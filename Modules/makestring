@@ -1,0 +1,5 @@
+.key FILE
+
+
+copy show.o <FILE>_strings.o
+SetDate <FILE>_strings.o 01-jan-88

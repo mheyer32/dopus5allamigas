@@ -1,0 +1,11 @@
+FROM LIB:c.o "regsum.o"
+TO "regsum"
+LIB lib:sc.lib lib:scm.lib lib:amiga.lib lib:debug.lib LIB:sc.lib LIB:amiga.lib
+SMALLCODE
+SMALLDATA
+STRIPDEBUG
+QUIET
+NOICONS
+DEFINE @__chkabort=@__dummy
+
+noicons

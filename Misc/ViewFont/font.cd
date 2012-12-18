@@ -1,0 +1,50 @@
+; ************************************************* 
+; Catalog description file for font.module
+; ************************************************* 
+;
+;
+MSG_FONT_TITLE (1000//)
+Font Viewer
+;
+MSG_FONT_FONT (//)
+_Font
+;
+MSG_FONT_SIZE (//)
+_Size
+;
+MSG_FONT_PRINT (//)
+_Print
+;
+MSG_VIEWFONT_DESC (//)
+View a font
+;
+MSG_FONT_BOLD (//)
+_B
+;
+MSG_FONT_ITALIC (//)
+_I
+;
+MSG_FONT_ULINE (//)
+_U
+;
+MSG_FONT_SELECT (//)
+Select Font
+;
+MSG_OK (//)
+Ok
+;
+MSG_MENU_PROJECT (//)
+Project
+;
+MSG_MENU_OPEN_FONT (//)
+Open Font...
+;
+MSG_MENU_SAVE_SETTINGS (//)
+Save Settings
+;
+MSG_MENU_QUIT (//)
+Quit
+;
+MSG_MENU_ABOUT (//)
+About...
+;

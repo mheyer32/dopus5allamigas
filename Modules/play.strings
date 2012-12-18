@@ -1,0 +1,203 @@
+#ifndef PLAY_H
+#define PLAY_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_NEXT 1000
+#define MSG_ABORT 1001
+#define MSG_PLAY_TITLE 1002
+#define MSG_FILENAME 1003
+#define MSG_LENGTH 1004
+#define MSG_TYPE 1005
+#define MSG_TYPE_STEREO 1006
+#define MSG_TYPE_MONO 1007
+#define MSG_TYPE_RAW 1008
+#define MSG_STATUS 1009
+#define MSG_STATUS_LOADING 1010
+#define MSG_STATUS_DECOMPRESSING 1011
+#define MSG_STATUS_PLAYING 1012
+#define MSG_PLAY_DESC 1013
+#define MSG_PLAY_NEXT 1014
+#define MSG_PLAY_ABORT 1015
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_NEXT_STR "_Next"
+#define MSG_ABORT_STR "_Abort"
+#define MSG_PLAY_TITLE_STR "Play"
+#define MSG_FILENAME_STR "File:"
+#define MSG_LENGTH_STR "Length:"
+#define MSG_TYPE_STR "Type:"
+#define MSG_TYPE_STEREO_STR "Stereo"
+#define MSG_TYPE_MONO_STR "Mono"
+#define MSG_TYPE_RAW_STR "Raw"
+#define MSG_STATUS_STR "Status:"
+#define MSG_STATUS_LOADING_STR "Reading file..."
+#define MSG_STATUS_DECOMPRESSING_STR "Decompressing..."
+#define MSG_STATUS_PLAYING_STR "Playing sound..."
+#define MSG_PLAY_DESC_STR "Play sound files"
+#define MSG_PLAY_NEXT_STR "Next"
+#define MSG_PLAY_ABORT_STR "Abort"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_NEXT,(STRPTR)MSG_NEXT_STR},
+    {MSG_ABORT,(STRPTR)MSG_ABORT_STR},
+    {MSG_PLAY_TITLE,(STRPTR)MSG_PLAY_TITLE_STR},
+    {MSG_FILENAME,(STRPTR)MSG_FILENAME_STR},
+    {MSG_LENGTH,(STRPTR)MSG_LENGTH_STR},
+    {MSG_TYPE,(STRPTR)MSG_TYPE_STR},
+    {MSG_TYPE_STEREO,(STRPTR)MSG_TYPE_STEREO_STR},
+    {MSG_TYPE_MONO,(STRPTR)MSG_TYPE_MONO_STR},
+    {MSG_TYPE_RAW,(STRPTR)MSG_TYPE_RAW_STR},
+    {MSG_STATUS,(STRPTR)MSG_STATUS_STR},
+    {MSG_STATUS_LOADING,(STRPTR)MSG_STATUS_LOADING_STR},
+    {MSG_STATUS_DECOMPRESSING,(STRPTR)MSG_STATUS_DECOMPRESSING_STR},
+    {MSG_STATUS_PLAYING,(STRPTR)MSG_STATUS_PLAYING_STR},
+    {MSG_PLAY_DESC,(STRPTR)MSG_PLAY_DESC_STR},
+    {MSG_PLAY_NEXT,(STRPTR)MSG_PLAY_NEXT_STR},
+    {MSG_PLAY_ABORT,(STRPTR)MSG_PLAY_ABORT_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x06"
+    MSG_NEXT_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x08"
+    MSG_ABORT_STR "\x00\x00"
+    "\x00\x00\x03\xEA\x00\x06"
+    MSG_PLAY_TITLE_STR "\x00\x00"
+    "\x00\x00\x03\xEB\x00\x06"
+    MSG_FILENAME_STR "\x00"
+    "\x00\x00\x03\xEC\x00\x08"
+    MSG_LENGTH_STR "\x00"
+    "\x00\x00\x03\xED\x00\x06"
+    MSG_TYPE_STR "\x00"
+    "\x00\x00\x03\xEE\x00\x08"
+    MSG_TYPE_STEREO_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x06"
+    MSG_TYPE_MONO_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x04"
+    MSG_TYPE_RAW_STR "\x00"
+    "\x00\x00\x03\xF1\x00\x08"
+    MSG_STATUS_STR "\x00"
+    "\x00\x00\x03\xF2\x00\x10"
+    MSG_STATUS_LOADING_STR "\x00"
+    "\x00\x00\x03\xF3\x00\x12"
+    MSG_STATUS_DECOMPRESSING_STR "\x00\x00"
+    "\x00\x00\x03\xF4\x00\x12"
+    MSG_STATUS_PLAYING_STR "\x00\x00"
+    "\x00\x00\x03\xF5\x00\x12"
+    MSG_PLAY_DESC_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x06"
+    MSG_PLAY_NEXT_STR "\x00\x00"
+    "\x00\x00\x03\xF7\x00\x06"
+    MSG_PLAY_ABORT_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* PLAY_H */

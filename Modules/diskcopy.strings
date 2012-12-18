@@ -1,0 +1,313 @@
+#ifndef DISKCOPY_H
+#define DISKCOPY_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_DISKCOPY_TITLE 1000
+#define MSG_DISKCOPY_DISKCOPY 1001
+#define MSG_DISKCOPY_CANCEL 1002
+#define MSG_DISKCOPY_VERIFY 1003
+#define MSG_DISKCOPY_BUMP 1004
+#define MSG_DISKCOPY_FROM 1005
+#define MSG_DISKCOPY_TO 1006
+#define MSG_DISKCOPY_STATUS 1007
+#define MSG_DISKCOPY_OPEN_DEVICES 1008
+#define MSG_CANT_OPEN_DEVICE 1009
+#define MSG_NO_DISK_PRESENT 1010
+#define MSG_CANT_OPEN_DESTINATION 1011
+#define MSG_NO_DISK_PRESENT_DEST 1012
+#define MSG_WRITE_PROTECTED_DEST 1013
+#define MSG_ABORTED 1014
+#define MSG_RETRY_CANCEL 1015
+#define MSG_RETRY_REMOVE_CANCEL 1016
+#define MSG_PROCEED_CANCEL 1017
+#define MSG_DISKCOPY_SUCCESSFUL 1018
+#define MSG_DISKCOPY_FAILED 1019
+#define MSG_READ_ERROR 1020
+#define MSG_WRITE_ERROR 1021
+#define MSG_VERIFY_ERROR 1022
+#define MSG_DISKCOPY_READING 1023
+#define MSG_DISKCOPY_WRITING 1024
+#define MSG_DISKCOPY_VERIFYING 1025
+#define MSG_DISKCOPY_TO_TITLE 1026
+#define MSG_INSERT_DESTINATION 1027
+#define MSG_INSERT_SOURCE 1028
+#define MSG_ERROR_WRITE_PROT 1029
+#define MSG_ERROR_NO_DISK 1030
+#define MSG_ERROR_UNKNOWN 1031
+#define MSG_ERROR_VERIFY 1032
+#define MSG_BUMPING_NAMES 1033
+#define MSG_INCOMPATIBLE 1034
+#define MSG_OK 1035
+#define MSG_DISKCOPY_DESC 1036
+#define MSG_DISKCOPY_COPYING 1037
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_DISKCOPY_TITLE_STR "Diskcopy"
+#define MSG_DISKCOPY_DISKCOPY_STR "_Diskcopy"
+#define MSG_DISKCOPY_CANCEL_STR "_Cancel"
+#define MSG_DISKCOPY_VERIFY_STR "_Verify"
+#define MSG_DISKCOPY_BUMP_STR "_Bump Name"
+#define MSG_DISKCOPY_FROM_STR "From..."
+#define MSG_DISKCOPY_TO_STR "To..."
+#define MSG_DISKCOPY_STATUS_STR "%s, %s used"
+#define MSG_DISKCOPY_OPEN_DEVICES_STR "Opening devices..."
+#define MSG_CANT_OPEN_DEVICE_STR "Can't open source device!"
+#define MSG_NO_DISK_PRESENT_STR "No disk present in source!"
+#define MSG_CANT_OPEN_DESTINATION_STR "Unable to open destination %s"
+#define MSG_NO_DISK_PRESENT_DEST_STR "No disk present in %s"
+#define MSG_WRITE_PROTECTED_DEST_STR "Disk in %s is write protected!"
+#define MSG_ABORTED_STR "Aborted."
+#define MSG_RETRY_CANCEL_STR "Retry|Cancel"
+#define MSG_RETRY_REMOVE_CANCEL_STR "Retry|Remove|Cancel"
+#define MSG_PROCEED_CANCEL_STR "Proceed|Cancel"
+#define MSG_DISKCOPY_SUCCESSFUL_STR "Diskcopy successful!"
+#define MSG_DISKCOPY_FAILED_STR "Diskcopy failed."
+#define MSG_READ_ERROR_STR "Error reading %s track %ld\n%s"
+#define MSG_WRITE_ERROR_STR "Error writing %s track %ld\n%s"
+#define MSG_VERIFY_ERROR_STR "Error verifying %s track %ld\n%s"
+#define MSG_DISKCOPY_READING_STR "Reading track %ld, %ld to go."
+#define MSG_DISKCOPY_WRITING_STR "Writing track %ld, %ld to go."
+#define MSG_DISKCOPY_VERIFYING_STR "Verifying track %ld, %ld to go."
+#define MSG_DISKCOPY_TO_TITLE_STR "to"
+#define MSG_INSERT_DESTINATION_STR "Insert destination disk in %s"
+#define MSG_INSERT_SOURCE_STR "Insert source disk in %s"
+#define MSG_ERROR_WRITE_PROT_STR "Disk is write protected"
+#define MSG_ERROR_NO_DISK_STR "No disk in drive"
+#define MSG_ERROR_UNKNOWN_STR "Unknown error code"
+#define MSG_ERROR_VERIFY_STR "Data not written correctly."
+#define MSG_BUMPING_NAMES_STR "Bumping names..."
+#define MSG_INCOMPATIBLE_STR "Disks are of incompatible types and can not be copied."
+#define MSG_OK_STR "OK"
+#define MSG_DISKCOPY_DESC_STR "Make copies of a disk"
+#define MSG_DISKCOPY_COPYING_STR "Copying disk..."
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_DISKCOPY_TITLE,(STRPTR)MSG_DISKCOPY_TITLE_STR},
+    {MSG_DISKCOPY_DISKCOPY,(STRPTR)MSG_DISKCOPY_DISKCOPY_STR},
+    {MSG_DISKCOPY_CANCEL,(STRPTR)MSG_DISKCOPY_CANCEL_STR},
+    {MSG_DISKCOPY_VERIFY,(STRPTR)MSG_DISKCOPY_VERIFY_STR},
+    {MSG_DISKCOPY_BUMP,(STRPTR)MSG_DISKCOPY_BUMP_STR},
+    {MSG_DISKCOPY_FROM,(STRPTR)MSG_DISKCOPY_FROM_STR},
+    {MSG_DISKCOPY_TO,(STRPTR)MSG_DISKCOPY_TO_STR},
+    {MSG_DISKCOPY_STATUS,(STRPTR)MSG_DISKCOPY_STATUS_STR},
+    {MSG_DISKCOPY_OPEN_DEVICES,(STRPTR)MSG_DISKCOPY_OPEN_DEVICES_STR},
+    {MSG_CANT_OPEN_DEVICE,(STRPTR)MSG_CANT_OPEN_DEVICE_STR},
+    {MSG_NO_DISK_PRESENT,(STRPTR)MSG_NO_DISK_PRESENT_STR},
+    {MSG_CANT_OPEN_DESTINATION,(STRPTR)MSG_CANT_OPEN_DESTINATION_STR},
+    {MSG_NO_DISK_PRESENT_DEST,(STRPTR)MSG_NO_DISK_PRESENT_DEST_STR},
+    {MSG_WRITE_PROTECTED_DEST,(STRPTR)MSG_WRITE_PROTECTED_DEST_STR},
+    {MSG_ABORTED,(STRPTR)MSG_ABORTED_STR},
+    {MSG_RETRY_CANCEL,(STRPTR)MSG_RETRY_CANCEL_STR},
+    {MSG_RETRY_REMOVE_CANCEL,(STRPTR)MSG_RETRY_REMOVE_CANCEL_STR},
+    {MSG_PROCEED_CANCEL,(STRPTR)MSG_PROCEED_CANCEL_STR},
+    {MSG_DISKCOPY_SUCCESSFUL,(STRPTR)MSG_DISKCOPY_SUCCESSFUL_STR},
+    {MSG_DISKCOPY_FAILED,(STRPTR)MSG_DISKCOPY_FAILED_STR},
+    {MSG_READ_ERROR,(STRPTR)MSG_READ_ERROR_STR},
+    {MSG_WRITE_ERROR,(STRPTR)MSG_WRITE_ERROR_STR},
+    {MSG_VERIFY_ERROR,(STRPTR)MSG_VERIFY_ERROR_STR},
+    {MSG_DISKCOPY_READING,(STRPTR)MSG_DISKCOPY_READING_STR},
+    {MSG_DISKCOPY_WRITING,(STRPTR)MSG_DISKCOPY_WRITING_STR},
+    {MSG_DISKCOPY_VERIFYING,(STRPTR)MSG_DISKCOPY_VERIFYING_STR},
+    {MSG_DISKCOPY_TO_TITLE,(STRPTR)MSG_DISKCOPY_TO_TITLE_STR},
+    {MSG_INSERT_DESTINATION,(STRPTR)MSG_INSERT_DESTINATION_STR},
+    {MSG_INSERT_SOURCE,(STRPTR)MSG_INSERT_SOURCE_STR},
+    {MSG_ERROR_WRITE_PROT,(STRPTR)MSG_ERROR_WRITE_PROT_STR},
+    {MSG_ERROR_NO_DISK,(STRPTR)MSG_ERROR_NO_DISK_STR},
+    {MSG_ERROR_UNKNOWN,(STRPTR)MSG_ERROR_UNKNOWN_STR},
+    {MSG_ERROR_VERIFY,(STRPTR)MSG_ERROR_VERIFY_STR},
+    {MSG_BUMPING_NAMES,(STRPTR)MSG_BUMPING_NAMES_STR},
+    {MSG_INCOMPATIBLE,(STRPTR)MSG_INCOMPATIBLE_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_DISKCOPY_DESC,(STRPTR)MSG_DISKCOPY_DESC_STR},
+    {MSG_DISKCOPY_COPYING,(STRPTR)MSG_DISKCOPY_COPYING_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x0A"
+    MSG_DISKCOPY_TITLE_STR "\x00\x00"
+    "\x00\x00\x03\xE9\x00\x0A"
+    MSG_DISKCOPY_DISKCOPY_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x08"
+    MSG_DISKCOPY_CANCEL_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x08"
+    MSG_DISKCOPY_VERIFY_STR "\x00"
+    "\x00\x00\x03\xEC\x00\x0C"
+    MSG_DISKCOPY_BUMP_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x08"
+    MSG_DISKCOPY_FROM_STR "\x00"
+    "\x00\x00\x03\xEE\x00\x06"
+    MSG_DISKCOPY_TO_STR "\x00"
+    "\x00\x00\x03\xEF\x00\x0C"
+    MSG_DISKCOPY_STATUS_STR "\x00"
+    "\x00\x00\x03\xF0\x00\x14"
+    MSG_DISKCOPY_OPEN_DEVICES_STR "\x00\x00"
+    "\x00\x00\x03\xF1\x00\x1A"
+    MSG_CANT_OPEN_DEVICE_STR "\x00"
+    "\x00\x00\x03\xF2\x00\x1C"
+    MSG_NO_DISK_PRESENT_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x1E"
+    MSG_CANT_OPEN_DESTINATION_STR "\x00"
+    "\x00\x00\x03\xF4\x00\x16"
+    MSG_NO_DISK_PRESENT_DEST_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x20"
+    MSG_WRITE_PROTECTED_DEST_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x0A"
+    MSG_ABORTED_STR "\x00\x00"
+    "\x00\x00\x03\xF7\x00\x0E"
+    MSG_RETRY_CANCEL_STR "\x00\x00"
+    "\x00\x00\x03\xF8\x00\x14"
+    MSG_RETRY_REMOVE_CANCEL_STR "\x00"
+    "\x00\x00\x03\xF9\x00\x10"
+    MSG_PROCEED_CANCEL_STR "\x00\x00"
+    "\x00\x00\x03\xFA\x00\x16"
+    MSG_DISKCOPY_SUCCESSFUL_STR "\x00\x00"
+    "\x00\x00\x03\xFB\x00\x12"
+    MSG_DISKCOPY_FAILED_STR "\x00\x00"
+    "\x00\x00\x03\xFC\x00\x1E"
+    MSG_READ_ERROR_STR "\x00"
+    "\x00\x00\x03\xFD\x00\x1E"
+    MSG_WRITE_ERROR_STR "\x00"
+    "\x00\x00\x03\xFE\x00\x20"
+    MSG_VERIFY_ERROR_STR "\x00"
+    "\x00\x00\x03\xFF\x00\x1E"
+    MSG_DISKCOPY_READING_STR "\x00"
+    "\x00\x00\x04\x00\x00\x1E"
+    MSG_DISKCOPY_WRITING_STR "\x00"
+    "\x00\x00\x04\x01\x00\x20"
+    MSG_DISKCOPY_VERIFYING_STR "\x00"
+    "\x00\x00\x04\x02\x00\x04"
+    MSG_DISKCOPY_TO_TITLE_STR "\x00\x00"
+    "\x00\x00\x04\x03\x00\x1E"
+    MSG_INSERT_DESTINATION_STR "\x00"
+    "\x00\x00\x04\x04\x00\x1A"
+    MSG_INSERT_SOURCE_STR "\x00\x00"
+    "\x00\x00\x04\x05\x00\x18"
+    MSG_ERROR_WRITE_PROT_STR "\x00"
+    "\x00\x00\x04\x06\x00\x12"
+    MSG_ERROR_NO_DISK_STR "\x00\x00"
+    "\x00\x00\x04\x07\x00\x14"
+    MSG_ERROR_UNKNOWN_STR "\x00\x00"
+    "\x00\x00\x04\x08\x00\x1C"
+    MSG_ERROR_VERIFY_STR "\x00"
+    "\x00\x00\x04\x09\x00\x12"
+    MSG_BUMPING_NAMES_STR "\x00\x00"
+    "\x00\x00\x04\x0A\x00\x38"
+    MSG_INCOMPATIBLE_STR "\x00\x00"
+    "\x00\x00\x04\x0B\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x04\x0C\x00\x16"
+    MSG_DISKCOPY_DESC_STR "\x00"
+    "\x00\x00\x04\x0D\x00\x10"
+    MSG_DISKCOPY_COPYING_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* DISKCOPY_H */

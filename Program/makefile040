@@ -1,0 +1,268 @@
+#DEBUGLIB = lib:debug.lib
+OD=o40/
+
+OBJS01=	$(OD)data.o \
+	$(OD)version.o \
+	$(OD)string_data.o \
+	$(OD)function_data.o \
+	$(OD)menu_data.o \
+	$(OD)palette_routines.o \
+	$(OD)pattern.o \
+	$(OD)key_press.o \
+	$(OD)key_finder_data.o \
+	$(OD)main.o \
+	$(OD)commands.o \
+	$(OD)menus.o \
+	$(OD)popup.o \
+	$(OD)popup_build.o \
+	$(OD)iconpos.o \
+	$(OD)cx.o \
+	$(OD)wb.o \
+	$(OD)text.o \
+	$(OD)help.o \
+	$(OD)eliza.o \
+	$(OD)event_loop.o \
+	$(OD)main_reset.o \
+	$(OD)backdrop.o \
+	$(OD)backdrop_render.o \
+	$(OD)backdrop_idcmp.o \
+	$(OD)backdrop_buttons.o \
+	$(OD)backdrop_utils.o \
+	$(OD)backdrop_arrange.o \
+	$(OD)backdrop_position.o \
+	$(OD)backdrop_open.o \
+	$(OD)backdrop_drag.o \
+	$(OD)backdrop_groups.o \
+	$(OD)backdrop_notify.o \
+	$(OD)backdrop_appicon.o \
+	$(OD)backdrop_devices.o \
+	$(OD)backdrop_snapshot.o \
+	$(OD)backdrop_popup.o \
+	$(OD)backdrop_format.o \
+	$(OD)backdrop_select.o \
+	$(OD)backdrop_info.o \
+	$(OD)backdrop_leftout.o \
+	$(OD)backdrop_replace.o \
+	$(OD)desktop.o \
+	$(OD)desktop_delete.o \
+	$(OD)desktop_drop.o \
+	$(OD)desktop_rename.o \
+	$(OD)desktop_folder.o \
+	$(OD)groups_new.o \
+	$(OD)toolbar.o \
+	$(OD)requesters.o \
+	$(OD)notify.o \
+	$(OD)graphics.o \
+	$(OD)misc.o \
+	$(OD)misc_proc.o \
+	$(OD)dates.o \
+	$(OD)links.o \
+	$(OD)path_routines.o \
+	$(OD)status_text.o \
+	$(OD)scripts.o \
+	$(OD)buffers.o \
+	$(OD)buffers_util.o \
+	$(OD)buffers_sort.o \
+	$(OD)buffers_reselect.o \
+	$(OD)filetypes.o \
+	$(OD)filetypes_proc.o \
+	$(OD)search_data.o \
+	$(OD)lister.o \
+	$(OD)lister_data.o \
+	$(OD)lister_proc.o \
+	$(OD)lister_idcmp.o \
+	$(OD)lister_function.o \
+	$(OD)lister_window.o \
+	$(OD)lister_diskinfo.o \
+	$(OD)lister_display.o \
+	$(OD)lister_busy.o \
+	$(OD)lister_title.o \
+	$(OD)lister_activate.o \
+	$(OD)lister_buffers.o \
+	$(OD)lister_dir.o \
+	$(OD)lister_show.o \
+	$(OD)lister_toolbar.o \
+	$(OD)lister_drop.o \
+	$(OD)lister_icons.o \
+	$(OD)lister_progress.o \
+	$(OD)lister_clip.o \
+	$(OD)lister_menus.o \
+	$(OD)lister_hotname.o \
+	$(OD)lister_edit.o \
+	$(OD)lister_ftp.o
+
+OBJS02=	$(OD)buttons.o \
+	$(OD)buttons_data.o \
+	$(OD)buttons_proc.o \
+	$(OD)buttons_draw.o \
+	$(OD)buttons_window.o \
+	$(OD)buttons_display.o \
+	$(OD)buttons_idcmp.o \
+	$(OD)buttons_function.o \
+	$(OD)buttons_run.o \
+	$(OD)buttons_io.o \
+	$(OD)buttons_edit.o \
+	$(OD)buttons_popup.o \
+	$(OD)start_menu.o \
+	$(OD)dirlist_read.o \
+	$(OD)dirlist_scroll.o \
+	$(OD)dirlist_util.o \
+	$(OD)function_launch.o \
+	$(OD)function_paths.o \
+	$(OD)function_readdir.o \
+	$(OD)function_run.o \
+	$(OD)function_parse.o \
+	$(OD)function_internal.o \
+	$(OD)function_external.o \
+	$(OD)function_script.o \
+	$(OD)function_support.o \
+	$(OD)function_filechange.o \
+	$(OD)function_filetype.o \
+	$(OD)function_files.o \
+	$(OD)function_all.o \
+	$(OD)function_none.o \
+	$(OD)function_toggle.o \
+	$(OD)function_copy.o \
+	$(OD)function_delete.o \
+	$(OD)function_makedir.o \
+	$(OD)function_rename.o \
+	$(OD)function_select.o \
+	$(OD)function_select_data.o \
+	$(OD)function_devicelist.o \
+	$(OD)function_change.o \
+	$(OD)function_change_data.o \
+	$(OD)function_scandir.o \
+	$(OD)function_clearbuffers.o \
+	$(OD)function_show.o \
+	$(OD)function_disk.o \
+	$(OD)function_loadbuttons.o \
+	$(OD)function_loadenvironment.o \
+	$(OD)function_leaveout.o \
+	$(OD)function_runprog.o \
+	$(OD)function_addicon.o \
+	$(OD)function_search.o \
+	$(OD)function_getsizes.o \
+	$(OD)function_hunt.o \
+	$(OD)function_parent.o \
+	$(OD)function_user.o \
+	$(OD)function_verify.o \
+	$(OD)function_cli.o \
+	$(OD)function_printdir.o \
+	$(OD)function_set.o \
+	$(OD)function_closebuttons.o \
+	$(OD)function_special.o \
+	$(OD)function_reselect.o \
+	$(OD)function_assign.o \
+	$(OD)function_configure.o \
+	$(OD)function_setbackground.o \
+	$(OD)function_runcommand.o \
+	$(OD)function_reset.o \
+	$(OD)clock_task.o \
+	$(OD)environment.o \
+	$(OD)app_msg.o \
+	$(OD)icons.o \
+	$(OD)icon_function.o \
+	$(OD)file_select.o \
+	$(OD)file_openwith.o \
+	$(OD)window_activate.o \
+	$(OD)cleanup.o \
+	$(OD)tile.o \
+	$(OD)display.o \
+	$(OD)display_pattern.o \
+	$(OD)rexx_proc.o \
+	$(OD)rexx_lister.o \
+	$(OD)rexx_files.o \
+	$(OD)rexx_util.o \
+	$(OD)rexx_data.o \
+	$(OD)rexx_traps.o \
+	$(OD)rexx_apps.o \
+	$(OD)rexx_handler.o \
+	$(OD)rexx_cmd.o \
+	$(OD)dos_notify.o \
+	$(OD)replace.o \
+	$(OD)position.o \
+	$(OD)callback_main.o \
+	$(OD)callback_dir.o \
+	$(OD)callback_help.o \
+	$(OD)callback_lister.o \
+	$(OD)serial.o
+
+#########################################################################
+
+all : string_data.h DOpus040 DOpusRT5 LoadWB dopusmsg
+
+string_data.h : dopus.cd
+	catcomp descriptor=dopus.cd cfile=string_data.h
+
+$(OD)string_data.o : string_data.h string_data.c
+	delete >nil: $(OD)string_data.o quiet
+	sc string_data.c objname=$(OD)
+
+#########################################################################
+
+DOpus040 : $(OBJS01) $(OBJS02)
+	slink with <<
+define __ctype=___ctype
+#define ___main=___tinymain
+from lib:cback.o $(OBJS01) $(OBJS02)
+to DOpus040
+lib lib:scm.lib lib:sc.lib lib:amiga.lib lib:dopus.lib $(DEBUGLIB)
+noicons
+maxhunk 51200
+sd nd
+#sc
+<
+
+#########################################################################
+
+DOpusRT5 : $(OD)DOpusRT.o
+	slink with <<
+define __ctype=___ctype
+from lib:cres.o $(OD)DOpusRT.o
+to DOpusRT5
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy DOpusRT5 dopus5:c
+
+#########################################################################
+
+LoadWB : $(OD)LoadWB.o
+	slink with <<
+define __ctype=___ctype
+from lib:c.o $(OD)LoadWB.o
+to LoadWB
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy LoadWB dopus5:c/LoadDB
+
+#########################################################################
+
+dopusmsg : $(OD)dopusmsg.o
+	slink with <<
+define __ctype=___ctype
+from lib:c.o $(OD)dopusmsg.o
+to dopusmsg
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy dopusmsg dopus5:c
+
+#########################################################################
+
+.c.o:
+	sc $*.c objname=$(OD) cpu=68040
+.asm.o:
+	sc:c/asm -iASMINC: $*.asm
+
+#########################################################################
+
+clean:
+	cd $(OD)
+	delete ~(string_data).o quiet
+	cd /
+	touch >nil: \#?.cd

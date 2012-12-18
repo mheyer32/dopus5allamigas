@@ -1,0 +1,40 @@
+; ************************************************* 
+; Catalog description file for fixicons.module
+; ************************************************* 
+;
+MSG_FIXICONS_DESC (1000//)
+Fix problem icons
+;
+MSG_FIXING_ICONS (//)
+Fixing icons...
+;
+MSG_FIXED (//)
+Fixed
+;
+MSG_COULDNT_FIX (//)
+Couldn't fix
+;
+MSG_ANB (//)
+Border
+;
+MSG_ANL (//)
+Label
+;
+MSG_NFO (//)
+Position
+;
+MSG_SWO (//)
+Sync to Opus
+;
+MSG_SOW (//)
+Sync to WB
+;
+MSG_RESULTS (//)
+Results of FixIcons
+;
+MSG_NO (//)
+No
+;
+MSG_CHANGES_MADE (//)
+changes made
+;

@@ -1,0 +1,54 @@
+; ************************************************* 
+; Catalog description file for play.module
+; ************************************************* 
+;
+;
+MSG_NEXT (1000//)
+_Next
+;
+MSG_ABORT (//)
+_Abort
+;
+MSG_PLAY_TITLE (//)
+Play
+;
+MSG_FILENAME (//)
+File:
+;
+MSG_LENGTH (//)
+Length:
+;
+MSG_TYPE (//)
+Type:
+;
+MSG_TYPE_STEREO (//)
+Stereo
+;
+MSG_TYPE_MONO (//)
+Mono
+;
+MSG_TYPE_RAW (//)
+Raw
+;
+MSG_STATUS (//)
+Status:
+;
+MSG_STATUS_LOADING (//)
+Reading file...
+;
+MSG_STATUS_DECOMPRESSING (//)
+Decompressing...
+;
+MSG_STATUS_PLAYING (//)
+Playing sound...
+;
+;
+MSG_PLAY_DESC (//)
+Play sound files
+;
+MSG_PLAY_NEXT (//)
+Next
+;
+MSG_PLAY_ABORT (//)
+Abort
+;

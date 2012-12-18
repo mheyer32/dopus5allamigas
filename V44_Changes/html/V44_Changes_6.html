@@ -1,0 +1,210 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - AppIcons</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_5.html">previous</A>, <A HREF="V44_Changes_7.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC12" HREF="V44_Changes_toc.html#TOC12">New AppIcon functionality</A></H2>
+<P>
+<A NAME="IDX18"></A>
+
+</P>
+
+
+<H3><A NAME="SEC13" HREF="V44_Changes_toc.html#TOC13">Responding to menu commands</A></H3>
+<P>
+<A NAME="IDX19"></A>
+
+</P>
+<P>
+As of Workbench V44, it is possible to invoke menu actions for
+<CODE>AppIcon</CODE>s just like they were normal icons. You have to tell
+Workbench which menu items your icon responds to using the tag item
+list you provide to <CODE>AddAppIconA()</CODE>. When one of the supported
+menu items is invoked, you will receive an <CODE>AppMessage</CODE> with
+the <CODE>am_Class</CODE> entry set to a value out of
+<CODE>AMCLASSICON_Open</CODE>..<CODE>AMCLASSICON_EmptyTrash</CODE>, corresponding
+to the menu item used.
+
+</P>
+<P>
+The following <CODE>BOOL</CODE> tags are provided by <CODE>AddAppIconA()</CODE> to
+control which menu commands are supported by an <CODE>AppIcon</CODE>:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>WBAPPICONA_SupportsOpen</CODE>
+<DD>
+<A NAME="IDX20"></A>
+<DT><CODE>WBAPPICONA_SupportsCopy</CODE>
+<DD>
+<A NAME="IDX21"></A>
+<DT><CODE>WBAPPICONA_SupportsRename</CODE>
+<DD>
+<A NAME="IDX22"></A>
+<DT><CODE>WBAPPICONA_SupportsInformation</CODE>
+<DD>
+<A NAME="IDX23"></A>
+<DT><CODE>WBAPPICONA_SupportsSnapshot</CODE>
+<DD>
+<A NAME="IDX24"></A>
+<DT><CODE>WBAPPICONA_SupportsUnSnapshot</CODE>
+<DD>
+<A NAME="IDX25"></A>
+<DT><CODE>WBAPPICONA_SupportsLeaveOut</CODE>
+<DD>
+<A NAME="IDX26"></A>
+<DT><CODE>WBAPPICONA_SupportsPutAway</CODE>
+<DD>
+<A NAME="IDX27"></A>
+<DT><CODE>WBAPPICONA_SupportsDelete</CODE>
+<DD>
+<A NAME="IDX28"></A>
+<DT><CODE>WBAPPICONA_SupportsFormatDisk</CODE>
+<DD>
+<A NAME="IDX29"></A>
+<DT><CODE>WBAPPICONA_SupportsEmptyTrash</CODE>
+<DD>
+<A NAME="IDX30"></A>
+
+</DL>
+
+
+
+<H3><A NAME="SEC14" HREF="V44_Changes_toc.html#TOC14">Custom AppIcon rendering hook</A></H3>
+<P>
+<A NAME="IDX31"></A>
+
+</P>
+<P>
+The new tag <CODE>WBAPPICONA_RenderHook</CODE> takes a pointer to a <CODE>struct Hook</CODE>
+that will be invoked when rendering your AppIcon. With this hook
+and <CODE>WorkbenchControlA()</CODE> you can create dynamic or animated
+<CODE>AppIcon</CODE>s. Your hook will be called with the following
+parameters and has to return a result value:
+
+</P>
+
+<PRE>
+
+result = hookFunc(hook, reserved, arm)
+  D0               A0     A2      A1
+
+LONG hookFunc(struct Hook *hook, APTR reserved,
+              struct AppIconRenderMsg *arm);
+
+struct AppIconRenderMsg
+{
+    struct RastPort *   arm_RastPort;
+    struct DiskObject * arm_Icon;
+    STRPTR              arm_Label;
+    struct TagItem *    arm_Tags;
+    WORD  arm_Left;
+    WORD  arm_Top;
+    WORD  arm_Width;
+    WORD  arm_Height;
+    ULONG  arm_State;
+};
+
+</PRE>
+
+<P>
+The <CITE>reserved</CITE> parameter will be set to <CODE>NULL</CODE>. The render
+message contents are as follows:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>arm_RastPort</CODE>
+<DD>
+A pointer to the RastPort to render into.
+
+<DT><CODE>arm_Icon</CODE>
+<DD>
+A pointer to the Icon to be rendered.
+
+<DT><CODE>arm_Label</CODE>
+<DD>
+A pointer to the label text to be printed
+below the icon.
+
+<DT><CODE>arm_Tags</CODE>
+<DD>
+Further control tags which you should pass on
+to <CODE>icon.library/DrawIconStateA()</CODE>, should you
+call this routine.
+
+<DT><CODE>arm_Left</CODE>
+<DD>
+<DT><CODE>arm_Top</CODE>
+<DD>
+Rendering origin; note that these coordinates DO NOT take the
+embossing border sizes into account.
+
+<DT><CODE>arm_Width</CODE>
+<DD>
+<DT><CODE>arm_Height</CODE>
+<DD>
+Size of the Icon's image area; you should limit your drawing to this area.
+
+<DT><CODE>arm_State</CODE>
+<DD>
+An icon drawing state, such as used by <CODE>icon.library/DrawIconStateA()</CODE>.
+
+</DL>
+
+<P>
+Note that all the data in the render message is read-only.
+
+</P>
+<P>
+If your hook code returns <CODE>TRUE</CODE>, the <CODE>AppIcon</CODE>'s regular
+image will be drawn. If your code returns <CODE>FALSE</CODE>, the regular
+image will not be drawn; this allows you to do all the icon's
+on-screen rendering with the exception of the icon image used when
+dragging the icon on the screen.
+
+</P>
+
+
+
+<H3><A NAME="SEC15" HREF="V44_Changes_toc.html#TOC15">AppIcon positioning</A></H3>
+
+<P>
+The new <CODE>WBAPPICONA_PropagatePosition</CODE> tag allows
+the AppIcon's position to be propagated back to the
+original <CODE>DiskObject</CODE> you passed to <CODE>AddAppIconA()</CODE>. By
+default, Workbench will make a copy of that <CODE>DiskObject</CODE>'s
+icon imagery, allowing the application to free the it.
+But if you specify <CODE>WBAPPICONA_PropagatePosition,TRUE</CODE>,
+Workbench will assume that you will not free the <CODE>DiskObject</CODE>
+and that the <CODE>AppIcon</CODE>'s current position should be stored
+in its <CODE>do_CurrentX/do_CurrentY</CODE> members.
+
+</P>
+
+
+<H3><A NAME="SEC16" HREF="V44_Changes_toc.html#TOC16">AppIcon selection</A></H3>
+
+<P>
+The new tag <CODE>WBAPPICONA_NotifySelectState</CODE> causes the application
+to be be notified whenever the AppIcon becomes selected or unselected.
+You will hear only state transitions, i.e. changes from selected to
+unselected state and the other way round. On a state transition you
+will receive <CODE>AppMessage</CODE>s with the <CODE>AppMessage-&#62;am_Class</CODE>
+member set to <CODE>AMCLASSICON_Selected</CODE> or <CODE>AMCLASSICON_Unselected</CODE>,
+respectively.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_5.html">previous</A>, <A HREF="V44_Changes_7.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

@@ -1,0 +1,198 @@
+#ifndef ENVOY_H
+#define ENVOY_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_ENVOY_TITLE 1000
+#define MSG_ENVOY_DESC 1001
+#define MSG_ENVOY_OWNER 1002
+#define MSG_ENVOY_GROUP 1003
+#define MSG_ENVOY_GROUP_BITS 1004
+#define MSG_ENVOY_OTHER_BITS 1005
+#define MSG_OK 1006
+#define MSG_CANCEL 1007
+#define MSG_ENVOY_GET_GROUP 1008
+#define MSG_ENVOY_GET_OWNER 1009
+#define MSG_ENVOY_NO_GROUP 1010
+#define MSG_ENVOY_NO_OWNER 1011
+#define MSG_ENVOY_BAD_GROUP 1012
+#define MSG_ENVOY_BAD_USER 1013
+#define MSG_ENVOY_PROGRESS_TITLE 1014
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_ENVOY_TITLE_STR "File Network Settings"
+#define MSG_ENVOY_DESC_STR "Change network settings for files"
+#define MSG_ENVOY_OWNER_STR "_Owner"
+#define MSG_ENVOY_GROUP_STR "_Group"
+#define MSG_ENVOY_GROUP_BITS_STR "Group bits"
+#define MSG_ENVOY_OTHER_BITS_STR "Other bits"
+#define MSG_OK_STR "OK"
+#define MSG_CANCEL_STR "Cancel"
+#define MSG_ENVOY_GET_GROUP_STR "Select Group"
+#define MSG_ENVOY_GET_OWNER_STR "Select Owner"
+#define MSG_ENVOY_NO_GROUP_STR "<No Group>"
+#define MSG_ENVOY_NO_OWNER_STR "<No Owner>"
+#define MSG_ENVOY_BAD_GROUP_STR "'%s' is not a valid group!"
+#define MSG_ENVOY_BAD_USER_STR "'%s' is not a valid user!"
+#define MSG_ENVOY_PROGRESS_TITLE_STR "Changing network settings..."
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_ENVOY_TITLE,(STRPTR)MSG_ENVOY_TITLE_STR},
+    {MSG_ENVOY_DESC,(STRPTR)MSG_ENVOY_DESC_STR},
+    {MSG_ENVOY_OWNER,(STRPTR)MSG_ENVOY_OWNER_STR},
+    {MSG_ENVOY_GROUP,(STRPTR)MSG_ENVOY_GROUP_STR},
+    {MSG_ENVOY_GROUP_BITS,(STRPTR)MSG_ENVOY_GROUP_BITS_STR},
+    {MSG_ENVOY_OTHER_BITS,(STRPTR)MSG_ENVOY_OTHER_BITS_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_CANCEL,(STRPTR)MSG_CANCEL_STR},
+    {MSG_ENVOY_GET_GROUP,(STRPTR)MSG_ENVOY_GET_GROUP_STR},
+    {MSG_ENVOY_GET_OWNER,(STRPTR)MSG_ENVOY_GET_OWNER_STR},
+    {MSG_ENVOY_NO_GROUP,(STRPTR)MSG_ENVOY_NO_GROUP_STR},
+    {MSG_ENVOY_NO_OWNER,(STRPTR)MSG_ENVOY_NO_OWNER_STR},
+    {MSG_ENVOY_BAD_GROUP,(STRPTR)MSG_ENVOY_BAD_GROUP_STR},
+    {MSG_ENVOY_BAD_USER,(STRPTR)MSG_ENVOY_BAD_USER_STR},
+    {MSG_ENVOY_PROGRESS_TITLE,(STRPTR)MSG_ENVOY_PROGRESS_TITLE_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x16"
+    MSG_ENVOY_TITLE_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x22"
+    MSG_ENVOY_DESC_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x08"
+    MSG_ENVOY_OWNER_STR "\x00\x00"
+    "\x00\x00\x03\xEB\x00\x08"
+    MSG_ENVOY_GROUP_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x0C"
+    MSG_ENVOY_GROUP_BITS_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x0C"
+    MSG_ENVOY_OTHER_BITS_STR "\x00\x00"
+    "\x00\x00\x03\xEE\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x08"
+    MSG_CANCEL_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x0E"
+    MSG_ENVOY_GET_GROUP_STR "\x00\x00"
+    "\x00\x00\x03\xF1\x00\x0E"
+    MSG_ENVOY_GET_OWNER_STR "\x00\x00"
+    "\x00\x00\x03\xF2\x00\x0C"
+    MSG_ENVOY_NO_GROUP_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x0C"
+    MSG_ENVOY_NO_OWNER_STR "\x00\x00"
+    "\x00\x00\x03\xF4\x00\x1C"
+    MSG_ENVOY_BAD_GROUP_STR "\x00\x00"
+    "\x00\x00\x03\xF5\x00\x1A"
+    MSG_ENVOY_BAD_USER_STR "\x00"
+    "\x00\x00\x03\xF6\x00\x1E"
+    MSG_ENVOY_PROGRESS_TITLE_STR "\x00\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* ENVOY_H */

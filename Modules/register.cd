@@ -1,0 +1,41 @@
+; ************************************************* 
+; Catalog description file for register.module
+; ************************************************* 
+;
+;
+MSG_ENTER_REGISTRATION (1000//)
+Enter registration details
+;
+MSG_SERIAL_SERIAL_NUMBER (//)
+Serial #
+;
+MSG_SERIAL_NAME (//)
+Name
+;
+MSG_SERIAL_COMPANY (//)
+Company
+;
+MSG_SERIAL_ADDRESS1 (//)
+Address #1
+;
+MSG_SERIAL_ADDRESS2 (//)
+Address #2
+;
+MSG_SERIAL_ADDRESS3 (//)
+Address #3
+;
+MSG_OK_BUTTON (//)
+_Register
+;
+MSG_CANCEL_BUTTON (//)
+_Cancel
+;
+MSG_RUN_BUTTON (//)
+R_un
+;
+MSG_OK (//)
+OK
+;
+MSG_TITLE (//)
+Directory Opus 5.5 for MACD11
+;

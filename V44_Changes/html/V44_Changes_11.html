@@ -1,0 +1,59 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - About NewIcons</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_10.html">previous</A>, <A HREF="V44_Changes_12.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC21" HREF="V44_Changes_toc.html#TOC21">About NewIcons</A></H2>
+<P>
+<A NAME="IDX52"></A>
+<A NAME="IDX53"></A>
+
+</P>
+<P>
+This extended icon format introduced in OS 3.5 duplicates and obsoletes
+the features previously provided by the third party NewIcons patch. Unlike
+NewIcons, the V44 color mapped icons do not encode the image data in the
+icon tooltypes, so the new icon format is both faster and more compact.
+The <CODE>newicon.library</CODE> V40 can still load V44 icons and decode the
+NewIcon images encoded in the tooltypes, but it can't access the new
+V44 palette mapped images.
+
+</P>
+<P>
+The V44 Workbench has compatibility code to decode NewIcons using
+the <CODE>newicon.library</CODE>, therefore it is no longer necessary to
+start the <TT>`C:NewIcon'</TT> program from the <TT>`Startup-Sequence'</TT>
+<A NAME="DOCF2" HREF="V44_Changes_foot.html#FOOT2">(2)</A>. This feature is active by default, but it can be switched
+off using the Workbench preferences editor.
+
+</P>
+<P>
+Once the migration to the new color mapped icon format will be complete,
+future versions of the Workbench will drop NewIcon compatibility.
+A future version of <CODE>newicon.library</CODE> could be enhanced to read the
+V44 image data as well as the original NewIcons format to support old
+applications that have not been updated to the new V44 API. As of this
+writing, such version of the <CODE>newicon.library</CODE> is not yet available.
+
+</P>
+<P>
+The choice of using a different scheme for palette mapped images
+instead of conforming to the de-facto standard set by NewIcons was
+necessary because the <CODE>newicon.library</CODE> API had a number of
+limitations and inconsistencies which couldn't be worked around
+straightforwardly. Programmers are therefore urged to adapt their
+applications to the new <CODE>icon.library</CODE> API as soon as possible.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_10.html">previous</A>, <A HREF="V44_Changes_12.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

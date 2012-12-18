@@ -1,0 +1,241 @@
+; ************************************************* 
+; Catalog description file for icon.module
+; ************************************************* 
+;
+;
+MSG_ICON_TITLE (1000//)
+%s : %s (%s)
+;
+MSG_ICON_SAVE (//)
+_Save
+;
+MSG_ICON_NEXT (//)
+Ne_xt
+;
+MSG_ICON_CANCEL (//)
+_Cancel
+;
+MSG_BLOCKS (//)
+Blocks:
+;
+MSG_BYTES (//)
+Bytes:
+;
+MSG_STACK (//)
+St_ack:
+;
+MSG_LAST_CHANGED (//)
+Last Changed:
+;
+MSG_COMMENT (//)
+Co_mment:
+;
+MSG_TOOLTYPES (//)
+_Tool Types:
+;
+MSG_NEW (//)
+_New
+;
+MSG_DELETE (//)
+_Delete
+;
+MSG_DEFAULT_TOOL (//)
+Defau_lt Tool:
+;
+MSG_SIZE (//)
+Size:
+;
+MSG_USED (//)
+Used:
+;
+MSG_FREE (//)
+Free:
+;
+MSG_FILE_SYSTEM (//)
+F.Sys:
+;
+MSG_CREATED (//)
+Created:
+;
+MSG_VOLUME_IS (//)
+Volume is
+;
+MSG_ICON_DISK (//)
+Volume
+;
+MSG_ICON_DRAWER (//)
+Drawer
+;
+MSG_ICON_TOOL (//)
+Tool
+;
+MSG_ICON_PROJECT (//)
+Project
+;
+MSG_ICON_SCRIPT (//)
+Script
+;
+MSG_ICON_ARCHIVED (//)
+Archived
+;
+MSG_ICON_READABLE (//)
+Readable
+;
+MSG_ICON_WRITABLE (//)
+Writable
+;
+MSG_ICON_EXECUTABLE (//)
+Executable
+;
+MSG_ICON_DELETABLE (//)
+Deletable
+;
+MSG_VALIDATING (//)
+Validating
+;
+MSG_WRITE_PROTECTED (//)
+Read Only
+;
+MSG_READ_WRITE (//)
+Read/Write
+;
+MSG_UNREADABLE (//)
+Unreadable
+;
+MSG_OFS (//)
+OFS
+;
+MSG_FFS (//)
+FFS
+;
+MSG_IOFS (//)
+OFS (I)
+;
+MSG_IFFS (//)
+FFS (I)
+;
+MSG_COFS (//)
+OFS (C)
+;
+MSG_CFFS (//)
+FFS (C)
+;
+MSG_NDOS (//)
+Non-DOS
+;
+MSG_MSDOS (//)
+MS-DOS
+;
+MSG_UNKNOWN (//)
+???
+;
+;
+MSG_ICONINFO_DESC (//)
+Show/edit icon information
+;
+;
+MSG_AFS (+2//)
+AFS
+;
+MSG_PFS (//)
+PFS
+;
+;
+MSG_SPECIAL_MENU (//)
+Special
+;
+MSG_AUTHOR (+2//)
+  Author : %s
+;
+MSG_STRIP_NEWICONS (//)
+Strip NewIcons Image
+;
+MSG_OK (+1//)
+Ok
+;
+MSG_STRIP_WARNING (//)
+This will permanently remove the NewIcon image\n\
+from this icon. Are you sure?
+;
+MSG_OK_CANCEL (//)
+Ok|Cancel
+;
+MSG_LOCATION (//)
+Location:
+;
+;
+MSG_ICON_GARBAGE (//)
+Trashcan
+;
+MSG_ICON_DEVICE (//)
+Device
+;
+MSG_ICON_KICK (//)
+Kickstart
+;
+;
+MSG_STRIP_OLD (//)
+Strip Original Image
+;
+MSG_NEWICONS (//)
+Show NewIcons Image
+;
+MSG_OLDICONS (//)
+Show Original Image
+;
+MSG_STRIP_WARNING_OLD (//)
+This will permanently remove the original image\n\
+from this icon. Are you sure?
+;
+;
+; New stuff added by Andrew 98
+;
+;
+MSG_BORDER_MENU (//)
+Icon Border
+;
+MSG_LABEL_MENU (//)
+Icon Label
+;
+MSG_EDIT (//)
+Edit
+;
+MSG_PICK_EDITOR (//)
+Pick Editor...
+;
+MSG_COPY_OLDICON (//)
+Copy Original Image
+;
+MSG_COPY_NEWICON (//)
+Copy NewIcons Image
+;
+MSG_COPY_BOTHICONS (//)
+Copy Both Images
+;
+MSG_COPY_TOOLTYPES (//)
+Copy Tooltypes
+;
+MSG_ICON_NEWICON (//)
+NewIcon
+;
+MSG_ICON_OLDICON (//)
+Standard Icon
+;
+MSG_ENTER_FUNCTION (//)
+Enter function to call icon editor\n(To use IconEdit you must\ntick the AppMessage box)
+;
+MSG_USE_ICONEDIT (//)
+Send AppMessage
+;
+MSG_USE (//)
+Use
+;
+MSG_ICON_DONT_SAVE (//)
+Don't Save
+;
+MSG_ICON_MODIFIED (//)
+Icon has been modified.\nDo you wish to save it first?
+;
+MSG_SORT (//)
+S_ort
+;

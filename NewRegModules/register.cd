@@ -1,0 +1,11 @@
+; ************************************************* 
+; Catalog description file for register.module
+; ************************************************* 
+;
+;
+MSG_TITLE (1000//)
+Welcome to Directory Opus 5.5
+;
+MSG_OK_BUTTON (//)
+_OK
+;

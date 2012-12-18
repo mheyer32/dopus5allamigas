@@ -1,0 +1,183 @@
+#ifndef REGISTER_H
+#define REGISTER_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_ENTER_REGISTRATION 1000
+#define MSG_SERIAL_SERIAL_NUMBER 1001
+#define MSG_SERIAL_NAME 1002
+#define MSG_SERIAL_COMPANY 1003
+#define MSG_SERIAL_ADDRESS1 1004
+#define MSG_SERIAL_ADDRESS2 1005
+#define MSG_SERIAL_ADDRESS3 1006
+#define MSG_OK_BUTTON 1007
+#define MSG_CANCEL_BUTTON 1008
+#define MSG_RUN_BUTTON 1009
+#define MSG_OK 1010
+#define MSG_TITLE 1011
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_ENTER_REGISTRATION_STR "Enter registration details"
+#define MSG_SERIAL_SERIAL_NUMBER_STR "Serial #"
+#define MSG_SERIAL_NAME_STR "Name"
+#define MSG_SERIAL_COMPANY_STR "Company"
+#define MSG_SERIAL_ADDRESS1_STR "Address #1"
+#define MSG_SERIAL_ADDRESS2_STR "Address #2"
+#define MSG_SERIAL_ADDRESS3_STR "Address #3"
+#define MSG_OK_BUTTON_STR "_Register"
+#define MSG_CANCEL_BUTTON_STR "_Cancel"
+#define MSG_RUN_BUTTON_STR "R_un"
+#define MSG_OK_STR "OK"
+#define MSG_TITLE_STR "Directory Opus 5.5 for MACD11"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_ENTER_REGISTRATION,(STRPTR)MSG_ENTER_REGISTRATION_STR},
+    {MSG_SERIAL_SERIAL_NUMBER,(STRPTR)MSG_SERIAL_SERIAL_NUMBER_STR},
+    {MSG_SERIAL_NAME,(STRPTR)MSG_SERIAL_NAME_STR},
+    {MSG_SERIAL_COMPANY,(STRPTR)MSG_SERIAL_COMPANY_STR},
+    {MSG_SERIAL_ADDRESS1,(STRPTR)MSG_SERIAL_ADDRESS1_STR},
+    {MSG_SERIAL_ADDRESS2,(STRPTR)MSG_SERIAL_ADDRESS2_STR},
+    {MSG_SERIAL_ADDRESS3,(STRPTR)MSG_SERIAL_ADDRESS3_STR},
+    {MSG_OK_BUTTON,(STRPTR)MSG_OK_BUTTON_STR},
+    {MSG_CANCEL_BUTTON,(STRPTR)MSG_CANCEL_BUTTON_STR},
+    {MSG_RUN_BUTTON,(STRPTR)MSG_RUN_BUTTON_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_TITLE,(STRPTR)MSG_TITLE_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x1C"
+    MSG_ENTER_REGISTRATION_STR "\x00\x00"
+    "\x00\x00\x03\xE9\x00\x0A"
+    MSG_SERIAL_SERIAL_NUMBER_STR "\x00\x00"
+    "\x00\x00\x03\xEA\x00\x06"
+    MSG_SERIAL_NAME_STR "\x00\x00"
+    "\x00\x00\x03\xEB\x00\x08"
+    MSG_SERIAL_COMPANY_STR "\x00"
+    "\x00\x00\x03\xEC\x00\x0C"
+    MSG_SERIAL_ADDRESS1_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x0C"
+    MSG_SERIAL_ADDRESS2_STR "\x00\x00"
+    "\x00\x00\x03\xEE\x00\x0C"
+    MSG_SERIAL_ADDRESS3_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x0A"
+    MSG_OK_BUTTON_STR "\x00"
+    "\x00\x00\x03\xF0\x00\x08"
+    MSG_CANCEL_BUTTON_STR "\x00"
+    "\x00\x00\x03\xF1\x00\x06"
+    MSG_RUN_BUTTON_STR "\x00\x00"
+    "\x00\x00\x03\xF2\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x1E"
+    MSG_TITLE_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* REGISTER_H */

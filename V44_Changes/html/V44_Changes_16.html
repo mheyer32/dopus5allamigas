@@ -1,0 +1,188 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Installer</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_15.html">previous</A>, <A HREF="V44_Changes_17.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC35" HREF="V44_Changes_toc.html#TOC35">The Installer program</A></H1>
+<P>
+<A NAME="IDX102"></A>
+
+</P>
+<P>
+The latest pre-V44 release of the <CODE>Installer</CODE> was V43.2, distributed on
+the Amiga Technologies FTP site.
+
+</P>
+
+
+<H2><A NAME="SEC36" HREF="V44_Changes_toc.html#TOC36">Checking the Installer version</A></H2>
+<P>
+<A NAME="IDX103"></A>
+
+</P>
+<P>
+If your installation script uses new features not available in earlier
+versions of the <CODE>Installer</CODE>, it is important to check the
+variable <VAR>@installer-version</VAR> before using these new
+features. This variable will default to 0 with old versions
+of <CODE>Installer</CODE> like V1.24, so it is safe and easy to check.
+Please do not do an exact equality check. Check for a minimum
+revision, just like with libraries.
+
+</P>
+
+
+<H2><A NAME="SEC37" HREF="V44_Changes_toc.html#TOC37">Backtracing</A></H2>
+
+<P>
+Starting with V44 the <CODE>Installer</CODE> allows backtracing in your
+script. If you use this mechanism the <CODE>Abort Install</CODE> button is
+replaced with a <CODE>Back</CODE> button in most cases. You should define a
+<CODE>(back)</CODE> parameter for all statements and functions with user
+interaction that presents the <CODE>Back</CODE> button. If you don't the
+<CODE>Back</CODE> button is disabled which may frustrate the user. The
+following new commands support backtracing:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>(trace)</CODE>
+<DD>
+<A NAME="IDX104"></A>
+The trace statement sets an backtrace position. A retrace will
+continue on that position in the script.
+
+<DT><CODE>(retrace)</CODE>
+<DD>
+<A NAME="IDX105"></A>
+The retrace initiates the backtrace mechanism. It skips the last
+backtrace position and searchs for the previous one.
+
+<DT><CODE>(back &#60;code&#62;)</CODE>
+<DD>
+<A NAME="IDX106"></A>
+If the user press the <CODE>Back</CODE> button the code is executed.
+Typically this code will contain a <CODE>(retrace)</CODE> statement the
+last statement.
+
+</DL>
+
+<P>
+Please see the <TT>`Installer.guide'</TT> for a detailed description of
+these commands.
+
+</P>
+
+
+
+<H2><A NAME="SEC38" HREF="V44_Changes_toc.html#TOC38">Interaction with the Workbench</A></H2>
+
+<P>
+The V44 <CODE>Installer</CODE> provides a way for installation scripts
+to interact with the Workbench. The following commands are new
+in V44:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>(openwbobject &#60;argument&#62; ...)</CODE>
+<DD>
+<A NAME="IDX107"></A>
+Open a Workbench object which can be a disk, a drawer, a trashcan, a
+tool or a project.
+
+<DT><CODE>(showwbobject &#60;argument&#62;)</CODE>
+<DD>
+<A NAME="IDX108"></A>
+This statement scrolls the view of an workbench drawer until the
+named icon is visible. The drawer has to be opened before.
+
+<DT><CODE>(closewbobject &#60;argument&#62;)</CODE>
+<DD>
+<A NAME="IDX109"></A>
+This statement closes the named workbench object. Currently only
+disks, trashcans and drawers can be closed.
+
+</DL>
+
+
+
+<H2><A NAME="SEC39" HREF="V44_Changes_toc.html#TOC39">Multimedia support</A></H2>
+
+<P>
+The V44 <CODE>Installer</CODE> provides support for displaying text
+and pictures and playing sounds during the installation. It is
+also possible to have the <CODE>Installer</CODE> open on its own screen
+to provide a full screen backdrop for the installation. The OS 3.5
+installer script makes use of these new features to provide an
+eye pleasing installation procedure as well as showing the user
+license in a separate window. Before V44, some later installation
+scripts from third party applications already made use of external
+programs to obtain similar results. It is recommended that you adapt
+your existing scripts to use the new mechanisms built into the
+Installer for increased consistency between different products.
+
+</P>
+<P>
+The following multimedia commands are provided by the V44 <CODE>Installer</CODE>:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>(effect &#60;position&#62; &#60;effect&#62; &#60;color 1&#62; &#60;color 2&#62;)</CODE>
+<DD>
+<A NAME="IDX110"></A>
+Sets the graphical effect that is used for the background.
+
+<DT><CODE>(showmedia &#60;medianame&#62; &#60;filename&#62; &#60;position&#62; &#60;size&#62; &#60;borderflag&#62; ...)</CODE>
+<DD>
+<A NAME="IDX111"></A>
+showmedia opens a datatype and presents it to the user.
+
+<DT><CODE>(setmedia &#60;media&#62; &#60;action&#62; [parameter])</CODE>
+<DD>
+<A NAME="IDX112"></A>
+Using the setmedia statement some action can be performed on the datatype.
+
+<DT><CODE>(closemedia &#60;media&#62;)</CODE>
+<DD>
+<A NAME="IDX113"></A>
+Closes a media file and removes it from memory.
+
+</DL>
+
+<P>
+Please see the <TT>`Installer.guide'</TT> for a detailed description of
+these commands.
+
+</P>
+
+
+<H2><A NAME="SEC40" HREF="V44_Changes_toc.html#TOC40">Rebooting the System</A></H2>
+
+<P>
+One new command allows to reboot the system automatically once the
+installation has finished. This command should be used with extreme
+caution: forced reboots are extremely annoying to most users.
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>(reboot)</CODE>
+<DD>
+<A NAME="IDX114"></A>
+This commands reboots the Amiga.
+
+</DL>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_15.html">previous</A>, <A HREF="V44_Changes_17.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

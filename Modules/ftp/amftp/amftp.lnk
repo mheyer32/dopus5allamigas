@@ -1,0 +1,12 @@
+FROM LIB:c.o "amftp.o"
+TO "amftp"
+LIB LIB:sc.lib LIB:amiga.lib
+ADDSYM
+SMALLCODE
+SMALLDATA
+STRIPDEBUG
+QUIET
+NOICONS
+DEFINE @__chkabort=@__dummy
+
+noicons

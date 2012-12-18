@@ -1,0 +1,44 @@
+; ************************************************* 
+; Catalog description file for pathformat.module
+; ************************************************* 
+;
+;
+MSG_PATHFORMAT_TITLE (3000//)
+Edit Paths
+;
+MSG_PATHFORMAT_SAVE (//)
+_Save
+;
+MSG_PATHFORMAT_CANCEL (//)
+_Cancel
+;
+MSG_PATHFORMAT_KEY (//)
+_Key
+;
+MSG_PATHFORMAT_ADD (//)
+_Add
+;
+MSG_PATHFORMAT_REMOVE (//)
+_Remove
+;
+MSG_PATHFORMAT_EDIT (//)
+_Edit
+;
+MSG_PATHFORMAT_PATH (//)
+_Path
+;
+MSG_PATHFORMAT_NEW_LISTER (//)
+_New lister mode
+;
+MSG_MODE_NONE (//)
+None
+;
+MSG_MODE_NAME (//)
+Name
+;
+MSG_MODE_ICON (//)
+Icon
+;
+MSG_MODE_ICON_ACTION (//)
+Icon Action
+;

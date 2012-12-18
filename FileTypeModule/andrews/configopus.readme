@@ -1,0 +1,26 @@
+
+Cfg_Filetype *EditFiletype(
+	register __a0 Cfg_Filetype *type,
+	register __a1 struct Window *window,
+	register __a2 IPCData *ipc,
+	register __a3 IPCData *dopus_ipc,
+	register __d0 ULONG flags);
+
+type      - filetype to edit (this copy is not changed)
+window    - parent window pointer (can be 0)
+ipc       - our ipc handle
+dopus_ipc - ipc handle of dopus main program
+flags     - flags
+
+dopus_ipc can be 0, but several things will not work (the View File
+function in the class editor, and the popup function list).
+
+flags - EFTF_EDIT_CLASS    bring up class editor automatically
+
+If the edit was successful, this routine returns a NEW filetype. You
+can do what you want with it, but the usual action would be to free the
+old one and use the new one in its place.
+
+
+
+don't forget this function is in the configopus.module (ConfigOpusBase).

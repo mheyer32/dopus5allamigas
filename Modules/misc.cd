@@ -1,0 +1,14 @@
+; ************************************************* 
+; Catalog description file for misc.module
+; ************************************************* 
+;
+;
+MSG_BEEP_DESC (1//)
+Makes a beep sound
+;
+MSG_FLASH_DESC (//)
+Flashes the display
+;
+MSG_ALARM_DESC (//)
+Sounds an alarm
+;

@@ -1,0 +1,453 @@
+From jpotter@birch.satech.net.au Fri, 09 Feb 1996 14:57:33 
+X-SystemInfo: InternetMail: EMail
+X-Message-No: 540 (database)
+From: Jonathan Potter <jpotter@birch.satech.net.au>
+To: zzgperry <zzgperry@mailbox.uq.oz.au>
+Subject: filetypes
+Date: Sat, 10 Feb 96 00:57:00
+Message-ID: <19960209145733.1e2acc9d.in@birch.satech.net.au>
+Received: from morse.satech.net.au (root@morse.satech.net.au [203.1.91.4]) by dingo.cc.uq.oz.au with ESMTP id OAA17928(8.6.12/IDA-1.6 for <zzgperry@mailbox.uq.oz.au>); Fri, 9 Feb 1996 14:28:03 +1000
+Received: from birch.satech.net.au (birch.satech.net.au [203.1.91.193]) by morse.satech.net.au (8.6.12/8.6.9) with ESMTP id PAA27911 for <zzgperry@mailbox.uq.oz.au>; Fri, 9 Feb 1996 15:04:02 +1030
+Received: by localhost from birch.satech.net.au(router,SLmail95 V1.15); Fri, 09 Feb 1996 14:57:33 
+Received: from birch.satech.net.au by birch.satech.net.au(203.1.91.193::mail daemon,SLmail95 V1.15); Fri, 09 Feb 1996 14:57:11
+X-Sender: Jonathan Potter <jpotter@birch.satech.net.au>
+X-Mailer: Windows Eudora Light Version 1.5.2
+Mime-Version: 1.0
+X-Attachments: A:\FT.TXT;
+==============================================================================
+to andrew:
+
+these docs should tell you how filetypes are configured and stored.. more to
+follow
+==============================================================================
+Content-Disposition: attachment; filename="FT.TXT"
+
+How filetypes work:
+
+
+These structures are from dopus_config.h:
+
+
+// List of filetypes (for storage)
+typedef struct {
+	struct Node			node;
+	char				path[256];		// File path
+	struct DateStamp	date;			// File datestamp
+	struct List			filetype_list;	// List of types
+	ULONG				flags;
+} Cfg_FiletypeList;
+
+
+// TYPE - Filetype definition
+typedef struct {
+	char				name[32];		// Filetype name
+	char				id[8];			// Filetype ID
+	UWORD				flags;			// Flags
+	char				priority;		// Priority
+	char				pad;			// Padding
+	UWORD				count;			// Number of functions defined
+} CFG_TYPE;
+
+
+// Filetype definition
+typedef struct {
+	struct Node			node;
+	CFG_TYPE			type;			// Filetype information
+	unsigned char		*recognition;	// Recognition string
+	char				*icon_path;		// Icon path
+	char				**actions;		// Action strings
+	struct List			function_list;	// Function list
+	Cfg_FiletypeList	*list;			// List we are in
+} Cfg_Filetype;
+
+
+The Cfg_FiletypeList structure contains a list with one or more filetype
+definitions in it. The filetype files on disk are actually IFF representations
+of the Cfg_FiletypeList structure - it is quite possible to have a filetype
+file with more than one filetype definition in it. The configuration system
+doesn't allow for this though. (I had originally planned that you could
+have one filetype file with all your archivers in it, another for pictures,
+etc..).
+
+
+You must initialise the Cfg_FiletypeList structure yourself. The fields are:
+
+	path - contains the full path to the file on disk.
+	date - last modified datestamp
+	filetype_list - list of filetype structures
+	flags - set to 0
+
+
+The Cfg_Filetype structure contains the definition for a filetype. Fill it
+out as follows :
+
+	type.name - filetype name
+	type.id - filetype id
+	type.flags - set to 0 for now
+	type.priority - filetype priority
+	type.count - number of functions defined in this filetype
+
+	recognition - compiled recognition string, see below
+	icon_path - pathname of filetype icon
+	actions - unused
+	function_list - list of functions
+	list - pointer back to Cfg_FiletypeList structure
+
+
+
+The recognition string is an unfortunate hangover from Opus 4. It is a single
+string containing control codes and data used to identify a file.
+The basic format is one or more repetitions of the following pattern :
+
+		<match_code> [<match_data>] <end_code>
+
+	match_code is a character code corresponding to a match or movement command
+	match_data is the data for this operation
+	end_code is a code signifying either the end of a command, an AND or an OR
+
+
+The match_code (and end_code) is one of the following values :
+
+// Filetype matching commands
+enum
+{
+	FTOP_NOOP,			// No operation (0)
+	FTOP_MATCH,			// Match text (1)
+	FTOP_MATCHNAME,		// Match filename (2)
+	FTOP_MATCHBITS,		// Match protection bits (3)
+	FTOP_MATCHCOMMENT,	// Match comment (4)
+	FTOP_MATCHSIZE,		// Match size (5)
+	FTOP_MATCHDATE,		// Match date (6)
+	FTOP_MOVETO,		// Move to absolute location (7)
+	FTOP_MOVE,			// Move to relative location (8)
+	FTOP_SEARCHFOR,		// Search for text (9)
+	FTOP_MATCHFORM,		// Match an IFF FORM (10)
+	FTOP_FINDCHUNK,		// Find an IFF chunk (11)
+	FTOP_MATCHDTGROUP,	// Match datatypes group (12)
+	FTOP_MATCHDTID,		// Match datatypes ID (13)
+	FTOP_MATCHNOCASE,	// Match text case insensitive (14)
+	FTOP_DIRECTORY,		// Match directory (15)
+
+	FTOP_LAST,			// Last valid command
+
+	FTOP_SPECIAL=252,	// Start of special instructions
+
+	FTOP_OR,			// Or (253)
+	FTOP_AND,			// And (254)
+	FTOP_ENDSECTION		// End of a section (255)
+};
+
+Use FTOP_ENDSECTION for the end_code unless you specifically want an AND or
+an OR. The recognition string must be null-terminated.
+
+match_data is the data used for the operation, and is a plain text string.
+match_data is NOT null-terminated; the end_code is used instead.
+
+An example is given for each command (leave out the quotes of course):
+
+	FTOP_MATCH			"text"
+	FTOP_MATCHNAME		"#?.txt"
+	FTOP_MATCHBITS		"rwed"
+	FTOP_MATCHCOMMENT	"comment"
+	FTOP_MATCHSIZE		">1000"
+	FTOP_MATCHDATE		">1-jan-95"
+	FTOP_MOVETO			"$1ac"
+	FTOP_MOVE			"-30"
+	FTOP_SEARCHFOR		"sometext"
+	FTOP_MATCHFORM		"ILBM"
+	FTOP_FINDCHUNK		"BODY"
+	FTOP_MATCHDTGROUP	"picture"
+	FTOP_MATCHDTID		"jpeg"
+	FTOP_MATCHNOCASE	"AbCdE?"
+	FTOP_DIRECTORY		<none>
+
+
+Functions you can use for filetypes are :
+
+	Cfg_Filetype *NewFiletype(APTR memory)
+
+		- creates a new filetype structure using the specified memory handle
+		  (there's no reason you can't create your own)
+
+	Cfg_FiletypeList *ReadFileTypes(char *name,APTR memory)
+
+		- loads a filetype list from disk, using specified memory handle
+
+	long SaveFiletypeList(Cfg_FiletypeList *list,char *name)
+
+		- saves a filetype list to disk
+
+	void FreeFiletypeList(Cfg_FiletypeList *list)
+
+		- frees a filetype list structure (the Cfg_FiletypeList structure
+		  must have been allocated with AllocMemH())
+
+	void FreeFiletype(Cfg_Filetype *type)
+
+		- frees a filetype structure (again, AllocMemH() must have been used)
+
+
+
+The functions in the function_list field of the Cfg_Filetype structure define
+the actions for this filetype.
+
+// FUNC - Function definition
+typedef struct {
+	ULONG				flags;			// Function flags
+	ULONG				flags2;			// More function flags
+	ULONG				pad_1;			// Some padding
+	UWORD				code;			// Function key code
+	UWORD				qual;			// Function qualifier
+	UWORD				func_type;		// Function type
+	UWORD				qual_mask;		// Qualifier mask
+	UWORD				qual_same;		// Qualifier same
+} CFG_FUNC;
+
+flags :
+
+#define FUNCF_OUTPUT_WINDOW		(1<<0)	// Output window
+#define FUNCF_OUTPUT_FILE		(1<<1)	// Output to file
+#define FUNCF_WORKBENCH_OUTPUT	(1<<2)	// Open window on Workbench
+#define FUNCF_RUN_ASYNC			(1<<4)	// Run asynchronously
+#define FUNCF_CD_SOURCE			(1<<5)	// CD source
+#define FUNCF_CD_DESTINATION	(1<<6)	// CD destination
+#define FUNCF_DO_ALL_FILES		(1<<7)	// Repeat for all files
+#define FUNCF_RECURSE_DIRS		(1<<8)	// Recursive directories
+#define FUNCF_RELOAD_FILES		(1<<9)	// Reload each file when done
+#define FUNCF_NO_QUOTES			(1<<11)	// Don't quote filenames
+#define FUNCF_RESCAN_SOURCE		(1<<12)	// Rescan source directory
+#define FUNCF_RESCAN_DEST		(1<<13)	// Rescan destination directory
+#define FUNCF_WAIT_CLOSE		(1<<16)	// Wait for click before closing window
+
+flags2 (you should set this) :
+
+#define FUNCF2_FILETYPE_FUNC	(1<<1)	// Function is a filetype function
+
+code, qual, qual_mask, qual_same should be set to 0 for filetypes.
+func_type will be set when you call NewFunction().
+
+
+
+// Function definition
+typedef struct {
+	struct Node			node;
+	CFG_FUNC			function;
+	struct MinList		instructions;
+} Cfg_Function;
+
+
+To create a function, use :
+
+	Cfg_Function *NewFunction(APTR memory,UWORD type)
+
+	memory is a memory handle
+	type is the type to create :
+
+Valid types for filetypes are :
+
+enum
+{
+	FTTYPE_USER_1,			// UserFunc1
+	FTTYPE_USER_2,			// UserFunc2
+	FTTYPE_DOUBLE_CLICK,	// Double-click
+	FTTYPE_DRAG_DROP,		// Drag 'n' drop
+	FTTYPE_OLD1,			// not used
+	FTTYPE_USER_3,			// UserFunc3
+	FTTYPE_OLD2,			// not used
+	FTTYPE_OLD3,			// not used
+	FTTYPE_OLD4,			// not used
+	FTTYPE_USER_4,			// UserFunc4
+};
+
+Each function consists of one or more Cfg_Instruction structures.
+
+// Function instruction
+typedef struct {
+	struct MinNode		node;
+	short				type;
+	char				*string;
+} Cfg_Instruction;
+
+
+	type :
+
+enum
+{
+	INST_COMMAND,		// Internal command
+	INST_AMIGADOS,		// AmigaDOS command
+	INST_WORKBENCH,		// Workbench command
+	INST_SCRIPT,		// Batch file
+	INST_AREXX,			// ARexx script
+	INST_LABEL,			// Label (not used)
+};
+
+	string - null terminated instruction string
+
+
+You can use this function to create instructions :
+
+	Cfg_Instruction *NewInstruction(APTR memory,short type,char *string)
+
+You should then AddTail() the instruction onto the Cfg_Function's instructions list.
+
+
+
+
+- here are the docs for the memory pooling routines, if you don't already have them -
+
+dopus5.library/AllocMemH                         dopus5.library/AllocMemH
+
+     NAME
+		AllocMemH - allocate memory using pooling routines
+
+     SYNOPSIS
+		AllocMemH(handle, size)
+		            A0     D0
+
+		void *AllocMemH(APTR, ULONG)
+
+     FUNCTION
+		This function allows you to allocate a chunk of memory.
+		The type of memory allocated was specified when the memory
+		handle was created. The size of the allocation is
+		tracked automatically (similar to AllocVec).
+
+		You can actually use this function with a NULL memory
+		handle - in this case, the function performs very like
+		AllocVec(). This disadvantage to this is that you are
+		unable to specify the type of memory you need (the
+		default is MEMF_ANY|MEMF_CLEAR). Memory allocated in
+		this way can obviously not be tracked, and you must
+		FreeMemH() each allocation individually.
+
+     INPUTS
+		handle - memory handle (from NewMemHandle())
+		size - the amount of memory to allocate
+
+     RETURNS
+		memory - a chunk of memory for you to use, or NULL if
+		the request could not be satisfied.
+
+     SEE ALSO
+		NewMemHandle(), FreeMemH()
+
+
+dopus5.library/ClearMemHandle                    dopus5.library/ClearMemHandle
+
+     NAME
+		ClearMemHandle - free all memory allocated via a handle
+
+     SYNOPSIS
+		ClearMemHandle(handle)
+		                 A0
+
+		void ClearMemHandle(APTR)
+
+     FUNCTION
+		This function frees all memory that has been allocated with
+		AllocMemH() via the specified handle. The memory handle
+		itself remains intact.
+
+     INPUTS
+		handle - memory handle (from NewMemHandle())
+
+     SEE ALSO
+		NewMemHandle(), AllocMemH(), FreeMemHandle()
+
+
+dopus5.library/FreeMemH                          dopus5.library/FreeMemH
+
+     NAME
+		FreeMemH - free memory allocated with AllocMemH()
+
+     SYNOPSIS
+		FreeMemH(memory)
+		           A0
+
+		void FreeMemH(APTR)
+
+     FUNCTION
+		This function frees an individual memory chunk that was
+		allocated using AllocMemH().
+
+     INPUTS
+		memory - memory address returned from AllocMemH()
+
+     SEE ALSO
+		NewMemHandle(), AllocMemH()
+
+
+dopus5.library/FreeMemHandle                     dopus5.library/FreeMemHandle
+
+     NAME
+		FreeMemHandle - free a memory handle completely
+
+     SYNOPSIS
+		FreeMemHandle(handle)
+		                A0
+
+		void FreeMemHandle(APTR)
+
+     FUNCTION
+		This function frees all memory that was allocated using the
+		specified handle, and then frees the handle itself.
+
+     INPUTS
+		handle - memory handle from NewMemHandle()
+
+     SEE ALSO
+		NewMemHandle(), ClearMemHandle()
+
+
+dopus5.library/NewMemHandle                      dopus5.library/NewMemHandle
+
+     NAME
+		NewMemHandle - allocate a new memory handle
+
+     SYNOPSIS
+		NewMemHandle(puddle_size, thresh_size, type)
+		                 D0            D1       D2
+
+		APTR NewMemHandle(ULONG, ULONG, ULONG)
+
+     FUNCTION
+		This function allocates a new memory handle, to enable
+		easy access to memory pooling and tracking functions.
+
+		If you wish to use the OS memory pooling routines, specify
+		a puddle and a threshhold size for the memory pool. If
+		you do not specify these, the memory handle will use
+		ordinary memory allocations and keep track of these
+		via a linked list. A linked list will also be used if
+		the creation of a memory pool fails for any reason.
+
+		You must specify the type of memory you want when you
+		create the handle. All memory allocated with this handle
+		will be of the requested type (ie you can not mix fast and
+		chip memory within the same handle). The normal MEMF_ flags
+		are used for this, with the following notes:
+
+		  - If MEMF_CLEAR is specified, the AllocMemH() routine
+		    clears the memory itself (as the OS pooling routines do
+		    not support this).
+
+		  - If MEMF_PUBLIC is specified, it indicates that you want
+		    the memory handle to be shareable between tasks, and will
+		    use semaphore locking when accessing the handle.
+
+     INPUTS
+		puddle_size - size of puddles to use for pooling
+		thresh_size - allocation threshhold size for pooling
+		type - type of memory to allocate
+
+     RESULT
+		handle - memory handle to pass to the other memory functions
+
+     SEE ALSO
+		AllocMemH(), ClearMemHandle(), FreeMemH(), FreeMemHandle(),
+		exec.library/AllocPooled(), exec.library/FreePooled(),
+		exec.library/CreatePool(), exec.library/DeletePool()
+
+==============================================================================
+         -- Jonathan Potter -- Left Side Software -- +61-412-845696 --
+

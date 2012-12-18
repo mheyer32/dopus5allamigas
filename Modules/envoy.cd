@@ -1,0 +1,50 @@
+; ************************************************* 
+; Catalog description file for envoy.module
+; ************************************************* 
+;
+;
+MSG_ENVOY_TITLE (1000//)
+File Network Settings
+;
+MSG_ENVOY_DESC (//)
+Change network settings for files
+;
+MSG_ENVOY_OWNER (//)
+_Owner
+;
+MSG_ENVOY_GROUP (//)
+_Group
+;
+MSG_ENVOY_GROUP_BITS (//)
+Group bits
+;
+MSG_ENVOY_OTHER_BITS (//)
+Other bits
+;
+MSG_OK (//)
+OK
+;
+MSG_CANCEL (//)
+Cancel
+;
+MSG_ENVOY_GET_GROUP (//)
+Select Group
+;
+MSG_ENVOY_GET_OWNER (//)
+Select Owner
+;
+MSG_ENVOY_NO_GROUP (//)
+<No Group>
+;
+MSG_ENVOY_NO_OWNER (//)
+<No Owner>
+;
+MSG_ENVOY_BAD_GROUP (//)
+'%s' is not a valid group!
+;
+MSG_ENVOY_BAD_USER (//)
+'%s' is not a valid user!
+;
+MSG_ENVOY_PROGRESS_TITLE (//)
+Changing network settings...
+;

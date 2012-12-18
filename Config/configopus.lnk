@@ -1,0 +1,20 @@
+FROM LIB:libent.o LIB:libinit.o "libinit.o"+"config.o"+"config_test.o"+"config_flags.o"+"config_flags_data.o"+"config_display.o"+"config_display_data.o"+"config_listers.o"+"config_listers_data.o"+"config_lister_format.o"+"config_buttons.o"+"config_buttons_data.o"+"config_buttons_god.o"+"config_buttons_support.o"+"function_editor.o"+"function_editor_data.o"+"lsprintf.o"+"string_data.o"+"ipc.o"+"misc.o"
+TO "configopus.library"
+LIB lib:debug.lib lib:amiga.lib lib:scm.lib lib:sc.lib LIB:sc.lib LIB:amiga.lib
+ADDSYM
+SMALLCODE
+SMALLDATA
+STRIPDEBUG
+QUIET
+NOICONS
+DEFINE @__chkabort=@__dummy
+LIBVERSION 1
+LIBREVISION 0
+LIBPREFIX _L_
+LIBFD configopus.fd
+DEFINE __CXM33=__UCXM33
+DEFINE __CXD33=__UCXD33
+DEFINE __CXM22=__UCXM22
+DEFINE __CXD22=__UCXD22
+
+noicons

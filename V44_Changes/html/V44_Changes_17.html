@@ -1,0 +1,75 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - SetPatch</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_16.html">previous</A>, <A HREF="V44_Changes_18.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC41" HREF="V44_Changes_toc.html#TOC41">The SetPatch command</A></H1>
+<P>
+<A NAME="IDX115"></A>
+<A NAME="IDX116"></A>
+<A NAME="IDX117"></A>
+<A NAME="IDX118"></A>
+<A NAME="IDX119"></A>
+<A NAME="IDX120"></A>
+
+</P>
+
+<P>
+The <CODE>SetPatch</CODE> program has been extended in V44 to perform
+some additional functions required by OS 3.5.
+
+</P>
+
+<UL>
+
+<LI>
+
+Remove ROM based libraries from Exec's library list before they
+have been opened by applications, so that a disk-based replacement
+can be subsequently loaded by ramlib. SetPatch defaults to remove
+<CODE>icon.library</CODE> and <CODE>workbench.library</CODE> automatically. This can be
+overridden with the <CODE>DISABLEROMMODULES</CODE> command line parameter.
+This feature obsoletes the <CODE>RemLibrary</CODE> command which was used
+in earlier OS 3.5 beta releases.
+
+<LI>
+
+Load resident modules from <TT>`Devs:Amiga ROM Update'</TT> and add them
+to Exec's residents list<A NAME="DOCF4" HREF="V44_Changes_foot.html#FOOT4">(4)</A>. The updated versions will then be
+initialized by Exec at bootstrap time. <CODE>SetPatch</CODE> uses this
+feature to replace the ROM versions of the <CODE>scsi.device</CODE> and
+the <CODE>FastFileSystem</CODE> with the updated V44 versions. <CODE>SetPatch</CODE>
+determines which modules need to be replaced automatically, but this can
+also be overridden by the command line parameters.
+
+</UL>
+
+<P>
+The V44 <CODE>SetPatch</CODE> command is designed to work with any Kickstart since
+V37, altrough it has been tested extensively only on V40. <STRONG>NOTE WELL:</STRONG>
+The replacement modules included in <TT>`Amiga ROM Update'</TT> are to be used on
+Kickstart V40 <STRONG>ONLY</STRONG> so they won't work with earlier Kickstart versions.
+
+</P>
+<P>
+The <TT>`CheckSetPatch.c'</TT> code fragment included in the NDK may help
+some software developers to internally turn off workarounds for OS bugs
+conditionally.
+
+</P>
+<P>
+ [TODO: describe command line template]
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_16.html">previous</A>, <A HREF="V44_Changes_18.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

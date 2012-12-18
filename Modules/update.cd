@@ -1,0 +1,20 @@
+; ************************************************* 
+; Catalog description file for update.module
+; ************************************************* 
+;
+;
+MSG_PLEASE_WAIT (1000//)
+Please wait...
+;
+MSG_UPDATE_TITLE (//)
+Directory Opus - Update Djinn
+;
+MSG_UPDATE_CONVERT_WB (//)
+Copy Workbench left-outs to Opus?
+;
+MSG_YES_NO (//)
+Yes|No
+;
+MSG_READ_DIR_BUTTON (//)
+Read \"%s\"
+;

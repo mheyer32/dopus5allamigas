@@ -1,0 +1,51 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Workbench Replacements</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_9.html">previous</A>, <A HREF="V44_Changes_11.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC20" HREF="V44_Changes_toc.html#TOC20">Support for Workbench enhancers and replacements</A></H2>
+<P>
+<A NAME="IDX48"></A>
+<A NAME="IDX49"></A>
+<A NAME="IDX50"></A>
+<A NAME="IDX51"></A>
+
+</P>
+<P>
+The new <CODE>icon.library/IconControlA()</CODE> call provides a way for
+applications to change the default parameters used by the
+<CODE>icon.library</CODE> when reading, remapping, drawing and saving icons.
+
+</P>
+<P>
+This new functionality obsoletes most of the Workbench patches that
+have been around before OS 3.5. There are now documented (and clean) ways
+to disable icon borders and to install a hook to choose default icons for
+icon-less files.
+
+</P>
+<P>
+For icon editors and other applications that need to create fresh new
+icons, the <CODE>NewDiskObject()</CODE> function provides a way to create and
+initialize a <CODE>DiskObject</CODE> structure. The old official way to do this
+was to to get a default icon with <CODE>GetDiskObjectNew()</CODE> or even
+create the structure manually. The latter method is now considered
+<STRONG>OBSOLETE</STRONG> and <CODE>VERY SYSTEM UNFRIENDLY</CODE>. The V44 <CODE>icon.library</CODE>
+contains compatibility code to distinguish between real <CODE>DiskObject</CODE>s
+and fake <CODE>DiskObject</CODE>s created by unfair applications. These hacks will
+stop working once the compatibility code is dropped for future versions
+of the <CODE>icon.library</CODE>.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_9.html">previous</A>, <A HREF="V44_Changes_11.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

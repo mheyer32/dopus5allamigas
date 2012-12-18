@@ -1,0 +1,251 @@
+#DEBUGLIB = lib:debug.lib
+
+OBJS =	data.o \
+	version.o \
+	string_data.o \
+	function_data.o \
+	menu_data.o \
+	moon_data.o \
+	palette_routines.o \
+	pattern.o \
+	key_press.o key_finder_data.o \
+	main.o \
+	commands.o \
+	menus.o \
+	popup.o popup_build.o \
+	iconpos.o \
+	cx.o \
+	wb.o \
+	text.o \
+	help.o \
+	eliza.o \
+	event_loop.o \
+	main_reset.o \
+	backdrop.o \
+	backdrop_render.o \
+	backdrop_idcmp.o \
+	backdrop_buttons.o \
+	backdrop_utils.o \
+	backdrop_arrange.o \
+	backdrop_position.o \
+	backdrop_open.o \
+	backdrop_drag.o \
+	backdrop_groups.o \
+	backdrop_notify.o \
+	backdrop_appicon.o \
+	backdrop_devices.o \
+	backdrop_snapshot.o \
+	backdrop_popup.o \
+	backdrop_format.o \
+	backdrop_select.o \
+	backdrop_info.o \
+	backdrop_leftout.o \
+	backdrop_replace.o \
+	desktop.o \
+	desktop_delete.o \
+	desktop_drop.o \
+	desktop_rename.o \
+	desktop_folder.o \
+	groups_new.o \
+	toolbar.o \
+	requesters.o \
+	notify.o \
+	graphics.o \
+	misc.o misc_proc.o \
+	dates.o \
+	links.o \
+	path_routines.o \
+	status_text.o \
+	scripts.o \
+	buffers.o \
+	buffers_util.o \
+	buffers_sort.o \
+	buffers_reselect.o \
+	filetypes.o \
+	filetypes_proc.o \
+	search_data.o \
+	lister.o \
+	lister_data.o \
+	lister_proc.o \
+	lister_idcmp.o \
+	lister_function.o \
+	lister_window.o \
+	lister_diskinfo.o \
+	lister_display.o \
+	lister_busy.o \
+	lister_title.o \
+	lister_activate.o \
+	lister_buffers.o \
+	lister_dir.o \
+	lister_show.o \
+	lister_toolbar.o \
+	lister_drop.o \
+	lister_icons.o \
+	lister_progress.o \
+	lister_clip.o \
+	lister_menus.o \
+	lister_hotname.o \
+	lister_edit.o \
+	lister_ftp.o \
+	buttons.o \
+	buttons_data.o \
+	buttons_proc.o \
+	buttons_draw.o \
+	buttons_window.o \
+	buttons_display.o \
+	buttons_idcmp.o \
+	buttons_function.o \
+	buttons_run.o \
+	buttons_io.o \
+	buttons_edit.o \
+	buttons_popup.o \
+	start_menu.o \
+	dirlist_read.o \
+	dirlist_scroll.o \
+	dirlist_util.o \
+	function_launch.o \
+	function_paths.o \
+	function_readdir.o \
+	function_run.o \
+	function_parse.o \
+	function_internal.o \
+	function_external.o \
+	function_script.o \
+	function_support.o \
+	function_filechange.o \
+	function_filetype.o \
+	function_files.o \
+	function_all.o \
+	function_none.o \
+	function_toggle.o \
+	function_copy.o \
+	function_delete.o \
+	function_makedir.o \
+	function_rename.o \
+	function_stopsniff.o \
+	function_select.o function_select_data.o \
+	function_devicelist.o \
+	function_change.o function_change_data.o \
+	function_scandir.o \
+	function_clearbuffers.o \
+	function_show.o \
+	function_disk.o \
+	function_loadbuttons.o \
+	function_loadenvironment.o \
+	function_loadfonts.o \
+	function_leaveout.o \
+	function_runprog.o \
+	function_addicon.o \
+	function_search.o \
+	function_getsizes.o \
+	function_hunt.o \
+	function_parent.o \
+	function_user.o \
+	function_verify.o \
+	function_cli.o \
+	function_printdir.o \
+	function_set.o \
+	function_closebuttons.o \
+	function_special.o \
+	function_reselect.o \
+	function_assign.o \
+	function_configure.o \
+	function_setbackground.o \
+	function_runcommand.o \
+	function_reset.o \
+	clock_task.o \
+	environment.o \
+	app_msg.o \
+	icons.o icon_function.o \
+	file_select.o file_openwith.o \
+	window_activate.o \
+	cleanup.o \
+	tile.o \
+	display.o display_pattern.o \
+	rexx_proc.o rexx_lister.o rexx_files.o rexx_util.o rexx_data.o \
+	rexx_traps.o rexx_apps.o rexx_handler.o rexx_cmd.o rexx_dopus.o \
+	dos_notify.o \
+	replace.o \
+	position.o \
+	callback_main.o callback_dir.o callback_help.o callback_lister.o \
+	serial.o
+
+#########################################################################
+
+all : string_data.h DOpus DOpusRT5 LoadWB dopusmsg
+
+string_data.h : dopus.cd
+	catcomp descriptor=dopus.cd cfile=string_data.h
+
+string_data.o : string_data.h string_data.c
+	delete >nil: string_data.o quiet
+	sc string_data.c
+
+#########################################################################
+
+DOpus : $(OBJS)
+	slink with <<
+define __ctype=___ctype
+#define ___main=___tinymain
+from lib:cback.o $(OBJS)
+to DOpus-debug
+lib lib:scm.lib lib:sc.lib lib:amiga.lib lib:dopus.lib $(DEBUGLIB)
+noicons
+maxhunk 51200
+sd
+#sc
+<
+	slink DOpus-debug to DOpus nodebug
+	copy DOpus dopus5:DirectoryOpus
+
+#########################################################################
+
+DOpusRT5 : DOpusRT.o
+	slink with <<
+define __ctype=___ctype
+from lib:cres.o DOpusRT.o
+to DOpusRT5
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy DOpusRT5 dopus5:c
+
+#########################################################################
+
+LoadWB : LoadWB.o
+	slink with <<
+define __ctype=___ctype
+from lib:c.o LoadWB.o
+to LoadWB
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy LoadWB dopus5:c/LoadDB
+
+#########################################################################
+
+dopusmsg : dopusmsg.o
+	slink with <<
+define __ctype=___ctype
+from lib:c.o dopusmsg.o
+to dopusmsg
+lib lib:sc.lib $(DEBUGLIB) lib:amiga.lib
+noicons
+sc sd nd
+<
+	copy dopusmsg dopus5:c
+
+#########################################################################
+
+.c.o:
+	sc $*.c
+.asm.o:
+	sc:c/asm -iASMINC: $*.asm
+
+#########################################################################
+
+clean:
+	delete ~(string_data).o quiet
+	touch >nil: \#?.cd
