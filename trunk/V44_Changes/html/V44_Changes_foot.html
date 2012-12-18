@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Footnotes</TITLE>
+</HEAD>
+<BODY>
+<H1>AmigaOS V44 (AKA OS3.5) Release Notes</H1>
+<H2>PRELIMINARY - last updated on 24 October 1999</H2>
+<ADDRESS>by Bernardo Innocenti</ADDRESS>
+<P>
+<P><HR><P>
+<H3><A NAME="FOOT1" HREF="V44_Changes_9.html#DOCF1">(1)</A></H3>
+<P>Actually, this isn't completely true: the
+<CODE>struct DiskObject</CODE> really contains the new images in its
+private data. The only way to retrieve it is by calling <CODE>DupDiskObject()</CODE>
+and passing the tag <CODE>ICONDUPA_ActivateImageData</CODE>. This trick is used
+by the Workbench as a workaround to display the new style image in
+AppIcons provided by non-V44-aware applications.
+<H3><A NAME="FOOT2" HREF="V44_Changes_11.html#DOCF2">(2)</A></H3>
+<P>In fact, it is strongly discouraged because it installs
+patches on the <CODE>icon.library</CODE> with no support for the new
+extensions.
+<H3><A NAME="FOOT3" HREF="V44_Changes_12.html#DOCF3">(3)</A></H3>
+<P>To prevent this from happening, you must explicitly set the
+<CODE>ICONGETA_RemapIcon</CODE> tag to FALSE.
+<H3><A NAME="FOOT4" HREF="V44_Changes_17.html#DOCF4">(4)</A></H3>
+<P>This feature obsoletes the <CODE>LoadV43Module</CODE>
+command which was distributed with earlier V43 <CODE>scsi.device</CODE> and
+<CODE>FastFileSystem</CODE> updates.
+<P><HR><P>
+This document was generated on 24 October 1999 using the
+<A HREF="http://wwwcn.cern.ch/dci/texi2html/">texi2html</A>
+translator version 1.51.</P>
+</BODY>
+</HTML>

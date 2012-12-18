@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Icon Functions</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_12.html">previous</A>, <A HREF="V44_Changes_14.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC25" HREF="V44_Changes_toc.html#TOC25">Summary of new functions in icon.library</A></H2>
+<P>
+<A NAME="IDX58"></A>
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>struct DiskObject *DupDiskObjectA(struct DiskObject *icon, struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX59"></A>
+Create a duplicate of a <CODE>DiskObject</CODE> in memory. It can also
+be used to create an extended (<CITE>native</CITE>) <CODE>DiskObject</CODE> data
+structure from an existing, traditional format <CODE>DiskObject</CODE>.
+
+<DT><CODE>ULONG IconControlA(struct DiskObject *, struct TagItem *)</CODE>
+<DD>
+<A NAME="IDX60"></A>
+Modify and query icon and icon.library options.
+
+<DT><CODE>VOID DrawIconStateA(struct RastPort *rp, struct DiskObject *icon, STRPTR label, LONG leftEdge, LONG topEdge, ULONG state,struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX61"></A>
+Draw an icon as if it were an image; if a label is provided, it
+will be printed below it.
+
+<DT><CODE>BOOL GetIconRectangleA(struct RastPort *rp, struct DiskObject *icon, STRPTR label, struct Rectangle *rectangle, struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX62"></A>
+Calculate the size of the area icon rendering would affect.
+
+<DT><CODE>struct DiskObject *NewDiskObject(LONG type)</CODE>
+<DD>
+<A NAME="IDX63"></A>
+create an <EM>empty</EM> <CODE>DiskObject</CODE> structure, which has no image data associated
+with it. Still, all the necessary structures are in place, you just have to fill them in.
+
+<DT><CODE>struct DiskObject *GetIconTagList(STRPTR name, struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX64"></A>
+Retrieve an icon that can belong to a file/drawer/volume or it can be a default icon.
+
+<DT><CODE>BOOL PutIconTagList(STRPTR name,struct DiskObject *icon, struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX65"></A>
+Store an icon; which can belong to a file/drawer/volume or it can be a default icon.
+
+<DT><CODE>BOOL LayoutIconA(struct DiskObject *icon,struct Screen *screen, struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX66"></A>
+prepare an icon for display, either on a specific screen or using a default colour
+palette. It is useful only for palette mapped icons.
+
+<DT><CODE>VOID ChangeToSelectedIconColor(struct ColorRegister *cr)</CODE>
+<DD>
+<A NAME="IDX67"></A>
+change the provided RGB colour value to make it suitable for use in an icon's select image.
+This may involve darkening or toning the colour.
+
+</DL>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_12.html">previous</A>, <A HREF="V44_Changes_14.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

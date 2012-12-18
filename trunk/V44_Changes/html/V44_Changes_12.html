@@ -1,0 +1,76 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Drawing Icons</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_11.html">previous</A>, <A HREF="V44_Changes_13.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC22" HREF="V44_Changes_toc.html#TOC22">Drawing icons in applications</A></H2>
+<P>
+<A NAME="IDX54"></A>
+
+</P>
+
+
+<H3><A NAME="SEC23" HREF="V44_Changes_toc.html#TOC23"><CODE>DrawIconStateA()</CODE></A></H3>
+<P>
+<A NAME="IDX55"></A>
+
+</P>
+<P>
+The V44 <CODE>icon.library</CODE> provides functions to support applications
+which need to display icons in their own GUI. These include icon editors,
+<CODE>WBInfo()</CODE> patches and full Workbench replacements. The pre-V44 method
+to draw an icon inside a window was to manipulate the images embedded
+into the icon directly. As of V44, this technique is strongly discouraged.
+
+</P>
+<P>
+The new <CODE>icon.library/DrawIconStateA()</CODE> function provides the same
+functionality in a straightforward way. Shall the icon appearance be
+changed with future extensions of the <CODE>icon.library</CODE>, your application
+will pick them up automatically.
+
+</P>
+
+
+<H3><A NAME="SEC24" HREF="V44_Changes_toc.html#TOC24"><CODE>LayoutIconA()</CODE></A></H3>
+<P>
+<A NAME="IDX56"></A>
+<A NAME="IDX57"></A>
+
+</P>
+<P>
+The <CODE>icon.library</CODE> supports drawing icons on any screen (not just on
+the Workbench screen). For these reason, icon imagery can be loaded into
+memory and then remapped at a later time by calling <CODE>LayoutIconA()</CODE>.
+
+</P>
+<P>
+<CODE>LayoutIconA()</CODE> is called implicitly by <CODE>GetIconTagList()</CODE>
+<A NAME="DOCF3" HREF="V44_Changes_foot.html#FOOT3">(3)</A>. The icons are automatically
+remapped for display on the screen selected using <CODE>IconControlA()</CODE>.
+This could be undesiderable when your application wants to display the
+icon on another screen.
+
+</P>
+<P>
+Note that <CODE>LayoutIconA()</CODE> allocates shared pens from the passed
+screen using the <CODE>graphics.library/ObtainBestPen()</CODE> function.
+These pens will be released when the icon is disposed (with <CODE>FreeDiskObject()</CODE>)
+or when the icon is remapped again by <CODE>LayoutIcon()</CODE>. It is
+<STRONG>VERY IMPORTANT</STRONG> that your custom or public screen is not closed
+until there are still icon objects remapped for it. See the
+<CODE>LayoutIconA()</CODE> AutoDoc for possible workarounds.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_11.html">previous</A>, <A HREF="V44_Changes_13.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

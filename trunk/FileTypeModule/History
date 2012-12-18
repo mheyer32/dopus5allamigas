@@ -1,0 +1,55 @@
+
+                    Directory Opus 5 Filetype module history
+
+-----------------------------------------------------------------------------
+
+   13-Mar-96 - Initial release
+      #9
+
+      #10    - Rearranged creator GUI. There is now only one line for bytes
+               with a cycle gadget to turn case sensitivity on and off.
+
+   14-Mar-96 - Fixed bug which caused the built in command list of the
+      #11      filetype editor to be corrupt and cause enforcer hits when
+               calling the editor from the creator from the finder.
+
+      #12    - Fixed bug which could create incorrect filename patterns.
+
+      #13    - Added some logic to the creator to make better choices of
+               which filetype fields to enable by default. IFF FORM will
+               now override all other matches.
+
+             - Using the case sensitivity cycle gadget could change the
+               status of the checkbox.
+
+             - The Finder listview is now read only.
+
+      #14    - The Finder listview is now sorted accurately.
+
+             - The Finder now shows 'Scanning' and 'Matching' messages when
+               it is busy
+
+   21-Mar-96 - Fixed bug which caused crashes on 68000 machines.
+      #15
+
+   22-Mar-96 - Now looks in DOpus5:Storage/Filetypes instead of
+      #16      DOpus5:Storage
+
+   27-Mar-96 - Added help support
+      #17
+
+   29-Mar-96 - No longer accepts empty Datatype GroupIDs as valid.
+      #18
+
+   04-Apr-96 - Doesn't treat 'Default' filetype as a special case any more.
+      #19
+
+   10-May-96 - Finder now hilites the best match - this is the one you can
+      #20      install or edit.
+
+   05-Jun-96 - Now uses datatypes GroupID itself rather than localized string
+      #21
+
+   21-Jun-96 - Now uses Opus' internal filetype list
+      #22
+             - Finder now hilites the best match even if it isn't installed

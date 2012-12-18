@@ -1,0 +1,221 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Picture Datatype</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_14.html">previous</A>, <A HREF="V44_Changes_16.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC29" HREF="V44_Changes_toc.html#TOC29">The Picture Datatype</A></H1>
+<P>
+<A NAME="IDX84"></A>
+<A NAME="IDX85"></A>
+<A NAME="IDX86"></A>
+<A NAME="IDX87"></A>
+<A NAME="IDX88"></A>
+<A NAME="IDX89"></A>
+<A NAME="IDX90"></A>
+
+</P>
+
+<P>
+The V40 <CODE>picture.datatype</CODE> distributed with OS 3.1 had several
+weak points and missing features which made it inadequate when
+the first RTG systems with true-color support became available.
+For this reason, nowadays the original V40/V42 version has been obsoleted
+by third party replacements featuring true-color support and other
+useful extensions.
+
+</P>
+<P>
+OS 3.5 integrates a rewritten <CODE>picture.datatype</CODE> whose API tries
+to be as compatible as possible to these unofficial versions.
+
+</P>
+<P>
+The V44 <CODE>picture.datatype</CODE> works transparently with both
+<CITE>CyberGraphX</CITE> and <CITE>Picasso 96</CITE>. It also integrates color
+reduction algorithms to convert high/true-color pictures to
+palette-mapped bitmaps. The API allows the programmer to choose among
+several quantization and dithering techniques to get better quality or
+faster conversion.
+
+</P>
+
+
+
+<H2><A NAME="SEC30" HREF="V44_Changes_toc.html#TOC30">General concepts</A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>palette-mapped</CODE>
+<DD>
+a picture, bitmap or screen is said to be palette-mapped
+when the color of its pixels must be determined by looking up a
+color palette containing the RGB triplets associated with an
+index value. The palette is also called CLUT (Color Look-Up Table).
+
+<DT><CODE>direct-mapped</CODE>
+<DD>
+a picture, bitmap or screen whose pixels directly
+contain an RGB triplet. Direct-mapped pictures do not need a palette.
+
+<DT><CODE>native bitmap</CODE>
+<DD>
+a bitmap in which the image data is represented by
+bitplanes in the native format of the Amiga chipset (OCS/ECS/AGA).
+
+<DT><CODE>RTG bitmap</CODE>
+<DD>
+a bitmap with a custom pixel format which may not be
+accessed directly. Drawing into the bitmap must be performed through
+the functions provided by the <CODE>graphics.library</CODE> or by the RTG system.
+
+</DL>
+
+
+
+<H2><A NAME="SEC31" HREF="V44_Changes_toc.html#TOC31">Backwards compatibility</A></H2>
+
+<P>
+For backwards compatibility, the unofficial V43 <CODE>picture.datatype</CODE>
+implementations which were distributed with <CITE>CyberGraphX</CITE> and
+<CITE>Picasso 96</CITE> behaved just like the V42 and eariler implementations
+by default. The picture returned to the application was stored
+in a native planar bitmap, up to 8 bitplanes deep.
+
+</P>
+<P>
+In order to let the datatype allocate custom bitmaps (chunky 8bpp
+or hi/truecolor), the application should set the PDTA_DestMode
+attribute to PMODE_V43.
+
+</P>
+<P>
+This has changed as of V44. PMODE_V43 is now active by default.
+Applications should never expect to get a native bitmap from the
+picture.datatype unless they explicitly ask for PMODE_V42.
+
+</P>
+<P>
+The following summary shows the different behaviour kept by all
+the known implementations of the <CODE>picture.datatype</CODE>:
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>picture.datatype V40/V42 (OS 3.1)</CODE>
+<DD>
+PDTA_DestMode is ignored.
+
+<DT><CODE>picture.datatype V43 (CyberGraphX)</CODE>
+<DD>
+PDTA_DestMode defaults to PMODE_V42. The returned bitmap is
+always a planar one, with up to 8 bitplanes.
+
+<DT><CODE>picture.datatype V43 (Picasso 96)</CODE>
+<DD>
+PDTA_DestMode defaults to <CODE>PMODE_V42</CODE>. However, the returned
+bitmap is <STRONG>NOT</STRONG> native.
+
+<DT><CODE>picture.datatype V44 (OS 3.5)</CODE>
+<DD>
+PDTA_DestMode defaults to <CODE>PMODE_V43</CODE>. It can be explicitly
+forced to <CODE>PMODE_V42</CODE>.
+
+</DL>
+
+<P>
+The V42 mode is retained in <CODE>picture.datatype</CODE> V44 for backwards
+compatibility only. Use of the V42 mode in new applications is
+<STRONG>STRONGLY DISCOURAGED</STRONG>. The V43 mode provides better performance
+for both the internal operations carried out by the datatype and
+for most bitmap to screen blitting operations.
+
+</P>
+
+
+
+<H2><A NAME="SEC32" HREF="V44_Changes_toc.html#TOC32">New methods in unofficial V43 <CODE>picture.datatype</CODE></A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>PDTM_WRITEPIXELARRAY</CODE>
+<DD>
+<A NAME="IDX91"></A>
+Transfer pixel data to the picture object in the specified format
+
+<DT><CODE>PDTM_READPIXELARRAY</CODE>
+<DD>
+<A NAME="IDX92"></A>
+Transfer pixel data from the picture object in the specified format
+</DL>
+
+
+
+<H2><A NAME="SEC33" HREF="V44_Changes_toc.html#TOC33">New tags in unofficial V43 <CODE>picture.datatype</CODE></A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>PDTA_SourceMode</CODE>
+<DD>
+<A NAME="IDX93"></A>
+Set the sub datatype interface mode
+
+<DT><CODE>PDTA_DestMode</CODE>
+<DD>
+<A NAME="IDX94"></A>
+Set the app datatype interface mode
+
+<DT><CODE>PDTA_UseFriendBitMap</CODE>
+<DD>
+<A NAME="IDX95"></A>
+Allocates the resulting bitmap as a friend bitmap
+
+<DT><CODE>PDTA_MaskPlane</CODE>
+<DD>
+<A NAME="IDX96"></A>
+NULL or mask plane for use with BltMaskBitMapRastPort()
+</DL>
+
+
+
+<H2><A NAME="SEC34" HREF="V44_Changes_toc.html#TOC34">New tags in V44</A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>PDTA_WhichPicture</CODE>
+<DD>
+<A NAME="IDX97"></A>
+Index number of the picture to load
+
+<DT><CODE>PDTA_GetNumPictures</CODE>
+<DD>
+<A NAME="IDX98"></A>
+Get the number of pictures stored in the file
+
+<DT><CODE>PDTA_MaxDitherPens</CODE>
+<DD>
+<A NAME="IDX99"></A>
+Maximum number of colours to use for dithering
+
+<DT><CODE>PDTA_DitherQuality</CODE>
+<DD>
+<A NAME="IDX100"></A>
+Quality of the dithering algorithm to be used during color quantization
+
+<DT><CODE>PDTA_AllocatedPens</CODE>
+<DD>
+<A NAME="IDX101"></A>
+Pointer to the allocated pen table
+
+</DL>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_14.html">previous</A>, <A HREF="V44_Changes_16.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

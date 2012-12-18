@@ -1,0 +1,128 @@
+; ************************************************* 
+; Catalog description file for read.module
+; ************************************************* 
+;
+;
+MSG_READING_FILE (1000//)
+Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE (//)
+Unable to open file '%s'!
+;
+MSG_FILE_TITLE (//)
+%s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE (//)
+File
+;
+MSG_MENU_NEXT (//)
+Next
+;
+MSG_MENU_SEARCH (//)
+Search...
+;
+MSG_MENU_REPEAT (//)
+Repeat Search  
+;
+MSG_MENU_PRINT (//)
+Print...
+;
+MSG_MENU_QUIT (//)
+Quit
+;
+MSG_MENU_SETTINGS (//)
+Settings
+;
+MSG_MENU_TAB (//)
+Tab Size
+;
+MSG_MENU_SAVE (//)
+Save Settings
+;
+MSG_ENTER_SEARCH_STRING (//)
+Enter text to search for.
+;
+MSG_SEARCH_NO_CASE (//)
+_Ignore Case
+;
+MSG_SEARCH_WILD (//)
+_Wildcards
+;
+MSG_SEARCH_ONLYWORD (//)
+_Only Words
+;
+MSG_SEARCH_REVERSE (//)
+_Reverse Search
+;
+MSG_OK_BUTTON (//)
+OK
+;
+MSG_CANCEL_BUTTON (//)
+Cancel
+;
+MSG_STRING_NOT_FOUND (//)
+String not found.
+;
+;
+MSG_READ_DESCRIPTION (//)
+Read text files
+;
+;
+MSG_MENU_MODE (//)
+Mode
+;
+MSG_MENU_MODE_NORMAL (//)
+Normal
+;
+MSG_MENU_MODE_ANSI (//)
+ANSI
+;
+MSG_MENU_MODE_HEX (//)
+Hex
+;
+;
+MSG_MENU_USE_SCREEN (//)
+Use Screen
+;
+MSG_MENU_SCREEN_MODE (//)
+Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT (//)
+Pick Font...
+;
+MSG_SCREEN_TITLE (//)
+Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS (//)
+Save As...
+;
+MSG_ENTER_FILENAME (//)
+Enter Filename
+;
+MSG_IO_ERROR (//)
+IO Error
+;
+MSG_ERROR_CODE (//)
+DOS error %ld
+;
+MSG_MENU_TO_EDITOR (//)
+To Editor...
+;
+MSG_MENU_SELECT_EDITOR (//)
+Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON (//)
+OK|Cancel
+;
+MSG_SELECT_EDITOR (//)
+Enter function to call text editor
+;
+MSG_READING_FILE_TITLE (//)
+Reading file...
+;
+MSG_COUNTING_LINES (//)
+Counting lines...
+;
+MSG_CLOSE (//)
+Close
+;

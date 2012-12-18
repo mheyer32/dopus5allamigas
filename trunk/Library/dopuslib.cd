@@ -1,0 +1,60 @@
+; ************************************************* 
+; Catalog description file for dopus5.library
+; Copyright © 1995 Jonathan Potter
+; ************************************************* 
+;
+;
+; Generic strings
+;
+MSG_OK (100//)
+OK
+;
+MSG_SELECT_FILE (//)
+Select File
+;
+MSG_SELECT_DIRECTORY (//)
+Select Directory
+;
+MSG_SELECT_FONT (//)
+Select Font
+;
+MSG_FONT_DRAWMODE (//)
+Mode:
+;
+MSG_FONT_TEXT (//)
+Text
+;
+MSG_FONT_FIELD_TEXT (//)
+Text+Field
+;
+MSG_SIZE_FIT (//)
+9999%%
+;
+MSG_SIZE (//)
+%ld%%
+;
+MSG_ABORT (//)
+Abort
+;
+MSG_FILE_FIT (//)
+9999 of 9999
+;
+MSG_FILE (//)
+%ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST (//)
+Directory Opus Request
+;
+;
+;
+; Error messages
+;
+MSG_UNABLE_TO_OPEN_TOOL (1000//)
+Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING (//)
+Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL (//)
+Wait|Cancel
+;

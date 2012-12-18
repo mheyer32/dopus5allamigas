@@ -1,0 +1,109 @@
+; ************************************************* 
+; Catalog description file for diskinfo.module
+; ************************************************* 
+;
+; This catalog is for the replacement diskinfo.module with
+; the 3D pie graph. You must set the catalog version to 56
+; for it to work.
+;
+;
+MSG_DISKINFO_TITLE (1000//)
+%b (%s) Information
+;
+MSG_DISKINFO_DESC (//)
+Show information about a device
+;
+MSG_OK (//)
+_OK
+;
+MSG_CANCEL (//)
+_Cancel
+;
+MSG_NAME (//)
+_Name:
+;
+MSG_HANDLER (//)
+Handler:
+;
+MSG_TYPE (//)
+Type:
+;
+MSG_STATE (//)
+State:
+;
+MSG_USED (//)
+Used:
+;
+MSG_FREE (//)
+Free:
+;
+MSG_CAPACITY (//)
+Total:
+;
+MSG_UNIT (//)
+unit
+;
+MSG_UNKNOWN (//)
+unknown
+;
+MSG_READ_WRITE (//)
+Read/Write
+;
+MSG_READ_ONLY (//)
+Read Only
+;
+MSG_VALIDATING (//)
+Validating
+;
+MSG_BYTES (//)
+ bytes
+;
+MSG_ERROR (//)
+%ld error
+;
+MSG_ERRORS (//)
+%ld errors
+;
+;
+;
+; DOS types
+;
+MSG_DOSTYPE_1 (2000//)
+Old File System
+;
+MSG_DOSTYPE_2 (//)
+Fast File System
+;
+MSG_DOSTYPE_3 (//)
+Old File System (International)
+;
+MSG_DOSTYPE_4 (//)
+Fast File System (International)
+;
+MSG_DOSTYPE_5 (//)
+Old File System (Dir-Caching)
+;
+MSG_DOSTYPE_6 (//)
+Fast File System (Dir-Caching)
+;
+MSG_DOSTYPE_7 (//)
+MS-DOS (CrossDOS)
+;
+MSG_DOSTYPE_8 (//)
+Ami-FileSafe Pro
+;
+MSG_DOSTYPE_9 (//)
+Ami-FileSafe User
+;
+MSG_DOSTYPE_10 (//)
+Ami-FileSafe Multi
+;
+MSG_DOSTYPE_11 (//)
+PFS Floppy
+;
+MSG_DOSTYPE_12 (//)
+PFS Hard Drive
+;
+MSG_DOSTYPE_13 (//)
+Envoy Network Volume
+;

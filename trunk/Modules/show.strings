@@ -1,0 +1,288 @@
+#ifndef SHOW_H
+#define SHOW_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_OK 1000
+#define MSG_INFO_TITLE 1001
+#define MSG_INFO_FILE 1002
+#define MSG_INFO_IMAGE_SIZE 1003
+#define MSG_INFO_COLOURS 1004
+#define MSG_INFO_MODE 1005
+#define MSG_INFO_FRAME 1006
+#define MSG_INFO_ANIM 1007
+#define MSG_INFO_FRAME_NUM 1008
+#define MSG_PRINT_ASPECT 1009
+#define MSG_PRINT_IMAGE 1010
+#define MSG_PRINT_SHADE 1011
+#define MSG_PRINT_PLACEMENT 1012
+#define MSG_PRINT_FORM_FEED 1013
+#define MSG_PRINT_PRINT_TITLE 1014
+#define MSG_PRINT 1015
+#define MSG_PRINT_ASPECT_PORTRAIT 1016
+#define MSG_PRINT_ASPECT_LANDSCAPE 1017
+#define MSG_PRINT_IMAGE_POSITIVE 1018
+#define MSG_PRINT_IMAGE_NEGATIVE 1019
+#define MSG_PRINT_SHADE_BW 1020
+#define MSG_PRINT_SHADE_GREY 1021
+#define MSG_PRINT_SHADE_COLOUR 1022
+#define MSG_PRINT_PLACEMENT_CENTER 1023
+#define MSG_PRINT_PLACEMENT_LEFT 1024
+#define MSG_OPENING_PRINTER 1025
+#define MSG_INITIALISING_PRINTER 1026
+#define MSG_PRINTING_PICTURE 1027
+#define MSG_ABORTING_PRINT 1028
+#define MSG_ANIM_TITLE 1029
+#define MSG_ILBM_TITLE 1030
+#define MSG_INFO_TYPE 1031
+#define MSG_SHOW_DESC 1032
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_OK_STR "_OK"
+#define MSG_INFO_TITLE_STR "Picture Information"
+#define MSG_INFO_FILE_STR "File:"
+#define MSG_INFO_IMAGE_SIZE_STR "Image Size:"
+#define MSG_INFO_COLOURS_STR "Colours:"
+#define MSG_INFO_MODE_STR "Display Mode:"
+#define MSG_INFO_FRAME_STR "Frame:"
+#define MSG_INFO_ANIM_STR "Anim Type:"
+#define MSG_INFO_FRAME_NUM_STR "%ld of %ld @ %ld/sec"
+#define MSG_PRINT_ASPECT_STR "_Aspect:"
+#define MSG_PRINT_IMAGE_STR "_Image:"
+#define MSG_PRINT_SHADE_STR "_Shade:"
+#define MSG_PRINT_PLACEMENT_STR "P_lacement:"
+#define MSG_PRINT_FORM_FEED_STR "_Form Feed"
+#define MSG_PRINT_PRINT_TITLE_STR "Print _Title"
+#define MSG_PRINT_STR "_Print"
+#define MSG_PRINT_ASPECT_PORTRAIT_STR "Portrait"
+#define MSG_PRINT_ASPECT_LANDSCAPE_STR "Landscape"
+#define MSG_PRINT_IMAGE_POSITIVE_STR "Positive"
+#define MSG_PRINT_IMAGE_NEGATIVE_STR "Negative"
+#define MSG_PRINT_SHADE_BW_STR "Black & White"
+#define MSG_PRINT_SHADE_GREY_STR "Gray Scale"
+#define MSG_PRINT_SHADE_COLOUR_STR "Colour"
+#define MSG_PRINT_PLACEMENT_CENTER_STR "Centre"
+#define MSG_PRINT_PLACEMENT_LEFT_STR "Left"
+#define MSG_OPENING_PRINTER_STR "Opening printer..."
+#define MSG_INITIALISING_PRINTER_STR "Initialising printer..."
+#define MSG_PRINTING_PICTURE_STR "Printing picture..."
+#define MSG_ABORTING_PRINT_STR "Aborting..."
+#define MSG_ANIM_TITLE_STR "Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n"
+#define MSG_ILBM_TITLE_STR "Picture : %s\t%ld x %ld x %ld\n\n"
+#define MSG_INFO_TYPE_STR "Picture Type:"
+#define MSG_SHOW_DESC_STR "Show pictures"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_INFO_TITLE,(STRPTR)MSG_INFO_TITLE_STR},
+    {MSG_INFO_FILE,(STRPTR)MSG_INFO_FILE_STR},
+    {MSG_INFO_IMAGE_SIZE,(STRPTR)MSG_INFO_IMAGE_SIZE_STR},
+    {MSG_INFO_COLOURS,(STRPTR)MSG_INFO_COLOURS_STR},
+    {MSG_INFO_MODE,(STRPTR)MSG_INFO_MODE_STR},
+    {MSG_INFO_FRAME,(STRPTR)MSG_INFO_FRAME_STR},
+    {MSG_INFO_ANIM,(STRPTR)MSG_INFO_ANIM_STR},
+    {MSG_INFO_FRAME_NUM,(STRPTR)MSG_INFO_FRAME_NUM_STR},
+    {MSG_PRINT_ASPECT,(STRPTR)MSG_PRINT_ASPECT_STR},
+    {MSG_PRINT_IMAGE,(STRPTR)MSG_PRINT_IMAGE_STR},
+    {MSG_PRINT_SHADE,(STRPTR)MSG_PRINT_SHADE_STR},
+    {MSG_PRINT_PLACEMENT,(STRPTR)MSG_PRINT_PLACEMENT_STR},
+    {MSG_PRINT_FORM_FEED,(STRPTR)MSG_PRINT_FORM_FEED_STR},
+    {MSG_PRINT_PRINT_TITLE,(STRPTR)MSG_PRINT_PRINT_TITLE_STR},
+    {MSG_PRINT,(STRPTR)MSG_PRINT_STR},
+    {MSG_PRINT_ASPECT_PORTRAIT,(STRPTR)MSG_PRINT_ASPECT_PORTRAIT_STR},
+    {MSG_PRINT_ASPECT_LANDSCAPE,(STRPTR)MSG_PRINT_ASPECT_LANDSCAPE_STR},
+    {MSG_PRINT_IMAGE_POSITIVE,(STRPTR)MSG_PRINT_IMAGE_POSITIVE_STR},
+    {MSG_PRINT_IMAGE_NEGATIVE,(STRPTR)MSG_PRINT_IMAGE_NEGATIVE_STR},
+    {MSG_PRINT_SHADE_BW,(STRPTR)MSG_PRINT_SHADE_BW_STR},
+    {MSG_PRINT_SHADE_GREY,(STRPTR)MSG_PRINT_SHADE_GREY_STR},
+    {MSG_PRINT_SHADE_COLOUR,(STRPTR)MSG_PRINT_SHADE_COLOUR_STR},
+    {MSG_PRINT_PLACEMENT_CENTER,(STRPTR)MSG_PRINT_PLACEMENT_CENTER_STR},
+    {MSG_PRINT_PLACEMENT_LEFT,(STRPTR)MSG_PRINT_PLACEMENT_LEFT_STR},
+    {MSG_OPENING_PRINTER,(STRPTR)MSG_OPENING_PRINTER_STR},
+    {MSG_INITIALISING_PRINTER,(STRPTR)MSG_INITIALISING_PRINTER_STR},
+    {MSG_PRINTING_PICTURE,(STRPTR)MSG_PRINTING_PICTURE_STR},
+    {MSG_ABORTING_PRINT,(STRPTR)MSG_ABORTING_PRINT_STR},
+    {MSG_ANIM_TITLE,(STRPTR)MSG_ANIM_TITLE_STR},
+    {MSG_ILBM_TITLE,(STRPTR)MSG_ILBM_TITLE_STR},
+    {MSG_INFO_TYPE,(STRPTR)MSG_INFO_TYPE_STR},
+    {MSG_SHOW_DESC,(STRPTR)MSG_SHOW_DESC_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x04"
+    MSG_OK_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x14"
+    MSG_INFO_TITLE_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x06"
+    MSG_INFO_FILE_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x0C"
+    MSG_INFO_IMAGE_SIZE_STR "\x00"
+    "\x00\x00\x03\xEC\x00\x0A"
+    MSG_INFO_COLOURS_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x0E"
+    MSG_INFO_MODE_STR "\x00"
+    "\x00\x00\x03\xEE\x00\x08"
+    MSG_INFO_FRAME_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x0C"
+    MSG_INFO_ANIM_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x16"
+    MSG_INFO_FRAME_NUM_STR "\x00\x00"
+    "\x00\x00\x03\xF1\x00\x0A"
+    MSG_PRINT_ASPECT_STR "\x00\x00"
+    "\x00\x00\x03\xF2\x00\x08"
+    MSG_PRINT_IMAGE_STR "\x00"
+    "\x00\x00\x03\xF3\x00\x08"
+    MSG_PRINT_SHADE_STR "\x00"
+    "\x00\x00\x03\xF4\x00\x0C"
+    MSG_PRINT_PLACEMENT_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x0C"
+    MSG_PRINT_FORM_FEED_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x0E"
+    MSG_PRINT_PRINT_TITLE_STR "\x00\x00"
+    "\x00\x00\x03\xF7\x00\x08"
+    MSG_PRINT_STR "\x00\x00"
+    "\x00\x00\x03\xF8\x00\x0A"
+    MSG_PRINT_ASPECT_PORTRAIT_STR "\x00\x00"
+    "\x00\x00\x03\xF9\x00\x0A"
+    MSG_PRINT_ASPECT_LANDSCAPE_STR "\x00"
+    "\x00\x00\x03\xFA\x00\x0A"
+    MSG_PRINT_IMAGE_POSITIVE_STR "\x00\x00"
+    "\x00\x00\x03\xFB\x00\x0A"
+    MSG_PRINT_IMAGE_NEGATIVE_STR "\x00\x00"
+    "\x00\x00\x03\xFC\x00\x0E"
+    MSG_PRINT_SHADE_BW_STR "\x00"
+    "\x00\x00\x03\xFD\x00\x0C"
+    MSG_PRINT_SHADE_GREY_STR "\x00\x00"
+    "\x00\x00\x03\xFE\x00\x08"
+    MSG_PRINT_SHADE_COLOUR_STR "\x00\x00"
+    "\x00\x00\x03\xFF\x00\x08"
+    MSG_PRINT_PLACEMENT_CENTER_STR "\x00\x00"
+    "\x00\x00\x04\x00\x00\x06"
+    MSG_PRINT_PLACEMENT_LEFT_STR "\x00\x00"
+    "\x00\x00\x04\x01\x00\x14"
+    MSG_OPENING_PRINTER_STR "\x00\x00"
+    "\x00\x00\x04\x02\x00\x18"
+    MSG_INITIALISING_PRINTER_STR "\x00"
+    "\x00\x00\x04\x03\x00\x14"
+    MSG_PRINTING_PICTURE_STR "\x00"
+    "\x00\x00\x04\x04\x00\x0C"
+    MSG_ABORTING_PRINT_STR "\x00"
+    "\x00\x00\x04\x05\x00\x32"
+    MSG_ANIM_TITLE_STR "\x00"
+    "\x00\x00\x04\x06\x00\x20"
+    MSG_ILBM_TITLE_STR "\x00\x00"
+    "\x00\x00\x04\x07\x00\x0E"
+    MSG_INFO_TYPE_STR "\x00"
+    "\x00\x00\x04\x08\x00\x0E"
+    MSG_SHOW_DESC_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* SHOW_H */

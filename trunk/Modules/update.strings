@@ -1,0 +1,148 @@
+#ifndef UPDATE_H
+#define UPDATE_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_PLEASE_WAIT 1000
+#define MSG_UPDATE_TITLE 1001
+#define MSG_UPDATE_CONVERT_WB 1002
+#define MSG_YES_NO 1003
+#define MSG_READ_DIR_BUTTON 1004
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_PLEASE_WAIT_STR "Please wait..."
+#define MSG_UPDATE_TITLE_STR "Directory Opus - Update Djinn"
+#define MSG_UPDATE_CONVERT_WB_STR "Copy Workbench left-outs to Opus?"
+#define MSG_YES_NO_STR "Yes|No"
+#define MSG_READ_DIR_BUTTON_STR "Read \"%s\""
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_PLEASE_WAIT,(STRPTR)MSG_PLEASE_WAIT_STR},
+    {MSG_UPDATE_TITLE,(STRPTR)MSG_UPDATE_TITLE_STR},
+    {MSG_UPDATE_CONVERT_WB,(STRPTR)MSG_UPDATE_CONVERT_WB_STR},
+    {MSG_YES_NO,(STRPTR)MSG_YES_NO_STR},
+    {MSG_READ_DIR_BUTTON,(STRPTR)MSG_READ_DIR_BUTTON_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x10"
+    MSG_PLEASE_WAIT_STR "\x00\x00"
+    "\x00\x00\x03\xE9\x00\x1E"
+    MSG_UPDATE_TITLE_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x22"
+    MSG_UPDATE_CONVERT_WB_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x08"
+    MSG_YES_NO_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x0A"
+    MSG_READ_DIR_BUTTON_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* UPDATE_H */

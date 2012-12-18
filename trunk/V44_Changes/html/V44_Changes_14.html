@@ -1,0 +1,145 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - ASL Library</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_13.html">previous</A>, <A HREF="V44_Changes_15.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC26" HREF="V44_Changes_toc.html#TOC26">The ASL Library</A></H1>
+<P>
+<A NAME="IDX68"></A>
+<A NAME="IDX69"></A>
+<A NAME="IDX70"></A>
+<A NAME="IDX71"></A>
+
+</P>
+
+<P>
+The <CODE>asl.library</CODE> has been improved in V44 to address a
+number of localization, efficiency and GUI layout issues as
+well as fixing bugs. For developers, there are also some new
+API extensions.
+
+</P>
+
+
+<H2><A NAME="SEC27" HREF="V44_Changes_toc.html#TOC27">New Functions</A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>VOID ActivateAslRequest(APTR requester)</CODE>
+<DD>
+<A NAME="IDX72"></A>
+Activate a modal requester from a different task context.
+
+<DT><CODE>VOID AbortAslRequest(APTR requester)</CODE>
+<DD>
+<A NAME="IDX73"></A>
+Attempt to tell the modal ASL requester provided to shut down and
+perform as if the user had clicked on the requester's window close
+gadget.
+
+</DL>
+
+
+
+<H2><A NAME="SEC28" HREF="V44_Changes_toc.html#TOC28">New Tags</A></H2>
+
+<DL COMPACT>
+
+<DT><CODE>ASLFR_InitialShowVolumes (BOOL)</CODE>
+<DD>
+<A NAME="IDX74"></A>
+When opening the file requester, read the list of active
+volumes, do not read the contents of the specified drawer.
+
+<DT><CODE>ASLFR_SetSortBy (ULONG)</CODE>
+<DD>
+<A NAME="IDX75"></A>
+<DT><CODE>ASLFR_GetSortBy (ULONG *)</CODE>
+<DD>
+<A NAME="IDX76"></A>
+Criteria for sorting the file list. This must be one of:
+
+
+<UL>
+<LI><CODE>ASLFRSORTBY_Name</CODE> - sort by name (default)
+
+<LI><CODE>ASLFRSORTBY_Date</CODE> - sort by date
+
+<LI><CODE>ASLFRSORTBY_Size</CODE> - sort by size
+
+</UL>
+
+If <CODE>ASLFR_GetSortBy</CODE> is passed to AslRequest(),
+the file requester will store its current sort
+criteria in the ULONG pointed to by the tag before
+leaving.
+
+<DT><CODE>ASLFR_SetSortDrawers (ULONG)</CODE>
+<DD>
+<A NAME="IDX77"></A>
+<DT><CODE>ASLFR_GetSortDrawers (ULONG *)</CODE>
+<DD>
+<A NAME="IDX78"></A>
+Determines where drawers are placed in the sorted list;
+this must be one of:
+
+
+<UL>
+<LI><CODE>ASLFRSORTDRAWERS_First</CODE> - drawers appear before all other files (default)
+
+<LI><CODE>ASLFRSORTDRAWERS_Mix</CODE> - drawers are sorted along with the the other files
+
+<LI><CODE>ASLFRSORTDRAWERS_Last</CODE> - drawers appear after all other files
+
+</UL>
+
+If <CODE>ASLFR_GetSortDrawers</CODE> is passed to AslRequest(),
+the file requester will store its current sort drawer list
+placement in the ULONG pointed to by this tag.
+
+<DT><CODE>ASLFR_SetSortOrder (ULONG)</CODE>
+<DD>
+<A NAME="IDX79"></A>
+<DT><CODE>ASLFR_GetSortOrder (ULONG *)</CODE>
+<DD>
+<A NAME="IDX80"></A>
+Selects the order in which the list is sorted; this must be
+one of:
+
+
+<UL>
+<LI><CODE>ASLFRSORTORDER_Ascend</CODE> - smallest/oldest files first, largest/newest files last (default)
+
+<LI><CODE>ASLFRSORTORDER_Descend</CODE> - largest/newest files first, smallest/oldest files last
+
+</UL>
+
+If <CODE>ASLFR_GetSortOrder</CODE> is passed to AslRequest(),
+the file requester will store its current sort order
+in the ULONG pointed to by this tag.
+
+<DT><CODE>ASLFR_PopToFront (BOOL)</CODE>
+<DD>
+<A NAME="IDX81"></A>
+<DT><CODE>ASLFO_PopToFront (BOOL)</CODE>
+<DD>
+<A NAME="IDX82"></A>
+<DT><CODE>ASLSM_PopToFront (BOOL)</CODE>
+<DD>
+<A NAME="IDX83"></A>
+When set to TRUE, this tells ASL to bring the screen to the
+front the requester has opened on. (Default is TRUE).
+
+</DL>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_13.html">previous</A>, <A HREF="V44_Changes_15.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

@@ -1,0 +1,14 @@
+; ************************************************* 
+; Catalog description file for iconclock.module
+; ************************************************* 
+;
+;
+MSG_ICONCLOCK_TITLE (1000//)
+Icon Clock
+;
+MSG_ICONCLOCK_COLOUR (//)
+Colour?
+;
+MSG_OK (//)
+Ok
+;

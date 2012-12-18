@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Workbench Functions</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_6.html">previous</A>, <A HREF="V44_Changes_8.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC17" HREF="V44_Changes_toc.html#TOC17">Summary of new functions in workbench.library</A></H2>
+<P>
+<A NAME="IDX32"></A>
+
+</P>
+<DL COMPACT>
+
+<DT><CODE>BOOL OpenWorkbenchObjectA(STRPTR name,struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX33"></A>
+Open a drawer or launch a program as if the user had double-clicked on
+its icon.
+
+<DT><CODE>BOOL CloseWorkbenchObjectA(STRPTR name,struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX34"></A>
+Close a drawer as if the user had clicked on the window close gadget.
+
+<DT><CODE>WorkbenchControlA(name,tags)</CODE>
+<DD>
+<A NAME="IDX35"></A>
+Query or modify global Workbench parameters or local icon options.
+
+<DT><CODE>struct AppWindowDropZone * AddAppWindowDropZoneA(struct AppWindow *aw, ULONG id, ULONG userData, struct TagItem * tags)</CODE>
+<DD>
+<A NAME="IDX36"></A>
+Designate an <CODE>AppWindow</CODE> area as suitable for dropping icons on.
+
+<DT><CODE>BOOL RemoveAppWindowDropZone(struct AppWindow *, struct AppWindowDropZone *)</CODE>
+<DD>
+<A NAME="IDX37"></A>
+Attempt to remove a drop zone from an <CODE>AppWindow</CODE>.
+
+<DT><CODE>BOOL ChangeWorkbenchSelectionA(STRPTR name,struct Hook *hook, struct TagItem *tags);</CODE>
+<DD>
+<A NAME="IDX38"></A>
+Change the selection states of icons displayed by Workbench.
+
+<DT><CODE>BOOL MakeWorkbenchObjectVisibleA(STRPTR name,struct TagItem *tags)</CODE>
+<DD>
+<A NAME="IDX39"></A>
+Change a Workbench window in such a way as to make a particular icon visible.
+
+</DL>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_6.html">previous</A>, <A HREF="V44_Changes_8.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

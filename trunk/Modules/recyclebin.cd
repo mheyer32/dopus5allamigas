@@ -1,0 +1,32 @@
+; ************************************************* 
+; Catalog description file for recyclebin.module
+; ************************************************* 
+;
+;
+MSG_RECYCLEBIN_TITLE (1000//)
+Recycle Bin
+;
+MSG_CONFIG_DESC (//)
+Configure the Recycle Bin
+;
+MSG_EMPTY_DESC (//)
+Empty the Recycle Bin
+;
+MSG_EMPTY_TRASH (//)
+Empty
+;
+MSG_RECYCLEBIN_STORAGE (//)
+Recycle Bin _Storage...
+;
+MSG_RECYCLEBIN_ADD (//)
+_Add
+;
+MSG_RECYCLEBIN_DELETE (//)
+_Delete
+;
+MSG_RECYCLEBIN_STATS (//)
+Statistics...
+;
+MSG_RECYCLEBIN_EMPTY (//)
+_Empty Bin
+;

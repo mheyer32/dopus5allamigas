@@ -1,0 +1,1067 @@
+; ************************************************* 
+; Catalog description file for ftp.module
+; ************************************************* 
+;
+; Thse are the descriptions of the ftp commands
+;
+;
+MSG_FTP_ADDRBOOK (1000//)
+Show FTP address book
+;
+MSG_FTP_CONNECT_SITE (//)
+Connect to FTP site
+;
+OBSOLETE001 (//)
+
+;
+OBSOLETE002 (//)
+
+;
+OBSOLETE003 (//)
+
+;
+OBSOLETE004 (//)
+
+;
+MSG_FTP_COMMAND (//)
+Send command to FTP site
+;
+MSG_FTP_SETVAR (//)
+Set FTP variable
+;
+MSG_FTP_QUIT (//)
+Quit OpusFTP
+;
+; These are requester options sererated by bars "|"
+;
+MSG_FTP_OKAY (//)
+OK
+;
+MSG_FTP_CANCEL (//)
+Cancel
+;
+OBSOLETE005 (//)
+
+;
+OBSOLETE006 (//)
+
+;
+OBSOLETE007 (//)
+
+;
+OBSOLETE008 (//)
+
+;
+OBSOLETE009 (//)
+
+;
+OBSOLETE010 (//)
+
+;
+OBSOLETE011 (//)
+
+;
+OBSOLETE012 (//)
+
+;
+OBSOLETE013 (//)
+
+;
+OBSOLETE014 (//)
+
+;
+MSG_FTP_CONNECTING (//)
+Connecting...
+;
+MSG_FTP_LOGGING_IN (//)
+Logging in as
+;
+MSG_FTP_ENTER_HOSTNAME (//)
+Enter host name
+;
+MSG_FTP_ENTER_USERNAME (//)
+Enter user name
+;
+MSG_FTP_ENTER_PASSWORD (//)
+Enter password
+;
+MSG_FTP_CANT_LOG_IN_TO (//)
+Cannot log in to
+;
+MSG_FTP_NOT_AVAILABLE (//)
+no longer available
+;
+;
+;
+OBSOLETE015 (//)
+
+;
+MSG_FTP_ENTER_NEW_FILENAME (//)
+Enter new filename.
+;
+OBSOLETE016 (//)
+
+;
+OBSOLETE017 (//)
+
+;
+;
+;
+MSG_FTP_ENTER_FILENAME_TO (//)
+Enter filename to
+;
+MSG_FTP_SKIP (//)
+Skip
+;
+MSG_FTP_REPLACE (//)
+Replace
+;
+MSG_FTP_RESUME (//)
+Resume
+;
+;
+;	Replace requester
+;
+;
+MSG_FTP_FILE (//)
+File
+;
+MSG_FTP_ALREADY_EXISTS (//)
+already exists
+;
+MSG_FTP_NEWSIZE (//)
+New - Size
+;
+MSG_FTP_OLDSIZE (//)
+Old - Size
+;
+MSG_FTP_DATE (//)
+Date
+;
+OBSOLETE018 (//)
+
+;
+MSG_FTP_REPLACE_IT (//)
+Replace it?
+;
+OBSOLETE019 (//)
+
+;
+;
+;
+MSG_FTP_XFER_BYTES (//)
+bytes
+;
+MSG_FTP_ENTER_DIRNAME (//)
+Enter directory name
+;
+MSG_FTP_MAKEDIR_ERROR (//)
+An error occured creating the directory
+;
+OBSOLETE020 (//)
+
+;
+MSG_FTP_RENAME_ERROR (//)
+An error occured renaming the entry
+;
+;
+; (The delete requester)
+;
+OBSOLETE021 (//)
+
+;
+MSG_FTP_WARNING_CANT_GET_BACK (//)
+Warning: you cannot get back
+;
+MSG_FTP_OK_TO_DELETE (//)
+what you delete! OK to delete
+;
+MSG_FTP_FILES_AND (//)
+file(s) and
+;
+OBSOLETE022 (//)
+
+;
+MSG_FTP_FROM (//)
+from
+;
+OBSOLETE023 (//)
+
+;
+;
+MSG_FTP_RETRIEVING_FILE (//)
+Retrieving file...
+;
+OBSOLETE024 (//)
+
+;
+MSG_FTP_CHANGING_DIR (//)
+Changing directory...
+;
+OBSOLETE025 (//)
+
+;
+MSG_FTP_PATH_NOT_FOUND (//)
+Path not found on FTP site
+;
+MSG_FTP_CMD_TO_SEND (//)
+Enter FTP command to send
+;
+MSG_FTP_SENDING_CMD (//)
+Sending FTP command...
+;
+MSG_FTP_LOCAL_VAR (//)
+Enter new value for local variable
+;
+MSG_FTP_DELETING (//)
+Deleting...
+;
+MSG_FTP_RENAMING (//)
+Renaming...
+;
+;
+; Error messages
+;
+MSG_FTP_COULD_NOT_CONNECT (//)
+(Could not connect)
+;
+MSG_FTP_USERNAME_FAILED (//)
+(User name failed)
+;
+MSG_FTP_PASSWORD_FAILED (//)
+(Password failed)
+;
+MSG_FTP_SERVER_CLOSED_CONN (//)
+(Server closed connection)
+;
+MSG_FTP_NO_ERR (//)
+(No error detected)
+;
+MSG_FTP_INT_SYS_CALL (//)
+(Interrupted system call)
+;
+MSG_FTP_PERMISSION_DENIED (//)
+(Permission denied)
+;
+MSG_FTP_PROTO_NOT_SUPP (//)
+(Protocol not supported)
+;
+MSG_FTP_CANT_ASSIGN_ADDR (//)
+(Cannot assign requested address)
+;
+MSG_FTP_CONN_RESET_PEER (//)
+(Connection reset by peer)
+;
+MSG_FTP_TIMEOUT (//)
+(Connection timed out)
+;
+MSG_FTP_CONN_REFUSED (//)
+(Connection refused)
+;
+MSG_FTP_NO_ROUTE (//)
+(No route to host)
+;
+MSG_ERR_XX (//)
+(Error xx)
+;
+;
+;
+MSG_MAIN_NEED_TCPIP (//)
+You must have a TCP/IP stack\nsuch as AmiTCP, AS225, INet,\nMiami, MLink, or TermiteTCP\nrunning to use\nOpusFTP
+;
+; (The next two lines make up a single string "The ??? command...")
+MSG_MAIN_THE (//)
+The
+;
+MSG_MAIN_CMD_NOT_SUPP (//)
+command\nis not currently supported\nby OpusFTP
+;
+;
+; ************************************************* 
+; Catalog description file for ftp gui
+; ************************************************* 
+;
+;
+MSG_FTP_TITLE (//)
+Opus FTP Sites
+;
+MSG_SITE_DETAILS (//)
+Site Details
+;
+MSG_OPTIONS_TITLE (//)
+Opus FTP Options
+;
+MSG_FTP_SITES (//)
+FTP Sites...
+;
+MSG_SITE_NAME (//)
+Name
+;
+MSG_SITE_HOST (//)
+Host
+;
+MSG_SITE_PORT (//)
+Port
+;
+MSG_SITE_ANON (//)
+Anon
+;
+MSG_FTP_CONNECT (//)
+Connec_t
+;
+MSG_FTP_SAVE (//)
+_Save
+;
+MSG_FTP_EDIT (//)
+_Edit
+;
+MSG_FTP_NEW (//)
+Ne_w
+;
+MSG_DELETE (//)
+_Del
+;
+MSG_OPTIONS (//)
+_Options
+;
+MSG_FTP_OK (//)
+_Ok
+;
+MSG_FTP_CANCEL_ULINE (//)
+_Cancel
+;
+MSG_EDIT_NAME (//)
+_Name
+;
+MSG_EDIT_HOST (//)
+_Host
+;
+MSG_EDIT_PORT (//)
+_Port
+;
+MSG_EDIT_ANON (//)
+_Anon
+;
+MSG_EDIT_USER (//)
+_User
+;
+MSG_EDIT_PASSWORD (//)
+Pa_ss
+;
+MSG_EDIT_DIR (//)
+_Dir
+;
+OBSOLETE26 (//)
+
+;
+MSG_LOG_FILE (//)
+Log _File
+;
+MSG_LOG_ON (//)
+_Log
+;
+MSG_UPDATE (//)
+_Update
+;
+MSG_DEBUG (//)
+_Debug
+;
+MSG_TIMEOUT (//)
+_Timeout
+;
+MSG_SHOW_INDEX (//)
+Inde_x
+;
+MSG_AUTO_INDEX (//)
+Aut_o
+;
+MSG_INDEX_SIZE (//)
+_Max Size
+;
+MSG_SECONDS (//)
+sec
+;
+MSG_KILOBYTES (//)
+kb
+;
+MSG_SEND_NOOP (//) ; don't tranlate the NOOP part
+NOOPs
+;
+MSG_BADSITE (//)
+Invalid Site Details\nYou must enter a Host IP or Address.
+;
+MSG_BADVER (//)
+This OpusFTP module requires\nDOpus version 5.51 or higher!
+;
+MSG_QUERYSAVE (//)
+You have modified the FTP config and not\nsaved it. Would you like to?
+;
+MSG_FTP_USE (//)
+_Use
+;
+MSG_QUERYINDEX (//)
+Found file %s of size %ld %s.\nFetch it and update file comments?
+;
+MSG_BADHASH (//)
+Sorry, OpusFTP cannot handle files\nbeginning with the '#' character.
+;
+MSG_FTP_DOS_ERROR (//)
+DOS error
+;
+OBSOLETE027 (//)
+
+;
+MSG_NO_LOCALHOST (//)
+Site to site transfer is not possible using localhost.\nPlease use the full address instead.
+;
+OBSOLETE028 (//)
+
+;
+OBSOLETE029 (//)
+
+;
+;
+;	New for post-magellan version of ftp.module
+;
+;	New built-in FTP commands
+;
+MSG_FTP_FTPADD (//)
+Add site to FTP address book
+;
+;	Requester buttons
+;
+MSG_FTP_YES (//)
+Yes
+;
+MSG_FTP_NO (//)
+No
+;
+MSG_FTP_KEEP (//)
+Keep
+;
+MSG_FTP_RECONNECT (//)
+Reconnect
+;
+MSG_FTP_REPLACEALL (//)
+Replace All
+;
+MSG_FTP_SKIPALL (//)
+Skip All
+;
+MSG_FTP_PROCEED (//)
+Proceed
+;
+MSG_DELETE_FILES (//)
+Delete
+;
+MSG_FTP_DELETEALL (//)
+Delete All
+;
+MSG_FTP_ANONYMOUS (//)
+Anonymous
+;
+MSG_FTP_RENAME_UCASE (//)
+Rename
+;
+MSG_FTP_COPY_UCASE (//)
+Copy
+;
+MSG_MOVE (//)
+Move
+;
+MSG_TRY_AGAIN (//)
+Try Again
+;
+MSG_ABORT (//)
+Abort
+;
+;	Progress bar messages
+;
+MSG_FTP_COPYING (//)
+Copying...
+;
+MSG_FTP_MOVING (//)
+Moving...
+;
+MSG_FTP_SCANNING_DIRS (//)
+Scanning directories...
+;
+MSG_FTP_SETTING_PROT (//)
+Setting protections...
+;
+MSG_READING_DIR (//)
+Reading directory...
+;
+;	Delete confirmation requesters
+;
+MSG_FTP_DRAWERS (//)
+drawer(s) (and their contents)
+;
+MSG_DELETE_DIRS (//)
+is a directory.\nProcede with delete operation?
+;
+;	Recursive confirmation requester
+;
+MSG_ACT_ON (//)
+Act on
+;
+MSG_FILES_IN_SUBDIRS (//)
+files in sub-directories?
+;
+;	Transfer progress info line
+;
+MSG_FROM (//)
+From
+;
+MSG_TO (//)
+to
+;
+;	Replace requesters
+;
+MSG_DESTINATION (//)
+Destination
+;
+MSG_IS_A_FILE (//)
+is a file
+;
+MSG_IS_A_DIR (//)
+is a directory
+;
+MSG_FTP_WOULD_BE_REPLACED (//)
+exists and would be replaced.
+;
+MSG_FTP_APPEAR_SAME (//)
+The two files appear to be the same.
+;
+MSG_IS_LONGER (//)
+is longer than the old version.
+;
+MSG_RESUME_XFER (//)
+Resume transfer?
+;
+;	More errors
+;
+MSG_NET_DOWN (//)
+(Network is down)
+;
+MSG_NET_UNREACH (//)
+(Network is unreachable)
+;
+MSG_CONN_ABORTED (//)
+(Software caused connection abort)
+;
+MSG_HOST_DOWN (//)
+(Host is down)
+;
+MSG_SITE_NOT_FOUND (//)
+(Site not found)
+;
+MSG_FTP_LOST_TIMEOUT (//)
+(Server connection timed out)
+;
+MSG_FTP_LOST_UNEXPECT (//)
+(Unexpected error ocurred)
+;
+;	Connect / login progress messages
+;
+MSG_LOOKING_UP (//)
+Looking up host...
+;
+MSG_HOST_FOUND (//)
+Host found, connecting...
+;
+MSG_READING_STARTUP (//)
+Connected, reading startup message...
+;
+MSG_CONNECT_RETRY (//)
+Connect retry %ld/%ld in %ld seconds...
+;
+MSG_QUERY_SYSTYPE (//)
+Querying FTP server type...
+;
+MSG_ENABLE_NT (//)
+Enabling Windows NT native mode...
+;
+MSG_BINARY_MODE (//)
+Setting binary transfer mode...
+;
+MSG_QUERY_PATH (//)
+Querying initial path...
+;
+MSG_INITIAL_DIR (//)
+Changing to initial path...
+;
+;	More GUI
+;
+MSG_RETRY_CONNECT (//)
+R_etry
+;
+MSG_RETRY_COUNT (//)
+C_ount
+;
+MSG_RETRY_TIME (//)
+Tim_e
+;
+MSG_DIR_PROGRESS (//)
+_Progress
+;
+;
+;
+MSG_FTP_GETPUT_NO_PASV (//)
+Neither site supports passive transfers.\nSite to site transfer is not possible.
+;
+MSG_FTP_LOGIN_FAILED (//)
+Login unsuccessful.
+;
+MSG_FTP_CHANGE_USERPASS (//)
+Do you wish to alter the user name\nand password?
+;
+MSG_RESUME_FAILURE (//)
+This FTP server does not support the resume feature.\nThe old file will be replaced.
+;
+MSG_CONSOLE_TITLE (//)
+Directory Opus Magellan FTP
+;
+MSG_FTP_CHMOD_ERROR (//)
+An error occured setting the protection flags
+;
+;*********************************************
+MSG_FTP_SUB_DETAILS (//)
+Details
+;
+MSG_FTP_NAME (//)
+Name
+;
+MSG_FTP_HOST (//)
+Host
+;
+MSG_FTP_ANONPASS (//)
+Anon
+;
+MSG_FTP_PORT (//)
+Port
+;
+MSG_FTP_USER (//)
+User
+;
+MSG_FTP_PASS (//)
+Pass
+;
+MSG_FTP_DIR (//)
+Dir
+;
+MSG_FTP_SUB_RECONNECTION (//)
+Reconnect
+;
+MSG_FTP_OPTIONS_ENABLE_RETRY (//)
+Enable Retry
+;
+MSG_FTP_OPTIONS_RETRY_COUNT (//)
+Retry Count
+;
+MSG_FTP_OPTIONS_RETRY_DELAY (//)
+Retry Delay
+;
+MSG_FTP_OPTIONS_ENABLE_RETRY_LOST (//)
+Auto Reconnect
+;
+MSG_FTP_OPTIONS_NOOPS (//)
+Send NOOPs (Idle)
+;
+MSG_FTP_NETWORK_TIMEOUT (//)
+Network Timeout (Secs)
+;
+MSG_FTP_LIST_UPDATE (//)
+List Update (Secs)
+;
+MSG_FTP_SUB_MISC (//)
+Miscellaneous
+;
+MSG_FTP_PROGRESS_WINDOW (//)
+Progress Windows (CD & List)
+;
+MSG_FTP_LOGICAL_LINKS (//)
+Logical Parent Dir
+;
+MSG_FTP_KEEP_LAST_DIR (//)
+Keep last Directory
+;
+MSG_FTP_SUB_SCRIPTS (//)
+Scripts
+;
+MSG_FTP_TEXT_SCRIPTS (//)
+Custom FTP Scripts...
+;
+MSG_FTP_SCRIPT_CONNECT_FAIL (//)
+Connect Fail
+;
+MSG_FTP_SCRIPT_CONNECT_SUCCESS (//)
+Connect Success
+;
+MSG_FTP_SCRIPT_COPY_SUCCESS (//)
+Copy Success
+;
+MSG_FTP_SCRIPT_COPY_FAIL (//)
+Copy Fail
+;
+MSG_FTP_SCRIPT_ERROR (//)
+Error
+;
+MSG_FTP_SCRIPT_CLOSE (//)
+Close Connection
+;
+MSG_FTP_SCRIPT_TIME (//)
+Activation Time (Secs)
+;
+MSG_FTP_SUB_INDEX (//)
+Index
+;
+MSG_FTP_INDEX (//)
+Download Index
+;
+MSG_FTP_AUTO_DOWNLOAD (//)
+Auto Download
+;
+MSG_FTP_AUTO_DOWNLOAD_SIZE (//)
+Max Size (Kb)
+;
+MSG_ADD (//)
+Add
+;
+MSG_SORT (//)
+So_rt
+;
+MSG_DEFAULT (//)
+Default
+;
+MSG_RESET_TO_DEFAULT (//)
+Reset to Defaults
+;
+MSG_RESET_TO_SYSTEM (//)
+Reset FTP Defaults
+;
+MSG_CUSTOM_OPTIONS (//)
+Custom Options
+;
+MSG_DEFAULT_OPTIONS (//)
+Default Options
+;
+MSG_ADVANCED_SETTINGS (//)
+Advanced Settings
+;
+MSG_SET_CUSTOM (//)
+Set Custo_m
+;
+MSG_LOG_ENABLE (//)
+Enable Log
+;
+MSG_FTP_LOG_DEBUG (//)
+Enable Debug
+;
+MSG_FTP_GLOBAL (//)
+Global
+;
+MSG_FTP_GLOBAL_SETTINGS (//)
+Global Settings
+;
+MSG_FTP_PASSIVE_TRANSFER (//)
+Passive Transfers
+;
+MSG_FTP_SPECIAL_DIR (//)
+Special Directory Names
+;
+MSG_FTP_LINKS (//)
+Links...
+;
+MSG_FTP_UNK_LINKS (//)
+Unknown
+;
+MSG_FTP_UNK_LINKS_FILE (//)
+As File
+;
+MSG_FTP_UNK_LINKS_DIR (//)
+As Directory
+;
+MSG_FTP_SUB_LISTER (//)
+Lister Display
+;
+MSG_FTP_TEXT_LISTER (//)
+FTP Lister Settings...
+;
+MSG_FTP_SUB_DISPLAY (//)
+Display
+;
+MSG_FORMAT_SET (//)
+Set Custom..
+;
+MSG_DEFAULT_FORMAT (//)
+FTP Lister Format...
+;
+MSG_LISTER_TOOLBAR (//)
+Toolbar:
+;
+MSG_SHOW_DIR_MSG (//)
+Show Directory Messages
+;
+MSG_SHOW_STARTUP_MSG (//)
+Show Startup Messages
+;
+MSG_TRANSFER_PPOGRESS (//)
+File Transfer Progress Display
+;
+MSG_TRANSFER_DETAILS (//)
+Show Transfer Details
+;
+MSG_REPLACE (//)
+Replace
+;
+MSG_REPLACE_ALWAYS (//)
+Always
+;
+MSG_REPLACE_NEVER (//)
+Never
+;
+MSG_REPLACE_ASK (//)
+Ask
+;
+MSG_FTP_SUB_COPYFLAGS (//)
+Copy
+;
+MSG_FTP_SUB_COPYATTR (//)
+Copy Attributes
+;
+MSG_FTP_TEXT_COPY (//)
+Options
+;
+MSG_FTP_TEXT_COPY_ATTRIBUTES (//)
+Attributes
+;
+MSG_COPY_DEFAULT (//)
+None
+;
+MSG_COPY_UPDATE (//)
+Update
+;
+MSG_COPY_NEWER (//)
+Newer
+;
+MSG_COPY_FLAGS (//)
+Copy Flags
+;
+MSG_ALSO_COPY_SOURCE (//)
+Also copy source's...
+;
+MSG_USE_OPUS_SETTINGS (//)
+Use Opus Settings
+;
+MSG_COPY_DATESTAMP (//)
+Datestamp
+;
+MSG_COPY_PROTECTION (//)
+Protection bits
+;
+MSG_COPY_COMMENT (//)
+Comment
+;
+MSG_COPY_SET_ARCHIVE (//)
+Set Source Archive bit
+;
+MSG_COPY_URL_COMMENT (//)
+Set Comment to URL
+;
+MSG_COPY_RESCAN (//)
+Rescan Destination
+;
+MSG_COPY_SPACE (//)
+Special Recursive Copy
+;
+MSG_ENV_MENU_PROJECT (//)
+Project
+;
+MSG_ENV_MENU_OPEN  (//)
+Open...
+;
+MSG_ENV_MENU_IMPORT  (//)
+Import...
+;
+MSG_ENV_MENU_IMPORT_AMFTP  (//)
+Import AMFTP Sites...
+;
+MSG_ENV_MENU_SAVE  (//)
+Save
+;
+MSG_ENV_MENU_SAVEAS  (//)
+SaveAs...
+;
+MSG_ENV_MENU_EXPORT  (//)
+Export ASCII...
+;
+MSG_ENV_MENU_QUIT  (//)
+Quit
+;
+MSG_ENV_MENU_EDIT  (//)
+Edit
+;
+MSG_ENV_MENU_RESET_DEFAULTS  (//)
+Reset to Defaults
+;
+MSG_ENV_MENU_LAST_SAVED  (//)
+Last Saved
+;
+MSG_ENV_MENU_RESTORE  (//)
+Restore
+;
+MSG_ENV_SAVE_OPTIONS (//)
+Save Custom FTP Options
+;
+MSG_ENV_READ_OPTIONS (//)
+Open Custom FTP Options
+;
+MSG_ENV_SAVE_DEFAULT_OPTIONS (//)
+Save DEFAULT FTP Options
+;
+MSG_ENV_READ_DEFAULT_OPTIONS (//)
+Open DEFAULT FTP Options
+;
+MSG_FTP_EXPORT_SITES (//)
+Export Sites
+;
+MSG_FTP_SAVE_SITES (//)
+Save FTP Addressbook
+;
+MSG_FTP_READ_SITES (//)
+Open FTP Addressbook
+;
+MSG_FTP_IMPORT_SITES (//)
+Import FTP Sites
+;
+MSG_ERROR_SAVING (//)
+Error Saving File!
+;
+MSG_RETRY (//)
+_Retry
+;
+MSG_ERROR_LOADING (//)
+Error Reading File!
+;
+MSG_FTP_OPTIONS (//)
+Display FTP Options
+;
+MSG_FTP_EDIT_TITLE (//)
+Edit an FTP Site
+;
+MSG_FTP_NEW_TITLE (//)
+New FTP Site
+;
+MSG_FTP_DEFAULT_OPTIONS_TITLE (//)
+Edit Default FTP Options
+;
+MSG_FTP_CUSTOM_OPTIONS_TITLE (//)
+Edit Custom FTP Options
+;
+MSG_FTP_CONNECT_TITLE (//)
+Connect to FTP Site
+;
+MSG_FTP_ADD_TITLE (//)
+Add FTP Site to Addresbook
+;
+MSG_SELECT_TOOLBAR (//)
+Select Custom FTP Toolbar
+;
+MSG_FTP_ADDR_NAME (//)
+Sites
+;
+MSG_ANON_PASS (//)
+Anon
+;
+MSG_ADR_DC (//)
+Double Click
+;
+MSG_AUTO_CLOSE	(//)
+Auto Close
+;
+MSG_ADR_CONNECT (//)
+Connect
+;
+MSG_ADR_EDIT (//)
+Edit
+;
+; tests
+MSG_SET_PROTECT_OLD (//)
+Current
+;
+MSG_SET_PROTECT_SET (//)
+Set
+;
+MSG_SET_PROTECT_CLEAR (//)
+Clear
+;
+MSG_OK_BUTTON (//)
+_OK
+;
+MSG_ALL_BUTTON (//)
+A_ll
+;
+MSG_SKIP_BUTTON (//)
+S_kip
+;
+MSG_ABORT_BUTTON (//)
+A_bort
+;
+MSG_SELECT_PROTECTION_BITS (//)
+Select protection bits
+;
+MSG_BADADRBOOK (//)
+Error Reading Addressbook
+;
+MSG_FTP_FOUND_FILE (//)
+Found the file
+;
+MSG_FTP_IN_THE_DIR (//)
+in the directory
+;
+MSG_FTP_SHALL_I_GO (//)
+Shall I go there?
+;
+MSG_FTP_NEW_LISTER (//)
+New Lister
+;
+MSG_FTP_ENTER_PATTERN (//)
+Enter file pattern to search for.
+;
+MSG_FTP_SEARCH_COMMENTS (//)
+Search file comments
+;
+MSG_FTP_RECONNECTING (//)
+Reconnecting...
+;
+MSG_FTP_IMPORT_AMFTP_SITES (//)
+Import AMFTP Sites
+;
+MSG_FTP_IMPORT_BAD_AMFTPFILE (//)
+Not an .AmFTPProfiles file!\n Continue anyway?
+;
+MSG_FTP_LAST_SITE (//)
+_Last Site
+;
+MSG_TRANSFER_DISPLAY_BYTES (//)
+Bytes:
+;
+MSG_TRANSFER_DISPLAY_TIMES (//)
+Times:
+;
+MSG_ABORT_COMMENT_START (//)
+Transfer aborted (
+;
+MSG_ABORT_COMMENT_UNKNOWN_SIZE (//)
+unknown
+;
+MSG_ABORT_COMMENT_END (//)
+ total length)
+;
+;
+;	Site-site error default for lst_server_err
+;
+MSG_FTP_SERVER_ERROR (//)
+Command Failed or Server Error
+;

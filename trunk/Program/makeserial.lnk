@@ -1,0 +1,11 @@
+FROM LIB:c.o "makeserial.o"
+TO "makeserial"
+LIB dopuslib:dopus.lib LIB:scm.lib
+    LIB:sc.lib LIB:amiga.lib
+ADDSYM
+SMALLCODE
+SMALLDATA
+STRIPDEBUG
+QUIET
+NOICONS
+

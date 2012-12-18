@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - OpenWorkbenchObject()</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_2.html">previous</A>, <A HREF="V44_Changes_4.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC4" HREF="V44_Changes_toc.html#TOC4">Launching Workbench applications</A></H2>
+<P>
+<A NAME="IDX9"></A>
+
+</P>
+<P>
+The new OpenWorkbenchObject() can be used to execute a program
+as if the user had double-clicked on its icon. This is expecially
+useful for commodities that put up toolbars or menus to start
+other applications.
+
+</P>
+<P>
+<A NAME="IDX10"></A>
+Before V44, a similar functionality was made available by third-party
+tools such as the <CODE>wbstart.library</CODE> and the <CODE>WBStart-Handler</CODE>.
+
+</P>
+<P>
+While third-party Workbench launchers are still supported in V44,
+applications should be updated as soon as possible to use
+OpenWorkbenchObject() when they detect a <CODE>workbench.library</CODE>
+whose version is greater or equal to V44.
+
+</P>
+<P>
+Future versions of the Workbench may extend the WBStartup structure
+to add new functionality. Then, the hack of sending faked WBStartup
+messages to process's pr_MsgPort <STRONG>WILL STOP WORKING</STRONG>.
+
+</P>
+<P>
+OpenWorkbenchObject() can also open drawers. This feature can be
+useful in some Workbench enhancer commodities.
+
+</P>
+<P>
+Note that <CODE>OpenWorkbenchObject()</CODE> fails if it is invoked
+while the Workbench program is not running. This behaviour prevents
+usage of this function by Workbench replacement applications. Workbench
+replacements should launch applications autonomously. After all, the
+cleanest way to duplicate Workbench functionality is providing a
+compatible replacement of the workbench.library instead of patching
+most of its vectors.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_2.html">previous</A>, <A HREF="V44_Changes_4.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

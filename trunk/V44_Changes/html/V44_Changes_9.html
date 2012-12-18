@@ -1,0 +1,65 @@
+<HTML>
+<HEAD>
+<!-- This HTML file has been created by texi2html 1.51
+     from V44_Changes.texi on 24 October 1999 -->
+
+<TITLE>AmigaOS 3.5 - V44 Release Notes - Palette Mapped Icons</TITLE>
+</HEAD>
+<BODY>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_8.html">previous</A>, <A HREF="V44_Changes_10.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H2><A NAME="SEC19" HREF="V44_Changes_toc.html#TOC19">The New Palette Mapped Icons</A></H2>
+<P>
+<A NAME="IDX42"></A>
+<A NAME="IDX43"></A>
+<A NAME="IDX44"></A>
+<A NAME="IDX45"></A>
+<A NAME="IDX46"></A>
+<A NAME="IDX47"></A>
+
+</P>
+<P>
+The <CODE>icon.library</CODE> has been enhanced to support palette mapped
+icons. The icon file format has been extended in a backwards
+compatible way to support palette mapped images as well as
+old-style images. This means that V44 icons can contain TWO
+image sets: the old-style planar images (for normal and
+selected states) and the new style palette mapped images.
+
+</P>
+<P>
+New API calls are provided to retrieve the V44 image data.
+The <CODE>GetDiskObject()</CODE> and <CODE>GetDiskObjectNew()</CODE> calls are now
+declared obsolete: they are still supported only for backwards
+compatiblity, therefore they don't provide a way to access the new
+palette mapped images<A NAME="DOCF1" HREF="V44_Changes_foot.html#FOOT1">(1)</A>.
+
+</P>
+<P>
+Applications which manipulate icons should be adapted to use
+the new <CODE>GetIconTagList()</CODE>. This new function is a superset of
+<CODE>GetDiskObject()</CODE>: it still returns a pointer to a pointer
+to a <CODE>struct DiskObject</CODE>, but it provides greater control
+by means of several taglist parameters.
+
+</P>
+<P>
+The defaults are to load and automatically remap the new
+style images embedded into the icon. The <CODE>ICONGETA_Screen</CODE>
+tag specifies which Screen the icon is to be displayed on.
+See the <CODE>GetIconTagList()</CODE> AutoDoc for more information.
+
+</P>
+<P>
+The new <CODE>icon.library/IconControlA()</CODE> call allows the
+applications to retrieve and change any of the extended icon
+attributes including the palette and the imagery.
+
+</P>
+
+<P><HR><P>
+Go to the <A HREF="V44_Changes_1.html">first</A>, <A HREF="V44_Changes_8.html">previous</A>, <A HREF="V44_Changes_10.html">next</A>, <A HREF="V44_Changes_21.html">last</A> section, <A HREF="V44_Changes_toc.html">table of contents</A>.
+</BODY>
+</HTML>

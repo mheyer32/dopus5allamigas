@@ -1,0 +1,53 @@
+New ftp module features:
+
+	  .35	'Copy/Also Copy Source's xxx' and 'Copy/Set Source Archive
+			Bit' would use the local Opus settings if the source
+			lister was a local one.  Now the ftp settings are
+			always used.  For site-site copy, the source is used.
+
+		When the above options were enabled, the resulting file
+			would have the correct protection bits, date,
+			and comment; but the lister didn't always reflect
+			this.  When uploading files with 'Also Copy Source's
+			Datestamp/Protection Bits' turned off, these fields
+			are only approximated to save unnecessary network
+			overhead.  You can always rescan the destination
+			afterward if these fields are important.
+
+		Site-site copy would always report file size as 0.  This is
+			now fixed.  If you abort a transfer the resulting
+			size is not actually known without a rescan so the
+			size will be shown as 1/2 the total size.
+
+	  .36	With 'Copy/Set Source Archive Bit' enabled, the source lister
+			was being updated for downloads even though this options
+			is only possible for uploads.
+
+		Added 'Copy/Rescan Destination' option.  This causes the
+			ftp lister to be rescanned automatically after each
+			upload or site to site transfer.  This ensures all
+			protection bits, dates, and sizes are accurate but
+			is not a good idea for slow ftp sites.
+
+	  .37	The 'passive' option was broken.  Not any more.
+
+	  .38	Implemented support for servers with broken ls command
+			that breaks when a dirname contains spaces.
+			Set Env:DOpus/ftp_broken_list for now
+
+	  .39	The above mentioned broken servers are now also supported
+	  		for the remaining recursive operations of
+	  		Delete, Protect, GetSizes, and FindFile.
+
+	  .40	Fixed small problem with FTPOoptions description
+
+	  .41	Added environment variable "DOpus/ftp_fred_hack" which
+	  		allows OpusFTP to work with filenames which begin
+	  		with spaces.  Note that there is potential for
+	  		this to cause some servers to break.
+
+			Aborted transfers now have a comment set indicating
+			that they have been aborted and what their full size is.
+
+			Colon ":" characters are now filtered to underscores "_".
+

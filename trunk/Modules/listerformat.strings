@@ -1,0 +1,273 @@
+#ifndef LISTERFORMAT_H
+#define LISTERFORMAT_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_LISTER_FORMAT_TITLE 3000
+#define MSG_LISTER_AVAILABLE_DISPLAY_ITEMS 3001
+#define MSG_LISTER_SELECTED_DISPLAY_ITEMS 3002
+#define MSG_LISTER_LIST_FILENAME 3003
+#define MSG_LISTER_LIST_FILESIZE 3004
+#define MSG_LISTER_LIST_PROTECTION 3005
+#define MSG_LISTER_LIST_DATE 3006
+#define MSG_LISTER_LIST_COMMENT 3007
+#define MSG_LISTER_LIST_FILETYPE 3008
+#define MSG_LISTER_LIST_OWNER 3009
+#define MSG_LISTER_LIST_GROUP 3010
+#define MSG_LISTER_LIST_NETPROTECTION 3011
+#define MSG_LISTER_ENTRY_SEPARATION 3012
+#define MSG_LISTER_REVERSE_SORTING 3013
+#define MSG_LISTER_SEPARATION_MIX 3014
+#define MSG_LISTER_SEPARATION_DIRS 3015
+#define MSG_LISTER_SEPARATION_FILES 3016
+#define MSG_LISTER_SHOW 3017
+#define MSG_LISTER_HIDE 3018
+#define MSG_LISTER_REJECT_ICONS 3019
+#define MSG_LISTER_HIDDEN_BIT 3020
+#define MSG_LISTER_USE 3021
+#define MSG_LISTER_CANCEL 3022
+#define MSG_LISTER_LIST_VERSION 3023
+#define MSG_LISTER_SAVE 3024
+#define MSG_DEFAULTS 3025
+#define MSG_FTP_DEFAULTS 3026
+#define MSG_LISTER_FUEL_GAUGE 3027
+#define MSG_LISTER_INHERIT 3028
+#define MSG_SET_AS_DEFAULTS 3029
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_LISTER_FORMAT_TITLE_STR "List Format"
+#define MSG_LISTER_AVAILABLE_DISPLAY_ITEMS_STR "Available..."
+#define MSG_LISTER_SELECTED_DISPLAY_ITEMS_STR "Display/Sort..."
+#define MSG_LISTER_LIST_FILENAME_STR "File Name"
+#define MSG_LISTER_LIST_FILESIZE_STR "File Size"
+#define MSG_LISTER_LIST_PROTECTION_STR "Protection"
+#define MSG_LISTER_LIST_DATE_STR "File Date"
+#define MSG_LISTER_LIST_COMMENT_STR "Comment"
+#define MSG_LISTER_LIST_FILETYPE_STR "File Type"
+#define MSG_LISTER_LIST_OWNER_STR "Owner"
+#define MSG_LISTER_LIST_GROUP_STR "Group"
+#define MSG_LISTER_LIST_NETPROTECTION_STR "Net Access"
+#define MSG_LISTER_ENTRY_SEPARATION_STR "_Entry Separation"
+#define MSG_LISTER_REVERSE_SORTING_STR "_Reverse Sorting"
+#define MSG_LISTER_SEPARATION_MIX_STR "Mix Files/Dirs"
+#define MSG_LISTER_SEPARATION_DIRS_STR "Directories First"
+#define MSG_LISTER_SEPARATION_FILES_STR "Files First"
+#define MSG_LISTER_SHOW_STR "_Show Filter"
+#define MSG_LISTER_HIDE_STR "_Hide Filter"
+#define MSG_LISTER_REJECT_ICONS_STR "_Filter Icons"
+#define MSG_LISTER_HIDDEN_BIT_STR "H_idden"
+#define MSG_LISTER_USE_STR "_Use"
+#define MSG_LISTER_CANCEL_STR "_Cancel"
+#define MSG_LISTER_LIST_VERSION_STR "Version"
+#define MSG_LISTER_SAVE_STR "S_ave"
+#define MSG_DEFAULTS_STR "Reset to _Defaults"
+#define MSG_FTP_DEFAULTS_STR "Reset FTP Defaults"
+#define MSG_LISTER_FUEL_GAUGE_STR "Free Space _Gauge"
+#define MSG_LISTER_INHERIT_STR "I_nherit"
+#define MSG_SET_AS_DEFAULTS_STR "Set _As Defaults"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_LISTER_FORMAT_TITLE,(STRPTR)MSG_LISTER_FORMAT_TITLE_STR},
+    {MSG_LISTER_AVAILABLE_DISPLAY_ITEMS,(STRPTR)MSG_LISTER_AVAILABLE_DISPLAY_ITEMS_STR},
+    {MSG_LISTER_SELECTED_DISPLAY_ITEMS,(STRPTR)MSG_LISTER_SELECTED_DISPLAY_ITEMS_STR},
+    {MSG_LISTER_LIST_FILENAME,(STRPTR)MSG_LISTER_LIST_FILENAME_STR},
+    {MSG_LISTER_LIST_FILESIZE,(STRPTR)MSG_LISTER_LIST_FILESIZE_STR},
+    {MSG_LISTER_LIST_PROTECTION,(STRPTR)MSG_LISTER_LIST_PROTECTION_STR},
+    {MSG_LISTER_LIST_DATE,(STRPTR)MSG_LISTER_LIST_DATE_STR},
+    {MSG_LISTER_LIST_COMMENT,(STRPTR)MSG_LISTER_LIST_COMMENT_STR},
+    {MSG_LISTER_LIST_FILETYPE,(STRPTR)MSG_LISTER_LIST_FILETYPE_STR},
+    {MSG_LISTER_LIST_OWNER,(STRPTR)MSG_LISTER_LIST_OWNER_STR},
+    {MSG_LISTER_LIST_GROUP,(STRPTR)MSG_LISTER_LIST_GROUP_STR},
+    {MSG_LISTER_LIST_NETPROTECTION,(STRPTR)MSG_LISTER_LIST_NETPROTECTION_STR},
+    {MSG_LISTER_ENTRY_SEPARATION,(STRPTR)MSG_LISTER_ENTRY_SEPARATION_STR},
+    {MSG_LISTER_REVERSE_SORTING,(STRPTR)MSG_LISTER_REVERSE_SORTING_STR},
+    {MSG_LISTER_SEPARATION_MIX,(STRPTR)MSG_LISTER_SEPARATION_MIX_STR},
+    {MSG_LISTER_SEPARATION_DIRS,(STRPTR)MSG_LISTER_SEPARATION_DIRS_STR},
+    {MSG_LISTER_SEPARATION_FILES,(STRPTR)MSG_LISTER_SEPARATION_FILES_STR},
+    {MSG_LISTER_SHOW,(STRPTR)MSG_LISTER_SHOW_STR},
+    {MSG_LISTER_HIDE,(STRPTR)MSG_LISTER_HIDE_STR},
+    {MSG_LISTER_REJECT_ICONS,(STRPTR)MSG_LISTER_REJECT_ICONS_STR},
+    {MSG_LISTER_HIDDEN_BIT,(STRPTR)MSG_LISTER_HIDDEN_BIT_STR},
+    {MSG_LISTER_USE,(STRPTR)MSG_LISTER_USE_STR},
+    {MSG_LISTER_CANCEL,(STRPTR)MSG_LISTER_CANCEL_STR},
+    {MSG_LISTER_LIST_VERSION,(STRPTR)MSG_LISTER_LIST_VERSION_STR},
+    {MSG_LISTER_SAVE,(STRPTR)MSG_LISTER_SAVE_STR},
+    {MSG_DEFAULTS,(STRPTR)MSG_DEFAULTS_STR},
+    {MSG_FTP_DEFAULTS,(STRPTR)MSG_FTP_DEFAULTS_STR},
+    {MSG_LISTER_FUEL_GAUGE,(STRPTR)MSG_LISTER_FUEL_GAUGE_STR},
+    {MSG_LISTER_INHERIT,(STRPTR)MSG_LISTER_INHERIT_STR},
+    {MSG_SET_AS_DEFAULTS,(STRPTR)MSG_SET_AS_DEFAULTS_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x0B\xB8\x00\x0C"
+    MSG_LISTER_FORMAT_TITLE_STR "\x00"
+    "\x00\x00\x0B\xB9\x00\x0E"
+    MSG_LISTER_AVAILABLE_DISPLAY_ITEMS_STR "\x00\x00"
+    "\x00\x00\x0B\xBA\x00\x10"
+    MSG_LISTER_SELECTED_DISPLAY_ITEMS_STR "\x00"
+    "\x00\x00\x0B\xBB\x00\x0A"
+    MSG_LISTER_LIST_FILENAME_STR "\x00"
+    "\x00\x00\x0B\xBC\x00\x0A"
+    MSG_LISTER_LIST_FILESIZE_STR "\x00"
+    "\x00\x00\x0B\xBD\x00\x0C"
+    MSG_LISTER_LIST_PROTECTION_STR "\x00\x00"
+    "\x00\x00\x0B\xBE\x00\x0A"
+    MSG_LISTER_LIST_DATE_STR "\x00"
+    "\x00\x00\x0B\xBF\x00\x08"
+    MSG_LISTER_LIST_COMMENT_STR "\x00"
+    "\x00\x00\x0B\xC0\x00\x0A"
+    MSG_LISTER_LIST_FILETYPE_STR "\x00"
+    "\x00\x00\x0B\xC1\x00\x06"
+    MSG_LISTER_LIST_OWNER_STR "\x00"
+    "\x00\x00\x0B\xC2\x00\x06"
+    MSG_LISTER_LIST_GROUP_STR "\x00"
+    "\x00\x00\x0B\xC3\x00\x0C"
+    MSG_LISTER_LIST_NETPROTECTION_STR "\x00\x00"
+    "\x00\x00\x0B\xC4\x00\x12"
+    MSG_LISTER_ENTRY_SEPARATION_STR "\x00"
+    "\x00\x00\x0B\xC5\x00\x12"
+    MSG_LISTER_REVERSE_SORTING_STR "\x00\x00"
+    "\x00\x00\x0B\xC6\x00\x10"
+    MSG_LISTER_SEPARATION_MIX_STR "\x00\x00"
+    "\x00\x00\x0B\xC7\x00\x12"
+    MSG_LISTER_SEPARATION_DIRS_STR "\x00"
+    "\x00\x00\x0B\xC8\x00\x0C"
+    MSG_LISTER_SEPARATION_FILES_STR "\x00"
+    "\x00\x00\x0B\xC9\x00\x0E"
+    MSG_LISTER_SHOW_STR "\x00\x00"
+    "\x00\x00\x0B\xCA\x00\x0E"
+    MSG_LISTER_HIDE_STR "\x00\x00"
+    "\x00\x00\x0B\xCB\x00\x0E"
+    MSG_LISTER_REJECT_ICONS_STR "\x00"
+    "\x00\x00\x0B\xCC\x00\x08"
+    MSG_LISTER_HIDDEN_BIT_STR "\x00"
+    "\x00\x00\x0B\xCD\x00\x06"
+    MSG_LISTER_USE_STR "\x00\x00"
+    "\x00\x00\x0B\xCE\x00\x08"
+    MSG_LISTER_CANCEL_STR "\x00"
+    "\x00\x00\x0B\xCF\x00\x08"
+    MSG_LISTER_LIST_VERSION_STR "\x00"
+    "\x00\x00\x0B\xD0\x00\x06"
+    MSG_LISTER_SAVE_STR "\x00"
+    "\x00\x00\x0B\xD1\x00\x14"
+    MSG_DEFAULTS_STR "\x00\x00"
+    "\x00\x00\x0B\xD2\x00\x14"
+    MSG_FTP_DEFAULTS_STR "\x00\x00"
+    "\x00\x00\x0B\xD3\x00\x12"
+    MSG_LISTER_FUEL_GAUGE_STR "\x00"
+    "\x00\x00\x0B\xD4\x00\x0A"
+    MSG_LISTER_INHERIT_STR "\x00\x00"
+    "\x00\x00\x0B\xD5\x00\x12"
+    MSG_SET_AS_DEFAULTS_STR "\x00\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* LISTERFORMAT_H */

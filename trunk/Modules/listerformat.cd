@@ -1,0 +1,94 @@
+; ************************************************* 
+; Catalog description file for listerformat.module
+; ************************************************* 
+;
+;
+MSG_LISTER_FORMAT_TITLE (3000//)
+List Format
+;
+MSG_LISTER_AVAILABLE_DISPLAY_ITEMS (//)
+Available...
+;
+MSG_LISTER_SELECTED_DISPLAY_ITEMS (//)
+Display/Sort...
+;
+MSG_LISTER_LIST_FILENAME (//)
+File Name
+;
+MSG_LISTER_LIST_FILESIZE (//)
+File Size
+;
+MSG_LISTER_LIST_PROTECTION (//)
+Protection
+;
+MSG_LISTER_LIST_DATE (//)
+File Date
+;
+MSG_LISTER_LIST_COMMENT (//)
+Comment
+;
+MSG_LISTER_LIST_FILETYPE (//)
+File Type
+;
+MSG_LISTER_LIST_OWNER (//)
+Owner
+;
+MSG_LISTER_LIST_GROUP (//)
+Group
+;
+MSG_LISTER_LIST_NETPROTECTION (//)
+Net Access
+;
+MSG_LISTER_ENTRY_SEPARATION (//)
+_Entry Separation
+;
+MSG_LISTER_REVERSE_SORTING (//)
+_Reverse Sorting
+;
+MSG_LISTER_SEPARATION_MIX (//)
+Mix Files/Dirs
+;
+MSG_LISTER_SEPARATION_DIRS (//)
+Directories First
+;
+MSG_LISTER_SEPARATION_FILES (//)
+Files First
+;
+MSG_LISTER_SHOW (//)
+_Show Filter
+;
+MSG_LISTER_HIDE (//)
+_Hide Filter
+;
+MSG_LISTER_REJECT_ICONS (//)
+_Filter Icons
+;
+MSG_LISTER_HIDDEN_BIT (//)
+H_idden
+;
+MSG_LISTER_USE (//)
+_Use
+;
+MSG_LISTER_CANCEL (//)
+_Cancel
+;
+MSG_LISTER_LIST_VERSION (//)
+Version
+;
+MSG_LISTER_SAVE (//)
+S_ave
+;
+MSG_DEFAULTS (//)
+Reset to _Defaults
+;
+MSG_FTP_DEFAULTS (//)
+Reset FTP Defaults
+;
+MSG_LISTER_FUEL_GAUGE (//)
+Free Space _Gauge
+;
+MSG_LISTER_INHERIT (//)
+I_nherit
+;
+MSG_SET_AS_DEFAULTS (//)
+Set _As Defaults

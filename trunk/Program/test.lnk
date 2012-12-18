@@ -1,0 +1,11 @@
+FROM LIB:c.o "test.o"
+TO "test"
+LIB LIB:scm.lib
+    LIB:sc.lib LIB:amiga.lib
+ADDSYM
+SMALLCODE
+SMALLDATA
+STRIPDEBUG
+QUIET
+NOICONS
+

@@ -1,0 +1,203 @@
+#ifndef THEMES_H
+#define THEMES_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_SAVE_THEME_DESC 1000
+#define MSG_LOAD_THEME_DESC 1001
+#define MSG_BUILD_THEME_DESC 1002
+#define MSG_SAVE_THEME_MSG 1003
+#define MSG_BUILD_THEME_MSG 1004
+#define MSG_SAVE_ERROR 1005
+#define MSG_OK 1006
+#define MSG_CANCEL 1007
+#define MSG_LOAD_THEME_MSG 1008
+#define MSG_THEME_APPLY_PALETTE 1009
+#define MSG_THEME_APPLY_FONTS 1010
+#define MSG_THEME_APPLY_PICTURES 1011
+#define MSG_THEME_APPLY_SOUNDS 1012
+#define MSG_BUILDING_THEME 1013
+#define MSG_CONVERT_THEME_DESC 1014
+#define MSG_CONVERT_THEME_MSG 1015
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_SAVE_THEME_DESC_STR "Save Theme File"
+#define MSG_LOAD_THEME_DESC_STR "Load Theme File"
+#define MSG_BUILD_THEME_DESC_STR "Build Theme For Distribution"
+#define MSG_SAVE_THEME_MSG_STR "Enter Name of Theme File To Save"
+#define MSG_BUILD_THEME_MSG_STR "Enter Name of Theme File To Build"
+#define MSG_SAVE_ERROR_STR "Error Saving Theme : %ld"
+#define MSG_OK_STR "OK"
+#define MSG_CANCEL_STR "Cancel"
+#define MSG_LOAD_THEME_MSG_STR "Select Theme To Load"
+#define MSG_THEME_APPLY_PALETTE_STR "Apply _palette and pen settings"
+#define MSG_THEME_APPLY_FONTS_STR "Apply _font settings"
+#define MSG_THEME_APPLY_PICTURES_STR "Apply _background picture settings"
+#define MSG_THEME_APPLY_SOUNDS_STR "Apply _sound settings"
+#define MSG_BUILDING_THEME_STR "Building Theme..."
+#define MSG_CONVERT_THEME_DESC_STR "Convert Windows95 Theme File"
+#define MSG_CONVERT_THEME_MSG_STR "Select Theme To Convert"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_SAVE_THEME_DESC,(STRPTR)MSG_SAVE_THEME_DESC_STR},
+    {MSG_LOAD_THEME_DESC,(STRPTR)MSG_LOAD_THEME_DESC_STR},
+    {MSG_BUILD_THEME_DESC,(STRPTR)MSG_BUILD_THEME_DESC_STR},
+    {MSG_SAVE_THEME_MSG,(STRPTR)MSG_SAVE_THEME_MSG_STR},
+    {MSG_BUILD_THEME_MSG,(STRPTR)MSG_BUILD_THEME_MSG_STR},
+    {MSG_SAVE_ERROR,(STRPTR)MSG_SAVE_ERROR_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_CANCEL,(STRPTR)MSG_CANCEL_STR},
+    {MSG_LOAD_THEME_MSG,(STRPTR)MSG_LOAD_THEME_MSG_STR},
+    {MSG_THEME_APPLY_PALETTE,(STRPTR)MSG_THEME_APPLY_PALETTE_STR},
+    {MSG_THEME_APPLY_FONTS,(STRPTR)MSG_THEME_APPLY_FONTS_STR},
+    {MSG_THEME_APPLY_PICTURES,(STRPTR)MSG_THEME_APPLY_PICTURES_STR},
+    {MSG_THEME_APPLY_SOUNDS,(STRPTR)MSG_THEME_APPLY_SOUNDS_STR},
+    {MSG_BUILDING_THEME,(STRPTR)MSG_BUILDING_THEME_STR},
+    {MSG_CONVERT_THEME_DESC,(STRPTR)MSG_CONVERT_THEME_DESC_STR},
+    {MSG_CONVERT_THEME_MSG,(STRPTR)MSG_CONVERT_THEME_MSG_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x10"
+    MSG_SAVE_THEME_DESC_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x10"
+    MSG_LOAD_THEME_DESC_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x1E"
+    MSG_BUILD_THEME_DESC_STR "\x00\x00"
+    "\x00\x00\x03\xEB\x00\x22"
+    MSG_SAVE_THEME_MSG_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x22"
+    MSG_BUILD_THEME_MSG_STR "\x00"
+    "\x00\x00\x03\xED\x00\x1A"
+    MSG_SAVE_ERROR_STR "\x00\x00"
+    "\x00\x00\x03\xEE\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x08"
+    MSG_CANCEL_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x16"
+    MSG_LOAD_THEME_MSG_STR "\x00\x00"
+    "\x00\x00\x03\xF1\x00\x20"
+    MSG_THEME_APPLY_PALETTE_STR "\x00"
+    "\x00\x00\x03\xF2\x00\x16"
+    MSG_THEME_APPLY_FONTS_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x24"
+    MSG_THEME_APPLY_PICTURES_STR "\x00\x00"
+    "\x00\x00\x03\xF4\x00\x16"
+    MSG_THEME_APPLY_SOUNDS_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x12"
+    MSG_BUILDING_THEME_STR "\x00"
+    "\x00\x00\x03\xF6\x00\x1E"
+    MSG_CONVERT_THEME_DESC_STR "\x00\x00"
+    "\x00\x00\x03\xF7\x00\x18"
+    MSG_CONVERT_THEME_MSG_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* THEMES_H */
