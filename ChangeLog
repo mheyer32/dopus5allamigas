@@ -1,0 +1,15 @@
+----------------------------
+Directory Opus 5 - ChangeLog
+----------------------------
+
+$Id$
+$URL$
+
+2012-12-22 Jens Langner <Jens.Langner@light-speed.de>
+
+  * ChangeLog, README, etc.: added ChangeLog file to synchronize individual
+    developer changes more easily.
+
+2012-12-18 Roman Kargin <kas1e@yandex.ru>
+
+  * initial checkin of open sourced sources.
