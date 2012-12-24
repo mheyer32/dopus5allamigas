@@ -430,7 +430,7 @@ ULONG __asm __saveds function_init(
 	// Create message port
 	if (!(handle->reply_port=CreateMsgPort()))
 		return 0;
-	handle->reply_port->mp_Flags|=PF_ASYNC;
+  handle->reply_port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC; //original dopus5code:	handle->reply_port->mp_Flags|=PF_ASYNC;
 
 	return 1;
 }
