@@ -333,7 +333,7 @@ ULONG __asm __saveds L_IPC_Command(
 		msg->msg.mn_ReplyPort=reply;
 
 		// Async?
-		if (reply->mp_Flags&PF_ASYNC)
+		if (reply->mp_Node.ln_Pri == PORT_ASYNC_MAGIC) //original dopus5code: if (reply->mp_Flags&PF_ASYNC)
 			reply=0;
 	}
 
@@ -699,7 +699,7 @@ void __asm __saveds L_IPC_ListCommand(
 
 	// If we need replies, create port
 	if (wait && (port=CreateMsgPort()))
-		port->mp_Flags|=PF_ASYNC;
+		port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC; //original dopus5code: port->mp_Flags|=PF_ASYNC;
 
 	// Lock list
 	L_GetSemaphore(&list->lock,SEMF_SHARED,0);

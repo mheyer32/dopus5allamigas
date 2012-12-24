@@ -700,7 +700,8 @@ typedef struct {
 	struct _IPC	*sender;		// Sender IPC
 } IPCMessage;
 
-#define PF_ASYNC	(1<<7)
+
+#define PORT_ASYNC_MAGIC  0x5A // original dopus5code: #define PF_ASYNC	(1<<7)
 
 #define REPLY_NO_PORT		(struct MsgPort *)-1
 #define REPLY_NO_PORT_IPC	(struct MsgPort *)-2
