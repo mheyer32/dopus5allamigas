@@ -5,6 +5,12 @@ Directory Opus 5 - ChangeLog
 $Id$
 $URL$
 
+2013-01-07 Jens Langner <Jens.Langner@light-speed.de>
+
+  * makefile: renamed all "makefile" files to "smakefile" to make it more clear
+    that these are SAS/C makefiles and no GCC makefiles and make room for the
+    upcoming GCC makefiles.
+
 2012-12-12 Roman Kargin <kas1e@yandex.ru>
 
   * Dopus5 code uses MsgPort->mp_Flags for some private flag (PF_ASYNC) for IPC
