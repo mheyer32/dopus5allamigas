@@ -5,6 +5,12 @@ Directory Opus 5 - ChangeLog
 $Id$
 $URL$
 
+2013-01-13 xenic
+
+  * Documents/Dopus55.pdf: Added Dopus 5.5 PDF documentation based on
+    original PageStream files and with references to registration and copyright
+    removed.
+
 2013-01-07 Jens Langner <Jens.Langner@light-speed.de>
 
   * makefile: renamed all "makefile" files to "smakefile" to make it more clear
