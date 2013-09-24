@@ -1,0 +1,90 @@
+;
+;  XADOpus.module 1.22 - DOpus Magellan plugin to browse through XAD archives
+;  Copyright (C) 1999,2000 Mladen Milinkovic <mladen.milinkovic@ri.tel.hr>
+;
+;  This program is free software; you can redistribute it and/or modify
+;  it under the terms of the GNU General Public License as published by
+;  the Free Software Foundation; either version 2 of the License, or
+;  (at your option) any later version.
+;
+;  This program is distributed in the hope that it will be useful,
+;  but WITHOUT ANY WARRANTY; without even the implied warranty of
+;  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;  GNU General Public License for more details.
+;
+;  You should have received a copy of the GNU General Public License
+;  along with this program; if not, write to the Free Software
+;  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+;
+;
+; *************************************************
+; Catalog description file for XADopus.module
+; ************************************************* 
+;
+;
+MSG_TITLE (1000//)
+XADopus Module
+;
+MSG_XADOPEN_DESC (//)
+Open XAD Archive
+;
+MSG_XADEXTRACT_DESC (//)
+Extract XAD Archive
+;
+MSG_ERROR (//)
+Error
+;
+MSG_EXTRACTING (//)
+Extracting ...
+;
+MSG_OPENING_ARC (//)
+Opening archive:
+;
+MSG_DISKARC_EXTRACT (//)
+Do you want to extract\narchive as files or to disk?
+;
+MSG_SELECT_DEST (//)
+Select destination
+;
+MSG_OK (//)
+_OK
+;
+MSG_FILES (//)
+_Files
+;
+MSG_DISK (//)
+_Disk
+;
+MSG_RENAME (//)
+_Rename
+;
+MSG_REPLACE (//)
+_Replace
+;
+MSG_REPLACE_ALL (//)
+R_eplace All
+;
+MSG_SKIP (//)
+_Skip
+;
+MSG_SKIP_ALL (//)
+S_kip All
+;
+MSG_ABORT (//)
+_Abort
+;
+MSG_EXISTS_FORM (//)
+File '%s' exists and would be replaced.
+;
+MSG_RENAME_FORM (//)
+Enter new filename for file\n'%s'
+;
+MSG_NO_PATH_ERR (//)
+Path doesn't exist!
+;
+MSG_NO_HOOKS_ERR (//)
+Unable to get DOpus callback hooks !
+;
+MSG_READING_ARCHIVE (//)
+Reading archive...
+;        

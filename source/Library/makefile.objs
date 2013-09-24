@@ -1,0 +1,37 @@
+COMMON_OBJS = libinit.o data.o string_data.o \
+	timer.o pathlist.o \
+	functions.o gui.o list_management.o \
+	misc.o simplerequest.o selection_list.o strings.o \
+	drag_routines.o palette_routines.o \
+	layout_routines.o layout_support.o layout_utils.o \
+	layout_resize.o \
+	boopsi.o image_class.o button_class.o listview_class.o palette_class.o \
+	dos_patch.o \
+	notify.o \
+	menu_routines.o \
+	bitmap.o \
+	args.o \
+	rexx.o \
+	popup_menus.o ipc.o images.o memory.o popup_support.o \
+	config_new.o config_open.o config_default.o config_save.o \
+	config_close.o config_copy.o config_misc.o \
+	status_window.o read_ilbm.o \
+	anim.o \
+	buffered_io.o diskio.o wb.o launcher.o iff.o \
+	string_hook.o clipboard.o semaphores.o \
+	requesters.o \
+	progress_win.o \
+	appmsg.o \
+	search.o \
+	dates.o \
+	filetypes.o \
+	icons.o \
+	icon_cache.o \
+	devices.o \
+	removed.o \
+	version.o \
+	getusage.o \
+	savepos.o \
+	lsprintf.o
+#/***	debug_lib.o
+

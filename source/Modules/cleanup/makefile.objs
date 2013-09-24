@@ -1,0 +1,2 @@
+COMMON_OBJS = 	init/libinit.o init/lsprintf.o cleanup.o cleanup_data.o cleanup_strings.o 
+

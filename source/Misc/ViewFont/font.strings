@@ -1,0 +1,198 @@
+#ifndef FONT_H
+#define FONT_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_FONT_TITLE 1000
+#define MSG_FONT_FONT 1001
+#define MSG_FONT_SIZE 1002
+#define MSG_FONT_PRINT 1003
+#define MSG_VIEWFONT_DESC 1004
+#define MSG_FONT_BOLD 1005
+#define MSG_FONT_ITALIC 1006
+#define MSG_FONT_ULINE 1007
+#define MSG_FONT_SELECT 1008
+#define MSG_OK 1009
+#define MSG_MENU_PROJECT 1010
+#define MSG_MENU_OPEN_FONT 1011
+#define MSG_MENU_SAVE_SETTINGS 1012
+#define MSG_MENU_QUIT 1013
+#define MSG_MENU_ABOUT 1014
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_FONT_TITLE_STR "Font Viewer"
+#define MSG_FONT_FONT_STR "_Font"
+#define MSG_FONT_SIZE_STR "_Size"
+#define MSG_FONT_PRINT_STR "_Print"
+#define MSG_VIEWFONT_DESC_STR "View a font"
+#define MSG_FONT_BOLD_STR "_B"
+#define MSG_FONT_ITALIC_STR "_I"
+#define MSG_FONT_ULINE_STR "_U"
+#define MSG_FONT_SELECT_STR "Select Font"
+#define MSG_OK_STR "Ok"
+#define MSG_MENU_PROJECT_STR "Project"
+#define MSG_MENU_OPEN_FONT_STR "Open Font..."
+#define MSG_MENU_SAVE_SETTINGS_STR "Save Settings"
+#define MSG_MENU_QUIT_STR "Quit"
+#define MSG_MENU_ABOUT_STR "About..."
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_FONT_TITLE,(STRPTR)MSG_FONT_TITLE_STR},
+    {MSG_FONT_FONT,(STRPTR)MSG_FONT_FONT_STR},
+    {MSG_FONT_SIZE,(STRPTR)MSG_FONT_SIZE_STR},
+    {MSG_FONT_PRINT,(STRPTR)MSG_FONT_PRINT_STR},
+    {MSG_VIEWFONT_DESC,(STRPTR)MSG_VIEWFONT_DESC_STR},
+    {MSG_FONT_BOLD,(STRPTR)MSG_FONT_BOLD_STR},
+    {MSG_FONT_ITALIC,(STRPTR)MSG_FONT_ITALIC_STR},
+    {MSG_FONT_ULINE,(STRPTR)MSG_FONT_ULINE_STR},
+    {MSG_FONT_SELECT,(STRPTR)MSG_FONT_SELECT_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_MENU_PROJECT,(STRPTR)MSG_MENU_PROJECT_STR},
+    {MSG_MENU_OPEN_FONT,(STRPTR)MSG_MENU_OPEN_FONT_STR},
+    {MSG_MENU_SAVE_SETTINGS,(STRPTR)MSG_MENU_SAVE_SETTINGS_STR},
+    {MSG_MENU_QUIT,(STRPTR)MSG_MENU_QUIT_STR},
+    {MSG_MENU_ABOUT,(STRPTR)MSG_MENU_ABOUT_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x0C"
+    MSG_FONT_TITLE_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x06"
+    MSG_FONT_FONT_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x06"
+    MSG_FONT_SIZE_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x08"
+    MSG_FONT_PRINT_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x0C"
+    MSG_VIEWFONT_DESC_STR "\x00"
+    "\x00\x00\x03\xED\x00\x04"
+    MSG_FONT_BOLD_STR "\x00\x00"
+    "\x00\x00\x03\xEE\x00\x04"
+    MSG_FONT_ITALIC_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x04"
+    MSG_FONT_ULINE_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x0C"
+    MSG_FONT_SELECT_STR "\x00"
+    "\x00\x00\x03\xF1\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x03\xF2\x00\x08"
+    MSG_MENU_PROJECT_STR "\x00"
+    "\x00\x00\x03\xF3\x00\x0E"
+    MSG_MENU_OPEN_FONT_STR "\x00\x00"
+    "\x00\x00\x03\xF4\x00\x0E"
+    MSG_MENU_SAVE_SETTINGS_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x06"
+    MSG_MENU_QUIT_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x0A"
+    MSG_MENU_ABOUT_STR "\x00\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* FONT_H */

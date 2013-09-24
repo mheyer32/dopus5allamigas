@@ -1,0 +1,37 @@
+* "multiuser.library"
+##base _muBase
+##bias 30
+##public
+muLogoutA(taglist)(a0)
+muLoginA(taglist)(a0)
+muGetTaskOwner(task)(d0)
+muPasswd(oldpwd,newpwd)(a0/a1)
+muAllocUserInfo()()
+muFreeUserInfo(info)(a0)
+muGetUserInfo(info,keytype)(a0,d0)
+##private
+OBSOLETEmuSetLibFlush(allowed)(d0)
+##public
+muSetDefProtectionA(taglist)(a0)
+muGetDefProtection(task)(d0)
+muSetProtection(name,mask)(d1/d2)
+muLimitDOSSetProtection(flag)(d0)
+muCheckPasswd(taglist)(a0)
+##private
+muFSRendezVous()()
+##public
+muGetPasswdDirLock()()
+muGetConfigDirLock()()
+muGetTaskExtOwner(task)(d0)
+muFreeExtOwner(info)(a0)
+muGetRelationshipA(user,owner,taglist)(d0/d1,a0)
+muUserInfo2ExtOwner(info)(a0)
+muAllocGroupInfo()()
+muFreeGroupInfo(info)(a0)
+muGetGroupInfo(info,keytype)(a0,d0)
+muAddMonitor(monitor)(a0)
+muRemMonitor(monitor)(a0)
+muKill(task)(d0)
+muFreeze(task)(d0)
+muUnfreeze(task)(d0)
+##end

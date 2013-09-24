@@ -1,0 +1,16 @@
+##base _NewIconBase
+##bias 30
+##public
+GetNewDiskObject(name)(A0)
+PutNewDiskObject(name,newdiskobj)(A0,A1)
+FreeNewDiskObject(newdiskobj)(A0)
+##private
+newiconPrivate1(diskobj)(A0)
+newiconPrivate2(diskobj)(A0)
+newiconPrivate3(diskobj)(A0)
+##public
+RemapChunkyImage(chunkyimage,screen)(A0,A1)
+FreeRemappedImage(image,screen)(A0,A1)
+* V40+ functions
+GetDefNewDiskObject(def_type)(D0)
+##end

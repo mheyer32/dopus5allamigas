@@ -1,0 +1,13 @@
+This is a replacement diskinfo.module for Directory Opus 5.5. It replaces
+the old text-based interface with a new graphical representation of
+free space. You can also relabel the disk from the requester.
+
+To install, simply copy the diskinfo.module file to your dopus5:modules
+directory. You might want to shift the old diskinfo.module file into your
+dopus5:modules/storage directory in case you want to go back to the old
+one. You may need to reboot after copying the new module.
+
+If you are using a non-English language catalog file, you will also need
+to remove or replace the old diskinfo.catalog.
+
+(c) 1996 Jonathan Potter & GPSoftware

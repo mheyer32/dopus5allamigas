@@ -1,0 +1,438 @@
+#ifndef FILETYPE_H
+#define FILETYPE_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_FIND_DESC 1000
+#define MSG_FIND_TITLE 1001
+#define MSG_FIND_PRI 1002
+#define MSG_FIND_ID 1003
+#define MSG_FIND_FILETYPE 1004
+#define MSG_FIND_FILE 1005
+#define MSG_FIND_USE 1006
+#define MSG_FIND_INSTALL 1007
+#define MSG_FIND_CREATE 1008
+#define MSG_FIND_EDIT 1009
+#define MSG_FIND_CANCEL 1010
+#define MSG_FIND_SCANNING 1011
+#define MSG_FIND_MATCHING 1012
+#define MSG_NONE_FOUND_1 1013
+#define MSG_NONE_FOUND_2 1014
+#define MSG_NONE_FOUND_3 1015
+#define MSG_NONE_FOUND_4 1016
+#define MSG_NONE_FOUND_5 1017
+#define MSG_NONE_FOUND_6 1018
+#define MSG_NONE_FOUND_7 1019
+#define MSG_STORED_FOUND_1 1020
+#define MSG_STORED_FOUND_2 1021
+#define MSG_STORED_FOUND_3 1022
+#define MSG_STORED_FOUND_4 1023
+#define MSG_STORED_FOUND_5 1024
+#define MSG_STORED_FOUND_6 1025
+#define MSG_STORED_FOUND_7 1026
+#define MSG_BETTER_FOUND_1 1027
+#define MSG_BETTER_FOUND_2 1028
+#define MSG_BETTER_FOUND_3 1029
+#define MSG_BETTER_FOUND_4 1030
+#define MSG_BETTER_FOUND_5 1031
+#define MSG_BETTER_FOUND_6 1032
+#define MSG_BETTER_FOUND_7 1033
+#define MSG_INSTALLED_FOUND_1 1034
+#define MSG_INSTALLED_FOUND_2 1035
+#define MSG_INSTALLED_FOUND_3 1036
+#define MSG_INSTALLED_FOUND_4 1037
+#define MSG_INSTALLED_FOUND_5 1038
+#define MSG_INSTALLED_FOUND_6 1039
+#define MSG_INSTALLED_FOUND_7 1040
+#define MSG_CREATE_DESC 1041
+#define MSG_CREATE_TITLE 1042
+#define MSG_CREATE_FILES 1043
+#define MSG_CREATE_ADD 1044
+#define MSG_CREATE_DELETE 1045
+#define MSG_CREATE_CLEAR 1046
+#define MSG_CREATE_FILETYPE 1047
+#define MSG_CREATE_NAME 1048
+#define MSG_CREATE_IFF 1049
+#define MSG_CREATE_GROUP 1050
+#define MSG_CREATE_ID 1051
+#define MSG_CREATE_BYTES 1052
+#define MSG_CREATE_CASE 1053
+#define MSG_CREATE_NOCASE 1054
+#define MSG_CREATE_EDIT 1055
+#define MSG_CREATE_SAVE 1056
+#define MSG_CREATE_CANCEL 1057
+#define MSG_CREATE_ADD_FILE 1058
+#define MSG_CREATE_WARN_EDITED 1059
+#define MSG_CREATE_CONTINUE_CANCEL 1060
+#define MSG_REPLACE_CANCEL 1061
+#define MSG_FILETYPE_EXISTS 1062
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_FIND_DESC_STR "Find filetype for a file"
+#define MSG_FIND_TITLE_STR "Filetype Finder"
+#define MSG_FIND_PRI_STR "Pri"
+#define MSG_FIND_ID_STR "ID"
+#define MSG_FIND_FILETYPE_STR "Filetype"
+#define MSG_FIND_FILE_STR "File..."
+#define MSG_FIND_USE_STR "_Use"
+#define MSG_FIND_INSTALL_STR "_Install"
+#define MSG_FIND_CREATE_STR "_Create"
+#define MSG_FIND_EDIT_STR "_Edit"
+#define MSG_FIND_CANCEL_STR "C_ancel"
+#define MSG_FIND_SCANNING_STR "Scanning filetypes..."
+#define MSG_FIND_MATCHING_STR "Matching filetypes..."
+#define MSG_NONE_FOUND_1_STR "No filetype has been found that"
+#define MSG_NONE_FOUND_2_STR "matches the selected file. Do you"
+#define MSG_NONE_FOUND_3_STR "wish to create a new filetype for"
+#define MSG_NONE_FOUND_4_STR "this file?"
+#define MSG_NONE_FOUND_5_STR ""
+#define MSG_NONE_FOUND_6_STR ""
+#define MSG_NONE_FOUND_7_STR ""
+#define MSG_STORED_FOUND_1_STR "No installed filetype matches the"
+#define MSG_STORED_FOUND_2_STR "selected file. However, there is"
+#define MSG_STORED_FOUND_3_STR "a filetype in storage which does match."
+#define MSG_STORED_FOUND_4_STR "Do you wish to install this filetype "
+#define MSG_STORED_FOUND_5_STR "now or create a new one?"
+#define MSG_STORED_FOUND_6_STR ""
+#define MSG_STORED_FOUND_7_STR ""
+#define MSG_BETTER_FOUND_1_STR "There is a filetype in storage which"
+#define MSG_BETTER_FOUND_2_STR "matches the selected file and has a"
+#define MSG_BETTER_FOUND_3_STR "higher priority than the currently"
+#define MSG_BETTER_FOUND_4_STR "installed filetype for this file. Do"
+#define MSG_BETTER_FOUND_5_STR "you wish to use the current filetype,"
+#define MSG_BETTER_FOUND_6_STR "install the stored filetype, or create"
+#define MSG_BETTER_FOUND_7_STR "a new one?"
+#define MSG_INSTALLED_FOUND_1_STR "There is a filetype installed"
+#define MSG_INSTALLED_FOUND_2_STR "which matches the selected file."
+#define MSG_INSTALLED_FOUND_3_STR "Do you wish to use this Filetype"
+#define MSG_INSTALLED_FOUND_4_STR "or create a new one?"
+#define MSG_INSTALLED_FOUND_5_STR ""
+#define MSG_INSTALLED_FOUND_6_STR ""
+#define MSG_INSTALLED_FOUND_7_STR ""
+#define MSG_CREATE_DESC_STR "Create new filetype"
+#define MSG_CREATE_TITLE_STR "Filetype Creator"
+#define MSG_CREATE_FILES_STR "Files..."
+#define MSG_CREATE_ADD_STR "_Add"
+#define MSG_CREATE_DELETE_STR "_Delete"
+#define MSG_CREATE_CLEAR_STR "_Clear"
+#define MSG_CREATE_FILETYPE_STR "Filetype..."
+#define MSG_CREATE_NAME_STR " _Name:"
+#define MSG_CREATE_IFF_STR "  _IFF:"
+#define MSG_CREATE_GROUP_STR "_Group:"
+#define MSG_CREATE_ID_STR "   I_D:"
+#define MSG_CREATE_BYTES_STR "_Bytes:"
+#define MSG_CREATE_CASE_STR "Case"
+#define MSG_CREATE_NOCASE_STR "No Case"
+#define MSG_CREATE_EDIT_STR "_Edit"
+#define MSG_CREATE_SAVE_STR "_Save"
+#define MSG_CREATE_CANCEL_STR "_Cancel"
+#define MSG_CREATE_ADD_FILE_STR "Add a file..."
+#define MSG_CREATE_WARN_EDITED_STR "WARNING\n\nYou have used the editor.\nIf you continue your changes will be lost..."
+#define MSG_CREATE_CONTINUE_CANCEL_STR "Continue|Cancel"
+#define MSG_REPLACE_CANCEL_STR "Replace|Cancel"
+#define MSG_FILETYPE_EXISTS_STR "Filetype '%s' exists.\nDo you wish to replace it?"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_FIND_DESC,(STRPTR)MSG_FIND_DESC_STR},
+    {MSG_FIND_TITLE,(STRPTR)MSG_FIND_TITLE_STR},
+    {MSG_FIND_PRI,(STRPTR)MSG_FIND_PRI_STR},
+    {MSG_FIND_ID,(STRPTR)MSG_FIND_ID_STR},
+    {MSG_FIND_FILETYPE,(STRPTR)MSG_FIND_FILETYPE_STR},
+    {MSG_FIND_FILE,(STRPTR)MSG_FIND_FILE_STR},
+    {MSG_FIND_USE,(STRPTR)MSG_FIND_USE_STR},
+    {MSG_FIND_INSTALL,(STRPTR)MSG_FIND_INSTALL_STR},
+    {MSG_FIND_CREATE,(STRPTR)MSG_FIND_CREATE_STR},
+    {MSG_FIND_EDIT,(STRPTR)MSG_FIND_EDIT_STR},
+    {MSG_FIND_CANCEL,(STRPTR)MSG_FIND_CANCEL_STR},
+    {MSG_FIND_SCANNING,(STRPTR)MSG_FIND_SCANNING_STR},
+    {MSG_FIND_MATCHING,(STRPTR)MSG_FIND_MATCHING_STR},
+    {MSG_NONE_FOUND_1,(STRPTR)MSG_NONE_FOUND_1_STR},
+    {MSG_NONE_FOUND_2,(STRPTR)MSG_NONE_FOUND_2_STR},
+    {MSG_NONE_FOUND_3,(STRPTR)MSG_NONE_FOUND_3_STR},
+    {MSG_NONE_FOUND_4,(STRPTR)MSG_NONE_FOUND_4_STR},
+    {MSG_NONE_FOUND_5,(STRPTR)MSG_NONE_FOUND_5_STR},
+    {MSG_NONE_FOUND_6,(STRPTR)MSG_NONE_FOUND_6_STR},
+    {MSG_NONE_FOUND_7,(STRPTR)MSG_NONE_FOUND_7_STR},
+    {MSG_STORED_FOUND_1,(STRPTR)MSG_STORED_FOUND_1_STR},
+    {MSG_STORED_FOUND_2,(STRPTR)MSG_STORED_FOUND_2_STR},
+    {MSG_STORED_FOUND_3,(STRPTR)MSG_STORED_FOUND_3_STR},
+    {MSG_STORED_FOUND_4,(STRPTR)MSG_STORED_FOUND_4_STR},
+    {MSG_STORED_FOUND_5,(STRPTR)MSG_STORED_FOUND_5_STR},
+    {MSG_STORED_FOUND_6,(STRPTR)MSG_STORED_FOUND_6_STR},
+    {MSG_STORED_FOUND_7,(STRPTR)MSG_STORED_FOUND_7_STR},
+    {MSG_BETTER_FOUND_1,(STRPTR)MSG_BETTER_FOUND_1_STR},
+    {MSG_BETTER_FOUND_2,(STRPTR)MSG_BETTER_FOUND_2_STR},
+    {MSG_BETTER_FOUND_3,(STRPTR)MSG_BETTER_FOUND_3_STR},
+    {MSG_BETTER_FOUND_4,(STRPTR)MSG_BETTER_FOUND_4_STR},
+    {MSG_BETTER_FOUND_5,(STRPTR)MSG_BETTER_FOUND_5_STR},
+    {MSG_BETTER_FOUND_6,(STRPTR)MSG_BETTER_FOUND_6_STR},
+    {MSG_BETTER_FOUND_7,(STRPTR)MSG_BETTER_FOUND_7_STR},
+    {MSG_INSTALLED_FOUND_1,(STRPTR)MSG_INSTALLED_FOUND_1_STR},
+    {MSG_INSTALLED_FOUND_2,(STRPTR)MSG_INSTALLED_FOUND_2_STR},
+    {MSG_INSTALLED_FOUND_3,(STRPTR)MSG_INSTALLED_FOUND_3_STR},
+    {MSG_INSTALLED_FOUND_4,(STRPTR)MSG_INSTALLED_FOUND_4_STR},
+    {MSG_INSTALLED_FOUND_5,(STRPTR)MSG_INSTALLED_FOUND_5_STR},
+    {MSG_INSTALLED_FOUND_6,(STRPTR)MSG_INSTALLED_FOUND_6_STR},
+    {MSG_INSTALLED_FOUND_7,(STRPTR)MSG_INSTALLED_FOUND_7_STR},
+    {MSG_CREATE_DESC,(STRPTR)MSG_CREATE_DESC_STR},
+    {MSG_CREATE_TITLE,(STRPTR)MSG_CREATE_TITLE_STR},
+    {MSG_CREATE_FILES,(STRPTR)MSG_CREATE_FILES_STR},
+    {MSG_CREATE_ADD,(STRPTR)MSG_CREATE_ADD_STR},
+    {MSG_CREATE_DELETE,(STRPTR)MSG_CREATE_DELETE_STR},
+    {MSG_CREATE_CLEAR,(STRPTR)MSG_CREATE_CLEAR_STR},
+    {MSG_CREATE_FILETYPE,(STRPTR)MSG_CREATE_FILETYPE_STR},
+    {MSG_CREATE_NAME,(STRPTR)MSG_CREATE_NAME_STR},
+    {MSG_CREATE_IFF,(STRPTR)MSG_CREATE_IFF_STR},
+    {MSG_CREATE_GROUP,(STRPTR)MSG_CREATE_GROUP_STR},
+    {MSG_CREATE_ID,(STRPTR)MSG_CREATE_ID_STR},
+    {MSG_CREATE_BYTES,(STRPTR)MSG_CREATE_BYTES_STR},
+    {MSG_CREATE_CASE,(STRPTR)MSG_CREATE_CASE_STR},
+    {MSG_CREATE_NOCASE,(STRPTR)MSG_CREATE_NOCASE_STR},
+    {MSG_CREATE_EDIT,(STRPTR)MSG_CREATE_EDIT_STR},
+    {MSG_CREATE_SAVE,(STRPTR)MSG_CREATE_SAVE_STR},
+    {MSG_CREATE_CANCEL,(STRPTR)MSG_CREATE_CANCEL_STR},
+    {MSG_CREATE_ADD_FILE,(STRPTR)MSG_CREATE_ADD_FILE_STR},
+    {MSG_CREATE_WARN_EDITED,(STRPTR)MSG_CREATE_WARN_EDITED_STR},
+    {MSG_CREATE_CONTINUE_CANCEL,(STRPTR)MSG_CREATE_CONTINUE_CANCEL_STR},
+    {MSG_REPLACE_CANCEL,(STRPTR)MSG_REPLACE_CANCEL_STR},
+    {MSG_FILETYPE_EXISTS,(STRPTR)MSG_FILETYPE_EXISTS_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x1A"
+    MSG_FIND_DESC_STR "\x00\x00"
+    "\x00\x00\x03\xE9\x00\x10"
+    MSG_FIND_TITLE_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x04"
+    MSG_FIND_PRI_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x04"
+    MSG_FIND_ID_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x0A"
+    MSG_FIND_FILETYPE_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x08"
+    MSG_FIND_FILE_STR "\x00"
+    "\x00\x00\x03\xEE\x00\x06"
+    MSG_FIND_USE_STR "\x00\x00"
+    "\x00\x00\x03\xEF\x00\x0A"
+    MSG_FIND_INSTALL_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x08"
+    MSG_FIND_CREATE_STR "\x00"
+    "\x00\x00\x03\xF1\x00\x06"
+    MSG_FIND_EDIT_STR "\x00"
+    "\x00\x00\x03\xF2\x00\x08"
+    MSG_FIND_CANCEL_STR "\x00"
+    "\x00\x00\x03\xF3\x00\x16"
+    MSG_FIND_SCANNING_STR "\x00"
+    "\x00\x00\x03\xF4\x00\x16"
+    MSG_FIND_MATCHING_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x20"
+    MSG_NONE_FOUND_1_STR "\x00"
+    "\x00\x00\x03\xF6\x00\x22"
+    MSG_NONE_FOUND_2_STR "\x00"
+    "\x00\x00\x03\xF7\x00\x22"
+    MSG_NONE_FOUND_3_STR "\x00"
+    "\x00\x00\x03\xF8\x00\x0C"
+    MSG_NONE_FOUND_4_STR "\x00\x00"
+    "\x00\x00\x03\xF9\x00\x02"
+    MSG_NONE_FOUND_5_STR "\x00\x00"
+    "\x00\x00\x03\xFA\x00\x02"
+    MSG_NONE_FOUND_6_STR "\x00\x00"
+    "\x00\x00\x03\xFB\x00\x02"
+    MSG_NONE_FOUND_7_STR "\x00\x00"
+    "\x00\x00\x03\xFC\x00\x22"
+    MSG_STORED_FOUND_1_STR "\x00"
+    "\x00\x00\x03\xFD\x00\x22"
+    MSG_STORED_FOUND_2_STR "\x00\x00"
+    "\x00\x00\x03\xFE\x00\x28"
+    MSG_STORED_FOUND_3_STR "\x00"
+    "\x00\x00\x03\xFF\x00\x26"
+    MSG_STORED_FOUND_4_STR "\x00"
+    "\x00\x00\x04\x00\x00\x1A"
+    MSG_STORED_FOUND_5_STR "\x00\x00"
+    "\x00\x00\x04\x01\x00\x02"
+    MSG_STORED_FOUND_6_STR "\x00\x00"
+    "\x00\x00\x04\x02\x00\x02"
+    MSG_STORED_FOUND_7_STR "\x00\x00"
+    "\x00\x00\x04\x03\x00\x26"
+    MSG_BETTER_FOUND_1_STR "\x00\x00"
+    "\x00\x00\x04\x04\x00\x24"
+    MSG_BETTER_FOUND_2_STR "\x00"
+    "\x00\x00\x04\x05\x00\x24"
+    MSG_BETTER_FOUND_3_STR "\x00\x00"
+    "\x00\x00\x04\x06\x00\x26"
+    MSG_BETTER_FOUND_4_STR "\x00\x00"
+    "\x00\x00\x04\x07\x00\x26"
+    MSG_BETTER_FOUND_5_STR "\x00"
+    "\x00\x00\x04\x08\x00\x28"
+    MSG_BETTER_FOUND_6_STR "\x00\x00"
+    "\x00\x00\x04\x09\x00\x0C"
+    MSG_BETTER_FOUND_7_STR "\x00\x00"
+    "\x00\x00\x04\x0A\x00\x1E"
+    MSG_INSTALLED_FOUND_1_STR "\x00"
+    "\x00\x00\x04\x0B\x00\x22"
+    MSG_INSTALLED_FOUND_2_STR "\x00\x00"
+    "\x00\x00\x04\x0C\x00\x22"
+    MSG_INSTALLED_FOUND_3_STR "\x00\x00"
+    "\x00\x00\x04\x0D\x00\x16"
+    MSG_INSTALLED_FOUND_4_STR "\x00\x00"
+    "\x00\x00\x04\x0E\x00\x02"
+    MSG_INSTALLED_FOUND_5_STR "\x00\x00"
+    "\x00\x00\x04\x0F\x00\x02"
+    MSG_INSTALLED_FOUND_6_STR "\x00\x00"
+    "\x00\x00\x04\x10\x00\x02"
+    MSG_INSTALLED_FOUND_7_STR "\x00\x00"
+    "\x00\x00\x04\x11\x00\x14"
+    MSG_CREATE_DESC_STR "\x00"
+    "\x00\x00\x04\x12\x00\x12"
+    MSG_CREATE_TITLE_STR "\x00\x00"
+    "\x00\x00\x04\x13\x00\x0A"
+    MSG_CREATE_FILES_STR "\x00\x00"
+    "\x00\x00\x04\x14\x00\x06"
+    MSG_CREATE_ADD_STR "\x00\x00"
+    "\x00\x00\x04\x15\x00\x08"
+    MSG_CREATE_DELETE_STR "\x00"
+    "\x00\x00\x04\x16\x00\x08"
+    MSG_CREATE_CLEAR_STR "\x00\x00"
+    "\x00\x00\x04\x17\x00\x0C"
+    MSG_CREATE_FILETYPE_STR "\x00"
+    "\x00\x00\x04\x18\x00\x08"
+    MSG_CREATE_NAME_STR "\x00"
+    "\x00\x00\x04\x19\x00\x08"
+    MSG_CREATE_IFF_STR "\x00"
+    "\x00\x00\x04\x1A\x00\x08"
+    MSG_CREATE_GROUP_STR "\x00"
+    "\x00\x00\x04\x1B\x00\x08"
+    MSG_CREATE_ID_STR "\x00"
+    "\x00\x00\x04\x1C\x00\x08"
+    MSG_CREATE_BYTES_STR "\x00"
+    "\x00\x00\x04\x1D\x00\x06"
+    MSG_CREATE_CASE_STR "\x00\x00"
+    "\x00\x00\x04\x1E\x00\x08"
+    MSG_CREATE_NOCASE_STR "\x00"
+    "\x00\x00\x04\x1F\x00\x06"
+    MSG_CREATE_EDIT_STR "\x00"
+    "\x00\x00\x04\x20\x00\x06"
+    MSG_CREATE_SAVE_STR "\x00"
+    "\x00\x00\x04\x21\x00\x08"
+    MSG_CREATE_CANCEL_STR "\x00"
+    "\x00\x00\x04\x22\x00\x0E"
+    MSG_CREATE_ADD_FILE_STR "\x00"
+    "\x00\x00\x04\x23\x00\x50"
+    MSG_CREATE_WARN_EDITED_STR "\x00"
+    "\x00\x00\x04\x24\x00\x10"
+    MSG_CREATE_CONTINUE_CANCEL_STR "\x00"
+    "\x00\x00\x04\x25\x00\x10"
+    MSG_REPLACE_CANCEL_STR "\x00\x00"
+    "\x00\x00\x04\x26\x00\x32"
+    MSG_FILETYPE_EXISTS_STR "\x00\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* FILETYPE_H */

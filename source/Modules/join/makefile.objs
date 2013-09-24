@@ -1,0 +1,3 @@
+COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
+				join.o join_data.o join_strings.o \
+

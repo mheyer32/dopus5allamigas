@@ -1,0 +1,120 @@
+; ************************************************* 
+; Catalog description file for diskcopy.module
+; ************************************************* 
+;
+;
+MSG_DISKCOPY_TITLE (1000//)
+Diskcopy
+;
+MSG_DISKCOPY_DISKCOPY (//)
+_Diskcopy
+;
+MSG_DISKCOPY_CANCEL (//)
+_Cancel
+;
+MSG_DISKCOPY_VERIFY (//)
+_Verify
+;
+MSG_DISKCOPY_BUMP (//)
+_Bump Name
+;
+MSG_DISKCOPY_FROM (//)
+From...
+;
+MSG_DISKCOPY_TO (//)
+To...
+;
+MSG_DISKCOPY_STATUS (//)
+%s, %s used
+;
+MSG_DISKCOPY_OPEN_DEVICES (//)
+Opening devices...
+;
+MSG_CANT_OPEN_DEVICE (//)
+Can't open source device!
+;
+MSG_NO_DISK_PRESENT (//)
+No disk present in source!
+;
+MSG_CANT_OPEN_DESTINATION (//)
+Unable to open destination %s
+;
+MSG_NO_DISK_PRESENT_DEST (//)
+No disk present in %s
+;
+MSG_WRITE_PROTECTED_DEST (//)
+Disk in %s is write protected!
+;
+MSG_ABORTED (//)
+Aborted.
+;
+MSG_RETRY_CANCEL (//)
+Retry|Cancel
+;
+MSG_RETRY_REMOVE_CANCEL (//)
+Retry|Remove|Cancel
+;
+MSG_PROCEED_CANCEL (//)
+Proceed|Cancel
+;
+MSG_DISKCOPY_SUCCESSFUL (//)
+Diskcopy successful!
+;
+MSG_DISKCOPY_FAILED (//)
+Diskcopy failed.
+;
+MSG_READ_ERROR (//)
+Error reading %s track %ld\n%s
+;
+MSG_WRITE_ERROR (//)
+Error writing %s track %ld\n%s
+;
+MSG_VERIFY_ERROR (//)
+Error verifying %s track %ld\n%s
+;
+MSG_DISKCOPY_READING (//)
+Reading track %ld, %ld to go.
+;
+MSG_DISKCOPY_WRITING (//)
+Writing track %ld, %ld to go.
+;
+MSG_DISKCOPY_VERIFYING (//)
+Verifying track %ld, %ld to go.
+;
+MSG_DISKCOPY_TO_TITLE (//)
+to
+;
+MSG_INSERT_DESTINATION (//)
+Insert destination disk in %s
+;
+MSG_INSERT_SOURCE (//)
+Insert source disk in %s
+;
+MSG_ERROR_WRITE_PROT (//)
+Disk is write protected
+;
+MSG_ERROR_NO_DISK (//)
+No disk in drive
+;
+MSG_ERROR_UNKNOWN (//)
+Unknown error code
+;
+MSG_ERROR_VERIFY (//)
+Data not written correctly.
+;
+MSG_BUMPING_NAMES (//)
+Bumping names...
+;
+MSG_INCOMPATIBLE (//)
+Disks are of incompatible types and can not be copied.
+;
+MSG_OK (//)
+OK
+;
+;
+MSG_DISKCOPY_DESC (//)
+Make copies of a disk
+;
+MSG_DISKCOPY_COPYING (//)
+Copying disk...
+;

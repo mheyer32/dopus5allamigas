@@ -1,0 +1,3 @@
+COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
+				diskcopy.o diskcopy_data.o diskcopy_strings.o \
+

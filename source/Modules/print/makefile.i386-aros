@@ -1,0 +1,35 @@
+include makefile.objs
+
+TARGET   := print.module
+OPTIMIZE := -O2
+DEBUG    := -DDEBUG
+DEBUGSYM := -gstabs 
+OPTIONS  := 
+INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../print -Iinit
+LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
+CC       := i386-aros-gcc
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
+LIBS     := 
+
+REMOVE = rm -f
+
+OBJS = $(COMMON_OBJS)
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+
+%.o : %.c
+	@echo ">>>>>Compiling $<"
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET)
+	@$(REMOVE) $(OBJS)
