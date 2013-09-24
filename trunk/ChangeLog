@@ -1,0 +1,76 @@
+----------------------------
+Directory Opus 5 - ChangeLog
+----------------------------
+
+$Id: ChangeLog 23 2013-02-06 14:38:59Z paraxenic $
+$URL: svn+ssh://kas1e@svn.code.sf.net/p/dopus5allamigas/code/trunk/ChangeLog $
+
+2013-02-06 xenic
+
+* Documents/Dopus55.pdf & Documents/Dopus582.pdf: Replaced PDF 1.4 docs
+  with PDF 1.3 docs so documentation will be readable by OS3 users.
+
+2013-01-17 xenic
+
+  * Documents/Dopus582.pdf: Added Dopus 5.82 PDF documentation based on
+    original PageStream files and with references to registration and copyright
+    removed.
+
+2013-01-13 xenic
+
+  * Documents/Dopus55.pdf: Added Dopus 5.5 PDF documentation based on
+    original PageStream files and with references to registration and copyright
+    removed.
+
+2013-01-07 Jens Langner <Jens.Langner@light-speed.de>
+
+  * makefile: renamed all "makefile" files to "smakefile" to make it more clear
+    that these are SAS/C makefiles and no GCC makefiles and make room for the
+    upcoming GCC makefiles.
+
+2012-12-12 Roman Kargin <kas1e@yandex.ru>
+
+  * Dopus5 code uses MsgPort->mp_Flags for some private flag (PF_ASYNC) for IPC
+    communications and which is defined as "#define PF_ASYNC    (1<<7)". While
+    on OS3 and MorphOS it wasn't a problem, its still was hardcode/hardcore and
+    bring conflicts in AmigaOS4 (which causes heavy crashes), because on AmigaOS4
+    such a define are taken for private messaging needs and defined as PF_SIGALLOC 
+    (check exec/ports.h in OS4's SDK).
+    
+    So we get rid of the hardcoding, and do changes to not mess with MsgPort->mp_Flags,
+    but instead make it put (and check) some magic value in MsgPort->mp_Node.ln_Pri
+    (may be possible with MsgPort->mp_Node.ln_Type as well).
+    
+    The changes are quite small:
+    
+    initial dopus5 code:
+    
+    # find -type f | xargs grep -i PF_ASYNC
+    
+     ./Program/function_launch.c:    handle->reply_port->mp_Flags|=PF_ASYNC;
+     ./Library/ipc.c:                if (reply->mp_Flags&PF_ASYNC)
+     ./Library/ipc.c:                port->mp_Flags|=PF_ASYNC;
+     ./Library/dopusbase.h:#define PF_ASYNC  (1<<7)
+     ./NewRegModules/dopusbase.h:#define PF_ASYNC    (1<<7)
+
+    our new changes:
+
+    ./Program/function_launch.c:    handle->reply_port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC;
+    ./Library/ipc.c:                if (reply->mp_Node.ln_Pri == PORT_ASYNC_MAGIC)
+    ./Library/ipc.c:                port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC;
+    ./Library/dopusbase.h:#define PORT_ASYNC_MAGIC  0x5A
+    ./NewRegModules/dopusbase.h:#define PORT_ASYNC_MAGIC 0x5A
+      
+     By this way we didn't have any conflicts with any private parts of any OS and avoid
+     hardcoding to make whole code more portable in end. 
+
+     Thanks to the AROS core coder "Georg Steger", who help to find out the roots.
+
+2012-12-22 Jens Langner <Jens.Langner@light-speed.de>
+
+  * ChangeLog, README, etc.: added ChangeLog file to synchronize individual
+    developer changes more easily.
+
+2012-12-18 Roman Kargin <kas1e@yandex.ru>
+
+  * initial checkin of open sourced sources.

@@ -1,0 +1,60 @@
+/***************************************************************************
+
+ Directory Opus 5
+ Original APL release version 5.82
+ Copyright 1993-2012 Jonathan Potter & GP Software
+ Copyright 2012-2013 DOPUS5 Open Source Team
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the AROS Public License version 1.1.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ AROS Public License for more details.
+
+ The release of Directory Opus 5 under the APL in NO WAY affects
+ the existing commercial status of Directory Opus for Windows.
+
+ For more information on Directory Opus for Windows please see:
+ http://www.gpsoft.com.au
+
+ Directory Opus 5 Support Site:  http://sf.net/p/dopus5allamigas/
+
+***************************************************************************/
+
+Directory Opus 5 is hereby released as free software under the AROS PUBLIC
+LICENSE (APL). Please READ this license (see COPYING file) and make sure you
+understand the terms and conditions of this license.
+
+This release was made possible by a power2people.org bounty
+(http://www.power2people.org/projects/profile/64) - many thanks to the
+contributors and to Olaf Schönweiß for organising this.
+
+Please note:
+
+Directory Opus is a registered trademark of GP Software.
+
+GP Software hereby grants a limited licence for use of this trademark in 
+relation to software derived from this source code, under the terms of the
+APL, running on "Amigoid" platforms such as AROS, AmigaOS and MorphOS only.
+The use of the Directory Opus trademark is restricted to these platforms; it
+is expressly forbidden to make use of this trademark in relation to software
+compiled and/or written for any other platform including Windows and MacOSX.
+
+The release of Directory Opus 5 under the APL in NO WAY affects the existing
+commercial status of Directory Opus for Windows.
+
+For more information on Directory Opus for Windows please see:
+
+http://www.gpsoft.com.au
+
+Directory Opus 5 (the last commercial release was 5.82) was compiled under
+SAS/C 6. Compilation with other compilers is certainly possible, but it is
+left to the individual to make any changes necessary. Note that a small amount
+of 68000 assembly code is also used; this would need to be converted to C/C++
+before compilation on non-68000 platforms could be possible.
+
+Jonathan Potter
+GP Software
+November 29, 2012
