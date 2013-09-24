@@ -35,3 +35,8 @@ Makefile.dep : $(OBJS:.o=.c)
 clean:
 	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY install:
+install:
+	@copy $(TARGET) DOpus5:
+
