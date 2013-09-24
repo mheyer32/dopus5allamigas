@@ -1,0 +1,139 @@
+; ************************************************* 
+; Catalog description file for join.module
+; ************************************************* 
+;
+;
+MSG_JOIN_DESC (1000//)
+Join files together
+;
+MSG_SPLIT_DESC (//)
+Split a file into parts
+;
+MSG_JOIN_LISTER (//)
+Join _files...
+;
+MSG_JOIN_ADD (//)
+_Add
+;
+MSG_JOIN_REMOVE (//)
+_Remove
+;
+MSG_JOIN_CLEAR (//)
+C_lear
+;
+MSG_JOIN_MOVE_UP (//)
+_Up
+;
+MSG_JOIN_MOVE_DOWN (//)
+_Down
+;
+MSG_JOIN_JOIN (//)
+_Join
+;
+MSG_JOIN_CANCEL (//)
+_Cancel
+;
+MSG_JOIN_TITLE (//)
+Join
+;
+MSG_JOIN_TO (//)
+_To:
+;
+MSG_JOIN_SELECT_FILE (//)
+Select File
+;
+MSG_REPLACE_RENAME_ABORT (//)
+Replace|Rename|Abort
+;
+MSG_FILE_EXISTS (//)
+File '%s' already exists!
+;
+MSG_ENTER_FILENAME (//)
+Enter destination filename.
+;
+MSG_OK (//)
+Ok
+;
+MSG_CANCEL (//)
+Cancel
+;
+MSG_JOINING_FILES (//)
+Joining files...
+;
+MSG_JOIN_ERROR_OPENING_OUTPUT (//)
+Unable to open '%s' for output!
+;
+MSG_JOIN_ERROR (//)
+%s\nError %ld %s
+;
+MSG_JOIN_RETRY (//)
+Retry
+;
+MSG_REMOVE (//)
+Remove
+;
+MSG_JOIN_ERROR_OPENING_INPUT (//)
+Unable to open '%s'!
+;
+MSG_JOIN_ERROR_READING (//)
+Error reading from '%s'!
+;
+MSG_SPLIT_FROM (//)
+Split _file
+;
+MSG_SPLIT_STEM (//)
+_With stem
+;
+MSG_SPLIT_INTO (//)
+_Chunk size
+;
+MSG_SPLIT_SPLIT (//)
+_Split
+;
+MSG_SPLIT_SKIP (//)
+S_kip
+;
+MSG_SPLIT_TO (//)
+_To
+;
+MSG_SPLIT_TITLE (//)
+Split
+;
+MSG_SPLIT_ERROR_OPENING_FILE (//)
+Unable to open '%s'!
+;
+MSG_SPLIT_NO_MEMORY (//)
+No memory!
+;
+MSG_SPLITTING_FILE (//)
+Splitting file...
+;
+MSG_ENTER_DISK (//)
+Insert next floppy into %s
+;
+;
+;
+MSG_CHUNK_CUSTOM (3000//)
+Custom Size
+;
+MSG_CHUNK_FLOPPY_FFS (//)
+865K (DD Floppy - FFS)
+;
+MSG_CHUNK_HD_FLOPPY_FFS (//)
+1733K (HD Floppy - FFS)
+;
+MSG_CHUNK_FLOPPY_OFS (//)
+824K (DD Floppy - OFS)
+;
+MSG_CHUNK_HD_FLOPPY_OFS (//)
+1651K (HD Floppy - OFS)
+;
+MSG_CHUNK_MSDOS (//)
+713K (DD MS-DOS)
+;
+MSG_CHUNK_MSDOS_HD (//)
+1423K (HD MS-DOS)
+;
+MSG_CHUNK_LAST (//)
+-
+;

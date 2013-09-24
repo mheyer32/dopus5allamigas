@@ -1,0 +1,343 @@
+#ifndef JOIN_H
+#define JOIN_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_JOIN_DESC 1000
+#define MSG_SPLIT_DESC 1001
+#define MSG_JOIN_LISTER 1002
+#define MSG_JOIN_ADD 1003
+#define MSG_JOIN_REMOVE 1004
+#define MSG_JOIN_CLEAR 1005
+#define MSG_JOIN_MOVE_UP 1006
+#define MSG_JOIN_MOVE_DOWN 1007
+#define MSG_JOIN_JOIN 1008
+#define MSG_JOIN_CANCEL 1009
+#define MSG_JOIN_TITLE 1010
+#define MSG_JOIN_TO 1011
+#define MSG_JOIN_SELECT_FILE 1012
+#define MSG_REPLACE_RENAME_ABORT 1013
+#define MSG_FILE_EXISTS 1014
+#define MSG_ENTER_FILENAME 1015
+#define MSG_OK 1016
+#define MSG_CANCEL 1017
+#define MSG_JOINING_FILES 1018
+#define MSG_JOIN_ERROR_OPENING_OUTPUT 1019
+#define MSG_JOIN_ERROR 1020
+#define MSG_JOIN_RETRY 1021
+#define MSG_REMOVE 1022
+#define MSG_JOIN_ERROR_OPENING_INPUT 1023
+#define MSG_JOIN_ERROR_READING 1024
+#define MSG_SPLIT_FROM 1025
+#define MSG_SPLIT_STEM 1026
+#define MSG_SPLIT_INTO 1027
+#define MSG_SPLIT_SPLIT 1028
+#define MSG_SPLIT_SKIP 1029
+#define MSG_SPLIT_TO 1030
+#define MSG_SPLIT_TITLE 1031
+#define MSG_SPLIT_ERROR_OPENING_FILE 1032
+#define MSG_SPLIT_NO_MEMORY 1033
+#define MSG_SPLITTING_FILE 1034
+#define MSG_ENTER_DISK 1035
+#define MSG_CHUNK_CUSTOM 3000
+#define MSG_CHUNK_FLOPPY_FFS 3001
+#define MSG_CHUNK_HD_FLOPPY_FFS 3002
+#define MSG_CHUNK_FLOPPY_OFS 3003
+#define MSG_CHUNK_HD_FLOPPY_OFS 3004
+#define MSG_CHUNK_MSDOS 3005
+#define MSG_CHUNK_MSDOS_HD 3006
+#define MSG_CHUNK_LAST 3007
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_JOIN_DESC_STR "Join files together"
+#define MSG_SPLIT_DESC_STR "Split a file into parts"
+#define MSG_JOIN_LISTER_STR "Join _files..."
+#define MSG_JOIN_ADD_STR "_Add"
+#define MSG_JOIN_REMOVE_STR "_Remove"
+#define MSG_JOIN_CLEAR_STR "C_lear"
+#define MSG_JOIN_MOVE_UP_STR "_Up"
+#define MSG_JOIN_MOVE_DOWN_STR "_Down"
+#define MSG_JOIN_JOIN_STR "_Join"
+#define MSG_JOIN_CANCEL_STR "_Cancel"
+#define MSG_JOIN_TITLE_STR "Join"
+#define MSG_JOIN_TO_STR "_To:"
+#define MSG_JOIN_SELECT_FILE_STR "Select File"
+#define MSG_REPLACE_RENAME_ABORT_STR "Replace|Rename|Abort"
+#define MSG_FILE_EXISTS_STR "File '%s' already exists!"
+#define MSG_ENTER_FILENAME_STR "Enter destination filename."
+#define MSG_OK_STR "Ok"
+#define MSG_CANCEL_STR "Cancel"
+#define MSG_JOINING_FILES_STR "Joining files..."
+#define MSG_JOIN_ERROR_OPENING_OUTPUT_STR "Unable to open '%s' for output!"
+#define MSG_JOIN_ERROR_STR "%s\nError %ld %s"
+#define MSG_JOIN_RETRY_STR "Retry"
+#define MSG_REMOVE_STR "Remove"
+#define MSG_JOIN_ERROR_OPENING_INPUT_STR "Unable to open '%s'!"
+#define MSG_JOIN_ERROR_READING_STR "Error reading from '%s'!"
+#define MSG_SPLIT_FROM_STR "Split _file"
+#define MSG_SPLIT_STEM_STR "_With stem"
+#define MSG_SPLIT_INTO_STR "_Chunk size"
+#define MSG_SPLIT_SPLIT_STR "_Split"
+#define MSG_SPLIT_SKIP_STR "S_kip"
+#define MSG_SPLIT_TO_STR "_To"
+#define MSG_SPLIT_TITLE_STR "Split"
+#define MSG_SPLIT_ERROR_OPENING_FILE_STR "Unable to open '%s'!"
+#define MSG_SPLIT_NO_MEMORY_STR "No memory!"
+#define MSG_SPLITTING_FILE_STR "Splitting file..."
+#define MSG_ENTER_DISK_STR "Insert next floppy into %s"
+#define MSG_CHUNK_CUSTOM_STR "Custom Size"
+#define MSG_CHUNK_FLOPPY_FFS_STR "865K (DD Floppy - FFS)"
+#define MSG_CHUNK_HD_FLOPPY_FFS_STR "1733K (HD Floppy - FFS)"
+#define MSG_CHUNK_FLOPPY_OFS_STR "824K (DD Floppy - OFS)"
+#define MSG_CHUNK_HD_FLOPPY_OFS_STR "1651K (HD Floppy - OFS)"
+#define MSG_CHUNK_MSDOS_STR "713K (DD MS-DOS)"
+#define MSG_CHUNK_MSDOS_HD_STR "1423K (HD MS-DOS)"
+#define MSG_CHUNK_LAST_STR "-"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_JOIN_DESC,(STRPTR)MSG_JOIN_DESC_STR},
+    {MSG_SPLIT_DESC,(STRPTR)MSG_SPLIT_DESC_STR},
+    {MSG_JOIN_LISTER,(STRPTR)MSG_JOIN_LISTER_STR},
+    {MSG_JOIN_ADD,(STRPTR)MSG_JOIN_ADD_STR},
+    {MSG_JOIN_REMOVE,(STRPTR)MSG_JOIN_REMOVE_STR},
+    {MSG_JOIN_CLEAR,(STRPTR)MSG_JOIN_CLEAR_STR},
+    {MSG_JOIN_MOVE_UP,(STRPTR)MSG_JOIN_MOVE_UP_STR},
+    {MSG_JOIN_MOVE_DOWN,(STRPTR)MSG_JOIN_MOVE_DOWN_STR},
+    {MSG_JOIN_JOIN,(STRPTR)MSG_JOIN_JOIN_STR},
+    {MSG_JOIN_CANCEL,(STRPTR)MSG_JOIN_CANCEL_STR},
+    {MSG_JOIN_TITLE,(STRPTR)MSG_JOIN_TITLE_STR},
+    {MSG_JOIN_TO,(STRPTR)MSG_JOIN_TO_STR},
+    {MSG_JOIN_SELECT_FILE,(STRPTR)MSG_JOIN_SELECT_FILE_STR},
+    {MSG_REPLACE_RENAME_ABORT,(STRPTR)MSG_REPLACE_RENAME_ABORT_STR},
+    {MSG_FILE_EXISTS,(STRPTR)MSG_FILE_EXISTS_STR},
+    {MSG_ENTER_FILENAME,(STRPTR)MSG_ENTER_FILENAME_STR},
+    {MSG_OK,(STRPTR)MSG_OK_STR},
+    {MSG_CANCEL,(STRPTR)MSG_CANCEL_STR},
+    {MSG_JOINING_FILES,(STRPTR)MSG_JOINING_FILES_STR},
+    {MSG_JOIN_ERROR_OPENING_OUTPUT,(STRPTR)MSG_JOIN_ERROR_OPENING_OUTPUT_STR},
+    {MSG_JOIN_ERROR,(STRPTR)MSG_JOIN_ERROR_STR},
+    {MSG_JOIN_RETRY,(STRPTR)MSG_JOIN_RETRY_STR},
+    {MSG_REMOVE,(STRPTR)MSG_REMOVE_STR},
+    {MSG_JOIN_ERROR_OPENING_INPUT,(STRPTR)MSG_JOIN_ERROR_OPENING_INPUT_STR},
+    {MSG_JOIN_ERROR_READING,(STRPTR)MSG_JOIN_ERROR_READING_STR},
+    {MSG_SPLIT_FROM,(STRPTR)MSG_SPLIT_FROM_STR},
+    {MSG_SPLIT_STEM,(STRPTR)MSG_SPLIT_STEM_STR},
+    {MSG_SPLIT_INTO,(STRPTR)MSG_SPLIT_INTO_STR},
+    {MSG_SPLIT_SPLIT,(STRPTR)MSG_SPLIT_SPLIT_STR},
+    {MSG_SPLIT_SKIP,(STRPTR)MSG_SPLIT_SKIP_STR},
+    {MSG_SPLIT_TO,(STRPTR)MSG_SPLIT_TO_STR},
+    {MSG_SPLIT_TITLE,(STRPTR)MSG_SPLIT_TITLE_STR},
+    {MSG_SPLIT_ERROR_OPENING_FILE,(STRPTR)MSG_SPLIT_ERROR_OPENING_FILE_STR},
+    {MSG_SPLIT_NO_MEMORY,(STRPTR)MSG_SPLIT_NO_MEMORY_STR},
+    {MSG_SPLITTING_FILE,(STRPTR)MSG_SPLITTING_FILE_STR},
+    {MSG_ENTER_DISK,(STRPTR)MSG_ENTER_DISK_STR},
+    {MSG_CHUNK_CUSTOM,(STRPTR)MSG_CHUNK_CUSTOM_STR},
+    {MSG_CHUNK_FLOPPY_FFS,(STRPTR)MSG_CHUNK_FLOPPY_FFS_STR},
+    {MSG_CHUNK_HD_FLOPPY_FFS,(STRPTR)MSG_CHUNK_HD_FLOPPY_FFS_STR},
+    {MSG_CHUNK_FLOPPY_OFS,(STRPTR)MSG_CHUNK_FLOPPY_OFS_STR},
+    {MSG_CHUNK_HD_FLOPPY_OFS,(STRPTR)MSG_CHUNK_HD_FLOPPY_OFS_STR},
+    {MSG_CHUNK_MSDOS,(STRPTR)MSG_CHUNK_MSDOS_STR},
+    {MSG_CHUNK_MSDOS_HD,(STRPTR)MSG_CHUNK_MSDOS_HD_STR},
+    {MSG_CHUNK_LAST,(STRPTR)MSG_CHUNK_LAST_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x14"
+    MSG_JOIN_DESC_STR "\x00"
+    "\x00\x00\x03\xE9\x00\x18"
+    MSG_SPLIT_DESC_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x10"
+    MSG_JOIN_LISTER_STR "\x00\x00"
+    "\x00\x00\x03\xEB\x00\x06"
+    MSG_JOIN_ADD_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x08"
+    MSG_JOIN_REMOVE_STR "\x00"
+    "\x00\x00\x03\xED\x00\x08"
+    MSG_JOIN_CLEAR_STR "\x00\x00"
+    "\x00\x00\x03\xEE\x00\x04"
+    MSG_JOIN_MOVE_UP_STR "\x00"
+    "\x00\x00\x03\xEF\x00\x06"
+    MSG_JOIN_MOVE_DOWN_STR "\x00"
+    "\x00\x00\x03\xF0\x00\x06"
+    MSG_JOIN_JOIN_STR "\x00"
+    "\x00\x00\x03\xF1\x00\x08"
+    MSG_JOIN_CANCEL_STR "\x00"
+    "\x00\x00\x03\xF2\x00\x06"
+    MSG_JOIN_TITLE_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x06"
+    MSG_JOIN_TO_STR "\x00\x00"
+    "\x00\x00\x03\xF4\x00\x0C"
+    MSG_JOIN_SELECT_FILE_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x16"
+    MSG_REPLACE_RENAME_ABORT_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x1A"
+    MSG_FILE_EXISTS_STR "\x00"
+    "\x00\x00\x03\xF7\x00\x1C"
+    MSG_ENTER_FILENAME_STR "\x00"
+    "\x00\x00\x03\xF8\x00\x04"
+    MSG_OK_STR "\x00\x00"
+    "\x00\x00\x03\xF9\x00\x08"
+    MSG_CANCEL_STR "\x00\x00"
+    "\x00\x00\x03\xFA\x00\x12"
+    MSG_JOINING_FILES_STR "\x00\x00"
+    "\x00\x00\x03\xFB\x00\x20"
+    MSG_JOIN_ERROR_OPENING_OUTPUT_STR "\x00"
+    "\x00\x00\x03\xFC\x00\x10"
+    MSG_JOIN_ERROR_STR "\x00"
+    "\x00\x00\x03\xFD\x00\x06"
+    MSG_JOIN_RETRY_STR "\x00"
+    "\x00\x00\x03\xFE\x00\x08"
+    MSG_REMOVE_STR "\x00\x00"
+    "\x00\x00\x03\xFF\x00\x16"
+    MSG_JOIN_ERROR_OPENING_INPUT_STR "\x00\x00"
+    "\x00\x00\x04\x00\x00\x1A"
+    MSG_JOIN_ERROR_READING_STR "\x00\x00"
+    "\x00\x00\x04\x01\x00\x0C"
+    MSG_SPLIT_FROM_STR "\x00"
+    "\x00\x00\x04\x02\x00\x0C"
+    MSG_SPLIT_STEM_STR "\x00\x00"
+    "\x00\x00\x04\x03\x00\x0C"
+    MSG_SPLIT_INTO_STR "\x00"
+    "\x00\x00\x04\x04\x00\x08"
+    MSG_SPLIT_SPLIT_STR "\x00\x00"
+    "\x00\x00\x04\x05\x00\x06"
+    MSG_SPLIT_SKIP_STR "\x00"
+    "\x00\x00\x04\x06\x00\x04"
+    MSG_SPLIT_TO_STR "\x00"
+    "\x00\x00\x04\x07\x00\x06"
+    MSG_SPLIT_TITLE_STR "\x00"
+    "\x00\x00\x04\x08\x00\x16"
+    MSG_SPLIT_ERROR_OPENING_FILE_STR "\x00\x00"
+    "\x00\x00\x04\x09\x00\x0C"
+    MSG_SPLIT_NO_MEMORY_STR "\x00\x00"
+    "\x00\x00\x04\x0A\x00\x12"
+    MSG_SPLITTING_FILE_STR "\x00"
+    "\x00\x00\x04\x0B\x00\x1C"
+    MSG_ENTER_DISK_STR "\x00\x00"
+    "\x00\x00\x0B\xB8\x00\x0C"
+    MSG_CHUNK_CUSTOM_STR "\x00"
+    "\x00\x00\x0B\xB9\x00\x18"
+    MSG_CHUNK_FLOPPY_FFS_STR "\x00\x00"
+    "\x00\x00\x0B\xBA\x00\x18"
+    MSG_CHUNK_HD_FLOPPY_FFS_STR "\x00"
+    "\x00\x00\x0B\xBB\x00\x18"
+    MSG_CHUNK_FLOPPY_OFS_STR "\x00\x00"
+    "\x00\x00\x0B\xBC\x00\x18"
+    MSG_CHUNK_HD_FLOPPY_OFS_STR "\x00"
+    "\x00\x00\x0B\xBD\x00\x12"
+    MSG_CHUNK_MSDOS_STR "\x00\x00"
+    "\x00\x00\x0B\xBE\x00\x12"
+    MSG_CHUNK_MSDOS_HD_STR "\x00"
+    "\x00\x00\x0B\xBF\x00\x02"
+    MSG_CHUNK_LAST_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* JOIN_H */

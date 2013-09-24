@@ -1,0 +1,13 @@
+##base _MUSICBase
+##bias 30
+##public
+PlayModule(name,foob)(a0,d0)
+StopModule()()
+IsModule(name)(a0)
+FlushModule()()
+ContModule()()
+SetVolume(volume)(d0)
+PlayFaster()()
+PlaySlower()()
+TempoReset()()
+##endif

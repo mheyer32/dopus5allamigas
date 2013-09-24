@@ -1,0 +1,3 @@
+COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
+				themes.o themes_data.o themes_strings.o \
+

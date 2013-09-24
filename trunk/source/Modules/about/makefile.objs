@@ -1,0 +1,7 @@
+COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
+				about.o about_data.o about_jon.o about_greg.o \
+				about_leo.o about_andrew.o about_ben.o about_juggler.o \
+				about_coopers.o about_bill.o about_thomas.o about_john.o \
+				about_trevor.o about_ash.o about_frederic.o about_tick.o \
+				about_harv.o about_martin.o about_dave.o
+

@@ -1,0 +1,188 @@
+#ifndef PATHFORMAT_H
+#define PATHFORMAT_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_PATHFORMAT_TITLE 3000
+#define MSG_PATHFORMAT_SAVE 3001
+#define MSG_PATHFORMAT_CANCEL 3002
+#define MSG_PATHFORMAT_KEY 3003
+#define MSG_PATHFORMAT_ADD 3004
+#define MSG_PATHFORMAT_REMOVE 3005
+#define MSG_PATHFORMAT_EDIT 3006
+#define MSG_PATHFORMAT_PATH 3007
+#define MSG_PATHFORMAT_NEW_LISTER 3008
+#define MSG_MODE_NONE 3009
+#define MSG_MODE_NAME 3010
+#define MSG_MODE_ICON 3011
+#define MSG_MODE_ICON_ACTION 3012
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_PATHFORMAT_TITLE_STR "Edit Paths"
+#define MSG_PATHFORMAT_SAVE_STR "_Save"
+#define MSG_PATHFORMAT_CANCEL_STR "_Cancel"
+#define MSG_PATHFORMAT_KEY_STR "_Key"
+#define MSG_PATHFORMAT_ADD_STR "_Add"
+#define MSG_PATHFORMAT_REMOVE_STR "_Remove"
+#define MSG_PATHFORMAT_EDIT_STR "_Edit"
+#define MSG_PATHFORMAT_PATH_STR "_Path"
+#define MSG_PATHFORMAT_NEW_LISTER_STR "_New lister mode"
+#define MSG_MODE_NONE_STR "None"
+#define MSG_MODE_NAME_STR "Name"
+#define MSG_MODE_ICON_STR "Icon"
+#define MSG_MODE_ICON_ACTION_STR "Icon Action"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_PATHFORMAT_TITLE,(STRPTR)MSG_PATHFORMAT_TITLE_STR},
+    {MSG_PATHFORMAT_SAVE,(STRPTR)MSG_PATHFORMAT_SAVE_STR},
+    {MSG_PATHFORMAT_CANCEL,(STRPTR)MSG_PATHFORMAT_CANCEL_STR},
+    {MSG_PATHFORMAT_KEY,(STRPTR)MSG_PATHFORMAT_KEY_STR},
+    {MSG_PATHFORMAT_ADD,(STRPTR)MSG_PATHFORMAT_ADD_STR},
+    {MSG_PATHFORMAT_REMOVE,(STRPTR)MSG_PATHFORMAT_REMOVE_STR},
+    {MSG_PATHFORMAT_EDIT,(STRPTR)MSG_PATHFORMAT_EDIT_STR},
+    {MSG_PATHFORMAT_PATH,(STRPTR)MSG_PATHFORMAT_PATH_STR},
+    {MSG_PATHFORMAT_NEW_LISTER,(STRPTR)MSG_PATHFORMAT_NEW_LISTER_STR},
+    {MSG_MODE_NONE,(STRPTR)MSG_MODE_NONE_STR},
+    {MSG_MODE_NAME,(STRPTR)MSG_MODE_NAME_STR},
+    {MSG_MODE_ICON,(STRPTR)MSG_MODE_ICON_STR},
+    {MSG_MODE_ICON_ACTION,(STRPTR)MSG_MODE_ICON_ACTION_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x0B\xB8\x00\x0C"
+    MSG_PATHFORMAT_TITLE_STR "\x00\x00"
+    "\x00\x00\x0B\xB9\x00\x06"
+    MSG_PATHFORMAT_SAVE_STR "\x00"
+    "\x00\x00\x0B\xBA\x00\x08"
+    MSG_PATHFORMAT_CANCEL_STR "\x00"
+    "\x00\x00\x0B\xBB\x00\x06"
+    MSG_PATHFORMAT_KEY_STR "\x00\x00"
+    "\x00\x00\x0B\xBC\x00\x06"
+    MSG_PATHFORMAT_ADD_STR "\x00\x00"
+    "\x00\x00\x0B\xBD\x00\x08"
+    MSG_PATHFORMAT_REMOVE_STR "\x00"
+    "\x00\x00\x0B\xBE\x00\x06"
+    MSG_PATHFORMAT_EDIT_STR "\x00"
+    "\x00\x00\x0B\xBF\x00\x06"
+    MSG_PATHFORMAT_PATH_STR "\x00"
+    "\x00\x00\x0B\xC0\x00\x12"
+    MSG_PATHFORMAT_NEW_LISTER_STR "\x00\x00"
+    "\x00\x00\x0B\xC1\x00\x06"
+    MSG_MODE_NONE_STR "\x00\x00"
+    "\x00\x00\x0B\xC2\x00\x06"
+    MSG_MODE_NAME_STR "\x00\x00"
+    "\x00\x00\x0B\xC3\x00\x06"
+    MSG_MODE_ICON_STR "\x00\x00"
+    "\x00\x00\x0B\xC4\x00\x0C"
+    MSG_MODE_ICON_ACTION_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* PATHFORMAT_H */

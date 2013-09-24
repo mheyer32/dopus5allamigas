@@ -1,0 +1,54 @@
+include makefile.objs
+
+TARGET   := diskinfo.module
+OPTIMIZE := -O2
+DEBUG    :=
+DEBUGSYM :=
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE
+INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../diskinfo -Iinit
+LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+WARNINGS := -Wall
+CC       := ppc-morphos-gcc -noixemul
+STRIP    := ppc-morphos-strip
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
+LIBS     := -ldebug
+
+REMOVE = rm -f
+
+OBJS = $(COMMON_OBJS) init/mos_ppc_libstub.o
+
+ECHO = echo
+ECHE = echo -e
+BOLD = \033[1m
+NRML = \033[22m
+
+COMPILING = @$(ECHE) "compiling $(BOLD)$@$(NRML)..."
+LINKING = @$(ECHE) "linking $(BOLD)$@$(NRML)..."
+STRIPPING = @$(ECHE) "stripping $(BOLD)$@$(NRML)..."
+ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(LINKING)
+	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@.db
+	$(STRIPPING)
+	@$(STRIP) -o $@ --remove-section=.comment $@.db
+	@chmod $(TARGET) -x
+
+%.o : %.c
+	$(COMPILING)
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET) $(TARGET).s
+	@$(REMOVE) *.db *.map $(OBJS)
+
+.PHONY dump:
+dump:
+	ppc-morphos-objdump --disassemble-all --reloc $(TARGET).db >$(TARGET).s

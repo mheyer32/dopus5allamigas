@@ -1,0 +1,60 @@
+# $Id: Makefile,v 1.9 2013/01/08 23:01:24 itix Exp $
+
+include makefile.objs
+
+TARGET   := dopus5.library
+OPTIMIZE := -O2
+DEBUG    :=
+DEBUGSYM :=
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DLIBRARIES_DOPUS5_H
+INCLUDES := -I../ -I../Include
+LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+WARNINGS := -Wall
+CC       := ppc-morphos-gcc -noixemul
+STRIP    := ppc-morphos-strip
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
+LIBS     :=
+
+REMOVE = rm -f
+
+OBJS = $(COMMON_OBJS) morphos_stubs.o
+
+ECHO = echo
+ECHE = echo -e
+BOLD = \033[1m
+NRML = \033[22m
+
+COMPILING = @$(ECHE) "compiling $(BOLD)$@$(NRML)..."
+LINKING = @$(ECHE) "linking $(BOLD)$@$(NRML)..."
+STRIPPING = @$(ECHE) "stripping $(BOLD)$@$(NRML)..."
+ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(LINKING)
+	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@.db
+	$(STRIPPING)
+	@$(STRIP) -o $@ --remove-section=.comment $@.db
+	@chmod $(TARGET) -x
+
+%.o : %.c
+	$(COMPILING)
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET) $(TARGET).s
+	@$(REMOVE) *.db *.map *.o
+
+.PHONY dump:
+dump:
+	ppc-morphos-objdump --disassemble-all --reloc $(TARGET).db >$(TARGET).s
+
+#ifneq ($(MAKECMDGOALS),clean)
+#-include Makefile.dep
+#endif

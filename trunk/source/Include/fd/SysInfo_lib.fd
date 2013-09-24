@@ -1,0 +1,21 @@
+##base _SysInfoBase
+##bias 30
+*-----init-----
+InitSysInfo()()
+FreeSysInfo(si)(a0)
+*-----load average-----
+GetLoadAverage(si,la)(a0,a1)
+*-----id-----
+GetPid(si)(a0)
+GetPpid(si)(a0)
+GetPgrp(si)(a0)
+*-----nice-----
+GetNice(si,which,who)(a0,d0,d1)
+SetNice(si,which,who,nice)(a0,d0,d1,d2)
+*-----notify-----
+AddNotify(si,flags,safety_limit)(a0,d0,d1)
+RemoveNotify(si,notify)(a0,a1)
+*-----cpu usage-----
+GetCpuUsage(si,usage)(a0,a1)
+GetTaskCpuUsage(si,usage,task)(a0,a1,a2)
+##end

@@ -1,0 +1,2 @@
+COMMON_OBJS = 	init/libinit.o play.o play_data.o play_strings.o
+

@@ -1,0 +1,258 @@
+
+#ifndef XADopus_STRINGS_H
+#define XADopus_STRINGS_H
+
+/****************************************************************
+
+   This file was created automatically by `FlexCat 2.4'
+   from "XADopus.cd"
+
+   using CatComp.sd 1.2 (24.09.1999)
+
+   Do NOT edit by hand!
+
+****************************************************************/
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef  XADopus_BASIC_CODE
+#undef  XADopus_BASIC
+#undef  XADopus_CODE
+#define XADopus_BASIC
+#define XADopus_CODE
+#endif
+
+#ifdef  XADopus_BASIC
+#undef  XADopus_ARRAY
+#undef  XADopus_BLOCK
+#define XADopus_ARRAY
+#define XADopus_BLOCK
+#endif
+
+#ifdef  XADopus_ARRAY
+#undef  XADopus_NUMBERS
+#undef  XADopus_STRINGS
+#define XADopus_NUMBERS
+#define XADopus_STRINGS
+#endif
+
+#ifdef  XADopus_BLOCK
+#undef  XADopus_STRINGS
+#define XADopus_STRINGS
+#endif
+
+
+#ifdef XADopus_CODE
+#include <proto/locale.h>
+extern struct Library *LocaleBase;
+#endif
+
+#ifdef XADopus_NUMBERS
+
+#define MSG_TITLE 1000
+#define MSG_XADOPEN_DESC 1001
+#define MSG_XADEXTRACT_DESC 1002
+#define MSG_ERROR 1003
+#define MSG_EXTRACTING 1004
+#define MSG_OPENING_ARC 1005
+#define MSG_DISKARC_EXTRACT 1006
+#define MSG_SELECT_DEST 1007
+#define MSG_OK 1008
+#define MSG_FILES 1009
+#define MSG_DISK 1010
+#define MSG_RENAME 1011
+#define MSG_REPLACE 1012
+#define MSG_REPLACE_ALL 1013
+#define MSG_SKIP 1014
+#define MSG_SKIP_ALL 1015
+#define MSG_ABORT 1016
+#define MSG_EXISTS_FORM 1017
+#define MSG_RENAME_FORM 1018
+#define MSG_NO_PATH_ERR 1019
+#define MSG_NO_HOOKS_ERR 1020
+#define MSG_READING_ARCHIVE 1021
+
+#endif /* XADopus_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef XADopus_STRINGS
+
+#define MSG_TITLE_STR "XADopus Module"
+#define MSG_XADOPEN_DESC_STR "Open XAD Archive"
+#define MSG_XADEXTRACT_DESC_STR "Extract XAD Archive"
+#define MSG_ERROR_STR "Error"
+#define MSG_EXTRACTING_STR "Extracting ..."
+#define MSG_OPENING_ARC_STR "Opening archive:"
+#define MSG_DISKARC_EXTRACT_STR "Do you want to extract\narchive as files or to disk?"
+#define MSG_SELECT_DEST_STR "Select destination"
+#define MSG_OK_STR "_OK"
+#define MSG_FILES_STR "_Files"
+#define MSG_DISK_STR "_Disk"
+#define MSG_RENAME_STR "_Rename"
+#define MSG_REPLACE_STR "_Replace"
+#define MSG_REPLACE_ALL_STR "R_eplace All"
+#define MSG_SKIP_STR "_Skip"
+#define MSG_SKIP_ALL_STR "S_kip All"
+#define MSG_ABORT_STR "_Abort"
+#define MSG_EXISTS_FORM_STR "File '%s' exists and would be replaced."
+#define MSG_RENAME_FORM_STR "Enter new filename for file\n'%s'"
+#define MSG_NO_PATH_ERR_STR "Path doesn't exist!"
+#define MSG_NO_HOOKS_ERR_STR "Unable to get DOpus callback hooks !"
+#define MSG_READING_ARCHIVE_STR "Reading archive..."
+
+#endif /* XADopus_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef XADopus_ARRAY
+
+struct XADopus_ArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct XADopus_ArrayType XADopus_Array[] =
+{
+    { MSG_TITLE, (STRPTR)MSG_TITLE_STR },
+    { MSG_XADOPEN_DESC, (STRPTR)MSG_XADOPEN_DESC_STR },
+    { MSG_XADEXTRACT_DESC, (STRPTR)MSG_XADEXTRACT_DESC_STR },
+    { MSG_ERROR, (STRPTR)MSG_ERROR_STR },
+    { MSG_EXTRACTING, (STRPTR)MSG_EXTRACTING_STR },
+    { MSG_OPENING_ARC, (STRPTR)MSG_OPENING_ARC_STR },
+    { MSG_DISKARC_EXTRACT, (STRPTR)MSG_DISKARC_EXTRACT_STR },
+    { MSG_SELECT_DEST, (STRPTR)MSG_SELECT_DEST_STR },
+    { MSG_OK, (STRPTR)MSG_OK_STR },
+    { MSG_FILES, (STRPTR)MSG_FILES_STR },
+    { MSG_DISK, (STRPTR)MSG_DISK_STR },
+    { MSG_RENAME, (STRPTR)MSG_RENAME_STR },
+    { MSG_REPLACE, (STRPTR)MSG_REPLACE_STR },
+    { MSG_REPLACE_ALL, (STRPTR)MSG_REPLACE_ALL_STR },
+    { MSG_SKIP, (STRPTR)MSG_SKIP_STR },
+    { MSG_SKIP_ALL, (STRPTR)MSG_SKIP_ALL_STR },
+    { MSG_ABORT, (STRPTR)MSG_ABORT_STR },
+    { MSG_EXISTS_FORM, (STRPTR)MSG_EXISTS_FORM_STR },
+    { MSG_RENAME_FORM, (STRPTR)MSG_RENAME_FORM_STR },
+    { MSG_NO_PATH_ERR, (STRPTR)MSG_NO_PATH_ERR_STR },
+    { MSG_NO_HOOKS_ERR, (STRPTR)MSG_NO_HOOKS_ERR_STR },
+    { MSG_READING_ARCHIVE, (STRPTR)MSG_READING_ARCHIVE_STR },
+};
+
+
+#endif /* XADopus_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef XADopus_BLOCK
+
+static const char XADopus_Block[] =
+{
+
+     "\x00\x00\x03\xe8" "\x00\x0e"
+    MSG_TITLE_STR ""
+     "\x00\x00\x03\xe9" "\x00\x10"
+    MSG_XADOPEN_DESC_STR ""
+     "\x00\x00\x03\xea" "\x00\x14"
+    MSG_XADEXTRACT_DESC_STR "\x00"
+     "\x00\x00\x03\xeb" "\x00\x06"
+    MSG_ERROR_STR "\x00"
+     "\x00\x00\x03\xec" "\x00\x0e"
+    MSG_EXTRACTING_STR ""
+     "\x00\x00\x03\xed" "\x00\x10"
+    MSG_OPENING_ARC_STR ""
+     "\x00\x00\x03\xee" "\x00\x34"
+    MSG_DISKARC_EXTRACT_STR "\x00"
+     "\x00\x00\x03\xef" "\x00\x12"
+    MSG_SELECT_DEST_STR ""
+     "\x00\x00\x03\xf0" "\x00\x04"
+    MSG_OK_STR "\x00"
+     "\x00\x00\x03\xf1" "\x00\x06"
+    MSG_FILES_STR ""
+     "\x00\x00\x03\xf2" "\x00\x06"
+    MSG_DISK_STR "\x00"
+     "\x00\x00\x03\xf3" "\x00\x08"
+    MSG_RENAME_STR "\x00"
+     "\x00\x00\x03\xf4" "\x00\x08"
+    MSG_REPLACE_STR ""
+     "\x00\x00\x03\xf5" "\x00\x0c"
+    MSG_REPLACE_ALL_STR ""
+     "\x00\x00\x03\xf6" "\x00\x06"
+    MSG_SKIP_STR "\x00"
+     "\x00\x00\x03\xf7" "\x00\x0a"
+    MSG_SKIP_ALL_STR "\x00"
+     "\x00\x00\x03\xf8" "\x00\x06"
+    MSG_ABORT_STR ""
+     "\x00\x00\x03\xf9" "\x00\x28"
+    MSG_EXISTS_FORM_STR "\x00"
+     "\x00\x00\x03\xfa" "\x00\x20"
+    MSG_RENAME_FORM_STR ""
+     "\x00\x00\x03\xfb" "\x00\x14"
+    MSG_NO_PATH_ERR_STR "\x00"
+     "\x00\x00\x03\xfc" "\x00\x24"
+    MSG_NO_HOOKS_ERR_STR ""
+     "\x00\x00\x03\xfd" "\x00\x12"
+    MSG_READING_ARCHIVE_STR ""
+
+};
+
+#endif /* XADopus_BLOCK */
+
+
+/****************************************************************************/
+
+
+#ifdef XADopus_CODE
+
+#ifndef XADopus_CODE_EXISTS
+ #define XADopus_CODE_EXISTS
+
+ STRPTR GetXADopusString(struct XADopus_LocaleInfo *li, LONG stringNum)
+ {
+ LONG   *l;
+ UWORD  *w;
+ STRPTR  builtIn;
+
+     l = (LONG *)XADopus_Block;
+
+     while (*l != stringNum)
+       {
+       w = (UWORD *)((ULONG)l + 4);
+       l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+       }
+     builtIn = (STRPTR)((ULONG)l + 6);
+
+// #define XADopus_XLocaleBase LocaleBase
+// #define LocaleBase li->li_LocaleBase
+    
+     if(LocaleBase && li)
+        return(GetCatalogStr(li->li_Catalog, stringNum, builtIn));
+
+// #undef  LocaleBase
+// #define LocaleBase XLocaleBase
+// #undef  XADopus_XLocaleBase
+
+     return(builtIn);
+ }
+
+#else
+
+ STRPTR GetXADopusString(struct XADopus_LocaleInfo *li, LONG stringNum);
+
+#endif /* XADopus_CODE_EXISTS */
+
+#endif /* XADopus_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* XADopus_STRINGS_H */

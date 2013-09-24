@@ -1,0 +1,52 @@
+; ************************************************* 
+; Catalog description file for themes.module
+; ************************************************* 
+;
+MSG_SAVE_THEME_DESC (1000//)
+Save Theme File
+;
+MSG_LOAD_THEME_DESC (//)
+Load Theme File
+;
+MSG_BUILD_THEME_DESC (//)
+Build Theme For Distribution
+;
+MSG_SAVE_THEME_MSG (//)
+Enter Name of Theme File To Save
+;
+MSG_BUILD_THEME_MSG (//)
+Enter Name of Theme File To Build
+;
+MSG_SAVE_ERROR (//)
+Error Saving Theme : %ld
+;
+MSG_OK (//)
+OK
+;
+MSG_CANCEL (//)
+Cancel
+;
+MSG_LOAD_THEME_MSG (//)
+Select Theme To Load
+;
+MSG_THEME_APPLY_PALETTE (//)
+Apply _palette and pen settings
+;
+MSG_THEME_APPLY_FONTS (//)
+Apply _font settings
+;
+MSG_THEME_APPLY_PICTURES (//)
+Apply _background picture settings
+;
+MSG_THEME_APPLY_SOUNDS (//)
+Apply _sound settings
+;
+MSG_BUILDING_THEME (//)
+Building Theme...
+;
+MSG_CONVERT_THEME_DESC (//)
+Convert Windows95 Theme File
+;
+MSG_CONVERT_THEME_MSG (//)
+Select Theme To Convert
+;

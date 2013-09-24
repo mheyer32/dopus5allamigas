@@ -1,0 +1,105 @@
+; ************************************************* 
+; Catalog description file for show.module
+; ************************************************* 
+;
+;
+MSG_OK (1000//)
+_OK
+;
+MSG_INFO_TITLE (//)
+Picture Information
+;
+MSG_INFO_FILE (//)
+File:
+;
+MSG_INFO_IMAGE_SIZE (//)
+Image Size:
+;
+MSG_INFO_COLOURS (//)
+Colours:
+;
+MSG_INFO_MODE (//)
+Display Mode:
+;
+MSG_INFO_FRAME (//)
+Frame:
+;
+MSG_INFO_ANIM (//)
+Anim Type:
+;
+MSG_INFO_FRAME_NUM (//)
+%ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT (//)
+_Aspect:
+;
+MSG_PRINT_IMAGE (//)
+_Image:
+;
+MSG_PRINT_SHADE (//)
+_Shade:
+;
+MSG_PRINT_PLACEMENT (//)
+P_lacement:
+;
+MSG_PRINT_FORM_FEED (//)
+_Form Feed
+;
+MSG_PRINT_PRINT_TITLE (//)
+Print _Title
+;
+MSG_PRINT (//)
+_Print
+;
+MSG_PRINT_ASPECT_PORTRAIT (//)
+Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE (//)
+Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE (//)
+Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE (//)
+Negative
+;
+MSG_PRINT_SHADE_BW (//)
+Black & White
+;
+MSG_PRINT_SHADE_GREY (//)
+Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR (//)
+Colour
+;
+MSG_PRINT_PLACEMENT_CENTER (//)
+Centre
+;
+MSG_PRINT_PLACEMENT_LEFT (//)
+Left
+;
+MSG_OPENING_PRINTER (//)
+Opening printer...
+;
+MSG_INITIALISING_PRINTER (//)
+Initialising printer...
+;
+MSG_PRINTING_PICTURE (//)
+Printing picture...
+;
+MSG_ABORTING_PRINT (//)
+Aborting...
+;
+MSG_ANIM_TITLE (//)
+Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE (//)
+Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE (//)
+Picture Type:
+;
+;
+MSG_SHOW_DESC (//)
+Show pictures
+;

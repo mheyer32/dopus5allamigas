@@ -1,0 +1,106 @@
+; ************************************************* 
+; Catalog description file for format.module
+; ************************************************* 
+;
+;
+MSG_FORMAT_TITLE (1000//)
+Format
+;
+MSG_FORMAT_FORMAT (//)
+_Format
+;
+MSG_FORMAT_QUICK_FORMAT (//)
+_Quick Format
+;
+MSG_FORMAT_CANCEL (//)
+_Cancel
+;
+MSG_FORMAT_NAME (//)
+_Name
+;
+MSG_FORMAT_FFS (//)
+F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL (//)
+_International Mode
+;
+MSG_FORMAT_CACHING (//)
+_Directory Caching
+;
+MSG_FORMAT_TRASHCAN (//)
+_Put Trashcan
+;
+MSG_FORMAT_INSTALL (//)
+_Make Bootable
+;
+MSG_FORMAT_VERIFY (//)
+_Verify
+;
+MSG_FORMAT_DEFAULT_NAME (//)
+Empty
+;
+MSG_FORMAT_STATUS (//)
+%ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE (//)
+Opening device...
+;
+MSG_CHECKING_DISK (//)
+Checking disk...
+;
+MSG_CANT_OPEN_DEVICE (//)
+Unable to open device!
+;
+MSG_NO_DISK_PRESENT (//)
+No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED (//)
+Disk is write-protected!
+;
+MSG_RETRY_CANCEL (//)
+Retry|Cancel
+;
+MSG_PROCEED_CANCEL (//)
+Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK (//)
+Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED (//)
+Aborted.
+;
+MSG_FORMAT_INITIALISING (//)
+Initialising disk...
+;
+MSG_FORMAT_FORMATTING (//)
+Formatting...
+;
+MSG_FORMAT_FORMATERROR (+1//)
+Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR (//)
+Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL (//)
+Format successful!
+;
+MSG_FORMAT_FAILED (//)
+Format failed.
+;
+MSG_FORMAT_SETTING_UP (//)
+Setting up...
+;
+MSG_FORMAT_CLEANING_UP (//)
+Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH (//)
+Making Trashcan...
+;
+MSG_INSTALLING_DISK (//)
+Installing Bootblock...
+;
+;
+MSG_FORMAT_DESC (//)
+Format disks
+;

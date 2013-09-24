@@ -1,0 +1,1608 @@
+; ************************************************* 
+; Catalog description file for ConfigOpus
+; Copyright © 1994 Jonathan Potter
+; ************************************************* 
+;
+;
+; Generic strings
+;
+MSG_OKAY (1//)
+Ok
+;
+MSG_CANCEL (//)
+Cancel
+;
+MSG_MISC_FLAGS (//)
+Misc. flags...
+;
+MSG_SAVE (//)
+Save
+;
+MSG_SELECT_FILE (//)
+Select file
+;
+MSG_BUTTONS_DROP_BOX (//)
+(Buttons) Drop a tool here!
+;
+MSG_MENUS_DROP_BOX (//)
+(Menus) Drop a tool here!
+;
+MSG_SELECT_DIR (//)
+Select directory
+;
+MSG_DRIVES_DROP_BOX (//)
+(Drives) Drop a directory here!
+;
+MSG_FUNCTION_DROP_BOX (//)
+(Function) Drop a tool here!
+;
+MSG_USE (//)
+Use
+;
+MSG_BY (//)
+by
+;
+MSG_FILE_EXISTS (//)
+Selected file already exists - overwrite it?
+;
+MSG_REPLACE (//)
+Replace
+;
+MSG_UNABLE_TO_OPEN (//)
+Unable to open file.
+;
+MSG_INVALID_IMPORT (//)
+Invalid file selected to import from.
+;
+MSG_SELECT_EXPORT_FILE (//)
+Select file to export to.
+;
+MSG_CLIPBOARD_EMPTY (//)
+The clipboard is empty!
+;
+MSG_CLIPBOARD_EXPORT_SUCCESSFUL (//)
+Clipboard contents exported successfully.
+;
+MSG_CLIPBOARD_EXPORT_FAILED (//)
+Clipboard export failed.
+;
+MSG_CLIPBOARD_IMPORT_SUCCESSFUL (//)
+Function imported to clipboard successfully.
+;
+MSG_EXPORT_SUCCESSFUL (//)
+Export successful.
+;
+MSG_EXPORT_FAILED (//)
+Export failed.
+;
+;
+;
+; Menus
+;
+MSG_CONFIGURE_MENU (100//)
+Configure
+;
+MSG_TOOLS_MENU (//)
+Tools
+;
+MSG_DEFAULT_MENU (//)
+Default
+;
+MSG_OPEN_MENU (//)
+Open...
+;
+MSG_SAVE_MENU (//)
+Save
+;
+MSG_SAVEAS_MENU (//)
+Save As...
+;
+MSG_PALETTEBOX_MENU (//)
+Palette box...
+;
+MSG_IMPORT_MENU (//)
+Import...
+;
+MSG_EXPORT_MENU (//)
+Export...
+;
+MSG_EXPORT_CLIP_MENU (//)
+Export clip...
+;
+MSG_FUNCTION_MENU (//)
+Function
+;
+MSG_EXPORT_TEXT_MENU (//)
+Export as text...
+;
+MSG_EDIT_MENU (//)
+Edit
+;
+MSG_CUT_MENU (//)
+Cut
+;
+MSG_COPY_MENU (//)
+Copy
+;
+MSG_PASTE_MENU (//)
+Paste...
+;
+MSG_ERASE_MENU (//)
+Erase
+;
+MSG_CLEAR_CLIPS_MENU (//)
+Clear clips
+;
+MSG_ABOUT_MENU (//)
+About
+;
+;
+;
+; Buttons configuration
+;
+MSG_BUTTONS_TITLE (1000//)
+Buttons
+;
+MSG_BUTTONS_BANK_NUMBER (//)
+Bank #
+;
+MSG_BUTTONS_NEW_BANK (//)
+Add
+;
+MSG_BUTTONS_INSERT_BANK (//)
+Insert
+;
+MSG_BUTTONS_DELETE_BANK (//)
+Delete
+;
+MSG_BUTTONS_COPY_BANK (//)
+Copy
+;
+MSG_BUTTONS_MOVE_BANK (//)
+Move
+;
+MSG_BUTTONS_CLIPBOARD (//)
+Clip
+;
+MSG_BUTTONS_ASK_DELETE_BANK (//)
+Do you really want to delete this button bank?
+;
+MSG_BUTTONS_ASK_DELETE_ONLY_BANK (//)
+This is the only button bank configured!\nDo you really want to delete this button bank?
+;
+MSG_BUTTONS_ASK_COPY_BANK (//)
+Enter bank number to copy this bank to.
+;
+MSG_BUTTONS_ASK_MOVE_BANK (//)
+Enter new position to move this bank to.
+;
+MSG_BUTTONS_DEFAULT_BANKS_ADDED (//)
+Default button banks appended to existing ones.
+;
+MSG_BUTTONS_NEW_BANKS_ADDED (//)
+New button banks appended to existing ones.
+;
+MSG_BUTTONS_SELECT_IMPORT_FILE (//)
+Select file to import buttons from.
+;
+MSG_BUTTONS_EXPORT_SUCCESSFUL (//)
+Button bank exported successfully.
+;
+MSG_BUTTONS_EXPORT_FAILED (//)
+Button bank export failed.
+;
+;
+;
+; Menus configuration
+;
+MSG_MENUS_TITLE (2000//)
+Menus
+;
+MSG_MENUS_COPY_MENU (//)
+Copy menu
+;
+MSG_MENUS_SWAP_MENU (//)
+Swap menu
+;
+MSG_MENUS_SORT_MENU (//)
+Sort menu
+;
+MSG_MENUS_DELETE_MENU (//)
+Delete menu
+;
+MSG_MENUS_CLIPBOARD (//)
+Clip
+;
+MSG_MENUS_ASK_SORT_MENU (//)
+Select menu to sort.
+;
+MSG_MENUS_ASK_DELETE_MENU (//)
+Select menu to delete.
+;
+MSG_MENUS_ASK_SWAP_MENU (//)
+Select menu to swap.
+;
+MSG_MENUS_ASK_COPY_MENU (//)
+Select menu to copy.
+;
+MSG_MENUS_ASK_SWAP_WITH_MENU (//)
+Select menu to swap %s with.
+;
+MSG_MENUS_ASK_COPY_TO_MENU (//)
+Select menu to copy %s to.
+;
+MSG_MENUS_UNTITLED_NAME (//)
+-Untitled %ld-
+;
+MSG_MENUS_IMPORT_MENU (//)
+Import a menu.
+;
+MSG_MENUS_SELECT_MENU_TO_IMPORT (//)
+Select menu to import.
+;
+MSG_MENUS_NO_EMPTY_MENUS (//)
+There are no empty menus to import into.
+;
+MSG_MENUS_NO_MENUS_TO_IMPORT (//)
+There are no menus to import!
+;
+MSG_MENUS_IMPORT_SUCCESSFUL (//)
+Menus imported successfully.
+;
+MSG_MENUS_SELECT_IMPORT_FILE (//)
+Select file to import menus from.
+;
+MSG_MENUS_EXPORT_MENU (//)
+Export a menu.
+;
+MSG_MENUS_SELECT_MENU_TO_EXPORT (//)
+Select menu to export.
+;
+MSG_MENUS_EXPORT_SUCCESSFUL (//)
+Menu exported successfully.
+;
+MSG_MENUS_EXPORT_FAILED (//)
+Menu export failed.
+;
+; System configuration
+;
+MSG_SYSTEM_TITLE (4000//)
+System
+;
+MSG_SYSTEM_SUB_AMIGADOS (//)
+AmigaDOS
+;
+MSG_SYSTEM_SUB_CLOCKS (//)
+Clocks
+;
+MSG_SYSTEM_SUB_DIRECTORIES (//)
+Directories
+;
+MSG_SYSTEM_SUB_HOTKEY (//)
+Hotkey
+;
+MSG_SYSTEM_SUB_ICONS (//)
+Icons
+;
+MSG_SYSTEM_SUB_MODULES (//)
+Modules
+;
+MSG_SYSTEM_SUB_SHOWPATTERN (//)
+Show pattern
+;
+MSG_SYSTEM_SUB_STARTUP (//)
+Startup
+;
+MSG_SYSTEM_SUB_VIEWPLAY (//)
+View & Play
+;
+MSG_SYSTEM_RUNNING_AMIGADOS_APPS (//)
+Running AmigaDOS applications...
+;
+MSG_SYSTEM_SHELL (//)
+Shell
+;
+MSG_SYSTEM_CONSOLE (//)
+Console
+;
+MSG_SYSTEM_STARTUP_SCRIPT (//)
+Startup script
+;
+MSG_SYSTEM_PRIORITY (//)
+Priority
+;
+MSG_SYSTEM_CLOCK_MEMORY_BAR (//)
+Clock/memory bar...
+;
+MSG_SYSTEM_MEMORY_MONITOR (//)
+Memory monitor
+;
+MSG_SYSTEM_CPU_MONITOR (//)
+CPU monitor
+;
+MSG_SYSTEM_DATE (//)
+Date
+;
+MSG_SYSTEM_TIME (//)
+Time
+;
+MSG_SYSTEM_WHEN_ICONIFIED (//)
+When iconified...
+;
+MSG_SYSTEM_SHOW_FREE_MEMORY_AS (//)
+Show free memory as...
+;
+MSG_SYSTEM_TEXT_FORMAT (//)
+Text format...
+;
+MSG_SYSTEM_DIRECTORY_CACHES (//)
+Directory caches...
+;
+MSG_SYSTEM_BUFFERS_PER_WINDOW (//)
+buffers per window
+;
+MSG_SYSTEM_ALWAYS_MOVE_EMPTY (//)
+Always move to an empty buffer
+;
+MSG_SYSTEM_REREAD_CHANGED_BUFFERS (//)
+Re-read changed buffers
+;
+MSG_SYSTEM_SEARCH_BUFFERS_ON (//)
+Search buffers on...
+;
+MSG_SYSTEM_PARENT_ROOT_OPERATION (//)
+Parent/Root operation
+;
+MSG_SYSTEM_DOUBLE_CLICK_DIRREAD (//)
+Double-click/click-m-click directory read
+;
+MSG_SYSTEM_AUTO_DISKCHANGE (//)
+Auto diskchange
+;
+MSG_SYSTEM_AUTO_DISKLOAD (//)
+Auto diskload
+;
+MSG_SYSTEM_EXPAND_PATHNAMES (//)
+Expand pathnames
+;
+MSG_SYSTEM_USE_EXALL (//)
+Use ExAll()
+;
+MSG_SYSTEM_SHOW_FREE_SPACE_AS (//)
+Show free space as...
+;
+MSG_SYSTEM_HOTKEY (//)
+Uniconify/activate hotkey
+;
+MSG_SYSTEM_MIDDLE_MOUSE_BUTTON (//)
+Use middle mouse button
+;
+MSG_SYSTEM_ADDICONS_ICONS (//)
+AddIcon's icons...
+;
+MSG_SYSTEM_ICON_TO_USE (//)
+Icon file to use for AddIcon...
+;
+MSG_SYSTEM_DEFAULT_TOOL (//)
+Project's Default Tool...
+;
+MSG_SYSTEM_PRELOAD_MODULES (//)
+Pre-load external modules...
+;
+MSG_SYSTEM_PRELOAD_CONFIGOPUS (//)
+Configuration program
+;
+MSG_SYSTEM_PRELOAD_DISK (//)
+Diskcopy, Format, Install
+;
+MSG_SYSTEM_PRELOAD_ICON (//)
+IconInfo
+;
+MSG_SYSTEM_PRELOAD_PRINT (//)
+Print, Printdir
+;
+MSG_SYSTEM_LIST_PATTERN (//)
+Directory list pattern...
+;
+MSG_SYSTEM_HIDDEN_BIT (//)
+Hide files with hidden bit set
+;
+MSG_SYSTEM_SHOW (//)
+Show
+;
+MSG_SYSTEM_HIDE (//)
+Hide
+;
+MSG_SYSTEM_STARTUP_DIRECTORIES (//)
+Directories to read on startup...
+;
+MSG_SYSTEM_STARTUP_LEFT (//)
+Left
+;
+MSG_SYSTEM_STARTUP_RIGHT (//)
+Right
+;
+MSG_SYSTEM_STARTUP_SCRIPTS (//)
+ARexx scripts to execute on...
+;
+MSG_SYSTEM_STARTUP_STARTUP (//)
+Startup
+;
+MSG_SYSTEM_STARTUP_UNICONIFY (//)
+Uniconify
+;
+MSG_SYSTEM_STARTUP_CFGRETURN (//)
+Cfg return
+;
+MSG_SYSTEM_IFF_VIEWER (//)
+Picture/animation viewer (IFF ILBM/ANIM)...
+;
+MSG_SYSTEM_BLACK_BACKGROUND (//)
+Black background between pictures
+;
+MSG_SYSTEM_START_ANIM_PAUSED (//)
+Start animation paused
+;
+MSG_SYSTEM_8_BIT_COLOR (//)
+8-bits per gun color
+;
+MSG_SYSTEM_PICK_BEST_MODE (//)
+Pick best screen-mode
+;
+MSG_SYSTEM_SHOW_DELAY (//)
+Show delay
+;
+MSG_SYSTEM_FADE_DELAY (//)
+Fade delay
+;
+MSG_SYSTEM_SOUND_PLAYER (//)
+Sound player (IFF 8SVX)...
+;
+MSG_SYSTEM_AUDIO_FILTER_OFF (//)
+Turn audio filter off for play
+;
+MSG_SYSTEM_LOOP_DOUBLECLICK (//)
+Loop on double-click
+;
+MSG_SYSTEM_TEXT_VIEWER (//)
+Text viewer...
+;
+MSG_SYSTEM_TEXT_VIEWER_BORDERS (//)
+Text viewer borders
+;
+MSG_SYSTEM_TAB_SIZE (//)
+Tab size
+;
+MSG_SYSTEM_ICONTYPE_APPICON (//)
+An AppIcon
+;
+MSG_SYSTEM_ICONTYPE_NOWINDOW (//)
+No window
+;
+MSG_SYSTEM_ICONTYPE_WINDOW (//)
+Window
+;
+MSG_SYSTEM_SHOWMEMORY_BYTES (//)
+Bytes free
+;
+MSG_SYSTEM_SHOWMEMORY_KILOBYTES (//)
+Kilobytes free
+;
+MSG_SYSTEM_TEXTFORMAT_CHIPFAST (//)
+CHIP: and FAST:
+;
+MSG_SYSTEM_TEXTFORMAT_CF (//)
+C: and F:
+;
+MSG_SYSTEM_SHOWFREE_BYTES (//)
+Bytes free
+;
+MSG_SYSTEM_SHOWFREE_KILOMEGA (//)
+Kilo/Megabytes free
+;
+MSG_SYSTEM_SHOWFREE_BLOCKS (//)
+Blocks free
+;
+MSG_SYSTEM_SHOWFREE_PERCENT (//)
+Percentage of space free
+;
+MSG_SYSTEM_DRAWER_ICON (//)
+Drawer icon
+;
+MSG_SYSTEM_DEFAULT_TOOL_ICON (//)
+Default Tool icon
+;
+MSG_SYSTEM_DEFAULT_PROJECT_ICON (//)
+Default Project icon
+;
+;
+;
+; Function editor
+;
+MSG_FUNCED_TITLE (5000//)
+Function Editor
+;
+MSG_FUNCED_NAME (//)
+Name
+;
+MSG_FUNCED_KEY (//)
+Key
+;
+MSG_FUNCED_AVAILABLE_FLAGS (//)
+Available flags...
+;
+MSG_FUNCED_SELECTED_FLAGS (//)
+Selected flags...
+;
+MSG_FUNCED_STACK_SIZE (//)
+Stack size
+;
+MSG_FUNCED_PRIORITY (//)
+Priority
+;
+MSG_FUNCED_CLOSE_DELAY (//)
+Close delay
+;
+MSG_FUNCED_NEW_ENTRY (//)
+New entry
+;
+MSG_FUNCED_INSERT (//)
+Insert
+;
+MSG_FUNCED_DELETE (//)
+Delete
+;
+MSG_FUNCED_FUNCTYPE_COMMAND (//)
+Command
+;
+MSG_FUNCED_FUNCTYPE_AMIGADOS (//)
+AmigaDOS
+;
+MSG_FUNCED_FUNCTYPE_WORKBENCH (//)
+Workbench
+;
+MSG_FUNCED_FUNCTYPE_BATCH (//)
+Batch
+;
+MSG_FUNCED_FUNCTYPE_AREXX (//)
+ARexx
+;
+MSG_FUNCED_FUNCTYPE_REQUESTER (//)
+Requester
+;
+MSG_FUNCED_FLAG_OUTPUTWINDOW (//)
+Output window
+;
+MSG_FUNCED_FLAG_OUTPUTFILE (//)
+Output to file
+;
+MSG_FUNCED_FLAG_WORKBENCH_TO_FRONT (//)
+Workbench to front
+;
+MSG_FUNCED_FLAG_DOPUS_TO_FRONT (//)
+Directory Opus to front
+;
+MSG_FUNCED_FLAG_RUN_ASYNC (//)
+Run asynchronously
+;
+MSG_FUNCED_FLAG_CD_SOURCE (//)
+CD source
+;
+MSG_FUNCED_FLAG_CD_DEST (//)
+CD destination
+;
+MSG_FUNCED_FLAG_DO_ALL_FILES (//)
+Do all files
+;
+MSG_FUNCED_FLAG_RECURSE_DIRS (//)
+Recursive directories
+;
+MSG_FUNCED_FLAG_RELOAD_EACH_FILE (//)
+Reload each file
+;
+MSG_FUNCED_FLAG_AUTO_ICONIFY (//)
+Auto iconify
+;
+MSG_FUNCED_FLAG_NO_FILENAME_QUOTE (//)
+No filename quote
+;
+MSG_FUNCED_FLAG_RESCAN_SOURCE (//)
+Rescan source
+;
+MSG_FUNCED_FLAG_RESCAN_DEST (//)
+Rescan destination
+;
+MSG_FUNCED_FLAG_SHELL_STARTUP (//)
+Include Shell-Startup
+;
+MSG_FUNCED_FLAG_DOPUS_STARTUP (//)
+Include DOpus-Startup
+;
+MSG_FUNCED_ARGUMENT_LIST (//)
+Argument list
+;
+MSG_FUNCED_SELECT_ARGUMENT (//)
+Select argument.
+;
+MSG_FUNCED_COMMAND_LIST (//)
+Command list
+;
+MSG_FUNCED_SELECT_COMMAND (//)
+Select internal command.
+;
+MSG_FUNCED_SELECT_FILE (//)
+Select file
+;
+MSG_FUNCED_IMPORT_SUCCESSFUL (//)
+Function imported successfully.
+;
+MSG_FUNCED_TEXTEXPORT_NAME (//)
+Name        : 
+;
+MSG_FUNCED_TEXTEXPORT_FUNCTION (//)
+Function    : 
+;
+MSG_FUNCED_TEXTEXPORT_NONE (//)
+<none>
+;
+MSG_FUNCED_TEXTEXPORT_FLAGS (//)
+Flags       : 
+;
+MSG_FUNCED_TEXTEXPORT_KEY (//)
+Key         : 
+;
+MSG_FUNCED_TEXTEXPORT_STACK (//)
+Stack       : 
+;
+MSG_FUNCED_TEXTEXPORT_PRIORITY (//)
+Priority    : 
+;
+MSG_FUNCED_TEXTEXPORT_DELAY (//)
+Close delay : 
+;
+MSG_FUNCED_CLIP_LIST (//)
+Function clip list
+;
+MSG_FUNCED_SELECT_FUNC (//)
+Select function to paste.
+;
+MSG_FUNCED_REALLY_CLEAR_CLIPS (//)
+Really clear all clipped functions?
+;
+MSG_FUNCED_NO_CLIPS (//)
+There are no functions in the clip list.
+;
+MSG_FUNCED_CLIPS_CLEARED (//)
+Function clip list cleared.
+;
+;
+;
+; Drives configuration
+;
+MSG_DRIVES_TITLE (6000//)
+Drives
+;
+MSG_DRIVES_NAME (//)
+Name
+;
+MSG_DRIVES_PATH (//)
+Path
+;
+MSG_DRIVES_ENABLE_DRIVES (//)
+Drive list
+;
+MSG_DRIVES_ENABLE_LEFT (//)
+on left
+;
+MSG_DRIVES_ENABLE_RIGHT (//)
+on right
+;
+MSG_DRIVES_ENABLE_OFF (//)
+not visible
+;
+MSG_DRIVES_ADD (//)
+Add
+;
+MSG_DRIVES_DELETE (//)
+Delete
+;
+MSG_DRIVES_MOVE_UP (//)
+Move up
+;
+MSG_DRIVES_MOVE_DOWN (//)
+Move down
+;
+MSG_DRIVES_SORT (//)
+Sort
+;
+;
+;
+; Drives configuration
+;
+MSG_HOTKEYS_TITLE (7000//)
+Hotkeys
+;
+MSG_HOTKEYS_ADD (//)
+Add
+;
+MSG_HOTKEYS_DELETE (//)
+Delete
+;
+MSG_HOTKEYS_DUPLICATE (//)
+Duplicate
+;
+MSG_HOTKEYS_MOVE_UP (//)
+Move up
+;
+MSG_HOTKEYS_MOVE_DOWN (//)
+Move down
+;
+MSG_HOTKEYS_REALLY_DELETE (//)
+\"%s\"\nDo you really want to delete this hotkey?
+;
+MSG_HOTKEYS_SELECT_IMPORT_FILE (//)
+Select file to import hotkeys from.
+;
+MSG_HOTKEYS_FILE_EMPTY (//)
+There are no new hotkeys defined in this file.
+;
+MSG_HOTKEYS_HOTKEY_LIST (//)
+Available hotkeys
+;
+MSG_HOTKEYS_SELECT_IMPORT (//)
+Select hotkey definition to import.
+;
+MSG_HOTKEYS_EXPORT_SUCCESSFUL (//)
+Hotkey exported successfully.
+;
+MSG_HOTKEYS_EXPORT_FAILED (//)
+Hotkey export failed.
+;
+MSG_HOTKEYS_NEW_KEY_ADDED (//)
+New hotkey imported successfully.
+;
+;
+;
+; Screen configuration
+;
+MSG_SCREEN_TITLE (8000//)
+Screen
+;
+MSG_SCREEN_SUB_ARROWS (//)
+Arrows
+;
+MSG_SCREEN_SUB_COLORS (//)
+Colors
+;
+MSG_SCREEN_SUB_FONTS (//)
+Fonts
+;
+MSG_SCREEN_SUB_GENERAL (//)
+General
+;
+MSG_SCREEN_SUB_PALETTE (//)
+Palette
+;
+MSG_SCREEN_SUB_SCREENMODE (//)
+Screen mode
+;
+MSG_SCREEN_ARROWS_SCROLLUPDOWN (+1//)
+Scroll up/down
+;
+MSG_SCREEN_ARROWS_SCROLLLEFTRIGHT (//)
+Scroll left/right
+;
+MSG_SCREEN_ARROWS_BUFFER (//)
+Buffer previous/next
+;
+MSG_SCREEN_ARROWS_INSIDE (//)
+Arrows on the inside
+;
+MSG_SCREEN_ARROWS_OUTSIDE (//)
+Arrows on the outside
+;
+MSG_SCREEN_ARROWS_EACH_END (//)
+One arrow at each end
+;
+MSG_SCREEN_ARROWS_ADJUST_SIZE (//)
+Adjust size...
+;
+MSG_SCREEN_FONTS_DISPLAY_ITEM (//)
+Display item...
+;
+MSG_SCREEN_FONTS_FONT (//)
+Font...
+;
+MSG_SCREEN_FONTS_SIZE (//)
+Size...
+;
+MSG_SCREEN_FONTS_CLOCK (//)
+Clock/Memory
+;
+MSG_SCREEN_FONTS_BUTTONS (//)
+Custom buttons
+;
+MSG_SCREEN_FONTS_DISK_NAMES (+1//)
+Disk names
+;
+MSG_SCREEN_FONTS_WINDOW (//)
+Directory window
+;
+MSG_SCREEN_FONTS_ICONIFY (+1//)
+Iconify to buttons
+;
+MSG_SCREEN_FONTS_PATHS (//)
+Path names
+;
+MSG_SCREEN_FONTS_STATUS_BAR (+2//)
+Status bar
+;
+MSG_SCREEN_FONTS_TEXT_VIEWER (//)
+Text viewer
+;
+MSG_SCREEN_GENERAL_TINY_BUTTONS (//)
+Bottom-right tiny buttons
+;
+MSG_SCREEN_GENERAL_BORDERS (//)
+Custom screen window borders
+;
+MSG_SCREEN_GENERAL_TITLE_STATUS (//)
+Display status text in title bar
+;
+MSG_SCREEN_GENERAL_RMB_INDICATE (//)
+Indicate button has RMB function
+;
+MSG_SCREEN_GENERAL_NEW_LOOK_MENUS (//)
+New-look menus
+;
+MSG_SCREEN_PALETTE_RED (//)
+Red
+;
+MSG_SCREEN_PALETTE_GREEN (//)
+Green
+;
+MSG_SCREEN_PALETTE_BLUE (//)
+Blue
+;
+MSG_SCREEN_PALETTE_PRESETS (//)
+Presets...
+;
+MSG_SCREEN_PALETTE_PRESET_RESET (//)
+Reset
+;
+MSG_SCREEN_PALETTE_PRESET_DEFAULT (//)
+Directory Opus default
+;
+MSG_SCREEN_PALETTE_PRESET_WBDEFAULT (//)
+Workbench default
+;
+MSG_SCREEN_PALETTE_PRESET_WBCURRENT (//)
+Workbench current
+;
+MSG_SCREEN_PALETTE_PRESET_TINT (//)
+Tint
+;
+MSG_SCREEN_PALETTE_PRESET_PHARAOH (//)
+Pharaoh
+;
+MSG_SCREEN_PALETTE_PRESET_SUNSET (//)
+Sunset
+;
+MSG_SCREEN_PALETTE_PRESET_OCEAN (//)
+Ocean
+;
+MSG_SCREEN_PALETTE_PRESET_STEEL (//)
+Steel
+;
+MSG_SCREEN_PALETTE_PRESET_CHOCOLATE (//)
+Chocolate
+;
+MSG_SCREEN_PALETTE_PRESET_PEWTER (//)
+Pewter
+;
+MSG_SCREEN_PALETTE_PRESET_WINE (//)
+Wine
+;
+MSG_SCREEN_PALETTE_PRESET_A2024 (//)
+A2024
+;
+MSG_SCREEN_SCREENMODE_MODE (//)
+Display mode...
+;
+MSG_SCREEN_SCREENMODE_WIDTH (//)
+Width
+;
+MSG_SCREEN_SCREENMODE_HEIGHT (//)
+Height
+;
+MSG_SCREEN_SCREENMODE_DEFAULT (//)
+Use default
+;
+MSG_SCREEN_SCREENMODE_COLORS (//)
+Colors
+;
+MSG_SCREEN_SCREENMODE_HALFHEIGHT (//)
+Half-height screen
+;
+MSG_SCREEN_SCREENMODE_WB_USE (//)
+Workbench:Use
+;
+MSG_SCREEN_SCREENMODE_WB_CLONE (//)
+Workbench:Clone
+;
+MSG_SCREEN_SCREENMODE_MIN_SIZE (//)
+Minimum size
+;
+MSG_SCREEN_SCREENMODE_MAX_SIZE (//)
+Maximum size
+;
+MSG_SCREEN_SCREENMODE_DEF_SIZE (//)
+Default size
+;
+MSG_SCREEN_SCREENMODE_MAX_COLS (//)
+Maximum colors
+;
+MSG_SCREEN_COLORS_ITEM (//)
+Display item...
+;
+MSG_SCREEN_COLORS_FGBG (//)
+Foreground/Background...
+;
+MSG_SCREEN_COLORS_SAMPLE (//)
+Example
+;
+MSG_SCREEN_COLORS_SEL_DISKNAME (//)
+Selected diskname
+;
+MSG_SCREEN_COLORS_UNSEL_DISKNAME (//)
+Unselected diskname
+;
+MSG_SCREEN_COLORS_SEL_DIRECTORY (//)
+Selected directory
+;
+MSG_SCREEN_COLORS_UNSEL_DIRECTORY (//)
+Unselected directory
+;
+MSG_SCREEN_COLORS_SEL_FILE (//)
+Selected file
+;
+MSG_SCREEN_COLORS_UNSEL_FILE (//)
+Unselected file
+;
+MSG_SCREEN_COLORS_STATUS_BAR (//)
+Clock/status bars
+;
+;
+;
+; Filetypes configuration
+;
+MSG_FILETYPES_TITLE (9000//)
+Filetypes
+;
+MSG_FILETYPES_LISTER (//)
+Defined filetype actions...
+;
+MSG_FILETYPES_EVENTS (//)
+Events...
+;
+MSG_FILETYPES_EVENT_DOUBLECLICK (//)
+Double-click
+;
+MSG_FILETYPES_EVENT_CLICKMCLICK (//)
+Click-m-click
+;
+MSG_FILETYPES_EVENT_USER1 (//)
+User1
+;
+MSG_FILETYPES_EVENT_USER2 (//)
+User2
+;
+MSG_FILETYPES_EVENT_USER3 (//)
+User3
+;
+MSG_FILETYPES_EVENT_USER4 (//)
+User4
+;
+MSG_FILETYPES_EVENT_READ (//)
+Read
+;
+MSG_FILETYPES_EVENT_ANSIREAD (//)
+AnsiRead
+;
+MSG_FILETYPES_EVENT_HEXREAD (//)
+HexRead
+;
+MSG_FILETYPES_EVENT_PLAY (//)
+Play
+;
+MSG_FILETYPES_EVENT_LOOPPLAY (//)
+LoopPlay
+;
+MSG_FILETYPES_EVENT_SHOW (//)
+Show
+;
+MSG_FILETYPES_ADD (//)
+Add
+;
+MSG_FILETYPES_DELETE (//)
+Delete
+;
+MSG_FILETYPES_MOVEUP (//)
+Move up
+;
+MSG_FILETYPES_MOVEDOWN (//)
+Move down
+;
+MSG_FILETYPES_REALLY_DELETE (//)
+\"%s\"\nDo you really want to delete this filetype?
+;
+MSG_FILETYPES_CLASS_LIST (//)
+Class list
+;
+MSG_FILETYPES_SELECT_CLASS (//)
+Select class to add a filetype for.
+;
+MSG_FILETYPES_CLASS_MENU (//)
+Classes
+;
+MSG_FILETYPES_CLASS_NEW_MENU (//)
+New...
+;
+MSG_FILETYPES_CLASS_EDIT_MENU (//)
+Edit...
+;
+MSG_FILETYPES_CLASS_DUPLICATE_MENU (//)
+Duplicate...
+;
+MSG_FILETYPES_CLASS_DELETE_MENU (//)
+Delete...
+;
+MSG_FILETYPES_CLASS_SAVE_MENU (+1//)
+Save
+;
+MSG_FILETYPES_CLASS_SAVEAS_MENU (//)
+Save As...
+;
+MSG_FILETYPES_CLASS_CLEAR_MENU (//)
+Clear
+;
+MSG_FILETYPES_SELECT_CLASS_EDIT (//)
+Select class to edit.
+;
+MSG_FILETYPES_SELECT_CLASS_DUPLICATE (//)
+Select class to duplicate.
+;
+MSG_FILETYPES_SELECT_CLASS_DELETE (//)
+Select class to delete.
+;
+MSG_FILETYPES_CLASS_REALLY_DELETE (//)
+\"%s\"\nDo you really want to delete this class?
+;
+MSG_FILETYPES_CLASS_SAVEAS (//)
+Enter new name for class file
+;
+MSG_FILETYPES_CLASS_OPEN (//)
+Select class file to import
+;
+MSG_FILETYPES_CLASS_REALLY_CLEAR (//)
+Do you really wish to erase all file classes?
+;
+MSG_FILETYPES_CLASS_CLEAR (//)
+Clear
+;
+MSG_FILETYPES_CLASS_LIST_EMPTY (//)
+There are no file classes defined.
+;
+MSG_FILETYPES_CLASS_LIST_CHANGED (//)
+The class list has been modified.\n\
+Do you wish to save it before exiting?
+;
+MSG_FILETYPES_CLASS_FILE_EMPTY (//)
+There are no file classes defined in this file.
+;
+MSG_FILETYPES_CLASS_SELECT_IMPORT (//)
+Select class definition to import.
+;
+MSG_FILETYPES_EVENT_TYPE_COMMAND (//)
+Command
+;
+MSG_FILETYPES_EVENT_TYPE_ACTION (//)
+Action
+;
+MSG_FILETYPES_SELECT_IMPORT_FILE (//)
+Select file to import filetypes from.
+;
+MSG_FILETYPES_FILE_EMPTY (//)
+There are no new filetypes defined in this file.
+;
+MSG_FILETYPES_FILETYPE_LIST (//)
+Available filetypes
+;
+MSG_FILETYPES_SELECT_IMPORT (//)
+Select filetype definition to import.
+;
+MSG_FILETYPES_NEW_TYPE_ADDED (//)
+New filetype imported successfully.
+;
+MSG_FILETYPES_EXPORT_SUCCESSFUL (//)
+Filetype exported successfully.
+;
+MSG_FILETYPES_EXPORT_FAILED (//)
+Filetype export failed.
+;
+MSG_FILETYPES_TEXTEXPORT_TYPE (//)
+Filetype   
+;
+MSG_FILETYPES_TEXTEXPORT_ID (//)
+ID         
+;
+MSG_FILETYPES_TEXTEXPORT_RECOGNITION (//)
+Recognition : 
+;
+MSG_FILETYPES_TEXTEXPORT_COMMAND (//)
+Command     : 
+;
+MSG_FILETYPES_TEXTEXPORT_ACTION (//)
+Action      : 
+;
+;
+;
+; Palette box
+;
+MSG_PALETTE_TITLE (10000//)
+Select object colors
+;
+MSG_PALETTE_FOREGROUND (//)
+Foreground
+;
+MSG_PALETTE_BACKGROUND (//)
+Background
+;
+;
+;
+; File class editor
+;
+MSG_FILECLASS_TITLE (11000//)
+File class editor
+;
+MSG_FILECLASS_FILEVIEWER (//)
+File viewer
+;
+MSG_FILECLASS_DISPLAY_DECIMAL (//)
+Decimal
+;
+MSG_FILECLASS_DISPLAY_HEX (//)
+Hex
+;
+MSG_FILECLASS_POSITION (//)
+Position
+;
+MSG_FILECLASS_OFFSET (//)
+Offset
+;
+MSG_FILECLASS_CLASSNAME (//)
+File class
+;
+MSG_FILECLASS_CLASSID (//)
+Class ID
+;
+MSG_FILECLASS_ADD (//)
+Add
+;
+MSG_FILECLASS_DELETE (//)
+Delete
+;
+MSG_FILECLASS_MOVEUP (//)
+Move up
+;
+MSG_FILECLASS_MOVEDOWN (//)
+Move down
+;
+MSG_FILECLASS_DROP_BOX (//)
+(Class editor) Drop a file here!
+;
+MSG_FILECLASS_FILE_NOT_FOUND (//)
+File not found!
+;
+MSG_FILECLASS_COMMAND_MATCH (//)
+Match\ttext or $hex
+;
+MSG_FILECLASS_COMMAND_MATCHNAME (//)
+MatchName\tfilename
+;
+MSG_FILECLASS_COMMAND_MATCHBITS (//)
+MatchBits\tHSPARWED with + and -
+;
+MSG_FILECLASS_COMMAND_MATCHCOMMENT (//)
+MatchComment\ttext
+;
+MSG_FILECLASS_COMMAND_MATCHSIZE (//)
+MatchSize\tvalue with >, < and =
+;
+MSG_FILECLASS_COMMAND_MATCHDATE (//)
+MatchDate\tdate string or range
+;
+MSG_FILECLASS_COMMAND_MOVETO (//)
+MoveTo\tabsolute location
+;
+MSG_FILECLASS_COMMAND_MOVE (//)
+Move\tbyte offset from here
+;
+MSG_FILECLASS_COMMAND_SEARCHFOR (//)
+SearchFor\ttext or $hex
+;
+MSG_FILECLASS_COMMAND_OR (//)
+Or\tstart of another group
+;
+MSG_FILECLASS_COMMAND_AND (//)
+And\tstart of another group
+;
+MSG_FILECLASS_COMMAND_LIST (//)
+Identification commands
+;
+MSG_FILECLASS_SELECT_COMMAND (//)
+Select the identification command to use.
+;
+MSG_FILECLASS_UNTITLED (//)
+Untitled class
+;
+;
+;
+; List of internal functions
+;
+MSG_FUNCED_INTERNAL_ABOUT (20000//)
+About\tDisplay program info
+;
+MSG_FUNCED_INTERNAL_ADDICON (//)
+AddIcon\tAdd icons to entries
+;
+MSG_FUNCED_INTERNAL_ALARM (//)
+Alarm\tSound an alarm
+;
+MSG_FUNCED_INTERNAL_ALL (//)
+All\tSelect all entries
+;
+MSG_FUNCED_INTERNAL_ANSIREAD (//)
+AnsiRead\tANSI text viewer
+;
+MSG_FUNCED_INTERNAL_AREXX (//)
+ARexx\tRun an ARexx command
+;
+MSG_FUNCED_INTERNAL_ASSIGN (//)
+Assign\tAssign logical devices
+;
+MSG_FUNCED_INTERNAL_BEEP (//)
+Beep\tSound a beep
+;
+MSG_FUNCED_INTERNAL_BUFFERLIST (//)
+BufferList\tbuffered directories
+;
+MSG_FUNCED_INTERNAL_BUTTONICONIFY (//)
+ButtonIconify\tIconify to button strip
+;
+MSG_FUNCED_INTERNAL_CD (//)
+CD\tChange current directory
+;
+MSG_FUNCED_INTERNAL_CHECKFIT (//)
+CheckFit\tif entries will fit
+;
+MSG_FUNCED_INTERNAL_CLEARBUFFERS (//)
+ClearBuffers\tClear buffered dirs
+;
+MSG_FUNCED_INTERNAL_CLEARSIZES (//)
+ClearSizes\tRemove dir byte counts
+;
+MSG_FUNCED_INTERNAL_CLEARWIN (//)
+ClearWin\tClear the current window
+;
+MSG_FUNCED_INTERNAL_CLONE (//)
+Clone\tClone selected entries
+;
+MSG_FUNCED_INTERNAL_COMMENT (//)
+Comment\tfilenotes to entries
+;
+MSG_FUNCED_INTERNAL_CONFIGURE (//)
+Configure\tLaunch config editor
+;
+MSG_FUNCED_INTERNAL_CONTST (//)
+ContST\tRestart paused ST module
+;
+MSG_FUNCED_INTERNAL_COPY (//)
+Copy\tCopy selected entries
+;
+MSG_FUNCED_INTERNAL_COPYAS (//)
+CopyAs\tCopy with new names
+;
+MSG_FUNCED_INTERNAL_COPYWINDOW (//)
+CopyWindow\tCopy one window to other
+;
+MSG_FUNCED_INTERNAL_DATESTAMP (//)
+DateStamp\tModify file datestamps
+;
+MSG_FUNCED_INTERNAL_DEFAULTS (//)
+Defaults\tdefault configuration
+;
+MSG_FUNCED_INTERNAL_DELETE (//)
+Delete\tDelete selected entries
+;
+MSG_FUNCED_INTERNAL_DIRTREE (//)
+DirTree\tCreate directory tree
+;
+MSG_FUNCED_INTERNAL_DISKCOPY (//)
+Diskcopy\tCopy floppy disks
+;
+MSG_FUNCED_INTERNAL_DISKCOPYBG (//)
+DiskcopyBG\tDiskcopy in background
+;
+MSG_FUNCED_INTERNAL_DISKINFO (//)
+DiskInfo\tDisplay info on a disk
+;
+MSG_FUNCED_INTERNAL_DISPLAYDIR (//)
+DisplayDir\tUpdate directory display
+;
+MSG_FUNCED_INTERNAL_DOPUSTOBACK (//)
+DopusToBack\tMove screen to the back
+;
+MSG_FUNCED_INTERNAL_DOPUSTOFRONT (//)
+DopusToFront\tMove screen to the front
+;
+MSG_FUNCED_INTERNAL_ENCRYPT (//)
+Encrypt\tEncrypt selected files
+;
+MSG_FUNCED_INTERNAL_ERRORHELP (//)
+ErrorHelp\tHelp with DOS errors
+;
+MSG_FUNCED_INTERNAL_EXECUTE (//)
+Execute\tExecute batch files
+;
+MSG_FUNCED_INTERNAL_FINISHSECTION (//)
+FinishSection\tFinish above commands
+;
+MSG_FUNCED_INTERNAL_FORMAT (//)
+Format\tFormat floppy disks
+;
+MSG_FUNCED_INTERNAL_FORMATBG (//)
+FormatBG\tFormat in background
+;
+MSG_FUNCED_INTERNAL_GETDEVICES (//)
+GetDevices\tDisplay device list
+;
+MSG_FUNCED_INTERNAL_GETSIZES (//)
+GetSizes\ttotal dir sizes
+;
+MSG_FUNCED_INTERNAL_HELP (//)
+Help\tTurn help mode on or off
+;
+MSG_FUNCED_INTERNAL_HEXREAD (//)
+HexRead\tHexadecimal text viewer
+;
+MSG_FUNCED_INTERNAL_HUNT (//)
+Hunt\tSearch for filenames
+;
+MSG_FUNCED_INTERNAL_ICONIFY (//)
+Iconify\tIconify program
+;
+MSG_FUNCED_INTERNAL_ICONINFO (//)
+IconInfo\tinformation on icons
+;
+MSG_FUNCED_INTERNAL_INSTALL (//)
+Install\tMake disks bootable
+;
+MSG_FUNCED_INTERNAL_INSTALLBG (//)
+InstallBG\tInstall in background
+;
+MSG_FUNCED_INTERNAL_LASTSAVED (//)
+LastSaved\tRead last-saved config
+;
+MSG_FUNCED_INTERNAL_LOADCONFIG (//)
+LoadConfig\tLoad nominated config
+;
+MSG_FUNCED_INTERNAL_LOADSTRINGS (//)
+LoadStrings\tLoad a new string file
+;
+MSG_FUNCED_INTERNAL_LOOPPLAY (//)
+LoopPlay\tLoop-play sound files
+;
+MSG_FUNCED_INTERNAL_MAKEDIR (//)
+Makedir\tCreate a new directory
+;
+MSG_FUNCED_INTERNAL_MODIFY (//)
+Modify\tChange configuration
+;
+MSG_FUNCED_INTERNAL_MOVE (//)
+Move\tMove selected entries
+;
+MSG_FUNCED_INTERNAL_MOVEAS (//)
+MoveAs\tMove with new names
+;
+MSG_FUNCED_INTERNAL_NEWCLI (//)
+NewCLI\tOpen a new CLI window
+;
+MSG_FUNCED_INTERNAL_NONE (//)
+None\tDeselect all entries
+;
+MSG_FUNCED_INTERNAL_NOTIFY (//)
+Notify\tNotification requester
+;
+MSG_FUNCED_INTERNAL_OTHERWINDOW (//)
+OtherWindow\tActivate other window
+;
+MSG_FUNCED_INTERNAL_PARENT (//)
+Parent\tRead parent directory
+;
+MSG_FUNCED_INTERNAL_PARENTLIST (//)
+ParentList\tList parent directories
+;
+MSG_FUNCED_INTERNAL_PLAY (//)
+Play\tselected sound files
+;
+MSG_FUNCED_INTERNAL_PLAYST (//)
+PlayST\tPlay ST modules only
+;
+MSG_FUNCED_INTERNAL_PRINT (//)
+Print\tPrint selected files
+;
+MSG_FUNCED_INTERNAL_PRINTDIR (//)
+PrintDir\tdisplayed directory
+;
+MSG_FUNCED_INTERNAL_PROTECT (//)
+Protect\tModify protection bits
+;
+MSG_FUNCED_INTERNAL_QUIT (//)
+Quit\tQuit Directory Opus
+;
+MSG_FUNCED_INTERNAL_READ (//)
+Read\tPlain text viewer
+;
+MSG_FUNCED_INTERNAL_REDRAW (//)
+Redraw\tRedraw main screen
+;
+MSG_FUNCED_INTERNAL_RELABEL (//)
+Relabel\tChange disk names
+;
+MSG_FUNCED_INTERNAL_REMEMBER (//)
+Remember\tRemember config state
+;
+MSG_FUNCED_INTERNAL_RENAME (//)
+Rename\tRename selected entries
+;
+MSG_FUNCED_INTERNAL_RESCAN (//)
+Rescan\tReload current directory
+;
+MSG_FUNCED_INTERNAL_RESELECT (//)
+Reselect\tReselect entries
+;
+MSG_FUNCED_INTERNAL_RESTORE (//)
+Restore\tRestore remembered cfg.
+;
+MSG_FUNCED_INTERNAL_ROOT (//)
+Root\tRead root directory
+;
+MSG_FUNCED_INTERNAL_RUN (//)
+Run\tRun a program
+;
+MSG_FUNCED_INTERNAL_SAVECONFIG (//)
+SaveConfig\tSave current config
+;
+MSG_FUNCED_INTERNAL_SCANDIR (//)
+ScanDir\tLoad nominated directory
+;
+MSG_FUNCED_INTERNAL_SEARCH (//)
+Search\tSearch files for a string
+;
+MSG_FUNCED_INTERNAL_SELECT (//)
+Select\tWildcard-select entries
+;
+MSG_FUNCED_INTERNAL_SETVAR (//)
+SetVar\tSet an internal variable
+;
+MSG_FUNCED_INTERNAL_SHOW (//)
+Show\tDisplay graphic images
+;
+MSG_FUNCED_INTERNAL_SMARTREAD (//)
+SmartRead\tAuto Hex or Text viewer
+;
+MSG_FUNCED_INTERNAL_STOPST (//)
+StopST\tStop ST module playing
+;
+MSG_FUNCED_INTERNAL_SWAPWINDOW (//)
+SwapWindow\tSwap contents of windows
+;
+MSG_FUNCED_INTERNAL_TECHSUPPORT (//)
+TechSupport\tShow Tech Support info
+;
+MSG_FUNCED_INTERNAL_TOGGLE (//)
+Toggle\tToggle all selections
+;
+MSG_FUNCED_INTERNAL_UNICONIFY (//)
+UnIconify\tUn-iconify program
+;
+MSG_FUNCED_INTERNAL_USER1 (//)
+User1\tCustom filetype action 1
+;
+MSG_FUNCED_INTERNAL_USER2 (//)
+User2\tCustom filetype action 2
+;
+MSG_FUNCED_INTERNAL_USER3 (//)
+User3\tCustom filetype action 3
+;
+MSG_FUNCED_INTERNAL_USER4 (//)
+User4\tCustom filetype action 4
+;
+MSG_FUNCED_INTERNAL_VERIFY (//)
+Verify\tVerify function
+;
+MSG_FUNCED_INTERNAL_VERSION (//)
+Version\tDisplay version numbers
+;
+;
+;
+; List of arguments
+;
+MSG_FUNCED_ARGUMENT_DEST (21000//)
+{d}\tDestination directory name
+;
+MSG_FUNCED_ARGUMENT_FIRST_PATH (//)
+{f}\tFirst selected entry (with path)
+;
+MSG_FUNCED_ARGUMENT_ALL_PATH (//)
+{F}\tAll selected entries (with paths)
+;
+MSG_FUNCED_ARGUMENT_FIRST_PATH_NOUNSEL (//)
+{fu}\tFirst entry (path ; no unselect)
+;
+MSG_FUNCED_ARGUMENT_ALL_PATH_NOUNSEL (//)
+{Fu}\tAll entries (path ; no unselect)
+;
+MSG_FUNCED_ARGUMENT_FIRST_NAME (//)
+{o}\tFirst selected entry (name only)
+;
+MSG_FUNCED_ARGUMENT_ALL_NAME (//)
+{O}\tAll selected entries (names only)
+;
+MSG_FUNCED_ARGUMENT_FIRST_NAME_NOUNSEL (//)
+{ou}\tFirst entry (name ; no unselect)
+;
+MSG_FUNCED_ARGUMENT_ALL_NAME_NOUNSEL (//)
+{Ou}\tAll entries (name ; no unselect)
+;
+MSG_FUNCED_ARGUMENT_QUERY (//)
+{Q}\tQuery the value of something
+;
+MSG_FUNCED_ARGUMENT_DIR_REQ (//)
+{Rd}\tDirectory requester
+;
+MSG_FUNCED_ARGUMENT_FILE_REQ (//)
+{Rf}\tFile requester
+;
+MSG_FUNCED_ARGUMENT_MULTI_REQ (//)
+{RF}\tMulti-select file requester
+;
+MSG_FUNCED_ARGUMENT_FONT_REQ (//)
+{Ro}\tFont requester
+;
+MSG_FUNCED_ARGUMENT_STRING_REQ (//)
+{Rs}\tString requester
+;
+MSG_FUNCED_ARGUMENT_SOURCE (//)
+{s}\tSource directory name
+;
+MSG_FUNCED_ARGUMENT_VARIABLE (//)
+{v}\tPre-defined variable
+;
+;
+;
+; About text
+;
+MSG_ABOUT_TITLE (22000//)
+ConfigOpus
+;
+MSG_ABOUT_COPYRIGHT (//)
+Copyright (c) 1994 Jonathan Potter
+;
+MSG_ABOUT_VERSION (//)
+Version %s
+;
+MSG_ABOUT_COMPILE_DATE (//)
+Compile date : %s
+;

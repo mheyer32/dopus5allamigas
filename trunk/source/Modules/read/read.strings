@@ -1,0 +1,323 @@
+#ifndef READ_H
+#define READ_H
+
+
+/****************************************************************************/
+
+
+/* This file was created automatically by CatComp.
+ * Do NOT edit by hand!
+ */
+
+
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+
+#ifdef CATCOMP_ARRAY
+#undef CATCOMP_NUMBERS
+#undef CATCOMP_STRINGS
+#define CATCOMP_NUMBERS
+#define CATCOMP_STRINGS
+#endif
+
+#ifdef CATCOMP_BLOCK
+#undef CATCOMP_STRINGS
+#define CATCOMP_STRINGS
+#endif
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_NUMBERS
+
+#define MSG_READING_FILE 1000
+#define MSG_CANT_OPEN_FILE 1001
+#define MSG_FILE_TITLE 1002
+#define MSG_MENU_FILE 1003
+#define MSG_MENU_NEXT 1004
+#define MSG_MENU_SEARCH 1005
+#define MSG_MENU_REPEAT 1006
+#define MSG_MENU_PRINT 1007
+#define MSG_MENU_QUIT 1008
+#define MSG_MENU_SETTINGS 1009
+#define MSG_MENU_TAB 1010
+#define MSG_MENU_SAVE 1011
+#define MSG_ENTER_SEARCH_STRING 1012
+#define MSG_SEARCH_NO_CASE 1013
+#define MSG_SEARCH_WILD 1014
+#define MSG_SEARCH_ONLYWORD 1015
+#define MSG_SEARCH_REVERSE 1016
+#define MSG_OK_BUTTON 1017
+#define MSG_CANCEL_BUTTON 1018
+#define MSG_STRING_NOT_FOUND 1019
+#define MSG_READ_DESCRIPTION 1020
+#define MSG_MENU_MODE 1021
+#define MSG_MENU_MODE_NORMAL 1022
+#define MSG_MENU_MODE_ANSI 1023
+#define MSG_MENU_MODE_HEX 1024
+#define MSG_MENU_USE_SCREEN 1025
+#define MSG_MENU_SCREEN_MODE 1026
+#define MSG_MENU_SELECT_FONT 1027
+#define MSG_SCREEN_TITLE 1028
+#define MSG_MENU_SAVE_AS 1029
+#define MSG_ENTER_FILENAME 1030
+#define MSG_IO_ERROR 1031
+#define MSG_ERROR_CODE 1032
+#define MSG_MENU_TO_EDITOR 1033
+#define MSG_MENU_SELECT_EDITOR 1034
+#define MSG_OK_CANCEL_BUTTON 1035
+#define MSG_SELECT_EDITOR 1036
+#define MSG_READING_FILE_TITLE 1037
+#define MSG_COUNTING_LINES 1038
+#define MSG_CLOSE 1039
+
+#endif /* CATCOMP_NUMBERS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_STRINGS
+
+#define MSG_READING_FILE_STR "Reading file '%s'..."
+#define MSG_CANT_OPEN_FILE_STR "Unable to open file '%s'!"
+#define MSG_FILE_TITLE_STR "%s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld"
+#define MSG_MENU_FILE_STR "File"
+#define MSG_MENU_NEXT_STR "Next"
+#define MSG_MENU_SEARCH_STR "Search..."
+#define MSG_MENU_REPEAT_STR "Repeat Search  "
+#define MSG_MENU_PRINT_STR "Print..."
+#define MSG_MENU_QUIT_STR "Quit"
+#define MSG_MENU_SETTINGS_STR "Settings"
+#define MSG_MENU_TAB_STR "Tab Size"
+#define MSG_MENU_SAVE_STR "Save Settings"
+#define MSG_ENTER_SEARCH_STRING_STR "Enter text to search for."
+#define MSG_SEARCH_NO_CASE_STR "_Ignore Case"
+#define MSG_SEARCH_WILD_STR "_Wildcards"
+#define MSG_SEARCH_ONLYWORD_STR "_Only Words"
+#define MSG_SEARCH_REVERSE_STR "_Reverse Search"
+#define MSG_OK_BUTTON_STR "OK"
+#define MSG_CANCEL_BUTTON_STR "Cancel"
+#define MSG_STRING_NOT_FOUND_STR "String not found."
+#define MSG_READ_DESCRIPTION_STR "Read text files"
+#define MSG_MENU_MODE_STR "Mode"
+#define MSG_MENU_MODE_NORMAL_STR "Normal"
+#define MSG_MENU_MODE_ANSI_STR "ANSI"
+#define MSG_MENU_MODE_HEX_STR "Hex"
+#define MSG_MENU_USE_SCREEN_STR "Use Screen"
+#define MSG_MENU_SCREEN_MODE_STR "Pick Screen Mode..."
+#define MSG_MENU_SELECT_FONT_STR "Pick Font..."
+#define MSG_SCREEN_TITLE_STR "Directory Opus Text Viewer"
+#define MSG_MENU_SAVE_AS_STR "Save As..."
+#define MSG_ENTER_FILENAME_STR "Enter Filename"
+#define MSG_IO_ERROR_STR "IO Error"
+#define MSG_ERROR_CODE_STR "DOS error %ld"
+#define MSG_MENU_TO_EDITOR_STR "To Editor..."
+#define MSG_MENU_SELECT_EDITOR_STR "Pick Editor..."
+#define MSG_OK_CANCEL_BUTTON_STR "OK|Cancel"
+#define MSG_SELECT_EDITOR_STR "Enter function to call text editor"
+#define MSG_READING_FILE_TITLE_STR "Reading file..."
+#define MSG_COUNTING_LINES_STR "Counting lines..."
+#define MSG_CLOSE_STR "Close"
+
+#endif /* CATCOMP_STRINGS */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_ARRAY
+
+struct CatCompArrayType
+{
+    LONG   cca_ID;
+    STRPTR cca_Str;
+};
+
+static const struct CatCompArrayType CatCompArray[] =
+{
+    {MSG_READING_FILE,(STRPTR)MSG_READING_FILE_STR},
+    {MSG_CANT_OPEN_FILE,(STRPTR)MSG_CANT_OPEN_FILE_STR},
+    {MSG_FILE_TITLE,(STRPTR)MSG_FILE_TITLE_STR},
+    {MSG_MENU_FILE,(STRPTR)MSG_MENU_FILE_STR},
+    {MSG_MENU_NEXT,(STRPTR)MSG_MENU_NEXT_STR},
+    {MSG_MENU_SEARCH,(STRPTR)MSG_MENU_SEARCH_STR},
+    {MSG_MENU_REPEAT,(STRPTR)MSG_MENU_REPEAT_STR},
+    {MSG_MENU_PRINT,(STRPTR)MSG_MENU_PRINT_STR},
+    {MSG_MENU_QUIT,(STRPTR)MSG_MENU_QUIT_STR},
+    {MSG_MENU_SETTINGS,(STRPTR)MSG_MENU_SETTINGS_STR},
+    {MSG_MENU_TAB,(STRPTR)MSG_MENU_TAB_STR},
+    {MSG_MENU_SAVE,(STRPTR)MSG_MENU_SAVE_STR},
+    {MSG_ENTER_SEARCH_STRING,(STRPTR)MSG_ENTER_SEARCH_STRING_STR},
+    {MSG_SEARCH_NO_CASE,(STRPTR)MSG_SEARCH_NO_CASE_STR},
+    {MSG_SEARCH_WILD,(STRPTR)MSG_SEARCH_WILD_STR},
+    {MSG_SEARCH_ONLYWORD,(STRPTR)MSG_SEARCH_ONLYWORD_STR},
+    {MSG_SEARCH_REVERSE,(STRPTR)MSG_SEARCH_REVERSE_STR},
+    {MSG_OK_BUTTON,(STRPTR)MSG_OK_BUTTON_STR},
+    {MSG_CANCEL_BUTTON,(STRPTR)MSG_CANCEL_BUTTON_STR},
+    {MSG_STRING_NOT_FOUND,(STRPTR)MSG_STRING_NOT_FOUND_STR},
+    {MSG_READ_DESCRIPTION,(STRPTR)MSG_READ_DESCRIPTION_STR},
+    {MSG_MENU_MODE,(STRPTR)MSG_MENU_MODE_STR},
+    {MSG_MENU_MODE_NORMAL,(STRPTR)MSG_MENU_MODE_NORMAL_STR},
+    {MSG_MENU_MODE_ANSI,(STRPTR)MSG_MENU_MODE_ANSI_STR},
+    {MSG_MENU_MODE_HEX,(STRPTR)MSG_MENU_MODE_HEX_STR},
+    {MSG_MENU_USE_SCREEN,(STRPTR)MSG_MENU_USE_SCREEN_STR},
+    {MSG_MENU_SCREEN_MODE,(STRPTR)MSG_MENU_SCREEN_MODE_STR},
+    {MSG_MENU_SELECT_FONT,(STRPTR)MSG_MENU_SELECT_FONT_STR},
+    {MSG_SCREEN_TITLE,(STRPTR)MSG_SCREEN_TITLE_STR},
+    {MSG_MENU_SAVE_AS,(STRPTR)MSG_MENU_SAVE_AS_STR},
+    {MSG_ENTER_FILENAME,(STRPTR)MSG_ENTER_FILENAME_STR},
+    {MSG_IO_ERROR,(STRPTR)MSG_IO_ERROR_STR},
+    {MSG_ERROR_CODE,(STRPTR)MSG_ERROR_CODE_STR},
+    {MSG_MENU_TO_EDITOR,(STRPTR)MSG_MENU_TO_EDITOR_STR},
+    {MSG_MENU_SELECT_EDITOR,(STRPTR)MSG_MENU_SELECT_EDITOR_STR},
+    {MSG_OK_CANCEL_BUTTON,(STRPTR)MSG_OK_CANCEL_BUTTON_STR},
+    {MSG_SELECT_EDITOR,(STRPTR)MSG_SELECT_EDITOR_STR},
+    {MSG_READING_FILE_TITLE,(STRPTR)MSG_READING_FILE_TITLE_STR},
+    {MSG_COUNTING_LINES,(STRPTR)MSG_COUNTING_LINES_STR},
+    {MSG_CLOSE,(STRPTR)MSG_CLOSE_STR},
+};
+
+#endif /* CATCOMP_ARRAY */
+
+
+/****************************************************************************/
+
+
+#ifdef CATCOMP_BLOCK
+
+static const char CatCompBlock[] =
+{
+    "\x00\x00\x03\xE8\x00\x16"
+    MSG_READING_FILE_STR "\x00\x00"
+    "\x00\x00\x03\xE9\x00\x1A"
+    MSG_CANT_OPEN_FILE_STR "\x00"
+    "\x00\x00\x03\xEA\x00\x30"
+    MSG_FILE_TITLE_STR "\x00"
+    "\x00\x00\x03\xEB\x00\x06"
+    MSG_MENU_FILE_STR "\x00\x00"
+    "\x00\x00\x03\xEC\x00\x06"
+    MSG_MENU_NEXT_STR "\x00\x00"
+    "\x00\x00\x03\xED\x00\x0A"
+    MSG_MENU_SEARCH_STR "\x00"
+    "\x00\x00\x03\xEE\x00\x10"
+    MSG_MENU_REPEAT_STR "\x00"
+    "\x00\x00\x03\xEF\x00\x0A"
+    MSG_MENU_PRINT_STR "\x00\x00"
+    "\x00\x00\x03\xF0\x00\x06"
+    MSG_MENU_QUIT_STR "\x00\x00"
+    "\x00\x00\x03\xF1\x00\x0A"
+    MSG_MENU_SETTINGS_STR "\x00\x00"
+    "\x00\x00\x03\xF2\x00\x0A"
+    MSG_MENU_TAB_STR "\x00\x00"
+    "\x00\x00\x03\xF3\x00\x0E"
+    MSG_MENU_SAVE_STR "\x00"
+    "\x00\x00\x03\xF4\x00\x1A"
+    MSG_ENTER_SEARCH_STRING_STR "\x00"
+    "\x00\x00\x03\xF5\x00\x0E"
+    MSG_SEARCH_NO_CASE_STR "\x00\x00"
+    "\x00\x00\x03\xF6\x00\x0C"
+    MSG_SEARCH_WILD_STR "\x00\x00"
+    "\x00\x00\x03\xF7\x00\x0C"
+    MSG_SEARCH_ONLYWORD_STR "\x00"
+    "\x00\x00\x03\xF8\x00\x10"
+    MSG_SEARCH_REVERSE_STR "\x00"
+    "\x00\x00\x03\xF9\x00\x04"
+    MSG_OK_BUTTON_STR "\x00\x00"
+    "\x00\x00\x03\xFA\x00\x08"
+    MSG_CANCEL_BUTTON_STR "\x00\x00"
+    "\x00\x00\x03\xFB\x00\x12"
+    MSG_STRING_NOT_FOUND_STR "\x00"
+    "\x00\x00\x03\xFC\x00\x10"
+    MSG_READ_DESCRIPTION_STR "\x00"
+    "\x00\x00\x03\xFD\x00\x06"
+    MSG_MENU_MODE_STR "\x00\x00"
+    "\x00\x00\x03\xFE\x00\x08"
+    MSG_MENU_MODE_NORMAL_STR "\x00\x00"
+    "\x00\x00\x03\xFF\x00\x06"
+    MSG_MENU_MODE_ANSI_STR "\x00\x00"
+    "\x00\x00\x04\x00\x00\x04"
+    MSG_MENU_MODE_HEX_STR "\x00"
+    "\x00\x00\x04\x01\x00\x0C"
+    MSG_MENU_USE_SCREEN_STR "\x00\x00"
+    "\x00\x00\x04\x02\x00\x14"
+    MSG_MENU_SCREEN_MODE_STR "\x00"
+    "\x00\x00\x04\x03\x00\x0E"
+    MSG_MENU_SELECT_FONT_STR "\x00\x00"
+    "\x00\x00\x04\x04\x00\x1C"
+    MSG_SCREEN_TITLE_STR "\x00\x00"
+    "\x00\x00\x04\x05\x00\x0C"
+    MSG_MENU_SAVE_AS_STR "\x00\x00"
+    "\x00\x00\x04\x06\x00\x10"
+    MSG_ENTER_FILENAME_STR "\x00\x00"
+    "\x00\x00\x04\x07\x00\x0A"
+    MSG_IO_ERROR_STR "\x00\x00"
+    "\x00\x00\x04\x08\x00\x0E"
+    MSG_ERROR_CODE_STR "\x00"
+    "\x00\x00\x04\x09\x00\x0E"
+    MSG_MENU_TO_EDITOR_STR "\x00\x00"
+    "\x00\x00\x04\x0A\x00\x10"
+    MSG_MENU_SELECT_EDITOR_STR "\x00\x00"
+    "\x00\x00\x04\x0B\x00\x0A"
+    MSG_OK_CANCEL_BUTTON_STR "\x00"
+    "\x00\x00\x04\x0C\x00\x24"
+    MSG_SELECT_EDITOR_STR "\x00\x00"
+    "\x00\x00\x04\x0D\x00\x10"
+    MSG_READING_FILE_TITLE_STR "\x00"
+    "\x00\x00\x04\x0E\x00\x12"
+    MSG_COUNTING_LINES_STR "\x00"
+    "\x00\x00\x04\x0F\x00\x06"
+    MSG_CLOSE_STR "\x00"
+};
+
+#endif /* CATCOMP_BLOCK */
+
+
+/****************************************************************************/
+
+
+struct LocaleInfo
+{
+    APTR li_LocaleBase;
+    APTR li_Catalog;
+};
+
+
+#ifdef CATCOMP_CODE
+
+STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+{
+LONG   *l;
+UWORD  *w;
+STRPTR  builtIn;
+
+    l = (LONG *)CatCompBlock;
+
+    while (*l != stringNum)
+    {
+        w = (UWORD *)((ULONG)l + 4);
+        l = (LONG *)((ULONG)l + (ULONG)*w + 6);
+    }
+    builtIn = (STRPTR)((ULONG)l + 6);
+
+#define XLocaleBase LocaleBase
+#define LocaleBase li->li_LocaleBase
+    
+    if (LocaleBase)
+        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
+#define LocaleBase XLocaleBase
+#undef XLocaleBase
+
+    return(builtIn);
+}
+
+
+#endif /* CATCOMP_CODE */
+
+
+/****************************************************************************/
+
+
+#endif /* READ_H */

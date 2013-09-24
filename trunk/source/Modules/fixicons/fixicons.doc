@@ -1,0 +1,6 @@
+New fixicons module features:
+
+63.3
+	15.5.98	Added new switch REPORT to output a report on the results.
+
+	26.5.98 Fixed SYNCOPUSTOWB option to save icons only if they have changed.

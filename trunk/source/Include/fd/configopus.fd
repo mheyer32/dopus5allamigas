@@ -1,0 +1,19 @@
+* "configopus.library"
+##base _ConfigOpusBase
+##bias 30
+*
+##public
+Config_Settings(env,screen,ipc,mainipc,name)(a0/a1/a2/a3,d0)
+Config_Environment(env,screen,table,ipc,mainipc,alloc,change,name,scripts)(a0/a1/a2/a3/a4,d0,a5,d1/d2)
+Config_removed()()
+Config_Buttons(bank,ipc,owner,screen,cmdlist)(a0/a1/a2/a3,d0)
+ConvertConfig(name,screen,owner)(a0/a1/a2)
+Config_Filetypes(screen,ipc,owner,cmdlist,name)(a0/a1/a2,d0,a3)
+Config_ListerButtons(name,ipc,owner,screen,bank,cmdlist,init)(a0/a1/a2/a3/a4,d0/d1)
+Config_Menu(name,ipc,owner,screen,bank,title,cmdlist,def,hotkeys,scripts)(a0/a1/a2/a3/a4/a5,d0/d1/d2/d3)
+Config_Menus(ipc,owner,screen,menu,cmdlist,type,name)(a0/a1/a2/a3,d0/d1/d2)
+EditFiletype(type,window,ipc,dopus,flags)(a0/a1/a2/a3,d0)
+Config_EditFunction(ipc,opus,window,func,memory,cmdlist)(a0/a1/a2/a3/a4,d0)
+ShowPaletteBox(window,data,fgpen,bgpen,font,spec,pen)(a0/a1/a2/a3/a4/a5,d0)
+FunctionExportASCII(name,button,func,type)(a0/a1/a2,d0)
+##end
