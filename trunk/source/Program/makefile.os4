@@ -39,4 +39,5 @@ clean:
 .PHONY install:
 install:
 	@copy $(TARGET) DOpus5:
+	@echo "$(TARGET) installed to DOpus5:"
 

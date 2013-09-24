@@ -41,8 +41,13 @@ void wb_do_startup(void)
 	// Change to wbstartup directory
 	if (!(lock=Lock("sys:wbstartup",ACCESS_READ)))
 	{
-		Att_RemList(launch_list,0);
-		return;
+		// if no wbstartup drawer found, use DOpus's own drawer
+		if (!(lock=Lock("dopus5:wbstartup",ACCESS_READ)))
+		{
+			Att_RemList(launch_list,0);
+			
+			return;
+		}
 	}
 	dirlock=DupLock(lock);
 	olddir=CurrentDir(lock);
