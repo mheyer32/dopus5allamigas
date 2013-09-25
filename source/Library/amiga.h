@@ -72,6 +72,8 @@
 
 #ifdef __amigaos4__
 
+#define KPrintF DebugPrintF  // just in case anyone will use KPrintF and do not want to add -ldebug.
+
 #define GetSemaphore	L_GetSemaphore
 #define FreeSemaphore	L_FreeSemaphore
 #define GetDosPathList	L_GetDosPathList
