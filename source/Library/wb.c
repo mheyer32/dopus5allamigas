@@ -35,7 +35,7 @@ For more information on Directory Opus for Windows please see:
 #define UtilityBase	(wb_data->utility_base)
 
 
-// AddAppWindow()
+//// AddAppWindow patch
 PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULONG, userdata, a0, struct Window *, window, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
 {
 	struct MyLibrary *libbase;
@@ -78,7 +78,7 @@ PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULON
 PATCH_END
 
 
-// AddAppMenuItem()
+//// AddAppMenuItem patch
 PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, ULONG, userdata, a0, char *, text, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
 {
 	struct MyLibrary *libbase;
@@ -143,7 +143,7 @@ PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, 
 PATCH_END
 
 
-// AddAppIcon()
+//// AddAppIcon patch
 PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, userdata, a0, char *, text, a1, struct MsgPort *, port, a2, BPTR, lock, a3, struct DiskObject *, icon, a4, struct TagItem *, tags)
 {
 	struct MyLibrary *libbase;
@@ -317,7 +317,7 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 PATCH_END
 
 
-// RemoveAppWindow()
+//// RemoveAppWindow patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppWindow, a0, struct AppWindow *, window)
 {
 	AppEntry *entry;
@@ -352,7 +352,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppWindow, a0, struct AppWindow *, window)
 PATCH_END
 
 
-// RemoveAppMenuItem()
+//// RemoveAppMenuItem patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 {
 	AppEntry *entry;
@@ -390,7 +390,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 PATCH_END
 
 
-// RemoveAppIcon()
+//// RemoveAppIcon patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 {
 	AppEntry *entry;
@@ -792,7 +792,7 @@ void LIBFUNC L_UnlockAppList(REG(a6, struct MyLibrary *libbase))
 }
 
 
-// Close Workbench screen
+//// CloseWorkbench patch
 PATCHED_0(LONG, LIBFUNC L_WB_CloseWorkBench)
 {
 	WB_Data *wb_data;
@@ -817,7 +817,7 @@ PATCHED_0(LONG, LIBFUNC L_WB_CloseWorkBench)
 PATCH_END
 
 
-// Open Workbench screen
+//// OpenWorkbench patch
 PATCHED_0(ULONG,LIBFUNC L_WB_OpenWorkBench)
 {
 	WB_Data *wb_data;
@@ -843,13 +843,13 @@ PATCH_END
 
 
 #ifdef __amigaos4__
-//OpenWorkbenchObject();
+//// OpenWorkbenchObject patch
 PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 
-	KPrintF("we in the patched L_WB_OpenWorkbenchObject !\n");	
+	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -857,26 +857,30 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, co
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
-// -----------------
-	
-	// patched code going here
-	// return result or whatever we will need there
- 
- // -----------------
 
-	// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-	return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECT], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	if( FindPort( "WORKBENCH" ) )
+	{
+		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
+
+		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECT], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	}
+	else
+	{
+		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
+	}
 	
+	return 0;
 }
 PATCH_END
 
-//OpenWorkbenchObjectA();
+//// OpenWorkbenchObjectA patch
 PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 
-	KPrintF("we in the patched L_WB_OpenWorkbenchObjectA !\n");	
+	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -884,16 +888,20 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
-// -----------------
-	
-	// patched code going here
-	// return result or whatever we will need there
- 
- // -----------------
 
-	// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-	return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	if( FindPort( "WORKBENCH" ) )
+	{
+		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
+
+		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	}
+	else
+	{
+		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
+	}
 	
+	return 0;
 }
 PATCH_END
 
@@ -1274,7 +1282,7 @@ if (((struct NewIconDiskObject *)icon)->nido_Flags&NIDOF_REMAPPED)
 }
 
 
-// AddPort patch
+//// AddPort patch
 PATCHED_1(void, LIBFUNC L_WB_AddPort, a1, struct MsgPort *, port)
 {
 	struct MyLibrary *libbase;
@@ -1304,7 +1312,7 @@ PATCHED_1(void, LIBFUNC L_WB_AddPort, a1, struct MsgPort *, port)
 PATCH_END
 
 
-// CloseWindow patch
+//// CloseWindow patch
 PATCHED_1(void, LIBFUNC L_WB_CloseWindow, a0, struct Window *, window)
 {
 	struct PubScreenNode *node;
@@ -1428,7 +1436,7 @@ struct Library *wb_get_patchbase(short type,struct LibData *data)
 }
 
 
-// CloseWindow patch
+//// CloseWindow patch
 PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, struct Screen *, screen)
 {
 	struct MyLibrary *libbase;
@@ -1489,7 +1497,7 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 PATCH_END
 
 
-// Patched AddTask (for statistics)
+//// AddTask patch (for statistics)
 PATCHED_3(APTR, ASM L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initialPC, a3, APTR, finalPC)
 {
 	struct MyLibrary *libbase;
@@ -1511,7 +1519,7 @@ PATCHED_3(APTR, ASM L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initial
 PATCH_END
 
 
-// Patched RemTask (for statistics)
+//// RemTask patch (for statistics)
 PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 {
 	struct MyLibrary *libbase;
@@ -1533,7 +1541,7 @@ PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 PATCH_END
 
 
-// Patched FindTask
+//// FindTask patch
 PATCHED_1(struct Task *, ASM L_PatchedFindTask, a1, char *, name)
 {
 	struct MyLibrary *libbase;
@@ -1568,7 +1576,7 @@ PATCHED_1(struct Task *, ASM L_PatchedFindTask, a1, char *, name)
 PATCH_END
 
 
-// OpenWindowTags patch
+//// OpenWindowTags patch
 PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow *, newwin, a1, struct TagItem *, tags)
 {
 	struct MyLibrary *libbase;
@@ -1784,7 +1792,7 @@ extern void L_PatchedWrite_stubs();
 extern void L_PatchedRelabel_stubs();
 #endif
 
-// Patch functions
+//// Patch functions
 static PatchList
 	wb_patches[WB_PATCH_COUNT]={
 	
@@ -1808,7 +1816,7 @@ static PatchList
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
 		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
 #ifdef __amigaos4__ 
-		// we path on os4 2 more function: OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running programms.
+		// we pacth on AmigaOS4.x 2 more function: OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running programms.
 		// while it sound strange why to path OWO if we patch already OWOA (which is called from OWO), it still proved that SetMethod() on os4
 		// loose some vector in the middle and when OWO calls it didn't point directly on patched OWOA. So we done it 2 times.
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
@@ -1819,8 +1827,13 @@ static PatchList
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
 		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),				L_PatchedCreateDir,			WB_PATCH_DOSFUNC),
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),			L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
-		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),			L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#ifdef DOS_OBSOLETE_H // later AmigaOS4 SDKs have renamed some DOS vectors, and the old ones are defined in dos/obsolete.h 
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#else
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#endif
 		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),			L_PatchedSetComment,		WB_PATCH_DOSFUNC),
 		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),			L_PatchedSetProtection,		WB_PATCH_DOSFUNC),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),				L_PatchedRename,			WB_PATCH_DOSFUNC),
