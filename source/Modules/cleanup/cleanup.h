@@ -27,4 +27,5 @@ For more information on Directory Opus for Windows please see:
 #include "cleanup.strings"
 #include "module_deps.h"
  
- #endif
+#endif
+
