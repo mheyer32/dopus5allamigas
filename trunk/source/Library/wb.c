@@ -868,6 +868,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, co
 	else
 	{
 		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
+		L_WB_Launch( name, NULL, FALSE );
 	}
 	
 	return 0;
@@ -899,6 +900,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 	else
 	{
 		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
+		L_WB_Launch( name, NULL, FALSE );
 	}
 	
 	return 0;
