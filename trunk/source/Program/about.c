@@ -23,14 +23,18 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 #include <proto/module.h>
+#include <version/dopus_version.h>
 
-extern short version_num;
-extern char *version_string;
+// version_num is actually revision number & used elsewhere in the program
+short version_num = PROG_REVISION;
+char *version_string="Magellan II";
+
+char *_version_str="\0$VER: DirectoryOpus "PROG_STRING;
 
 // Show about requester
 void show_about(struct Screen *screen,IPCData *ipc)
 {
-	static const char about_1[] = "(c) Copyright 1998 Jonathan Potter & GPSoftware";
+	static const char about_1[] = COPYRIGHT;
 	static const char about_2[] = "Written by Jonathan Potter";
 
 	char buf[80],*buffer;
@@ -43,7 +47,7 @@ void show_about(struct Screen *screen,IPCData *ipc)
 		return;
 
 	// Build lines
-	lsprintf(buf,"%s %ld.%ld %s",(IPTR)dopus_name,5,version_num,(IPTR)version_string);
+	lsprintf(buf,"%s %ld.%ld %s",(IPTR)dopus_name,PROG_VERSION,PROG_REVISION,(IPTR)version_string);
 	Att_NewNode(list,buf,2,0);
 	Att_NewNode(list,about_1,2,0);
 	Att_NewNode(list,about_2,2,0);

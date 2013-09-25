@@ -1,6 +1,9 @@
+// transforms a define into a string
+#define STRI(x)  STRI2(x)
+#define STRI2(x) #x
 
 //set the compile date from the makefile date definition
-#define DOPUSDATE STR(COMPDATE)
+#define DOPUSDATE STRI(COMPDATE)
 
 // set the program version/revision
 #define PROG_VERSION    5
@@ -26,9 +29,9 @@
 #endif
 
 // set the version/revision strings
-#define PROG_STRING STR(PROG_VERSION)"."STR(PROG_REVISION)" "STR(PLATFORM)" ("DOPUSDATE")"
-#define LIB_STRING STR(LIB_VERSION)"."STR(LIB_REVISION)" "STR(PLATFORM)" ("DOPUSDATE")"
-#define CMD_STRING STR(CMD_VERSION)"."STR(CMD_REVISION)" "STR(PLATFORM)" ("DOPUSDATE")"
+#define PROG_STRING STRI(PROG_VERSION)"."STRI(PROG_REVISION)" "STRI(PLATFORM)" ("DOPUSDATE")"
+#define LIB_STRING STRI(LIB_VERSION)"."STRI(LIB_REVISION)" "STRI(PLATFORM)" ("DOPUSDATE")"
+#define CMD_STRING STRI(CMD_VERSION)"."STRI(CMD_REVISION)" "STRI(PLATFORM)" ("DOPUSDATE")"
 
 #define COPYRIGHT  " Copyright (c) 2012-2013 dopus5 Open Source Team "
 

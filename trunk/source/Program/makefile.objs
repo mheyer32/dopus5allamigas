@@ -1,5 +1,4 @@
 COMMON_OBJS =	data.o \
-	version.o \
 	string_data.o \
 	function_data.o \
 	menu_data.o \

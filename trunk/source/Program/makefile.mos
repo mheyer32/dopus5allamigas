@@ -2,11 +2,14 @@
 
 include makefile.objs
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 TARGET   := DirectoryOpus
 OPTIMIZE := -O2
 DEBUG    :=
 DEBUGSYM :=
-OPTIONS  := $(OPTIMIZE) -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H
+OPTIONS  := $(OPTIMIZE) -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
