@@ -1829,13 +1829,8 @@ static PatchList
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
 		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),				L_PatchedCreateDir,			WB_PATCH_DOSFUNC),
-#ifdef DOS_OBSOLETE_H // later AmigaOS4 SDKs have renamed some DOS vectors, and the old ones are defined in dos/obsolete.h 
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
-		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
-#else
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
-		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
-#endif
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
 		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),			L_PatchedSetComment,		WB_PATCH_DOSFUNC),
 		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),			L_PatchedSetProtection,		WB_PATCH_DOSFUNC),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),				L_PatchedRename,			WB_PATCH_DOSFUNC),
