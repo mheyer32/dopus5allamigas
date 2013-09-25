@@ -842,6 +842,35 @@ PATCHED_0(ULONG,LIBFUNC L_WB_OpenWorkBench)
 PATCH_END
 
 
+#ifdef __amigaos4__
+PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, STRPTR, name, a1, struct TagItem *, tags)
+{
+	WB_Data *wb_data;
+	struct MyLibrary *libbase;
+	ULONG result;
+
+	// Open library
+	if (!(libbase=GET_DOPUSLIB))
+		return 0;
+
+	// Get Workbench data pointer
+	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
+// -----------------
+
+	KPrintF("we in the patched L_WB_OpenWorkbenchObject !\n");
+	// patched code going here
+	// return result or whatever we will need there
+ 
+ // -----------------
+
+	// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+	return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECT], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	
+}
+PATCH_END
+#endif
+
+
 // Change an AppIcon's image
 void LIBFUNC L_ChangeAppIcon(
 	REG(a0, APTR appicon),
@@ -1740,33 +1769,36 @@ static PatchList
 	// pragmas/wb_pragmas.h, pragmas/intuition_pragmas.h
 	// pragmas/icon_pragmas.h, pragmas/exec_pragmas.h and pragmas/dos_pragmas.h
 	
-		PATCH(-8 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppWindowA),		L_WB_AddAppWindow,		WB_PATCH_WORKBENCH)	,		
-		PATCH(-9 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppWindow),	L_WB_RemoveAppWindow,	WB_PATCH_WORKBENCH),
-		PATCH(-10 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppIconA),		L_WB_AddAppIcon,		WB_PATCH_WORKBENCH),
-		PATCH(-11 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppIcon),		L_WB_RemoveAppIcon,		WB_PATCH_WORKBENCH),
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppMenuItemA),	L_WB_AddAppMenuItem,	WB_PATCH_WORKBENCH),
-		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppMenuItem),	L_WB_RemoveAppMenuItem,	WB_PATCH_WORKBENCH),
-		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),	L_WB_CloseWorkBench,	WB_PATCH_INTUITION),
-		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),		L_WB_OpenWorkBench,		WB_PATCH_INTUITION),
-		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace, 		PutDiskObject),		L_WB_PutDiskObject,		WB_PATCH_ICON),
-		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),	L_WB_DeleteDiskObject,	WB_PATCH_ICON),
-		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),			L_WB_AddPort,			WB_PATCH_EXEC),
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),		L_WB_CloseWindow,		WB_PATCH_INTUITION),
-		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),			L_PatchedCreateDir,		WB_PATCH_DOSFUNC),
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),		L_PatchedDeleteFile,	WB_PATCH_DOSFUNC),
-		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),		L_PatchedSetFileDate,	WB_PATCH_DOSFUNC),
-		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),		L_PatchedSetComment,	WB_PATCH_DOSFUNC),
-		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),		L_PatchedSetProtection,	WB_PATCH_DOSFUNC),
-		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),			L_PatchedRename,		WB_PATCH_DOSFUNC),
-		PATCH(-5 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Open),				L_PatchedOpen,			WB_PATCH_DOSFUNC),
-		PATCH(-6 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Close),				L_PatchedClose,			WB_PATCH_DOSFUNC),
-		PATCH(-8 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Write),				L_PatchedWrite,			WB_PATCH_DOSFUNC),
-		PATCH(-120 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Relabel),			L_PatchedRelabel,		WB_PATCH_DOS),
-		PATCH(-15 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WBInfo),			L_PatchedWBInfo,		WB_PATCH_WORKBENCH),
-		PATCH(-47 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddTask),			L_PatchedAddTask,		WB_PATCH_EXEC),
-		PATCH(-48 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		RemTask),			L_PatchedRemTask,		WB_PATCH_EXEC),
-		PATCH(-49 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		FindTask),			L_PatchedFindTask,		WB_PATCH_EXEC),
-		PATCH(-101 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace, OpenWindowTagList),	L_PatchedOpenWindowTags,WB_PATCH_INTUITION),
+		PATCH(-8 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppWindowA),			L_WB_AddAppWindow,			WB_PATCH_WORKBENCH)	,		
+		PATCH(-9 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppWindow),		L_WB_RemoveAppWindow,		WB_PATCH_WORKBENCH),
+		PATCH(-10 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppIconA),			L_WB_AddAppIcon,			WB_PATCH_WORKBENCH),
+		PATCH(-11 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppIcon),			L_WB_RemoveAppIcon,			WB_PATCH_WORKBENCH),
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	AddAppMenuItemA),		L_WB_AddAppMenuItem,		WB_PATCH_WORKBENCH),
+		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppMenuItem),		L_WB_RemoveAppMenuItem,		WB_PATCH_WORKBENCH),
+		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
+		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
+#ifdef __amigaos4__ // we path on os4 one more function: OpenWorkbenchObject, as it uses a lot now for running programs.
+		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
+#endif		
+		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace, 		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
+		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),		L_WB_DeleteDiskObject,		WB_PATCH_ICON),
+		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
+		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),				L_PatchedCreateDir,			WB_PATCH_DOSFUNC),
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),			L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),			L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),			L_PatchedSetComment,		WB_PATCH_DOSFUNC),
+		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),			L_PatchedSetProtection,		WB_PATCH_DOSFUNC),
+		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),				L_PatchedRename,			WB_PATCH_DOSFUNC),
+		PATCH(-5 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Open),					L_PatchedOpen,				WB_PATCH_DOSFUNC),
+		PATCH(-6 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Close),					L_PatchedClose,				WB_PATCH_DOSFUNC),
+		PATCH(-8 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Write),					L_PatchedWrite,				WB_PATCH_DOSFUNC),
+		PATCH(-120 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Relabel),				L_PatchedRelabel,			WB_PATCH_DOS),
+		PATCH(-15 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WBInfo),				L_PatchedWBInfo,			WB_PATCH_WORKBENCH),
+		PATCH(-47 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddTask),				L_PatchedAddTask,			WB_PATCH_EXEC),
+		PATCH(-48 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		RemTask),				L_PatchedRemTask,			WB_PATCH_EXEC),
+		PATCH(-49 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		FindTask),				L_PatchedFindTask,			WB_PATCH_EXEC),
+		PATCH(-101 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace, OpenWindowTagList),		L_PatchedOpenWindowTags,	WB_PATCH_INTUITION),
 	
 };
 
