@@ -65,7 +65,7 @@ PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULON
 		// Otherwise pass to OS
 		else
 		{
-			app_entry->os_object=LIBCALL_5(struct AppWindow *,wb_data->old_function[WB_PATCH_ADDAPPWINDOW],wb_data->wb_base, IWorkbench, d0,id,d1,userdata,a0,window,a1,port,a2,tags);
+			app_entry->os_object=LIBCALL_5(struct AppWindow *,wb_data->old_function[WB_PATCH_ADDAPPWINDOWA],wb_data->wb_base, IWorkbench, d0,id,d1,userdata,a0,window,a1,port,a2,tags);
 		}
 
 		// Send notification
@@ -113,7 +113,7 @@ PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, 
 		// Otherwise pass to OS
 		else
 		{
-			object=LIBCALL_5(APTR,wb_data->old_function[WB_PATCH_ADDAPPMENU],wb_data->wb_base,IWorkbench, d0,id,d1,userdata,a0,text,a1,port,a2,tags);
+			object=LIBCALL_5(APTR,wb_data->old_function[WB_PATCH_ADDAPPMENUA],wb_data->wb_base,IWorkbench, d0,id,d1,userdata,a0,text,a1,port,a2,tags);
 
 			if (app_entry) app_entry->os_object=object;
 		}
@@ -301,7 +301,7 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 					REG(a2, BPTR),
 					REG(a3, struct DiskObject *),
 					REG(a4, struct TagItem *),
-					REG(a6, struct Library *)))wb_data->old_function[WB_PATCH_ADDAPPICON])
+					REG(a6, struct Library *)))wb_data->old_function[WB_PATCH_ADDAPPICONA])
 					(id,userdata,text,port,lock,icon,tags,wb_data->wb_base);
 			if (app_entry) app_entry->os_object=object;
 		}
@@ -843,12 +843,14 @@ PATCH_END
 
 
 #ifdef __amigaos4__
-PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, STRPTR, name, a1, struct TagItem *, tags)
+//OpenWorkbenchObject();
+PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
-	ULONG result;
 
+	KPrintF("we in the patched L_WB_OpenWorkbenchObject !\n");	
+	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
 		return 0;
@@ -856,8 +858,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, STRPTR, name, a1, struct T
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
 // -----------------
-
-	KPrintF("we in the patched L_WB_OpenWorkbenchObject !\n");
+	
 	// patched code going here
 	// return result or whatever we will need there
  
@@ -868,6 +869,35 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, STRPTR, name, a1, struct T
 	
 }
 PATCH_END
+
+//OpenWorkbenchObjectA();
+PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
+{
+	WB_Data *wb_data;
+	struct MyLibrary *libbase;
+
+	KPrintF("we in the patched L_WB_OpenWorkbenchObjectA !\n");	
+	
+	// Open library
+	if (!(libbase=GET_DOPUSLIB))
+		return 0;
+
+	// Get Workbench data pointer
+	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
+// -----------------
+	
+	// patched code going here
+	// return result or whatever we will need there
+ 
+ // -----------------
+
+	// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+	return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	
+}
+PATCH_END
+
+
 #endif
 
 
@@ -1777,8 +1807,12 @@ static PatchList
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppMenuItem),		L_WB_RemoveAppMenuItem,		WB_PATCH_WORKBENCH),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
 		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
-#ifdef __amigaos4__ // we path on os4 one more function: OpenWorkbenchObject, as it uses a lot now for running programs.
+#ifdef __amigaos4__ 
+		// we path on os4 2 more function: OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running programms.
+		// while it sound strange why to path OWO if we patch already OWOA (which is called from OWO), it still proved that SetMethod() on os4
+		// loose some vector in the middle and when OWO calls it didn't point directly on patched OWOA. So we done it 2 times.
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
+		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObjectA),	L_WB_OpenWorkbenchObjectA,	WB_PATCH_WORKBENCH),
 #endif		
 		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace, 		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
 		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),		L_WB_DeleteDiskObject,		WB_PATCH_ICON),
