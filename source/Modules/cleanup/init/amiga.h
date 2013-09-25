@@ -70,7 +70,7 @@
 #include <stddef.h>
 
 
-#ifdef __MORPHOS__
+#if defined(__MORPHOS__) || defined(__amigaos3__)
 #include <intuition/intuitionbase.h>
 #include <clib/alib_protos.h>
 #endif

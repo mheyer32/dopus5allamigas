@@ -30,4 +30,4 @@ ModuleInfo
 		"cleanup.catalog",
 		0,
 		1,
-		{0,"CleanUp",MSG_CLEANUP_DESC,0,0}};
+		{{0,"CleanUp",MSG_CLEANUP_DESC,0,0}}};

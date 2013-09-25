@@ -5,8 +5,8 @@
 #include "base.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
+#include <version/dopus_version.h>
 
-		
 extern struct DOpusLocale *locale;
 extern ModuleInfo module_info;
 
@@ -43,20 +43,12 @@ void KPrintF __ARGS((char *,...));
 		IPTR args[] = { __VA_ARGS__ }; \
 		RawDoFmt(fmt, &args, DOPUS_RAWFMTFUNC, buf); \
 	})
- 
-  
 
 
-#define LIB_VERSION    68
-#define LIB_REVISION   10
-#define DATE       "05.05.2013"
-#define COPYRIGHT  "Copyright (c) 2012-2013 dopus5 Open Source Team"
 
-// set the LIB_REV_STRING
-#define REV_STRING STR(LIB_VERSION) "." STR(LIB_REVISION)
 
 #define userlibname "cleanup.module"
-#define textsegmentname "$VER: cleanup.module 68.10 (05.05.2013)"
+#define textsegmentname "\0$VER: cleanup.module "LIB_STRING
+
 
 #endif
-
