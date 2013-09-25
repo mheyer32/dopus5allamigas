@@ -1,9 +1,12 @@
 include makefile.objs
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 TARGET   := DirectoryOpus
 OPTIMIZE := -O2
 DEBUGSYM := -gstabs
-OPTIONS  := -m68020-60 -D__amigaos3__
+OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -noixemul
 #WARNINGS := -Wall
