@@ -201,7 +201,11 @@ struct Menu *LIBFUNC L_BuildMenuStrip(
 			}
 #else
 			if ((new_menu[count].nm_CommKey=(char *)L_AllocMemH(memory,2)))
-				new_menu[count].nm_CommKey[0]=key;
+			{
+			    /* this stops the compiler complaining about read-only locations */
+			    STRPTR ck = (STRPTR)new_menu[count].nm_CommKey;
+				ck[0]=key;
+			}
 #endif
 		}
 
@@ -246,7 +250,11 @@ struct Menu *LIBFUNC L_BuildMenuStrip(
 						}
 #else
 						if ((new_menu[count].nm_CommKey=(char *)L_AllocMemH(memory,2)))
-							new_menu[count].nm_CommKey[0]=key;
+						{
+						    /* this stops the compiler complaining about read-only locations */
+						    STRPTR ck = (STRPTR)new_menu[count].nm_CommKey;
+							ck[0]=key;
+						}
 #endif
 						break;
 					}
