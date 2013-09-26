@@ -908,6 +908,40 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 PATCH_END
 
 
+//// WorkbenchControlA patch
+PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
+{
+	WB_Data *wb_data;
+	struct MyLibrary *libbase;
+
+	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
+	
+	// Open library
+	if (!(libbase=GET_DOPUSLIB))
+		return 0;
+
+	// Get Workbench data pointer
+	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
+
+	if( FindPort( "WORKBENCH" ) )
+	{
+		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
+
+		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	}
+	else
+	{
+		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
+		//L_WB_Launch( name, NULL, FALSE );
+	}
+	
+	return 0;
+}
+PATCH_END
+
+
+
 #endif
 
 
@@ -1823,14 +1857,20 @@ static PatchList
 		// loose some vector in the middle and when OWO calls it didn't point directly on patched OWOA. So we done it 2 times.
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObjectA),	L_WB_OpenWorkbenchObjectA,	WB_PATCH_WORKBENCH),
+		PATCH(-18 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WorkbenchControlA),		L_WB_WorkbenchControlA,		WB_PATCH_WORKBENCH),
 #endif		
 		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace, 		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
 		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),		L_WB_DeleteDiskObject,		WB_PATCH_ICON),
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
 		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),				L_PatchedCreateDir,			WB_PATCH_DOSFUNC),
-		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
-		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#ifdef SetFileDate	// in case we on new OS4's DOS-SDK, do some ifdef which allow builds src on all sdk versions. another builds should be not affected at all.
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#else		
+		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),			L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
+		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),			L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
+#endif		
 		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),			L_PatchedSetComment,		WB_PATCH_DOSFUNC),
 		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),			L_PatchedSetProtection,		WB_PATCH_DOSFUNC),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),				L_PatchedRename,			WB_PATCH_DOSFUNC),
