@@ -1852,15 +1852,15 @@ static PatchList
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
 		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
 #ifdef __amigaos4__ 
-		// On OS4 with patch some more functions in workbench:
+		// On OS4 we patch some more functions in workbench.library:
 		//
 		// First two functions:  OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running of programms
 		// (like Amidock and co). While it may sounds strange why to path OWO if we patch already OWOA (which is called from OWO), it still
 		// proved that after patching by SetMethod() only OWOA call, OWO still didn't point directly on patched OWOA. So we done it 2 times.
 		//
-		// Third function is: L_WB_WorkbenchControlA.
-		// We should path it as well, as without it "duplicate search patches" will not works (used a lot by the system, and for example
-		// by CodeBench).
+		// Third function is: WorkbenchControlA.
+		// We should path it as well, as without it "duplicate search patches" thing will not works (which used a lot by the system itself,
+		// and for example by CodeBench).
 		//		
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObjectA),	L_WB_OpenWorkbenchObjectA,	WB_PATCH_WORKBENCH),
