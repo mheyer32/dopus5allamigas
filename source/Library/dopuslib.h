@@ -23,6 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUSLIB_H
 #define _DOPUSLIB_H
 
+#include "debug_lib.h"
 #include "dopusbase.h"
 #include "read_ilbm.h"
 #include "images.h"
