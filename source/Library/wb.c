@@ -1852,14 +1852,21 @@ static PatchList
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
 		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
 #ifdef __amigaos4__ 
-		// we pacth on AmigaOS4.x 2 more function: OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running programms.
-		// while it sound strange why to path OWO if we patch already OWOA (which is called from OWO), it still proved that SetMethod() on os4
-		// loose some vector in the middle and when OWO calls it didn't point directly on patched OWOA. So we done it 2 times.
+		// On OS4 with patch some more functions in workbench:
+		//
+		// First two functions:  OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running of programms
+		// (like Amidock and co). While it may sounds strange why to path OWO if we patch already OWOA (which is called from OWO), it still
+		// proved that after patching by SetMethod() only OWOA call, OWO still didn't point directly on patched OWOA. So we done it 2 times.
+		//
+		// Third function is: L_WB_WorkbenchControlA.
+		// We should path it as well, as without it "duplicate search patches" will not works (used a lot by the system, and for example
+		// by CodeBench).
+		//		
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObjectA),	L_WB_OpenWorkbenchObjectA,	WB_PATCH_WORKBENCH),
 		PATCH(-18 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WorkbenchControlA),		L_WB_WorkbenchControlA,		WB_PATCH_WORKBENCH),
 #endif		
-		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace, 		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
+		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace,		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
 		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),		L_WB_DeleteDiskObject,		WB_PATCH_ICON),
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
