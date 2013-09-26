@@ -847,7 +847,9 @@ PATCH_END
 PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
 	WB_Data *wb_data;
+	struct LibData *libdata;
 	struct MyLibrary *libbase;
+	struct DiskObject *icon;
 
 	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
 	
@@ -857,8 +859,9 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, co
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
-
-	if( FindPort( "WORKBENCH" ) )
+	libdata = (struct LibData *)libbase->ml_UserData;
+	
+	if (FindPort( "WORKBENCH" ))
 	{
 		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
 
@@ -868,7 +871,23 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObject, a0, CONST_STRPTR, name, a1, co
 	else
 	{
 		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
-		L_WB_Launch( name, NULL, FALSE );
+		icon=GetIconTags(name,
+				ICONGETA_FailIfUnavailable,TRUE,
+				ICONGETA_Screen,*libdata->backfill_screen,
+				TAG_DONE);
+		if (icon && icon->do_Type==WBTOOL)
+		{
+		    KPrintF("[%s:%ld] Icon found, type is WB_TOOL, launching via WB\n", __FILE__, __LINE__ );
+			L_WB_Launch( (char *)name, NULL, FALSE );
+		}
+		else
+		{
+		    KPrintF("[%s:%ld] Icon not found or wrong type, launching via CLI\n", __FILE__, __LINE__ );
+			L_CLI_Launch( (char *)name, *libdata->backfill_screen, 0, 0, 0, 0, 65535 );
+		}
+
+		if (icon)
+			FreeDiskObject(icon);
 	}
 	
 	return 0;
@@ -879,18 +898,21 @@ PATCH_END
 PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
 	WB_Data *wb_data;
+	struct LibData *libdata;
 	struct MyLibrary *libbase;
+	struct DiskObject *icon;
 
 	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
-	
+
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
 		return 0;
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
+	libdata = (struct LibData *)libbase->ml_UserData;
 
-	if( FindPort( "WORKBENCH" ) )
+	if (FindPort("WORKBENCH"))
 	{
 		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
 
@@ -900,7 +922,23 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 	else
 	{
 		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
-		L_WB_Launch( name, NULL, FALSE );
+		icon=GetIconTags(name,
+				ICONGETA_FailIfUnavailable,TRUE,
+				ICONGETA_Screen,*libdata->backfill_screen,
+				TAG_DONE);
+		if (icon && icon->do_Type==WBTOOL)
+		{
+		    KPrintF("[%s:%ld] Icon found, type is WB_TOOL, launching via WB\n", __FILE__, __LINE__ );
+			L_WB_Launch( (char *)name, NULL, FALSE );
+		}
+		else
+		{
+		    KPrintF("[%s:%ld] Icon not found or wrong type, launching via CLI\n", __FILE__, __LINE__ );
+			L_CLI_Launch( (char *)name, *libdata->backfill_screen, 0, 0, 0, 0, 65535 );
+		}
+
+		if (icon)
+			FreeDiskObject(icon);
 	}
 	
 	return 0;
@@ -908,13 +946,40 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 PATCH_END
 
 
-//// WorkbenchControlA patch
-PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
+/* this function is called by the WorkbenchControl patches.
+** Currently only supported tag is WBCTRLA_DuplicateSearchPath, 
+** but we may be able to expand this later for better compatibility.
+*/
+BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, struct TagItem *tags )
+{
+	ULONG *storage;
+	
+	if(( storage = GetTagData( WBCTRLA_DuplicateSearchPath, 0, tags )))
+	{
+		/* duplicate search path requested, result should hold the new path nodes. */
+		KPrintF("[%s:%ld] DuplicateSearchPath requested, storage: %p\n", __FILE__, __LINE__, storage );
+		
+		*storage = L_GetOpusPathList(libbase);
+		if (*storage)
+			return TRUE;
+	}
+	
+	return FALSE;
+}
+//// WorkbenchControl patch
+BOOL VARARGS68K L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, CONST_STRPTR name, ... )
 {
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
+	BPTR *newPath = NULL;
+	va_list ap;
+	struct TagItem *tags;
 
-	KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
+	va_startlinear(ap, name);
+	
+	tags = va_getlinearva(ap, struct TagItem *);
+	
+	//KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -923,19 +988,53 @@ PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, cons
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
 
-	if( FindPort( "WORKBENCH" ) )
+	if (FindPort("WORKBENCH"))
 	{
-		KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
+		//KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
 		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
-		KPrintF("[%s:%ld] Workbench not found, launching %s ourselves\n", __FILE__, __LINE__, name );
-		//L_WB_Launch( name, NULL, FALSE );
+		//KPrintF("[%s:%ld] Workbench not found, handling %s ourselves\n", __FILE__, __LINE__, name );
+		return internalWBCtrl( libbase, name, tags );
 	}
+
+	return 0;
+}
+
+
+
+//// WorkbenchControlA patch
+PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
+{
+	WB_Data *wb_data;
+	struct MyLibrary *libbase;
+	BPTR *newPath = NULL;
+
+	//KPrintF("[%s:%ld] %s called\n", __FILE__, __LINE__, __PRETTY_FUNCTION__ );
 	
+	// Open library
+	if (!(libbase=GET_DOPUSLIB))
+		return 0;
+
+	// Get Workbench data pointer
+	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
+
+	if (FindPort("WORKBENCH"))
+	{
+		//KPrintF("[%s:%ld] Workbench available, calling original vector\n", __FILE__, __LINE__);
+
+		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+	}
+	else
+	{
+		//KPrintF("[%s:%ld] Workbench not found, handling %s ourselves\n", __FILE__, __LINE__, name );
+		return internalWBCtrl( libbase, name, tags );
+	}
+
 	return 0;
 }
 PATCH_END
@@ -1472,7 +1571,7 @@ struct Library *wb_get_patchbase(short type,struct LibData *data)
 }
 
 
-//// CloseWindow patch
+//// WBInfo patch
 PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, struct Screen *, screen)
 {
 	struct MyLibrary *libbase;
@@ -1835,7 +1934,7 @@ static PatchList
 	// PATCH macro (wb.h) have 4 offsets args: 
 	// 1. offsets in jump table (for os3 and morphos builds, when SetFunction for patching is used)
 	// 2. offsets in interface vectors (for os4 build only, when SetMethod for patching is used)
-	// reassons is to have one single pathlist for all builds and to avoid alot of ifdefs
+	// reasons is to have one single pathlist for all builds and to avoid alot of ifdefs
     // 3. our patch-function
 	// 4. type of function (to make scan by wb_get_patchbase easy). 
 	
@@ -1851,21 +1950,22 @@ static PatchList
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	RemoveAppMenuItem),		L_WB_RemoveAppMenuItem,		WB_PATCH_WORKBENCH),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWorkBench),		L_WB_CloseWorkBench,		WB_PATCH_INTUITION),
 		PATCH(-35 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	OpenWorkBench),			L_WB_OpenWorkBench,			WB_PATCH_INTUITION),
-#ifdef __amigaos4__ 
+#ifdef __amigaos4__
 		// On OS4 we patch some more functions in workbench.library:
 		//
 		// First two functions:  OpenWorkbenchObject(OWO) and OpenWorkbenchObjectA (OWOA), as it uses a lot now for running of programms
 		// (like Amidock and co). While it may sounds strange why to path OWO if we patch already OWOA (which is called from OWO), it still
 		// proved that after patching by SetMethod() only OWOA call, OWO still didn't point directly on patched OWOA. So we done it 2 times.
 		//
-		// Third function is: WorkbenchControlA.
-		// We should path it as well, as without it "duplicate search patches" thing will not works (which used a lot by the system itself,
+		// Third and fourth functions are: WorkbenchControl and WorkbenchControlA.
+		// We should pacth it as well, as without it "duplicate search patches" thing will not works (which used a lot by the system itself,
 		// and for example by CodeBench).
-		//		
+		//
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObject),	L_WB_OpenWorkbenchObject,	WB_PATCH_WORKBENCH),
 		PATCH(-16 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	OpenWorkbenchObjectA),	L_WB_OpenWorkbenchObjectA,	WB_PATCH_WORKBENCH),
+		PATCH(-18 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WorkbenchControl),		L_WB_WorkbenchControl,		WB_PATCH_WORKBENCH),
 		PATCH(-18 * LIB_VECTSIZE,	offsetof(struct WorkbenchIFace,	WorkbenchControlA),		L_WB_WorkbenchControlA,		WB_PATCH_WORKBENCH),
-#endif		
+#endif
 		PATCH(-14 * LIB_VECTSIZE,	offsetof(struct IconIFace,		PutDiskObject),			L_WB_PutDiskObject,			WB_PATCH_ICON),
 		PATCH(-23 * LIB_VECTSIZE,	offsetof(struct IconIFace,		DeleteDiskObject),		L_WB_DeleteDiskObject,		WB_PATCH_ICON),
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
@@ -1874,10 +1974,10 @@ static PatchList
 #ifdef SetFileDate	// in case we on new OS4's DOS-SDK, do some ifdef which allow builds src on all sdk versions. another builds should be not affected at all.
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
 		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
-#else		
+#else
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		DeleteFile),			L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
 		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetFileDate),			L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
-#endif		
+#endif
 		PATCH(-30 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetComment),			L_PatchedSetComment,		WB_PATCH_DOSFUNC),
 		PATCH(-31 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetProtection),			L_PatchedSetProtection,		WB_PATCH_DOSFUNC),
 		PATCH(-13 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Rename),				L_PatchedRename,			WB_PATCH_DOSFUNC),
