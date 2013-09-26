@@ -72,7 +72,11 @@
 
 #ifdef __amigaos4__
 
-#define KPrintF DebugPrintF  // just in case anyone will use KPrintF and do not want to add -ldebug.
+#ifdef DEBUG
+#define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
+#else
+#define KPrintF(fmt, args...) VOID(0)
+#endif
 
 #define GetSemaphore	L_GetSemaphore
 #define FreeSemaphore	L_FreeSemaphore

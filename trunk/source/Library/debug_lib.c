@@ -420,13 +420,14 @@ void _DPRINTF(unsigned long dclass, unsigned long dflags, const char *file, int 
     static char buf[1024];
 
     _INDENT();
-#warning vsnprintf() replaced with sprintf() for libnix compile
-#warning fix possible buffer overflow which can occur with sprintf()
+
     va_start(args, format);
 #if defined(__libnix__) && defined(__mc68000__)
+#warning vsnprintf() replaced with sprintf() for libnix compile
+#warning fix possible buffer overflow which can occur with sprintf()
 	sprintf(buf, format, args);
 #else
-    vsnprintf(buf, 1024, format, args);
+    vsnprintf(buf, sizeof(buf), format, args);
 #endif
     va_end(args);
 
