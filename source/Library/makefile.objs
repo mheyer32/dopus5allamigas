@@ -33,5 +33,4 @@ COMMON_OBJS = libinit.o data.o string_data.o \
 	getusage.o \
 	savepos.o \
 	lsprintf.o 
-#\	debug_lib.o
 
