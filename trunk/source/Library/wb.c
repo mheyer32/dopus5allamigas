@@ -2101,7 +2101,7 @@ static PatchList
 		PATCH(-59 * LIB_VECTSIZE,	offsetof(struct ExecIFace,		AddPort),				L_WB_AddPort,				WB_PATCH_EXEC),
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct IntuitionIFace,	CloseWindow),			L_WB_CloseWindow,			WB_PATCH_INTUITION),
 		PATCH(-20 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		CreateDir),				L_PatchedCreateDir,			WB_PATCH_DOSFUNC),
-#ifdef SetFileDate	// in case we on new OS4's DOS-SDK, do some ifdef which allow builds src on all sdk versions. another builds should be not affected at all.
+#ifdef SetDate	// in case we on new OS4's DOS-SDK, do some ifdef which allow builds src on all sdk versions. another builds should be not affected at all.
 		PATCH(-12 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		Delete),				L_PatchedDeleteFile,		WB_PATCH_DOSFUNC),
 		PATCH(-66 * LIB_VECTSIZE,	offsetof(struct DOSIFace,		SetDate),				L_PatchedSetFileDate,		WB_PATCH_DOSFUNC),
 #else
