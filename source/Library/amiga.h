@@ -67,17 +67,21 @@
 #include <graphics/gfxbase.h>
 #endif
 
-
-// for os4 replace external (non L_) calls on internal (L_ ones)
+#if defined(__amigaos3__)
+extern ULONG GlobalStuffChar;
+#define DOPUS_RAWFMTFUNC (APTR)&GlobalStuffChar
+#else
+#define DOPUS_RAWFMTFUNC NULL
+#endif
 
 #ifdef __amigaos4__
-
 #ifdef DEBUG
 #define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
 #else
 #define KPrintF(fmt, args...) VOID(0)
 #endif
 
+// for os4 replace external (non L_) calls on internal (L_ ones)
 #define GetSemaphore	L_GetSemaphore
 #define FreeSemaphore	L_FreeSemaphore
 #define GetDosPathList	L_GetDosPathList
