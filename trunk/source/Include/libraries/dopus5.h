@@ -403,6 +403,7 @@ enum
 #define DISPOPTF_REMOPUSPOS		(1<<9)		// Remove Opus icon positions
 #define DISPOPTF_REALTIME_SCROLL	(1<<10)		// Real-time icon scrolling
 #define DISPOPTF_THIN_BORDERS		(1<<11)		// Thin borders
+#define DISPOPTF_SHOW_WBLEFTOUTS	(1<<12)		// show workbench's leftout icons from the .backdrop files
 
 // lister options
 #define LISTEROPTF_DEVICES	(1<<0)		// Device list in new lister
