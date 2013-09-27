@@ -19,7 +19,7 @@ LIBS     := -lamiga
 
 REMOVE = rm -f
 
-OBJS = $(COMMON_OBJS) amiga.o aos4_68k_to_ppc_vectors.o aos4_ppc_libstubs.o
+OBJS = $(COMMON_OBJS) aos4_68k_to_ppc_vectors.o aos4_ppc_libstubs.o
 
 all : $(TARGET)
 

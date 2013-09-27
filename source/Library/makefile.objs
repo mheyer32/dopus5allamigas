@@ -1,4 +1,5 @@
 COMMON_OBJS = libinit.o data.o string_data.o \
+	amiga.o \
 	timer.o pathlist.o \
 	functions.o gui.o list_management.o \
 	misc.o simplerequest.o selection_list.o strings.o \
