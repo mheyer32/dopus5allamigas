@@ -49,7 +49,7 @@ ModuleInfo
 		"join.catalog",
 		0,
 		2,
-		{JOIN,"Join",MSG_JOIN_DESC,FUNCF_WANT_ENTRIES|FUNCF_WANT_DEST,ARG_1}};
+		{{JOIN,"Join",MSG_JOIN_DESC,FUNCF_WANT_ENTRIES|FUNCF_WANT_DEST,ARG_1}}};
 
 ModuleFunction
 	more_functions[]={
