@@ -65,9 +65,8 @@ int _start(void) //must be first for 68k library
 #if defined(__amigaos4__)
 // stack cookie for shell v45+
 static const char USED_VAR stack_size[] = "$STACK:" STR(MIN_STACKSIZE) "\n";
-// Serial debug output
-#define KPrintF DebugPrintF
 #endif
+static const char USED_VAR copyright[] = COPYRIGHT;
 
 /****************************************************************************/
 
