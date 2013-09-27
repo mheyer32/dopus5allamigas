@@ -44,7 +44,7 @@ ModuleInfo
 		"misc.catalog",
 		0,
 		3,
-		{BEEP,"Beep",MSG_BEEP_DESC,0,0}};
+		{{BEEP,"Beep",MSG_BEEP_DESC,0,0}}};
 
 ModuleFunction
 	more_functions[]={
