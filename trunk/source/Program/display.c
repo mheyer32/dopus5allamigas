@@ -385,6 +385,7 @@ BOOL display_open(long flags)
 			get_colour_table();
 
 			// Get all icons
+KPrintF( "Calling backdrop_get_objects\n");
 			backdrop_get_objects(
 				GUI->backdrop,
 				BGOF_ALL|BGOF_SHOW|BGOF_FIRST|(flags&BGOF_DESKTOP));

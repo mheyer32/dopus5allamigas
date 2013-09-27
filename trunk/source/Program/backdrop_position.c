@@ -34,7 +34,9 @@ long backdrop_arrange_objects(BackdropInfo *info)
 
 	// Valid list?
 	if (IsListEmpty(&info->objects.list))
+	{
 		return 0;
+	}
 
 	// Desktop window
 	if (info->flags&BDIF_MAIN_DESKTOP)
