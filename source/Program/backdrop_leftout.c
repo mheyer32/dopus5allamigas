@@ -22,6 +22,7 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "dopus.h"
+#include "amiga.h"
 
 #define is_digit(c) ((c)>='0' && (c)<='9')
 
@@ -114,6 +115,7 @@ void backdrop_leave_icons_out(BackdropInfo *info,BackdropObject *only_one,BOOL s
 {
 	BackdropObject *object=0;
 	BOOL save=0;
+	KPrintF("Entered");
 
 	// Lock icon list
 	lock_listlock(&info->objects,0);
@@ -203,6 +205,7 @@ BackdropObject *backdrop_leave_out(
 	BackdropObject *object;
 	struct List *search;
 	char path[262];
+	KPrintF("Entered\n");
 
 	// Lock object
 	if (!(lock=Lock(name,ACCESS_READ)))
@@ -544,6 +547,56 @@ void backdrop_add_leftouts(BackdropInfo *info)
 			}
 		}
 	}
+
+	// added option to show workbench leftouts, set in config module
+	if (environment->env->display_options&DISPOPTF_SHOW_WBLEFTOUTS)
+	{
+		BackdropObject *object, *newobject;
+		char buf[2048], leftout[2048];
+		BPTR backdrop;
+		char *pos;
+
+		APTR oldwin = ((struct Process *)FindTask(0))->pr_WindowPtr;
+		((struct Process *)FindTask(0))->pr_WindowPtr=(APTR)-1;
+
+		for (object=(BackdropObject *)info->objects.list.lh_Head;
+			object->node.ln_Succ;
+			object=(BackdropObject *)object->node.ln_Succ)
+		{
+			// Is this a disk?
+			if (object->type==BDO_DISK)
+			{
+				snprintf( buf, sizeof(buf), "%s:.backdrop", object->name );
+
+				if ((backdrop=Open(buf,MODE_OLDFILE)))
+				{
+					while (FGets(backdrop,leftout,sizeof(leftout)-1) )
+					{
+						// clean any newlines from the string
+						if ((pos=strchr(leftout,'\r')) || (pos=strchr(leftout,'\n')) )
+							*pos = 0;
+
+						if (*leftout)
+						{
+							snprintf(buf, sizeof(buf), "%s%s", object->name, leftout);
+
+							if ((newobject=backdrop_leftout_new(info,buf,0,BLNF_CUSTOM_LABEL)))
+							{
+								stccpy(newobject->device_name,FilePart(buf),GUI->def_filename_length+1);
+
+								backdrop_get_icon(info,newobject,GETICON_CD);
+							}
+						}
+					}
+
+					Close(backdrop);
+				}
+			}
+		}
+
+		((struct Process *)FindTask(0))->pr_WindowPtr = oldwin;
+	}
+
 
 	// Lock position list
 	unlock_listlock(&GUI->positions);

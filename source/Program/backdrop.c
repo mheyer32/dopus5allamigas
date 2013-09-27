@@ -963,7 +963,7 @@ void backdrop_pos_slider(BackdropInfo *info,short which)
 		if (which&SLIDER_HORZ)
 		{
 			// Get horizontal position
-			GetAttr(PGA_Top,info->horiz_scroller,(ULONG *)&info->offset_x);
+			GetAttr(PGA_Top,(Object *)info->horiz_scroller,(ULONG *)&info->offset_x);
 			info->offset_x+=info->area.MinX;
 		}
 
@@ -971,7 +971,7 @@ void backdrop_pos_slider(BackdropInfo *info,short which)
 		if (which&SLIDER_VERT)
 		{
 			// Get vertical position
-			GetAttr(PGA_Top,info->vert_scroller,(ULONG *)&info->offset_y);
+			GetAttr(PGA_Top,(Object *)info->vert_scroller,(ULONG *)&info->offset_y);
 			info->offset_y+=info->area.MinY;
 		}
 
@@ -1073,7 +1073,9 @@ void backdrop_get_objects(BackdropInfo *info,short flags)
 		// Leftouts?
 		if (flags&BGOF_LEFTOUT)
 		{
+KPrintF("Calling backdrop_add_leftouts\n"); 
 			backdrop_add_leftouts(info);
+KPrintF("Reading desktop folder...\n");
 			read_desktop_folder(info,FALSE);
 		}
 
@@ -1087,10 +1089,12 @@ void backdrop_get_objects(BackdropInfo *info,short flags)
 	// Show objects
 	if (flags&BGOF_SHOW)
 	{
+KPrintF("arranging backdrop objects...\n");
 		// Arrange backdrop objects
 		backdrop_arrange_objects(info);
 
 		// Show backdrop objects (including newly arranged icons)
+KPrintF("Showing objects...\n");
 		backdrop_show_objects(info,(flags&BGOF_FIRST)?BDSF_RECALC:BDSF_CLEAR|BDSF_RECALC);
 
 		// Check for auto-open groups (if we did groups)

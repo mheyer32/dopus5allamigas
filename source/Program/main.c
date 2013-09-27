@@ -715,7 +715,15 @@ void startup_process_args(int argc,char **argv)
 	}
 
 	// Otherwise, from CLI
-	else arg_array=argv;
+	else 
+	{
+		arg_array=argv;
+		
+		// if Workbench is not running, set the flag to do startup items
+		if( FindPort( "WORKBENCH" ) == NULL )
+			GUI->flags|=GUIF_DO_WBSTARTUP;
+	}
+
 
 	// Got arguments?
 	if (arg_array)
@@ -749,9 +757,13 @@ void startup_process_args(int argc,char **argv)
 			GUI->flags2|=GUIF2_NO_SCREENFRONT;
 
 		// Do Workbench startup drawer?
-		if ((ptr=FindToolType(arg_array,"WBSTARTUP")) &&
-			MatchToolValue(ptr,"yes"))
-			GUI->flags|=GUIF_DO_WBSTARTUP;
+		if ((ptr=FindToolType(arg_array,"WBSTARTUP")))
+		{
+			if(( MatchToolValue(ptr,"yes")))
+				GUI->flags|=GUIF_DO_WBSTARTUP;
+			else
+				GUI->flags&=~GUIF_DO_WBSTARTUP;
+		}
 
 		// Startup picture?
 		if ((ptr=FindToolType(arg_array,"STARTUPPIC")))
