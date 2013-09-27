@@ -17,6 +17,11 @@
 #include <string.h>
 #include <ctype.h>
 
+// we use now some VARARGS68K based function to do os4 specifc patching, so to avoid compiler errors/warnings
+// amiga_compiler.h should come before any SDI includes. Till VARARGS68K is in use, such include should stay here.
+#ifdef __amigaos4__
+#include <amiga_compiler.h>  
+#endif
 #include <SDI/SDI_compiler.h>
 #include <SDI/SDI_lib.h>
 #include <SDI/SDI_stdarg.h>
