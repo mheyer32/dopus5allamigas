@@ -102,6 +102,5 @@ void diskcopy_motor(DiskHandle *handle,short on);
 void serialise_disk(ULONG *data,unsigned long offset,struct DateStamp *);
 
 
+#endif
 
-
-#endif 
