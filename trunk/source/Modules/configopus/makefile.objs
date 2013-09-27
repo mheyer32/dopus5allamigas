@@ -1,4 +1,4 @@
-COMMON_OBJS = init/libinit.o init/lsprintf.o \
+COMMON_OBJS = init/libinit.o \
 		config.o config_drag.o \
 		config_settings.o \
 		config_environment.o config_environment_data.o \
