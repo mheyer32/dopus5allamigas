@@ -28,6 +28,7 @@ For more information on Directory Opus for Windows please see:
 
 #include <proto/exec.h>
 #include <proto/input.h>
+#include <proto/intuition.h>
 
 #include <proto/dopus5.h>
 
@@ -58,7 +59,7 @@ enum
 
 BOOL workbench_running(void);
 
-void STDARGS main(char *arg_string)
+int main(int argc, char **arg_string)
 {
 
 	BOOL ok=0,run_wb=0,wb_startup=1,wb_running;
@@ -77,7 +78,7 @@ void STDARGS main(char *arg_string)
 		arg_array[a]=0;
 
 	// Parse arguments
-	if (args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",(long *)arg_array,0))
+	if ((args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",(long *)arg_array,0)))
 	{
 		// Free arguments
 		FreeArgs(args);
@@ -96,7 +97,7 @@ void STDARGS main(char *arg_string)
 		if (FindPort("Directory Opus"))
 		{
 			// Open library
-			if (DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",61))
+			if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",61)))
 			{
 				#ifdef __amigaos4__
 				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
@@ -125,7 +126,7 @@ void STDARGS main(char *arg_string)
 
 		// Otherwise, exit now, unless Opus has to be launched
 		else
-		if (ok) exit(0);
+		if (ok) return(0);
 	}
 
 	// Open input device
@@ -162,7 +163,7 @@ void STDARGS main(char *arg_string)
 
 	// Find argument pointer
 	for (a=0;arg_string[a] && arg_string[a]!=' ';a++);
-	if (arg_string[a]) arg_ptr=arg_string+a;
+	if (arg_string[a]) arg_ptr=(char *)arg_string+a;
 
 	// Try to run DOpus?
 	if (!run_wb)
@@ -176,13 +177,13 @@ void STDARGS main(char *arg_string)
 		proc->pr_WindowPtr=(APTR)-1;
 
 		// See if DOpus is there
-		if (lock=Lock("DOpus5:DirectoryOpus",ACCESS_READ))
+		if ((lock=Lock("DOpus5:DirectoryOpus",ACCESS_READ)))
 		{
 			// Yup
 			UnLock(lock);
 
 			// Open library
-			if (DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",0))
+			if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",0)))
 			{
 				#ifdef __amigaos4__
 				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
@@ -227,7 +228,7 @@ void STDARGS main(char *arg_string)
 		Execute(buf,0,0);
 	}
 
-	exit(0);
+	return(0);
 }
 
 
@@ -239,7 +240,7 @@ BOOL workbench_running(void)
 	BOOL wb=0;
 
 	// Lock public screen list
-	if (list=LockPubScreenList())
+	if ((list=LockPubScreenList()))
 	{
 		struct PubScreenNode *pub;
 		BOOL ok=0;
@@ -265,7 +266,7 @@ BOOL workbench_running(void)
 	}
 
 	// Lock Workbench screen
-	if (screen=LockPubScreen("Workbench"))
+	if ((screen=LockPubScreen("Workbench")))
 	{
 		struct Window *window;
 		ULONG lock;
