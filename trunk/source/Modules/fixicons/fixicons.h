@@ -52,3 +52,4 @@ typedef struct _FunctionEntry
 #if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
     #pragma pack()
 #endif
+
