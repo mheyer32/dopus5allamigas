@@ -35,7 +35,7 @@ ModuleInfo
 		"diskinfo.catalog",
 		MODULEF_CATALOG_VERSION,
 		1,
-		{0,"DiskInfo",MSG_DISKINFO_DESC,FUNCF_NEED_SOURCE|FUNCF_NO_ARGS,0}};
+		{{0,"DiskInfo",MSG_DISKINFO_DESC,FUNCF_NEED_SOURCE|FUNCF_NO_ARGS,0}}};
 
 
 struct TagItem
