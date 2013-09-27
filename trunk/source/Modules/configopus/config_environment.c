@@ -1976,6 +1976,10 @@ void _config_env_set(config_env_data *data,short option)
 				data->option_list,
 				GAD_ENVIRONMENT_OPTIONS_HIDEBAD,
 				data->config->display_options&DISPOPTF_HIDE_BAD);
+			SetGadgetValue(
+				data->option_list,
+				GAD_ENVIRONMENT_OPTIONS_SHOW_WBLEFTOUTS,
+				data->config->display_options&DISPOPTF_SHOW_WBLEFTOUTS);
 			break;
 
 
@@ -2455,7 +2459,7 @@ void _config_env_store(config_env_data *data,short option)
 		case ENVIRONMENT_DISPLAY_OPTIONS:
 
 			// Reset flags
-			data->config->display_options&=~(DISPOPTF_SHOW_APPICONS|DISPOPTF_SHIFT_APPICONS|DISPOPTF_SHOW_TOOLS|DISPOPTF_HIDE_BAD);
+			data->config->display_options&=~(DISPOPTF_SHOW_APPICONS|DISPOPTF_SHIFT_APPICONS|DISPOPTF_SHOW_TOOLS|DISPOPTF_HIDE_BAD|DISPOPTF_SHOW_WBLEFTOUTS);
 
 			// Workbench patches
 			if (GetGadgetValue(data->option_list,GAD_ENVIRONMENT_OPTIONS_APPICONS))
@@ -2466,6 +2470,8 @@ void _config_env_store(config_env_data *data,short option)
 				data->config->display_options|=DISPOPTF_SHOW_TOOLS;
 			if (GetGadgetValue(data->option_list,GAD_ENVIRONMENT_OPTIONS_HIDEBAD))
 				data->config->display_options|=DISPOPTF_HIDE_BAD;
+			if (GetGadgetValue(data->option_list,GAD_ENVIRONMENT_OPTIONS_SHOW_WBLEFTOUTS))
+				data->config->display_options|=DISPOPTF_SHOW_WBLEFTOUTS;
 			break;
 
 

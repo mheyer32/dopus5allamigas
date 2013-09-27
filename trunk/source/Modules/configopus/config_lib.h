@@ -99,6 +99,7 @@ typedef struct
     #pragma pack()
 #endif
 
+
 BOOL config_drag_check(CfgDragInfo *drag);
 void config_drag_move(CfgDragInfo *drag);
 void config_drag_start(CfgDragInfo *,Att_List *,short,struct TagItem *,BOOL);

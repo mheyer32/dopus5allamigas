@@ -718,6 +718,16 @@ ObjectDef
 			GAD_ENVIRONMENT_OPTIONS_HIDEBAD,
 			_environment_relative_taglist},
 
+		// Show WB leftouts
+		{OD_GADGET,
+			CHECKBOX_KIND,
+			{4,8,0,1},
+			{5,44,26,4},
+			MSG_ENVIRONMENT_OPTIONS_SHOW_WBLEFTOUTS,
+			PLACETEXT_RIGHT,
+			GAD_ENVIRONMENT_OPTIONS_SHOW_WBLEFTOUTS,
+			_environment_relative_taglist},
+
 		{OD_END}},
 
 
