@@ -31,6 +31,5 @@ COMMON_OBJS = libinit.o data.o string_data.o \
 	removed.o \
 	version.o \
 	getusage.o \
-	savepos.o \
-	lsprintf.o 
+	savepos.o
 

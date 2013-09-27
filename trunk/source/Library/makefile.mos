@@ -2,11 +2,14 @@
 
 include makefile.objs
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 TARGET   := dopus5.library
 OPTIMIZE := -O2
 DEBUG    :=
 DEBUGSYM :=
-OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DLIBRARIES_DOPUS5_H
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DLIBRARIES_DOPUS5_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall

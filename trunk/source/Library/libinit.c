@@ -32,12 +32,11 @@
 #include "base.h"
 #include "lib_protos.h"
 
-#include "version.h"
+#include <version/dopus_version.h>
 
 #include "dopusbase.h" //??
 #include "dopuslib.h"
 #include "boopsi.h"
-//*** #include "debug_lib.h"
 
 /****************************************************************************/
 
@@ -69,6 +68,7 @@ int _start(void) //must be first for 68k library
 // stack cookie for shell v45+
 static const char USED_VAR stack_size[] = "$STACK:" STR(MIN_STACKSIZE) "\n";
 #endif
+static const char USED_VAR copyright[] = COPYRIGHT;
 
 /****************************************************************************/
 
@@ -188,10 +188,10 @@ void free_locale_data(struct DOpusLocale *locale);
 
 static struct TextAttr topaz_attr={"topaz.font",8,0,0};
 
-char *version="$VER: dopus5.library 68.16 (03.03.2013)";
+char *version="\0$VER: dopus5.library "LIB_STRING;
 
 static const char UserLibName[] = "dopus5.library";
-static const char __TEXTSEGMENT__ UserLibID[] = "$VER: dopus5.library " LIB_REV_STRING " (" LIB_DATE ") " LIB_COPYRIGHT;
+static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STRING;
 /**************************************************************************/
 
 // first function should be FAS (without _), or at least LibNull if it removed function (like in our case it is RemovedFunc() ).
@@ -976,12 +976,6 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
   if(aroscbase = OpenLibrary("arosc.library", 41))
 #endif
   {
-/***    #if defined(DEBUG)
-    // this must be called ahead of any debug output, otherwise we get stuck
-    InitDebug();
-    #endif
-    D(DBF_STARTUP, "LibInit()");
-*/
     // cleanup the library header structure beginning with the
     // library base.
     base->libBase.lib_Node.ln_Type = NT_LIBRARY;
@@ -1074,8 +1068,6 @@ static BPTR LIBFUNC LibExpunge(REG(a6, struct LibraryHeader *base))
 #endif
   BPTR rc;
 
-//***  D(DBF_STARTUP, "LibExpunge(): %ld", base->libBase.lib_OpenCnt);
-
   // in case our open counter is still > 0, we have
   // to set the late expunge flag and return immediately
   if(base->libBase.lib_OpenCnt > 0)
@@ -1116,7 +1108,6 @@ static struct LibraryHeader * LIBFUNC LibOpen(REG(d0, UNUSED ULONG version), REG
 {
 #endif
   BOOL success = FALSE;
-//***  D(DBF_STARTUP, "LibOpen(): %ld", base->libBase.lib_OpenCnt);
 
   // LibOpen(), LibClose() and LibExpunge() are called while the system is in
   // Forbid() state. That means that these functions should be quick and should
@@ -1179,8 +1170,6 @@ static BPTR LIBFUNC LibClose(REG(a6, struct LibraryHeader *base))
 #endif
   BPTR rc = 0;
 
-//***  D(DBF_STARTUP, "LibClose(): %ld", base->libBase.lib_OpenCnt);
-
   // decrease the open counter
   base->libBase.lib_OpenCnt--;
 
@@ -1221,9 +1210,6 @@ static BPTR LIBFUNC LibClose(REG(a6, struct LibraryHeader *base))
 
 ULONG freeBase(struct LibraryHeader *lib)
 {
-//***  ENTER();
-
-//***  D(DBF_STARTUP, "freeing all resources of dopus.library");
 
   UserLibCleanup((struct MyLibrary *)lib);
 
@@ -1350,8 +1336,7 @@ ULONG freeBase(struct LibraryHeader *lib)
     CloseLibrary((struct Library *)DOSBase);
     DOSBase = NULL;
   }
-   
-//***  RETURN(TRUE);
+
   return TRUE;
 }
 
@@ -1359,7 +1344,6 @@ ULONG freeBase(struct LibraryHeader *lib)
 
 ULONG initBase(struct LibraryHeader *lib)
 {
-//***  ENTER();
 
   if ((DOSBase = (APTR)OpenLibrary("dos.library", 37)) != NULL && GETINTERFACE(IDOS, DOSBase))
   if ((UtilityBase = (APTR)OpenLibrary("utility.library", 37)) != NULL && GETINTERFACE(IUtility, UtilityBase))
@@ -1385,14 +1369,8 @@ ULONG initBase(struct LibraryHeader *lib)
       #endif
     #endif
 
-    // setup the debugging stuff
-/***    #if defined(DEBUG)
-    SetupDebug();
-    #endif
-*/
 	UserLibInit((struct MyLibrary *)lib);
-	
-//***    RETURN(TRUE);
+
     return TRUE;
   }
 
@@ -1400,8 +1378,7 @@ ULONG initBase(struct LibraryHeader *lib)
   UserLibCleanup((struct MyLibrary *)lib);
 
   freeBase(lib);
-  
-//***  RETURN(FALSE);
+
   return FALSE;
 }
 
