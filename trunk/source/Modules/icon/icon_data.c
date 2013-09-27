@@ -30,7 +30,7 @@ ModuleInfo
 		"icon.catalog",
 		0,
 		1,
-		{0,"IconInfo",MSG_ICONINFO_DESC,FUNCF_NO_ARGS,0}};
+		{{0,"IconInfo",MSG_ICONINFO_DESC,FUNCF_NO_ARGS,0}}};
 
 ConfigWindow
 	icon_disk_window={
@@ -584,9 +584,9 @@ short
 		WBKICK,MSG_ICON_KICK,
 		0};
 
-UWORD oldicon_imagedata[1]={0xffff};   
+UWORD oldicon_imagedata[1]={0xffff};
 
 struct Image   
 	oldicon_image={
-		0,0,1,1,1,oldicon_imagedata,1,0,0};		
-		
+		0,0,1,1,1,oldicon_imagedata,1,0,0};
+

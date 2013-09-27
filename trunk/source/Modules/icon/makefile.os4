@@ -1,12 +1,15 @@
 include makefile.objs
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 TARGET   := icon.module 
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
 DEBUG := -DDEBUG
 DEBUGSYM := -gstabs 
-OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__ -DUSE_DRAWICONSTATE 
+OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__ -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../icon -Iinit
 LDFLAGS  := $(C_LIB) -nostartfiles
 WARNINGS := -Wall
