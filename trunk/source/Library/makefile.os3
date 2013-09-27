@@ -18,7 +18,7 @@ LIBS     := -lpools -lamiga -ldebug
 REMOVE = rm -f
 
 #OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
-OBJS = $(COMMON_OBJS) amiga.o
+OBJS = $(COMMON_OBJS)
 
 
 all : $(TARGET)
