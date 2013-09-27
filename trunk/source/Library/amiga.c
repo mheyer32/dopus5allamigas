@@ -11,6 +11,7 @@ void LSprintf(char *buffer, char *string, APTR data)
 	RawDoFmt(string, data, DOPUS_RAWFMTFUNC, buffer);
 }
 
+#if !defined(__MORPHOS__) && !defined(__AROS__)
 int stccpy(char *p, const char *q, int n)
 {
 	char *t = p;
@@ -20,3 +21,4 @@ int stccpy(char *p, const char *q, int n)
 
 	return p - t;
 }
+#endif

@@ -20,7 +20,7 @@ LIBS     :=
 
 REMOVE = rm -f
 
-OBJS = $(COMMON_OBJS) morphos_stubs.o
+OBJS = $(COMMON_OBJS) amiga.o morphos_stubs.o
 
 ECHO = echo
 ECHE = echo -e
