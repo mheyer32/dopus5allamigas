@@ -26,8 +26,6 @@
 #include <SDI/SDI_lib.h>
 #include <SDI/SDI_stdarg.h>
 
-//*** #include "debug_lib.h"
-
 #include <proto/exec.h>
 #include <proto/dos.h>
 #include <proto/graphics.h>
@@ -83,7 +81,7 @@ extern ULONG GlobalStuffChar;
 #ifdef DEBUG
 #define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
 #else
-#define KPrintF(fmt, args...) VOID(0)
+#define KPrintF(fmt, args...) ((void)0)
 #endif
 
 // for os4 replace external (non L_) calls on internal (L_ ones)
