@@ -5,7 +5,7 @@
 #include "base.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
-
+#include <version/dopus_version.h>
 		
 extern struct DOpusLocale *locale;
 extern ModuleInfo module_info;
