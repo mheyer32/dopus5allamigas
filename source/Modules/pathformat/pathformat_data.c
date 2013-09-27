@@ -29,7 +29,7 @@ ModuleInfo
 		"pathformat.module",
 		"pathformat.catalog",
 		0,
-		0,{0}};
+		0,{{0}}};
 
 // Display window dimensions
 ConfigWindow
