@@ -30,7 +30,7 @@ ModuleInfo
 		"diskcopy.catalog",
 		0,
 		1,
-		{0,"DiskCopy",MSG_DISKCOPY_DESC,FUNCF_NO_ARGS,0}};
+		{{0,"DiskCopy",MSG_DISKCOPY_DESC,FUNCF_NO_ARGS,0}}};
 
 ConfigWindow
 	diskcopy_window={
