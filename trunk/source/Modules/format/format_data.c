@@ -30,7 +30,7 @@ ModuleInfo
 		"format.catalog",
 		0,
 		1,
-		{0,"Format",MSG_FORMAT_DESC,FUNCF_NO_ARGS,0}};
+		{{0,"Format",MSG_FORMAT_DESC,FUNCF_NO_ARGS,0}}};
 
 ConfigWindow
 	format_window={

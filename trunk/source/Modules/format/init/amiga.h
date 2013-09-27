@@ -89,6 +89,7 @@
 #define REG68K_a2 REG68K_A2
 #define REG68K_a3 REG68K_A3
 #define REG68K_a4 REG68K_A4
+#define KPrintF DebugPrintF
 #endif
 
 
