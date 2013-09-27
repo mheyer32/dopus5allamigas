@@ -21,7 +21,7 @@
 ***************************************************************************/
 #include <stdlib.h>
 
-#include "amiga.h"
+#include "init/amiga.h"
 
 #include <proto/exec.h>
 #include <proto/dos.h>

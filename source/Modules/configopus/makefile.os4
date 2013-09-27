@@ -12,7 +12,7 @@ LDFLAGS  := $(C_LIB) -nostartfiles
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-LIBS     := -lamiga -ldebug
+#LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
 
@@ -35,3 +35,8 @@ Makefile.dep : $(OBJS:.o=.c)
 clean:
 	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY locale:
+locale:
+	catcomp configopus.cd CFILE string_data.h
+
