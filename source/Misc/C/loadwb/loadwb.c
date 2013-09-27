@@ -21,8 +21,29 @@ For more information on Directory Opus for Windows please see:
 
 */
 
+#include <SDI/SDI_compiler.h>
+#include <SDI/SDI_stdarg.h>
+
+#include <strings.h>
+
+#include <proto/exec.h>
+#include <proto/input.h>
+
 #include <proto/dopus5.h>
-#include "dopus.h"
+
+#if defined(__amigaos3__) || defined(__AROS__)
+struct Device			*InputBase = NULL;
+#else
+struct Library			*InputBase = NULL;
+#endif
+
+struct Library			*DOpusBase = NULL;
+
+#ifdef __amigaos4__
+struct InputIFace 		*IInput = NULL;
+struct DOpusIFace 		*IDOpus = NULL; 
+#endif
+
 
 char *version="$VER: LoadDB 62.0 (14.7.97)";
 
@@ -37,15 +58,14 @@ enum
 
 BOOL workbench_running(void);
 
-void STDARGS __main(char *arg_string)
+void STDARGS main(char *arg_string)
 {
+
 	BOOL ok=0,run_wb=0,wb_startup=1,wb_running;
 	BPTR lock;
 	struct Process *proc;
 	APTR wsave;
 	char buf[256];
-	struct Library *InputBase;
-	struct Library *DOpusBase;
 	struct IOStdReq input_req;
 	short a;
 	char *arg_ptr=0;
@@ -78,10 +98,17 @@ void STDARGS __main(char *arg_string)
 			// Open library
 			if (DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",61))
 			{
+				#ifdef __amigaos4__
+				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
+				#endif
+			
 				// Update the path list from current process
 				UpdatePathList();
 
 				// Close library
+				#ifdef __amigaos4__
+				DropInterface((struct Interface *)IDOpus);
+				#endif
 				CloseLibrary(DOpusBase);
 
 				// Set flag to say we got a new path
@@ -102,11 +129,15 @@ void STDARGS __main(char *arg_string)
 	}
 
 	// Open input device
+
 	if (!run_wb && !(OpenDevice("input.device",0,(struct IORequest *)&input_req,0)))
 	{
 		// Get input base
 		InputBase=(struct Library *)input_req.io_Device;
-
+		#ifdef __amigaos4__
+		IInput = (struct InputIFace *)GetInterface(InputBase,"main",1,NULL);
+		#endif
+ 
 		// See if shift is held down
 		if (PeekQualifier()&(IEQUALIFIER_LSHIFT|IEQUALIFIER_RSHIFT))
 		{
@@ -123,6 +154,9 @@ void STDARGS __main(char *arg_string)
 		}
 
 		// Close input device
+		#ifdef __amigaos4__
+		DropInterface((struct Interface *)IInput);
+		#endif 
 		CloseDevice((struct IORequest *)&input_req);
 	}
 
@@ -150,6 +184,13 @@ void STDARGS __main(char *arg_string)
 			// Open library
 			if (DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",0))
 			{
+				#ifdef __amigaos4__
+				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
+				#endif
+				
+				#ifdef __amigaos4__
+				DropInterface((struct Interface *)IDOpus);
+				#endif
 				CloseLibrary(DOpusBase);
 
 				// Build command string
