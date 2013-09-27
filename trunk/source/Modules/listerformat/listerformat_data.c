@@ -29,7 +29,7 @@ ModuleInfo
 		"listerformat.module",
 		"listerformat.catalog",
 		0,
-		0,{0}};
+		0,{{0}}};
 
 // Display window dimensions
 ConfigWindow
