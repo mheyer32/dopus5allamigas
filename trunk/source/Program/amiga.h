@@ -103,7 +103,7 @@
   #define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
  #endif
 #else
- #define KPrintF(fmt, args...) VOID(0)
+ #define KPrintF(fmt, args...) (void(0))
 #endif
 
 /* Replacement functions for functions not available in some SDKs/GCCs */
