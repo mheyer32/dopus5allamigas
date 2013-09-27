@@ -13,7 +13,7 @@ LDFLAGS  := $(C_LIB)
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-LIBS     := -lamiga -lauto
+LIBS     := -lauto
 
 REMOVE = rm -f
 
