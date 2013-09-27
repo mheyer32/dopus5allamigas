@@ -1,3 +1,2 @@
-COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
-				diskinfo.o diskinfo_data.o diskinfo_strings.o \
+COMMON_OBJS = init/libinit.o diskinfo.o diskinfo_data.o diskinfo_strings.o
 
