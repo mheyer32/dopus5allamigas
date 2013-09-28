@@ -30,7 +30,7 @@ ModuleInfo
 		"print.catalog",
 		0,
 		1,
-		{0,"Print",MSG_PRINT_DESC,FUNCF_NO_ARGS,0}};
+		{{0,"Print",MSG_PRINT_DESC,FUNCF_NO_ARGS,0}}};
 
 ConfigWindow
 	print_window={
