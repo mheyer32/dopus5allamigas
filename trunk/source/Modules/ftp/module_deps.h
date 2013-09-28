@@ -5,8 +5,8 @@
 #include "base.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
+#include <version/dopus_version.h>
 
-		
 extern struct DOpusLocale *locale;
 #ifdef __AROS__
 typedef struct
@@ -49,7 +49,7 @@ extern ULONG GlobalStuffChar;
 #else
 #define DOPUS_RAWFMTFUNC NULL
 #endif
- 
+
 void KPrintF __ARGS((char *,...));
 void LSprintf(char *buffer, char *string, APTR data);
 
@@ -58,20 +58,13 @@ void LSprintf(char *buffer, char *string, APTR data);
 		IPTR args[] = { __VA_ARGS__ }; \
 		RawDoFmt(fmt, &args, DOPUS_RAWFMTFUNC, buf); \
 	})
- 
-  
 
 
-#define LIB_VERSION    68
-#define LIB_REVISION   10
-#define DATE       "05.05.2013"
-#define COPYRIGHT  "Copyright (c) 2012-2013 dopus5 Open Source Team"
 
-// set the LIB_REV_STRING
-#define REV_STRING STR(LIB_VERSION) "." STR(LIB_REVISION)
 
 #define userlibname "ftp.module"
-#define textsegmentname "$VER: ftp.module 68.10 (05.05.2013)"
+#define textsegmentname "$VER: ftp.module "LIB_STRING
+
 
 #endif
 

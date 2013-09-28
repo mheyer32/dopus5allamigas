@@ -1,4 +1,4 @@
-COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
+COMMON_OBJS = 	init/libinit.o \
 				ftp_ver.o  ftp_main.o ftp_lister.o ftp_lister_list.o \
 				ftp_lister_xfer.o ftp_lister_connect.o ftp.o \
 				ftp_arexx.o ftp_util.o ftp_recursive.o \
