@@ -57,7 +57,7 @@ int LIBFUNC L_Module_Entry(
 	GL_Object *object=0;
 	short left=0,top=0,a;
 	struct Node *node;
-	short show_jon=0,need_open=1,scroll_text=0,ctrl_down=0;
+	short show_jon=0,need_open=1,scroll_text=0; //,ctrl_down=0;
 	short ret=0;
 	struct Image logo;
 	about_data data;
