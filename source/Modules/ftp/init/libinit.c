@@ -66,6 +66,7 @@ int _start(void) //must be first for 68k library
 // stack cookie for shell v45+
 static const char USED_VAR stack_size[] = "$STACK:" STR(MIN_STACKSIZE) "\n";
 #endif
+static const char USED_VAR copyright[] = COPYRIGHT;
 
 /****************************************************************************/
 
