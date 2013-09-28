@@ -1,10 +1,13 @@
 include makefile.objs
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 TARGET   := about.module
 OPTIMIZE := -O2
 DEBUG    :=
 DEBUGSYM :=
-OPTIONS  := -DAROS_ALMOST_COMPATIBLE
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../about -Iinit
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
