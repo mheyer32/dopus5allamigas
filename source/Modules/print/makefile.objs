@@ -1,3 +1,2 @@
-COMMON_OBJS = 	init/libinit.o init/lsprintf.o \
-				print.o print_data.o print_strings.o \
+COMMON_OBJS = init/libinit.o print.o print_data.o print_strings.o
 
