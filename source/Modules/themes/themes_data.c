@@ -53,7 +53,7 @@ ModuleInfo
 		"themes.catalog",
 		0,
 		4,
-		{SAVETHEME,"SaveTheme",MSG_SAVE_THEME_DESC,0,ARG_1}};
+		{{SAVETHEME,"SaveTheme",MSG_SAVE_THEME_DESC,0,ARG_1}}};
 
 ModuleFunction
 	more_functions[]={

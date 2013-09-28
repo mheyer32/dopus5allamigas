@@ -974,7 +974,7 @@ Att_List *theme_build_list(char *path)
 short convert_theme(DOpusCallbackInfo *info,char *source,char *dest)
 {
 	APTR in,file;
-	BPTR lock,old;
+	BPTR lock,old = 0;
 	char buf[500],*ptr;
 	char wallpaper[256];
 	short stretch=0,tile=0;
