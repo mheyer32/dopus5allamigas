@@ -162,4 +162,5 @@ enum
 #define DIF_WRITEPIX	(1<<6) 
 
 #define ANIMF_LONG	1
-#define ANIMF_XOR	2 
+#define ANIMF_XOR	2
+
