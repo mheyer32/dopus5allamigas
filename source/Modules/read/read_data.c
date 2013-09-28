@@ -30,7 +30,7 @@ ModuleInfo
 		"read.catalog",
 		0,
 		1,
-		{0,"Read",MSG_READ_DESCRIPTION,0,0}};
+		{{0,"Read",MSG_READ_DESCRIPTION,0,0}}};
 
 MenuData
 	read_menus[]={
@@ -181,3 +181,4 @@ ULONG
 		 0xaa00aa,	/* Purple */
 		 0x0000aa,	/* Blue */
 		 0xeebb00};	/* Yellow */
+
