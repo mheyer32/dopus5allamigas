@@ -30,7 +30,7 @@ ModuleInfo
 		"show.catalog",
 		0,
 		1,
-		{0,"Show",MSG_SHOW_DESC,FUNCF_NO_ARGS,0}};
+		{{0,"Show",MSG_SHOW_DESC,FUNCF_NO_ARGS,0}}};
 
 ConfigWindow
 	picture_info_window={
