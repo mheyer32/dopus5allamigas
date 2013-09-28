@@ -1036,7 +1036,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					AddPart(arcname,Entry->name,512);
 				}
 			}
-			sprintf(buf,"command source %d ScanDir %s",data.destp->lister,data.destp->path);
+			sprintf(buf,"command source %ld ScanDir %s",(ULONG)data.destp->lister,data.destp->path);
 			DC_CALL4(infoptr, dc_SendCommand,
 				DC_REGA0, IPCDATA(ipc),
 				DC_REGA1, buf,

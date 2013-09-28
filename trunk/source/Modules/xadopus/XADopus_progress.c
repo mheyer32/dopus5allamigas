@@ -36,7 +36,7 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 	struct Library *DOpusBase;
 	struct DosLibrary *DOSBase;
 	struct Library *UtilityBase;
-	struct TagItem tags[] = {PW_FileDone, 0, TAG_DONE};
+	struct TagItem tags[] = {{PW_FileDone, 0, TAG_DONE}};
 /*	struct TagItem reqtags[]={AR_Window,0,AR_Message,0, AR_Button,0,
 					AR_Button,0, AR_Button,0, AR_Button,0,
 					AR_Button,0, AR_Button,0, TAG_DONE};*/

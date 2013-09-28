@@ -5,7 +5,8 @@
 #include "base.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
-		
+#include <version/dopus_version.h>
+
 extern struct DOpusLocale *locale;
 #ifdef __AROS__
 typedef struct
@@ -47,7 +48,7 @@ extern ULONG GlobalStuffChar;
 #else
 #define DOPUS_RAWFMTFUNC NULL
 #endif
- 
+
 void KPrintF __ARGS((char *,...));
 
 #define lsprintf(buf,fmt,...) \
@@ -55,21 +56,12 @@ void KPrintF __ARGS((char *,...));
 		IPTR argsa[] = { __VA_ARGS__ }; \
 		RawDoFmt(fmt, &argsa, DOPUS_RAWFMTFUNC, buf); \
 	})
- 
- 
 
 
-#define LIB_VERSION    1
-#define LIB_REVISION   2
-#define DATE       "09.09.2013"
-#define COPYRIGHT  "Copyright (c) 2012-2013 dopus5 Open Source Team"
-
-// set the LIB_REV_STRING
-#define REV_STRING STR(LIB_VERSION) "." STR(LIB_REVISION)
 
 
 #define userlibname "xadopus.module"
-#define textsegmentname "$VER: XADopus.module 5.90 1999-2002 Written by Mladen Milinkovic, 2002 by Amis, 2013-2014 Dopus5 Open Source Team"
+#define textsegmentname "\0$VER: xadopus.module "LIB_STRING"Written by Mladen Milinkovic, 2002 by Amis"
 
 
 #endif

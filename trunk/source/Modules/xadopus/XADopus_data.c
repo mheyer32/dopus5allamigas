@@ -41,7 +41,7 @@ ModuleInfo module_info =
 		"XADopus.catalog",	// Catalog name
 		NULL,										// Flags
 		2,												 // Number of functions
-		{0, "XADOpen", MSG_XADOPEN_DESC, FUNCF_NEED_SOURCE|FUNCF_NEED_FILES|FUNCF_SINGLE_SOURCE, 0}
+		{{0, "XADOpen", MSG_XADOPEN_DESC, FUNCF_NEED_SOURCE|FUNCF_NEED_FILES|FUNCF_SINGLE_SOURCE, 0}}
 };
 
 
