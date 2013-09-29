@@ -123,7 +123,7 @@ void show_list_selector(Lister *lister,short line,BOOL erase)
 	SetAPen(&lister->list_area.rast,(entry && bpen==lister->drawinfo->dri_Pens[TEXTPEN])?fpen:lister->drawinfo->dri_Pens[TEXTPEN]);
 	SetDrMd(&lister->list_area.rast,JAM1);
 	BltTemplate(
-		(char *)image,
+		(unsigned char *)image,
 		0,2,
 		&lister->list_area.rast,
 		left,top,
@@ -150,7 +150,7 @@ struct Gadget *create_iconify_gadget(struct Screen *screen,struct List *list,BOO
 			screen,
 			list,
 			cover_zoom,
-			0,
+			TBGADGETOFFSET,
 			IM_ICONIFY,
 			GAD_ICONIFY);
 }
