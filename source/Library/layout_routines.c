@@ -1657,7 +1657,7 @@ void LIBFUNC L_FreeObject(
 		struct Gadget *firstgad,*lastgad;
 
 		// Gadtools gadget?
-		if (IS_GADTOOLS((ULONG)object))
+		if (IS_GADTOOLS(object))
 			firstgad=object->gl_info.gl_gadget.context;
 
 		// BOOPSI gadget
@@ -1679,7 +1679,7 @@ void LIBFUNC L_FreeObject(
 		if (lastgad) lastgad->NextGadget=0;
 
 		// Free this gadget
-		if (IS_GADTOOLS((ULONG)object))
+		if (IS_GADTOOLS(object))
 			FreeGadgets(object->gl_info.gl_gadget.context);
 		else DisposeObject((Object *)object->gl_info.gl_gadget.gadget);
 

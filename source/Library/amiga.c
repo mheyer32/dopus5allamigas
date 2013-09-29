@@ -22,3 +22,4 @@ int stccpy(char *p, const char *q, int n)
 	return p - t;
 }
 #endif
+
