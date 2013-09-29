@@ -106,6 +106,13 @@
  #define KPrintF(fmt, args...) (void(0))
 #endif
 
+/* an offset to correctly position the iconify and padlock gadgets in the window titlebar */
+#ifdef __amigaos4__
+#define TBGADGETOFFSET -10
+#else
+#define TBGADGETOFFSET 0
+#endif
+
 /* Replacement functions for functions not available in some SDKs/GCCs */
 #if !defined(__MORPHOS__) && !defined(__AROS__)
 #undef stccpy

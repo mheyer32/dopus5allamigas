@@ -135,6 +135,7 @@ struct Window *lister_open_window(Lister *lister,struct Screen *screen)
 			&lister->backdrop_info->boopsi_list,
 			(lister->flags&LISTERF_LOCK_POS)?TRUE:FALSE);
 
+
 	// Create lock gadget
 	if (!(GUI->flags2&GUIF2_NO_PADLOCK) &&
 			(lock_gad=
@@ -142,7 +143,7 @@ struct Window *lister_open_window(Lister *lister,struct Screen *screen)
 					screen,
 					&lister->backdrop_info->boopsi_list,
 					(lister->flags&LISTERF_LOCK_POS)?TRUE:FALSE,
-					(gadget)?-gadget->Width:0,
+					(gadget)?-gadget->Width+TBGADGETOFFSET:0,
 					IM_LOCK,
 					GAD_LOCK)))
 	{
@@ -320,7 +321,7 @@ struct Window *lister_open_window(Lister *lister,struct Screen *screen)
 			TAG_END);
 
 	// Create path field
-	if (!(lister->path_field=
+	if (!(lister->path_field=(struct Gadget *)
 		NewObject(0,"dopusstrgclass",
 			GA_ID,GAD_PATH,
 			GA_Left,lister->window->BorderLeft,
@@ -536,7 +537,7 @@ void lister_close_window(Lister *lister,BOOL run_script)
 	// Free gauge gadget 
 	if (lister->gauge_gadget)
 	{
-		DisposeObject(lister->gauge_gadget);
+		DisposeObject((Object *)lister->gauge_gadget);
 		lister->gauge_gadget=0;
 	}
 
@@ -839,7 +840,7 @@ void lister_set_gauge(Lister *lister,BOOL refresh)
 		RemoveGList(lister->window,lister->gauge_gadget,1);
 
 		// Free gadget
-		DisposeObject(lister->gauge_gadget);
+		DisposeObject((Object *)lister->gauge_gadget);
 		lister->gauge_gadget=0;
 
 		// Fix border width
@@ -860,7 +861,7 @@ void lister_set_gauge(Lister *lister,BOOL refresh)
 		lister_init_colour(lister,ENVCOL_GAUGE,FALSE);
 
 		// Create gauge
-		if ((lister->gauge_gadget=
+		if ((lister->gauge_gadget=(struct Gadget *)
 				NewObject(
 					0,
 					"dopusgaugeclass",
