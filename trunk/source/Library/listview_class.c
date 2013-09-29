@@ -206,6 +206,7 @@ ULONG LIBFUNC listview_dispatch(
 						GA_Height,data->dims.Height-4-(data->arrow_height<<1),
 						GA_Disabled,(gadget->Flags&GFLG_DISABLED)?TRUE:FALSE,
 						PGA_Freedom,FREEVERT,
+						PGA_NewLook, TRUE,
 						PGA_Borderless,TRUE,
 						PGA_Visible,1,
 						PGA_Total,1,
