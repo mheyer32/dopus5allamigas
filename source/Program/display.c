@@ -312,6 +312,24 @@ BOOL display_open(long flags)
 		if (GUI->window)
 		{
 			// Build chipset string
+			#ifdef __amigaos4__
+			#include <proto/picasso96api.h>
+			struct Library *p96base=OpenLibrary("Picasso96API.library",2);
+			if (p96base)
+			{
+				struct P96IFace *IP96=(struct P96IFace *)GetInterface(p96base,"main",1,NULL);
+				if (IP96)
+				{
+					KPrintF("Getting board name\n");
+					STRPTR chip = NULL;
+					p96GetBoardDataTags(0,P96BD_BoardName,&chip,TAG_DONE);
+					if (chip)
+						strcpy(GUI->ver_chips,chip);
+					DropInterface((struct Interface *)IP96);
+				}
+				CloseLibrary(p96base);
+			}
+			#else
 			strcpy(GUI->ver_chips,
 					(GfxBase->ChipRevBits0&GFXF_AA_ALICE)?"AGA":
 					(GfxBase->ChipRevBits0&GFXF_HR_AGNUS)?"ECS":"OCS");
@@ -331,6 +349,7 @@ BOOL display_open(long flags)
 					FindName(&SysBase->LibList,"cyberintuition.library"))
 					strcpy(GUI->ver_chips,"CGX");
 			}
+			#endif
 
 			// Get visual info
 			GUI->visual_info=GetVisualInfoA(GUI->window->WScreen,0);
@@ -385,7 +404,6 @@ BOOL display_open(long flags)
 			get_colour_table();
 
 			// Get all icons
-KPrintF( "Calling backdrop_get_objects\n");
 			backdrop_get_objects(
 				GUI->backdrop,
 				BGOF_ALL|BGOF_SHOW|BGOF_FIRST|(flags&BGOF_DESKTOP));

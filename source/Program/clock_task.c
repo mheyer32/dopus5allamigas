@@ -25,7 +25,13 @@ For more information on Directory Opus for Windows please see:
 #include <proto/input.h>
 #include <proto/SysInfo.h>
 #include <libraries/SysInfo.h>
-
+#ifdef __amigaos4__
+#include <proto/label.h>
+#include <images/label.h>
+#include <proto/bitmap.h>
+#include <images/bitmap.h>
+#include <intuition/gui.h>
+#endif
 #define TITLE_ERROR		1
 #define ERROR_TIMEOUT	4
 
@@ -36,7 +42,11 @@ extern UWORD __chip moon_big_data[8][2][13],moon_small_data[8][2][9];
 #define MOON_BIG_SIZE	13
 #define MOON_SMALL_SIZE	9
 
-void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct DateStamp *date,struct SysInfo *si,struct Library *SysInfoBase);
+APTR clock_show_custom_title(struct RastPort *rp,
+	#ifdef __amigaos4__
+	struct DrawInfo *dri,
+	#endif
+	long clock_x,long days,struct DateStamp *date,struct SysInfo *si,struct Library *SysInfoBase);
 
 // Clock task
 IPC_EntryCode(clock_proc)
@@ -51,12 +61,25 @@ IPC_EntryCode(clock_proc)
 	BOOL hide_clock;
 	short clock_x=0;
 	struct RastPort clock_rp={0};
-	struct Screen *pubscreen=0;
+	struct Screen *pubscreen=NULL;
 	long mem_msg=0,error_count=0,days;
 	char *error_txt=0;
 	short bar_x=0,last_x=0,clock_on=0,error_time=0;
 	struct Library *SysInfoBase;
 	struct SysInfo *si=0;
+	#ifdef __amigaos4__
+	/* under AmigaOS4, we move away from blasting the text straight into the screen titlebar layer, and use BOOPSI
+	** images instead, as this offers us transparency. This means that the titlebar doesn't have to be RectFill'd
+	** and we can keep the nice gradient.
+	** Other platforms may benefit from this change too, but as I can't test it, I'll leave this as an AmigaOS4.x 
+	** feature only. Please test the same routines elsewhere.
+	*/
+	struct ClassLibrary *labelcb = NULL;
+	Class *labelclass = NULL;
+	Object *clock_image = NULL;
+	Object *title_image = NULL;
+	struct DrawInfo *dri = NULL;
+	#endif
 
 	// Do startup
 	if ((ipc=IPC_ProcStartup(0,0)))
@@ -70,8 +93,12 @@ IPC_EntryCode(clock_proc)
 				exit(0);
 			}			
 			#endif
-			si=InitSysInfo();			
+			si=InitSysInfo();
 		}
+		#ifdef __amigaos4__
+		if ((labelcb = OpenClass("label.image",53,&labelclass)))
+		{
+		#endif
 		// Open timer
 		if ((timer=AllocTimer(UNIT_VBLANK,0)))
 		{
@@ -99,6 +126,7 @@ IPC_EntryCode(clock_proc)
 
 						// Show
 						case IPC_SHOW:
+							//KPrintF("IPC_SHOW received\n");
 
 							// Not already open?
 							if (!window && !layer)
@@ -158,6 +186,11 @@ IPC_EntryCode(clock_proc)
 
 									// Get draw info
 									drawinfo=GetScreenDrawInfo(screen);
+
+									// clear the title for the currently active window
+									#ifdef __amigaos4__
+									SetWindowTitles(IntuitionBase->ActiveWindow, (char *)-1, NULL );
+									#endif
 
 									// Set pens
 									SetAPen(&clock_rp,
@@ -237,12 +270,21 @@ IPC_EntryCode(clock_proc)
 									// Make an AppWindow
 									appwindow=AddAppWindowA(0x12345678,0,window,GUI->appmsg_port,0);
 								}
+								
+								#ifdef __amigaos4__
+								if (pubscreen)
+								{
+									dri = GetScreenDrawInfo(pubscreen);
+								}
+								#endif
 							}
+							//KPrintF("IPC_SHOW done\n");
 							break;
 
 
 						// Hide
 						case IPC_HIDE:
+							//KPrintF("IPC_HIDE received\n");
 
 							// Close window if it's open
 							if (window)
@@ -259,6 +301,15 @@ IPC_EntryCode(clock_proc)
 								window=0;
 							}
 
+							
+							#ifdef __amigaos4__
+							if(dri && pubscreen)
+							{
+								FreeScreenDrawInfo(pubscreen,dri);
+								dri = NULL;
+							}
+							#endif
+
 							// Unlock public screen if it's locked
 							if (pubscreen)
 							{
@@ -266,6 +317,8 @@ IPC_EntryCode(clock_proc)
 								pubscreen=0;
 							}
 							layer=0;
+							//KPrintF("IPC_HIDE done\n");
+
 							break;
 
 
@@ -336,16 +389,23 @@ IPC_EntryCode(clock_proc)
 				// Timer event
 				if (CheckTimer(timer))
 				{
+					// a shorter micros value updates the titlebar more often. We are not on 7MHz anymore :)
+					#ifdef __amigaos4__
+					#define MICROS 80000
+					#else
+					#define MICROS 800000
+					#endif
 					// Send next timer request
-					StartTimer(timer,0,800000);
+					StartTimer(timer,0,MICROS);
 
 					// Set flag to update window
 					update=1;
 				}
 
-				// Update?
+				//// Update clock?
 				if (update)
 				{
+					//KPrintF("Updating title\n");
 					// If error text, update error count
 					if (error_txt)
 					{
@@ -449,6 +509,11 @@ IPC_EntryCode(clock_proc)
 									// Save window pointer
 									tit_window=IntuitionBase->ActiveWindow;
 								}
+
+								#ifdef __amigaos4__
+								// clear the screen title for the current window
+								SetWindowTitles(IntuitionBase->ActiveWindow, (char *)-1, NULL );
+								#endif
 							}
 
 							// Unlock Intuition
@@ -470,7 +535,7 @@ IPC_EntryCode(clock_proc)
 									if (done_tit++>=10)
 									{
 										// Call SetWindowTitles which will be patched
-										SetWindowTitles(IntuitionBase->ActiveWindow,(UBYTE *)-1,"Amiga Workbench");
+										SetWindowTitles(IntuitionBase->ActiveWindow,(char *)-1,"Amiga Workbench");
 										done_tit=0;
 									}
 								}
@@ -484,8 +549,26 @@ IPC_EntryCode(clock_proc)
 									// Is clock on?
 									if (GUI->flags&GUIF_CLOCK)
 									{
+										#ifdef __amigaos4__
+										if (clock_image)
+										{
+											//KPrintF("Disposing of clock_image\n");
+											DisposeObject(clock_image);
+											clock_image=NULL;
+										}
+										if (dri && !clock_image && labelcb)
+										{
+											//KPrintF("Creating new clock image\n");
+											if ((clock_image = NewObject(labelclass, NULL, IA_EraseBackground, TRUE, LABEL_DrawInfo, dri, LABEL_Text, titlebuf, TAG_DONE )))
+											{
+												//KPrintF("Drawing clock image\n");
+												DrawImage( &clock_rp, (struct Image *)clock_image, clock_x, (clock_rp.Layer->Height-clock_rp.TxHeight)/2);
+											}
+										}
+										#else
 										Move(&clock_rp,clock_x,clock_rp.TxBaseline+1);
 										Text(&clock_rp,titlebuf,strlen(titlebuf));
+										#endif
 										clock_on=1;
 									}
 
@@ -502,9 +585,49 @@ IPC_EntryCode(clock_proc)
 									if (environment->env->scr_title_text[0] && !error_txt)
 									{
 										// Show custom title
+										#ifdef __amigaos4__
+										if (title_image)
+										{
+											//KPrintF("Disposing of title image\n");
+											DisposeObject(title_image);
+											title_image = NULL;
+										}
+
+										title_image =
+										#endif
 										clock_show_custom_title(
 											&clock_rp,
+											#ifdef __amigaos4__
+											dri,
+											#endif
 											(GUI->flags&GUIF_CLOCK)?clock_x:last_x,days,&date.dat_Stamp,si,SysInfoBase);
+										
+										#ifdef __amigaos4__
+										if (title_image)
+										{
+											//KPrintF("Creating new title image\n");
+											LONG width = 5; // a bit of padding
+											struct Image *image;
+											//KPrintF("Getting SBar logo for width...\n");
+											if ((image=(struct Image *)NewObject(
+													0,
+													"sysiclass",
+													SYSIA_DrawInfo,dri,
+													SYSIA_Which,SBARLOGO,
+													TAG_END)))
+											{
+												// Get width from image
+												//KPrintF("width is: %ld\n", image->Width );
+												width+=image->Width;
+
+												// Free image
+												//KPrintF("Disposing of logo\n");
+												DisposeObject((Object *)image);
+											}
+											//KPrintF("Drawing title image...\n");
+											DrawImage(&clock_rp, (struct Image *)title_image, width, (clock_rp.Layer->Height-clock_rp.TxHeight)/2);
+										}
+										#endif
 									}
 
 									// Normal title with memory monitor
@@ -532,6 +655,22 @@ IPC_EntryCode(clock_proc)
 					((window)?(1<<window->UserPort->mp_SigBit):0));
 			}
 
+			// clock task is quitting
+			#ifdef __amigaos4__
+			if (clock_image)
+			{
+				//KPrintF("Disposing of clock image\n");
+				DisposeObject(clock_image);
+				clock_image=NULL;
+			}
+			if (title_image)
+			{
+				//KPrintF("Disposing of title image\n");
+				DisposeObject(title_image);
+				title_image=NULL;
+			}
+			#endif
+
 			// Close window if it's open
 			if (window)
 			{
@@ -555,6 +694,11 @@ IPC_EntryCode(clock_proc)
 			// Free timer
 			FreeTimer(timer);
 		}
+		#ifdef __amigaos4__
+			//KPrintF("Closing label.image\n");
+			CloseClass( labelcb );
+		}
+		#endif
 
 		// Free SysInfo
 		if (si) FreeSysInfo(si);
@@ -653,10 +797,36 @@ void title_error(char *txt,short time)
 #define TITLE_SIZE	256
 
 // Show custom title
-void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct DateStamp *date,struct SysInfo *si,struct Library *SysInfoBase)
+APTR clock_show_custom_title(
+	struct RastPort *rp,
+	#ifdef __amigaos4__
+	struct DrawInfo *dri,
+	#endif
+	long clock_x,
+	long days,
+	struct DateStamp *date,
+	struct SysInfo *si,
+	struct Library *SysInfoBase)
 {
 	char *ptr,*format,*title_buffer;
 	short pos=0,moon_day=-1,moon_pos=0;
+	struct BitMap bm;
+	#ifdef __amigaos4__
+	struct Screen *screen = NULL;
+	struct ClassLibrary *labelcb = NULL, *bitmapcb = NULL;
+	Class *labelclass = NULL, *bitmapclass = NULL;
+	APTR title_image = NULL;
+	TEXT beforemoon[256] = "\0";
+	TEXT aftermoon[256] = "\0";
+
+	labelcb = OpenClass("label.image", 53, &labelclass);
+	bitmapcb = OpenClass("bitmap.image",53,&bitmapclass);
+	
+	if (labelclass && bitmapclass)
+	{
+		if (dri)
+			screen = dri->dri_Screen;
+	#endif
 
 	// Get numeric formatting string
 	format=(environment->env->settings.date_flags&DATE_1000SEP && GUI->flags&GUIF_LOCALE_OK)?
@@ -668,7 +838,7 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 	{
 		short esc=0;
 		unsigned long memval=(unsigned long)-1,memtotal=(unsigned long)-1;
-		char buf[80];
+		char buf[80]; // let's hope that is always big enough, as there doesn't seem to be any length checking here.
 
 		// Clear buffer
 		buf[0]=0;
@@ -958,6 +1128,12 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 					++esc;
 				}
 				else
+				if (*(ptr+3)=='G' || *(ptr+3)=='g')
+				{
+					DivideToString(buf,memval,1024*1024*1024,(*(ptr+3)=='G')?1:0,(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+					++esc;
+				}
+				else
 				if (*(ptr+3)=='S' || *(ptr+3)=='s')
 				{
 					BytesToString(memval,buf,(*(ptr+3)=='S')?1:0,(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
@@ -974,7 +1150,11 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 					++esc;
 				}
 				else
-					lsprintf(buf,format,memval);
+				{
+					// memory values should always be unsigned
+					lsprintf(buf,"%lu",memval);
+					//lsprintf(buf,format,memval);
+				}
 			}
 				
 			// Got a string to add?
@@ -996,15 +1176,18 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 	// Null-terminate buffer
 	title_buffer[pos]=0;
 
+	#ifdef __amigaos4__
+	Strlcpy(beforemoon,title_buffer,(moon_day>-1)?moon_pos+1:strlen(title_buffer)+1);
+	#else
 	// Render text
 	Move(rp,5,rp->Font->tf_Baseline+1);
 	Text(rp,title_buffer,(moon_day>-1)?moon_pos:strlen(title_buffer));
+	#endif
 
 	// Moon to show?
 	if (moon_day>-1)
 	{
 		short x,image,size;
-		struct BitMap bm;
 
 		// Find position for moon
 		x=rp->cp_x;
@@ -1054,6 +1237,9 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 			size=MOON_SMALL_SIZE;
 		}
 
+		#ifdef __amigaos4__
+		Strlcpy(aftermoon,title_buffer+moon_pos+2,x+1);
+		#else
 		// Draw moon
 		BltBitMapRastPort(
 			&bm,0,0,
@@ -1065,8 +1251,10 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 		Move(rp,x+size,rp->Font->tf_Baseline+1);
 		if ((x=strlen(title_buffer)-moon_pos-2)>0)
 			Text(rp,title_buffer+moon_pos+2,x);
+		#endif
 	}
 
+	#ifndef __amigaos4__
 	// Erase to start of clock text
 	if (clock_x>rp->cp_x)
 	{
@@ -1080,6 +1268,48 @@ void clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct D
 			clock_x-1,rp->Font->tf_YSize+1);
 		SetAPen(rp,fp);
 	}
+
+	return NULL;
+	#else
+
+		Object *moon = NULL;
+		
+		if (moon_day>-1)
+		{
+			// we need to create a bitmap.image object to contain the "moon" image 
+			moon = NewObject(bitmapclass,NULL,
+			                                  BITMAP_HasAlpha,TRUE,
+			                                  BITMAP_Masking,TRUE,
+			                                  BITMAP_Screen,screen,
+			                                  BITMAP_BitMap,&bm,
+			                                  BITMAP_Width,(rp->TxHeight>=13?MOON_BIG_SIZE:MOON_SMALL_SIZE),
+			                                  BITMAP_Height,(rp->TxHeight>=13?MOON_BIG_SIZE:MOON_SMALL_SIZE),
+			                                  TAG_DONE);
+		}
+
+		// create the image to display...
+		title_image = NewObject(labelclass,NULL,IA_EraseBackground, TRUE, 
+		                                        LABEL_DrawInfo, dri,
+		                                        LABEL_Text, beforemoon, 
+		                                        (moon?LABEL_DisposeImage:TAG_IGNORE), TRUE,
+		                                        (moon?LABEL_Image:TAG_IGNORE),moon,
+		                                        (*aftermoon?LABEL_Text:TAG_IGNORE),aftermoon,
+		                                        TAG_DONE);
+	}
+	
+	if (labelclass)
+	{
+		CloseClass(labelcb);
+	}
+
+	if (bitmapcb)
+	{
+		CloseClass(bitmapcb);
+	}
+
+	// return an image to be displayed as the title
+	return title_image;
+	#endif
 }
 
 static char mondays[12]={31,28,31,30,31,30,31,31,30,31,30,31};

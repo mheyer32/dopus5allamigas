@@ -1073,9 +1073,8 @@ void backdrop_get_objects(BackdropInfo *info,short flags)
 		// Leftouts?
 		if (flags&BGOF_LEFTOUT)
 		{
-KPrintF("Calling backdrop_add_leftouts\n"); 
 			backdrop_add_leftouts(info);
-KPrintF("Reading desktop folder...\n");
+
 			read_desktop_folder(info,FALSE);
 		}
 
@@ -1089,12 +1088,10 @@ KPrintF("Reading desktop folder...\n");
 	// Show objects
 	if (flags&BGOF_SHOW)
 	{
-KPrintF("arranging backdrop objects...\n");
 		// Arrange backdrop objects
 		backdrop_arrange_objects(info);
 
 		// Show backdrop objects (including newly arranged icons)
-KPrintF("Showing objects...\n");
 		backdrop_show_objects(info,(flags&BGOF_FIRST)?BDSF_RECALC:BDSF_CLEAR|BDSF_RECALC);
 
 		// Check for auto-open groups (if we did groups)

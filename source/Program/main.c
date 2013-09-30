@@ -30,6 +30,12 @@ For more information on Directory Opus for Windows please see:
 #include <proto/newicon.h>
 #include <proto/module.h>
 
+#ifdef __amigaos4__
+#include <proto/expansion.h>
+#include <expansion/expansion.h>
+
+#endif
+
 #define LIB_VER 68	// Minimum library version we need
 
 #define INIT_STEPS	15
@@ -346,27 +352,27 @@ void startup_open_libraries()
 		!(IconBase=main_open_library("icon.library",37)) ||
 		!(WorkbenchBase=main_open_library("workbench.library",37)) ||
 		!(CxBase=main_open_library("commodities.library",37)) ||
-		!(UtilityBase=main_open_library("utility.library",37)) ||
+		!(UtilityBase=(struct UtilityBase *)main_open_library("utility.library",37)) ||
 		!(GadToolsBase=main_open_library("gadtools.library",37)) ||
 		!(RexxSysBase=main_open_library("rexxsyslib.library",0)) ||
 		!(AslBase=main_open_library("asl.library",37))) quit(0);
 
 	#ifdef __amigaos4__
 	// obtain ifaces
-	if (!(IGraphics=(struct GraphicsIFace *)GetInterface(GfxBase,"main",1,NULL)) ||
-	    !(IIntuition=(struct IntuitionIFace *)GetInterface(IntuitionBase,"main",1,NULL)) ||
+	if (!(IGraphics=(struct GraphicsIFace *)GetInterface((struct Library *)GfxBase,"main",1,NULL)) ||
+	    !(IIntuition=(struct IntuitionIFace *)GetInterface((struct Library *)IntuitionBase,"main",1,NULL)) ||
 	    !(ILayers=(struct LayersIFace *)GetInterface(LayersBase,"main",1,NULL)) ||
 	    !(IDiskfont=(struct DiskfontIFace *)GetInterface(DiskfontBase,"main",1,NULL)) ||
 	    !(IIcon=(struct IconIFace *)GetInterface(IconBase,"main",1,NULL)) ||
 	    !(IWorkbench=(struct WorkbenchIFace *)GetInterface(WorkbenchBase,"main",1,NULL)) ||
 	    !(ICommodities=(struct CommoditiesIFace *)GetInterface(CxBase,"main",1,NULL)) ||
-	    !(IUtility=(struct UtilityIFace *)GetInterface(UtilityBase,"main",1,NULL)) ||
+	    !(IUtility=(struct UtilityIFace *)GetInterface((struct Library *)UtilityBase,"main",1,NULL)) ||
 	    !(IGadTools=(struct GadToolsIFace *)GetInterface(GadToolsBase,"main",1,NULL)) ||
 	    !(IRexxSys=(struct RexxSysIFace *)GetInterface(RexxSysBase,"main",1,NULL)) ||
 	    !(IAsl=(struct AslIFace *)GetInterface(AslBase,"main",1,NULL))) quit(0);
 	#endif
-				
-		
+
+
 	// Some other useful libraries
 	DataTypesBase=OpenLibrary("datatypes.library",0);
 	AmigaGuideBase=OpenLibrary("amigaguide.library",0);
@@ -401,9 +407,9 @@ void startup_open_libraries()
 
 	// Get timer.device base
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&timer_req,0)) {
-		TimerBase=(struct Library *)timer_req.io_Device;
+		TimerBase=(APTR)timer_req.io_Device;
 		#ifdef __amigaos4__
-		ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
+		ITimer = (struct TimerIFace *)GetInterface((struct Library *)TimerBase,"main",1,NULL); 
 		#endif
 	}	
 	else {
@@ -412,9 +418,9 @@ void startup_open_libraries()
 
 	// Get console.device base
 	if (!OpenDevice("console.device",-1,(struct IORequest *)&console_req,0)) {
-		ConsoleDevice=(struct Library *)console_req.io_Device;
+		ConsoleDevice=(APTR)console_req.io_Device;
 		#ifdef __amigaos4__
-		IConsole = (struct ConsoleIFace *)GetInterface(ConsoleDevice,"main",1,NULL); 
+		IConsole = (struct ConsoleIFace *)GetInterface((struct Library *)ConsoleDevice,"main",1,NULL); 
 		#endif
 	}	
 	else { 
@@ -438,7 +444,7 @@ void startup_open_libraries()
 // Create a global memory pool and GUI structure
 void startup_init_gui()
 {
-	short a,proc=0;
+	short a;
 
 	// Create a global memory pool and GUI structure
 	if (!(global_memory_pool=NewMemHandle(1024,512,MEMF_CLEAR|MEMF_PUBLIC)) ||
@@ -532,7 +538,7 @@ void startup_init_gui()
 		// Get lengths of days of the week
 		for (day=DAY_1;day<=DAY_7;day++)
 		{
-			if ((str=GetLocaleStr(locale.li_Locale,day)) &&
+			if ((str=(char *)GetLocaleStr(locale.li_Locale,day)) &&
 				(len=strlen(str))>GUI->date_length)
 				GUI->date_length=len;
 		}
@@ -540,7 +546,7 @@ void startup_init_gui()
 		// Yesterday, etc
 		for (day=YESTERDAYSTR;day<=FUTURESTR;day++)
 		{
-			if ((str=GetLocaleStr(locale.li_Locale,day)) &&
+			if ((str=(char *)GetLocaleStr(locale.li_Locale,day)) &&
 				(len=strlen(str))>GUI->date_length)
 				GUI->date_length=len;
 		}
@@ -618,10 +624,17 @@ void startup_init_gui()
 
 	// Build CPU model string
 #if defined(__PPC__)
+#ifdef __amigaos4__
+	STRPTR cpu;
+	GetCPUInfoTags(GCIT_ModelString,&cpu,TAG_DONE);
+	strcpy(GUI->ver_cpu, cpu);
+#else
 	strcpy(GUI->ver_cpu,"PowerPC");
+#endif
 #elif defined(__i386__)
 	strcpy(GUI->ver_cpu,"i386");
 #else
+	short proc=0;
 	if (SysBase->AttnFlags&AFF_68010)
 		if (SysBase->AttnFlags&AFF_68020)
 			if (SysBase->AttnFlags&AFF_68030)

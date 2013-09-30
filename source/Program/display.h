@@ -112,9 +112,9 @@ typedef struct
 
 	char			ver_kickstart[16];
 	char			ver_workbench[16];
-	char			ver_cpu[8];
-	char			ver_fpu[8];
-	char			ver_chips[8];
+	char			ver_cpu[64];			// later machines have more elaborate CPU names
+	char			ver_fpu[64];
+	char			ver_chips[32];			// need more room to hold the graphics card info
 
 	ULONG			foo2pad[5];
 
