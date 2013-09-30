@@ -3,11 +3,17 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+else
+DEBUG := -DDEBUG
+endif
+
 TARGET   := DirectoryOpus
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
-DEBUG := -DDEBUG
 DEBUGSYM := -gstabs 
 OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__  -D__USE_BASETYPE__ -DUSE_OLD_ANCHORPATH -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
@@ -15,7 +21,7 @@ LDFLAGS  := $(C_LIB)
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-LIBS     := -lamiga
+LIBS     := 
 
 REMOVE = rm -f
 

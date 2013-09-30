@@ -3,6 +3,13 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+else
+DEBUG := -DDEBUG
+endif
+
 TARGET   := DirectoryOpus
 OPTIMIZE := -O2
 DEBUGSYM := -gstabs
@@ -11,7 +18,7 @@ INCLUDES := -I../ -I../Include
 LDFLAGS  := -noixemul
 #WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
-CFLAGS   := $(OPTIONS) $(DEBUGSYM) $(OPTIMIZE) -noixemul
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
 LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f

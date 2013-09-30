@@ -23,7 +23,6 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 #include <proto/module.h>
-#include <version/dopus_version.h>
 
 // version_num is actually revision number & used elsewhere in the program
 short version_num = PROG_REVISION;

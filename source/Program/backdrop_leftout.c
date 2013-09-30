@@ -115,7 +115,7 @@ void backdrop_leave_icons_out(BackdropInfo *info,BackdropObject *only_one,BOOL s
 {
 	BackdropObject *object=0;
 	BOOL save=0;
-	KPrintF("Entered");
+	D(bug("Entered\n"));
 
 	// Lock icon list
 	lock_listlock(&info->objects,0);
@@ -205,7 +205,7 @@ BackdropObject *backdrop_leave_out(
 	BackdropObject *object;
 	struct List *search;
 	char path[262];
-	KPrintF("Entered\n");
+	D(bug("Entered\n"));
 
 	// Lock object
 	if (!(lock=Lock(name,ACCESS_READ)))

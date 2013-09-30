@@ -5,9 +5,15 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+else
+DEBUG := -DDEBUG
+endif
+
 TARGET   := DirectoryOpus
 OPTIMIZE := -O2
-DEBUG    :=
 DEBUGSYM :=
 OPTIONS  := $(OPTIMIZE) -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
@@ -16,7 +22,7 @@ WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
 STRIP    := ppc-morphos-strip
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-LIBS     :=
+LIBS     := -ldebug
 
 REMOVE = rm -f
 
