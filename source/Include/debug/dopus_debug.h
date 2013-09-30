@@ -1,6 +1,12 @@
 #ifndef DOPUS_DEBUG
 #define DOPUS_DEBUG
 
+#if defined(__AROS__)
+
+#include <aros/debug.h>
+
+#else
+
 #if defined(__amigaos3__) || defined(__MORPHOS__)
 #include <clib/debug_protos.h>
 #endif
@@ -21,5 +27,6 @@
   #define bug(fmt, args...)  {kprintf("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); kprintf(fmt, ##args);}
 #endif
 
+#endif
 
 #endif /* DOPUS_DEBUG */
