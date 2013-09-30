@@ -35,6 +35,7 @@
 #include "lib_protos.h"
 
 #include "module_deps.h"
+#include <debug/dopus_debug.h>
 
 /****************************************************************************/
 
