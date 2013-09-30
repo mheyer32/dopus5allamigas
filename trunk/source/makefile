@@ -1,6 +1,9 @@
 # Main Dopus5 makefile
 
 ###########################################################
+# Enter debug=no on "Make" command line to disable debug output.
+export debug
+###########################################################
 # Read platform arguments from the "Make" command line:
 # Acceptable platform arguments are os3, os4, or mos.
 PLATFORM:= none

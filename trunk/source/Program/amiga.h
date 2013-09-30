@@ -77,6 +77,8 @@
 #include <graphics/gfxbase.h>
 #endif
 
+#include <debug/dopus_debug.h>
+
 #ifdef __amigaos4__
 #include <exec/emulation.h>		// necessary 68k emul-based parts
 #include <dos/stdio.h>			// for #define Flush(x) FFlush(x)
@@ -97,14 +99,6 @@
 #define SDivMod32(x,y) ( ((LONG) x) / ((LONG) y) )  
 #undef UMult32
 #define UMult32(x,y) ( ((ULONG) x) * ((ULONG) y) )
-
-#ifdef DEBUG
- #ifdef __amigaos4__
-  #define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
- #endif
-#else
- #define KPrintF(fmt, args...) (void(0))
-#endif
 
 /* an offset to correctly position the iconify and padlock gadgets in the window titlebar */
 #ifdef __amigaos4__

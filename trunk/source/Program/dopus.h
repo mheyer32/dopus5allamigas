@@ -36,6 +36,7 @@ For more information on Directory Opus for Windows please see:
 #include <proto/configopus.h>
 
 #include "amiga.h"
+#include <version/dopus_version.h>
 
 #include "main_commands.h"
 

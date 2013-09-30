@@ -36,7 +36,7 @@ For more information on Directory Opus for Windows please see:
 
 #endif
 
-#define LIB_VER 68	// Minimum library version we need
+#define LIB_VER LIB_VERSION	// Minimum library version we need
 
 #define INIT_STEPS	15
 
