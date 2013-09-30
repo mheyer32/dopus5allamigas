@@ -2238,7 +2238,7 @@ typedef struct {
 	char				*path;		// Path to load
 } Cfg_Lister;
 
-
+// THIS STRUCTURE IS DUPLICATED IN Program/dopus_config.h
 // ENVR - defines the screen and other display info
 typedef struct
 {
@@ -2298,7 +2298,7 @@ typedef struct
 	ULONG		pad6[17];
 */
 
-	char		scr_title_text[188];	// Screen title text
+	char		scr_title_text[512];	// Screen title text
 
 
 	UWORD		lister_options;		// Lister options
