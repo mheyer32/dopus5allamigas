@@ -19,7 +19,7 @@ LIBS     :=
 
 REMOVE = rm -f
 
-OBJS = $(COMMON_OBJS) init/amiga.o init/aos4_ppc_libstub.o init/aos4_68k_to_ppc_vectors.o
+OBJS = $(COMMON_OBJS) init/aos4_ppc_libstub.o init/aos4_68k_to_ppc_vectors.o
 
 all : $(TARGET)
 

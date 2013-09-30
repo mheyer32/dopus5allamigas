@@ -8,7 +8,7 @@ OPTIMIZE := -O2
 DEBUG := -DDEBUG
 DEBUGSYM := -gstabs
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include -I../../../Include -I../ftp -Iinit
+INCLUDES := -I../ -I../../ -I../Include -I../../Include -I../../../Include -I../ftp -Iinit -I/usr/local/amiga/m68k-amigaos/netinclude
 LDFLAGS  := -nostartfiles -noixemul
 WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
@@ -17,7 +17,7 @@ LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
 
-OBJS = $(COMMON_OBJS) init/amiga.o init/68k_asm_a4_a5.o
+OBJS = $(COMMON_OBJS) init/68k_asm_a4_a5.o
 
 all : $(TARGET)
 

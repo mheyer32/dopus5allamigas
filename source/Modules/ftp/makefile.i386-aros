@@ -17,7 +17,7 @@ LIBS     :=
 
 REMOVE = rm -f
 
-OBJS = $(COMMON_OBJS) init/amiga.o
+OBJS = $(COMMON_OBJS)
 
 all : $(TARGET)
 
