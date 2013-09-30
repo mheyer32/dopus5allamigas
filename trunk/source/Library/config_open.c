@@ -558,7 +558,7 @@ Cfg_FiletypeList *LIBFUNC L_ReadFiletypes(
 						init_config_string(iff,&handle);
 
 						// Read recognition string
-						type->recognition=read_config_string(memory,&handle);
+						type->recognition=(unsigned char *)read_config_string(memory,&handle);
 
 						// Read icon path
 						type->icon_path=read_config_string(memory,&handle);
@@ -921,6 +921,7 @@ BOOL LIBFUNC L_OpenEnvironment(
 	NewList((struct List *)&data->soundlist);
 	NewList((struct List *)&data->startmenus);
 	NewList((struct List *)&data->buttons);
+
 	NewList((struct List *)&data->listers);
 	data->toolbar_path[0]=0;
 	data->menu_path[0]=0;
