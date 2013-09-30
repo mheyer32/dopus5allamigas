@@ -93,7 +93,7 @@ extern ULONG GlobalStuffChar;
 #define DOPUS_RAWFMTFUNC NULL
 #endif
 
-void KPrintF __ARGS((char *,...));
+//void KPrintF __ARGS((char *,...));
 #define lsprintf(buf,fmt,...) \
 	({ \
 		IPTR args[] = { __VA_ARGS__ }; \

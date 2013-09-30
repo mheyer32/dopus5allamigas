@@ -444,7 +444,7 @@ void startup_open_libraries()
 // Create a global memory pool and GUI structure
 void startup_init_gui()
 {
-	short a;
+	short a,proc=0;	
 
 	// Create a global memory pool and GUI structure
 	if (!(global_memory_pool=NewMemHandle(1024,512,MEMF_CLEAR|MEMF_PUBLIC)) ||
@@ -634,7 +634,6 @@ void startup_init_gui()
 #elif defined(__i386__)
 	strcpy(GUI->ver_cpu,"i386");
 #else
-	short proc=0;
 	if (SysBase->AttnFlags&AFF_68010)
 		if (SysBase->AttnFlags&AFF_68020)
 			if (SysBase->AttnFlags&AFF_68030)
