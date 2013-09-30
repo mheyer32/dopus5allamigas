@@ -373,6 +373,7 @@ typedef struct {
 #define CUST_PENS	16
 
 // ENVR - defines the screen and other display info
+// THIS STRUCTURE IS DUPLICATED IN libraries/dopus5.h
 typedef struct
 {
 	ULONG		screen_mode;		// Screen mode
