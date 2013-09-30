@@ -34,7 +34,7 @@ $(TARGET): $(OBJS)
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
-	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@ 
 
 .PHONY depend: Makefile.dep
 Makefile.dep : $(OBJS:.o=.c)

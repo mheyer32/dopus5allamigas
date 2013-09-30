@@ -107,12 +107,15 @@ BOOL environment_open(Cfg_Environment *env,char *name,BOOL first,APTR prog)
 	opendata->volatile_memory=env->volatile_memory;
 	opendata->flags=OEDF_ALL;
 
+
 	// Initialise progress
 	SetProgressWindowTags(prog,PW_FileCount,14,PW_FileNum,1,TAG_END);
+
 
 	// Read environment
 	if ((success=OpenEnvironment((name)?name:env->path,opendata)))
 	{
+
 		// Copy things back to the environment
 		CopyMem((char *)&opendata->env,(char *)env->env,sizeof(CFG_ENVR));
 		strcpy(env->toolbar_path,opendata->toolbar_path);

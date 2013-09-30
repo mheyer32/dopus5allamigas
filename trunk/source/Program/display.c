@@ -320,7 +320,6 @@ BOOL display_open(long flags)
 				struct P96IFace *IP96=(struct P96IFace *)GetInterface(p96base,"main",1,NULL);
 				if (IP96)
 				{
-					D(bug("Getting board name\n"));
 					STRPTR chip = NULL;
 					p96GetBoardDataTags(0,P96BD_BoardName,&chip,TAG_DONE);
 					if (chip)
