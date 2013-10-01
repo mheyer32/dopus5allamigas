@@ -50,7 +50,6 @@ extern ULONG GlobalStuffChar;
 #define DOPUS_RAWFMTFUNC NULL
 #endif
 
-void KPrintF __ARGS((char *,...));
 void LSprintf(char *buffer, char *string, APTR data);
 
 #define lsprintf(buf,fmt,...) \

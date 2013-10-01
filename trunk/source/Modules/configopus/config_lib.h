@@ -60,7 +60,6 @@ typedef struct _SubOptionHandle {
 #endif
 
 void init_locale_data(struct DOpusLocale *);
-void KPrintF __ARGS((char *,...));
 void lsprintf __ARGS((char *,...));
 
 Att_List *build_sub_options(SubOptionHandle *);
