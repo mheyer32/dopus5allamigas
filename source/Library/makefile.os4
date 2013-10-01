@@ -21,7 +21,7 @@ LDFLAGS  := $(C_LIB) -nostartfiles
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-LIBS     := 
+LIBS     := -lamiga
 
 REMOVE = rm -f
 
