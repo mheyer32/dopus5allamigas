@@ -70,7 +70,7 @@
 #include <stddef.h>
 
 
-#if defined(__MORPHOS__) || defined(__amigaos3__)
+#ifdef __MORPHOS__
 #include <intuition/intuitionbase.h>
 #include <clib/alib_protos.h>
 #endif
@@ -78,6 +78,8 @@
 #ifdef __AROS__
 #include <proto/alib.h>
 #endif
+
+#include <debug/dopus_debug.h>
 
 #ifdef __amigaos4__
 #include <exec/emulation.h>		// necessary 68k emul-based parts
