@@ -86,6 +86,8 @@ extern ULONG GlobalStuffChar;
 #define DOPUS_RAWFMTFUNC NULL
 #endif
 
+#include <debug/dopus_debug.h>
+
 #ifdef __amigaos4__
 #include <exec/emulation.h>		// necessary 68k emul-based parts
 #include <dos/stdio.h>			// for #define Flush(x) FFlush(x)
@@ -96,7 +98,6 @@ extern ULONG GlobalStuffChar;
 #define REG68K_a2 REG68K_A2
 #define REG68K_a3 REG68K_A3
 #define REG68K_a4 REG68K_A4
-#define KPrintF DebugPrintF
 #endif
 
 
