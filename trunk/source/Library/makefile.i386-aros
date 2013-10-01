@@ -3,9 +3,15 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+else
+DEBUG := -DDEBUG
+endif
+
 TARGET   := dopus5.library
 OPTIMIZE := -O2
-DEBUG    := -DDEBUG
 DEBUGSYM := -gstabs
 OPTIONS  := -DLIBRARIES_DOPUS5_H -DCLIB_DOPUS5_PROTOS_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
