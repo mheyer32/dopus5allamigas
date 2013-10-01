@@ -70,6 +70,8 @@
 #include <graphics/gfxbase.h>
 #endif
 
+#include <debug/dopus_debug.h>
+
 #if defined(__amigaos3__)
 extern ULONG GlobalStuffChar;
 #define DOPUS_RAWFMTFUNC (APTR)&GlobalStuffChar
@@ -78,11 +80,6 @@ extern ULONG GlobalStuffChar;
 #endif
 
 #ifdef __amigaos4__
-#ifdef DEBUG
-#define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
-#else
-#define KPrintF(fmt, args...) ((void)0)
-#endif
 
 // for os4 replace external (non L_) calls on internal (L_ ones)
 #define GetSemaphore	L_GetSemaphore
@@ -117,7 +114,7 @@ extern ULONG GlobalStuffChar;
 #define UpdateMyPaths()					L_UpdateMyPaths(dopuslibbase_global)
 #define SendNotifyMsg(par1,par2,par3,par4,par5,par6)		L_SendNotifyMsg(par1,par2,par3,par4,par5,par6,dopuslibbase_global)
 #define DoSimpleRequest(par1,par2)		L_DoSimpleRequest(par1,par2,dopuslibbase_global)
- 
+
 #endif
 
 /* Long word alignement (mainly used to get
