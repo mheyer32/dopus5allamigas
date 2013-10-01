@@ -69,7 +69,6 @@
 
 #include <stddef.h>
 
-
 #ifdef __MORPHOS__
 #include <intuition/intuitionbase.h>
 #include <clib/alib_protos.h>
@@ -78,6 +77,8 @@
 #ifdef __AROS__
 #include <proto/alib.h>
 #endif
+
+#include <debug/dopus_debug.h>
 
 #ifdef __amigaos4__
 #include <exec/emulation.h>		// necessary 68k emul-based parts
@@ -122,13 +123,5 @@ int stccpy(char *p, const char *q, int n);
 #define putreg(x,y)
 #endif
 
-
-#ifdef DEBUG
- #ifdef __amigaos4__
-  #define KPrintF(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}  // just in case anyone will use KPrintF and do not want to add -ldebug.
- #endif
-#else
- #define KPrintF(fmt, args...) ((void)0)
-#endif
 
 #endif
