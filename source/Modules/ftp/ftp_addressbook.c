@@ -76,7 +76,7 @@ For more information on Directory Opus for Windows please see:
 void test(int i)
 {
 
-KPrintF("%ld\n",i);
+D(bug("%ld\n",i));
 Delay(50);
 
 }
@@ -413,11 +413,11 @@ if	((obj = GetObject( dg->dg_addrwp->wp_objlist, GAD_FTP_SITES )))
 		{
 		drop_item = (x << 16) | y;
 
-		KPrintF("x %ld y %ld di %ld\n  ",x,y,drop_item);
+		D(bug("x %ld y %ld di %ld\n  ",x,y,drop_item));
 
 		GetAttr( DLV_GetLine, GADGET(obj), &drop_item );
 
-		KPrintF("di %ld\n  ",drop_item);
+		D(bug("di %ld\n  ",drop_item));
 
 		// Item dragged onto itself?
 		if	(dg->dg_drag_item == drop_item)
@@ -743,7 +743,7 @@ if	(option)
 						break;
 
 					default:
-						KPrintF( "** dropped on registered window\n" );
+						D(bug( "** dropped on registered window\n" ));
 						break;
 					}
 				}
@@ -3239,7 +3239,7 @@ if	(am && am->am_opus)
 	// Try to load size
 	if	(LoadPos("dopus/windows/ftp",&pos,&old_font_size))
 		{
-		KPrintF("font size %ld , old_font_size %ld\n", dg->dg_og->og_screen->RastPort.TxHeight,old_font_size);
+		D(bug("font size %ld , old_font_size %ld\n", dg->dg_og->og_screen->RastPort.TxHeight,old_font_size));
 
 		// Is font size the same?
 		if	(dg->dg_og->og_screen->RastPort.TxHeight==old_font_size)
@@ -3519,7 +3519,7 @@ ogp=dg->dg_og;
 
 mask=SIGBREAKF_CTRL_C  | dg->win_sig |  (1 << data->spd_ipc->command_port->mp_SigBit);
 
-KPrintF("Idle\n");
+D(bug("Idle\n"));
 
 
 // Event loop
@@ -3536,7 +3536,7 @@ while	(TRUE)
 		// Deadlocked?
 		if	(dg->dg_tick_count == dg->dg_last_tick)
 			{
-			KPrintF( "** drag and drop deadlock!\n" );
+			D(bug( "** drag and drop deadlock!\n" ));
 			address_drag_end( dg, 0 );
 			}
 
@@ -3556,7 +3556,7 @@ while	(TRUE)
 			struct window_params *tmpwp;
 			int command_result=FALSE;
 
-			KPrintF("IPC event %lx \n",imsg->command );
+			D(bug("IPC event %lx \n",imsg->command ));
 			switch	(imsg->command)
 				{
 				case IPC_QUIT:
@@ -3678,7 +3678,7 @@ while	(TRUE)
 				default:
 					command_result=FALSE;
 
-					KPrintF( "** addrbook unknown IPC event (0x%lx %ld)\n", imsg->command, imsg->command );
+					D(bug( "** addrbook unknown IPC event (0x%lx %ld)\n", imsg->command, imsg->command ));
 					break;
 				}
 
@@ -4485,7 +4485,7 @@ while	(TRUE)
 
 close_all_windows(dg);
 
-KPrintF("end idle\n");
+D(bug("end idle\n"));
 
 }
 

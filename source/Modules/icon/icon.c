@@ -1830,7 +1830,7 @@ if	(WB_LaunchNotify(
 								goto breakout;
 					}
 				else
-					KPrintF( "** Icon module: Unexpected notify %lx\n", nmsg->dn_Type );
+					D(bug( "** Icon module: Unexpected notify %lx\n", nmsg->dn_Type ));
 
 				ReplyFreeMsg( nmsg );
 				}
@@ -2089,7 +2089,7 @@ FOREVER
 		while	((nmsg = (DOpusNotify *)GetMsg( data->notify_port )))
 			{
 			if	(nmsg->dn_Type != DN_APP_WINDOW_LIST)
-				KPrintF( "** Icon module: Ignoring notify %lx\n", nmsg->dn_Type );
+				D(bug( "** Icon module: Ignoring notify %lx\n", nmsg->dn_Type ));
 
 			ReplyFreeMsg( nmsg );
 			}
@@ -2173,7 +2173,7 @@ FOREVER
 				data->busy = FALSE;
 				}
 			else
-				KPrintF( "** Icon module unknown IPC msg %lx\n", imsg->command );
+				D(bug( "** Icon module unknown IPC msg %lx\n", imsg->command ));
 
 			IPC_Reply(imsg);
 			}
@@ -2695,7 +2695,7 @@ FOREVER
 		// Deadlocked?
 		if	(data->tick_count == data->last_tick)
 			{
-			//	KPrintF( "** drag and drop deadlock!\n" );
+			//	D(bug( "** drag and drop deadlock!\n" ));
 			drag_end( data, 0 );
 			}
 

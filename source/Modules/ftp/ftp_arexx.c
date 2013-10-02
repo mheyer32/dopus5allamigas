@@ -144,13 +144,13 @@ send_rexxa( opus, REXX_REPLY_NONE, "command doubleclick %s", path );
 //
 void rexx_lst_refresh( const char *opus, ULONG handle, int date )
 {
-KPrintF("Refresh lister - start - ");
+D(bug("Refresh lister - start - "));
 
 send_rexxa( opus, FALSE, "lister refresh %lu", handle );
 if	(date == REFRESH_DATE)
 	send_rexxa( opus, FALSE, "lister refresh %lu date", handle );
 
-KPrintF("end\n");
+D(bug("end\n"));
 
 }
 
@@ -164,9 +164,9 @@ void rexx_lst_busy( const char *opus, ULONG handle, int val )
 {
 /*
 if	(val)
-	KPrintF( "rexx_lst_busy()\n" );
+	D(bug( "rexx_lst_busy()\n" ));
 else
-	KPrintF( "rexx_lst_unlock()\n" );
+	D(bug( "rexx_lst_unlock()\n" ));
 */
 
 send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu busy %d wait", handle, val );
@@ -183,7 +183,7 @@ send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu busy %d wait", handle, val );
 
 void rexx_lst_empty( const char *opus, ULONG handle )
 {
-KPrintF( "rexx_lst_empty(%ld)\n", handle );
+D(bug( "rexx_lst_empty(%ld)\n", handle ));
 
 send_rexxa( opus, REXX_REPLY_NONE, "lister empty %lu", handle );
 send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu namelength 256", handle );
@@ -199,7 +199,7 @@ send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu case on", handle );
 
 void rexx_lst_clear( const char *opus, ULONG handle )
 {
-KPrintF( "rexx_lst_clear(%ld)\n", handle );
+D(bug( "rexx_lst_clear(%ld)\n", handle ));
 
 send_rexxa( opus, REXX_REPLY_NONE, "lister clear %lu", handle );
 }
@@ -290,7 +290,7 @@ void rexx_lst_lock( const char *opus, ULONG handle )
 int		notdone = 1;
 char *		r;
 
-KPrintF( "rexx_lst_lock()\n" );
+D(bug( "rexx_lst_lock()\n" ));
 
 while	(notdone)
 	{
@@ -409,7 +409,7 @@ int   value = 0;
 
 if	((string = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu visible", handle)))
 	{
-	KPrintF( "** query visible '%s'\n", string );
+	D(bug( "** query visible '%s'\n", string ));
 	value = atoi(string);
 	DeleteArgstring( string );
 	}
@@ -505,11 +505,11 @@ char *rexx_lst_query_path( const char *opus, ULONG handle )
 {
 char *path;
 
-KPrintF( "rexx_lst_query_path(%ld)\n", handle );
+D(bug( "rexx_lst_query_path(%ld)\n", handle ));
 
 path = (char*)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu path", handle );
 
-KPrintF( "-> '%s'\n", path );
+D(bug( "-> '%s'\n", path ));
 
 return path;
 }
@@ -555,8 +555,8 @@ send_rexxa( opus, REXX_REPLY_NONE, "lister select %lu \"%s\" %d", handle, name, 
 
 void rexx_lst_set_path( const char *opus, ULONG handle, char *path )
 {
-KPrintF( "rexx_lst_set_path(%ld)\n", handle );
-KPrintF( "-> '%s'\n", path );
+D(bug( "rexx_lst_set_path(%ld)\n", handle ));
+D(bug( "-> '%s'\n", path ));
 
 send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu path %s", handle, path );
 
@@ -837,7 +837,7 @@ if	((rp = CreateMsgPort()))
 		if	(LOUD || !quiet)
 			{
 			show_debug = TRUE;
-			KPrintF( "%s: '%s'\n", dest_portname, cmd );
+			D(bug( "%s: '%s'\n", dest_portname, cmd ));
 			}
 #endif
 		if	((argstr = CreateArgstring( (char *)cmd, strlen(cmd) )))
@@ -865,10 +865,10 @@ if	((rp = CreateMsgPort()))
 #ifdef DEBUG
 				if	(reply_type != REXX_REPLY_NONE && show_debug)
 					{
-					KPrintF( "RC==> 1: %ld  ", rxmsg->rm_Result1 );
+					D(bug( "RC==> 1: %ld  ", rxmsg->rm_Result1 ));
 					if	(retptr == &rxmsg->rm_Result2)
-						KPrintF( "RES==> 2: '%s'\n", retval );
-					KPrintF( "\n");
+						D(bug( "RES==> 2: '%s'\n", retval ));
+					D(bug( "\n"));
 					}
 #endif
 				}

@@ -296,13 +296,13 @@ while	(reqresult == 1)
 		resume					// restart?
 	);
 
-	KPrintF( "** GET errno=%ld, actual=%lu\n", hc->hc_source->ep_ftpnode->fn_ftp.fi_errno, actual );
+	D(bug( "** GET errno=%ld, actual=%lu\n", hc->hc_source->ep_ftpnode->fn_ftp.fi_errno, actual ));
 
 	// Any errors?
 	switch	(hc->hc_source->ep_ftpnode->fn_ftp.fi_errno & FTPERR_XFER_MASK)
 		{
 		case FTPERR_XFER_SRCERR:
-			KPrintF( "** get src err\n" );
+			D(bug( "** get src err\n" ));
 			reqresult = hc->hc_source->ep_errorreq( hc->hc_source, hc->hc_prognode, ERRORREQ_RETRYABORT );
 			retval = 0;
 			break;
@@ -320,7 +320,7 @@ while	(reqresult == 1)
 			// Do Copy options
 			options = hc->hc_source->ep_opts( hc->hc_source, OPTION_COPY );
 
-			KPrintF("opts %lx\n",options);
+			D(bug("opts %lx\n",options));
 
 			// Copy Date? (only possible on filesystem)
 			if	(options & COPY_DATE)
@@ -335,7 +335,7 @@ while	(reqresult == 1)
 			// Abort message in comment field?
 			if	(hc->hc_prognode->fn_flags & LST_ABORT)
 				{
-				KPrintF( "Adding 'aborted' comment\n" );
+				D(bug( "Adding 'aborted' comment\n" ));
 
 				lsprintf( hc->hc_url, GetString(locale,MSG_ABORT_COMMENT_START) );
 				if	(hc->hc_ui.ui_total_bytes == 0xffffffff)
@@ -345,7 +345,7 @@ while	(reqresult == 1)
 
 				lsprintf( hc->hc_url + strlen(hc->hc_url), GetString(locale,MSG_ABORT_COMMENT_END) );
 
-				KPrintF( "  comment: '%s'\n", hc->hc_url );
+				D(bug( "  comment: '%s'\n", hc->hc_url ));
 
 				hc->hc_dest->ep_setnote( hc->hc_dest, destname, hc->hc_url );
 				}
@@ -409,9 +409,9 @@ int    retval = 0;
 char   destname[PATHLEN + 1];
 
 
-KPrintF( "rec_retry_put()\n" );
-KPrintF( "entry: '%s'\n", entry->ei_name );
-KPrintF( "startdir: '%s'\n", startdirname );
+D(bug( "rec_retry_put()\n" ));
+D(bug( "entry: '%s'\n", entry->ei_name ));
+D(bug( "startdir: '%s'\n", startdirname ));
 
 // Aborted?
 if	(hc->hc_prognode->fn_flags & LST_ABORT)
@@ -449,7 +449,7 @@ while	(reqresult == 1)
 		resume ? hc->hc_misc_bytes : 0		// restart position
 	);
 
-	KPrintF( "** PUT errno=%ld, actual=%lu\n", hc->hc_source->ep_ftpnode->fn_ftp.fi_errno, actual );
+	D(bug( "** PUT errno=%ld, actual=%lu\n", hc->hc_source->ep_ftpnode->fn_ftp.fi_errno, actual ));
 
 	// Any errors?
 	switch	(hc->hc_dest->ep_ftpnode->fn_ftp.fi_errno & FTPERR_XFER_MASK)
@@ -524,7 +524,7 @@ int    reqresult = 1;
 int    retval = 0;
 char  *destname;
 
-KPrintF( "rec_retry_getput()\n" );
+D(bug( "rec_retry_getput()\n" ));
 
 // Aborted?
 if	(hc->hc_prognode->fn_flags & LST_ABORT)
@@ -561,7 +561,7 @@ while	(reqresult == 1)
 			destname,
 			resume ? entry->ei_size : 0 );
 
-	KPrintF( "** getput actual 1 %ld\n", actual );
+	D(bug( "** getput actual 1 %ld\n", actual ));
 
 	// Fix value of actual (getput returns special values)
 
@@ -581,7 +581,7 @@ while	(reqresult == 1)
 	else if	(actual == REC_GETPUT_ERROR_END)
 		actual = entry->ei_size / 2;
 
-	KPrintF( "** getput actual 2 %ld\n", actual );
+	D(bug( "** getput actual 2 %ld\n", actual ));
 
 	{
 //	endpoint *ep;
@@ -603,31 +603,31 @@ while	(reqresult == 1)
 	switch	(fooerrno & FTPERR_XFER_MASK)
 		{
 		case FTPERR_XFER_SRCERR:
-			KPrintF("FTPERR_XFER_SRCERR\n");
+			D(bug("FTPERR_XFER_SRCERR\n"));
 			reqresult = hc->hc_source->ep_errorreq( hc->hc_source, hc->hc_prognode, ERRORREQ_RETRYABORT );
 			retval = 0;
 			break;
 
 		case FTPERR_XFER_DSTERR:
-			KPrintF("FTPERR_XFER_DSTERR\n");
+			D(bug("FTPERR_XFER_DSTERR\n"));
 			reqresult = hc->hc_dest->ep_errorreq( hc->hc_dest, hc->hc_prognode, ERRORREQ_RETRYABORT );
 			retval = 0;
 			break;
 
 		case FTPERR_XFER_RARERR:
-			KPrintF("FTPERR_XFER_RARERR\n");
+			D(bug("FTPERR_XFER_RARERR\n"));
 			hc->hc_source->ep_errorreq( hc->hc_source, hc->hc_prognode, 0 );
 			reqresult = 0;
 			retval = 0;
 			break;
 
 		default:
-			KPrintF( "** getput unknown error\n" );
+			D(bug( "** getput unknown error\n" ));
 			reqresult = 0;
 			retval = 0;
 			break;
 		case 0:
-			KPrintF( "** getput no errors\n" );
+			D(bug( "** getput no errors\n" ));
 
 			// Update size
 			entry->ei_size = actual;
@@ -1055,7 +1055,7 @@ switch	(entry->ei_type)
 	{
 	case -3:	// Link to File
 		// Confirm link copy and fall through (enabled by default)
-		KPrintF( "file link '%s'\n", entry->ei_name );
+		D(bug( "file link '%s'\n", entry->ei_name ));
 
 	case -1:	// File
 		// Init update info callback structure (from old lister_xfer())
@@ -1118,7 +1118,7 @@ switch	(entry->ei_type)
 			}
 		else
 			{
-			KPrintF( "** unsupported endpoint combination\n" );
+			D(bug( "** unsupported endpoint combination\n" ));
 			retval = 0;
 			}
 		break;
@@ -1140,12 +1140,12 @@ switch	(entry->ei_type)
 		// Use new name for CopyAs/MoveAs at top level
 		if	(hc->hc_basedirname == startdir && hc->hc_newname)
 			{
-			KPrintF( "destname = hc->hc_newname\n" );
+			D(bug( "destname = hc->hc_newname\n" ));
 			l->destname = hc->hc_newname;
 			}
 		else
 			{
-			KPrintF( "destname = entry->ei_name\n" );
+			D(bug( "destname = entry->ei_name\n" ));
 			l->destname = entry->ei_name;
 			}
 
@@ -1157,12 +1157,12 @@ switch	(entry->ei_type)
 		break;
 
 	default:	// This is not possible
-		KPrintF( "** (??) %s\n", entry->ei_name );
+		D(bug( "** (??) %s\n", entry->ei_name ));
 		retval = 0;
 		break;
 	}
 
-KPrintF( "** copy = %ld\n", retval );
+D(bug( "** copy = %ld\n", retval ));
 
 // Only do the following if we jumped there specifically
 goto free_locals;
@@ -1190,7 +1190,7 @@ int                 aborted = 0;
 int                 reply;
 int                 keep_trying = 1;
 
-KPrintF( "recursive_getput()\n" );
+D(bug( "recursive_getput()\n" ));
 
 // No abort/error yet
 source->ep_ftpnode->fn_ftp.fi_aborted = 0;
@@ -1201,7 +1201,7 @@ dest->ep_ftpnode->fn_ftp.fi_errno = 0;
 // Don't attempt transfer if we know neither side supports PASV
 if	(source->ep_ftpnode->fn_ftp.fi_flags & dest->ep_ftpnode->fn_ftp.fi_flags & FTP_NO_PASV)
 	{
-	KPrintF( "** getput neither side supports PASV\n" );
+	D(bug( "** getput neither side supports PASV\n" ));
 	source->ep_ftpnode->fn_ftp.fi_errno |= FTPERR_XFER_SRCERR;
 	stccpy(source->ep_ftpnode->fn_ftp.fi_serverr,GetString(locale,MSG_FTP_GETPUT_NO_PASV),IOBUFSIZE + 1 );
 	keep_trying = 0;
@@ -1210,7 +1210,7 @@ if	(source->ep_ftpnode->fn_ftp.fi_flags & dest->ep_ftpnode->fn_ftp.fi_flags & FT
 // Don't attempt to resume if we know one or both sides doesn't support REST
 if	(restart && !(source->ep_ftpnode->fn_ftp.fi_flags & dest->ep_ftpnode->fn_ftp.fi_flags & FTP_NO_REST))
 	{
-	KPrintF( "** getput no restart on one or both ends\n" );
+	D(bug( "** getput no restart on one or both ends\n" ));
 	restart = 0;
 	}
 
@@ -1270,7 +1270,7 @@ while	(keep_trying)
 						// Don't abort if either side has completed though
 						if	((srcselectresult != 1 && dstselectresult != 1 && srcselectresult == -1) || dstselectresult == -1)
 							{
-							KPrintF( "*** getput() CTRL-D SIGNAL ***\n" );
+							D(bug( "*** getput() CTRL-D SIGNAL ***\n" ));
 							source->ep_ftpnode->fn_ftp.fi_aborted = 1;
 
 							// Send ABOR
@@ -1281,7 +1281,7 @@ while	(keep_trying)
 							reply = source->ep_getreply( source, 0 );
 
 							if	(reply == 225)
-								KPrintF( "** ABOR sent but RETR already completed\n" );
+								D(bug( "** ABOR sent but RETR already completed\n" ));
 							else
 								aborted = 1;
 							}
@@ -1346,7 +1346,7 @@ while	(keep_trying)
 			}
 		else
 			{
-			KPrintF( "** PORT fail\n" );
+			D(bug( "** PORT fail\n" ));
 			source->ep_ftpnode->fn_ftp.fi_errno |= FTPERR_XFER_SRCERR;
 			stccpy( source->ep_ftpnode->fn_ftp.fi_serverr, source->ep_ftpnode->fn_ftp.fi_iobuf, IOBUFSIZE + 1 );
 			}
@@ -1355,7 +1355,7 @@ while	(keep_trying)
 		}
 	else
 		{
-		KPrintF( "** PASV fail\n" );
+		D(bug( "** PASV fail\n" ));
 		dest->ep_ftpnode->fn_ftp.fi_errno |= FTPERR_XFER_DSTERR;
 		stccpy( dest->ep_ftpnode->fn_ftp.fi_serverr, dest->ep_ftpnode->fn_ftp.fi_iobuf, IOBUFSIZE + 1 );
 		}
@@ -1381,7 +1381,7 @@ int do_normal_rec_delete(
 	struct entry_info	*entry,
 	int			 retval )
 {
-KPrintF( "normal delete\n" );
+D(bug( "normal delete\n" ));
 
 // Get list of entry_infos from FTP server
 if	((l->entry_list = hc->hc_source->ep_list( hc->hc_source, entry->ei_name )))
@@ -1441,7 +1441,7 @@ int do_broken_rec_delete(
 	struct entry_info	*entry,
 	int			 retval )
 {
-KPrintF( "broken delete\n" );
+D(bug( "broken delete\n" ));
 
 // CD source to dir
 if	(hc->hc_source->ep_cwd( hc->hc_source, entry->ei_name ))
@@ -1514,7 +1514,7 @@ int recursive_delete( struct hook_rec_data *hc, char *startdir, struct entry_inf
 struct delete_locals *l;
 int                   retval = 2;	// Result we will return
 
-KPrintF( "recursive_delete()\n" );
+D(bug( "recursive_delete()\n" ));
 
 if	(!(l = AllocVec( sizeof(*l), MEMF_ANY )))
 	return 0;
@@ -1570,7 +1570,7 @@ switch	(entry->ei_type)
 		break;
 
 	default:	// Shouldn't happen (so don't try to delete)
-		KPrintF( "** recursive_delete()\n   unexpected type %ld '%s'\n", entry->ei_type, entry->ei_name );
+		D(bug( "** recursive_delete()\n   unexpected type %ld '%s'\n", entry->ei_type, entry->ei_name ));
 		retval = 0;
 		break;
 	}
@@ -1605,7 +1605,7 @@ int do_normal_rec_protect(
 	LONG			 clr,
 	int			 retval )
 {
-KPrintF( "normal protect\n" );
+D(bug( "normal protect\n" ));
 
 if	((l->entry_list = hc->hc_source->ep_list( hc->hc_source, entry->ei_name )))
 	{
@@ -1659,7 +1659,7 @@ int do_broken_rec_protect(
 	LONG			 clr,
 	int			 retval )
 {
-KPrintF( "broken protect\n" );
+D(bug( "broken protect\n" ));
 
 // CD source to dir
 if	(hc->hc_source->ep_cwd( hc->hc_source, entry->ei_name ))
@@ -1795,7 +1795,7 @@ switch	(entry->ei_type)
 		break;
 
 	default:	// Shouldn't happen (Try to protect anyway)
-		KPrintF( "** (??) %s\n", entry->ei_name );
+		D(bug( "** (??) %s\n", entry->ei_name ));
 		retval = 0;
 		break;
 	}
@@ -1880,7 +1880,7 @@ int do_broken_rec_getsizes(
 	struct entry_info	*entry,
 	int			 retval )
 {
-KPrintF( "broken getsizes\n" );
+D(bug( "broken getsizes\n" ));
 
 // We only need do this when recursion is specified by the user
 // CD source to dir
@@ -1993,7 +1993,7 @@ switch	(entry->ei_type)
 		break;
 
 	default:	// Shouldn't happen (and shouldn't matter)
-		KPrintF( "** (??) %s\n", entry->ei_name );
+		D(bug( "** (??) %s\n", entry->ei_name ));
 		hc->hc_misc_bytes += entry->ei_size;
 		//retval = 0;
 		break;
@@ -2107,7 +2107,7 @@ if	((l->entry_list = hc->hc_source->ep_list( hc->hc_source, entry->ei_name )))
 					//retval = min(2,retval);
 					retval = l->subrv;
 
-				KPrintF( "** subrv %ld retval %ld\n", l->subrv, retval );
+				D(bug( "** subrv %ld retval %ld\n", l->subrv, retval ));
 				}
 			// CD source back up to original dir
 			hc->hc_source->ep_cdup( hc->hc_source );
@@ -2127,7 +2127,7 @@ int do_broken_rec_findfile(
 	struct entry_info	*entry,
 	int			 retval )
 {
-KPrintF( "broken findfile\n" );
+D(bug( "broken findfile\n" ));
 
 // CD source to dir
 if	(hc->hc_source->ep_cwd( hc->hc_source, entry->ei_name ))
@@ -2170,7 +2170,7 @@ if	(hc->hc_source->ep_cwd( hc->hc_source, entry->ei_name ))
 					//retval = min(2,retval);
 					retval = l->subrv;
 
-				KPrintF( "** subrv %ld retval %ld\n", l->subrv, retval );
+				D(bug( "** subrv %ld retval %ld\n", l->subrv, retval ));
 				}
 			}
 		// Free entry list
@@ -2200,7 +2200,7 @@ int recursive_findfile( struct hook_rec_data *hc, char *fulldirname, struct entr
 struct findfile_locals *l;
 int                     retval = 2;	// Result we will return
 
-KPrintF( "full %s\n", fulldirname );
+D(bug( "full %s\n", fulldirname ));
 
 if	(!(l = AllocVec( sizeof(*l), MEMF_ANY )))
 	return 0;
@@ -2296,7 +2296,7 @@ switch	(entry->ei_type)
 		break;
 
 	default:	// Shouldn't happen (and shouldn't matter)
-		KPrintF( "** (??) %s\n", entry->ei_name );
+		D(bug( "** (??) %s\n", entry->ei_name ));
 		hc->hc_misc_bytes += entry->ei_size;
 		//retval = 0;
 		break;
@@ -2328,7 +2328,7 @@ BPTR                            lock;
 D_S(struct FileInfoBlock,fib)
 struct entry_info              *entry;
 
-//KPrintF( "FS  LIST %s\n", dir->ei_name );
+//D(bug( "FS  LIST %s\n", dir->ei_name ));
 
 // Valid?
 if	(!*ep->ep_ftpnode->fn_site.se_path)
@@ -2365,7 +2365,7 @@ if	((lock = Lock( (char *)dirname ? dirname : "", ACCESS_READ )))
 			}
 		// Normal end of scan?
 		if	(IoErr() != ERROR_NO_MORE_ENTRIES)
-			KPrintF( "** scan aborted abnormally (%ld)\n", IoErr() );
+			D(bug( "** scan aborted abnormally (%ld)\n", IoErr() ));
 		}
 
 	// Unlock directory
@@ -2441,7 +2441,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return (struct rec_entry_list *)rec_ask_lister_favour( FAVOUR_LIST, ep, dirname, 0 );
 
-//KPrintF( "FTP LIST %s\n", dir->ei_name );
+//D(bug( "FTP LIST %s\n", dir->ei_name ));
 
 // Allocate entry list
 if	(!(rel = AllocVec( sizeof(struct rec_entry_list), MEMF_CLEAR )))
@@ -2505,7 +2505,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_CWD, ep, dirname, 0 );
 
-KPrintF( "FTP CWD  %s\n", dirname );
+D(bug( "FTP CWD  %s\n", dirname ));
 
 if	(ftp_cwd( &ep->ep_ftpnode->fn_ftp, 0, 0, dirname ) == 250)
 	return 1;
@@ -2520,7 +2520,7 @@ int rec_filesys_cwd( endpoint *ep, char *dirname )
 {
 BPTR lock;
 
-KPrintF( "FS  CWD  %s\n", dirname );
+D(bug( "FS  CWD  %s\n", dirname ));
 
 if	((lock = Lock( dirname, ACCESS_READ )))
 	{
@@ -2542,7 +2542,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_CDUP, ep, 0, 0 );
 
-KPrintF( "FTP CDUP\n" );
+D(bug( "FTP CDUP\n" ));
 
 if	(ftp_cdup( &ep->ep_ftpnode->fn_ftp, 0, 0 ) == 250)
 	return 1;
@@ -2558,7 +2558,7 @@ int rec_filesys_cdup( endpoint *ep )
 BPTR lock, newlock;
 int ret_val=0;
 
-KPrintF( "FS  CDUP\n" );
+D(bug( "FS  CDUP\n" ));
 
 // Valid?
 if	(!ep)
@@ -2607,7 +2607,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_MKD, ep, dirname, 0 );
 
-//KPrintF( "FTP MKD  %s\n", dir->ei_name );
+//D(bug( "FTP MKD  %s\n", dir->ei_name ));
 
 // Can TIMEOUT
 reply = ftp_mkd( &ep->ep_ftpnode->fn_ftp, dirname );
@@ -2619,7 +2619,7 @@ else if	(reply == 421)
 else
 	retval = 3;
 
-KPrintF( "** FTP MKDIR = %ld\n", retval );
+D(bug( "** FTP MKDIR = %ld\n", retval ));
 
 return retval;
 }
@@ -2643,7 +2643,7 @@ BPTR lock;
 D_S(struct FileInfoBlock,fib)
 int retval = 0;
 
-KPrintF( "FS  MKD  <%s>\n", dirname );
+D(bug( "FS  MKD  <%s>\n", dirname ));
 
 // Try to create dir
 if	((lock = CreateDir( dirname )))
@@ -2670,7 +2670,7 @@ else	{
 		}
 	}
 
-KPrintF( "** FS MKDIR = %ld\n", retval );
+D(bug( "** FS MKDIR = %ld\n", retval ));
 
 return retval;
 }
@@ -2680,7 +2680,7 @@ return retval;
 //
 int rec_ftp_dele( endpoint *ep, struct entry_info *file )
 {
-KPrintF( "rec_ftp_dele()\n" );
+D(bug( "rec_ftp_dele()\n" ));
 
 // Are we the owning task of this lister?
 if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
@@ -2688,7 +2688,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_DELE, ep, file, 0 );
 
-KPrintF( "FTP DELE %s\n", file->ei_name );
+D(bug( "FTP DELE %s\n", file->ei_name ));
 
 if	(ftp_dele( &ep->ep_ftpnode->fn_ftp, file->ei_name ) == 250)
 	return 1;
@@ -2701,7 +2701,7 @@ else
 //
 int rec_filesys_dele( endpoint *ep, struct entry_info *file )
 {
-KPrintF( "FS  DELE %s\n", file->ei_name );
+D(bug( "FS  DELE %s\n", file->ei_name ));
 
 return DeleteFile( file->ei_name );
 }
@@ -2717,7 +2717,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_RMD, ep, dir, 0 );
 
-KPrintF( "FTP RMD %s\n", dir->ei_name );
+D(bug( "FTP RMD %s\n", dir->ei_name ));
 
 if	(ftp_rmd( &ep->ep_ftpnode->fn_ftp, dir->ei_name ) / 100 == COMPLETE)
 	return 1;
@@ -2730,7 +2730,7 @@ else
 //
 int rec_filesys_rmd( endpoint *ep, struct entry_info *dir )
 {
-KPrintF( "FS  RMD %s\n", dir->ei_name );
+D(bug( "FS  RMD %s\n", dir->ei_name ));
 
 return DeleteFile( dir->ei_name );
 }
@@ -2746,7 +2746,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_PORT, ep, addr, (void *)flags );
 
-KPrintF( "FTP PORT\n" );
+D(bug( "FTP PORT\n" ));
 
 if	(ftp_port( &ep->ep_ftpnode->fn_ftp, flags, (char *)&addr->sin_addr, (char *)&addr->sin_port ) == 200)
 	return 1;
@@ -2759,7 +2759,7 @@ else
 //
 int rec_filesys_port( endpoint *ep, struct sockaddr_in *addr, ULONG flags )
 {
-KPrintF( "FS  PORT %lu:%lu\n", addr->sin_addr.s_addr, addr->sin_port );
+D(bug( "FS  PORT %lu:%lu\n", addr->sin_addr.s_addr, addr->sin_port ));
 
 return 0;
 }
@@ -2778,7 +2778,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	return (struct sockaddr_in *)rec_ask_lister_favour( FAVOUR_PASV, ep, 0, 0 );
 	}
 
-KPrintF( "FTP PASV\n" );
+D(bug( "FTP PASV\n" ));
 
 // Send PASV command to FTP server
 if	(ftp_pasv( &ep->ep_ftpnode->fn_ftp ) == 227)
@@ -2788,7 +2788,7 @@ if	(ftp_pasv( &ep->ep_ftpnode->fn_ftp ) == 227)
 		{
 		if	(!pasv_to_address( address, ep->ep_ftpnode->fn_ftp.fi_iobuf ))
 			{
-			KPrintF( "** couldn't convert PASV reply\n" );
+			D(bug( "** couldn't convert PASV reply\n" ));
 
 			if	(address)
 				FreeVec( address );
@@ -2806,7 +2806,7 @@ return address;
 //
 struct sockaddr_in *rec_filesys_pasv( endpoint *ep )
 {
-KPrintF( "FS  PASV\n" );
+D(bug( "FS  PASV\n" ));
 
 return 0;
 }
@@ -2822,7 +2822,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_REST, ep, (void *)offset, 0 );
 
-KPrintF( "FTP REST %s\n", offset );
+D(bug( "FTP REST %s\n", offset ));
 
 return ftpa( &ep->ep_ftpnode->fn_ftp, "REST %lu", offset );
 }
@@ -2832,7 +2832,7 @@ return ftpa( &ep->ep_ftpnode->fn_ftp, "REST %lu", offset );
 //
 int rec_filesys_rest( endpoint *ep, unsigned int offset )
 {
-KPrintF( "FS  REST %s\n", offset );
+D(bug( "FS  REST %s\n", offset ));
 
 return 0;
 }
@@ -2850,7 +2850,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_RETR, ep, file, 0 );
 
-KPrintF( "FTP RETR %s\n", file );
+D(bug( "FTP RETR %s\n", file ));
 
 reply = ftpa( &ep->ep_ftpnode->fn_ftp, "RETR %s", file );
 
@@ -2862,7 +2862,7 @@ return reply == 150 || reply == 125;
 //
 int rec_filesys_retr( endpoint *ep, char *file )
 {
-KPrintF( "FS  RETR %s\n", file );
+D(bug( "FS  RETR %s\n", file ));
 
 return 0;
 }
@@ -2880,7 +2880,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_STOR, ep, file, 0 );
 
-KPrintF( "FTP STOR %s\n", file );
+D(bug( "FTP STOR %s\n", file ));
 
 reply = ftpa( &ep->ep_ftpnode->fn_ftp, "STOR %s", file );
 
@@ -2892,7 +2892,7 @@ return reply == 150 || reply == 125;
 //
 int rec_filesys_stor( endpoint *ep, char *file )
 {
-KPrintF( "FS  STOR %s\n", file );
+D(bug( "FS  STOR %s\n", file ));
 
 return 0;
 }
@@ -2902,7 +2902,7 @@ return 0;
 //
 int rec_ftp_abor( endpoint *ep )
 {
-KPrintF( "rec_ftp_abor()\n" );
+D(bug( "rec_ftp_abor()\n" ));
 
 // Are we the owning task of this lister?
 if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
@@ -2973,8 +2973,8 @@ int rec_filesys_setnote( endpoint *ep, char *name, char *comment )
 {
 if	(strlen(comment)>79)
 	{
-	KPrintF("**Comment Trimmed ** - ");
-	KPrintF("name:<%s> Comment:<%s>\n",name,comment);
+	D(bug("**Comment Trimmed ** - "));
+	D(bug("name:<%s> Comment:<%s>\n",name,comment));
 	comment[79]=0;
 	}
 return (SetComment( name, comment ) ) ;
@@ -3026,7 +3026,7 @@ return _getreply( &ep->ep_ftpnode->fn_ftp, flags, 0, 0 );
 //
 int rec_filesys_getreply( endpoint *ep, ULONG flags )
 {
-KPrintF( "FS  getreply\n" );
+D(bug( "FS  getreply\n" ));
 
 return 600;
 }
@@ -3049,7 +3049,7 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 	// Ask the appropriate lister to do it for us
 	return rec_ask_lister_favour( FAVOUR_SELECT, ep, 0, 0 );
 
-KPrintF( "FTP select\n" );
+D(bug( "FTP select\n" ));
 
 /**********************************
 * far too short a timeout
@@ -3078,7 +3078,7 @@ if	((nds = WaitSelect( ep->ep_ftpnode->fn_ftp.fi_cs + 1, &rd, 0L, &ex, &t, &flag
 	// Socket closed etc?
 	else if	(FD_ISSET( ep->ep_ftpnode->fn_ftp.fi_cs, &ex ))
 		{
-		KPrintF( "** getput select exception\n" );
+		D(bug( "** getput select exception\n" ));
 		retval = -2;
 		}
 	}
@@ -3089,7 +3089,7 @@ else if	(nds == 0)
 	// Abort?
 	if	(flags & SIGBREAKF_CTRL_D)
 		{
-		KPrintF( "** getput select abort\n" );
+		D(bug( "** getput select abort\n" ));
 
 		// Prevent more aborts coming in
 		// ** This doesn't take into account abort signals sent from the
@@ -3105,7 +3105,7 @@ else if	(nds == 0)
 // Select error
 else
 	{
-	KPrintF( "** getput select error\n" );
+	D(bug( "** getput select error\n" ));
 	retval = -3;
 	}
 
@@ -3147,7 +3147,7 @@ return lister_options( ep->ep_ftpnode, type );
 //
 unsigned long rec_filesys_opts( endpoint *ep, int type )
 {
-KPrintF( "**** FILESYS OPTIONS!! ****\n" );
+D(bug( "**** FILESYS OPTIONS!! ****\n" ));
 return ftpmod_options( ep->ep_ftpnode->fn_og, type );
 }
 
@@ -3158,7 +3158,7 @@ struct entry_info *rec_ftp_getentry( endpoint *ep, char *name )
 {
 struct entry_info *ei;
 
-KPrintF( "FTP getentry\n" );
+D(bug( "FTP getentry\n" ));
 
 // Are we the owning task of this lister?
 if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
@@ -3188,7 +3188,7 @@ D_S(struct FileInfoBlock,fib)
 struct entry_info              *ei;
 int                             success = 0;
 
-KPrintF( "FS  getentry\n" );
+D(bug( "FS  getentry\n" ));
 
 if	((ei = AllocVec( sizeof(struct entry_info), MEMF_CLEAR)))
 	{
@@ -3217,7 +3217,7 @@ return ei;
 //
 int rec_ftp_dummy( endpoint *ep, struct entry_info *entry )
 {
-KPrintF( "FTP DUMMY\n" );
+D(bug( "FTP DUMMY\n" ));
 
 return 0;
 }
@@ -3227,7 +3227,7 @@ return 0;
 //
 int rec_filesys_dummy( endpoint *ep, struct entry_info *entry )
 {
-KPrintF( "FS  DUMMY\n" );
+D(bug( "FS  DUMMY\n" ));
 
 return 0;
 }

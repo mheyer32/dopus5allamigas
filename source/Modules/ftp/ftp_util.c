@@ -76,9 +76,9 @@ if	(!ipc || !str)
 	return 0;
 
 if	((struct Task *)ipc->proc != FindTask(0))
-	KPrintF( "** DISPLAYMSG bad task!!\n" );
+	D(bug( "** DISPLAYMSG bad task!!\n" ));
 
-KPrintF( "display_msg() <%s>\n",str);
+	D(bug( "display_msg() <%s>\n",str));
 
 // see if they supplied a window
 if	(win)
@@ -505,7 +505,7 @@ if	(strlen(line) < 27)
 if	(!strcmp( line, "Volume or directory is empty." ))
 	return 0;
 
-KPrintF("line <%s>\n",line);
+D(bug("line <%s>\n",line));
 
 // Type - Directory, Link, or File?
 switch	(line[0])
@@ -536,7 +536,7 @@ switch	(line[0])
 		break;
 	}
 
-KPrintF("type %ld ",entry->ei_type);
+D(bug("type %ld ",entry->ei_type));
 
 
 entry->ei_prot = FIBF_READ|FIBF_WRITE|FIBF_EXECUTE|FIBF_DELETE;
@@ -593,7 +593,7 @@ if	(line[10] != ' ')
 // Skip to next field
 p = stpblk( line + 10 );
 
-KPrintF("<%s>\n",p);
+D(bug("<%s>\n",p));
 
 // Skip 'links' field if there is one
 if	(!(flags & UI_NO_LINK_FIELD) && (!(p = strchr( p,' ' ))))
@@ -1240,7 +1240,7 @@ struct TagItem  tags[] =
 // Called by non-owning process?
 if	((struct Task *)ipc->proc != FindTask(0))
 	{
-	KPrintF( "** ftpmod_request called with wrong IPC!\n" );
+	D(bug( "** ftpmod_request called with wrong IPC!\n" ));
 	return 0;
 	}
 
@@ -1383,7 +1383,7 @@ ULONG	micros, secs;
 int 	temp_key;
 BPTR	file=NULL;
 
-KPrintF( "open_temp_file()\n" );
+D(bug( "open_temp_file()\n" ));
 
 // Get temporary key
 temp_key = (ULONG)ipc;

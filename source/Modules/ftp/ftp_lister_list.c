@@ -273,7 +273,7 @@ struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1
 #endif
 int progress = ftpnode->fn_site.se_env->e_progress_window;
 
-KPrintF( "lister_list()\n" );
+D(bug( "lister_list()\n" ));
 
 // Prepare for index if found
 ftpnode->fn_ftp.fi_found_index = 0;
@@ -351,7 +351,7 @@ if	((ui = AllocVec( sizeof(struct update_info), MEMF_CLEAR )))
 		// Send the LIST command
 		lsresult = list( &ftpnode->fn_ftp, list_update, ui, ftpnode->fn_lscmd, "" );
 		
-		KPrintF("list command result |n",lsresult);
+		D(bug("list command result |n",lsresult));
 
 		ftplister_refresh( ftpnode, REFRESH_NODATE );
 

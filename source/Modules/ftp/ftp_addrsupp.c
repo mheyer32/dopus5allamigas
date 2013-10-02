@@ -458,7 +458,7 @@ BOOL ok=FALSE;
 struct ftp_config *conf;
 LONG chunk;
 
-KPrintF("read options\n");
+D(bug("read options\n"));
 
 if	((conf=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 	{
@@ -696,7 +696,7 @@ APTR iff;
 BOOL err=FALSE;
 Att_List *list;
 
-KPrintF("read sites\n");
+D(bug("read sites\n"));
 
 if	(!(list=Att_NewList(LISTF_POOL)))
 	return(NULL);
@@ -1319,7 +1319,7 @@ return(list);
  */
 void read_build_addressbook(struct opusftp_globals *ogp,IPCData *ipc)
 {
-KPrintF( "read_build_addressbook()\n" );
+D(bug( "read_build_addressbook()\n" ));
 
 if	(ogp->og_SiteList)
 	{

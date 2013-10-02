@@ -120,7 +120,7 @@ struct Library *L_SocketBase = NULL;
 struct SocketIFace *L_ISocket = NULL;
 #endif
 
-//KPrintF( "** %s requested\n", og->og_socketlib == NOSOCK ? "no specific library" : og->og_socketlib == AMITCPSOCK ? "bsdsocket.library" : og->og_socketlib == INETSOCK ? "socket.library" : "some unknown socket library" );
+//D(bug( "** %s requested\n", og->og_socketlib == NOSOCK ? "no specific library" : og->og_socketlib == AMITCPSOCK ? "bsdsocket.library" : og->og_socketlib == INETSOCK ? "socket.library" : "some unknown socket library" ));
 
 		if	((L_SocketBase = OpenLibrary("bsdsocket.library", 3)))
 		{
@@ -596,7 +596,7 @@ if	(cm)
 	// Ignore if source has a handler
 	else if	(handle_has_handler( cm->cm_opus, cm->cm_handle ))
 		{
-		KPrintF( "** can't drag site to non-FTP handler\n" );
+		D(bug( "** can't drag site to non-FTP handler\n" ));
 		DisplayBeep( og->og_screen );
 		}
 	else
@@ -641,7 +641,7 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 	more = TRUE;
 
 	if	(msg->msg.mn_Node.ln_Type == NT_REPLYMSG)
-		KPrintF( "** main got reply msg\n" );
+		D(bug( "** main got reply msg\n" ));
 
 	switch	(msg->command)
 		{
@@ -657,7 +657,7 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 		// Print to log file
 		// We want to print the listers' goodbye messages even if we are quitting
 		case IPC_PRINT:
-			KPrintF("LOG: %s",msg->data_free);
+			D(bug("LOG: %s",msg->data_free));
 
 			if	(med->med_log_fp)
 				FWrite( med->med_log_fp, msg->data_free, strlen( msg->data_free ), 1 );
@@ -722,10 +722,10 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 							msg = 0;
 							}
 						else
-							KPrintF( "** add/cmd node 0x%lx not found\n" );
+							D(bug( "** add/cmd node 0x%lx not found\n" ));
 						}
 					else
-						KPrintF( "** add/cmd can't get handle from func handle 0x%lx\n", fm->fm_function_handle );
+						D(bug( "** add/cmd can't get handle from func handle 0x%lx\n", fm->fm_function_handle ));
 					}
 				}
 
@@ -752,7 +752,7 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 
 		case IPC_QUIT:
 		case IPC_ABORT:
-			KPrintF( "** ftp_main got IPC_QUIT/IPC_ABORT\n" );
+			D(bug( "** ftp_main got IPC_QUIT/IPC_ABORT\n" ));
 
 			if	(med->med_status == STATE_RUNNING)
 				{
@@ -767,7 +767,7 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 				}
 			else
 				{
-				KPrintF( "** got QUIT while quitting\n" );
+				D(bug( "** got QUIT while quitting\n" ));
 				if	(msg->data)
 					FreeVec( msg->data );
 					msg->command = FALSE;
@@ -775,7 +775,7 @@ if	((msg = (IPCMessage *)GetMsg( med->med_ipc->command_port )))
 			break;
 
 		default:
-			KPrintF( "** main ipc default: %lx\n", msg->command );
+			D(bug( "** main ipc default: %lx\n", msg->command ));
 			msg->command = FALSE;
 			break;
 		}
@@ -803,7 +803,7 @@ static void opus_dnd_remote( struct opusftp_globals *og, int argc, char **argv )
 struct ftp_node *srcnode, *dstnode, *tmpnode;
 struct xfer_msg *xm;
 
-KPrintF( "opus_dnd_remote()\n" );
+D(bug( "opus_dnd_remote()\n" ));
 
 if	(argc >= 4 && (srcnode = find_ftpnode( og, atoi(argv[1]) )) && (dstnode = find_ftpnode( og, atoi(argv[3]) )))
 	{
@@ -903,7 +903,7 @@ struct ftp_node *node;
 struct ftp_msg  *fm;
 int              retval = 0;
 
-KPrintF( "opus_active(%s)\n", argv[3] );
+D(bug( "opus_active(%s)\n", argv[3] ));
 
 if	(argc < 5 || !(node = find_ftpnode( og, atoi(argv[1]) )))
 	return 0;
@@ -1015,7 +1015,7 @@ if	((srchandle = atoi(argv[3])))
 	if	(handle_has_handler( node->fn_opus, srchandle ))
 		{
 		DisplayBeep( og->og_screen );
-		KPrintF( "** can't drag to FTP from other handler\n" );
+		D(bug( "** can't drag to FTP from other handler\n" ));
 		return retval;
 		}
 
@@ -1027,21 +1027,21 @@ if	((srchandle = atoi(argv[3])))
 // Source is not a lister - one or more icons from desktop
 else
 	{
-	KPrintF( "** drop source not lister\n" );
+	D(bug( "** drop source not lister\n" ));
 
 	// Get first icon name
 	stptok( argv[2] + 1, firstname, FILENAMELEN, "\"\r\n" );
-	KPrintF( "** drop file '%s'\n", firstname );
+	D(bug( "** drop file '%s'\n", firstname ));
 
 	// Ends in colon?
 	if	(*firstname && (firstname[strlen(firstname)-1] == ':'))
 		{
-		KPrintF( "** drop file ends in colon\n" );
+		D(bug( "** drop file ends in colon\n" ));
 
 		// Really the name of a device?
 		if	((mp = DeviceProc( firstname )))
 			{
-			KPrintF( "** drop DeviceProc ok\n" );
+			D(bug( "** drop DeviceProc ok\n" ));
 
 			// Quit commands are freed with FreeVec()
 			if	((qm = AllocVec( sizeof(struct quit_msg) + strlen("ScanDir") + 1 + strlen(firstname) + 1, MEMF_ANY )))
@@ -1060,7 +1060,7 @@ else
 			}
 		}
 
-	KPrintF( "** icons dropped from desktop\n" );
+	D(bug( "** icons dropped from desktop\n" ));
 	flags |= XFER_DROP_FROM_DESKTOP;
 	}
 
@@ -1099,7 +1099,7 @@ char              *name;
 char              *p;
 DOpusCallbackInfo *infoptr = &og->og_hooks;
 
-KPrintF( "opus_leaveout()\n" );
+D(bug( "opus_leaveout()\n" ));
 
 DC_CALL1(infoptr, dc_GetDesktop, DC_REGA0, desktop);
 //og->og_hooks.dc_GetDesktop( desktop );
@@ -1119,7 +1119,7 @@ for	(p = names + 1; ; p += 3)
 		// Directory?
 		if	(ei.ei_type >= 0)
 			{
-			KPrintF( "  directory\n" );
+			D(bug( "  directory\n" ));
 
 			strcpy( command, "FTPConnect " );
 
@@ -1146,8 +1146,8 @@ for	(p = names + 1; ; p += 3)
 				AddPart( command, name, 1024 );
 				}
 
-			KPrintF( "    path: '%s'\n", path );
-			KPrintF( "    command: '%s'\n", command );
+			D(bug( "    path: '%s'\n", path ));
+			D(bug( "    command: '%s'\n", command ));
 
 			CreateFunctionFile( path, INST_COMMAND, command, "DOpus5:Icons/FTPDirectory" );
 			}
@@ -1155,7 +1155,7 @@ for	(p = names + 1; ; p += 3)
 		// Otherwise a file
 		else
 			{
-			KPrintF( "  file\n" );
+			D(bug( "  file\n" ));
 
 			strcpy( command, "DOpus5:ARexx/ftp_file.dopus5 " );
 
@@ -1192,9 +1192,9 @@ Also, if the user changes the dir in the site or details then it will not work.
 					name );
 				}
 
-			KPrintF( "    name: '%s' path '%s'\n", name,node->fn_site.se_path);
-			KPrintF( "    path: '%s'\n", path );
-			KPrintF( "    command: '%s'\n", command );
+			D(bug( "    name: '%s' path '%s'\n", name,node->fn_site.se_path));
+			D(bug( "    path: '%s'\n", path ));
+			D(bug( "    command: '%s'\n", command ));
 
 			CreateFunctionFile( path, INST_AREXX, command, "DOpus5:Icons/FTPFile" );
 			}
@@ -1245,7 +1245,7 @@ char            *p;
 int              retval = 0;		// 1 if ARexx msg has been forwarded
 DOpusCallbackInfo *infoptr = &og->og_hooks;
 
-KPrintF( "opus_dropfrom()\n" );
+D(bug( "opus_dropfrom()\n" ));
 
 // Valid?
 if	(argc < 4 || !(node = find_ftpnode( og, atoi(argv[1]) )))
@@ -1400,7 +1400,7 @@ else
 
 				// Some new setting?
 				default:
-					KPrintF( "** unknown desktop setting %ld\n", result );
+					D(bug( "** unknown desktop setting %ld\n", result ));
 					break;
 				}
 			}
@@ -1408,12 +1408,12 @@ else
 		// Dragged to icon
 		else
 			{
-			KPrintF( "** dragged to icon\n" );
+			D(bug( "** dragged to icon\n" ));
 
 			// To directory icon?
 			if	(check_is_dir( argv[5] ) == 1)
 				{
-				KPrintF( "** dragged to directory icon\n" );
+				D(bug( "** dragged to directory icon\n" ));
 
 				strcpy( p, argv[5] );
 				flags |= XFER_DROPFROM_TO_ICON;
@@ -1465,7 +1465,7 @@ static int opus_edit(
 struct ftp_node *node;
 struct edit_msg *em;
 
-KPrintF( "opus_edit()\n" );
+D(bug( "opus_edit()\n" ));
 
 if	(argc <5 || !(node = find_ftpnode( og, atoi(argv[1]) )))
 	return 0;
@@ -1509,7 +1509,7 @@ struct ftp_node *node;
 struct quit_msg *qm;
 int              retval = 0;
 
-KPrintF( "opus_inactive(%s)\n", argv[3] );
+D(bug( "opus_inactive(%s)\n", argv[3] ));
 
 if	(argc >= 3 && (node = find_ftpnode( og, atoi(argv[1]) )))
 	{
@@ -1774,13 +1774,13 @@ if	((node = find_ftpnode( og, atoi(argv[1]) )))
 		// Signal another task, or this lister's task?
 		if	(node->fn_signaltask)
 			{
-			KPrintF( "*** SENDING SIGNAL (0x%08lx -> 0x%08lx) ***\n", node->fn_ipc->proc, node->fn_signaltask );
+			D(bug( "*** SENDING SIGNAL (0x%08lx -> 0x%08lx) ***\n", node->fn_ipc->proc, node->fn_signaltask ));
 			Signal( node->fn_signaltask, node->fn_ftp.fi_abortsignals );
 		//	retval = 1;
 			}
 	//	else
 			{
-			KPrintF( "*** SENDING SIGNAL (0x%08lx) ***\n", node->fn_ipc->proc );
+			D(bug( "*** SENDING SIGNAL (0x%08lx) ***\n", node->fn_ipc->proc ));
 			Signal( (struct Task *)node->fn_ipc->proc, node->fn_ftp.fi_abortsignals );
 			retval = 1;
 			}
@@ -1811,7 +1811,7 @@ struct ftp_node *node;
 struct ftp_msg  *fm;
 int              retval = 0;
 
-KPrintF( "trap_configure()\n" );
+D(bug( "trap_configure()\n" ));
 
 // Valid?
 if	(argc < 5 || !argv[1] || !(node = find_ftpnode( og, atoi(argv[1]) )))
@@ -1887,7 +1887,7 @@ char            *newname = 0;
 char            *p;
 int              retval = 0;
 
-KPrintF( "trap_copy() %s %s\n",argv[0],args);
+D(bug( "trap_copy() %s %s\n",argv[0],args));
 
 // Workaround weird jon-ism
 if	(!args || !*args)
@@ -1941,7 +1941,7 @@ if	((fa = ParseArgs( template, args )))
 	// Check options
 	if	(opt_name != -1 && fa->FA_Arguments[opt_name])
 		{
-		KPrintF( "ftp_main: XFER_OPT_NAME\n" );
+		D(bug( "ftp_main: XFER_OPT_NAME\n" ));
 		flags |= XFER_OPT_NAME;
 		}
 	if	(opt_to != -1 && fa->FA_Arguments[opt_to])
@@ -2216,7 +2216,7 @@ if	((fa = ParseArgs( "NAME,QUIET/S", args )))
 				else if	(ei.ei_type == -4)
 					ei.ei_type = -3;
 				else
-					KPrintF( "** ExamineEntry bad type %ld\n", ei.ei_type );
+					D(bug( "** ExamineEntry bad type %ld\n", ei.ei_type ));
 
 				if	(ei.ei_type >= 0)
 					++fm->fm_dircount;
@@ -2335,7 +2335,7 @@ FuncArgs            *fa;
 char                *args = argv[5];
 int                  retval = 0;
 
-KPrintF( "trap_getsizes()\n" );
+D(bug( "trap_getsizes()\n" ));
 
 // Workaround weird jon-ism
 if	(!args || !*args)
@@ -2480,7 +2480,7 @@ int                 retval = 0;
 ULONG               set_mask = 0;
 ULONG               clear_mask = 0;
 
-KPrintF( "trap_protect()\n" );
+D(bug( "trap_protect()\n" ));
 
 // Workaround weird jon-ism
 if	(!args || !*args)
@@ -2849,14 +2849,14 @@ while	((rxmsg = (struct RexxMsg *)GetMsg( rexport )))
 			for	(rfi = rexx_func_table; rfi->rfi_name; ++rfi)
 				if	(!stricmp( argv[0], rfi->rfi_name ))
 					{
-					KPrintF( "** trapped '%s'\n", argv[0] );
+					D(bug( "** trapped '%s'\n", argv[0] ));
 					result = rfi->rfi_function( og, rxmsg, argc, argv );
 					break;
 					}
 
 			if	(!rfi->rfi_name)
 				{
-				KPrintF( "** didn't trap '%s'\n", argv[0] );
+				D(bug( "** didn't trap '%s'\n", argv[0] ));
 
 				// Handle quit message
 				if	(!stricmp( argv[0], "quit" ))
@@ -2961,8 +2961,8 @@ if	(og->og_SiteList && AttemptSemaphore(&og->og_SiteList_semaphore))
 	}
 else if	(og->og_SiteList)
 	{
-	KPrintF( "** address book not freed!\n" );
-	KPrintF( "    because couldn't get semaphore\n" );
+	D(bug( "** address book not freed!\n" ));
+	D(bug( "    because couldn't get semaphore\n" ));
 	}
 }
 
@@ -3003,7 +3003,7 @@ while	((nmsg = (DOpusNotify *)GetMsg( nfyport )))
 		free_address_book( og );
 		}
 	else
-		KPrintF( "** notify UNEXPECTED 0x%lx\n", nmsg->dn_Type );
+		D(bug( "** notify UNEXPECTED 0x%lx\n", nmsg->dn_Type ));
 
 	ReplyFreeMsg( nmsg );
 	}
@@ -3047,7 +3047,7 @@ for	(node = (struct ftp_node*)listerlist->list.lh_Head;
 
 	else if	(node->fn_ftp.fi_abortsignals)
 		{
-		KPrintF( "*** SENDING SIGNAL ***\n" );
+		D(bug( "*** SENDING SIGNAL ***\n" ));
 		Signal( (struct Task *)node->fn_ipc->proc, node->fn_ftp.fi_abortsignals );
 
 		// Don't allow signals to queue
@@ -3156,7 +3156,7 @@ APTR                    notify_req;			/* Opus Notify stuff */
 struct Message         *msg;
 int                     quittry = 0;
 
-KPrintF( "dopus_ftp()\n" );
+D(bug( "dopus_ftp()\n" ));
 
 // Initialize event loop data
 med.med_status = STATE_RUNNING;
@@ -3208,7 +3208,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 				// Make the ARexx port public so Opus can find it
 				rexport->mp_Node.ln_Name = PORTNAME;
 				AddPort( rexport );
-				KPrintF( "**** OPUSFTP PORT ADDED ****\n" );
+				D(bug( "**** OPUSFTP PORT ADDED ****\n" ));
 
 				// Ask Opus to tell us when it will be hidden or revealed
 				if	((notify_req = AddNotifyRequest( DN_OPUS_HIDE | DN_OPUS_SHOW | DN_FLUSH_MEM,0, nfyport)))
@@ -3299,7 +3299,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 								ipc_list_signal( &og->og_listerlist, 1 );
 								}
 
-							KPrintF( "** ABORT %ld listers...\n", og->og_listercount );
+							D(bug( "** ABORT %ld listers...\n", og->og_listercount ));
 
 							IPC_ListQuit( &med.med_tasklist, mldata->mld_ftp_ipc, 0, FALSE );
 
@@ -3332,7 +3332,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 			if	(rexport)
 				{
 				RemPort( rexport );
-				KPrintF( "**** OPUSFTP PORT REMOVED ****\n" );
+				D(bug( "**** OPUSFTP PORT REMOVED ****\n" ));
 				flush_arexxport( rexport );
 				DeleteMsgPort( rexport );
 				}
@@ -3373,7 +3373,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 	CloseLibrary( ourbase );
 	}
 
-KPrintF( "dopus_ftp() returning\n" );
+D(bug( "dopus_ftp() returning\n" ));
 }
 
 /********************************/
