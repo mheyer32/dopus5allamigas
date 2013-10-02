@@ -100,7 +100,7 @@ IPC_EntryCode(clock_proc)
 
 						// Show
 						case IPC_SHOW:
-							//KPrintF("IPC_SHOW received\n");
+							//D(bug("IPC_SHOW received\n"));
 
 							// Not already open?
 							if (!window && !layer)
@@ -241,13 +241,13 @@ IPC_EntryCode(clock_proc)
 								}
 								
 							}
-							//KPrintF("IPC_SHOW done\n");
+							//D(bug("IPC_SHOW done\n"));
 							break;
 
 
 						// Hide
 						case IPC_HIDE:
-							//KPrintF("IPC_HIDE received\n");
+							//D(bug("IPC_HIDE received\n"));
 
 							// Close window if it's open
 							if (window)
@@ -272,7 +272,7 @@ IPC_EntryCode(clock_proc)
 								pubscreen=0;
 							}
 							layer=0;
-							//KPrintF("IPC_HIDE done\n");
+							//D(bug("IPC_HIDE done\n"));
 
 							break;
 
@@ -354,7 +354,7 @@ IPC_EntryCode(clock_proc)
 				//// Update clock?
 				if (update)
 				{
-					//KPrintF("Updating title\n");
+					//D(bug("Updating title\n"));
 					// If error text, update error count
 					if (error_txt)
 					{

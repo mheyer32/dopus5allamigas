@@ -185,7 +185,7 @@ void buffers_clear(BOOL check_max)
 			}
 		}
 /*
-else if (!check_max) KPrintF("** buffer locked - can't free\n");
+else if (!check_max) D(bug("** buffer locked - can't free\n"));
 */
 
 		// Get next pointer

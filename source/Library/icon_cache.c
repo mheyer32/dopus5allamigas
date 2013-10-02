@@ -524,7 +524,7 @@ BOOL LIBFUNC L_RemapIcon(
 		if (nido->nido_Flags&NIDOF_REMAPPED)
 		{
 #ifdef DEBUG_ICON
-			KPrintF("error! icon remap twice\n");
+			D(bug("error! icon remap twice\n"));
 #endif
 			return 0;
 		}

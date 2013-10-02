@@ -266,9 +266,9 @@ IPC_EntryCode(rexx_proc)
 					{
 						short a;
 
-						KPrintF("Got REXX message!\n");
+						D(bug("Got REXX message!\n"));
 						for (a=0;a<(rmsg->rm_Action&RXARGMASK);a++)
-							KPrintF("Arg %ld : %s\n",a,rmsg->rm_Args[a]);
+							D(bug("Arg %ld : %s\n",a,rmsg->rm_Args[a]));
 					}
 #endif
 
@@ -278,7 +278,7 @@ IPC_EntryCode(rexx_proc)
 						// Clear message pointer
 						rmsg=0;
 #ifdef RX_DEBUG
-						KPrintF("Message swallowed\n");
+						D(bug("Message swallowed\n"));
 #endif
 					}
 				}
@@ -287,7 +287,7 @@ IPC_EntryCode(rexx_proc)
 				if (rmsg)
 				{
 #ifdef RX_DEBUG
-					KPrintF("Replying to message (port %lx)\n",rmsg->rm_Node.mn_ReplyPort);
+					D(bug("Replying to message (port %lx)\n",rmsg->rm_Node.mn_ReplyPort));
 #endif
 					rexx_reply_msg(rmsg);
 				}
@@ -387,7 +387,7 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 	BOOL ret=0;
 
 #ifdef RX_DEBUG
-	KPrintF("Command : %s\n",msg->rm_Args[0]);
+	D(bug("Command : %s\n",msg->rm_Args[0]));
 #endif
 
 	// Get initial command
@@ -396,7 +396,7 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 		return 0;
 
 #ifdef RX_DEBUG
-	KPrintF("      # : %ld\n",command);
+	D(bug("      # : %ld\n",command));
 #endif
 
 	// Internal command?
@@ -453,7 +453,7 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 		}
 
 #ifdef RX_DEBUG
-		KPrintF("Command : %s\n",commandptr);
+		D(bug("Command : %s\n",commandptr));
 #else
 
 		// Create dummy function
@@ -509,7 +509,7 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 		return 0;
 
 #ifdef RX_DEBUG
-	KPrintF("Sub-Command : %ld\n",subcommand);
+	D(bug("Sub-Command : %ld\n",subcommand));
 #endif
 
 	// Look at initial command

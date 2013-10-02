@@ -864,7 +864,7 @@ BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const s
 				ICONGETA_Screen,*libdata->backfill_screen,
 				TAG_DONE);
 
-		//KPrintF("Icon: %p  type: %ld\n", icon, icon?icon->do_Type:0 );
+		//D(bug("Icon: %p  type: %ld\n", icon, icon?icon->do_Type:0 ));
 
 		if (icon)
 		{
@@ -876,7 +876,7 @@ BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const s
 
 		if (via == viaWB)
 		{
-			KPrintF("Launching via WB\n");
+			D(bug("Launching via WB\n"));
 			result = L_WB_Launch( (char *)name, NULL, FALSE );
 		}
 		else if (via == viaCLI)
@@ -889,12 +889,12 @@ BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const s
 			if(( cd = GetCurrentDir() ))
 				dupcd = DupLock(cd);
 
-			KPrintF("Launching %s via CLI\n", name );
+			D(bug("Launching %s via CLI\n", name ));
 			result = L_CLI_Launch( (char *)name, *libdata->backfill_screen, dupcd, input, 0, LAUNCHF_USE_STACK, 65535 );
 		}
 		else if (via==viaREXX)
 		{
-			KPrintF("Running via ARexx not yet supported\n");
+			D(bug("Running via ARexx not yet supported\n"));
 		}
 
 		if (icon)
@@ -923,7 +923,7 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 
 	tags = va_getlinearva(ap, struct TagItem *);
 
-	KPrintF("called by %s\n", FindTask(NULL)->tc_Node.ln_Name);
+	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -935,14 +935,14 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 
 	if (FindPort("WORKBENCH"))
 	{
-		//KPrintF("Workbench available, calling original vector\n");
+		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
 		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
-		//KPrintF("Workbench not found, launching %s ourselves\n", name);
+		//D(bug("Workbench not found, launching %s ourselves\n", name));
 		return internalOpenWBObject( libbase, name, tags );
 	}
 	
@@ -956,7 +956,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 
-	KPrintF("called by %s\n", FindTask(NULL)->tc_Node.ln_Name);
+	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -968,14 +968,14 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 
 	if (FindPort("WORKBENCH"))
 	{
-		//KPrintF("Workbench available, calling original vector\n");
+		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
 		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
-		//KPrintF("Workbench not found, launching %s ourselves\n", name );
+		//D(bug("Workbench not found, launching %s ourselves\n", name ));
 		return internalOpenWBObject( libbase, name, tags );
 	}
 	
@@ -998,12 +998,12 @@ BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, const struct 
 		switch (tag->ti_Tag)
 		{
 			case WBCTRLA_IsOpen:
-				KPrintF("WBCTRLA_IsOpen unsupported\n");
+				D(bug("WBCTRLA_IsOpen unsupported\n"));
 				break;
 
 			case WBCTRLA_DuplicateSearchPath:
 				/* duplicate search path requested, result should hold the new path nodes. */
-				KPrintF("WBCTRLA_DuplicateSearchPath found, storage: %p\n", tag->ti_Data );
+				D(bug("WBCTRLA_DuplicateSearchPath found, storage: %p\n", tag->ti_Data ));
 
 				*((BPTR *)tag->ti_Data) = L_GetOpusPathList(libbase);
 				if (*((BPTR *)tag->ti_Data))
@@ -1011,7 +1011,7 @@ BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, const struct 
 				break;
 
 			case WBCTRLA_FreeSearchPath:
-				KPrintF("WBCTRLA_FreeSearchPath found, path: %p\n", tag->ti_Data );
+				D(bug("WBCTRLA_FreeSearchPath found, path: %p\n", tag->ti_Data ));
 				L_FreeDosPathList( tag->ti_Data );
 				result = TRUE;
 				break;
@@ -1022,7 +1022,7 @@ BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, const struct 
 				break;
 
 			case WBCTRLA_SetDefaultStackSize:
-				KPrintF("Setting the stack size is currently not supported\n");
+				D(bug("Setting the stack size is currently not supported\n"));
 				break;
 
 			case WBCTRLA_RedrawAppIcon:
@@ -1069,32 +1069,32 @@ BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, const struct 
 			case WBCTRLA_RemoveHiddenDeviceName:
 			case WBCTRLA_GetHiddenDeviceList:
 			case WBCTRLA_FreeHiddenDeviceList:
-				KPrintF("Workbenches hidden devices are not supported\n");
+				D(bug("Workbenches hidden devices are not supported\n"));
 				break;
 
 			case WBCTRLA_GetTypeRestartTime:
 			case WBCTRLA_SetTypeRestartTime:
-				KPrintF("Setting or getting the TypeRestartTime is unsupported\n");
+				D(bug("Setting or getting the TypeRestartTime is unsupported\n"));
 				break;
 
 			case WBCTRLA_GetCopyHook:
 			case WBCTRLA_SetCopyHook:
-				KPrintF("The Workbench CopyHook is unsupported\n");
+				D(bug("The Workbench CopyHook is unsupported\n"));
 				break;
 
 			case WBCTRLA_GetDeleteHook:
 			case WBCTRLA_SetDeleteHook:
-				KPrintF("The Workbench DeleteHook is unsupported\n");
+				D(bug("The Workbench DeleteHook is unsupported\n"));
 				break;
 
 			case WBCTRLA_GetTextInputHook:
 			case WBCTRLA_SetTextInputHook:
-				KPrintF("The Workbench TextInputHook is unsupported\n");
+				D(bug("The Workbench TextInputHook is unsupported\n"));
 				break;
 
 			case WBCTRLA_AddSetupCleanupHook:
 			case WBCTRLA_RemSetupCleanupHook:
-				KPrintF("The Workbench CleanupHook is unsupported\n");
+				D(bug("The Workbench CleanupHook is unsupported\n"));
 				break;
 		}
 	}
@@ -1113,7 +1113,7 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 
 	tags = va_getlinearva(ap, struct TagItem *);
 
-	KPrintF("called by %s\n", FindTask(NULL)->tc_Node.ln_Name);
+	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -1124,13 +1124,13 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 
 	if (FindPort("WORKBENCH"))
 	{
-		//KPrintF("Workbench available, calling original vector\n");
+		//D(bug("Workbench available, calling original vector\n"));
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
 		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
-		//KPrintF("Workbench not found, handling call ourselves\n" );
+		//D(bug("Workbench not found, handling call ourselves\n" ));
 		return internalWBCtrl( libbase, name, tags );
 	}
 
@@ -1145,7 +1145,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, cons
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 
-	KPrintF("called by %s\n", FindTask(NULL)->tc_Node.ln_Name);
+	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
@@ -1156,14 +1156,14 @@ PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, cons
 
 	if (FindPort("WORKBENCH"))
 	{
-		//KPrintF("Workbench available, calling original vector\n");
+		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
 		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
-		//KPrintF("Workbench not found, handling %s ourselves\n", name );
+		//D(bug("Workbench not found, handling %s ourselves\n", name ));
 		return internalWBCtrl( libbase, name, tags );
 	}
 
@@ -1527,7 +1527,7 @@ void LIBFUNC L_FreeDiskObjectCopy(
 	{
 #ifdef DEBUG_ICON
 if (((struct NewIconDiskObject *)icon)->nido_Flags&NIDOF_REMAPPED)
-	KPrintF("error! icon freed while still remapped\n");
+	D(bug("error! icon freed while still remapped\n"));
 #endif
 
 #define NewIconBase	(data->new_icon_base)

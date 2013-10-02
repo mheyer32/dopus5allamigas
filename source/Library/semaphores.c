@@ -287,20 +287,20 @@ void LIBFUNC L_ShowSemaphore(
 	// Matched?
 	if (node->node.mln_Succ)
 	{
-		KPrintF("Semaphore : %s\n",sem->ss_Link.ln_Name);
-		KPrintF("Owners:\n");
+		D(bug("Semaphore : %s\n",sem->ss_Link.ln_Name));
+		D(bug("Owners:\n"));
 		for (owner=(SemaphoreOwner *)node->owners.mlh_Head;
 			owner->node.mln_Succ;
 			owner=(SemaphoreOwner *)owner->node.mln_Succ)
 		{
-			KPrintF("%lc   %s (%lx) %s\n",(owner->exclusive)?'*':' ',owner->task->tc_Node.ln_Name,owner->task,owner->data);
+			D(bug("%lc   %s (%lx) %s\n",(owner->exclusive)?'*':' ',owner->task->tc_Node.ln_Name,owner->task,owner->data));
 		}
-		KPrintF("Waiters:\n");
+		D(bug("Waiters:\n"));
 		for (owner=(SemaphoreOwner *)node->waiters.mlh_Head;
 			owner->node.mln_Succ;
 			owner=(SemaphoreOwner *)owner->node.mln_Succ)
 		{
-			KPrintF("%lc   %s (%lx) %s\n",(owner->exclusive)?'*':' ',owner->task->tc_Node.ln_Name,owner->task,owner->data);
+			D(bug("%lc   %s (%lx) %s\n",(owner->exclusive)?'*':' ',owner->task->tc_Node.ln_Name,owner->task,owner->data));
 		}
 	}
 

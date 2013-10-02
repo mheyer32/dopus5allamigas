@@ -126,7 +126,7 @@ void unlock_listlock(struct ListLock *list)
 	if (list->list.lh_TailPred->ln_Succ!=(struct Node *)&list->list.lh_Tail ||
 		list->list.lh_Head->ln_Pred!=(struct Node *)&list->list.lh_Head)
 	{
-		KPrintF("*** List integrity failure\n");
+		D(bug("*** List integrity failure\n"));
 	}
 */
 }

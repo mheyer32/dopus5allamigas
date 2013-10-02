@@ -403,11 +403,11 @@ ULONG LIBFUNC L_IPC_Command(
 						// Does it require a reply?
 						if (mes->msg.mn_ReplyPort)
 						{
-KPrintF("*** deadlock message from %s (%lx) to %s (%lx)! ***\n"
+D(bug("*** deadlock message from %s (%lx) to %s (%lx)! ***\n"
         "command : %lx\nflags   : %lx\ndata    : %lx\n",
 mes->sender->proc->pr_Task.tc_Node.ln_Name,mes->sender->proc,
 task->tc_Node.ln_Name,task,
-mes->command,mes->flags,mes->data);
+mes->command,mes->flags,mes->data));
 							// Remove this message
 							Remove((struct Node *)mes);
 
