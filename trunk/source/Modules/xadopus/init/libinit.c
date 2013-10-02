@@ -1010,7 +1010,7 @@ int UserLibInit()
 {
 		
 	if(!(DOpusBase=OpenLibrary("dopus5.library",41))) {
-		KPrintF("can't open dopus5.library\n");
+		D(bug("can't open dopus5.library\n"));
 		return 1;
 	}	
 	
@@ -1023,7 +1023,7 @@ int UserLibInit()
 #endif	
 
 	if(!(xadMasterBase=(struct xadMasterBase *)OpenLibrary(XADNAME,7))) {
-		KPrintF("can't open xadmaster.library\n");
+		D(bug("can't open xadmaster.library\n"));
 		return 1;
 	}	
 
