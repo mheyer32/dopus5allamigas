@@ -642,7 +642,7 @@ struct entry_info *dstent;
 int replace_flags = 0;
 int replace_option = REPLACE_INVALID;
 
-KPrintF( "hook_copy_pre()\n" );
+D(bug( "hook_copy_pre()\n" ));
 
 // Valid?
 if	(!hc) return replace_option;
@@ -719,7 +719,7 @@ if	(hc->hc_basedirname == dirname && !(hc->hc_copy_flags & XFER_SUBDIR))
 
 				replace_option = replace_requester( hc, replace_flags, srcent, dstent );
 
-				KPrintF( "** replace option %ld\n", replace_option );
+				D(bug( "** replace option %ld\n", replace_option ));
 				}
 
 			FreeVec( dstent );
@@ -738,7 +738,7 @@ if	(hc->hc_basedirname == dirname && !(hc->hc_copy_flags & XFER_SUBDIR))
 
 			replace_option = replace_requester( hc, replace_flags, srcent, dstent );
 
-				KPrintF( "** B replace option %ld\n", replace_option );
+				D(bug( "** B replace option %ld\n", replace_option ));
 
 			FreeVec( dstent );
 			}
@@ -754,7 +754,7 @@ else
 		hc->hc_misc_bytes = dstent->ei_size;
 
 		replace_option = replace_requester( hc, replace_flags, srcent, dstent );
-		KPrintF( "** C replace option %ld\n", replace_option );
+		D(bug( "** C replace option %ld\n", replace_option ));
 
 		}
 	}
@@ -850,7 +850,7 @@ xfer_locals           *l;
 int                    rexx_result=0;
 DOpusCallbackInfo     *infoptr;
 
-KPrintF( "lister_xfer()\n" );
+D(bug( "lister_xfer()\n" ));
 
 // Valid?
 if	(!remotenode || !msg || !msg->data_free)
@@ -875,7 +875,7 @@ rexx_lst_lock( remotenode->fn_opus, remotenode->fn_handle );
 if	(xm->xm_otherhandle)
 	rexx_lst_lock( remotenode->fn_opus, xm->xm_otherhandle );
 else
-	KPrintF( "** no local handle!\n" );
+	D(bug( "** no local handle!\n" ));
 
 
 // -ve flag 0=TRUE
@@ -1039,13 +1039,13 @@ if	((names = xm->xm_names))
 	// Does entry contain path information?
 	if	(xm->xm_srcpath && strpbrk( xm->xm_srcpath, ":/" ))
 		{
-		KPrintF( "** entry contains source path information\n" );
-		KPrintF( "** '%s'\n", xm->xm_srcpath );
+		D(bug( "** entry contains source path information\n" ));
+		D(bug( "** '%s'\n", xm->xm_srcpath ));
 		}
 	if	(xm->xm_dstpath && strpbrk( xm->xm_dstpath, ":/" ))
 		{
-		KPrintF( "** entry contains dest path information\n" );
-		KPrintF( "** '%s'\n", xm->xm_dstpath );
+		D(bug( "** entry contains dest path information\n" ));
+		D(bug( "** '%s'\n", xm->xm_dstpath ));
 		}
 
 	// Endpoints created?
@@ -1063,8 +1063,8 @@ if	((names = xm->xm_names))
 				// Does entry contain path information?
 				if	(strpbrk( l->srcname, ":/" ))
 					{
-					KPrintF( "** entry contains path information\n" );
-					KPrintF( "** '%s'\n", l->srcname );
+					D(bug( "** entry contains path information\n" ));
+					D(bug( "** '%s'\n", l->srcname ));
 					}
 
 				if	(entry_info_from_lister(srcnode,l->srcname,&ei,ENTRYFROMF_DEFAULT ))
@@ -1091,7 +1091,7 @@ if	((names = xm->xm_names))
 		// Multiple entries with no source lister handle??  Impossible
 		else
 			{
-			KPrintF( "** copy multiple entries without source lister!\n" );
+			D(bug( "** copy multiple entries without source lister!\n" ));
 			}
 
 
@@ -1194,7 +1194,7 @@ if	((names = xm->xm_names))
 				// Transer As?
 				else if	(xm->xm_flags & XFER_AS)
 #else
-				KPrintF( "illegal char filter OFF\n" );
+				D(bug( "illegal char filter OFF\n" ));
 				if	(xm->xm_flags & XFER_AS)
 #endif
 					{
@@ -1389,7 +1389,7 @@ if	(remotenode->fn_og->og_hooks.dc_Script
 
 	if	(rexx_result && remotenode->fn_site.se_env->e_script_copy_ok)
 		{
-		KPrintF( "** script copy success\n" );
+		D(bug( "** script copy success\n" ));
 		DC_CALL2(infoptr, dc_Script,
 			DC_REGA0, "FTP copy success",
 			DC_REGA1, handle);
@@ -1397,7 +1397,7 @@ if	(remotenode->fn_og->og_hooks.dc_Script
 		}
 	else if	(!rexx_result && remotenode->fn_site.se_env->e_script_copy_fail)
 		{
-		KPrintF( "** script copy fail\n" );
+		D(bug( "** script copy fail\n" ));
 		DC_CALL2(infoptr, dc_Script,
 			DC_REGA0, "FTP copy fail",
 			DC_REGA1, handle);
@@ -1439,7 +1439,7 @@ struct update_info  ui = {0};
 ULONG               cwd_flags = CWD_RELATIVE;
 int                 rexx_result = 0;
 
-KPrintF( "lister_doubleclick()\n" );
+D(bug( "lister_doubleclick()\n" ));
 
 // Valid?
 if	(!node || !msg || !msg->data_free)
@@ -1881,7 +1881,7 @@ if	(!thisnode || !msg ||!msg->data_free)
 
 infoptr = &thisnode->fn_og->og_hooks;
 	
-KPrintF("getput \n");
+D(bug("getput \n"));
 
 // Get transfer message
 xm = msg->data_free;
@@ -1897,7 +1897,7 @@ if	(thisnode != xm->xm_rm_src)
 // Drag and drop in a single FTP lister?
 if	(thisnode == xm->xm_rm_dest)
 	{
-	KPrintF( "** can't drag and drop within a single FTP lister\n" );
+	D(bug( "** can't drag and drop within a single FTP lister\n" ));
 	DisplayBeep( thisnode->fn_og->og_screen );
 	goto reply;
 	}
@@ -1993,10 +1993,10 @@ if	((names = xm->xm_names))
 
 		// Does entry contain path information?
 		if	(xm->xm_srcpath && strpbrk( xm->xm_srcpath, ":/" ))
-			KPrintF( "** entry contains source path information\n" );
+			D(bug( "** entry contains source path information\n" ));
 
 		if	(xm->xm_dstpath && strpbrk( xm->xm_dstpath, ":/" ))
-			KPrintF( "** entry contains dest path information\n" );
+			D(bug( "** entry contains dest path information\n" ));
 
 		// Count files and directories
 
@@ -2009,7 +2009,7 @@ if	((names = xm->xm_names))
 
 				// Does entry contain path information?
 				if	(strpbrk( srcname, ":/" ))
-					KPrintF( "** entry contains path information\n" );
+					D(bug( "** entry contains path information\n" ));
 
 				if	(entry_info_from_lister(srcnode,srcname,&ei,ENTRYFROMF_DEFAULT ))
 					{
@@ -2035,7 +2035,7 @@ if	((names = xm->xm_names))
 		// Multiple entries with no source lister handle??  Impossible
 		else
 			{
-			KPrintF( "** copy multiple entries without source lister!\n" );
+			D(bug( "** copy multiple entries without source lister!\n" ));
 			}
 
 		// Show warning requester for recursive copy

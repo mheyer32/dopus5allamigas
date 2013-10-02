@@ -94,7 +94,7 @@ int retval;
 
 lst_addabort( node, SIGBREAKF_CTRL_C, 0 );
 
-KPrintF("lister_connect %s %ld\n",host,port);
+D(bug("lister_connect %s %ld\n",host,port));
 
 retval = connect_host( &node->fn_ftp, startupfn, mu, host, port );
 
@@ -109,7 +109,7 @@ if	(retval == 1)
 	}
 
 
-KPrintF("lister_connect returns %ld\n",retval);
+D(bug("lister_connect returns %ld\n",retval));
 
 return retval;
 }
@@ -152,7 +152,7 @@ else
 	if	(node->fn_flags & LST_CONNECTED)
 		logout( &node->fn_ftp );
 	else
-		KPrintF( "** lst login not sending quit - not connected\n" );
+		D(bug( "** lst login not sending quit - not connected\n" ));
 	}
 
 return retval;
@@ -218,7 +218,7 @@ if	(reply < 500 && reply != 421)
 	if	((type = systype_lookup( node->fn_ftp.fi_iobuf )))
 		node->fn_systype=type;
 	else
-		KPrintF( "** Unknown system type: %s", node->fn_ftp.fi_iobuf + 4 );
+		D(bug( "** Unknown system type: %s", node->fn_ftp.fi_iobuf + 4 ));
 	}
 
 // Default ls conversion function different for NT
@@ -253,7 +253,7 @@ else if (node->fn_systype == FTP_WINDOWSNT)
 		"FTP_ULTRIX",		"FTP_VAX_VMS",
 		"FTP_VM_CMS"
 		};
-	KPrintF( "system type: '%s'%s\n", sysname[node->fn_systype], node->fn_ftp.fi_flags & FTP_IS_WUFTPD ? " (wu-ftpd)" : "" );
+	D(bug( "system type: '%s'%s\n", sysname[node->fn_systype], node->fn_ftp.fi_flags & FTP_IS_WUFTPD ? " (wu-ftpd)" : "" ));
 	}
 #endif
 #endif
@@ -341,7 +341,7 @@ struct message_update_info  *mu;
 TimerHandle *th;
 ULONG sigs;
 
-KPrintF( "lister_connect_and_login()\n" );
+D(bug( "lister_connect_and_login()\n" ));
 
 // Get number of retries from config
 if	(node->fn_site.se_env->e_retry)
@@ -400,7 +400,7 @@ while	(tries--)
 		// Log in with user name and password
 		loginerr = lister_login(node,startupfn,mu,cld->cld_cm->cm_site.se_user,cld->cld_cm->cm_site.se_pass );
 
-	KPrintF("lister_login of %s %s ->%ld\n",cld->cld_cm->cm_site.se_user,cld->cld_cm->cm_site.se_pass,loginerr);
+	D(bug("lister_login of %s %s ->%ld\n",cld->cld_cm->cm_site.se_user,cld->cld_cm->cm_site.se_pass,loginerr));
 
 		// Login successful?
 		if	(loginerr == 0)
@@ -417,7 +417,7 @@ while	(tries--)
 			// User aborted?
 			if	(errno == EINTR)
 				{
-				KPrintF( "** login abort (EINTR)\n" );
+				D(bug( "** login abort (EINTR)\n" ));
 				cld->cld_aborted = 1;
 				cld->cld_errmsg = 0;
 				tries = 0;
@@ -470,7 +470,7 @@ while	(tries--)
 		// User aborted?
 		if	(errno == EINTR)
 			{
-			KPrintF( "** connect abort (EINTR)\n" );
+			D(bug( "** connect abort (EINTR)\n" ));
 			cld->cld_aborted = 1;
 			cld->cld_errmsg = 0;
 			}
@@ -525,7 +525,7 @@ while	(tries--)
 				// Abort pressed
 				if	(sigs & SIGBREAKF_CTRL_C)
 					{
-					KPrintF( "** connect delay abort (CTRL_C)\n" );
+					D(bug( "** connect delay abort (CTRL_C)\n" ));
 					SetSignal( 0L, SIGBREAKF_CTRL_C );
 					tries = 0;
 					break;
@@ -587,7 +587,7 @@ if	(logged_in)
 			// Can TIMEOUT
 			reply = connect_cwd( node, cwdfn, mu, node->fn_site.se_path );
 
-			KPrintF("connect_cwd -> %ld\n",reply);
+			D(bug("connect_cwd -> %ld\n",reply));
 
 			if	(reply / 100 != COMPLETE)
 				need_query_path = 1;
@@ -695,7 +695,7 @@ if	(!cld->cld_okay)
 	}
 
 
-KPrintF( "lister_connect_and_login returns %ld\n",cld->cld_okay );
+D(bug( "lister_connect_and_login returns %ld\n",cld->cld_okay ));
 
 return cld->cld_okay;
 }
@@ -853,7 +853,7 @@ if	(imsg && (cm = imsg->data_free))
 						cm->cm_site.se_host,
 						cm->cm_site.se_env->e_toolbar )))
 				{
-				KPrintF("lister_new_connection %lx\n",handle);
+				D(bug("lister_new_connection %lx\n",handle));
 
 				node->fn_handle = handle;
 				node->fn_flags |= LST_OPENED;
@@ -977,22 +977,22 @@ int   msg;
 int   retval = 0;
 
 #ifdef DEBUG
-KPrintF( "opus_lostconn() - %ld  ",ftpnode->fn_ftp.fi_errno );
+D(bug( "opus_lostconn() - %ld  ",ftpnode->fn_ftp.fi_errno ));
 
 	ftpnode->fn_ftp.fi_errno &= ~FTPERR_XFER_MASK;
 
 	switch	(ftpnode->fn_ftp.fi_errno)
 		{
 		case FTPERR_TIMEOUT:
-			KPrintF(" FTPERR_TIMEOUT\n");
+			D(bug(" FTPERR_TIMEOUT\n"));
 			break;
 
 		case FTPERR_FAKE_421:
-			KPrintF(" FTPERR_FAKE_421\n");
+			D(bug(" FTPERR_FAKE_421\n"));
 			break;
 
 		default:
-			KPrintF(" -unk\n");
+			D(bug(" -unk\n"));
 			break;
 
 		}
@@ -1059,7 +1059,7 @@ ULONG               handle;
 BOOL                do_script = 0;
 DOpusCallbackInfo *infoptr = &og->og_hooks;
 
-KPrintF( "lister_disconnect()\n" );
+D(bug( "lister_disconnect()\n" ));
 
 // save site entry
 
@@ -1131,7 +1131,7 @@ if	(ftpnode->fn_flags & LST_OPENED)
 		|| ((ftpnode->fn_flags & LST_RECONNECTING)
 			&& !(ftpnode->fn_flags & LST_CONNECTFAILED)))
 		{
-		KPrintF( "** leaving lister open\n" );
+		D(bug( "** leaving lister open\n" ));
 		// make sure the cache is dumped
 		send_rexxa( opus, REXX_REPLY_NONE, "lister freecaches %lu "PORTNAME"", ftpnode->fn_handle);
 
@@ -1148,7 +1148,7 @@ if	(ftpnode->fn_flags & LST_OPENED)
 	// Otherwise close lister
 	else
 		{
-		KPrintF( "** closing lister\n" );
+		D(bug( "** closing lister\n" ));
 		// Now close it
 		rexx_lst_close( opus, ftpnode->fn_handle );
 		}
@@ -1194,7 +1194,7 @@ void lister_reconnect( struct opusftp_globals *og, struct msg_loop_data *mld )
 {
 char command[1024+1];
 
-KPrintF( "lister_reconnect()\n" );
+D(bug( "lister_reconnect()\n" ));
 
 // Valid?
 
@@ -1228,7 +1228,7 @@ else
 
 if	((mld->mld_quit_command = AllocVec( strlen(command) + 1, MEMF_CLEAR )))
 	{
-	KPrintF( "** reconnect allocated quit command\n" );
+	D(bug( "** reconnect allocated quit command\n" ));
 	strcpy( mld->mld_quit_command, command );
 
 	// Since we'll still be using it, leave it open
@@ -1244,7 +1244,7 @@ int lister_retry_connect_requester( struct ftp_node *node, struct connect_log_da
 int  choice;
 char buffer[1024+1] = "";
 
-KPrintF( "lister_retry_connect_requester()\n" );
+D(bug( "lister_retry_connect_requester()\n" ));
 
 // Add reason in brackets
 if	(cld->cld_errmsg)

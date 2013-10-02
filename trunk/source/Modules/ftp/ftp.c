@@ -182,7 +182,7 @@ reply = ftp( info, "PASV\r\n" );
 
 if	(reply >= 500 && reply <= 502)
 	{
-	KPrintF( "** setting NO_PASV\n" );
+	D(bug( "** setting NO_PASV\n" ));
 	info->fi_flags |= FTP_NO_PASV;
 	}
 else if	(reply / 100 != COMPLETE)
@@ -496,7 +496,7 @@ if	((ts = socket( AF_INET, SOCK_STREAM, 0 )) >= 0)
 				return(-1);
 
 			default:
-				KPrintF( "Pasv failed returns %ld\n",pasvreply);
+				D(bug( "Pasv failed returns %ld\n",pasvreply));
 				bad_pasv = TRUE;
 			}
 		}
@@ -525,19 +525,19 @@ if	((ts = socket( AF_INET, SOCK_STREAM, 0 )) >= 0)
 					}
 				else
 					{
-					KPrintF( "** listen fail\n" );
+					D(bug( "** listen fail\n" ));
 					info->fi_errno = FTPERR_LISTEN_FAIL;
 					}
 				}
 			else
 				{
-				KPrintF( "** getsockname fail\n" );
+				D(bug( "** getsockname fail\n" ));
 				info->fi_errno = FTPERR_GETSOCKNAME_FAIL;
 				}
 			}
 		else
 			{
-			KPrintF( "** bind fail\n" );
+			D(bug( "** bind fail\n" ));
 			info->fi_errno = FTPERR_BIND_FAIL;
 			}
 		}
@@ -669,7 +669,7 @@ strcat( sizebuf, " " );
 cat_bytes( sizebuf, rate );
 strcat( sizebuf, "/s" );
 
-KPrintF("time %ld done %s\n",time,sizebuf);
+D(bug("time %ld done %s\n",time,sizebuf));
 
 #ifdef __amigaos4__
 DropInterface((struct Interface *)ITimer);
@@ -731,7 +731,7 @@ struct timeval          timer = {0};
 int                     display_bytes;
 int                     done;
 
-KPrintF( "get() '%s' -> '%s'\n", remote_path, local_path );
+D(bug( "get() '%s' -> '%s'\n", remote_path, local_path ));
 
 // Valid?
 if	(!info)
@@ -861,7 +861,7 @@ if	((f = OpenBuf( (char *)local_path, restart ? MODE_OLDFILE : MODE_NEWFILE, WBU
 				// did we get a signal to abort?
 				if	(!done && (flags & SIGBREAKF_CTRL_D))
 					{
-					KPrintF( "*** get() CTRL-D SIGNAL ***\n" );
+					D(bug( "*** get() CTRL-D SIGNAL ***\n" ));
 					info->fi_abortsignals = 0;
 					info->fi_aborted = 1;
 					ftp_abor( info );	// NEEDED why not just close socket?
@@ -871,7 +871,7 @@ if	((f = OpenBuf( (char *)local_path, restart ? MODE_OLDFILE : MODE_NEWFILE, WBU
 				// did we get an exception? Other end closed connection maybe
 				if	(FD_ISSET( ds, &ex ))
 					{
-					KPrintF("** get() socket exception\n");
+					D(bug("** get() socket exception\n"));
 
 					// has been aborted from remote ?
 					done = TRUE;
@@ -880,7 +880,7 @@ if	((f = OpenBuf( (char *)local_path, restart ? MODE_OLDFILE : MODE_NEWFILE, WBU
 			else
 				{
 				// some socket error -ve a 0 == timeout
-				KPrintF( "** get() WaitSelect error\n" );
+				D(bug( "** get() WaitSelect error\n" ));
 				done = TRUE;
 				}
 			}
@@ -965,7 +965,7 @@ flags = checkbreak ? SIGBREAKF_CTRL_D : 0;
 
 if	(WaitSelect( skt+1, &rd, 0L, &ex, &timer, &flags ) >= 0)
 	{
-	KPrintF("recv - ");
+	D(bug("recv - "));
 
 	// is data available from the socket?
 	if	(FD_ISSET( skt, &rd ))
@@ -978,14 +978,14 @@ if	(WaitSelect( skt+1, &rd, 0L, &ex, &timer, &flags ) >= 0)
 #ifdef DEBUG
 	// has the socket been closed?
 	if	(FD_ISSET( skt, &ex ))
-		KPrintF( "** iread() socket exception\n" );
+		D(bug( "** iread() socket exception\n" ));
 #endif
 
 	// whatever check if user has hit CTRL_D
 	if	(flags & SIGBREAKF_CTRL_D)
 		{
 		info->fi_abortsignals = 0;
-		KPrintF( "*** iread() CTRL-D SIGNAL ***\n" );
+		D(bug( "*** iread() CTRL-D SIGNAL ***\n" ));
 		retval = -1;
 		}
 	}
@@ -1113,7 +1113,7 @@ struct timeval t = {0};
 // Valid?
 if	(!info || skt < 0)
 	{
-	KPrintF( "** sgetc invalid!\n" );
+	D(bug( "** sgetc invalid!\n" ));
 	return retval;
 	}
 
@@ -1142,7 +1142,7 @@ if	((nds = WaitSelect( skt+1, &rd, 0L, &ex, &t, &flags )) >= 0)
 	{
 	if	(nds == 0) // timeout or abort
 		{
-		KPrintF( "** sgetc() WaitSelect timeout\n" );
+		D(bug( "** sgetc() WaitSelect timeout\n" ));
 		retval = -2;
 		}		
 
@@ -1150,7 +1150,7 @@ if	((nds = WaitSelect( skt+1, &rd, 0L, &ex, &t, &flags )) >= 0)
 	if	(flags & SIGBREAKF_CTRL_D)
 		{
 		info->fi_abortsignals = 0;
-		KPrintF( "*** sgetc() CTRL-D SIGNAL ***\n" );
+		D(bug( "*** sgetc() CTRL-D SIGNAL ***\n" ));
 		retval = -3;
 		}
 
@@ -1162,7 +1162,7 @@ if	((nds = WaitSelect( skt+1, &rd, 0L, &ex, &t, &flags )) >= 0)
 #ifdef DEBUG
 	// has the socket been closed?
 	if	(FD_ISSET( skt, &ex ))
-		KPrintF( "** sgetc() socket exception\n" );
+		D(bug( "** sgetc() socket exception\n" ));
 #endif
 
 	}
@@ -1292,7 +1292,7 @@ if	(ds >= 0)
 
 			if	(updateret <= 0)
 				{
-				KPrintF( "** list update %ld\n", updateret );
+				D(bug( "** list update %ld\n", updateret ));
 				retval = updateret;
 				}
 			}
@@ -1447,7 +1447,7 @@ if	((f = OpenBuf( (char *)local_path, MODE_OLDFILE, WBUFSIZE )))
 
 				if	(!done && (flags & SIGBREAKF_CTRL_D))
 					{
-					KPrintF( "*** put() CTRL-D SIGNAL ***\n" );
+					D(bug( "*** put() CTRL-D SIGNAL ***\n" ));
 					info->fi_abortsignals = 0;
 					info->fi_aborted = TRUE;
 					done = TRUE;
@@ -1455,7 +1455,7 @@ if	((f = OpenBuf( (char *)local_path, MODE_OLDFILE, WBUFSIZE )))
 
 				if	(FD_ISSET( ds, &ex ))
 					{
-					KPrintF( "** put() socket exception\n" );
+					D(bug( "** put() socket exception\n" ));
 					info->fi_abortsignals = 0;
 					done = TRUE;
 					}
@@ -1463,7 +1463,7 @@ if	((f = OpenBuf( (char *)local_path, MODE_OLDFILE, WBUFSIZE )))
 			else
 				{
 				// some socket error -ve  a 0== timeout
-				KPrintF("** put() WaitSelect error\n");
+				D(bug("** put() WaitSelect error\n"));
 				done = TRUE;
 				}
 			}
@@ -1572,7 +1572,7 @@ if	(gethost( ogp, &remote_addr, host ))
 		{
 		// Connect the control socket to the FTP server
 		//err( "--> connect()" );
-		KPrintF( "** control connect(0x%08lx)\n", remote_addr.sin_addr.s_addr );
+		D(bug( "** control connect(0x%08lx)\n", remote_addr.sin_addr.s_addr ));
 
 		if	(connect( info->fi_cs, (struct sockaddr *)&remote_addr, sizeof(remote_addr) ) >= 0)
 			{
@@ -1582,7 +1582,7 @@ if	(gethost( ogp, &remote_addr, host ))
 			if	(getsockname( info->fi_cs, (struct sockaddr *)&info->fi_addr, &len ) >= 0)
 				{
 				int tos = IPTOS_LOWDELAY;
-				KPrintF("  conhost: %lx\n",info->fi_addr.sin_addr);
+				D(bug("  conhost: %lx\n",info->fi_addr.sin_addr));
 
 				// Control connection is somewhat interactive, so quick response
 				// is desired

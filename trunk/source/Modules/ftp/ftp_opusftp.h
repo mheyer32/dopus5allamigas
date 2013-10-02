@@ -44,9 +44,9 @@ For more information on Directory Opus for Windows please see:
 //#include "hooks.h"
 
 #ifdef DEBUG
-#define err(s)		(KPrintF(s),KPrintF("\n"))
-#define errf(s,a)	(KPrintF(s,a))
-#define errf2(s,a,b)	(KPrintF(s,a,b))
+#define err(s)			(D(bug(s)),D(bug("\n")))
+#define errf(s,a)		(D(bug(s,a)))
+#define errf2(s,a,b)	(D(bug(s,a,b)))
 #else
 #define err(s)
 #define errf(s,a)

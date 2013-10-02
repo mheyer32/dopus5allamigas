@@ -178,7 +178,7 @@ switch	(type)
 		etype = ST_LINKFILE;
 		break;
 	default:
-		KPrintF("** lst_add() bad type %ld\n",type);
+		D(bug("** lst_add() bad type %ld\n",type));
 		etype = ST_FILE;
 		break;
 	}
@@ -247,7 +247,7 @@ void ftplister_refresh( struct ftp_node *node, int date )
 // Valid
 if	(!node)
 	{
-	KPrintF( "** ftplister_refresh invalid args!\n" );
+	D(bug( "** ftplister_refresh invalid args!\n" ));
 	return;
 	}
 
@@ -598,7 +598,7 @@ if	(seconds == -2)
 // Any other error, assume it doesn't exist
 else if	(seconds == -1 || seconds == -3)
 	{
-	KPrintF( "** MDTM invalid\n" );
+	D(bug( "** MDTM invalid\n" ));
 	}
 
 // If it returned >= 0, it's a file
@@ -832,7 +832,7 @@ void lst_server_reply( struct opusftp_globals *og, struct ftp_node *displaynode,
 {
 char   *str = 0;
 
-KPrintF( "lst_server_reply()\n" );
+D(bug( "lst_server_reply()\n" ));
 
 // Valid?
 if	(!og || !displaynode || !errnode || !errnode->fn_ipc)
@@ -876,7 +876,7 @@ char  handle[13];
 char *str = 0;
 DOpusCallbackInfo *infoptr = &og->og_hooks;
 
-KPrintF( "lst_server_err()\n" );
+D(bug( "lst_server_err()\n" ));
 
 // Valid?
 if	(!og || !displaynode || !errnode || !errnode->fn_ipc)
@@ -1445,7 +1445,7 @@ int                 total = 0, count = 1;		// Used in bar graph display
 int                 used_req = FALSE;
 int                 rexx_result = 0;
 
-KPrintF( "lister_rename()\n" );
+D(bug( "lister_rename()\n" ));
 
 //Valid?
 if	(!ftpnode || !msg || !msg->data_free)
@@ -1666,7 +1666,7 @@ if	(fm->fm_entries)
 				{
 				// Does entry contain path information?
 				if	(strpbrk( fm->fm_entries[0].ei_name, ":/" ))
-					KPrintF( "** entry contains path information\n" );
+					D(bug( "** entry contains path information\n" ));
 				}
 
 			// Show requester
@@ -1992,7 +1992,7 @@ int                        (*updatefn)(void *,int,char *) = 0;
 struct message_update_info  *mu = 0;
 int                          result = 0;
 
-KPrintF( "lister_cmd()\n" );
+D(bug( "lister_cmd()\n" ));
 
 if	((fm = msg->data))
 	{
@@ -2075,7 +2075,7 @@ static int lister_setvar( struct ftp_node *ftpnode, IPCMessage *msg )
 char  cmdbuf[LSCMDLEN+1] = "";
 char *cmd;
 
-KPrintF( "lister_setvar()\n" );
+D(bug( "lister_setvar()\n" ));
 
 // Valid?
 if	(!ftpnode || !msg)
@@ -2200,7 +2200,7 @@ switch	(fm->fm_ftp_command)
 		msg->command = fm->fm_endpoint->ep_errorreq( fm->fm_endpoint, fm->fm_arg1, (ULONG)fm->fm_arg2 );
 		break;
 	default:
-		KPrintF( "** unknown favour %ld\n", fm->fm_ftp_command );
+		D(bug( "** unknown favour %ld\n", fm->fm_ftp_command ));
 		msg->command = 0;
 		break;
 	}
@@ -2646,7 +2646,7 @@ if	(gm->gs_rxmsg)
 //
 static void lister_snapshot( struct ftp_node *ftpnode, IPCMessage *msg )
 {
-KPrintF( "lister_snapshot()\n" );
+D(bug( "lister_snapshot()\n" ));
 
 if	(msg->data)
 	reply_rexx( msg->data, 0, 0 );
@@ -2659,7 +2659,7 @@ if	(msg->data)
 //
 static void lister_unsnapshot( struct ftp_node *ftpnode, IPCMessage *msg )
 {
-KPrintF( "lister_unsnapshot()\n" );
+D(bug( "lister_unsnapshot()\n" ));
 
 if	(msg->data)
 	reply_rexx( msg->data, 0, 0 );
@@ -2909,7 +2909,7 @@ if	((names = pm->pm_names))
 
 			// Does entry contain path information?
 			if	(strpbrk( srcname, ":/" ))
-				KPrintF( "** entry contains path information\n" );
+				D(bug( "** entry contains path information\n" ));
 
 			if	(entry_info_from_lister(ftpnode,srcname,&ei,ENTRYFROMF_DEFAULT ))
 				{
@@ -2919,7 +2919,7 @@ if	((names = pm->pm_names))
 					filecount = 1;
 				}
 			else
-				KPrintF( "** entry not in lister - should use special delete\n" );
+				D(bug( "** entry not in lister - should use special delete\n" ));
 			}
 
 		// Multiple entries.  Query using callbacks.
@@ -3075,7 +3075,7 @@ static BOOL network_available(struct ftp_node *ftpnode,IPCMessage *msg)
 BOOL result=FALSE;
 char env;
 
-KPrintF("check network\n");
+D(bug("check network\n"));
 
 while	(1) // for colin :)
 	{
@@ -3089,7 +3089,7 @@ while	(1) // for colin :)
 			{
 			struct xfer_msg *xm = msg->data_free;
 
-			KPrintF("check network getput\n");
+			D(bug("check network getput\n"));
 
 			// safety if no handles
 			if	(!xm->xm_rm_src->fn_handle || !xm->xm_rm_dest->fn_handle)
@@ -3117,7 +3117,7 @@ while	(1) // for colin :)
 
 		if	(!ftpnode->fn_site.se_env->e_noops)
 			{
-			KPrintF("check network this site \n");
+			D(bug("check network this site \n"));
 
 			if	(do_noop( &ftpnode->fn_ftp) == 421) // connection closed by remote
 				{
@@ -3189,7 +3189,7 @@ struct lister_msg_info *lmi;
 int result = 0;
 int found = 0;
 
-KPrintF( "lister_msg_switch()\n" );
+D(bug( "lister_msg_switch()\n" ));
 
 for	(lmi = lister_msg_table; lmi->lmi_command; ++lmi)
 	{
@@ -3207,7 +3207,7 @@ for	(lmi = lister_msg_table; lmi->lmi_command; ++lmi)
 			{
 			if	(msg->command == IPC_GETPUT || ftpnode->fn_site.se_env->e_passive || ftpnode->fn_site.se_env->e_retry_lost)
 				{
-				KPrintF("check alive\n");
+				D(bug("check alive\n"));
 
 				if	(!network_available(ftpnode,msg))
 					{
@@ -3233,7 +3233,7 @@ for	(lmi = lister_msg_table; lmi->lmi_command; ++lmi)
 	}
 
 if	(!found)
-	KPrintF( "lister: unknown IPC msg %lx\n", msg->command );
+	D(bug( "lister: unknown IPC msg %lx\n", msg->command ));
 
 return result;
 }
@@ -3245,7 +3245,7 @@ static int send_noop( struct opusftp_globals *og, struct ftp_node *ftpnode )
 int reply;
 int result = FALSE;
 
-KPrintF( "send_noop()\n" );
+D(bug( "send_noop()\n" ));
 
 // If user has option turned on
 //if	(ftpnode->fn_site.se_env->e_noops)
@@ -3322,7 +3322,7 @@ while	(!mld->mld_done && *mld->mld_ftpreply != 421)
 	// Get Control C from AmiTCP then quit
 	if	(sigbits & SIGBREAKF_CTRL_C)
 		{
-		KPrintF( "*** lister received SIGBREAKF_CTRL_C ***\n" );
+		D(bug( "*** lister received SIGBREAKF_CTRL_C ***\n" ));
 		break;
 		}
 	
@@ -3335,7 +3335,7 @@ while	(!mld->mld_done && *mld->mld_ftpreply != 421)
 			switch	(imsg->command)
 				{
 				case IPC_QUIT:
-					KPrintF( "*** lister received IPC_QUIT ***\n" );
+					D(bug( "*** lister received IPC_QUIT ***\n" ));
 		
 					// Has lister already been closed?
 					if	(mld->mld_node && imsg->flags == -1)
@@ -3488,10 +3488,10 @@ static void lister_get_prog_stuff( struct ftp_node *node, ULONG *handle, int *ty
 if	(!node || !handle || !type)
 	{
 
-	KPrintF( "** get prog stuff invalid args!\n" );
-	KPrintF( "node:   0x%lx\n", node );
-	KPrintF( "handle: 0x%lx\n", handle );
-	KPrintF( "type:   0x%lx\n", type );
+	D(bug( "** get prog stuff invalid args!\n" ));
+	D(bug( "node:   0x%lx\n", node ));
+	D(bug( "handle: 0x%lx\n", handle ));
+	D(bug( "type:   0x%lx\n", type ));
 
 
 	if	(!node)
@@ -3541,7 +3541,7 @@ void lister_prog_clear( struct ftp_node *node )
 ULONG handle;
 int   type;
 
-KPrintF("Clear progress\n");
+D(bug("Clear progress\n"));
 
 lister_get_prog_stuff( node, &handle, &type );
 
@@ -3597,7 +3597,7 @@ lister_get_prog_stuff( node, &handle, &type );
 
 if	(type == PROGRESS_FREE && handle)
 	{
-	KPrintF( "** progress bar inited without being cleared!\n" );
+	D(bug( "** progress bar inited without being cleared!\n" ));
 	lister_prog_clear( node );
 	}
 
@@ -3619,7 +3619,7 @@ lister_get_prog_stuff( node, &handle, &type );
 
 if	(type == PROGRESS_FREE && handle)
 	{
-	KPrintF( "** progress bar inited without being cleared!\n" );
+	D(bug( "** progress bar inited without being cleared!\n" ));
 	lister_prog_clear( node );
 	}
 
@@ -3727,7 +3727,7 @@ ipc = (IPCData *)GetTagData( FR_IPC, (ULONG)node->fn_ipc, tags );
 
 if	((struct Task *)ipc->proc != FindTask(0))
 	{
-	KPrintF( "** lister_request called with wrong IPC!\n" );
+	D(bug( "** lister_request called with wrong IPC!\n" ));
 	return 0;
 	}
 else

@@ -141,7 +141,7 @@ if	((am = AllocVec( sizeof(*am), MEMF_CLEAR )))
 	FreeVec( am );
 	}
 
-KPrintF( "module addrbook done (%ld)\n", okay );
+D(bug( "module addrbook done (%ld)\n", okay ));
 
 return okay;
 }
@@ -157,7 +157,7 @@ struct connect_msg *cm;
 ULONG               flags = 0;
 int                 okay = FALSE;
 
-KPrintF( "mod_connect()\n" );
+D(bug( "mod_connect()\n" ));
 
 // Workaround weird jon-ism
 if	(!args || !*args)
@@ -231,7 +231,7 @@ if	((fa = ParseArgs( CONNECT_TEMPLATE, args )))
 	DisposeArgs( fa );
 	}
 
-KPrintF( "module connect done (%ld)\n", okay );
+D(bug( "module connect done (%ld)\n", okay ));
 
 return okay;
 }
@@ -267,7 +267,7 @@ if	((fm = AllocVec( sizeof(struct ftp_msg) + arglen + 1, MEMF_CLEAR )))
 	FreeVec( fm );
 	}
 
-KPrintF( "module setvar done (%ld)\n", okay );
+D(bug( "module setvar done (%ld)\n", okay ));
 
 return okay;
 }
@@ -289,7 +289,7 @@ if	((fm = AllocVec( sizeof(*fm), MEMF_CLEAR )))
 	FreeVec( fm );
 	}
 
-KPrintF( "module ftpadd done (%ld)\n", okay );
+D(bug( "module ftpadd done (%ld)\n", okay ));
 
 return okay;
 }
@@ -353,7 +353,7 @@ if	((fa = ParseArgs( COMMAND_TEMPLATE, args )))
 	DisposeArgs( fa );
 	}
 
-KPrintF( "module ftpcommand done (%ld)\n", okay );
+D(bug( "module ftpcommand done (%ld)\n", okay ));
 
 return okay;
 }
@@ -395,7 +395,7 @@ if	((fa = ParseArgs( OPTIONS_TEMPLATE, args )))
 	DisposeArgs( fa );
 	}
 
-KPrintF( "module options done (%ld)\n", okay );
+D(bug( "module options done (%ld)\n", okay ));
 
 return okay;
 }
@@ -415,7 +415,7 @@ static int mod_quit( IPCData *function_ipc, char *args, int arglen )
 FuncArgs *fa;
 int       okay = FALSE;
 
-KPrintF( "mod_quit()\n" );
+D(bug( "mod_quit()\n" ));
 
 // Workaround weird jon-ism
 if	(!args || !*args)
@@ -525,11 +525,11 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 
 		if	(mod_id == ID_QUIT || ftpport )
 			{
-			KPrintF( "not launching dopus_ftp\n" );
+			D(bug( "not launching dopus_ftp\n" ));
 			if	(ftpport)
-				;KPrintF( "\tbecause it's already running\n" );
+				;D(bug( "\tbecause it's already running\n" ));
 			if	(mod_id == ID_QUIT)
-				;KPrintF( "\tbecause function is quit\n" );
+				;D(bug( "\tbecause function is quit\n" ));
 
 			okay = TRUE;
 			}
@@ -554,7 +554,7 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 		// If OpusFTP process already existed or launched successfully, send a command to it
 		if	(okay)
 			{
-			 KPrintF( "  sending message for running process\n" );
+			 D(bug( "  sending message for running process\n" ));
 
 			// Send a message to the main FTP process
 			for	(mci = module_command_table; mci->mci_id != 0xffffffff; ++mci)
@@ -567,7 +567,7 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 				}
 
 			if	(mci->mci_id == 0xffffffff)
-				KPrintF( "unknown mod_id:%ld\n", mod_id );
+				D(bug( "unknown mod_id:%ld\n", mod_id ));
 
 			}
 		#ifdef __amigaos4__
