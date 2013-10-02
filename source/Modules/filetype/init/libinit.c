@@ -996,7 +996,7 @@ int UserLibInit()
 {
 	
 	if(!(DOpusBase=OpenLibrary("dopus5.library",41))) {
-		KPrintF("can't open dopus5.library\n");
+		D(bug("can't open dopus5.library\n"));
 		return 1;
 	}	
 	
