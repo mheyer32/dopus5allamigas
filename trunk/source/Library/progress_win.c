@@ -215,7 +215,7 @@ void SAVEDS progress_task(void)
 /*
 	// Debug?
 	if (prog->pw_Flags&PWF_DEBUG)
-		KPrintF("progress task : code entry %lx\n",(ULONG)progress_task);
+		D(bug("progress task : code entry %lx\n",(ULONG)progress_task));
 */
 
 	// Open invisibly?

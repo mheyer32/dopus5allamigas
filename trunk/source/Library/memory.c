@@ -311,7 +311,7 @@ void LIBFUNC L_FreeMemH(REG(a0, void *memory))
 			if (handle->check_val!=(ULONG)handle)
 			{
 /*
-				KPrintF("** Invalid MemHandle : %lx %lx %ld\n",handle,memory,mem[1]);
+				D(bug("** Invalid MemHandle : %lx %lx %ld\n",handle,memory,mem[1]));
 */
 			}
 

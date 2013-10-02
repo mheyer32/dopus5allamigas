@@ -892,17 +892,17 @@ void dump_button_info(Cfg_ButtonBank *bank)
 	for (button=(Cfg_Button *)bank->buttons.lh_Head;button->node.ln_Succ;button=(Cfg_Button *)button->node.ln_Succ)
 	{
 		Cfg_ButtonFunction *func;
-		KPrintF("button flags %lx (title %lx item %lx sub %lx)\n",button->button.flags,
-			button->button.flags&BUTNF_TITLE,button->button.flags&BUTNF_ITEM,button->button.flags&BUTNF_SUB);
+		D(bug("button flags %lx (title %lx item %lx sub %lx)\n",button->button.flags,
+			button->button.flags&BUTNF_TITLE,button->button.flags&BUTNF_ITEM,button->button.flags&BUTNF_SUB));
 		for (func=(Cfg_ButtonFunction *)button->function_list.mlh_Head;func->node.ln_Succ;func=(Cfg_ButtonFunction *)func->node.ln_Succ)
 		{
 			Cfg_Instruction *ins;
 
-			KPrintF("name %s label %s flags %lx type %ld\n",func->node.ln_Name,func->label,func->function.flags2,func->function.func_type);
+			D(bug("name %s label %s flags %lx type %ld\n",func->node.ln_Name,func->label,func->function.flags2,func->function.func_type));
 			for (ins=(Cfg_Instruction *)func->instructions.mlh_Head;ins->node.mln_Succ;ins=(Cfg_Instruction *)ins->node.mln_Succ)
-				KPrintF("\t%ld %s\n",ins->type,ins->string);
+				D(bug("\t%ld %s\n",ins->type,ins->string));
 		}
-		KPrintF("------------\n");
+		D(bug("------------\n"));
 	}
 }
 */

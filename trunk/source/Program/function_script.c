@@ -120,9 +120,9 @@ int function_write_script(
 	}
 
 /*
-KPrintF("> ");
-if (script_type_intro[type]) KPrintF("%s",script_type_intro[type]);
-KPrintF("%s\n",script_line);
+D(bug("> "));
+if (script_type_intro[type]) D(bug("%s",script_type_intro[type]));
+D(bug("%s\n",script_line));
 */
 
 	// Write line to script file

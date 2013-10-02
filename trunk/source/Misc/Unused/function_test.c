@@ -56,7 +56,7 @@ DOPUS_FUNC(function_test)
 	// Got one?
 	if (new)
 	{
-		KPrintF("ok!\n");
+		D(bug("ok!\n"));
 		FreeFiletype(new);
 	}
 

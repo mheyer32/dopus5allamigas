@@ -2,5 +2,5 @@
 
 void LIBFUNC L_Test(void)
 {
-	KPrintF("test\n");
+	D(bug("test\n"));
 }
