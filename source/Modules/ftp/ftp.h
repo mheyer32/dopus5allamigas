@@ -24,6 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _FTP_H
 #define _FTP_H
 
+
 #define CATCOMP_NUMBERS
 #include "ftp.strings"
 #include "module_deps.h"
@@ -43,9 +44,6 @@ For more information on Directory Opus for Windows please see:
 //#include <sys/time.h>
 
 #include <dopus/hooks.h>
-
-//#include "ftp_ad_internet.h"
-
 
 #define CMDBUFSIZE 256
 #define REPLYTIMEOUT 60

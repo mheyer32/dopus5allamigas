@@ -26,8 +26,4 @@ ftp/ftp_addressbook.c
  */
 
 void test(int );
-
 void addressbook(void);
-
-//ULONG ASM addressbook_init(REG(a0, IPCData *), REG(a1, struct subproc_data * ));
-

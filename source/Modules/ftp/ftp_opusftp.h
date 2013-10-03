@@ -36,22 +36,8 @@ For more information on Directory Opus for Windows please see:
 #ifndef _OPUSFTP_H
 #define _OPUSFTP_H
 
-//#include "dopuslib:dopusbase.h"
-//#include "modules.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
-
-//#include "hooks.h"
-
-#ifdef DEBUG
-#define err(s)			(D(bug(s)),D(bug("\n")))
-#define errf(s,a)		(D(bug(s,a)))
-#define errf2(s,a,b)	(D(bug(s,a,b)))
-#else
-#define err(s)
-#define errf(s,a)
-#define errf2(s,a,b)
-#endif
 
 // Not actually defined in dos.h
 #define FIBF_HIDDEN    (1<<7)
