@@ -1280,10 +1280,12 @@ while	(keep_trying)
 							// Reply to RETR might be arriving first though (225)
 							reply = source->ep_getreply( source, 0 );
 
-							if	(reply == 225)
-								D(bug( "** ABOR sent but RETR already completed\n" ));
-							else
-								aborted = 1;
+								if	(reply == 225) {
+									D(bug( "** ABOR sent but RETR already completed\n" ));
+								}	
+								else {
+									aborted = 1;
+								}	
 							}
 						}
 

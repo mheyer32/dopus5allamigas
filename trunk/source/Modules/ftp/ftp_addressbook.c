@@ -63,24 +63,12 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_recursive.h"
 #include "ftp_util.h"
 
-//#include "//config/configopus.h"
-
-
 #define SetFlag(v,f)		((v)|=(f))
 #define ClearFlag(v,f)		((v)&=~(f))
 #define ToggleFlag(v,f) 	((v)^=(f))
 #define FlagIsSet(v,f)		(((v)&(f))!=0)
 #define FlagIsClear(v,f)	(((v)&(f))==0)
 
-/*#ifdef	DEBUG
-void test(int i)
-{
-
-D(bug("%ld\n",i));
-Delay(50);
-
-}
-#endif*/
 
 #if defined(__amigaos3__) || defined(__AROS__)
 struct Device *InputBase = NULL;

@@ -432,13 +432,13 @@ void ftp_abor( struct ftp_info *info )
 unsigned char iac_ip[] = { IAC, IP, IAC, DM, 'A', 'B', 'O', 'R', '\r', '\n' };
 struct opusftp_globals *ogp = info->fi_og;
 
-err( "--> IAC,IP" );
+D(bug( "--> IAC,IP\n" ));
 send( info->fi_cs, iac_ip, 2, 0 );
 
-err( "--> IAC (MSG_OOB)" );
+D(bug( "--> IAC (MSG_OOB)\n" ));
 send( info->fi_cs, iac_ip+2, 1, MSG_OOB );
 
-err( "--> DM" );
+D(bug( "--> DM\n" ));
 
 if	(info->fi_og->og_oc.oc_log_debug)
 	logprintf( "--> ABOR\n" );
@@ -889,7 +889,7 @@ if	((f = OpenBuf( (char *)local_path, restart ? MODE_OLDFILE : MODE_NEWFILE, WBU
 		if	(!info->fi_aborted && !info->fi_errno && updatefn)
 			(*updatefn)( updateinfo, total, 0 );
 
-		//errf( "--> close(%ld)\n", ds );
+		//D(bug( "--> close(%ld)\n", ds ));
 		CloseSocket( ds );
 
 #ifdef	DEBUG
@@ -1298,7 +1298,7 @@ if	(ds >= 0)
 			}
 		}
 
-	//errf( "--> close(%ld)\n", ds );
+	//D(bug( "--> close(%ld)\n", ds ));
 	CloseSocket( ds );
 
 	// Get reply to socket closure -  Can TIMEOUT
@@ -1473,7 +1473,7 @@ if	((f = OpenBuf( (char *)local_path, MODE_OLDFILE, WBUFSIZE )))
 			(*updatefn)( updateinfo, 0xffffffff, 0 );
 
 		// Close data socket
-		//errf( "--> close(%ld)\n", ds );
+		//D(bug( "--> close(%ld)\n", ds ));
 		CloseSocket( ds );
 
 		// Get reply to socket closure -  Can TIMEOUT
@@ -1571,7 +1571,7 @@ if	(gethost( ogp, &remote_addr, host ))
 	if	((info->fi_cs = socket( remote_addr.sin_family, SOCK_STREAM, 0 )) >= 0)
 		{
 		// Connect the control socket to the FTP server
-		//err( "--> connect()" );
+		//D(bug( "--> connect()\n" ));
 		D(bug( "** control connect(0x%08lx)\n", remote_addr.sin_addr.s_addr ));
 
 		if	(connect( info->fi_cs, (struct sockaddr *)&remote_addr, sizeof(remote_addr) ) >= 0)
