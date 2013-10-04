@@ -1,0 +1,37 @@
+TARGET   := DopusRT
+OPTIMIZE := -O2
+DEBUG    :=
+DEBUGSYM :=
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
+INCLUDES := -I../../../Include
+LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+WARNINGS := -Wall
+CC       := ppc-morphos-gcc -noixemul
+STRIP    := ppc-morphos-strip
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
+LIBS     := 
+REMOVE = rm -f
+
+OBJS = dopusrt.o
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+
+%.o : %.c
+	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET)
+	@$(REMOVE) *.o
+#	@$(REMOVE) Makefile.dep
+
+#ifneq ($(MAKECMDGOALS),clean)
+#-include Makefile.dep
+#endif

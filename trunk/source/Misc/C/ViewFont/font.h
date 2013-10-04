@@ -105,9 +105,14 @@ extern struct Library *DOpusBase;
 #ifdef __amigaos4__
 extern struct DOpusIFace *IDOpus;
 extern struct Library *LocaleBase;
+#endif
+
+#ifdef __MORPHOS__
+extern struct Library          *LocaleBase;
 #else
 extern struct LocaleBase *LocaleBase;
 #endif
+
 
 extern struct Library *LayersBase;
 extern struct Library *AslBase;
