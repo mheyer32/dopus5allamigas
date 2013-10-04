@@ -1,0 +1,38 @@
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
+TARGET   := DopusRT
+OPTIMIZE := -O2
+DEBUGSYM := -gstabs
+OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
+INCLUDES := -I../../../Include
+LDFLAGS  := -noixemul
+#WARNINGS := -Wall
+CC       := m68k-amigaos-gcc
+CFLAGS   := $(OPTIONS) $(DEBUGSYM) $(OPTIMIZE) -noixemul
+LIBS     := -lamiga -ldebug
+
+REMOVE = rm -f
+
+OBJS = dopusrt.o
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+
+68k_asm_a5_a6.o : 68k_asm_a5_a6.c
+	$(CC) -c $^ -o $@
+
+%.o : %.c
+	@echo ">>>>>Compiling $<"
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c) $(COMMON_OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) $(COMMON_OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET)
+	@$(REMOVE) *.o
