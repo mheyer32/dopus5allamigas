@@ -6,13 +6,17 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
+STRIP := m68k-amigaos-strip --remove-section=.comment
 else
 DEBUG := -DDEBUG
+STRIP := touch
 endif
 
-TARGET   := dopus5.library
+NAME := dopus5.library
+DESTDIR  := ../bin.os3
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUGSYM := -gstabs
+DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -nostartfiles -noixemul
@@ -22,15 +26,16 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
 LIBS     := -lpools -lamiga -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
-#OBJS = $(patsubst %.c,%.o,$(wildcard *.c))
 OBJS = $(COMMON_OBJS)
-
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
@@ -42,9 +47,12 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
-	@$(REMOVE) *.o
+	@$(REMOVE) $(OBJS)
 #	@$(REMOVE) Makefile.dep
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
 
 #ifneq ($(MAKECMDGOALS),clean)
 #-include Makefile.dep

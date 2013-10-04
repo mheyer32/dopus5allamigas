@@ -3,11 +3,21 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-TARGET   := show.module 
+# Enter debug=no on "Make" command line to disable debuging.
+ifeq ($(debug), no)
+DEBUG := 
+STRIP := ppc-amigaos-strip -R=.comment
+else
+DEBUG := -DDEBUG
+STRIP := touch
+endif
+
+NAME     := show.module 
+DESTDIR  := ../../bin.os4
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
-DEBUG := -DDEBUG
 DEBUGSYM := -gstabs 
 OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__  -DUSE_OLD_ANCHORPATH -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../show -Iinit
@@ -18,13 +28,16 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 #LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) init/amiga.o init/aos4_ppc_libstub.o init/aos4_68k_to_ppc_vectors.o
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
@@ -36,5 +49,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

@@ -3,10 +3,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-TARGET   := diskinfo.module
-OPTIMIZE := -O2
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+DEBUGSYM := 
+else
 DEBUG := -DDEBUG
-DEBUGSYM := -gstabs 
+DEBUGSYM := -gstabs
+endif
+
+NAME     := diskinfo.module
+DESTDIR  := ../../bin.i386-aros
+TARGET   := $(DESTDIR)/$(NAME)
+OPTIMIZE := -O2
 OPTIONS  := -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include -I../../Include  -I../diskinfo -Iinit
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
@@ -16,12 +25,14 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS)
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 
 %.o : %.c
@@ -34,5 +45,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

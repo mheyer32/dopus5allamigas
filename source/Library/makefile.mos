@@ -8,13 +8,17 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
+STRIP := ppc-morphos-strip --remove-section=.comment
 else
 DEBUG := -DDEBUG
+STRIP := touch
 endif
 
-TARGET   := dopus5.library
+NAME     := dopus5.library
+DESTDIR  := ../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUGSYM :=
+DEBUGSYM := -gstabs
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DLIBRARIES_DOPUS5_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
@@ -25,6 +29,7 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) morphos_stubs.o
 
@@ -41,10 +46,11 @@ ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(LINKING)
-	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@.db
+	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
-	@$(STRIP) -o $@ --remove-section=.comment $@.db
+	@$(STRIP) $@
 	@chmod $(TARGET) -x
 
 %.o : %.c
@@ -57,8 +63,11 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET) $(TARGET).s
-	@$(REMOVE) *.db *.map *.o
+	@$(REMOVE) *.map $(OBJS) $(NAME).s
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
 
 .PHONY dump:
 dump:

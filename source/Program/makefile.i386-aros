@@ -6,13 +6,16 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
+DEBUGSYM := 
 else
+DEBUGSYM := -gstabs
 DEBUG := -DDEBUG
 endif
 
-TARGET   := DirectoryOpus
+NAME := DirectoryOpus
+DESTDIR := ../bin.i386-aros
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUGSYM := -gstabs 
 OPTIONS  := -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -Wl,-Map=$(TARGET).map
@@ -21,13 +24,15 @@ CC       := i386-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
-REMOVE = rm -f
+REMOVE := rm -f
+MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS)	
+OBJS := $(COMMON_OBJS)
 
 all : $(TARGET)
 
-$(TARGET): $(OBJS) 
+$(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 
 %.o : %.c
@@ -40,5 +45,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+
