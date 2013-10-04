@@ -3,10 +3,20 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-TARGET   := format.module
-OPTIMIZE := -O2
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+STRIP := m68k-amigaos-strip --remove-section=.comment
+else
 DEBUG := -DDEBUG
-DEBUGSYM := -gstabs
+STRIP := touch
+endif
+
+NAME     := format.module
+DESTDIR  := ../../bin.os3
+TARGET   := $(DESTDIR)/$(NAME)
+OPTIMIZE := -O2
+DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include -I../../Include -I../../../Include -I../format -Iinit
 LDFLAGS  := -nostartfiles -noixemul
@@ -16,13 +26,16 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
 LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) init/amiga.o init/68k_asm_a4_a5.o
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
@@ -34,5 +47,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

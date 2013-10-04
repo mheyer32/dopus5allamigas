@@ -8,23 +8,27 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
+STRIP := ppc-morphos-strip --remove-section=.comment
 else
 DEBUG := -DDEBUG
+STRIP := touch
 endif
 
-TARGET   := DirectoryOpus
+NAME := DirectoryOpus
+DESTDIR := ../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUGSYM :=
-OPTIONS  := $(OPTIMIZE) -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H -DCOMPDATE=$(NEWDATE)
+DEBUGSYM := 
+OPTIONS  := -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
-STRIP    := ppc-morphos-strip
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := -ldebug
 
-REMOVE = rm -f
+REMOVE := rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS)
 
@@ -38,13 +42,15 @@ LINKING = @$(ECHE) "linking $(BOLD)$@$(NRML)..."
 STRIPPING = @$(ECHE) "stripping $(BOLD)$@$(NRML)..."
 ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
 
+
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(LINKING)
-	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@.db
+	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
-	@$(STRIP) -o $@ --remove-section=.comment $@.db
+	@$(STRIP) $@
 
 %.o : %.c
 	$(COMPILING)
@@ -56,12 +62,15 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET) $(TARGET).s
-	@$(REMOVE) *.db *.map *.o
+	@$(REMOVE) *.map $(OBJS) $(NAME).s
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
 
 .PHONY dump:
 dump:
-	ppc-morphos-objdump --disassemble-all --reloc $(TARGET).db >$(TARGET).s
+	ppc-morphos-objdump --disassemble-all --reloc $(NAME).db >$(NAME).s
 
 #ifneq ($(MAKECMDGOALS),clean)
 #-include Makefile.dep

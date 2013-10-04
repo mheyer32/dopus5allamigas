@@ -3,14 +3,18 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-# Enter debug=no on "Make" command line to disable debug output.
+# Enter debug=no on "Make" command line to disable debuging.
 ifeq ($(debug), no)
 DEBUG := 
+STRIP := ppc-amigaos-strip -R=.comment
 else
 DEBUG := -DDEBUG
+STRIP := touch
 endif
 
-TARGET   := DirectoryOpus
+NAME := DirectoryOpus
+DESTDIR  := ../bin.os4
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
@@ -23,14 +27,17 @@ CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
-REMOVE = rm -f
+REMOVE := rm -f
+MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS) amiga.o	
+OBJS := $(COMMON_OBJS) amiga.o
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
@@ -42,8 +49,11 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
 
 .PHONY install:
 install:

@@ -3,14 +3,18 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-# Enter debug=no on "Make" command line to disable debug output.
+# Enter debug=no on "Make" command line to disable debuging.
 ifeq ($(debug), no)
 DEBUG := 
+STRIP := ppc-amigaos-strip -R=.comment
 else
 DEBUG := -DDEBUG
+STRIP := touch
 endif
 
-TARGET   := dopus5.library
+NAME := dopus5.library
+DESTDIR  := ../bin.os4
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
@@ -24,13 +28,16 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := -lamiga
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) aos4_68k_to_ppc_vectors.o aos4_ppc_libstubs.o
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
@@ -42,9 +49,12 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
 #	@$(REMOVE) Makefile.dep
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
 
 #ifneq ($(MAKECMDGOALS),clean)
 #-include Makefile.dep

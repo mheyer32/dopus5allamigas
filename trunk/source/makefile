@@ -41,6 +41,7 @@ $(PLATFORM) : all
 endif
 ###########################################################
 
+REMOVE := rm -rf
 
 .PHONY : all
 all : program library modules
@@ -67,6 +68,10 @@ modules:
 
 .PHONY : clean
 clean : clean-program clean-library clean-modules
+
+.PHONY : cleanall
+cleanall : clean
+	@$(REMOVE) bin.$(PLATFORM)
 
 .PHONY : clean-program
 clean-program:

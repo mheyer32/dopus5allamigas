@@ -3,10 +3,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-TARGET   := icon.module
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+DEBUGSYM := 
+else
+DEBUG := -DDEBUG
+DEBUGSYM := -gstabs
+endif
+
+NAME     := icon.module
+DESTDIR  := ../../bin.i386-aros
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUG    := -DDEBUG
-DEBUGSYM := -gstabs 
 OPTIONS  := -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../icon -Iinit
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
@@ -16,12 +25,14 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS)
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 
 %.o : %.c
@@ -34,5 +45,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
 	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

@@ -18,14 +18,26 @@
 #define CMD_REVISION   0
 
 // set platform identification
-#if defined(__amigaos3__)
-	#define PLATFORM [OS3]
-#elif defined(__amigaos4__)
-	#define PLATFORM [OS4]
-#elif defined(__MORPHOS__)
-	#define PLATFORM [MOS]
+#ifdef DEBUG
+	#if defined(__amigaos3__)
+		#define PLATFORM [OS3dev]
+	#elif defined(__amigaos4__)
+		#define PLATFORM [OS4dev]
+	#elif defined(__MORPHOS__)
+		#define PLATFORM [MOSdev]
+	#else
+		#define PLATFORM [AROSdev]
+	#endif
 #else
-	#define PLATFORM [AROS]
+	#if defined(__amigaos3__)
+		#define PLATFORM [OS3]
+	#elif defined(__amigaos4__)
+		#define PLATFORM [OS4]
+	#elif defined(__MORPHOS__)
+		#define PLATFORM [MOS]
+	#else
+		#define PLATFORM [AROS]
+	#endif
 #endif
 
 // set the version/revision strings
