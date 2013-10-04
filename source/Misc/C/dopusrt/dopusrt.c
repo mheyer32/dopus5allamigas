@@ -21,37 +21,42 @@ For more information on Directory Opus for Windows please see:
 
 */
 
+#include <proto/exec.h>
+
 #include <proto/dopus5.h>
-#include "dopus.h"
 
 char *version="$VER: DOpusRT 62.0 (14.7.97)";
 
-void STDARGS __main(char *command)
+int main(int argc, char **command)
 {
 	struct Library *DOpusBase;
+	#ifdef __amigaos4__
+	struct DOpusIFace 		*IDOpus = NULL;
+	#endif
+	
 	char *ptr,*lfptr=0;
 	BOOL quote=0;
 
 	// Skip to first argument
-	if (*command=='\"')
+	if (**command=='\"')
 	{
 		quote=1;
 		++command;
 	}
-	while (*command)
+	while (**command)
 	{
-		if (*command==' ' && !quote) break;
-		else if (*command=='\"' && quote)
+		if (**command==' ' && !quote) break;
+		else if (**command=='\"' && quote)
 		{
 			++command;
 			break;
 		}
 		++command;
 	}
-	while (*command==' ') ++command;
+	while (**command==' ') ++command;
 
 	// Strip linefeed
-	ptr=command;
+	ptr=*command;
 	while (*ptr)
 	{
 		if (*ptr=='\n')
@@ -64,21 +69,28 @@ void STDARGS __main(char *command)
 	}
 
 	// Valid arguments?
-	if (*command)
+	if (**command)
 	{
 		// Open dopus library
 		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",43)))
-			exit(0);
-
+			return(0);
+			
+		#ifdef __amigaos4__
+		IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
+		#endif
+	
 		// Launch program
-		WB_Launch(command,0,LAUNCH_WAIT);
+		WB_Launch(*command,0,LAUNCH_WAIT);
 
 		// Close library
+		#ifdef __amigaos4__
+		DropInterface((struct Interface *)IDOpus);
+		#endif
 		CloseLibrary(DOpusBase);
 	}
 
 	// Put linefeed back
 	if (lfptr) *lfptr='\n';
 
-	exit(0);
+	return(0);
 }
