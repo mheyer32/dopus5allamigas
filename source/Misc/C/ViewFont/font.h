@@ -16,6 +16,9 @@
 #include <proto/wb.h>
 #include <proto/dopus5.h>
 #include <libraries/gadtools.h>
+#ifdef __AROS__
+#include <diskfont/diskfont.h>
+#endif
 
 enum
 {

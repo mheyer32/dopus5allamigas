@@ -70,14 +70,14 @@ int main(int argc, char **arg_string)
 	short a;
 	char *arg_ptr=0;
 	struct RDArgs *args;
-	ULONG arg_array[ARG_COUNT];
+	IPTR arg_array[ARG_COUNT];
 
 	// Initialise arguments
 	for (a=0;a<ARG_COUNT;a++)
 		arg_array[a]=0;
 
 	// Parse arguments
-	if ((args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",(long *)arg_array,0)))
+	if ((args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",arg_array,0)))
 	{
 		// Free arguments
 		FreeArgs(args);
@@ -130,6 +130,9 @@ int main(int argc, char **arg_string)
 
 	// Open input device
 
+#ifdef __AROS__
+	input_req.io_Message.mn_Length = sizeof(input_req);
+#endif
 	if (!run_wb && !(OpenDevice("input.device",0,(struct IORequest *)&input_req,0)))
 	{
 		// Get input base
@@ -171,7 +174,7 @@ int main(int argc, char **arg_string)
 		if (wb_running) wb_startup=0;
 
 		// Get this process, turn off requesters
-		proc=(struct Process *)FindTask(0);
+		proc=(struct Process *)FindTask(NULL);
 		wsave=proc->pr_WindowPtr;
 		proc->pr_WindowPtr=(APTR)-1;
 
