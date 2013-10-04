@@ -45,7 +45,6 @@ struct InputIFace 		*IInput = NULL;
 struct DOpusIFace 		*IDOpus = NULL; 
 #endif
 
-
 char *version="$VER: LoadDB 62.0 (14.7.97)";
 
 enum

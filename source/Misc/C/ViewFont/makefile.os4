@@ -1,0 +1,40 @@
+TARGET   := viewfont
+OPTIMIZE := -O2
+DEBUG := -DDEBUG
+DEBUGSYM := -gstabs
+OPTIONS  := -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__
+INCLUDES := -I../../../Include
+LDFLAGS  := $(DEBUGSYM)
+WARNINGS := -Wall
+CC       := ppc-amigaos-gcc
+CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
+#LIBS     := -lamiga -ldebug -lauto
+LIBS     := -lauto
+
+REMOVE = rm -f
+
+OBJS = font_data.o font.o font_strings.o lsprintf.o
+
+all : $(TARGET)
+
+font_strings.o : font.strings
+
+$(TARGET): $(OBJS)
+	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+
+%.o : %.c
+	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+
+.PHONY depend: Makefile.dep
+Makefile.dep : $(OBJS:.o=.c)
+	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) >Makefile.dep
+
+.PHONY clean:
+clean:
+	@$(REMOVE) $(TARGET)
+	@$(REMOVE) *.o
+#	@$(REMOVE) Makefile.dep
+
+#ifneq ($(MAKECMDGOALS),clean)
+#-include Makefile.dep
+#endif

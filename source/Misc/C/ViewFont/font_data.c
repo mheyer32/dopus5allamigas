@@ -154,7 +154,11 @@ struct DOpusIFace *IDOpus = NULL;
 struct Library *LayersBase = NULL;
 struct Library *AslBase = NULL;
 struct Library *DiskfontBase = NULL;
+#ifdef __MORPHOS__
+struct Library          *LocaleBase;
+#else
 struct LocaleBase *LocaleBase = NULL;
+#endif
 struct Library *WorkbenchBase = NULL;
 #endif
 
