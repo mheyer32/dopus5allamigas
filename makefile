@@ -26,7 +26,7 @@ MAKEDIR := mkdir -p
 LHA := lha
 ###########################################################
 
-all : os4 #os3 mos aros
+all : os4 os3 mos aros
 
 os4 : amigaos4
 	@$(MAKEDIR) dopus5/Libs
