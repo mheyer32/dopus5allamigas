@@ -1,16 +1,31 @@
-TARGET   := viewfont
+
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+STRIP := ppc-morphos-strip --remove-section=.comment
+else
+DEBUG := -DDEBUG
+STRIP := touch
+endif
+
+NAME := viewfont
+DESTDIR := ../../../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUG    :=
-DEBUGSYM :=
+DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../../Include
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
-STRIP    := ppc-morphos-strip
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
+
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = font_data.o font.o font_strings.o lsprintf.o
 
@@ -19,7 +34,9 @@ all : $(TARGET)
 font_strings.o : font.strings
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
@@ -30,10 +47,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
-	@$(REMOVE) *.o
-#	@$(REMOVE) Makefile.dep
+	@$(REMOVE) $(OBJS)
 
-#ifneq ($(MAKECMDGOALS),clean)
-#-include Makefile.dep
-#endif
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

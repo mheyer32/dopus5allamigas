@@ -1,9 +1,21 @@
+
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-TARGET   := DopusRT
+# Enter debug=no on "Make" command line to disable debug output.
+ifeq ($(debug), no)
+DEBUG := 
+STRIP := m68k-amigaos-strip --remove-section=.comment
+else
+DEBUG := -DDEBUG
+STRIP := touch
+endif
+
+NAME := DOpusRT5
+DESTDIR := ../../../bin.os3
+TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-DEBUGSYM := -gstabs
+DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../../Include
 LDFLAGS  := -noixemul
@@ -13,26 +25,26 @@ CFLAGS   := $(OPTIONS) $(DEBUGSYM) $(OPTIMIZE) -noixemul
 LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = dopusrt.o
 
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
+	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-
-68k_asm_a5_a6.o : 68k_asm_a5_a6.c
-	$(CC) -c $^ -o $@
+	@$(STRIP) $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
 	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
 
-.PHONY depend: Makefile.dep
-Makefile.dep : $(OBJS:.o=.c) $(COMMON_OBJS:.o=.c)
-	@$(CC) -MM $(CFLAGS) $(INCLUDES) $(OBJS:.o=.c) $(COMMON_OBJS:.o=.c) >Makefile.dep
-
 .PHONY clean:
 clean:
+	@$(REMOVE) $(OBJS)
+
+.PHONY cleanall:
+cleanall : clean
 	@$(REMOVE) $(TARGET)
-	@$(REMOVE) *.o
+

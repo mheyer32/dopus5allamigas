@@ -1,6 +1,6 @@
 #include "font.h"
 
-char *version="$VER: ViewFont 55.1 (27.01.97)";
+const char USED_VAR version[] = "\0$VER: ViewFont "CMD_STRING;
 
 ConfigWindow
 	font_window={
@@ -149,17 +149,18 @@ ObjectDef
 
 struct Library *DOpusBase = NULL;
 #ifdef __amigaos4__
-struct DOpusIFace *IDOpus = NULL;
+	struct DOpusIFace *IDOpus = NULL;
+	struct Library *LocaleBase = NULL;
 #else
-struct Library *LayersBase = NULL;
-struct Library *AslBase = NULL;
-struct Library *DiskfontBase = NULL;
-#ifdef __MORPHOS__
-struct Library          *LocaleBase;
-#else
-struct LocaleBase *LocaleBase = NULL;
-#endif
-struct Library *WorkbenchBase = NULL;
+	struct Library *LayersBase = NULL;
+	struct Library *AslBase = NULL;
+	struct Library *DiskfontBase = NULL;
+	#ifdef __MORPHOS__
+		struct Library *LocaleBase = NULL;
+	#else
+		struct LocaleBase *LocaleBase = NULL;
+	#endif
+	struct Library *WorkbenchBase = NULL;
 #endif
 
 MenuData

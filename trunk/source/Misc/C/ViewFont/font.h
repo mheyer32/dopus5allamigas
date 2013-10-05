@@ -9,6 +9,7 @@
 #include <SDI/SDI_compiler.h>
 #include <SDI/SDI_stdarg.h>
 #include <proto/exec.h>
+#include <proto/dos.h>
 #include <proto/locale.h>
 #include <proto/layers.h>
 #include <proto/asl.h>
@@ -19,6 +20,8 @@
 #ifdef __AROS__
 #include <diskfont/diskfont.h>
 #endif
+#include <version/dopus_version.h>
+#include <debug/dopus_debug.h>
 
 enum
 {
@@ -108,19 +111,15 @@ extern struct Library *DOpusBase;
 #ifdef __amigaos4__
 extern struct DOpusIFace *IDOpus;
 extern struct Library *LocaleBase;
-#endif
-
-#ifdef __MORPHOS__
-extern struct Library          *LocaleBase;
+#elif defined(__MORPHOS__)
+extern struct Library *LocaleBase;
 #else
 extern struct LocaleBase *LocaleBase;
 #endif
 
-
 extern struct Library *LayersBase;
 extern struct Library *AslBase;
 extern struct Library *DiskfontBase;
-//extern struct Library *LocaleBase;
 extern struct Library *WorkbenchBase;
 
 extern MenuData font_menus[];
