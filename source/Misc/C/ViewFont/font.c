@@ -33,7 +33,7 @@ int main(int argc,char **argv)
 	data->args=
 		ReadArgs(
 			"FONT,SIZE/N,B=BOLD/S,I=ITALIC/S,U=ULINE/S,PUBSCREEN/K",
-			(long *)data->arg_array,
+			data->arg_array,
 			0);
 
 	// Default to topaz 8
@@ -61,7 +61,13 @@ int main(int argc,char **argv)
 
 		// Change PROGDIR: to dopus5:
 		if ((lock=Lock("dopus5:",ACCESS_READ)))
+#ifdef __AROS__
+			// the lock returned here is the initial PROGDIR: which belongs to the system,
+			// so it's not a very good idea to just UnLock it
+			SetProgramDir(lock);
+#else
 			UnLock(SetProgramDir(lock));
+#endif
 
 		// Initialise
 		data->locale.li_LocaleBase=LocaleBase;
@@ -465,8 +471,10 @@ void font_free(font_data *data)
 	if (LayersBase) CloseLibrary(LayersBase);
 	if (AslBase) CloseLibrary(AslBase);
 	if (DiskfontBase) CloseLibrary(DiskfontBase);
-	if (LocaleBase) CloseLibrary((struct Library *)LocaleBase);
 	if (WorkbenchBase) CloseLibrary(WorkbenchBase);
+#endif
+#if defined(__amigaos3__) || defined(__AROS__)
+	if (LocaleBase) CloseLibrary((struct Library *)LocaleBase);
 #endif
 }
 
@@ -480,9 +488,11 @@ int font_openlibs(void)
 		return(0);
 	if (!(DiskfontBase = OpenLibrary("diskfont.library", 37)))
 		return(0);
-	if (!(LocaleBase = (struct LocaleBase *)OpenLibrary("locale.library", 37)))
-		return(0);
 	if (!(WorkbenchBase = OpenLibrary("workbench.library", 37)))
+		return(0);
+#endif
+#if defined(__amigaos3__) || defined(__AROS__)
+	if (!(LocaleBase = (struct LocaleBase *)OpenLibrary("locale.library", 37)))
 		return(0);
 #endif
 	return(1);
