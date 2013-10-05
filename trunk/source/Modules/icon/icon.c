@@ -546,9 +546,28 @@ if	((lock = Lock( data->prog_name, ACCESS_READ )))
 
 	// Get object date
 	if	(data->icon_type == WBDISK)
+	{
+#ifdef __AROS__
+		if (((struct Library *)DOSBase)->lib_Version<50)
+		{
+			struct DosList *dl;
+
+			if ((dl = LockDosList(LDF_VOLUMES | LDF_READ)))
+			{
+				if ((dl = FindDosEntry(dl, data->object_name, LDF_VOLUMES)))
+				{
+					data->datetime.dat_Stamp = dl->dol_misc.dol_volume.dol_VolumeDate;
+					//CopyMem(&dl->dol_misc.dol_volume.dol_VolumeDate, &data->datetime.dat_Stamp, sizeof(data->datetime.dat_Stamp));
+				}
+				UnLockDosList(LDF_VOLUMES | LDF_READ);
+			}
+		}
+		else
+#endif
 		data->datetime.dat_Stamp =
 			((struct DeviceList *)BADDR(
 				((struct FileLock *)BADDR(lock))->fl_Volume))->dl_VolumeDate;
+	}
 	else
 		data->datetime.dat_Stamp = data->fib.fib_Date;
 
@@ -2022,6 +2041,15 @@ if	((a = strlen(data->name)) > 5 && stricmp(data->name+a-5, ".info") == 0)
 if	(data->name[strlen(data->name)-1] == ':')
 	strcat( data->name, "Disk" );
 
+#ifdef __AROS__
+// maybe it's the Ram Disk?
+if (!stricmp(data->name, "RAM Disk:Disk"))
+{
+	data->icon = (struct DiskObject *)IPC_Command( data->main_ipc, MAINCMD_GET_ICON, GCDOF_NOCACHE, "envarc:sys/def_ram", 0, REPLY_NO_PORT );
+	data->icon->do_Type = WBDISK;
+}
+else
+#endif
 // Get icon from Opus
 data->icon = (struct DiskObject *)IPC_Command( data->main_ipc, MAINCMD_GET_ICON, GCDOF_NOCACHE, data->name, 0, REPLY_NO_PORT );
 
@@ -3405,11 +3433,25 @@ if	((len = strlen(data->name)) > 5 &&
 	stricmp(data->name+len-5,".info") == 0)
 	data->name[len-5] = 0;
 
-// Try and get icon
-if	((icon=GetIconTags(data->name,
+#ifdef __AROS__
+// maybe it's the Ram Disk?
+if (!stricmp(data->name, "RAM Disk:Disk"))
+{
+	icon=GetIconTags("envarc:sys/def_ram",
 		ICONGETA_FailIfUnavailable,TRUE,
 		ICONGETA_Screen,data->window->WScreen,
-		TAG_DONE)))
+		TAG_DONE);
+	data->icon->do_Type = WBDISK;
+}
+else
+#endif
+icon=GetIconTags(data->name,
+		ICONGETA_FailIfUnavailable,TRUE,
+		ICONGETA_Screen,data->window->WScreen,
+		TAG_DONE);
+
+// Try and get icon
+if	(icon)
 	{
 	int   area = 0;
 	ULONG old_idcmp = data->window->IDCMPFlags;

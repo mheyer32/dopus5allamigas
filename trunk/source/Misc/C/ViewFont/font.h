@@ -50,7 +50,7 @@ typedef struct
 
 	char			title[80];
 
-	ULONG 			arg_array[ARG_COUNT];
+	IPTR 			arg_array[ARG_COUNT];
 
 	char			font_text[256];
 
