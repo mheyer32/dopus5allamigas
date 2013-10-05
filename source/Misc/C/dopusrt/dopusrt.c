@@ -24,8 +24,12 @@ For more information on Directory Opus for Windows please see:
 #include <proto/exec.h>
 
 #include <proto/dopus5.h>
+#include <version/dopus_version.h>
+#include <debug/dopus_debug.h>
 
-char *version="$VER: DOpusRT 62.0 (14.7.97)";
+#include <SDI/SDI_compiler.h>
+
+const char USED_VAR version[] = "\0$VER: DOpusRT "CMD_STRING;
 
 int main(int argc, char **command)
 {

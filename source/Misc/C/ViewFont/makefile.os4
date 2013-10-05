@@ -1,17 +1,32 @@
-TARGET   := viewfont
-OPTIMIZE := -O2
+
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
+# Enter debug=no on "Make" command line to disable debuging.
+ifeq ($(debug), no)
+DEBUG := 
+STRIP := ppc-amigaos-strip -R=.comment
+else
 DEBUG := -DDEBUG
+STRIP := touch
+endif
+
+NAME := viewfont
+DESTDIR  := ../../../bin.os4
+TARGET   := $(DESTDIR)/$(NAME)
+OPTIMIZE := -O2
+C_LIB :=  -mcrt=newlib
 DEBUGSYM := -gstabs
-OPTIONS  := -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__
+OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../../Include
-LDFLAGS  := $(DEBUGSYM)
+LDFLAGS  := $(C_LIB) $(DEBUGSYM)
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-#LIBS     := -lamiga -ldebug -lauto
 LIBS     := -lauto
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = font_data.o font.o font_strings.o lsprintf.o
 
@@ -20,10 +35,13 @@ all : $(TARGET)
 font_strings.o : font.strings
 
 $(TARGET): $(OBJS)
+	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	@$(STRIP) $@
 
 %.o : %.c
-	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+	@echo ">>>>>Compiling $<"
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
 
 .PHONY depend: Makefile.dep
 Makefile.dep : $(OBJS:.o=.c)
@@ -31,10 +49,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(TARGET)
-	@$(REMOVE) *.o
-#	@$(REMOVE) Makefile.dep
+	@$(REMOVE) $(OBJS)
 
-#ifneq ($(MAKECMDGOALS),clean)
-#-include Makefile.dep
-#endif
+.PHONY cleanall:
+cleanall : clean
+	@$(REMOVE) $(TARGET)
+

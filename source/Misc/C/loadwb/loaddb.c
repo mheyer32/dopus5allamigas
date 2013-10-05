@@ -31,6 +31,8 @@ For more information on Directory Opus for Windows please see:
 #include <proto/intuition.h>
 
 #include <proto/dopus5.h>
+#include <version/dopus_version.h>
+#include <debug/dopus_debug.h>
 
 #if defined(__amigaos3__) || defined(__AROS__)
 struct Device			*InputBase = NULL;
@@ -45,7 +47,7 @@ struct InputIFace 		*IInput = NULL;
 struct DOpusIFace 		*IDOpus = NULL; 
 #endif
 
-char *version="$VER: LoadDB 62.0 (14.7.97)";
+const char USED_VAR version[] = "\0$VER: LoadDB "CMD_STRING;
 
 enum
 {
