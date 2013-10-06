@@ -37,7 +37,11 @@ int main(int argc,char **argv)
 			0);
 
 	// Default to topaz 8
+#ifdef __AROS__
+	strcpy(data->font_name,"ttcourier.font");
+#else
 	strcpy(data->font_name,"topaz.font");
+#endif
 	data->font_size=8;
 
 	// Got font name?
@@ -48,7 +52,7 @@ int main(int argc,char **argv)
 	if (data->arg_array[ARG_SIZE] && *((long *)data->arg_array[ARG_SIZE]))
 	{
 		data->font_size=*((long *)data->arg_array[ARG_SIZE]);
-		data->first=1;
+		data->first=TRUE;
 	}
 
 	// Initialise locale
@@ -91,7 +95,7 @@ int main(int argc,char **argv)
 	if (data->arg_array[ARG_ULINE]) SetGadgetValue(data->list,GAD_FONT_ULINE,1);
 
 	// Show font
-	font_show_font(data,0);
+	font_show_font(data,FALSE);
 
 	// Initialise refresh hook
 	data->refresh_hook.h_Entry=(ULONG (*)())font_refresh;
@@ -101,7 +105,7 @@ int main(int argc,char **argv)
 	FOREVER
 	{
 		struct IntuiMessage *msg;
-		BOOL quit_flag=0;
+		BOOL quit_flag=FALSE;
 
 		// AppWindow?
 		if (data->appwindow)
@@ -126,7 +130,7 @@ int main(int argc,char **argv)
 
 					// Get new font
 					font_get_font(data);
-					font_show_font(data,0);
+					font_show_font(data,FALSE);
 				}
 
 				// Reply to message
@@ -142,7 +146,7 @@ int main(int argc,char **argv)
 			{
 				// Close requester
 				FreeSysRequest(data->about);
-				data->about=0;
+				data->about=NULL;
 			}
 		}
 
@@ -167,7 +171,7 @@ int main(int argc,char **argv)
 				{
 					// Close window
 					case IDCMP_CLOSEWINDOW:
-						quit_flag=1;
+						quit_flag=TRUE;
 						break;
 
 
@@ -175,10 +179,10 @@ int main(int argc,char **argv)
 					case IDCMP_NEWSIZE:
 
 						// Redraw font
-						font_show_font(data,0);
+						font_show_font(data,FALSE);
 
 						// Set flag to say we resized
-						data->resized=1;
+						data->resized=TRUE;
 						break;
 
 
@@ -218,7 +222,7 @@ int main(int argc,char **argv)
 
 								// Get new font
 								font_get_font(data);
-								font_show_font(data,0);
+								font_show_font(data,FALSE);
 								break;
 
 
@@ -273,7 +277,7 @@ int main(int argc,char **argv)
 
 								// Get new font
 								font_get_font(data);
-								font_show_font(data,0);
+								font_show_font(data,FALSE);
 								break;
 
 							// Styles changed
@@ -282,7 +286,7 @@ int main(int argc,char **argv)
 							case GAD_FONT_ULINE:
 
 								// Redraw font
-								font_show_font(data,0);
+								font_show_font(data,FALSE);
 								break;
 
 
@@ -294,7 +298,7 @@ int main(int argc,char **argv)
 
 							// Quit
 							case MENU_QUIT:
-								quit_flag=1;
+								quit_flag=TRUE;
 								break;
 
 
@@ -317,7 +321,7 @@ int main(int argc,char **argv)
 					case IDCMP_VANILLAKEY:
 
 						// Escape does quit
-						if (msg_copy.Code==0x1b) quit_flag=1;
+						if (msg_copy.Code==0x1b) quit_flag=TRUE;
 						break;
 
 
@@ -330,12 +334,12 @@ int main(int argc,char **argv)
 							// Don't need to refresh
 							BeginRefresh(data->window);
 							EndRefresh(data->window,TRUE);
-							data->resized=0;
+							data->resized=FALSE;
 							break;
 						}
 
 						// Refresh font display
-						font_show_font(data,1);
+						font_show_font(data,TRUE);
 						break;
 				}
 
@@ -362,7 +366,7 @@ int main(int argc,char **argv)
 // Open font window
 BOOL font_open(font_data *data)
 {
-	struct Screen *screen=0;
+	struct Screen *screen=NULL;
 
 	// Screen supplied?
 	if (data->arg_array[ARG_SCREEN])
@@ -389,7 +393,7 @@ BOOL font_open(font_data *data)
 	UnlockPubScreen(0,screen);
 
 	// Failed to open?
-	if (!data->list) return 0;
+	if (!data->list) return FALSE;
 
 	// Fix sizing limits
 	WindowLimits(data->window,
@@ -406,7 +410,7 @@ BOOL font_open(font_data *data)
 
 	// Get the font
 	font_get_font(data);
-	return 1;
+	return TRUE;
 }
 
 
@@ -418,15 +422,15 @@ void font_close(font_data *data)
 	{
 		// Remove AppWindow
 		RemoveAppWindow(data->appwindow);
-		data->appwindow=0;
+		data->appwindow=NULL;
 
 		// Close requester
 		FreeSysRequest(data->about);
-		data->about=0;
+		data->about=NULL;
 
 		// Close window
 		CloseConfigWindow(data->window);
-		data->window=0;
+		data->window=NULL;
 	}
 }
 
@@ -506,7 +510,7 @@ void font_get_font(font_data *data)
 	{
 		// Free font
 		CloseFont(data->font);
-		data->font=0;
+		data->font=NULL;
 	}
 
 	// Has the font name changed?
@@ -610,7 +614,7 @@ void font_get_font(font_data *data)
 	strcpy(data->last_font_name,data->font_name);
 
 	// Clear 'first' flag
-	data->first=0;
+	data->first=FALSE;
 
 	// Clear window busy
 	ClearWindowBusy(data->window);
@@ -783,7 +787,7 @@ void font_get_name(font_data *data,char *name)
 
 		// Store size
 		data->font_size=len;
-		data->first=1;
+		data->first=TRUE;
 	}
 
 	// Name specified without .font
@@ -836,7 +840,7 @@ void font_ask_name(font_data *data)
 
 		// Get new font
 		font_get_font(data);
-		font_show_font(data,0);
+		font_show_font(data,FALSE);
 	}
 
 	// Unbusy window
@@ -864,7 +868,7 @@ ULONG ASM SAVEDS font_refresh(
 	if (msg->Class==IDCMP_REFRESHWINDOW)
 	{
 		// Do the refresh
-		font_show_font(data,1);
+		font_show_font(data,TRUE);
 	}
 
 	// New size?
@@ -875,10 +879,10 @@ ULONG ASM SAVEDS font_refresh(
 		LayoutResize(data->window);
 
 		// Redraw font
-		font_show_font(data,0);
+		font_show_font(data,FALSE);
 
 		// Set flag to say we resized
-		data->resized=1;
+		data->resized=TRUE;
 	}
 
 	return (ULONG)msg;
@@ -910,15 +914,15 @@ void font_build_labels(font_data *data,struct FontContentsHeader *fch)
 {
 	char **labels,*ptr;
 	short num=0,a,smallest=0;
-	struct FontContents *fc=0;
-	BOOL topaz=0;
+	struct FontContents *fc=NULL;
+	BOOL topaz=FALSE;
 
 	// Get number
 	if (fch) num=fch->fch_NumEntries;
 	if (num<1)
 	{
 		num=1;
-		fch=0;
+		fch=NULL;
 	}
 
 	// Kludge for topaz
@@ -932,7 +936,7 @@ void font_build_labels(font_data *data,struct FontContentsHeader *fch)
 		{
 			// Add 8 and 9
 			num+=2;
-			topaz=1;
+			topaz=TRUE;
 		}
 	}
 
