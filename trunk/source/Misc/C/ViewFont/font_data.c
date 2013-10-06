@@ -151,7 +151,7 @@ struct Library *DOpusBase = NULL;
 #ifdef __amigaos4__
 	struct DOpusIFace *IDOpus = NULL;
 	struct Library *LocaleBase = NULL;
-#else
+#elif 0 //defined(__amigaos3__) || defined(__MORPHOS__)
 	struct Library *LayersBase = NULL;
 	struct Library *AslBase = NULL;
 	struct Library *DiskfontBase = NULL;

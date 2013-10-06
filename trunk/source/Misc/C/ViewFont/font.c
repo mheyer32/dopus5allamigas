@@ -467,32 +467,28 @@ void font_free(font_data *data)
 	DropInterface((struct Interface *)IDOpus);
 #endif
 	CloseLibrary(DOpusBase);
-#ifdef __amigaos3__
+#if 0 //defined(__amigaos3__) || defined(__MORPHOS__)
 	if (LayersBase) CloseLibrary(LayersBase);
 	if (AslBase) CloseLibrary(AslBase);
 	if (DiskfontBase) CloseLibrary(DiskfontBase);
-	if (WorkbenchBase) CloseLibrary(WorkbenchBase);
-#endif
-#if defined(__amigaos3__) || defined(__AROS__)
 	if (LocaleBase) CloseLibrary((struct Library *)LocaleBase);
+	if (WorkbenchBase) CloseLibrary(WorkbenchBase);
 #endif
 }
 
 
 int font_openlibs(void)
 {
-#ifdef __amigaos3__
+#if 0 //defined(__amigaos3__) || defined(__MORPHOS__)
 	if (!(LayersBase = OpenLibrary("layers.library", 37)))
 		return(0);
 	if (!(AslBase = OpenLibrary("asl.library", 37)))
 		return(0);
 	if (!(DiskfontBase = OpenLibrary("diskfont.library", 37)))
 		return(0);
-	if (!(WorkbenchBase = OpenLibrary("workbench.library", 37)))
-		return(0);
-#endif
-#if defined(__amigaos3__) || defined(__AROS__)
 	if (!(LocaleBase = (struct LocaleBase *)OpenLibrary("locale.library", 37)))
+		return(0);
+	if (!(WorkbenchBase = OpenLibrary("workbench.library", 37)))
 		return(0);
 #endif
 	return(1);
