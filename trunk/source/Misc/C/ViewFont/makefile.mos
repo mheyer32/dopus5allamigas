@@ -5,10 +5,10 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip --remove-section=.comment
+STRIP := ppc-morphos-strip --remove-section=.comment $@
 else
 DEBUG := -DDEBUG
-STRIP := touch
+STRIP := 
 endif
 
 NAME := viewfont
@@ -36,7 +36,7 @@ font_strings.o : font.strings
 $(TARGET): $(OBJS)
 	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP) $@
+	@$(STRIP)
 
 %.o : %.c
 	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@

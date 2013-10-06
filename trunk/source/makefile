@@ -44,30 +44,36 @@ endif
 REMOVE := rm -rf
 
 .PHONY : all
-all : program library modules
+all : program library modules commands
 
 .PHONY : program
 program:
 	@echo " "
-	@echo "+++++++++++++++++ program ++++++++++++++++++"
+	@echo "++++++++++++++++++ program ++++++++++++++++++"
 	@$(MAKE) -C Program -f makefile.$(PLATFORM)
 
 .PHONY : library
 library:
 	@echo " "
-	@echo "+++++++++++++++++ library ++++++++++++++++++"
+	@echo "++++++++++++++++++ library ++++++++++++++++++"
 	@$(MAKE) -C Library -f makefile.$(PLATFORM)
 
 .PHONY : modules
 modules:
 	@echo " "
-	@echo "+++++++++++++++++ modules ++++++++++++++++++"
+	@echo "++++++++++++++++++ modules ++++++++++++++++++"
 	@$(MAKE) -C Modules $(PLATFORM)
+
+.PHONY : commands
+commands:
+	@echo " "
+	@echo "++++++++++++++++++ commands +++++++++++++++++"
+	@$(MAKE) -C Misc/C $(PLATFORM)
 
 ###########################################################
 
 .PHONY : clean
-clean : clean-program clean-library clean-modules
+clean : clean-program clean-library clean-modules clean-commands
 
 .PHONY : cleanall
 cleanall : clean
@@ -90,6 +96,12 @@ clean-modules:
 	@echo " "
 	@echo "++++++++++++++ clean modules +++++++++++++++"
 	@$(MAKE) -C Modules $(PLATFORM) clean
+
+.PHONY : clean-commands
+clean-commands:
+	@echo " "
+	@echo "++++++++++++++++++ commands +++++++++++++++++"
+	@$(MAKE) -C Misc/C $(PLATFORM) clean
 
 ###########################################################
 
