@@ -6,7 +6,7 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debuging.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-amigaos-strip -R=.comment $@
+STRIP := ppc-amigaos-strip
 else
 DEBUG := -DDEBUG
 STRIP := 
@@ -37,7 +37,7 @@ all : $(TARGET)
 $(TARGET): $(OBJS)
 	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP)
+	@$(STRIP) -R=.comment $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"

@@ -5,7 +5,7 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := m68k-amigaos-strip --remove-section=.comment $@
+STRIP := m68k-amigaos-strip
 else
 DEBUG := -DDEBUG
 STRIP := 
@@ -34,7 +34,7 @@ all : $(TARGET)
 $(TARGET): $(OBJS)
 	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP)
+	@$(STRIP) --remove-section=.comment $@
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
