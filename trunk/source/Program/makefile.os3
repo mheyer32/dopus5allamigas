@@ -3,18 +3,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME := DirectoryOpus
+DESTDIR := ../bin.os3
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := m68k-amigaos-strip
+STRIP := m68k-amigaos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME := DirectoryOpus
-DESTDIR := ../bin.os3
-TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
@@ -35,7 +36,7 @@ all : $(TARGET)
 $(TARGET): $(OBJS)
 	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP) --remove-section=.comment $@
+	@$(STRIP)
 
 68k_asm_a5_a6.o : 68k_asm_a5_a6.c
 	$(CC) -c $^ -o $@

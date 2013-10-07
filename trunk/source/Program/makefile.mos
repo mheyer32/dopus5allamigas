@@ -5,18 +5,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME := DirectoryOpus
+DESTDIR := ../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip
+STRIP := ppc-morphos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME := DirectoryOpus
-DESTDIR := ../bin.mos
-TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -D_DOPUSBASE_H -DCOMPDATE=$(NEWDATE)
@@ -50,7 +51,7 @@ $(TARGET): $(OBJS)
 	$(LINKING)
 	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
-	@$(STRIP) --remove-section=.comment $@
+	@$(STRIP)
 
 %.o : %.c
 	$(COMPILING)
