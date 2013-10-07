@@ -351,7 +351,7 @@ if	((ui = AllocVec( sizeof(struct update_info), MEMF_CLEAR )))
 		// Send the LIST command
 		lsresult = list( &ftpnode->fn_ftp, list_update, ui, ftpnode->fn_lscmd, "" );
 		
-		D(bug("list command result |n",lsresult));
+		D(bug("list command result %d\n",lsresult));
 
 		ftplister_refresh( ftpnode, REFRESH_NODATE );
 
