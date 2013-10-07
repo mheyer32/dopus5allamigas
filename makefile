@@ -11,19 +11,20 @@ else
 TYPE := dev
 endif
 ###########################################################
-# Sets destination directory
+# Sets destination directory and lha command
 DEST := ../
 ifeq ($(os), amiga)
 ARCDEST := /
+LHA := lha a -a -r
 else
 ARCDEST := ../../
+LHA := lha -aro5
 endif
 ###########################################################
 # Commands
 REMOVE := rm -rf
 COPY := cp
 MAKEDIR := mkdir -p
-LHA := lha
 ###########################################################
 
 all : os4 os3 mos aros
@@ -39,12 +40,12 @@ os4 : amigaos4
 	@$(COPY) source/bin.os4/loadDB dopus5/C
 	@$(COPY) source/bin.os4/viewfont dopus5/C
 	@$(COPY) release/archive.lha $(DEST)dopus5-OS4$(TYPE).lha
-	@$(LHA) a -a -r $(ARCDEST)dopus5-OS4$(TYPE).lha dopus5
+	@$(LHA) $(ARCDEST)dopus5-OS4$(TYPE).lha dopus5
 	@$(REMOVE) dopus5
-	@$(MAKE) -C source os4 cleanall
 
 .PHONY : amigaos4
 amigaos4:
+#	@$(MAKE) -C source os4 cleanall
 	@$(MAKE) -C source os4
 
 #####
@@ -60,12 +61,12 @@ os3 : amigaos3
 	@$(COPY) source/bin.os3/loadDB dopus5/C
 	@$(COPY) source/bin.os3/viewfont dopus5/C
 	@$(COPY) release/archive.lha $(DEST)dopus5-OS3$(TYPE).lha
-	@$(LHA) a -a -r $(ARCDEST)dopus5-OS3$(TYPE).lha dopus5
+	@$(LHA) $(ARCDEST)dopus5-OS3$(TYPE).lha dopus5
 	@$(REMOVE) dopus5
-	@$(MAKE) -C source os3 cleanall
 
 .PHONY : amigaos3
 amigaos3:
+	@$(MAKE) -C source os3 cleanall
 	@$(MAKE) -C source os3
 
 #####
@@ -81,12 +82,12 @@ mos : morphos
 	@$(COPY) source/bin.mos/loadDB dopus5/C
 	@$(COPY) source/bin.mos/viewfont dopus5/C
 	@$(COPY) release/archive.lha $(DEST)dopus5-MOS$(TYPE).lha
-	@$(LHA) a -a -r $(ARCDEST)dopus5-MOS$(TYPE).lha dopus5
+	@$(LHA) $(ARCDEST)dopus5-MOS$(TYPE).lha dopus5
 	@$(REMOVE) dopus5
-	@$(MAKE) -C source mos cleanall
 
 .PHONY : morphos
 morphos:
+	@$(MAKE) -C source mos cleanall
 	@$(MAKE) -C source mos
 
 #####
@@ -102,10 +103,10 @@ aros : aros-bin
 	@$(COPY) source/bin.aros/loadDB dopus5/C
 	@$(COPY) source/bin.aros/viewfont dopus5/C
 	@$(COPY) release/archive.lha $(DEST)dopus5-AROS$(TYPE).lha
-	@$(LHA) a -a -r $(ARCDEST)dopus5-AROS$(TYPE).lha dopus5
+	@$(LHA) $(ARCDEST)dopus5-AROS$(TYPE).lha dopus5
 	@$(REMOVE) dopus5
-	@$(MAKE) -C source aros cleanall
 
 .PHONY : aros-bin
 aros-bin:
+	@$(MAKE) -C source aros cleanall
 	@$(MAKE) -C source aros
