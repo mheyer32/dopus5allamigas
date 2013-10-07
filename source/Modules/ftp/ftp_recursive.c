@@ -2750,7 +2750,8 @@ if	(ep->ep_ftpnode->fn_ftp.fi_task != FindTask(0))
 
 D(bug( "FTP PORT\n" ));
 
-if	(ftp_port( &ep->ep_ftpnode->fn_ftp, flags, (char *)&addr->sin_addr, (char *)&addr->sin_port ) == 200)
+//if	(ftp_port( &ep->ep_ftpnode->fn_ftp, flags, (char *)&addr->sin_addr, (char *)&addr->sin_port ) == 200)
+if (ftp_port( &ep->ep_ftpnode->fn_ftp, flags, addr ) == 200)
 	return 1;
 else
 	return 0;

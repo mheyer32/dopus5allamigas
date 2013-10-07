@@ -192,6 +192,33 @@ return reply;
 }
 
 // Send PORT command
+int ftp_port( struct ftp_info *info, unsigned long flags, struct sockaddr_in *addr )
+{
+	int reply;
+	int ip1, ip2, ip3, ip4, p1, p2;
+
+	if (!addr)
+		return 0;
+
+	if	(!(flags & PORT_QUIET))
+		*info->fi_serverr = 0;
+
+	if (sscanf(Inet_NtoA(addr->sin_addr.s_addr), "%d.%d.%d.%d", &ip1, &ip2, &ip3, &ip4) != 4)
+		return 0;
+
+	// the port is in network byte order, so the following is always correct
+	p1 = addr->sin_port & 0xff;
+	p2 = (addr->sin_port >> 8) & 0xff;
+
+	reply = _ftpa( info, flags, "PORT %d,%d,%d,%d,%d,%d", ip1, ip2, ip3, ip4, p1, p2 );
+
+	if	(!(flags & PORT_QUIET) && reply / 100 != COMPLETE)
+		stccpy( info->fi_serverr, info->fi_iobuf, IOBUFSIZE + 1 );
+
+	return reply;
+}
+	
+#if 0
 int ftp_port( struct ftp_info *info, unsigned long flags, unsigned char *host, unsigned char *port )
 {
 int reply;
@@ -211,6 +238,7 @@ if	(!(flags & PORT_QUIET) && reply / 100 != COMPLETE)
 
 return reply;
 }
+#endif
 
 // Return current dir
 int ftp_pwd( struct ftp_info *info )
@@ -518,7 +546,8 @@ if	((ts = socket( AF_INET, SOCK_STREAM, 0 )) >= 0)
 				if	(listen( ts, 1 ) >= 0)
 					{
 					// Can TIMEOUT
-					reply = ftp_port( info, 0, (char *)&info->fi_addr.sin_addr, (char *)&info->fi_addr.sin_port );
+					//reply = ftp_port( info, 0, (char *)&info->fi_addr.sin_addr, (char *)&info->fi_addr.sin_port );
+					reply = ftp_port( info, 0, &info->fi_addr );
 
 					if	(reply/100 == COMPLETE)
 						return(ts);
