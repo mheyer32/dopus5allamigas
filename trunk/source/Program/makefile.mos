@@ -8,7 +8,7 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip --remove-section=.comment $@
+STRIP := ppc-morphos-strip
 else
 DEBUG := -DDEBUG
 STRIP := 
@@ -50,7 +50,7 @@ $(TARGET): $(OBJS)
 	$(LINKING)
 	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
-	@$(STRIP)
+	@$(STRIP) --remove-section=.comment $@
 
 %.o : %.c
 	$(COMPILING)
