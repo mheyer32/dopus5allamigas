@@ -329,7 +329,7 @@ if	(info->fi_task != FindTask(0))
 
 // Log outgoing commands if debugging is turned on
 // NOOPs are never logged, passwords are hidden
-if	(!info->fi_doing_noop && info->fi_og->og_oc.oc_log_debug)
+if	(!info->fi_doing_noop && ogp->og_oc.oc_log_debug)
 	logprintf("--> %s\n", strnicmp(cmd,"PASS ",5) ? cmd : "PASS ....." );
 
 
@@ -440,7 +440,7 @@ send( info->fi_cs, iac_ip+2, 1, MSG_OOB );
 
 D(bug( "--> DM\n" ));
 
-if	(info->fi_og->og_oc.oc_log_debug)
+if	(ogp->og_oc.oc_log_debug)
 	logprintf( "--> ABOR\n" );
 
 send( info->fi_cs, iac_ip+3, 7, 0 );
@@ -642,14 +642,14 @@ return ds;
 }
 
 #ifdef	DEBUG
-static void timeit( struct update_info *ui, int bytes )
+/*static void timeit( struct update_info *ui, int bytes )
 {
 unsigned char sizebuf[48] = "";
 int  time;
 int  rate;
 
 #ifdef __AROS__
-struct Device *TimerBase = GetTimerBase();
+struct Device *TimerBase = (struct Device *)GetTimerBase();
 #else
 struct Library *TimerBase = GetTimerBase();
 #endif
@@ -674,7 +674,7 @@ D(bug("time %ld done %s\n",time,sizebuf));
 #ifdef __amigaos4__
 DropInterface((struct Interface *)ITimer);
 #endif
-}
+}*/
 #endif
 
 /*********************************************************************
@@ -718,7 +718,7 @@ if	(timer->tv_secs == 0)
 unsigned int get( struct ftp_info *info, int (*updatefn)(void *,unsigned int,unsigned int), void *updateinfo, char *remote_path, char *local_path, BOOL restart )
 {
 // Needed because socket library base is in our task's tc_userdata field
-struct opusftp_globals *ogp = info->fi_og;
+//struct opusftp_globals *ogp = info->fi_og;
 unsigned int            total = 0xffffffff;	// Length of file
 unsigned int            bytes = 0;		// Bytes received so far
 APTR                    f;			// Output file
@@ -942,7 +942,7 @@ return bytes;
 
 static int iread( struct ftp_info *info, int skt, BOOL checkbreak )
 {
-#define ogp info->fi_og
+//struct opusftp_globals *ogp = info->fi_og;
 int                     retval = -1;
 fd_set                  rd, ex;
 ULONG                   flags;
@@ -992,7 +992,6 @@ if	(WaitSelect( skt+1, &rd, 0L, &ex, &timer, &flags ) >= 0)
 
 
 return(retval);
-#undef ogp
 }
 
 
@@ -1102,7 +1101,7 @@ return(retval);
 //
 static int sgetc( struct ftp_info *info, int skt, int checkabort_time )
 {
-#define ogp info->fi_og
+//struct opusftp_globals *ogp = info->fi_og;
 int retval = -1;
 unsigned char c;
 fd_set rd, ex;
@@ -1168,7 +1167,6 @@ if	((nds = WaitSelect( skt+1, &rd, 0L, &ex, &t, &flags )) >= 0)
 	}
 
 return retval;
-#undef ogp
 }
 
 
@@ -1250,7 +1248,7 @@ return retval;
 int list( struct ftp_info *info, int (*updatefn)(void *, const char *), void *updateinfo, const char *cmd, const char *path )
 {
 // Needed because socket library base is in our task's tc_userdata field
-struct opusftp_globals *ogp = info->fi_og;
+//struct opusftp_globals *ogp = info->fi_og;
 int                     retval = -1;	// error - 0 is no error
 int                     ds;		// Data socket
 int                     reply;		// FTP reply
@@ -1330,7 +1328,7 @@ return retval;
 
 unsigned int put( struct ftp_info *info, int (*updatefn)(void *,unsigned int,unsigned int), void *updateinfo, char *local_path, char *remote_path, unsigned int restart )
 {
-struct opusftp_globals *ogp = info->fi_og;
+//struct opusftp_globals *ogp = info->fi_og;
 unsigned int            bytes = 0;
 APTR                    f;				// Output file
 int                     ds;				// Data socket
@@ -1561,8 +1559,10 @@ if	(gethost( ogp, &remote_addr, host ))
 		if	((se = getservbyname( "ftp", "tcp" )))
 			port = se->s_port;
 		else
-			port = 21;
+			port = htons(21);
 		}
+	else
+		port = htons(port);
 
 	// Specify the port in the address structure
 	remote_addr.sin_port = port;
@@ -1657,7 +1657,7 @@ return retval;
 //
 void disconnect_host( struct ftp_info *info )
 {
-struct opusftp_globals *ogp = info->fi_og;
+//struct opusftp_globals *ogp = info->fi_og;
 
 if	(info->fi_cs >= 0)
 	{
@@ -1673,7 +1673,7 @@ if	(info->fi_cs >= 0)
 //
 void lostconn( struct ftp_info *info )
 {
-struct opusftp_globals *ogp = info->fi_og;
+//struct opusftp_globals *ogp = info->fi_og;
 
 if	(info->fi_cs >= 0)
 	{
@@ -1758,6 +1758,7 @@ int _getreply(
 	int             (*updatefn)(void *,int,char *),
 	void             *updateinfo )
 {
+struct opusftp_globals *ogp = info->fi_og;
 int   actual;			// Bytes received
 int   first = 1;		// Is this the first line?
 int   multi = 0;		// Multi-line reply
@@ -1827,7 +1828,7 @@ do
 	// No output if doing_noop
 	if	(!info->fi_doing_noop)
 		{
-		if	(!info->fi_og->og_oc.oc_log_debug && currcode)
+		if	(!ogp->og_oc.oc_log_debug && currcode)
 			{
 			if	(updatefn && updateinfo)
 				(*updatefn)( updateinfo, -1, iobuf + 4 );
@@ -1908,6 +1909,32 @@ return _getreply( info, 0, 0, 0 );
 //
 BOOL pasv_to_address( struct sockaddr_in *address, const char *buf )
 {
+	const char    *in;		// Convert address from here
+	int ip1, ip2, ip3, ip4, p1, p2, port;
+	char data_ip_addr[16];
+
+	if (!strncmp( "227 Entering Passive Mode (", buf, 27 ))
+	{
+		in = buf + 26;
+		
+		if (sscanf(in, "(%d,%d,%d,%d,%d,%d)", &ip1, &ip2, &ip3, &ip4, &p1, &p2) != 6)
+			return FALSE;
+
+		sprintf(data_ip_addr, "%d.%d.%d.%d", ip1, ip2, ip3, ip4);
+		port = (p1<<8)+p2;
+
+		address->sin_addr.s_addr = inet_addr(data_ip_addr);
+		address->sin_port = htons(port);
+		
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+#if 0
+BOOL pasv_to_address( struct sockaddr_in *address, const char *buf )
+{
 int            n;		// Scratch for address numbers
 const char    *in;		// Convert address from here
 unsigned char *out;		// Convert address to here
@@ -1952,3 +1979,4 @@ if (!strncmp( "227 Entering Passive Mode (", buf, 27 ))
 
 return good;
 }
+#endif
