@@ -218,9 +218,10 @@ BOOL AllocPort(struct xoData *data)
 	DOpusCallbackInfo *infoptr = &data->hook;
 
 	if((data->mp=CreateMsgPort())) {
-		(data->mp->mp_Node.ln_Pri) = 2;
-		(data->mp->mp_Node.ln_Name) = data->mp_name;
+		data->mp->mp_Node.ln_Pri = 2;
+		data->mp->mp_Node.ln_Name = data->mp_name;
 
+#if 0
 		Forbid();
 		do {
 			sprintf(data->mp_name,"XADopus_%d",c);
@@ -229,6 +230,10 @@ BOOL AllocPort(struct xoData *data)
 		
 		AddPort(data->mp);
 		Permit();
+#else
+		sprintf(data->mp_name,"XADopus_%p",data->mp); // this is guaranteed to be unique
+		AddPort(data->mp);
+#endif
 
 		sprintf(data->buf,"lister set %s handler %s quotes",data->lists,data->mp_name);
 		DC_CALL4(infoptr, dc_SendCommand,
