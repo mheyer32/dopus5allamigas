@@ -16,7 +16,7 @@ NAME := DirectoryOpus
 DESTDIR := ../bin.i386-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -DUSE_DRAWICONSTATE -DUSE_SCREENTITLE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
