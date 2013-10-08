@@ -18,7 +18,7 @@ ARCDEST := /
 LHA := lha a -a -r
 else
 ARCDEST := ../../
-LHA := lha -ao5
+LHA := lha ao5
 endif
 ###########################################################
 # Commands
