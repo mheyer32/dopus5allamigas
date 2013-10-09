@@ -676,6 +676,15 @@ void ASM SAVEDS PatternBackfill(
 		// Wait for the blitter, for some reason...
 		WaitBlit();
 
+#ifdef __AROS__
+		// bounds come out wrong for icons and menus, so we have to manually
+		// add the height of the screen title
+		if (info->bounds.MinY != offsety)
+			SrcOffsetY += (info->bounds.MinY - offsety);
+
+		D(bug("offsety %4d SrcOffsetY %4d MinY %4d\n",offsety,SrcOffsetY,info->bounds.MinY));
+#endif
+
 		// Blit the first piece of the tile
 		BltBitMap(
 			pattern->bitmap,
