@@ -494,9 +494,10 @@ IPC_EntryCode(clock_proc)
 									// Is clock on?
 									if (GUI->flags&GUIF_CLOCK)
 									{
-
+#ifndef USE_SCREENTITLE
 										Move(&clock_rp,clock_x,clock_rp.TxBaseline+1);
 										Text(&clock_rp,titlebuf,strlen(titlebuf));
+#endif
 
 										clock_on=1;
 									}
@@ -530,6 +531,14 @@ IPC_EntryCode(clock_proc)
 											(GUI->flags&GUIF_CLOCK)?clock_x:last_x,
 											error_txt);
 									}
+
+#ifdef USE_SCREENTITLE
+									if (clock_on)
+									{
+										strcat(GUI->screen_title," - ");
+										strcat(GUI->screen_title,titlebuf);
+									}
+#endif
 
 									// Remember position
 									last_x=clock_rp.cp_x;
