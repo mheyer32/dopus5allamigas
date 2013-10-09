@@ -27,6 +27,7 @@ CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := -ldebug
 
 REMOVE = rm -f
+MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) init/mos_ppc_libstub.o
 
