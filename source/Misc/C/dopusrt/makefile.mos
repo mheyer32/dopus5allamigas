@@ -2,19 +2,19 @@
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME := DOpusRT5
+DESTDIR := ../../../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip
+STRIP := ppc-morphos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME := DOpusRT5
-DESTDIR := ../../../bin.mos
-TARGET   := $(DESTDIR)/$(NAME)
-TARGET   := DopusRT
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
@@ -35,7 +35,7 @@ all : $(TARGET)
 $(TARGET): $(OBJS)
 	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP) --remove-section=.comment $@
+	@$(STRIP)
 
 %.o : %.c
 	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@

@@ -34,7 +34,7 @@ OBJS = $(COMMON_OBJS) amiga.o 68k_asm_a4_a5.o
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(MAKEDIR) $(DESTDIR)
+	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	@$(STRIP)
 

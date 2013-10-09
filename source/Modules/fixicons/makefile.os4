@@ -3,18 +3,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME     := fixicons.module 
+DESTDIR  := ../../bin.os4
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debuging.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-amigaos-strip
+STRIP := ppc-amigaos-strip -R=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME     := fixicons.module 
-DESTDIR  := ../../bin.os4
-TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
@@ -35,9 +36,9 @@ OBJS = $(COMMON_OBJS) init/amiga.o init/aos4_ppc_libstub.o init/aos4_68k_to_ppc_
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(MAKEDIR) $(DESTDIR)
+	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP) -R=.comment $@
+	@$(STRIP)
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"

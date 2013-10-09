@@ -3,18 +3,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME     := themes.module
+DESTDIR  := ../../bin.os3
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := m68k-amigaos-strip
+STRIP := m68k-amigaos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME     := themes.module
-DESTDIR  := ../../bin.os3
-TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
@@ -33,9 +34,9 @@ OBJS = $(COMMON_OBJS) init/amiga.o init/68k_asm_a4_a5.o
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(MAKEDIR) $(DESTDIR)
+	@$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
-	@$(STRIP) --remove-section=.comment $@
+	@$(STRIP)
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"

@@ -47,7 +47,7 @@ ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(MAKEDIR) $(DESTDIR)
+	@$(MAKEDIR) $(DESTDIR)
 	$(LINKING)
 	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
