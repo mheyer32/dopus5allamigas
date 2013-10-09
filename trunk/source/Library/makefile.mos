@@ -5,18 +5,19 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
+NAME     := dopus5.library
+DESTDIR  := ../bin.mos
+TARGET   := $(DESTDIR)/$(NAME)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip
+STRIP := ppc-morphos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
 endif
 
-NAME     := dopus5.library
-DESTDIR  := ../bin.mos
-TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 DEBUGSYM := -gstabs
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DLIBRARIES_DOPUS5_H -DCOMPDATE=$(NEWDATE)
@@ -46,11 +47,11 @@ ARCHIVING = @$(ECHE) "archiving $(BOLD)$@$(NRML)..."
 all : $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(MAKEDIR) $(DESTDIR)
+	@$(MAKEDIR) $(DESTDIR)
 	$(LINKING)
 	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
-	@$(STRIP)  --remove-section=.comment $@
+	@$(STRIP)
 	@chmod $(TARGET) -x
 
 %.o : %.c
