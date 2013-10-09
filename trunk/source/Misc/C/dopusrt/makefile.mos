@@ -19,7 +19,7 @@ OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../../Include
-LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+LDFLAGS  := -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
