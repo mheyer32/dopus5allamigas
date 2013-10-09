@@ -195,7 +195,7 @@ return reply;
 int ftp_port( struct ftp_info *info, unsigned long flags, struct sockaddr_in *addr )
 {
 	int reply;
-	int ip1, ip2, ip3, ip4, p1, p2;
+	int ip1, ip2, ip3, ip4, p1, p2, port;
 
 	if (!addr)
 		return 0;
@@ -206,9 +206,9 @@ int ftp_port( struct ftp_info *info, unsigned long flags, struct sockaddr_in *ad
 	if (sscanf(Inet_NtoA(addr->sin_addr.s_addr), "%d.%d.%d.%d", &ip1, &ip2, &ip3, &ip4) != 4)
 		return 0;
 
-	// the port is in network byte order, so the following is always correct
-	p1 = addr->sin_port & 0xff;
-	p2 = (addr->sin_port >> 8) & 0xff;
+	port = ntohs(addr->sin_port);
+	p1 = port / 256;
+	p2 = port % 256;
 
 	reply = _ftpa( info, flags, "PORT %d,%d,%d,%d,%d,%d", ip1, ip2, ip3, ip4, p1, p2 );
 
