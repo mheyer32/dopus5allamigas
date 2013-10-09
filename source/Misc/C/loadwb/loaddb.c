@@ -49,6 +49,10 @@ struct DOpusIFace 		*IDOpus = NULL;
 
 const char USED_VAR version[] = "\0$VER: LoadDB "CMD_STRING;
 
+#ifdef __MORPHOS__
+struct ExecBase *SysBase = NULL;
+#endif
+
 enum
 {
 	ARG_DEBUG,
