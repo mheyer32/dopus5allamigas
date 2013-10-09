@@ -46,7 +46,7 @@ all : $(TARGET)
 $(TARGET): $(OBJS)
 	@$(MAKEDIR) $(DESTDIR)
 	$(LINKING)
-	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@.db
+	@$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 	$(STRIPPING)
 	@$(STRIP)
 	@chmod $(TARGET) -x
