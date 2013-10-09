@@ -31,10 +31,6 @@ For more information on Directory Opus for Windows please see:
 
 const char USED_VAR version[] = "\0$VER: DOpusRT "CMD_STRING;
 
-#ifdef __MORPHOS__
-struct ExecBase *SysBase = NULL;
-#endif
-
 int main(int argc, char **command)
 {
 	struct Library *DOpusBase;
