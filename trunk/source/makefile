@@ -4,6 +4,22 @@
 # Enter debug=no on "Make" command line to disable debug output.
 export debug
 ###########################################################
+# Example Commands:
+
+# make os4
+# Compiles debug version of dopus5 components for OS4.
+
+# make MOS debug=no
+# Compiles normal (non-debug) version of dopus5 components for MorphOS.
+
+# make OS3 release
+# Compiles debug version of dopus5 components for OS3 & creates
+# release archive.
+
+# make i386-aros release debug=no
+# Compiles normal version of dopus5 components for AROS & creates
+# release archive.
+###########################################################
 # Read platform arguments from the "Make" command line:
 # Acceptable platform arguments are os3, os4, or mos.
 PLATFORM:= none
@@ -40,8 +56,41 @@ ifeq ($(strip $(filter-out $(PLATFORM), $(MAKECMDGOALS))),)
 $(PLATFORM) : all
 endif
 ###########################################################
-
+# Sets archive filename platform name & version.
+#NAME := $(shell echo $(PLATFORM) | tr '[:lower:]' '[:upper:]')
+NAME := $(PLATFORM)
+ifeq ($(debug), no)
+TYPE :=
+VERSION := _90_
+else
+TYPE := _debug
+VERSION := _90_dev_
+endif
+###########################################################
+# Sets compile system
+HOST := $(shell uname)
+ifeq ($(HOST), AmigaOS)
+	SYSTEM := amiga
+endif
+ifeq ($(HOST), MorphOS)
+	SYSTEM := amiga
+endif
+###########################################################
+# Sets destination directory and lha command
+DEST := ../releases/
+ifeq ($(SYSTEM), amiga)
+ARCDEST := /releases/
+LHA := lha a -a -r -q
+else
+ARCDEST := $(DEST)
+LHA := lha ao5q
+endif
+###########################################################
+# Commands
 REMOVE := rm -rf
+COPY := cp
+MAKEDIR := mkdir -p
+###########################################################
 
 .PHONY : all
 all : program library modules commands
@@ -102,6 +151,32 @@ clean-commands:
 	@echo " "
 	@echo "++++++++++++++++++ commands +++++++++++++++++"
 	@$(MAKE) -C Misc/C $(PLATFORM) clean
+
+###########################################################
+
+.PHONY : release
+release: cleanall all
+	@echo " "
+	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
+	@$(MAKEDIR) Dopus5/Libs
+	@$(MAKEDIR) Dopus5/Modules
+	@$(MAKEDIR) Dopus5/C
+	@$(MAKEDIR) $(DEST)
+	@$(COPY) bin.$(PLATFORM)/dopus5.library Dopus5/Libs
+	@$(COPY) bin.$(PLATFORM)/*.module Dopus5/Modules
+	@$(COPY) bin.$(PLATFORM)/DirectoryOpus Dopus5
+	@$(COPY) bin.$(PLATFORM)/DOpusRT5 Dopus5/C
+	@$(COPY) bin.$(PLATFORM)/LoadDB Dopus5/C
+	@$(COPY) bin.$(PLATFORM)/viewfont Dopus5/C
+	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
+	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
+	@$(REMOVE) Dopus5
+
+###########################################################
+
+.PHONY : clean-release
+clean-release: cleanall
+	@$(REMOVE) $(DEST)
 
 ###########################################################
 
