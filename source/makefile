@@ -58,7 +58,6 @@ endif
 ###########################################################
 # Sets archive filename platform name & version.
 #NAME := $(shell echo $(PLATFORM) | tr '[:lower:]' '[:upper:]')
-NAME := $(PLATFORM)
 ifeq ($(debug), no)
 TYPE :=
 VERSION := _90_
@@ -73,6 +72,9 @@ ifeq ($(HOST), AmigaOS)
 	SYSTEM := amiga
 endif
 ifeq ($(HOST), MorphOS)
+	SYSTEM := amiga
+endif
+ifeq ($(HOST), AROS)
 	SYSTEM := amiga
 endif
 ###########################################################
@@ -92,31 +94,31 @@ COPY := cp
 MAKEDIR := mkdir -p
 ###########################################################
 
-.PHONY : all
+#.PHONY : all
 all : program library modules commands
 
 .PHONY : program
 program:
 	@echo " "
-	@echo "++++++++++++++++++ program ++++++++++++++++++"
+	@echo "<<<<<<<<<<<<<<<<<< program >>>>>>>>>>>>>>>>>>"
 	@$(MAKE) -C Program -f makefile.$(PLATFORM)
 
 .PHONY : library
 library:
 	@echo " "
-	@echo "++++++++++++++++++ library ++++++++++++++++++"
+	@echo "<<<<<<<<<<<<<<<<<< library >>>>>>>>>>>>>>>>>>"
 	@$(MAKE) -C Library -f makefile.$(PLATFORM)
 
 .PHONY : modules
 modules:
 	@echo " "
-	@echo "++++++++++++++++++ modules ++++++++++++++++++"
+	@echo "<<<<<<<<<<<<<<<<<< modules >>>>>>>>>>>>>>>>>>"
 	@$(MAKE) -C Modules $(PLATFORM)
 
 .PHONY : commands
 commands:
 	@echo " "
-	@echo "++++++++++++++++++ commands +++++++++++++++++"
+	@echo "<<<<<<<<<<<<<<<<<< commands >>>>>>>>>>>>>>>>>"
 	@$(MAKE) -C Misc/C $(PLATFORM)
 
 ###########################################################
@@ -126,38 +128,40 @@ clean : clean-program clean-library clean-modules clean-commands
 
 .PHONY : cleanall
 cleanall : clean
+	@echo " "
+	@echo "++++++++++++++ clean binaries ++++++++++++++"
 	@$(REMOVE) bin.$(PLATFORM)
 
 .PHONY : clean-program
 clean-program:
 	@echo " "
 	@echo "++++++++++++++ clean program +++++++++++++++"
-	@$(MAKE) -C Program -f makefile.$(PLATFORM) clean
+	@$(MAKE) -C Program -s -f makefile.$(PLATFORM) clean
 
 .PHONY : clean-library
 clean-library:
 	@echo " "
 	@echo "++++++++++++++ clean library +++++++++++++++"
-	@$(MAKE) -C Library -f makefile.$(PLATFORM) clean
+	@$(MAKE) -C Library -s -f makefile.$(PLATFORM) clean
 
 .PHONY : clean-modules
 clean-modules:
 	@echo " "
 	@echo "++++++++++++++ clean modules +++++++++++++++"
-	@$(MAKE) -C Modules $(PLATFORM) clean
+	@$(MAKE) -C Modules -s $(PLATFORM) clean
 
 .PHONY : clean-commands
 clean-commands:
 	@echo " "
-	@echo "++++++++++++++++++ commands +++++++++++++++++"
-	@$(MAKE) -C Misc/C $(PLATFORM) clean
+	@echo "++++++++++++++ clean commands ++++++++++++++"
+	@$(MAKE) -C Misc/C -s $(PLATFORM) clean
 
 ###########################################################
 
 .PHONY : release
 release: cleanall all
 	@echo " "
-	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
+	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
 	@$(MAKEDIR) Dopus5/Modules
 	@$(MAKEDIR) Dopus5/C
@@ -168,14 +172,16 @@ release: cleanall all
 	@$(COPY) bin.$(PLATFORM)/DOpusRT5 Dopus5/C
 	@$(COPY) bin.$(PLATFORM)/LoadDB Dopus5/C
 	@$(COPY) bin.$(PLATFORM)/viewfont Dopus5/C
-	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
-	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
+	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha
+	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha Dopus5
 	@$(REMOVE) Dopus5
 
 ###########################################################
 
 .PHONY : clean-release
 clean-release: cleanall
+	@echo " "
+	@echo "++++++++++++++ clean release +++++++++++++++"
 	@$(REMOVE) $(DEST)
 
 ###########################################################

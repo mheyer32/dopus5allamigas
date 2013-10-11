@@ -48,19 +48,19 @@ all : dopusrt loaddb viewfont
 .PHONY : dopusrt
 dopusrt:
 	@echo " "
-	@echo "################## dopusrt ##################"
+	@echo "================== dopusrt ================="
 	@$(MAKE) -C dopusrt -f makefile.$(PLATFORM)
 
 .PHONY : loaddb
 loaddb:
 	@echo " "
-	@echo "################## loaddb ###################"
+	@echo "================== loaddb =================="
 	@$(MAKE) -C loadwb -f makefile.$(PLATFORM)
 
 .PHONY : viewfont
 viewfont:
 	@echo " "
-	@echo "################# viewfont ##################"
+	@echo "================= viewfont ================="
 	@$(MAKE) -C ViewFont -f makefile.$(PLATFORM)
 
 
@@ -72,19 +72,19 @@ clean:	clean-dopusrt clean-loaddb clean-viewfont
 .PHONY : clean-dopusrt
 clean-dopusrt:
 	@echo " "
-	@echo "############### clean dopusrt ###############"
+	@echo "--------------- clean dopusrt --------------"
 	@$(MAKE) -C dopusrt -f makefile.$(PLATFORM) clean
 	
 .PHONY : clean-loaddb
 clean-loaddb:
 	@echo " "
-	@echo "############### clean loaddb ################"
+	@echo "--------------- clean loaddb ---------------"
 	@$(MAKE) -C loadwb -f makefile.$(PLATFORM) clean
 
 .PHONY : clean-viewfont
 clean-viewfont:
 	@echo " "
-	@echo "############## clean viewfont ###############"
+	@echo "-------------- clean viewfont --------------"
 	@$(MAKE) -C ViewFont -f makefile.$(PLATFORM) clean
 
 
