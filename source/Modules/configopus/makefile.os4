@@ -50,11 +50,11 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(OBJS)
+	@$(REMOVE) *.o
 
 .PHONY cleanall:
 cleanall : clean
-	@$(REMOVE) $(TARGET)
+	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 
 .PHONY locale:
 locale:

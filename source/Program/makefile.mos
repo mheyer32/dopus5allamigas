@@ -63,15 +63,15 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) *.map $(OBJS) $(NAME).s
+	@$(REMOVE) *.o
 
 .PHONY cleanall:
 cleanall : clean
-	@$(REMOVE) $(TARGET)
+	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 
 .PHONY dump:
 dump:
-	ppc-morphos-objdump --disassemble-all --reloc $(NAME).db >$(NAME).s
+	ppc-morphos-objdump --disassemble-all --reloc $(NAME) >$(TARGET).s
 
 #ifneq ($(MAKECMDGOALS),clean)
 #-include Makefile.dep
