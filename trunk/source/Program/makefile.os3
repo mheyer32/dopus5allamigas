@@ -51,9 +51,9 @@ Makefile.dep : $(OBJS:.o=.c) $(COMMON_OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(OBJS)
+	@$(REMOVE) *.o
 
 .PHONY cleanall:
 cleanall : clean
-	@$(REMOVE) $(TARGET)
+	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 

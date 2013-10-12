@@ -45,12 +45,12 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(OBJS)
+	@$(REMOVE) *.o
 #	@$(REMOVE) Makefile.dep
 
 .PHONY cleanall:
 cleanall : clean
-	@$(REMOVE) $(TARGET)
+	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 
 #ifneq ($(MAKECMDGOALS),clean)
 #-include Makefile.dep

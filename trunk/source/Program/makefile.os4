@@ -50,14 +50,9 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) $(OBJS)
+	@$(REMOVE) *.o
 
 .PHONY cleanall:
 cleanall : clean
-	@$(REMOVE) $(TARGET)
-
-.PHONY install:
-install:
-	@cp $(TARGET) /DOpus5
-	@echo "$(TARGET) installed to DOpus5:"
+	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 
