@@ -169,7 +169,9 @@ release: cleanall all
 	@$(COPY) bin.$(PLATFORM)/dopus5.library Dopus5/Libs
 	@$(COPY) bin.$(PLATFORM)/*.module Dopus5/Modules
 	@$(COPY) bin.$(PLATFORM)/DirectoryOpus Dopus5
-	@$(COPY) bin.$(PLATFORM)/DOpusRT5 Dopus5/C
+# Temporary change until DOpusRT5 is fixed
+#	@$(COPY) bin.$(PLATFORM)/DOpusRT5 Dopus5/C
+	@$(COPY) ../archive/DOpusRT5  Dopus5/C
 	@$(COPY) bin.$(PLATFORM)/LoadDB Dopus5/C
 	@$(COPY) bin.$(PLATFORM)/viewfont Dopus5/C
 	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha
