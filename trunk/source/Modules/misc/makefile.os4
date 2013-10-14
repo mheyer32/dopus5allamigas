@@ -50,7 +50,7 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) *.o
+	@$(REMOVE) *.o init/*.o
 
 .PHONY cleanall:
 cleanall : clean
