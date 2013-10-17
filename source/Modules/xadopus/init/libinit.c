@@ -1072,10 +1072,13 @@ void UserLibCleanup()
 		FreeVec(locale);
 	}
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IXadMaster);
-	#endif
+#endif
 	CloseLibrary((struct Library *)xadMasterBase);
+#ifdef __amigaos4__
+	DropInterface((struct Interface *)IDOpus);
+#endif
 	CloseLibrary(DOpusBase);
 }
 
