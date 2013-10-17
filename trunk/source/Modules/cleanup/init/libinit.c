@@ -1041,6 +1041,9 @@ void UserLibCleanup()
 		FreeVec(locale);
 	}
 
+#ifdef __amigaos4__
+	DropInterface((struct Interface *)IDOpus);
+#endif
 	CloseLibrary(DOpusBase);
 }
 
