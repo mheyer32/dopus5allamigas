@@ -111,7 +111,7 @@ struct IntuitionIFace 	*IIntuition = NULL;
 struct GadToolsIFace 	*IGadTools = NULL;
 struct AslIFace 		*IAsl = NULL;
 struct LayersIFace 		*ILayers = NULL;
-struct DiskFontIFace 	*IDiskFont = NULL;
+struct DiskfontIFace 	*IDiskfont = NULL;
 struct IconIFace 		*IIcon = NULL;
 struct WorkbenchIFace 	*IWorkbench = NULL;
 struct DataTypesIFace 	*IDataTypes = NULL;
@@ -146,7 +146,7 @@ struct Library 			*CyberGfxBase = NULL;
 struct Library 			*GadToolsBase = NULL;
 struct Library 			*AslBase = NULL;
 struct Library 			*LayersBase = NULL;
-struct Library 			*DiskFontBase = NULL;
+struct Library 			*DiskfontBase = NULL;
 struct Library 			*IconBase = NULL;
 struct Library 			*WorkbenchBase = NULL;
 struct Library 			*DataTypesBase = NULL;
@@ -879,11 +879,11 @@ ULONG freeBase(struct LibraryHeader *lib)
   }
 
   // close diskfont.library
-  if(DiskFontBase != NULL)
+  if(DiskfontBase != NULL)
   {
-    DROPINTERFACE(IDiskFont);
-    CloseLibrary((struct Library *)DiskFontBase);
-    DiskFontBase = NULL;
+    DROPINTERFACE(IDiskfont);
+    CloseLibrary((struct Library *)DiskfontBase);
+    DiskfontBase = NULL;
   }
 
   // close layers.library
@@ -958,7 +958,7 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((GadToolsBase = (APTR)OpenLibrary("gadtools.library", 37)) != NULL && GETINTERFACE(IGadTools, GadToolsBase))
   if ((AslBase = (APTR)OpenLibrary("asl.library", 37)) != NULL && GETINTERFACE(IAsl, AslBase))  
   if ((LayersBase = (APTR)OpenLibrary("layers.library", 37)) != NULL && GETINTERFACE(ILayers, LayersBase))
-  if ((DiskFontBase = (APTR)OpenLibrary("diskfont.library", 37)) != NULL && GETINTERFACE(IDiskFont, DiskFontBase))
+  if ((DiskfontBase = (APTR)OpenLibrary("diskfont.library", 37)) != NULL && GETINTERFACE(IDiskfont, DiskfontBase))
   if ((IconBase = (APTR)OpenLibrary("icon.library", 37)) != NULL && GETINTERFACE(IIcon, IconBase))
   if ((WorkbenchBase = (APTR)OpenLibrary("workbench.library", 37)) != NULL && GETINTERFACE(IWorkbench, WorkbenchBase))
   if ((DataTypesBase = (APTR)OpenLibrary("datatypes.library", 37)) != NULL && GETINTERFACE(IDataTypes, DataTypesBase))

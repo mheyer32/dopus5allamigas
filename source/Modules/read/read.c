@@ -26,13 +26,11 @@ For more information on Directory Opus for Windows please see:
 #include <proto/diskfont.h>
 #include <proto/input.h>
 
-struct Library *DiskfontBase = NULL;
 #ifdef __amigaos3__
 struct Device *InputBase = NULL;
 #endif
 
 #ifdef __amigaos4__
-struct DiskfontIFace *IDiskfont; 
 struct InputIFace *IInput;
 #endif
 
@@ -93,7 +91,7 @@ int LIBFUNC L_Module_Entry(
 	if (!OpenDevice("input.device",0,(struct IORequest *)&data->input_req,0))
 		data->input_base=(struct Library *)data->input_req.io_Device;
 	#ifdef __amigaos4__
-	IInput = (struct ConsoleIFace *)GetInterface(data->input_base,"main",1,NULL); 
+	IInput = (struct InputIFace *)GetInterface(data->input_base,"main",1,NULL); 
 	#endif
 	
 	// Initial search?
