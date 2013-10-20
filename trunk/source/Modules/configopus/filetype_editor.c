@@ -37,24 +37,26 @@ void FiletypeEditor(void)
 	}
 
 	// Get icon image
-#ifdef USE_DRAWICONSTATE
+	if (data->type->icon_path)
 	{
-		char *path_copy;
-		data->icon_image=NULL;
-		if ((path_copy=AllocMemH(0,strlen(data->type->icon_path)+1)))
+#ifdef USE_DRAWICONSTATE
 		{
-			// icon_path is guaranteed to have a .info at the end
-			stccpy(path_copy,data->type->icon_path,strlen(data->type->icon_path)-4);
-			data->icon_image=GetCachedDiskObject(path_copy,0);
-			FreeMemH(path_copy);
+			char *path_copy;
+			data->icon_image=NULL;
+			if ((path_copy=AllocMemH(0,strlen(data->type->icon_path)+1)))
+			{
+				// icon_path is guaranteed to have a .info at the end
+				stccpy(path_copy,data->type->icon_path,strlen(data->type->icon_path)-4);
+				data->icon_image=GetCachedDiskObject(path_copy,0);
+				FreeMemH(path_copy);
+			}
 		}
-	}
 #else
-	data->icon_image=OpenImage(data->type->icon_path,0);
+		data->icon_image=OpenImage(data->type->icon_path,0);
 #endif
-
-	// Show icon image
-	filetypeed_show_icon(data);
+		// Show icon image
+		filetypeed_show_icon(data);
+	}
 
 	// Launch class editor immediately?
 	if (data->edit_flag) filetypeed_edit_definition(data);
@@ -970,7 +972,7 @@ void filetypeed_show_icon(filetype_ed_data *data)
 // Pick icon image
 BOOL filetypeed_pick_icon(filetype_ed_data *data)
 {
-	char path[256],file[32],*ptr,pattern[10];
+	char path[256],file[32],*ptr,pattern[18];
 	BOOL ret=0;
 
 	// Make window busy
@@ -990,7 +992,7 @@ BOOL filetypeed_pick_icon(filetype_ed_data *data)
 	}
 
 	// Build pattern
-	ParsePatternNoCase("#?.info",pattern,10);
+	ParsePatternNoCase("#?.info",pattern,18);
 
 	// Display requester
 	if (AslRequestTags(DATA(data->window)->request,
