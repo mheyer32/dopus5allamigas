@@ -48,7 +48,7 @@ ListFormat	*current;
 struct format_data
 {
 struct opusftp_globals	*fd_ogp;
-ULONG			fd_a4;
+//ULONG			fd_a4;
 IPCData			*fd_ipc;	
 IPCData			*fd_main_ipc;	// Main DOPUS ipc passed to listformat.module
 IPCMessage		*fd_imsg;	// from caller - if called bt IPC_CONFIGURE from a lister
@@ -107,7 +107,7 @@ ULONG ok = FALSE;
 if	(data)
 	{
 	/* Setup a4 correctly; from this point on we have access to global data */
-	putreg( REG_A4, data->fd_a4 );
+	//putreg( REG_A4, data->fd_a4 );
 
 	data->fd_ipc = ipc;	/* 'ipc' points to this task's tc_UserData field */
 
@@ -146,7 +146,7 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		struct window_params *wp=NULL;
 
 		/* Setup a4 correctly; from this point on we have access to global data */
-		putreg( REG_A4, data->fd_a4 );
+		//putreg( REG_A4, data->fd_a4 );
 
 		// if from our task then get semaphore for orderly abort from addressbook
 		if	(!data->fd_imsg)
@@ -235,7 +235,7 @@ BOOL result=0;
 if	((data = AllocVec( sizeof(struct format_data), MEMF_CLEAR )))
 	{
 	data->fd_ogp = og;
-	data->fd_a4 = getreg(REG_A4);
+	//data->fd_a4 = getreg(REG_A4);
 
 	data->fd_win=win;
 	data->fd_main_ipc=og->og_main_ipc;

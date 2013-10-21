@@ -28,7 +28,7 @@ void FiletypeEditor(void)
 		return;
 
 	// Fix A4
-	putreg(REG_A4,data->func_startup.a4);
+	//putreg(REG_A4,data->func_startup.a4);
 
 	// Create App stuff
 	if ((data->app_port=CreateMsgPort()))
@@ -597,7 +597,7 @@ ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a1, filetype_ed_data *data
 	short a;
 
 	// Fix A4
-	putreg(REG_A4,data->func_startup.a4);
+	//putreg(REG_A4,data->func_startup.a4);
 
 	// Store IPC pointer
 	data->ipc=ipc;

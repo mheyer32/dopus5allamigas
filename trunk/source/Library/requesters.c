@@ -33,7 +33,7 @@ typedef struct
 	struct Window		*window;
 	APTR				data;
 	IPCData				*ipc;
-	ULONG				a4;
+	//ULONG				a4;
 	struct MyLibrary	*libbase;
 } ReqStartup;
 
@@ -80,7 +80,7 @@ long LIBFUNC L_AsyncRequest(
 	startup->window=window;
 	startup->data=tags;
 	startup->ipc=my_ipc;
-	startup->a4=getreg(REG_A4);
+	//startup->a4=getreg(REG_A4);
 	startup->libbase=libbase;
 
 	// Start process
@@ -202,7 +202,7 @@ void SAVEDS requester_proc(void)
 		return;
 
 	// Restore A4
-	putreg(REG_A4,startup->a4);
+	//putreg(REG_A4,startup->a4);
 
 	// Get library data pointer
 	libdata=(struct LibData *)startup->libbase->ml_UserData;

@@ -17,8 +17,8 @@ BOOL LIBFUNC L_FunctionExportASCII(
 	short export_type=0;
 
 	// A4 supplied?
-	if (a4) putreg(REG_A4,a4);
-
+	//if (a4) putreg(REG_A4,a4);
+	if (a4) { }
 	// Export for Key Finder
 	else export_type=1;
 

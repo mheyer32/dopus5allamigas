@@ -589,7 +589,7 @@ void filetype_edit(
 	eddata->func_startup.layers_base=LayersBase;
 
 	// Supply a4
-	eddata->func_startup.a4=getreg(REG_A4);
+	//eddata->func_startup.a4=getreg(REG_A4);
 
 	// Supply locale
 	eddata->func_startup.locale=locale;

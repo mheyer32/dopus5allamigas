@@ -25,7 +25,7 @@ void ButtonEditor(void)
 		return;
 
 	// Fix A4
-	putreg(REG_A4,startup->func_startup.a4);
+	//putreg(REG_A4,startup->func_startup.a4);
 
 	// Get data pointer
 	data=startup->data;

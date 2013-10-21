@@ -4604,7 +4604,7 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 	if	(IPC_ProcStartup( (ULONG *)&data, addressbook_init ))
 		{
 		/* Setup a4 correctly; from this point on we have access to global data */
-		putreg( REG_A4, data->spd_a4 );
+		//putreg( REG_A4, data->spd_a4 );
 
 		if	((dg=init_globals(data)))
 			{
@@ -4651,7 +4651,7 @@ struct opusftp_globals *ogp;
 
 if	(data)
 	{
-	putreg( REG_A4, data->spd_a4 );
+	//putreg( REG_A4, data->spd_a4 );
 
 	ogp = data->spd_ogp;
 

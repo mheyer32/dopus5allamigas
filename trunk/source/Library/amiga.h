@@ -139,6 +139,7 @@ int stccpy(char *p, const char *q, int n);
 
 /* dummy replacements for SASC getreg() & putreg() functions */
 
+/*
 #if defined(__MORPHOS__)
 #define getreg(x) x
 #define putreg(x,y) x = y
@@ -146,6 +147,6 @@ int stccpy(char *p, const char *q, int n);
 #define getreg(x) 0
 #define putreg(x,y)
 #endif
-
+*/
 
 #endif /* _AMIGA_H */

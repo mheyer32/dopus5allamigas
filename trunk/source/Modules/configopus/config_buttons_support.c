@@ -1091,7 +1091,7 @@ void function_editor_init(FunctionStartup *startup,ULONG command_list)
 	startup->gfx_base=(struct Library *)GfxBase;
 	startup->asl_base=AslBase;
 	startup->layers_base=LayersBase;
-	startup->a4=getreg(REG_A4);
+	//startup->a4=getreg(REG_A4);
 
 	// Supply locale
 	startup->locale=locale;

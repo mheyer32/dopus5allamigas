@@ -30,7 +30,7 @@ void FunctionEditor(void)
 	}
 
 	// Fix A4
-	putreg(REG_A4,startup->a4);
+	//putreg(REG_A4,startup->a4);
 
 	// Get data pointer
 	data=startup->data;
