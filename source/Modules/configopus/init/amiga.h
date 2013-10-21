@@ -115,6 +115,7 @@
 int stccpy(char *p, const char *q, int n);
 #endif
 
+/*
 #if defined(__MORPHOS__)
 #define getreg(x) x
 #define putreg(x,y) x = y
@@ -122,6 +123,6 @@ int stccpy(char *p, const char *q, int n);
 #define getreg(x) 0
 #define putreg(x,y)
 #endif
-
+*/
 
 #endif

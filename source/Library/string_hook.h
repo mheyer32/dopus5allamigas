@@ -33,8 +33,8 @@ typedef struct
 	Att_List	*history;
 	ULONG		type;
 	ULONG		flags;
-	ULONG		a4;
-	ULONG		a6;
+//	ULONG		a4;
+//	ULONG		a6;
 	struct Task	*change_task;
 	short		change_bit;
 } HookData;

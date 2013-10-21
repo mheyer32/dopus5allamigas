@@ -41,7 +41,7 @@ struct subproc_data
 struct opusftp_globals	*spd_ogp;
 IPCData			*spd_ipc;
 IPCData			*spd_owner_ipc;
-ULONG			spd_a4;
+//ULONG			spd_a4;
 };
 #if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
     #pragma pack()

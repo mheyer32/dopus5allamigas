@@ -69,7 +69,7 @@ ProgressWindow *LIBFUNC L_OpenProgressWindow(
 		prog->pw_Flags|=PWF_SWAP;
 
 	// Save A4 and library pointer
-	prog->pw_A4=(LONG)getreg(REG_A4);
+	//prog->pw_A4=(LONG)getreg(REG_A4);
 	prog->pw_Lib=lib;
 
 	// Initialise task name
@@ -210,7 +210,7 @@ void SAVEDS progress_task(void)
 		return;
 
 	// Fix A4 pointer
-	putreg(REG_A4,prog->pw_A4);
+	//putreg(REG_A4,prog->pw_A4);
 
 /*
 	// Debug?

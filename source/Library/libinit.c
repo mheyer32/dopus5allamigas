@@ -1518,7 +1518,7 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	}
 
 	// Save a4
-	data->a4=(ULONG)getreg(REG_A4);
+	//data->a4=(ULONG)getreg(REG_A4);
 
 
 	// Create some memory handles

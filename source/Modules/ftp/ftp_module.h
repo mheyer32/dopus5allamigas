@@ -37,7 +37,7 @@ For more information on Directory Opus for Windows please see:
 struct modlaunch_data
 {
 IPCData       *mld_ftp_ipc;		// dopus_ftp's ipc
-ULONG         mld_a4;			// It's A4 register
+//ULONG         mld_a4;			// It's A4 register
 BOOL          mld_okay;			// proc_init() sets this to TRUE so it can be checked after calling IPC_Launch() */
 
 struct Screen *mld_screen;		// Screen we're on

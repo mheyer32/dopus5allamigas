@@ -1087,8 +1087,8 @@ ObjectList *LIBFUNC L_AddObjectList(
 							#else
 							hook->hook.h_Entry=(ULONG (*)())string_edit_hook;
 							#endif
-							hook->a4=(ULONG)getreg(REG_A4);
-							hook->a6=(ULONG)getreg(REG_A6);
+							//hook->a4=(ULONG)getreg(REG_A4);
+							//hook->a6=(ULONG)getreg(REG_A6);
 
 							// Don't select next field?
 							if (GetTagData(GTCustom_NoSelectNext,0,taglist))

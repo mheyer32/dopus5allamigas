@@ -334,7 +334,7 @@ void SAVEDS launcher_proc(void)
 		return;
 
 	// Set a4
-	putreg(REG_A4,data->a4);
+	//putreg(REG_A4,data->a4);
 
 #ifdef FAKEWB
 	// Install fake workbench task
