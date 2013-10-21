@@ -682,7 +682,7 @@ void ASM SAVEDS PatternBackfill(
 		if (info->bounds.MinY != offsety)
 			SrcOffsetY += (info->bounds.MinY - offsety);
 
-		D(bug("offsety %4d SrcOffsetY %4d MinY %4d\n",offsety,SrcOffsetY,info->bounds.MinY));
+		//D(bug("offsety %4d SrcOffsetY %4d MinY %4d\n",offsety,SrcOffsetY,info->bounds.MinY));
 #endif
 
 		// Blit the first piece of the tile

@@ -7,6 +7,8 @@
 #include <aros/libcall.h>
 #endif /* !AROS_LIBCALL_H */
 
+#include <aros/preprocessor/variadic/cast2iptr.hpp>
+
 #ifndef DOPUS_BASE_NAME
 #define DOPUS_BASE_NAME DOpusBase
 #endif /* !DOPUS_BASE_NAME */
@@ -108,7 +110,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define AsyncRequestTags(a0, a1, a2, a3, a4, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; AsyncRequest((a0), (a1), (a2), (a3), (a4), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; AsyncRequest((a0), (a1), (a2), (a3), (a4), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define Atoh(___str, ___len) \
@@ -240,7 +242,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define BuildRexxMsgExTags(a0, a1, a2, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; BuildRexxMsgEx((a0), (a1), (a2), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; BuildRexxMsgEx((a0), (a1), (a2), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define BuildTransDragMask(___mask, ___image, ___width, ___height, ___depth, ___flags) \
@@ -950,7 +952,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define GetEditHookTags(a0, a1, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; GetEditHook((a0), (a1), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; GetEditHook((a0), (a1), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define GetFileVersion(___name, ___ver, ___rev, ___date, ___prog) \
@@ -993,7 +995,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define GetImageAttrsTags(a0, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; GetImageAttrs((a0), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; GetImageAttrs((a0), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define GetImagePalette(___image) \
@@ -1062,7 +1064,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define GetProgressWindowTags(a0, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; GetProgressWindow((a0), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; GetProgressWindow((a0), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define GetRexxVarEx(___msg, ___varname, ___bufpointer) \
@@ -1555,7 +1557,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define OpenProgressWindowTags(...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; OpenProgressWindow((struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; OpenProgressWindow((struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define OpenStatusWindow(___title, ___text, ___screen, ___graph, ___flags) \
@@ -1851,7 +1853,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define RenderImageTags(a0, a1, a2, a3, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; RenderImage((a0), (a1), (a2), (a3), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; RenderImage((a0), (a1), (a2), (a3), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define ReplyAppMessage(___msg) \
@@ -2066,7 +2068,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define SetProgressWindowTags(a0, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; SetProgressWindow((a0), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; SetProgressWindow((a0), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define SetReqBackFill(___hook, ___scr) \
@@ -2152,10 +2154,7 @@
 	
 #ifndef NO_INLINE_STDARG
 #define SimpleRequestTags(window,title,buttons,message,...) \
-({ \
-	IPTR __args[] = { __VA_ARGS__ }; \
-	(short) SimpleRequest(window, title, buttons, message, 0, (APTR)&__args, 0, 0); \
-})
+	({IPTR __args[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; SimpleRequest(window, title, buttons, message, 0, (APTR)&__args, 0, 0);})
 #endif /* !NO_INLINE_STDARG */
 
 #define StampDragImage(___draginfo, ___x, ___y) \
@@ -2290,7 +2289,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define WB_AddAppWindowTags(a0, a1, a2, a3, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; WB_AddAppWindow((a0), (a1), (a2), (a3), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; WB_AddAppWindow((a0), (a1), (a2), (a3), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define WB_AppIconFlags(___icon) \

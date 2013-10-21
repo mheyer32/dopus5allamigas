@@ -7,6 +7,8 @@
 #include <aros/libcall.h>
 #endif /* !AROS_LIBCALL_H */
 
+#include <aros/preprocessor/variadic/cast2iptr.hpp>
+
 #ifndef MULTIUSER_BASE_NAME
 #define MULTIUSER_BASE_NAME muBase
 #endif /* !MULTIUSER_BASE_NAME */
@@ -31,7 +33,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define muCheckPasswdTags(...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; muCheckPasswd((struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; muCheckPasswd((struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define muFreeExtOwner(___info) \
@@ -82,7 +84,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define muGetRelationship(a0, a1, ...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; muGetRelationshipA((a0), (a1), (struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; muGetRelationshipA((a0), (a1), (struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define muGetTaskExtOwner(___task) \
@@ -118,7 +120,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define muLogin(...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; muLoginA((struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; muLoginA((struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define muLogoutA(___taglist) \
@@ -128,7 +130,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define muLogout(...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; muLogoutA((struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; muLogoutA((struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define muPasswd(___oldpwd, ___newpwd) \
@@ -149,7 +151,7 @@
 
 #ifndef NO_INLINE_STDARG
 #define muSetDefProtection(...) \
-	({IPTR _tags[] = { __VA_ARGS__ }; muSetDefProtectionA((struct TagItem *)_tags);})
+	({IPTR _tags[] = { AROS_PP_VARIADIC_CAST2IPTR(__VA_ARGS__) }; muSetDefProtectionA((struct TagItem *)_tags);})
 #endif /* !NO_INLINE_STDARG */
 
 #define muSetProtection(___name, ___mask) \
