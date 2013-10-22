@@ -17,8 +17,8 @@ BOOL LIBFUNC L_FunctionExportASCII(
 	short export_type=0;
 
 	// A4 supplied?
-	//if (a4) putreg(REG_A4,a4);
-	if (a4) { }
+	if (a4) putreg(REG_A4,a4);
+
 	// Export for Key Finder
 	else export_type=1;
 
@@ -194,8 +194,21 @@ BOOL LIBFUNC L_FunctionExportASCII(
 // Write strings to a file
 void write_str(APTR file,char *str,...)
 {
-	char **ptr;
+//	char **ptr;
+	char *string = NULL;
+	va_list va;
 
+	// Write first string
+	if (str) WriteBuf(file, str, -1);
+
+	va_start(va, str);
+
+	// While string is valid
+	while ((string = va_arg(va, STRPTR)))
+	{
+		WriteBuf(file, string, -1);
+	}
+/*
 	// Get first string
 	ptr=&str;
 
@@ -205,7 +218,7 @@ void write_str(APTR file,char *str,...)
 		WriteBuf(file,*ptr,-1);
 		ptr++;
 	}
-
+*/
 	// CR
 	WriteBuf(file,"\n",1);
 }

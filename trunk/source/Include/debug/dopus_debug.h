@@ -26,6 +26,6 @@
   #define bug(fmt, args...)  {kprintf("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); kprintf(fmt, ##args);}
 #endif
 
-#endif
+#endif /* __AROS__ */
 
 #endif /* DOPUS_DEBUG */
