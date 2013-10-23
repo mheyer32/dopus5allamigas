@@ -4,6 +4,9 @@
 # Enter debug=no on "Make" command line to disable debug output.
 export debug
 ###########################################################
+# Enter arch=<i386|arm> on "Make" command line to select the AROS architecture
+export arch
+###########################################################
 # Read platform arguments from the "Make" command line:
 # Acceptable platform arguments are os3, os4, or mos.
 PLATFORM:= none
@@ -20,19 +23,19 @@ ifeq ($(findstring mos, $(MAKECMDGOALS)),mos)
 	PLATFORM:= mos
 	COUNT:= $(COUNT) num
 endif
-ifeq ($(findstring i386-aros, $(MAKECMDGOALS)),i386-aros)
-	PLATFORM:= i386-aros
+ifeq ($(findstring aros, $(MAKECMDGOALS)),aros)
+	PLATFORM:= aros
 	COUNT:= $(COUNT) num
 endif
 
 #Generate error if multiple platforms entered on "Make" command line.
 ifneq ($(words $(COUNT)), 1)
-$(error Error: Enter only one platform (os3, os4, i386-aros, or mos))
+$(error Error: Enter only one platform (os3, os4, aros, or mos))
 endif
 
 # Generate error if no platform entered on "Make" command line.
 ifeq ($(PLATFORM), none)
-$(error Error: Enter a platform (os3, os4, i386-aros, or mos).)
+$(error Error: Enter a platform (os3, os4, aros, or mos).)
 endif
 
 # Compile all if only a platform is entered on "Make" command line.
@@ -94,10 +97,10 @@ clean-viewfont:
 # commands when entered as a goal for "make"
 # on the command line (like: make os3).
 
-.PHONY : os3 os4 mos i386-aros
+.PHONY : os3 os4 mos aros
 os3: mos
 os4: mos
-i386-aros: mos
+aros: mos
 mos:
 	-@sh -c "echo -n"
 

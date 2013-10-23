@@ -25,8 +25,17 @@
 		#define PLATFORM [OS4dev]
 	#elif defined(__MORPHOS__)
 		#define PLATFORM [MOSdev]
+	#elif defined(__AROS__)
+		/*#if ARCH == i386
+			#define PLATFORM [AROSdev-i386]
+		#elif ARCH == arm
+			#define PLATFORM [AROSdev-arm]
+		#else
+			#warning Unknown architecture!*/
+			#define PLATFORM [AROSdev]
+		//#endif
 	#else
-		#define PLATFORM [AROSdev]
+		#error Unsupported operating system!
 	#endif
 #else
 	#if defined(__amigaos3__)
@@ -35,8 +44,17 @@
 		#define PLATFORM [OS4]
 	#elif defined(__MORPHOS__)
 		#define PLATFORM [MOS]
+	#elif defined(__AROS__)
+		/*#if ARCH == i386
+			#define PLATFORM [AROS-i386]
+		#elif ARCH == arm
+			#define PLATFORM [AROS-arm]
+		#else
+			#warning Unknown architecture!*/
+			#define PLATFORM [AROS]
+		//#endif
 	#else
-		#define PLATFORM [AROS]
+		#error Unsupported operating system!
 	#endif
 #endif
 

@@ -11,22 +11,22 @@ DEBUGSYM := -gstabs
 DEBUG := -DDEBUG
 endif
 
-NAME := DOpusRT5
-DESTDIR := ../../../bin.i386-aros
+NAME := LoadDB
+DESTDIR := ../../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
 INCLUDES := -I../../../Include
 LDFLAGS  := $(DEBUGSYM)
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
-CC       := i386-aros-gcc
+CC       := $(ARCH)-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = dopusrt.o
+OBJS = loaddb.o
 
 all : $(TARGET)
 

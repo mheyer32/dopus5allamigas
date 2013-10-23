@@ -8,26 +8,33 @@ ifeq ($(debug), no)
 DEBUG := 
 DEBUGSYM := 
 else
-DEBUGSYM := -gstabs
 DEBUG := -DDEBUG
+DEBUGSYM := -gstabs
 endif
 
-NAME := DirectoryOpus
-DESTDIR := ../bin.i386-aros
+# TODO: add sanity checks
+ifdef arch
+ARCH := $(arch)
+else
+ARCH := $(shell uname -m)
+endif
+
+NAME     := dopus5.library
+DESTDIR  := ../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DUSE_DRAWICONSTATE -DUSE_SCREENTITLE -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -DLIBRARIES_DOPUS5_H -DCLIB_DOPUS5_PROTOS_H -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
 INCLUDES := -I../ -I../Include
-LDFLAGS  := -Wl,-Map=$(TARGET).map
+LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
-CC       := i386-aros-gcc
+CC       := $(ARCH)-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
-REMOVE := rm -f
+REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS := $(COMMON_OBJS)
+OBJS = $(COMMON_OBJS)
 
 all : $(TARGET)
 
@@ -46,8 +53,12 @@ Makefile.dep : $(OBJS:.o=.c)
 .PHONY clean:
 clean:
 	@$(REMOVE) *.o
+#	@$(REMOVE) Makefile.dep
 
 .PHONY cleanall:
 cleanall : clean
 	@$(REMOVE) $(TARGET) $(TARGET).map $(TARGET).s
 
+#ifneq ($(MAKECMDGOALS),clean)
+#-include Makefile.dep
+#endif

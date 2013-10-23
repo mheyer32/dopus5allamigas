@@ -12,17 +12,24 @@ DEBUG := -DDEBUG
 DEBUGSYM := -gstabs
 endif
 
-NAME     := listerformat.module
-DESTDIR  := ../../bin.i386-aros
+# TODO: add sanity checks
+ifdef arch
+ARCH := $(arch)
+else
+ARCH := $(shell uname -m)
+endif
+
+NAME     := about.module
+DESTDIR  := ../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
-#OPTIMIZE := -O2
-OPTIONS  := -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../listerformat -Iinit
+OPTIMIZE := -O2
+OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+INCLUDES := -I../ -I../Include -I../../Include  -I../about -Iinit
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
-CC       := i386-aros-gcc
+CC       := $(ARCH)-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-#LIBS     := -lrom
+LIBS     := 
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
@@ -37,7 +44,7 @@ $(TARGET): $(OBJS)
 
 %.o : %.c
 	@echo ">>>>>Compiling $<"
-	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
 
 .PHONY depend: Makefile.dep
 Makefile.dep : $(OBJS:.o=.c)
