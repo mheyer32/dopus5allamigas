@@ -1,4 +1,3 @@
-include makefile.objs
 
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
@@ -8,36 +7,37 @@ ifeq ($(debug), no)
 DEBUG := 
 DEBUGSYM := 
 else
-DEBUG := -DDEBUG
 DEBUGSYM := -gstabs
+DEBUG := -DDEBUG
 endif
 
-NAME     := misc.module
-DESTDIR  := ../../bin.i386-aros
+NAME := viewfont
+DESTDIR := ../../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../misc -Iinit
-LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
+OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+INCLUDES := -I../../../Include
+LDFLAGS  := $(DEBUGSYM)
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
-CC       := i386-aros-gcc
+CC       := $(ARCH)-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS)
+OBJS = font_data.o font.o font_strings.o lsprintf.o
 
 all : $(TARGET)
+
+font_strings.o : font.strings
 
 $(TARGET): $(OBJS)
 	$(MAKEDIR) $(DESTDIR)
 	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
 
 %.o : %.c
-	@echo ">>>>>Compiling $<"
-	@$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
+	$(CC) -c $< $(CFLAGS) $(INCLUDES) $(WARNINGS) -o $@
 
 .PHONY depend: Makefile.dep
 Makefile.dep : $(OBJS:.o=.c)
@@ -45,7 +45,7 @@ Makefile.dep : $(OBJS:.o=.c)
 
 .PHONY clean:
 clean:
-	@$(REMOVE) *.o init/*.o
+	@$(REMOVE) *.o
 
 .PHONY cleanall:
 cleanall : clean

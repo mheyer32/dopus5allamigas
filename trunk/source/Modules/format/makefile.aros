@@ -12,15 +12,22 @@ DEBUG := -DDEBUG
 DEBUGSYM := -gstabs
 endif
 
-NAME     := read.module
-DESTDIR  := ../../bin.i386-aros
+# TODO: add sanity checks
+ifdef arch
+ARCH := $(arch)
+else
+ARCH := $(shell uname -m)
+endif
+
+NAME := format.module
+DESTDIR  := ../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../read -Iinit
+OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+INCLUDES := -I../ -I../Include -I../../Include  -I../format -Iinit
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
-CC       := i386-aros-gcc
+CC       := $(ARCH)-aros-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
 LIBS     := 
 
