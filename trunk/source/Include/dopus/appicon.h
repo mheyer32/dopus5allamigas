@@ -34,9 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <workbench/workbench.h>
 #endif
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 #define DAE_Local		TAG_USER + 0	// Add to DOpus only, not WB
 #define DAE_SnapShot		TAG_USER + 1	// Supports snapshot
@@ -110,8 +108,6 @@ BOOL GetWBArgPath(struct WBArg *,char *,long);
 void ReplyAppMessage(DOpusAppMessage *);
 BOOL SetWBArg(DOpusAppMessage *,short,BPTR,char *,APTR);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 #endif

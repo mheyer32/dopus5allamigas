@@ -26,9 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 #include <libraries/newicon.h>
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct
 {
@@ -62,9 +60,7 @@ typedef struct
 */
 } Image_Data;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 #define IMAGEF_SEL_IMAGE	(1<<0)		// Selected imagery
 #define IMAGEF_ILBM		(1<<1)		// Image from ILBM

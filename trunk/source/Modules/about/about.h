@@ -32,9 +32,7 @@ For more information on Directory Opus for Windows please see:
 #define logo_mod	8
 #define logo_frames	10
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	short	width;
@@ -44,9 +42,7 @@ typedef struct
 	UWORD	*imagedata;
 	ULONG	*palette;
 } image_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define image_count	17
 #define image_special	14
@@ -83,9 +79,7 @@ enum
 	GAD_REGISTRATION_9,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Window	*window;
@@ -105,9 +99,7 @@ typedef struct
 	char		*trans_info;
 	char		*message;
 } about_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern unsigned char about_message[];
 

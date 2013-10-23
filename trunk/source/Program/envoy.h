@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_ENVOY
 #define _DOPUS_ENVOY
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 // Envoy stuff
 struct UserInfo
@@ -42,9 +40,7 @@ struct GroupInfo
 	UWORD	gi_GroupID;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 struct UserInfo *AllocUserInfo( void );
 struct GroupInfo *AllocGroupInfo( void );

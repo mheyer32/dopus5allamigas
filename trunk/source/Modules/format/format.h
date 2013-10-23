@@ -25,9 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "format.strings"
 #include "module_deps.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Screen		*screen;
@@ -62,9 +60,7 @@ typedef struct
 
 	short			abort_bit;
 } format_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 BOOL format_open(format_data *data,BOOL);
 void format_close(format_data *data);

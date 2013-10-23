@@ -86,9 +86,7 @@ RA_REPLACE,
 RA_RESUME
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 //
 //	Like a FileInfoBlock for a file or directory entry
@@ -135,9 +133,7 @@ struct site_entry       fn_site;		// As used in Address book etc
 ULONG                   fn_read_handle;		// Handle of our Opus text viewer
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 // Unknown values for some fields
 #define EI_SIZE_UNKNOWN		(0xffffffff)
@@ -157,9 +153,7 @@ ULONG                   fn_read_handle;		// Handle of our Opus text viewer
 /*
  *	Used by the message loop in lister.c
  */
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct msg_loop_data
 {
 IPCData         *mld_ipc;
@@ -170,16 +164,12 @@ char            *mld_quit_command;
 int              mld_done;
 int              mld_reconnecting;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 //
 //	Used when updating the display during a file transfer and directory listing
 //	NOTE: when self-aborted because of a Write error, ui_abort == 2 
 //
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct update_info
 {
 struct opusftp_globals *ui_og;
@@ -197,9 +187,7 @@ struct timeval		ui_start, ui_last, ui_curr;
 int                     ui_info_type;			// extended display
 char                    ui_infotext_path[256];		
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 // Flags for update_info
 enum
 {
@@ -240,17 +228,13 @@ REQUSERF_LAST_USER	= 1 << 0,	// Show last used username in requester
 REQUSERF_SAME_USER	= 1 << 1,	// Show same username as in connect message
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct message_update_info
 {
 struct ftp_node *mu_node;
 Att_List        *mu_msg;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 int             message_update         ( struct message_update_info *, int num, char *text );
 

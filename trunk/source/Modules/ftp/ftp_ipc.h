@@ -33,9 +33,7 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_opusftp.h"
 
 // Sub-process data used when launching new processes
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct subproc_data
 {
 struct opusftp_globals	*spd_ogp;
@@ -43,9 +41,7 @@ IPCData			*spd_ipc;
 IPCData			*spd_owner_ipc;
 //ULONG			spd_a4;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 // Custom IPC message
 enum
@@ -119,9 +115,7 @@ MKDIR_READ   = 1 << 4
 };
 
 // Generic FTP message with ARexx forwarding
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct ftp_msg
 {
 APTR               fm_function_handle;	// Useful for callback functions
@@ -133,9 +127,7 @@ int                fm_filecount;
 int                fm_dircount;
 struct entry_info *fm_entries;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 // Delete flags (Don't use bits 1-3)
 #define DELE_SPECIAL			(1<<4)	// Caused by 'FTPDelete' command - has special qualities
 #define DELE_OPT_NAME			(1<<5)	// NAME option specified
@@ -145,9 +137,7 @@ struct entry_info *fm_entries;
 #define OPTIONS_OPT_DEFAULT		(1<<4)	// DEFAULT option of FTPOptions
 
 // Quit message
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct quit_msg
 {
 struct RexxMsg *qm_rxmsg;		// ARexx message to reply when done quitting
@@ -170,9 +160,7 @@ struct Window          *cm_window;		// Window to open requester over
 ULONG                   cm_handle;		// Lister handle if called with one
 struct site_entry       cm_site;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define CONN_OPT_GUI			(1<<4)	// Show GUI even if other details are complete
 #define CONN_OPT_SITE			(1<<5)	// Find site in Address book
@@ -185,9 +173,7 @@ struct site_entry       cm_site;
 #define CMD_OPT_LONG			(1<<5)	// Show long result
 
 // FindFile message
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct findfile_msg
 {
 struct RexxMsg *fm_rxmsg;
@@ -238,9 +224,7 @@ struct ftp_node       *xm_rm_dest;	// Destination FTP server
 char                  *xm_rm_file;	// For ftp-ftp transfer
 struct SignalSemaphore xm_rm_semaphore;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 // Transfer flags (not all used yet)
 #define XFER_AS				(1<<4)	// CopyAs requires name change
@@ -265,9 +249,7 @@ struct SignalSemaphore xm_rm_semaphore;
 #define XFER_SUBDIR			(1<<23)	// Drop onto a subdirectory
 
 // Trapped Opus command that uses a temporary file
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct traptemp_msg
 {
 struct RexxMsg *tm_rxmsg;
@@ -283,9 +265,7 @@ struct _endpoint *fm_endpoint;		// Endpoint of the lister being asked
 void             *fm_arg1;		// Argument to command (which entry to act on)
 void             *fm_arg2;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 // Favours one FTP lister can ask another
 enum {
 FAVOUR_LIST = 1,
@@ -310,9 +290,7 @@ FAVOUR_ENDLIST,
 };
 
 // Edit message
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct edit_msg
 {
 struct RexxMsg *em_rxmsg;
@@ -327,9 +305,7 @@ struct rename_msg
 char *rm_names;
 char *rm_newname;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 /*
  *	For the IPC_SET command, one of these values goes in the flags field
  *	 The new value of the variable goes in the data field

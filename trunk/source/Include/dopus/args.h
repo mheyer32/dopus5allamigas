@@ -30,9 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
- #if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+ #pragma pack(2) 
 
 typedef struct
 {
@@ -45,9 +43,7 @@ typedef struct
 	short		FA_DoneArgs;	// DOpus uses this flag for its own purposes
 } FuncArgs;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 FuncArgs *ParseArgs(char *,char *);
 void DisposeArgs(FuncArgs *);

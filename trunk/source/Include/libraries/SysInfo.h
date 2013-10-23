@@ -28,9 +28,7 @@
 #define SYSINFOVERSION	2L
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 /*
  * This structure is returned by InitSysInfo() and it's READ-ONLY.
@@ -222,9 +220,7 @@ struct SI_TaskCpuUsage {
 	LONG	reserved[8];		/* Reserved for future use		*/
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 /* These bits are used in cpu_usage_implemented-field */
 #define TASK_CPU_USAGEB_TOTAL_IMPLEMENTED		0

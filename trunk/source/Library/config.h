@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 
@@ -357,9 +355,7 @@ typedef struct _ConfigStuff {
 #define SCRFLAGS_HALFHEIGHT 4
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif

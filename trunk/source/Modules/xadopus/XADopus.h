@@ -31,9 +31,7 @@
 #define ADDNODEF_SORT		1		// Sort names
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 //--- from include/dopus/modules.h
 struct function_entry
@@ -102,6 +100,4 @@ struct MyPacket
 	char *a7, *a8;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 

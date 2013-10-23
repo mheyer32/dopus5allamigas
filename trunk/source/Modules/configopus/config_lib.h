@@ -28,9 +28,7 @@ extern struct Library		*UtilityBase;
 //extern struct Library		*LocaleBase;
 extern struct DOpusLocale	*locale;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Library		*DOSBase;
@@ -55,9 +53,7 @@ typedef struct _SubOptionHandle {
 	ULONG name;		// Option name ID
 	ObjectDef *objects;	// Object list
 } SubOptionHandle;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 void init_locale_data(struct DOpusLocale *);
 void lsprintf __ARGS((char *,...));
@@ -72,9 +68,7 @@ IPCData *SAVEDS Local_IPC_ProcStartup(
                          IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
                          IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif						 
+#pragma pack(2)						 
 typedef struct
 {
 	struct Window		*window;
@@ -94,9 +88,7 @@ typedef struct
 	short			lock_count;
 	short			flags;
 } CfgDragInfo;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 BOOL config_drag_check(CfgDragInfo *drag);

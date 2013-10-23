@@ -26,9 +26,7 @@ For more information on Directory Opus for Windows please see:
 #undef TRAP_SEMAPHORE
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct SemaphoreOwner
 {
@@ -46,9 +44,7 @@ typedef struct SemaphoreNode
 	struct MinList			waiters;
 } SemaphoreNode;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 long LIBFUNC L_GetSemaphore(

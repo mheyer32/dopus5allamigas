@@ -25,9 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "show.strings"
 #include "module_deps.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 typedef struct
 {
 	ILBMHandle		*ilbm;
@@ -80,9 +78,7 @@ typedef struct
 
 	struct BitMap		*scr_bm;
 } show_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #define DataTypesBase	(data->dt_base)

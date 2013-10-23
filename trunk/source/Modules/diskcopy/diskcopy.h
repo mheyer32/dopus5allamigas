@@ -28,9 +28,7 @@ For more information on Directory Opus for Windows please see:
 #include "diskcopy.strings"
 #include "module_deps.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Screen		*screen;
@@ -61,9 +59,7 @@ typedef struct
 
 	short			abort_bit;
 } diskcopy_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 BOOL diskcopy_open(diskcopy_data *data,BOOL);

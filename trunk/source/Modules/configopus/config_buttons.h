@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _bank_node
 {
 	struct Node		node;
@@ -74,9 +72,7 @@ typedef struct
 
 	ImageRemap		remap;
 } config_buttons_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 void _config_buttons_update(config_buttons_data *);
 BOOL _config_buttons_open(config_buttons_data *data,struct Screen *screen);

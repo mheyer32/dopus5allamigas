@@ -35,9 +35,7 @@ For more information on Directory Opus for Windows please see:
 #endif
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct _DragInfo
 {
@@ -65,9 +63,7 @@ typedef struct
 	struct GelsInfo	info;		// GEL info
 } DragInfoExtra;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 #define DRAGF_VALID		(1<<0)	// Bob is valid
 #define DRAGF_OPAQUE		(1<<1)	// Bob should be opaque

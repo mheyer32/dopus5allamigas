@@ -19,9 +19,7 @@ enum
 	PICMENU_WHITE,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	NewConfigWindow		newwin;
@@ -107,9 +105,7 @@ typedef struct
 	struct MinList		sound_list;
 	Att_List		*script_list;
 } config_env_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern ObjectDef _lister_format_gadgets[];
 

@@ -43,9 +43,7 @@ For more information on Directory Opus for Windows please see:
 
 #define KEY_SEL_OFFSET	12
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -55,18 +53,14 @@ typedef struct
 	short		type;
 } ListerWaiter;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define LISTERWAIT_ALL			0
 #define LISTERWAIT_UNBUSY		1
 #define LISTERWAIT_BUSY			2
 #define LISTERWAIT_AUTO_CMD		3
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -75,9 +69,7 @@ typedef struct
 	ULONG	flags;
 } ProgressPacket;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 enum
 {
@@ -194,9 +186,7 @@ enum
 // Maximum length we can display in a window
 #define MAXDISPLAYLENGTH  256
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -455,9 +445,7 @@ typedef struct ListerWindow
 	struct RastPort			render_rast;
 } Lister;	
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 #define LISTERF_BUSY		(1<<1)	// Lister is busy
@@ -686,9 +674,7 @@ void lister_receive_drop(Lister *dest,struct _DOpusAppMessage *amsg);
 #define DROPF_ICON_MODE	(1<<1)	// Source lister in icon mode
 #define DROPF_PARENT	(1<<2)	// Dropped on parent area
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -697,9 +683,7 @@ typedef struct
 	struct DateStamp	date;
 } devname_change;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 void lister_diskinfo(Lister *lister);
 

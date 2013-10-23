@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -41,9 +39,7 @@ typedef struct
 */
 } AddIconData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 enum
 {

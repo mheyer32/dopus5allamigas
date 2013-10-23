@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 typedef struct
 {
@@ -39,9 +37,7 @@ typedef struct
 	void		*dos;			// DOS library pointer
 } BufFile;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 // Open a buffered file

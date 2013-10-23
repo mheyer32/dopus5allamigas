@@ -51,9 +51,7 @@ LONG   port;
 };
 */
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct short_site_entry
 {
 BOOL	se_anon;
@@ -80,9 +78,7 @@ LONG			se_port;
 BOOL			se_has_custom_env;
 struct ftp_environment	se_local_env;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define	TMPBUFLEN	512
 
@@ -104,9 +100,7 @@ struct ftp_environment	se_local_env;
 
 // wt_type defines as MSB parenttype LSB type
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct display_globals {
 	struct opusftp_globals *dg_og;
 	IPCData 		*dg_ipc;
@@ -196,9 +190,7 @@ struct window_params {
 							// to allow orderly aborts of main process
 
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define ID_FTPSITE_SHORT	MAKE_ID('F','A','D','1')
 #define ID_FTPSITE_LONG		MAKE_ID('F','A','D','2')
@@ -214,9 +206,7 @@ struct window_params {
 //	We can't include them ourselved becuase of loads
 //	of conflicts and stuff.
 /**********************************************************/
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Window		*window;
@@ -242,9 +232,7 @@ typedef struct _FunctionEntry {
 	int		type;		// Entry type
 	char		buffer[256];	// Entry buffer
 } FunctionEntry;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif

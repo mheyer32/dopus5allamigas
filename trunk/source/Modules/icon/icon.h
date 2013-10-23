@@ -74,9 +74,7 @@ enum
 	IDM_COUNT
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Screen		*screen;
@@ -179,9 +177,7 @@ typedef struct
 
 	char			tempname[256];
 } icon_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 void icon_free(icon_data *data);
 void closewindow(icon_data *data);

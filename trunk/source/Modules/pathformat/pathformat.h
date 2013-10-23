@@ -55,9 +55,7 @@ enum
 	MODE_ACTION
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	NewConfigWindow		newwin;
@@ -82,9 +80,7 @@ typedef struct
 	ULONG			seconds;
 	ULONG			micros;
 } config_path_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 BOOL config_paths_open(config_path_data *data,struct Screen *screen);
 void config_paths_cleanup(config_path_data *data);

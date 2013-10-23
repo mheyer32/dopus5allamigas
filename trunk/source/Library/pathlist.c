@@ -32,9 +32,7 @@ static char FAR
 		"New_WShell",
 		"Background CLI",0};
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 		
 typedef struct
 {
@@ -42,9 +40,7 @@ typedef struct
 	BPTR	lock;
 } PathListEntry;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 // Get a usable path list

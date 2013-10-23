@@ -46,9 +46,7 @@ enum
 	GAD_SELECT_PROTECTION,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -67,9 +65,7 @@ typedef struct
 	short		include;		// Include/exclude
 } SelectData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 enum
 {

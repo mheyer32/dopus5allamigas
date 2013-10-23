@@ -34,9 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <dopus/dopusbase.h>
 #endif
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 
 // Defines a function in a module
@@ -264,9 +262,7 @@ extern ModuleInfo module_info;
 #endif
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

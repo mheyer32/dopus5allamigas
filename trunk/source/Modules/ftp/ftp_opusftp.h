@@ -163,9 +163,7 @@ ID_QUIT,		// FORCE/S
 	COPY_REPLACE_ASK,
 	};
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif	
+#pragma pack(2)	
 struct ftp_environment 
 {
 int	e_retry_count;	// Number of times to retry a connection
@@ -251,9 +249,7 @@ unsigned int pad8		:	1;
 // the environment MUST BE LAST IN STRUCTURE
 struct ftp_environment oc_env;		// default global environment
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 /****************************************************************************
@@ -265,9 +261,7 @@ struct ftp_environment oc_env;		// default global environment
 *	ALWAYS Use fn copy_site_entry(og,new,old)
 *
 *****************************************************************************/
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct site_entry
 {
 BOOL			 se_anon;
@@ -359,9 +353,7 @@ struct SocketIFace *g_isocket;
 int		 g_errno;		/* Socket library puts its errors here */
 IPCData 	*g_master_ipc;		/* Master process's IPC */
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 /*
  * the socket libraries need to be opened by each process that uses them
@@ -549,9 +541,7 @@ ENV_SUB_GLOBAL,
 //
 
 // Defines information about a GUI element
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	BOOL			visible;		// Indicates visibility
@@ -565,9 +555,7 @@ typedef struct
 
 	struct RastPort		rast;			// RastPort copy
 } GUI_Element;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #include <Program/reselect.h>
 #include <Program/pattern.h>
@@ -580,16 +568,12 @@ typedef struct
 
 
 // Config sub-option handles
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _SubOptionHandle {
 	int num;		// Option number
 	ULONG name;		// Option name ID
 	ObjectDef *objects;	// Object list
 } SubOptionHandle;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #endif

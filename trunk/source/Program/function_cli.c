@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 #include "eliza.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct
 {
@@ -39,9 +37,7 @@ typedef struct
 	struct MsgPort	*reply_port;
 } CLIData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 void print_string(char *);
 BOOL cli_open(CLIData *);

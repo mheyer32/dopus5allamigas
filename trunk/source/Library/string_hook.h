@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _STRING_HOOK_H
 #define _STRING_HOOK_H
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct
 {
@@ -39,9 +37,7 @@ typedef struct
 	short		change_bit;
 } HookData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 ULONG ASM string_edit_hook(
 	REG(a0, HookData *hook),

@@ -62,9 +62,7 @@
 #define FTFUNC_READ        10
 #define FTFUNC_SHOW        11
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 struct olddopusgadget {
 	char name[10];
@@ -289,9 +287,7 @@ typedef struct _ConfigStuff {
 	Hotkey		*firsthotkey;	// First hotkey
 	APTR		memory;
 } ConfigStuff;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define MODE_WORKBENCHUSE    1
 #define MODE_WORKBENCHCLONE  2

@@ -9,9 +9,7 @@
 #include "workbench/workbench.h"
 #endif
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 /* Programs should NOT change anything in the librarybase!
@@ -145,9 +143,7 @@ struct NewIconsPrefs
    ULONG fomode;        /* Font Outline mode (see NIFOM_#? definitions) */
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif  /* LIBRARIES_NEWICON_H */

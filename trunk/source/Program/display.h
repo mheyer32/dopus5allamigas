@@ -31,9 +31,7 @@ For more information on Directory Opus for Windows please see:
 #define NAME_PATTERNS		"dopus_pattern_stuff"
 
 // Defines information about a GUI element
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -300,9 +298,7 @@ typedef struct
 	ULONG			env_BackgroundBorderColour[4];	// Border colour
 } GUI_Glue;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define PATTERN_MAIN	0
 #define PATTERN_LISTER	1

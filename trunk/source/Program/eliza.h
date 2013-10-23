@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 
 #define MAX_BUFFER 512
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 struct eliza_data
 {
@@ -46,9 +44,7 @@ struct eliza_data
 	int keyword_size, wordin_size, wordout_size;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 short eliza_line(struct eliza_data *data,char *line);

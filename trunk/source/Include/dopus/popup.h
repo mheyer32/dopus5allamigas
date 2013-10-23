@@ -29,9 +29,7 @@ For more information on Directory Opus for Windows please see:
  Popup menus
 
  *****************************************************************************/
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
  
 // Defines an item in a menu
@@ -69,9 +67,7 @@ typedef struct {
 UWORD DoPopUpMenu(struct Window *,PopUpMenu *,PopUpItem **,UWORD);
 PopUpItem *GetPopUpItem(PopUpMenu *,UWORD);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

@@ -53,9 +53,7 @@ For more information on Directory Opus for Windows please see:
 #include "string_data.h"
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 struct MyLibrary
@@ -170,9 +168,7 @@ struct LibData
 	#endif
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #include "wb.h"
@@ -180,9 +176,7 @@ struct LibData
 #include "dos_patch.h"
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 typedef struct {
 	struct MinNode		node;
@@ -251,9 +245,7 @@ void lsprintfa __ARGS((char *,...)); // unused ??
 //void __asm LSprintf(register __a3 char *buffer,register __a0 char *string,register __a1 APTR data);
 void ASM LSprintf(char *buffer, char *string, APTR data);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #include "pools.h"

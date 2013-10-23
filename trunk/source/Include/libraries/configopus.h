@@ -2,9 +2,7 @@
 #define _CONFIGOPUS_H_
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 
 #define STACK_DEFAULT	6144
@@ -126,9 +124,7 @@ enum
 };
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 #endif
 

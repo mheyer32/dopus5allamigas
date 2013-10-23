@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	char			bank_name[256];		// Current bank path
@@ -64,9 +62,7 @@ typedef struct
 	unsigned long		tick_count;
 	unsigned long		last_tick;
 } lister_buttons_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 BOOL lister_buttons_open(lister_buttons_data *data,struct Screen *screen);
 void lister_buttons_close(lister_buttons_data *data,BOOL);

@@ -22,9 +22,7 @@ For more information on Directory Opus for Windows please see:
 */
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -43,9 +41,7 @@ typedef struct
 	iconpos_data		ip_Data;
 } iconpos_info;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 void iconpos_openwindow(iconpos_info *,struct MsgPort *);
 void iconpos_closewindow(iconpos_info *);

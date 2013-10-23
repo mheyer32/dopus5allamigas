@@ -67,9 +67,7 @@ For more information on Directory Opus for Windows please see:
 #include <pragmas/dopus_pragmas.h>
 #endif
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 // DOpus Public Semaphore
 struct DOpusPublicSemaphore {
@@ -78,8 +76,6 @@ struct DOpusPublicSemaphore {
 	struct ListLock		ds_Modules;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 #endif

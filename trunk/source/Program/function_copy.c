@@ -70,9 +70,7 @@ enum
 #define COPY_UPDATE_COPY	(1<<16)
 #define COPY_NEWER_COPY		(1<<17)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -101,9 +99,7 @@ typedef struct
 	} func;
 } CopyData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 void copy_icon_position(FunctionHandle *handle,char *name,struct DiskObject *icon);
 

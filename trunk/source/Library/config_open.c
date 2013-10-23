@@ -25,9 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "config.h"
 #include <Program/dopus_config.h>
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 typedef struct {
 	char				*buffer;
@@ -36,9 +34,7 @@ typedef struct {
 	short				error;
 } string_handle;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 void init_config_string(struct _IFFHandle *iff,string_handle *handle);

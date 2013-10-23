@@ -41,9 +41,7 @@ struct ArgArray
 	ULONG		aa_Count;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 struct ArgArrayEntry
 {
@@ -52,9 +50,7 @@ struct ArgArrayEntry
 	char		ae_String[1];
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define AAF_ALLOW_DIRS	(1<<0)
 

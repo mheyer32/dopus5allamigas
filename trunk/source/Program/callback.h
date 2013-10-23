@@ -243,9 +243,7 @@ long ASM HookFileRequest(
 	REG(d0, ULONG flags),
 	REG(d1, char *pattern));
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -306,9 +304,7 @@ typedef struct
 	APTR	dc_GetThemes;
 } DOpusCallbackInfo;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define DOPUS_HOOK_COUNT	52
 

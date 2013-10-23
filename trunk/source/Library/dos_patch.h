@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOS_PATCH_H
 #define _DOS_PATCH_H
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 struct FileInfoBlock *dospatch_fib(BPTR,struct MyLibrary *,BOOL);
 
@@ -41,9 +39,7 @@ struct FileHandleWrapper
 
 struct FileHandleWrapper *find_filehandle(BPTR file,struct LibData *data);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif

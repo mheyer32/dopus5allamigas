@@ -39,9 +39,7 @@
 # include <libraries/locale.h>
 #endif /* LIBRARIES_LOCALE_H */
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 #define MULTIUSERNAME           "multiuser.library"
@@ -218,8 +216,6 @@ struct muMonMsg
 #define muTrgF_CheckPasswdFail   (1 << muTrgB_CheckPasswdFail)
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #endif /* LIBRARIES_MULTIUSER_H */

@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_CONFIGURATION
 #define _DOPUS_CONFIGURATION
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 #define CONFIG_VERSION_3 		2
@@ -928,9 +926,7 @@ enum
 #define			GENERALF_EXCLUSIVE_STARTUP_SND	(1<<27)
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif

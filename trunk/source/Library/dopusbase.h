@@ -772,9 +772,7 @@ typedef VOID ASM (*REF_CALLBACK)(REG(d0, ULONG iclass), REG(a0, APTR window), RE
 *
 */
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 typedef struct _DragInfo
 {
@@ -1303,9 +1301,7 @@ struct AllocBitmapPatchNode
 	struct Task	*abp_Task;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 
