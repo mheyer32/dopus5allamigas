@@ -30,9 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
  
  
 // IPC message
@@ -103,9 +101,7 @@ void IPC_ListCommand(struct ListLock *,ULONG,ULONG,ULONG,BOOL);
 IPCData *IPC_ProcStartup(ULONG *,ULONG (*__asm)(register __a0 IPCData *,register __a1 APTR));
 void IPC_Reply(IPCMessage *);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

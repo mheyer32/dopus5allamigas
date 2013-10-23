@@ -26,9 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 
 // Protect GUI message
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct protectgui_msg
 {
 struct Window *pm_window;
@@ -37,9 +35,7 @@ ULONG          pm_current;
 ULONG          pm_set_mask;
 ULONG          pm_clear_mask;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 // Get protection

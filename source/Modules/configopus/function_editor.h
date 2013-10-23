@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Window		*window;
@@ -89,9 +87,7 @@ typedef struct _FuncEdData
 
 	char			label[80];
 } FuncEdData;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern ConfigWindow
 	_function_editor_window,
@@ -112,17 +108,13 @@ extern ObjectDef
 #define FUNCTYPE_FILETYPE	3
 #define FUNCTYPE_HOTKEY		4
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _FunctionEntry {
 	Att_Node	*node;		// Points back to node
 	int		type;		// Entry type
 	char		buffer[256];	// Entry buffer
 } FunctionEntry;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern long _funced_flaglist[];
 extern UWORD _function_type_labels[];

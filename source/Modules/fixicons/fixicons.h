@@ -38,9 +38,7 @@ enum
 	FI_REPORT
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _FunctionEntry
 {
 	struct MinNode		node;
@@ -49,7 +47,5 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 

@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_CX
 #define _DOPUS_CX
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct _CxData
 {
@@ -44,9 +42,7 @@ typedef struct _CxData
 	short			start_popped;
 } CxData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 enum

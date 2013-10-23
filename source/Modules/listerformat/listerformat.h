@@ -53,9 +53,7 @@ enum
 	GAD_SET_AS_DEFAULTS,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct {
 	NewConfigWindow		newwin;
 	struct Window		*window;
@@ -73,9 +71,7 @@ typedef struct {
 	ULONG			mod_id;
 	ListFormatStorage	def_format_copy;
 } config_lister_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 void _config_lister_init_format(config_lister_data *data);
 void _config_lister_cleanup(config_lister_data *data);

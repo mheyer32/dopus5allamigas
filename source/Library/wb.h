@@ -305,9 +305,7 @@ void free_app_entry(AppEntry *entry,WB_Data *);
 AppEntry *find_app_entry(AppEntry *entry,WB_Data *wb_data);
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif  
+#pragma pack(2)  
 typedef struct
 {
 	struct DiskObject	doc_DiskObject;
@@ -317,9 +315,7 @@ typedef struct
 	APTR			doc_Image2;
 	APTR			doc_Data;
 } DiskObjectCopy;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif  
+#pragma pack()  
 
 void icon_notify(struct LibData *data,char *name,ULONG flags,short);
 char *icon_fullname(struct LibData *data,char *name);

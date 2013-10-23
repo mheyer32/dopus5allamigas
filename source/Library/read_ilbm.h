@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _READ_ILBM_H
 #define _READ_ILBM_H
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 
 /*  IFF types we may encounter  */
@@ -344,9 +342,7 @@ ILBMHandle *FakeILBM(
 #define DIF_MASK	(1<<0)
 #define DIF_WRITEPIX	(1<<6)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

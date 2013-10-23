@@ -50,9 +50,7 @@ For more information on Directory Opus for Windows please see:
 #define RXMF_NO_INC		(1<<1)
 #define RXMF_SYNC		(1<<2)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -74,9 +72,7 @@ typedef struct
 	char		args[1];
 } RexxRequester;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 extern RexxCommandList rexx_commands[];
 extern short rexx_commands_can_do_all[];
@@ -268,9 +264,7 @@ enum
 #define RXERR_NO_LISTER		20	// Lister couldn't open
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 // Function trap
 typedef struct _FunctionTrap
@@ -282,15 +276,11 @@ typedef struct _FunctionTrap
 	ULONG			pad[4];
 } FunctionTrap;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define FTRAPF_SIGNAL		(1<<0)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct _TrapSignal
 {
@@ -325,9 +315,7 @@ typedef struct
 	APTR			progress;
 } RexxProgress;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 enum
 {
@@ -419,9 +407,7 @@ void rexx_send_command(char *command,BOOL);
 #define HA_Value	0x02
 #define HA_Qualifier	0x03
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -430,9 +416,7 @@ typedef struct
 	ULONG	ha_Data;
 } HandlerArg;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define rexx_handler_msg(handler,buffer,flags,...) \
 	({ \
@@ -447,9 +431,7 @@ short STDARGS rexx_handler_msg_args(
 
 long rexx_set_appicon(char *str,struct RexxMsg *msg);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -458,15 +440,11 @@ typedef struct
 	IPCMessage	*ipc_msg;
 } RexxMsgTracker;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 BOOL rexx_send_msg(struct MinList *list,IPCMessage **imsg,struct MsgPort *port);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -474,9 +452,7 @@ typedef struct
 	struct RexxMsg	*rx_msg;
 } RexxDespatch;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 BOOL rexx_send_rxmsg(IPCMessage *imsg,struct MsgPort *rxport);
 BOOL rexx_send_rxmsg_args(RexxDespatch *desp,ULONG flags,struct MsgPort *rxport);

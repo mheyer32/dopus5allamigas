@@ -125,9 +125,7 @@ enum
 };
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 // Command entry (looks like a (struct Node) as far as ln_Name goes)
 typedef struct _CommandList
@@ -151,9 +149,7 @@ typedef struct _CommandList
 	char		*help_name;
 } CommandList;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern CommandList	commandlist_internal[];
 
@@ -245,9 +241,7 @@ enum {
 #define COPY_FAILED		0	// Failed
 #define COPY_OK			1	// Ok
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 // Keeps track of what's in the modules directory
 typedef struct _ModuleNode
@@ -257,9 +251,7 @@ typedef struct _ModuleNode
 	short			flags;
 } ModuleNode;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define MNF_TEMP	(1<<0)
 

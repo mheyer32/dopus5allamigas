@@ -79,9 +79,7 @@ extern ConfigWindow join_window,split_window;
 extern ObjectDef join_objects[],split_objects[];
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct Screen		*screen;
@@ -118,9 +116,7 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 BOOL join_open(join_data *);
 void join_close(join_data *);

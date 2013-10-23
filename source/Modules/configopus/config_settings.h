@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	IPCData			*ipc;
@@ -31,9 +29,7 @@ typedef struct
 	char			*settings_name;
 	char			last_saved[256];
 } config_settings_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define CFGSETF_NEW_PATH	(1<<0)
 

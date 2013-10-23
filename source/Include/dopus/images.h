@@ -30,9 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 // RenderImage() tags
 #define IM_Width		TAG_USER + 0	// Width of image
@@ -80,9 +78,7 @@ APTR OpenImage(char *name,OpenImageInfo *);
 BOOL RemapImage(APTR,struct Screen *,ImageRemap *);
 short RenderImage(struct RastPort *rp,APTR image,unsigned short left,unsigned short top,struct TagItem *tags);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

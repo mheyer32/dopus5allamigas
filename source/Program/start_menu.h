@@ -23,9 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #define STARTMENUF_POPPED	(1<<0)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct _StartMenu
 {
@@ -72,9 +70,7 @@ typedef struct _StartMenu
 	short			last_id;
 } StartMenu;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 IPCData *start_new(char *,char *,char *,short,short);

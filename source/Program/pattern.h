@@ -26,9 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 #define PATTILE_SIZE	64
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 typedef struct PatternInstance
 {
@@ -93,9 +91,7 @@ void ASM SAVEDS PatternBackfill(REG(a0, PatternInstance *), REG(a2, struct RastP
 
 BOOL pattern_check_random(PatternData *,char *);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 
 #endif

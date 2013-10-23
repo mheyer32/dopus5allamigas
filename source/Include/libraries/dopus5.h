@@ -47,9 +47,7 @@ For more information on Directory Opus for Windows please see:
 #endif
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 
 
 #define CONFIG_VERSION_3 		2
@@ -2418,9 +2416,7 @@ struct AllocBitmapPatchNode
 	struct Task	*abp_Task;
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 /*********************************************************************/
 

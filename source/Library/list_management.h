@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define _LIST_MANAGMENT_H
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct _Att_List {
 	struct List list;
@@ -38,9 +36,7 @@ typedef struct _Att_Node {
 	ULONG data;
 } Att_Node;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #define ADDNODE_SORT		1		// Sort names

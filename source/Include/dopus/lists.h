@@ -29,9 +29,7 @@ For more information on Directory Opus for Windows please see:
  List management
 
  *****************************************************************************/
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
  
 typedef struct _Att_List
@@ -101,9 +99,7 @@ long GetSemaphore(struct SignalSemaphore *,long,APTR);
 void InitListLock(struct ListLock *,APTR);
 BOOL IsListLockEmpty(struct ListLock *);
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #endif

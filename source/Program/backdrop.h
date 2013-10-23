@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_BACKDROP
 #define _DOPUS_BACKDROP
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct _BackdropObject
 {
@@ -133,9 +131,7 @@ typedef struct _BackdropInfo
 	struct Region		*temp_region;
 } BackdropInfo;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 enum
 {
@@ -198,9 +194,7 @@ enum
 #define BACKDROP_GROUP_OBJECT	(1<<30)
 #define BACKDROP_ICON_VIEW	(1<<29)
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -229,9 +223,7 @@ typedef struct
 	PopUpHandle		*popup;
 } GroupData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define GETICON_CD		(1<<0)
 #define GETICON_KEEP		(1<<1)

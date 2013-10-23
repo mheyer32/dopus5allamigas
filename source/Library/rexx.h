@@ -24,9 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define _REXX_H
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 
 struct RexxStem
@@ -35,9 +33,7 @@ struct RexxStem
 	char		rs_Value[2];
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 struct RexxMsg *ASM L_CreateRexxMsgEx(

@@ -35,9 +35,7 @@ enum
 };
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _ProgressWindow
 {
 	struct Window		*pw_Window;		// Window pointer
@@ -86,9 +84,7 @@ typedef struct _ProgressWindow
 	struct IBox		pw_Coords[PROG_LAST+1];	// Coordinates
 } ProgressWindow;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define PWF_ALL			(PWF_FILENAME|PWF_FILESIZE|PWF_INFO|PWF_GRAPH)
 

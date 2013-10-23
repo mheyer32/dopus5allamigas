@@ -25,9 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "print.strings"
 #include "module_deps.h"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	struct FileInfoBlock	fib;
@@ -82,9 +80,7 @@ typedef struct
 
 	struct FileRequester	*filereq;
 } print_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define DATA_SIZE	(offsetof(print_data,progress)-offsetof(print_data,print_quality))
 

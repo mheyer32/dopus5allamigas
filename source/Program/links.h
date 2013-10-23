@@ -21,9 +21,7 @@ For more information on Directory Opus for Windows please see:
 
 */
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -31,8 +29,6 @@ typedef struct
 	struct FileInfoBlock	sli_Fib;
 } SoftLinkInfo;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 BOOL ReadSoftLinkDopus(BPTR,char *,char *,SoftLinkInfo *);

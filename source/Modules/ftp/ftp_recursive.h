@@ -27,9 +27,7 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_lister.h"
 
 // End of a connection for recursive transfer - FTP or file system
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct _endpoint
 {
 int                      ep_type;			// FTP or file system?
@@ -58,24 +56,18 @@ int                    (*ep_errorreq)( struct _endpoint *, struct ftp_node *, UL
 unsigned long          (*ep_opts)    ( struct _endpoint *, int type );
 
 } endpoint;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern const char *months[];
 
 // List of entries in a directory
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct rec_entry_list
 {
 struct List rl_list;
 int         rl_entry_count;	// How many entries in the list
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 // Tags for create_endpoint()
 #define EP_TYPE		(TAG_USER + 0)
@@ -93,9 +85,7 @@ ENDPOINT_HTTPPROXY	// Just dreaming here!
 //
 //	Structure used by all recursive hook functions
 //
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 struct hook_rec_data
 {
 struct opusftp_globals  *hc_og;
@@ -130,9 +120,7 @@ char                     hc_pattern[FILENAMELEN*2 + 1];	// For pattern matchine 
 char                     hc_resultpath[PATHLEN + 1];	// Where we found a match
 short                    hc_match_comment;
 };
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 //
 //	Flags for recursive stuff

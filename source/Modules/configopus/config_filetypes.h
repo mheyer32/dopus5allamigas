@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	Cfg_Filetype	*type;
@@ -123,9 +121,7 @@ typedef struct
 	struct MinNode	node;
 	ULONG		handle;
 } ReaderNode;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 extern short filetype_action_lookup[];
 extern short fileclass_match_lookup[];

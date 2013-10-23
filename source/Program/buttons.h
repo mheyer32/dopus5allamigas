@@ -41,9 +41,7 @@ enum {
 	BUTTONS_ICONIFY,		// Iconify
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 // Defines a button window
 typedef struct ButtonWindow
@@ -167,9 +165,7 @@ typedef struct
 	struct AppMessage *appmsg;
 } buttons_edit_packet;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 #define BUTTONF_RESIZED		(1<<0)		// Window has been resized

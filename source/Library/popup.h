@@ -66,9 +66,7 @@ enum
 	SUB_BIG_HI,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif 
+#pragma pack(2) 
 
 typedef struct
 {
@@ -142,9 +140,7 @@ typedef struct
 	BOOL			locked;		// Locked open
 } PopUpData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif 
+#pragma pack() 
 
 
 #define TICK_TIME	20000

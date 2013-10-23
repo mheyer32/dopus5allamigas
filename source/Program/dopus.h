@@ -73,9 +73,7 @@ enum {
 	MAIN_MENU_EVENT,			// Menu event from a sub-process
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct _rego_data
 {
@@ -92,9 +90,7 @@ typedef struct _rego_data
 	long			checksum;
 } rego_data;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 // Include files
@@ -151,9 +147,7 @@ typedef struct _rego_data
 #define REQ_OFF(save) { save=main_proc->pr_WindowPtr; main_proc->pr_WindowPtr=(APTR)-1; }
 #define REQ_ON(save) { main_proc->pr_WindowPtr=save; }
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -176,9 +170,7 @@ typedef struct
 	char	name[2];
 } env_packet;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 
 #define WBArgDir(a) (!(a)->wa_Name || !*(a)->wa_Name)

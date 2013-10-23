@@ -1,6 +1,4 @@
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	NewConfigWindow			newwin;
@@ -45,9 +43,7 @@ typedef struct
 
 	ULONG				pad1[2];
 } PaletteBoxData;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define PBF_NO_FG	(1<<0)
 #define PBF_NO_EDIT	(1<<1)

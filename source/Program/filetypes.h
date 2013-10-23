@@ -50,9 +50,7 @@ enum
 	FTTYPE_USER_10,			// UserFunc10
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -71,9 +69,7 @@ typedef struct
 	unsigned long		disk_type;	// Disk type
 } MatchHandle;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define MATCHF_TRIED_DT		(1<<0)		// Tried to get datatypes
 #define MATCHF_TRIED_MODULE	(1<<1)		// Tried to get module
@@ -139,9 +135,7 @@ enum {
 };
 
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack(2)
-#endif
 
 typedef struct
 {
@@ -157,9 +151,7 @@ typedef struct
 	char		name[1];
 } SniffData;
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
 #pragma pack()
-#endif
 
 #define SNIFFF_VERSION		(1<<0)
 #define SNIFFF_NO_FILETYPES	(1<<1)

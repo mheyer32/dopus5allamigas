@@ -30,9 +30,7 @@ For more information on Directory Opus for Windows please see:
 
 #define ENV_PLAY	"dopus/Player"
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	IPCData         *ipc;
@@ -74,9 +72,7 @@ typedef struct
 
 	ULONG		flags;
 } play_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define PLAYF_QUIET	(1<<0)
 #define PLAYF_ICON	(1<<1)

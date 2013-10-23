@@ -5,9 +5,7 @@ enum
 	TYPE_SCRIPTS,
 };
 
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack(2)
-#endif
+#pragma pack(2)
 typedef struct
 {
 	char			menu_name[256];			// Current bank path
@@ -63,9 +61,7 @@ typedef struct
 
 	Att_List		*script_list;
 } lister_menu_data;
-#if (defined(__PPC__) || defined(__i386__)) && defined(__GNUC__)
-    #pragma pack()
-#endif
+#pragma pack()
 
 #define LMF_NEW_ENTRY	(1<<0)
 
