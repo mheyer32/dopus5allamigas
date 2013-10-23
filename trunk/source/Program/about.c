@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 // version_num is actually revision number & used elsewhere in the program
 short version_num = PROG_REVISION;
-char *version_string="Magellan II";
+char *version_string="Magellan II  "STRI(PLATFORM);
 
 char *_version_str="\0$VER: DirectoryOpus "PROG_STRING;
 
