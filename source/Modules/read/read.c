@@ -28,6 +28,8 @@ For more information on Directory Opus for Windows please see:
 
 #ifdef __amigaos3__
 struct Device *InputBase = NULL;
+#else
+struct Library *InputBase = NULL;
 #endif
 
 #ifdef __amigaos4__
@@ -89,7 +91,7 @@ int LIBFUNC L_Module_Entry(
 
 	// Get input.device base
 	if (!OpenDevice("input.device",0,(struct IORequest *)&data->input_req,0))
-		data->input_base=(struct Library *)data->input_req.io_Device;
+		InputBase=data->input_base=(struct Library *)data->input_req.io_Device;
 	#ifdef __amigaos4__
 	IInput = (struct InputIFace *)GetInterface(data->input_base,"main",1,NULL); 
 	#endif
@@ -2139,7 +2141,6 @@ BOOL read_view(read_data *data)
 			{
 				short dir=0,y,h;
 				long speed=10000;
-				struct Library *InputBase=data->input_base;
 
 				// Check right button is still down
 				if (InputBase && !(PeekQualifier()&IEQUALIFIER_RBUTTON))
