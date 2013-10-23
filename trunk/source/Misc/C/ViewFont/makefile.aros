@@ -11,8 +11,15 @@ DEBUGSYM := -gstabs
 DEBUG := -DDEBUG
 endif
 
-NAME := viewfont
-DESTDIR := ../../../bin.$(ARCH)-aros
+# TODO: add sanity checks
+ifdef arch
+ARCH := $(arch)
+else
+ARCH := $(shell uname -m)
+endif
+
+NAME     := viewfont
+DESTDIR  := ../../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
