@@ -42,6 +42,11 @@ endif
 ifeq ($(findstring aros, $(MAKECMDGOALS)),aros)
 	PLATFORM:= aros
 	COUNT:= $(COUNT) num
+	ifdef arch
+		ARCHSTRING := $(arch)-
+	else
+		ARCHSTRING := $(shell uname -m)-
+	endif
 endif
 
 # Generate error if no platform entered on "Make" command line.
@@ -133,7 +138,7 @@ clean : clean-program clean-library clean-modules clean-commands
 cleanall : clean
 	@echo " "
 	@echo "++++++++++++++ clean binaries ++++++++++++++"
-	@$(REMOVE) bin.$(PLATFORM)
+	@$(REMOVE) bin.$(ARCHSTRING)$(PLATFORM)
 
 .PHONY : clean-program
 clean-program:
@@ -164,21 +169,21 @@ clean-commands:
 .PHONY : release
 release: cleanall all
 	@echo " "
-	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha"
+	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
 	@$(MAKEDIR) Dopus5/Modules
 	@$(MAKEDIR) Dopus5/C
 	@$(MAKEDIR) $(DEST)
-	@$(COPY) bin.$(PLATFORM)/dopus5.library Dopus5/Libs
-	@$(COPY) bin.$(PLATFORM)/*.module Dopus5/Modules
-	@$(COPY) bin.$(PLATFORM)/DirectoryOpus Dopus5
+	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/dopus5.library Dopus5/Libs
+	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/*.module Dopus5/Modules
+	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/DirectoryOpus Dopus5
 # Temporary change until DOpusRT5 is fixed
-#	@$(COPY) bin.$(PLATFORM)/DOpusRT5 Dopus5/C
+#	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/DOpusRT5 Dopus5/C
 	@$(COPY) ../archive/DOpusRT5  Dopus5/C
-	@$(COPY) bin.$(PLATFORM)/LoadDB Dopus5/C
-	@$(COPY) bin.$(PLATFORM)/viewfont Dopus5/C
-	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha
-	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(PLATFORM)$(TYPE).lha Dopus5
+	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/LoadDB Dopus5/C
+	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/viewfont Dopus5/C
+	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha
+	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha Dopus5
 	@$(REMOVE) Dopus5
 
 ###########################################################
