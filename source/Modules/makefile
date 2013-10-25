@@ -69,8 +69,7 @@ endif
 
 
 .PHONY : all
-all : about
-# cleanup configopus diskcopy diskinfo filetype fixicons format ftp icon join listerformat misc pathformat play print read show themes xadopus
+all : about cleanup configopus diskcopy diskinfo filetype fixicons format ftp icon join listerformat misc pathformat play print read show themes xadopus
 
 .PHONY : about
 about:
