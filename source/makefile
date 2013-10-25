@@ -4,7 +4,7 @@
 # Enter debug=no on "Make" command line to disable debug output.
 export debug
 ###########################################################
-# Enter arch=<i386|arm> on "Make" command line to select the AROS architecture
+# Export arch to select the AROS architecture
 export arch
 ###########################################################
 # Example Commands:
@@ -19,53 +19,54 @@ export arch
 # Compiles debug version of dopus5 components for OS3 & creates
 # release archive.
 
-# make aros release debug=no arch=i386
+# make i386-aros release debug=no
 # Compiles normal version of dopus5 components for i386-AROS & creates
 # release archive.
 ###########################################################
 # Read platform arguments from the "Make" command line:
-# Acceptable platform arguments are os3, os4, or mos.
+# Acceptable platform arguments are os3, os4, mos, i386-aros or arm-aros.
 PLATFORM:= none
-COUNT:=
+NAME:=
 ifeq ($(findstring os3, $(MAKECMDGOALS)),os3)
 	PLATFORM:= os3
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
 ifeq ($(findstring os4, $(MAKECMDGOALS)),os4)
 	PLATFORM:= os4
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
 ifeq ($(findstring mos, $(MAKECMDGOALS)),mos)
 	PLATFORM:= mos
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
-ifeq ($(findstring aros, $(MAKECMDGOALS)),aros)
+ifeq ($(findstring arm, $(MAKECMDGOALS)),arm)
 	PLATFORM:= aros
-	COUNT:= $(COUNT) num
-	ifdef arch
-		ARCHSTRING := $(arch)-
-	else
-		ARCHSTRING := $(shell uname -m)-
-	endif
+	arch:= arm
+	NAME:= $(arch)-$(PLATFORM) $(NAME)
 endif
+ifeq ($(findstring i386-aros, $(MAKECMDGOALS)),i386-aros)
+	PLATFORM:= aros
+	arch:= i386
+	NAME:= $(arch)-$(PLATFORM) $(NAME)
+endif
+NAME := $(strip $(NAME))
 
 # Generate error if no platform entered on "Make" command line.
 ifeq ($(PLATFORM), none)
-$(error Error: Enter a platform (os3, os4, aros, or mos).)
+$(error Error: Enter a platform (os3, os4, mos, arm-aros or i386-aros).)
 endif
 
 #Generate error if multiple platforms entered on "Make" command line.
-ifneq ($(words $(COUNT)), 1)
-$(error Error: Enter only one platform (os3, os4, aros, or mos))
+ifneq ($(words $(NAME)), 1)
+$(error Error: Enter only 1 platform (os3, os4, mos, arm-aros or i386-aros).)
 endif
 
 # Compile all if only a platform is entered on "Make" command line.
-ifeq ($(strip $(filter-out $(PLATFORM), $(MAKECMDGOALS))),)
-$(PLATFORM) : all
+ifeq ($(strip $(filter-out $(NAME), $(MAKECMDGOALS))),)
+$(NAME) : all
 endif
 ###########################################################
-# Sets archive filename platform name & version.
-#NAME := $(shell echo $(PLATFORM) | tr '[:lower:]' '[:upper:]')
+# Sets archive type & version.
 ifeq ($(debug), no)
 TYPE :=
 VERSION := _90_
@@ -86,7 +87,7 @@ ifeq ($(HOST), AROS)
 	SYSTEM := amiga
 endif
 ###########################################################
-# Sets destination directory and lha command
+# Sets destination directory and lha command for releases
 DEST := ../releases/
 ifeq ($(SYSTEM), amiga)
 ARCDEST := /releases/
@@ -96,13 +97,21 @@ ARCDEST := $(DEST)
 LHA := lha ao5q
 endif
 ###########################################################
+# Sets base archive to use for releases
+ifeq ($(PLATFORM), os4)
+	BASEARC = basedata-os4.lha
+else
+	BASEARC := basedata.lha
+endif
+###########################################################
 # Commands
 REMOVE := rm -rf
 COPY := cp -p
 MAKEDIR := mkdir -p
 ###########################################################
 
-#.PHONY : all
+
+.PHONY : all
 all : program library modules commands
 
 .PHONY : program
@@ -121,13 +130,13 @@ library:
 modules:
 	@echo " "
 	@echo "<<<<<<<<<<<<<<<<<< modules >>>>>>>>>>>>>>>>>>"
-	@$(MAKE) -C Modules $(PLATFORM)
+	@$(MAKE) -C Modules $(NAME)
 
 .PHONY : commands
 commands:
 	@echo " "
 	@echo "<<<<<<<<<<<<<<<<<< commands >>>>>>>>>>>>>>>>>"
-	@$(MAKE) -C Misc/C $(PLATFORM)
+	@$(MAKE) -C Misc/C $(NAME)
 
 ###########################################################
 
@@ -138,7 +147,7 @@ clean : clean-program clean-library clean-modules clean-commands
 cleanall : clean
 	@echo " "
 	@echo "++++++++++++++ clean binaries ++++++++++++++"
-	@$(REMOVE) bin.$(ARCHSTRING)$(PLATFORM)
+	@$(REMOVE) bin.$(NAME)
 
 .PHONY : clean-program
 clean-program:
@@ -156,34 +165,34 @@ clean-library:
 clean-modules:
 	@echo " "
 	@echo "++++++++++++++ clean modules +++++++++++++++"
-	@$(MAKE) -C Modules -s $(PLATFORM) clean
+	@$(MAKE) -C Modules -s $(NAME) clean
 
 .PHONY : clean-commands
 clean-commands:
 	@echo " "
 	@echo "++++++++++++++ clean commands ++++++++++++++"
-	@$(MAKE) -C Misc/C -s $(PLATFORM) clean
+	@$(MAKE) -C Misc/C -s $(NAME) clean
 
 ###########################################################
 
 .PHONY : release
 release: cleanall all
 	@echo " "
-	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha"
+	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
 	@$(MAKEDIR) Dopus5/Modules
 	@$(MAKEDIR) Dopus5/C
 	@$(MAKEDIR) $(DEST)
-	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/dopus5.library Dopus5/Libs
-	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/*.module Dopus5/Modules
-	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/DirectoryOpus Dopus5
+	@$(COPY) bin.$(NAME)/dopus5.library Dopus5/Libs
+	@$(COPY) bin.$(NAME)/*.module Dopus5/Modules
+	@$(COPY) bin.$(NAME)/DirectoryOpus Dopus5
 # Temporary change until DOpusRT5 is fixed
-#	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/DOpusRT5 Dopus5/C
+#	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
 	@$(COPY) ../archive/DOpusRT5  Dopus5/C
-	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/LoadDB Dopus5/C
-	@$(COPY) bin.$(ARCHSTRING)$(PLATFORM)/viewfont Dopus5/C
-	@$(COPY) ../archive/basedata.lha $(DEST)Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha
-	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(ARCHSTRING)$(PLATFORM)$(TYPE).lha Dopus5
+	@$(COPY) bin.$(NAME)/LoadDB Dopus5/C
+	@$(COPY) bin.$(NAME)/viewfont Dopus5/C
+	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
+	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
 	@$(REMOVE) Dopus5
 
 ###########################################################
@@ -193,6 +202,7 @@ clean-release: cleanall
 	@echo " "
 	@echo "++++++++++++++ clean release +++++++++++++++"
 	@$(REMOVE) $(DEST)
+	@$(REMOVE) bin.*
 
 ###########################################################
 
@@ -200,7 +210,9 @@ clean-release: cleanall
 # commands when entered as a goal for "make"
 # on the command line (like: make os3).
 
-.PHONY : os3 os4 mos aros
+.PHONY : os3 os4 mos aros i386-aros arm-aros
+i386-aros: mos
+arm-aros: mos
 os3: mos
 os4: mos
 aros: mos
