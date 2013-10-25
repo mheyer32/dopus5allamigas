@@ -2,6 +2,12 @@
 #define STRI(x)  STRI2(x)
 #define STRI2(x) #x
 
+// converts AROS archetecture into integer for conditional tests
+#undef i386
+#define i386 386
+#undef arm
+#define arm 603
+
 //set the compile date from the makefile date definition
 #define DOPUSDATE STRI(COMPDATE)
 
@@ -26,14 +32,16 @@
 	#elif defined(__MORPHOS__)
 		#define PLATFORM [MOSdev]
 	#elif defined(__AROS__)
-		/*#if ARCH == i386
+		#if ARCH == 386
+			#undef i386
 			#define PLATFORM [AROSdev-i386]
-		#elif ARCH == arm
+		#elif ARCH == 603
+			#undef arm
 			#define PLATFORM [AROSdev-arm]
 		#else
-			#warning Unknown architecture!*/
+			#warning Unknown architecture!
 			#define PLATFORM [AROSdev]
-		//#endif
+		#endif
 	#else
 		#error Unsupported operating system!
 	#endif
@@ -45,14 +53,16 @@
 	#elif defined(__MORPHOS__)
 		#define PLATFORM [MOS]
 	#elif defined(__AROS__)
-		/*#if ARCH == i386
+		#if ARCH == 386
+			#undef i386
 			#define PLATFORM [AROS-i386]
-		#elif ARCH == arm
+		#elif ARCH == 603
+			#undef arm
 			#define PLATFORM [AROS-arm]
 		#else
-			#warning Unknown architecture!*/
+			#warning Unknown architecture!
 			#define PLATFORM [AROS]
-		//#endif
+		#endif
 	#else
 		#error Unsupported operating system!
 	#endif

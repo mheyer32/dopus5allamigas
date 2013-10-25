@@ -4,43 +4,66 @@
 # Enter debug=no on "Make" command line to disable debug output.
 export debug
 ###########################################################
-# Enter arch=<i386|arm> on "Make" command line to select the AROS architecture
+# Export arch to select the AROS architecture
 export arch
 ###########################################################
+# Example Commands:
+
+# make os4
+# Compiles debug version of dopus5 components for OS4.
+
+# make MOS debug=no
+# Compiles normal (non-debug) version of dopus5 components for MorphOS.
+
+# make OS3 release
+# Compiles debug version of dopus5 components for OS3 & creates
+# release archive.
+
+# make i386-aros release debug=no
+# Compiles normal version of dopus5 components for i386-AROS & creates
+# release archive.
+###########################################################
 # Read platform arguments from the "Make" command line:
-# Acceptable platform arguments are os3, os4, or mos.
+# Acceptable platform arguments are os3, os4, mos, i386-aros or arm-aros.
 PLATFORM:= none
-COUNT:=
+NAME:=
 ifeq ($(findstring os3, $(MAKECMDGOALS)),os3)
 	PLATFORM:= os3
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
 ifeq ($(findstring os4, $(MAKECMDGOALS)),os4)
 	PLATFORM:= os4
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
 ifeq ($(findstring mos, $(MAKECMDGOALS)),mos)
 	PLATFORM:= mos
-	COUNT:= $(COUNT) num
+	NAME:= $(PLATFORM) $(NAME)
 endif
-ifeq ($(findstring aros, $(MAKECMDGOALS)),aros)
+ifeq ($(findstring arm-aros, $(MAKECMDGOALS)),arm-aros)
 	PLATFORM:= aros
-	COUNT:= $(COUNT) num
+	arch:= arm
+	NAME:= $(arch)-$(PLATFORM) $(NAME)
 endif
-
-#Generate error if multiple platforms entered on "Make" command line.
-ifneq ($(words $(COUNT)), 1)
-$(error Error: Enter only one platform (os3, os4, aros, or mos))
+ifeq ($(findstring i386-aros, $(MAKECMDGOALS)),i386-aros)
+	PLATFORM:= aros
+	arch:= i386
+	NAME:= $(arch)-$(PLATFORM) $(NAME)
 endif
+NAME := $(strip $(NAME))
 
 # Generate error if no platform entered on "Make" command line.
 ifeq ($(PLATFORM), none)
-$(error Error: Enter a platform (os3, os4, aros, or mos).)
+$(error Error: Enter a platform (os3, os4, mos, arm-aros or i386-aros).)
+endif
+
+#Generate error if multiple platforms entered on "Make" command line.
+ifneq ($(words $(NAME)), 1)
+$(error Error: Enter only 1 platform (os3, os4, mos, arm-aros or i386-aros).)
 endif
 
 # Compile all if only a platform is entered on "Make" command line.
-ifeq ($(strip $(filter-out $(PLATFORM), $(MAKECMDGOALS))),)
-$(PLATFORM) : all
+ifeq ($(strip $(filter-out $(NAME), $(MAKECMDGOALS))),)
+$(NAME) : all
 endif
 ###########################################################
 
@@ -97,7 +120,9 @@ clean-viewfont:
 # commands when entered as a goal for "make"
 # on the command line (like: make os3).
 
-.PHONY : os3 os4 mos aros
+.PHONY : os3 os4 mos aros i386-aros arm-aros
+i386-aros: mos
+arm-aros: mos
 os3: mos
 os4: mos
 aros: mos
