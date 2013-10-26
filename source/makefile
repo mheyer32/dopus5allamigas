@@ -172,8 +172,7 @@ clean-commands:
 ###########################################################
 
 .PHONY : release
-#release: cleanall all
-release: all
+release: cleanall all
 	@echo " "
 	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
