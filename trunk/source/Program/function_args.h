@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_FUNCTION_ARGS
 #define _DOPUS_FUNCTION_ARGS
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _FuncArgs
 {
@@ -37,7 +39,9 @@ typedef struct _FuncArgs
 	short		done_args;
 } FuncArgs;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 FuncArgs *function_parse_args(char *template,char *args);
 void function_free_args(FuncArgs *args);

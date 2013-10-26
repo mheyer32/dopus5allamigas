@@ -25,7 +25,9 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_TILE
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -44,7 +46,9 @@ typedef struct
 	short				y_offset;
 } TileInfo;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 enum
 {

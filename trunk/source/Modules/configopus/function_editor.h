@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct Window		*window;
@@ -87,7 +89,9 @@ typedef struct _FuncEdData
 
 	char			label[80];
 } FuncEdData;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern ConfigWindow
 	_function_editor_window,
@@ -108,13 +112,17 @@ extern ObjectDef
 #define FUNCTYPE_FILETYPE	3
 #define FUNCTYPE_HOTKEY		4
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _FunctionEntry {
 	Att_Node	*node;		// Points back to node
 	int		type;		// Entry type
 	char		buffer[256];	// Entry buffer
 } FunctionEntry;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern long _funced_flaglist[];
 extern UWORD _function_type_labels[];

@@ -183,7 +183,9 @@ struct DOpusCommandList
 
 #endif
  
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 // Use this command to get the address of the hooks from the Opus process.
 // Send it to the main Opus IPC, and supply the address of a DOpusCallbackInfo
@@ -498,7 +500,9 @@ typedef struct
 
 } DOpusCallbackInfo;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #if defined(__amigaos4__)
 

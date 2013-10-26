@@ -22,7 +22,9 @@ For more information on Directory Opus for Windows please see:
 */
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -41,7 +43,9 @@ typedef struct
 	iconpos_data		ip_Data;
 } iconpos_info;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void iconpos_openwindow(iconpos_info *,struct MsgPort *);
 void iconpos_closewindow(iconpos_info *);

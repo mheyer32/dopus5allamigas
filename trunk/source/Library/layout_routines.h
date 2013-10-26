@@ -25,7 +25,9 @@ For more information on Directory Opus for Windows please see:
 
 //#define BACKFILL
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 struct backfill_hook
 {
@@ -37,7 +39,9 @@ struct backfill_hook
 	short			shadowpen;
 };
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #ifdef BACKFILL
 void ASM _req_backfill(REG(a0, struct backfill_hook *hook),REG(a1, struct BackFillInfo *info),REG(a2, struct RastPort *rp));

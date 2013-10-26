@@ -41,7 +41,9 @@ enum {
 	BUTTONS_ICONIFY,		// Iconify
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 // Defines a button window
 typedef struct ButtonWindow
@@ -165,7 +167,9 @@ typedef struct
 	struct AppMessage *appmsg;
 } buttons_edit_packet;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #define BUTTONF_RESIZED		(1<<0)		// Window has been resized

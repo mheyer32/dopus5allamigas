@@ -23,7 +23,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _FILETYPES_H
 #define _FILETYPES_H
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 typedef struct
@@ -116,7 +118,9 @@ void AddFiletypeCache(MatchHandle *,Cfg_Filetype *,ULONG,struct LibData *);
 ULONG FindFiletypeCache(MatchHandle *,Cfg_Filetype *,struct LibData *);
 void FreeFiletypeCache(struct LibData *,FileTypeCache *);
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #endif

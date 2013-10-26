@@ -29,7 +29,9 @@ For more information on Directory Opus for Windows please see:
  Timer
 
  *****************************************************************************/
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
  
 typedef struct TimerHandle
 {
@@ -39,7 +41,9 @@ typedef struct TimerHandle
 	short			active;		// Indicates active request
 } TimerHandle;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 TimerHandle *AllocTimer(ULONG,struct MsgPort *);
 BOOL CheckTimer(TimerHandle *);

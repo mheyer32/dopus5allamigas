@@ -47,7 +47,9 @@ For more information on Directory Opus for Windows please see:
 #endif
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 #define CONFIG_VERSION_3 		2
@@ -2416,7 +2418,9 @@ struct AllocBitmapPatchNode
 	struct Task	*abp_Task;
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 /*********************************************************************/
 

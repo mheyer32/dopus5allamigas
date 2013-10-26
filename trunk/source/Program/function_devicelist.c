@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 struct device_data
 {
 	char				name[80];	// Disk name
@@ -36,7 +38,9 @@ struct device_data
 	short				valid;		// Validating?
 	char				fsys[6];	// File system
 };
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 enum
 {

@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef DOPUS_STRUCTURES
 #define DOPUS_STRUCTURES
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 #define OLD_CONFIG_VERSION 9999
@@ -244,7 +246,9 @@ struct RLEinfo {
 	int offset;
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #include "dopusmessage.h"

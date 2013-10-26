@@ -22,7 +22,9 @@ For more information on Directory Opus for Windows please see:
 */
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct ToolBarInfo
 {
@@ -47,7 +49,9 @@ typedef struct ToolBarInfo
 	short			max_width;
 } ToolBarInfo;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 ToolBarInfo *OpenToolBar(Cfg_ButtonBank *,char *);
 void FreeToolBar(ToolBarInfo *);

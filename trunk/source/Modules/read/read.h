@@ -37,7 +37,9 @@ enum
 #define READCHUNK_SIZE		65536
 #define READ_READ_SIZE		32768
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 typedef struct
 {
 	struct MinNode			node;
@@ -182,7 +184,9 @@ struct read_startup
 	struct IBox	dims;
 	BOOL		got_pos;
 };
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #define READF_DONE_ANSI		(1<<0)
 #define READF_HIGH_OK		(1<<1)

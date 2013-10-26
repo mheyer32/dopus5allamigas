@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	Cfg_Filetype	*type;
@@ -121,7 +123,9 @@ typedef struct
 	struct MinNode	node;
 	ULONG		handle;
 } ReaderNode;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern short filetype_action_lookup[];
 extern short fileclass_match_lookup[];

@@ -27,7 +27,9 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_lister.h"
 
 // End of a connection for recursive transfer - FTP or file system
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _endpoint
 {
 int                      ep_type;			// FTP or file system?
@@ -56,18 +58,24 @@ int                    (*ep_errorreq)( struct _endpoint *, struct ftp_node *, UL
 unsigned long          (*ep_opts)    ( struct _endpoint *, int type );
 
 } endpoint;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern const char *months[];
 
 // List of entries in a directory
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct rec_entry_list
 {
 struct List rl_list;
 int         rl_entry_count;	// How many entries in the list
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 // Tags for create_endpoint()
 #define EP_TYPE		(TAG_USER + 0)
@@ -85,7 +93,9 @@ ENDPOINT_HTTPPROXY	// Just dreaming here!
 //
 //	Structure used by all recursive hook functions
 //
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct hook_rec_data
 {
 struct opusftp_globals  *hc_og;
@@ -120,7 +130,9 @@ char                     hc_pattern[FILENAMELEN*2 + 1];	// For pattern matchine 
 char                     hc_resultpath[PATHLEN + 1];	// Where we found a match
 short                    hc_match_comment;
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 //
 //	Flags for recursive stuff

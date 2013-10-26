@@ -34,7 +34,9 @@ For more information on Directory Opus for Windows please see:
 #include <dopus/dopusbase.h>
 #endif
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 
 // Defines a function in a module
@@ -262,7 +264,9 @@ extern ModuleInfo module_info;
 #endif
 
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 
 #endif

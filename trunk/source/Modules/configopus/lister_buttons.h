@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	char			bank_name[256];		// Current bank path
@@ -62,7 +64,9 @@ typedef struct
 	unsigned long		tick_count;
 	unsigned long		last_tick;
 } lister_buttons_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 BOOL lister_buttons_open(lister_buttons_data *data,struct Screen *screen);
 void lister_buttons_close(lister_buttons_data *data,BOOL);

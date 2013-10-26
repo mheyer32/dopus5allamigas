@@ -305,7 +305,9 @@ void free_app_entry(AppEntry *entry,WB_Data *);
 AppEntry *find_app_entry(AppEntry *entry,WB_Data *wb_data);
 
 
-#pragma pack(2)  
+#ifndef __mc68000__
+#pragma pack(2)
+#endif  
 typedef struct
 {
 	struct DiskObject	doc_DiskObject;
@@ -315,7 +317,9 @@ typedef struct
 	APTR			doc_Image2;
 	APTR			doc_Data;
 } DiskObjectCopy;
-#pragma pack()  
+#ifndef __mc68000__
+#pragma pack()
+#endif  
 
 void icon_notify(struct LibData *data,char *name,ULONG flags,short);
 char *icon_fullname(struct LibData *data,char *name);

@@ -23,7 +23,9 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 typedef struct
 {
@@ -42,7 +44,9 @@ struct RequestData
 	long return_values[10];
 };
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 
 void SAVEDS requester_proc(void);

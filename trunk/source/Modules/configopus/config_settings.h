@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	IPCData			*ipc;
@@ -29,7 +31,9 @@ typedef struct
 	char			*settings_name;
 	char			last_saved[256];
 } config_settings_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define CFGSETF_NEW_PATH	(1<<0)
 

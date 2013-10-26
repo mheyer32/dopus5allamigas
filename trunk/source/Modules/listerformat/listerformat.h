@@ -53,7 +53,9 @@ enum
 	GAD_SET_AS_DEFAULTS,
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct {
 	NewConfigWindow		newwin;
 	struct Window		*window;
@@ -71,7 +73,9 @@ typedef struct {
 	ULONG			mod_id;
 	ListFormatStorage	def_format_copy;
 } config_lister_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void _config_lister_init_format(config_lister_data *data);
 void _config_lister_cleanup(config_lister_data *data);

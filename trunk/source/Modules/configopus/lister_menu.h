@@ -5,7 +5,9 @@ enum
 	TYPE_SCRIPTS,
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	char			menu_name[256];			// Current bank path
@@ -61,7 +63,9 @@ typedef struct
 
 	Att_List		*script_list;
 } lister_menu_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define LMF_NEW_ENTRY	(1<<0)
 

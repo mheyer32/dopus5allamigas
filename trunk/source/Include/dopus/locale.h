@@ -29,7 +29,9 @@ For more information on Directory Opus for Windows please see:
  Locale
 
  *****************************************************************************/
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 // Locale marker
 struct DOpusLocale
@@ -40,7 +42,9 @@ struct DOpusLocale
 	struct Locale	*li_Locale;
 };
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 STRPTR DOpusGetString(struct DOpusLocale *,LONG);
 

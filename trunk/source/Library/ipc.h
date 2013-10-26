@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #define _IPC_H
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 typedef struct {
 	struct Message	msg;
@@ -42,7 +44,9 @@ typedef struct {
 	struct ListLock			*list;			// List we're a member of
 } IPCData;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 enum {
 	IPC_COMMAND_BASE=0x8000000,

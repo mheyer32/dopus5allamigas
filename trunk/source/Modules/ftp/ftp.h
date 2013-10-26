@@ -68,7 +68,9 @@ For more information on Directory Opus for Windows please see:
 //
 //	Every FTP server has an ftp_info structure:
 //
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct ftp_info
 {
 struct opusftp_globals *fi_og;			// Global data pointer - we really shouldn't need this at this low level!!
@@ -94,7 +96,9 @@ int                     fi_doing_noop;		// GP Flag to suppress log output
 int                     fi_buffer_left;		// GP
 char                   *fi_buffer_pos;		// GP
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 //	FTP flags
 enum

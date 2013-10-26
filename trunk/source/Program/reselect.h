@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_RESELECT
 #define _DOPUS_RESELECT
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -37,11 +39,15 @@ typedef struct
 	unsigned long		flags;		// Flags
 } ReselectionData;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define RESELF_SAVE_FILETYPES	(1<<0)
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -52,7 +58,9 @@ typedef struct
 	char			name[1];	// Filename
 } ReselectionFile;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void InitReselect(ReselectionData *);
 void MakeReselect(ReselectionData *,struct DirectoryBuffer *,ULONG);

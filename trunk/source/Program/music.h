@@ -21,7 +21,9 @@ For more information on Directory Opus for Windows please see:
 
 */
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 struct MusicBase
 {
@@ -39,7 +41,9 @@ struct MusicBase
     char   *ml_SongName;
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 /* Module types currently supported */

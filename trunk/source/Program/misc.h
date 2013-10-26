@@ -35,7 +35,9 @@ enum
 #define READFILE_NOT_FOUND	-1
 #define READFILE_NO_MEMORY	-2
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -45,7 +47,9 @@ typedef struct
 	IPCData		*ipc;
 } MiscStartup;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 IPCData *misc_startup(char *,ULONG,struct Window *,APTR,BOOL);
 IPC_EntryProto(misc_proc, extern);
@@ -96,7 +100,9 @@ short error_saving(short err,struct Window *window,long txt,long buttons);
 BOOL check_closescreen(struct Screen *screen);
 BOOL check_qualifier(UWORD,UWORD,UWORD,UWORD);
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 struct read_startup
 {
@@ -116,13 +122,17 @@ typedef struct
 	char			data[1];
 } iconopen_packet;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 iconopen_packet *get_icon_packet(struct _BackdropInfo *,struct _BackdropObject *,char *,UWORD);
 
 struct IntuiMessage *check_refresh_msg(struct Window *window,ULONG mask);
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 struct Window *WhichWindow(
 	struct Screen *screen,
@@ -130,7 +140,9 @@ struct Window *WhichWindow(
 	short y,
 	unsigned short flags);
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define WWF_LEAVE_LOCKED	(1<<0)
 #define WWF_NO_LOCK		(1<<1)

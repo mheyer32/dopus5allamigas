@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	NewConfigWindow			newwin;
@@ -43,7 +45,9 @@ typedef struct
 
 	ULONG				pad1[2];
 } PaletteBoxData;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define PBF_NO_FG	(1<<0)
 #define PBF_NO_EDIT	(1<<1)

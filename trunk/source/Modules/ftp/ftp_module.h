@@ -31,7 +31,9 @@ For more information on Directory Opus for Windows please see:
 #include <proto/module.h>
 
 // This is what 'dopus_ftp' gets sent when we launch it
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct modlaunch_data
 {
 IPCData       *mld_ftp_ipc;		// dopus_ftp's ipc
@@ -42,7 +44,9 @@ struct Screen *mld_screen;		// Screen we're on
 IPCData       *mld_opus_ipc;		// The main Opus process's ipc
 IPCData       *mld_function_ipc;	// dopus_function's ipc, needed for callback hooks
 EXT_FUNC      (mld_func_callback);
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 struct opusftp_globals *mld_og;		// Points back to global info
 };

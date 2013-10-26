@@ -27,7 +27,9 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 #include "layout_routines.h"
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 #define GAD_POPUP_ID	(UWORD)-7
 #define GAD_CHECK_ID	(UWORD)-6
@@ -69,7 +71,9 @@ typedef struct
 	int string_len_2;
 } simplereq_data;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 BOOL _simplereq_open(simplereq_data *data,void *parent);
 void _simplereq_close(simplereq_data *data);

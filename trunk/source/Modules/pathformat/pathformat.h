@@ -55,7 +55,9 @@ enum
 	MODE_ACTION
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	NewConfigWindow		newwin;
@@ -80,7 +82,9 @@ typedef struct
 	ULONG			seconds;
 	ULONG			micros;
 } config_path_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 BOOL config_paths_open(config_path_data *data,struct Screen *screen);
 void config_paths_cleanup(config_path_data *data);

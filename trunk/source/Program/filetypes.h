@@ -50,7 +50,9 @@ enum
 	FTTYPE_USER_10,			// UserFunc10
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -69,7 +71,9 @@ typedef struct
 	unsigned long		disk_type;	// Disk type
 } MatchHandle;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define MATCHF_TRIED_DT		(1<<0)		// Tried to get datatypes
 #define MATCHF_TRIED_MODULE	(1<<1)		// Tried to get module
@@ -135,7 +139,9 @@ enum {
 };
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -151,7 +157,9 @@ typedef struct
 	char		name[1];
 } SniffData;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define SNIFFF_VERSION		(1<<0)
 #define SNIFFF_NO_FILETYPES	(1<<1)

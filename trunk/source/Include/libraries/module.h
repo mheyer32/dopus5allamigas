@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_MODULES
 #define _DOPUS_MODULES
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	ULONG	id;		// Function ID code
@@ -61,7 +63,9 @@ typedef struct
 	ULONG		function_count;	// Number of functions in module
 	ModuleFunction	function[1];	// Definition of first function
 } ModuleInfo;
-#pragma pack()	
+#ifndef __mc68000__
+#pragma pack()
+#endif	
 
 #define MODULEF_CALL_STARTUP		(1<<0)	// Call ModuleEntry() on startup
 #define MODULEF_STARTUP_SYNC		(1<<1)	// Run Synchronously on startup
@@ -116,7 +120,9 @@ struct progress_packet
 	ULONG			count;
 };
 
-#pragma pack(2)	
+#ifndef __mc68000__
+#pragma pack(2)
+#endif	
 struct endentry_packet
 {
 	struct _FunctionEntry	*entry;
@@ -129,7 +135,9 @@ struct addchange_packet
 	UWORD			change;
 	APTR			data;
 };
-#pragma pack()	
+#ifndef __mc68000__
+#pragma pack()
+#endif	
 
 struct addfile_packet
 {
@@ -161,7 +169,9 @@ struct sortlist_packet
 	long			dir_count;
 };
 
-#pragma pack(2)	
+#ifndef __mc68000__
+#pragma pack(2)
+#endif	
 struct replacereq_packet
 {
 	struct Window		*window;
@@ -181,7 +191,9 @@ struct DOpusScreenData
 	unsigned short		pen_array[16];
 	short			pen_count;
 };	
-#pragma pack()	
+#ifndef __mc68000__
+#pragma pack()
+#endif	
 
 
 #if !defined(__amigaos4__) && !defined(__MORPHOS__)
@@ -234,7 +246,9 @@ struct command_packet
 #ifndef DEF_DOPUSCOMMANDLIST
 #define DEF_DOPUSCOMMANDLIST
 
-#pragma pack(2)	
+#ifndef __mc68000__
+#pragma pack(2)
+#endif	
 struct DOpusCommandList
 {
 	struct Node	dcl_Node;
@@ -244,7 +258,9 @@ struct DOpusCommandList
 	char		*dcl_Module;
 	char		*dcl_Help;
 };
-#pragma pack()	
+#ifndef __mc68000__
+#pragma pack()
+#endif	
 
 #endif
 
