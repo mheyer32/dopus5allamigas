@@ -98,11 +98,7 @@ LHA := lha ao5q
 endif
 ###########################################################
 # Sets base archive to use for releases
-ifeq ($(PLATFORM), os4)
-	BASEARC = basedata-os4.lha
-else
-	BASEARC := basedata.lha
-endif
+BASEARC := basedata.lha
 ###########################################################
 # Commands
 REMOVE := rm -rf
@@ -176,13 +172,19 @@ clean-commands:
 ###########################################################
 
 .PHONY : release
-release: cleanall all
+#release: cleanall all
+release: all
 	@echo " "
 	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
 	@$(MAKEDIR) Dopus5/Modules
 	@$(MAKEDIR) Dopus5/C
 	@$(MAKEDIR) $(DEST)
+ifeq ($(PLATFORM), os4)
+	@$(MAKEDIR) Dopus5/WBStartup
+	@$(COPY) ../archive/DoWBStartup Dopus5/WBStartup
+	@$(COPY) ../archive/DoWBStartup.info  Dopus5/WBStartup
+endif
 	@$(COPY) bin.$(NAME)/dopus5.library Dopus5/Libs
 	@$(COPY) bin.$(NAME)/*.module Dopus5/Modules
 	@$(COPY) bin.$(NAME)/DirectoryOpus Dopus5
