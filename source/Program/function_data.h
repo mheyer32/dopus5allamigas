@@ -125,7 +125,9 @@ enum
 };
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 // Command entry (looks like a (struct Node) as far as ln_Name goes)
 typedef struct _CommandList
@@ -149,7 +151,9 @@ typedef struct _CommandList
 	char		*help_name;
 } CommandList;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern CommandList	commandlist_internal[];
 
@@ -241,7 +245,9 @@ enum {
 #define COPY_FAILED		0	// Failed
 #define COPY_OK			1	// Ok
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 // Keeps track of what's in the modules directory
 typedef struct _ModuleNode
@@ -251,7 +257,9 @@ typedef struct _ModuleNode
 	short			flags;
 } ModuleNode;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define MNF_TEMP	(1<<0)
 

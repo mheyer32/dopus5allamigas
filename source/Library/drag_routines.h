@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #define _DRAG_ROUTINES_H
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _DragInfo {
 	struct RastPort	*rastport;	// Stores RastPort this bob belongs to
@@ -53,7 +55,9 @@ typedef struct _DragInfo {
 	long		pad[4];
 } DragInfo;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 // prototypes

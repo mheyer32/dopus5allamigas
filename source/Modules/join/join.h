@@ -79,7 +79,9 @@ extern ConfigWindow join_window,split_window;
 extern ObjectDef join_objects[],split_objects[];
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct Screen		*screen;
@@ -116,7 +118,9 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 BOOL join_open(join_data *);
 void join_close(join_data *);

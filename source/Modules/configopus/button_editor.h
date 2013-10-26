@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct MinNode		node;
@@ -85,7 +87,9 @@ typedef struct _ButtonEdData
 
 	ImageRemap		remap;
 } ButtonEdData;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern ConfigWindow
 	_button_editor_window;

@@ -19,7 +19,9 @@ enum
 	PICMENU_WHITE,
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	NewConfigWindow		newwin;
@@ -105,7 +107,9 @@ typedef struct
 	struct MinList		sound_list;
 	Att_List		*script_list;
 } config_env_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern ObjectDef _lister_format_gadgets[];
 

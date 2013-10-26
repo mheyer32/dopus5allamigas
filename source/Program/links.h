@@ -21,7 +21,9 @@ For more information on Directory Opus for Windows please see:
 
 */
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -29,6 +31,8 @@ typedef struct
 	struct FileInfoBlock	sli_Fib;
 } SoftLinkInfo;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 BOOL ReadSoftLinkDopus(BPTR,char *,char *,SoftLinkInfo *);

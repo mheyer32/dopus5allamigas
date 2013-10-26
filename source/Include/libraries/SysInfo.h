@@ -28,7 +28,9 @@
 #define SYSINFOVERSION	2L
 
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 /*
  * This structure is returned by InitSysInfo() and it's READ-ONLY.
@@ -220,7 +222,9 @@ struct SI_TaskCpuUsage {
 	LONG	reserved[8];		/* Reserved for future use		*/
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 /* These bits are used in cpu_usage_implemented-field */
 #define TASK_CPU_USAGEB_TOTAL_IMPLEMENTED		0

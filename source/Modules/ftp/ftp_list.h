@@ -34,7 +34,9 @@ For more information on Directory Opus for Windows please see:
 #define BDLEN      12
 #define SECONDSLEN 12
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct ls_parse_buf
 {
 char ls_own_grp_byt[OGBLEN+1];	//	Could be Owner, Group, or Bytes
@@ -45,6 +47,8 @@ char ls_seconds[SECONDSLEN+1];	//	Seconds from 1/1/78 (ascii)
 LONG ls_protect;		//	Protection flags
 char ls_comment[COMMENTLEN+1];	//	Used for link's real path
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #endif

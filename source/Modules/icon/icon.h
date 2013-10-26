@@ -74,7 +74,9 @@ enum
 	IDM_COUNT
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct Screen		*screen;
@@ -177,7 +179,9 @@ typedef struct
 
 	char			tempname[256];
 } icon_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void icon_free(icon_data *data);
 void closewindow(icon_data *data);

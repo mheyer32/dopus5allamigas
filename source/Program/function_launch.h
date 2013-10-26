@@ -38,7 +38,9 @@ enum
 	FUNCTION_GET_ICONS,			// Get icons
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _FunctionEntry
 {
@@ -74,7 +76,9 @@ typedef struct _InstructionParsed
 	unsigned short		count;
 } InstructionParsed;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define FUNCENTF_UNSELECT		(1<<0)	// Deselect this entry
 #define FUNCENTF_REMOVE			(1<<1)	// Remove this entry
@@ -90,7 +94,9 @@ typedef struct _InstructionParsed
 #define FUNCENTF_LINK			(1<<11)	// Link
 #define FUNCENTF_FAKE_ICON		(1<<12)
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _PathNode
 {
@@ -101,7 +107,9 @@ typedef struct _PathNode
 	ULONG			flags;
 } PathNode;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define LISTNF_INVALID		(1<<0)	// List is invalid
 #define LISTNF_NO_TITLE		(1<<1)	// Don't update title at finish
@@ -112,7 +120,9 @@ typedef struct _PathNode
 #define LISTNF_RESCAN		(1<<6)	// Rescan this list
 #define LISTNF_NO_REFRESH	(1<<7)	// Don't refresh this lister
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -143,7 +153,9 @@ typedef struct
 	char			fib_FileName[1];
 } FileChange;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define FCTYPE_ADD		1
 #define FCTYPE_DEL		2
@@ -155,7 +167,9 @@ typedef struct
 #define FCF_SHOW	1
 #define FCF_SELECT	2
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _FunctionHandle
 {
@@ -303,7 +317,9 @@ typedef struct _FunctionReturn {
 	char	*result;
 } FunctionReturn;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 // Function flags

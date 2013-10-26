@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_CONFIGURATION
 #define _DOPUS_CONFIGURATION
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 #define CONFIG_VERSION_3 		2
@@ -926,7 +928,9 @@ enum
 #define			GENERALF_EXCLUSIVE_STARTUP_SND	(1<<27)
 
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #endif

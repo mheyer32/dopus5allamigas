@@ -1,4 +1,6 @@
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _bank_node
 {
 	struct Node		node;
@@ -72,7 +74,9 @@ typedef struct
 
 	ImageRemap		remap;
 } config_buttons_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void _config_buttons_update(config_buttons_data *);
 BOOL _config_buttons_open(config_buttons_data *data,struct Screen *screen);

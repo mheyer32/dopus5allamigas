@@ -10,7 +10,9 @@ enum
 	MENU_SUB,
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	IPCData			*ipc;		// IPC pointer
@@ -56,7 +58,9 @@ typedef struct
 	short			flags;
 	IPCData			*ipc;
 } menu_node;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define MNF_SEP		(1<<0)
 

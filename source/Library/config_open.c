@@ -25,7 +25,9 @@ For more information on Directory Opus for Windows please see:
 #include "config.h"
 #include <Program/dopus_config.h>
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct {
 	char				*buffer;
@@ -34,7 +36,9 @@ typedef struct {
 	short				error;
 } string_handle;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 void init_config_string(struct _IFFHandle *iff,string_handle *handle);

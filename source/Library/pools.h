@@ -37,7 +37,9 @@ void ASM AsmFreePooled(REG(a0, void *), REG(a1, void *), REG(d0, ULONG), REG(a6,
 #endif
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 typedef struct
 {
@@ -52,7 +54,9 @@ typedef struct
 	ULONG			check_val;	// Header check value
 } MemHandle;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #define	MEMHF_CLEAR		(1<<0)		// Clear memory
 #define MEMHF_LOCK		(1<<1)		// Want locking

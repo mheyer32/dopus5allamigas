@@ -34,7 +34,9 @@ For more information on Directory Opus for Windows please see:
 #include <libraries/gadtools.h>
 #endif
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 
 #define POS_CENTER		-1		// Center position
@@ -498,7 +500,9 @@ struct MsgPort *GetWindowAppPort(struct Window *);
 #define RECTHEIGHT(rect)	(1+(rect)->MaxY-(rect)->MinY)
 
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 
 #endif

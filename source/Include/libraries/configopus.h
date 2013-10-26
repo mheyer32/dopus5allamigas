@@ -2,7 +2,9 @@
 #define _CONFIGOPUS_H_
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 
 #define STACK_DEFAULT	6144
@@ -124,7 +126,9 @@ enum
 };
 
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #endif
 

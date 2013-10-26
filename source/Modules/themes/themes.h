@@ -26,7 +26,9 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 #include <dopus/hooks.h>
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 typedef struct _FunctionEntry
 {
 	struct MinNode		node;
@@ -35,7 +37,9 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #define SAVETHEME	0
 #define LOADTHEME	1

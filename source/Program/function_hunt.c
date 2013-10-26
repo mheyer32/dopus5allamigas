@@ -23,7 +23,9 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct
 {
@@ -31,7 +33,9 @@ typedef struct
 	short comment;
 } HuntData;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 // HUNT
 DOPUS_FUNC(function_hunt)

@@ -28,7 +28,9 @@ extern struct Library		*UtilityBase;
 //extern struct Library		*LocaleBase;
 extern struct DOpusLocale	*locale;
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct Library		*DOSBase;
@@ -53,7 +55,9 @@ typedef struct _SubOptionHandle {
 	ULONG name;		// Option name ID
 	ObjectDef *objects;	// Object list
 } SubOptionHandle;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 void init_locale_data(struct DOpusLocale *);
 void lsprintf __ARGS((char *,...));
@@ -68,7 +72,9 @@ IPCData *SAVEDS Local_IPC_ProcStartup(
                          IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
                          IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
 
-#pragma pack(2)						 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif						 
 typedef struct
 {
 	struct Window		*window;
@@ -88,7 +94,9 @@ typedef struct
 	short			lock_count;
 	short			flags;
 } CfgDragInfo;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 BOOL config_drag_check(CfgDragInfo *drag);

@@ -23,7 +23,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _CLIPBOARD_H
 #define _CLIPBOARD_H
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 
@@ -46,7 +48,9 @@ typedef struct ClipHandle
 	BOOL			clip_Write;
 } ClipHandle;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #endif

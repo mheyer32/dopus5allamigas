@@ -66,7 +66,9 @@ enum
 	SUB_BIG_HI,
 };
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 typedef struct
 {
@@ -140,7 +142,9 @@ typedef struct
 	BOOL			locked;		// Locked open
 } PopUpData;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 
 #define TICK_TIME	20000

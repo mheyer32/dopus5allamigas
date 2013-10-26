@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_CX
 #define _DOPUS_CX
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 typedef struct _CxData
 {
@@ -42,7 +44,9 @@ typedef struct _CxData
 	short			start_popped;
 } CxData;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 enum

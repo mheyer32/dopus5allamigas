@@ -163,7 +163,9 @@ ID_QUIT,		// FORCE/S
 	COPY_REPLACE_ASK,
 	};
 
-#pragma pack(2)	
+#ifndef __mc68000__
+#pragma pack(2)
+#endif	
 struct ftp_environment 
 {
 int	e_retry_count;	// Number of times to retry a connection
@@ -249,7 +251,9 @@ unsigned int pad8		:	1;
 // the environment MUST BE LAST IN STRUCTURE
 struct ftp_environment oc_env;		// default global environment
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 /****************************************************************************
@@ -261,7 +265,9 @@ struct ftp_environment oc_env;		// default global environment
 *	ALWAYS Use fn copy_site_entry(og,new,old)
 *
 *****************************************************************************/
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 struct site_entry
 {
 BOOL			 se_anon;
@@ -353,7 +359,9 @@ struct SocketIFace *g_isocket;
 int		 g_errno;		/* Socket library puts its errors here */
 IPCData 	*g_master_ipc;		/* Master process's IPC */
 };
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 /*
  * the socket libraries need to be opened by each process that uses them
@@ -541,7 +549,9 @@ ENV_SUB_GLOBAL,
 //
 
 // Defines information about a GUI element
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	BOOL			visible;		// Indicates visibility
@@ -555,7 +565,9 @@ typedef struct
 
 	struct RastPort		rast;			// RastPort copy
 } GUI_Element;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #include <Program/reselect.h>
 #include <Program/pattern.h>
@@ -568,12 +580,16 @@ typedef struct
 
 
 // Config sub-option handles
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _SubOptionHandle {
 	int num;		// Option number
 	ULONG name;		// Option name ID
 	ObjectDef *objects;	// Object list
 } SubOptionHandle;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #endif

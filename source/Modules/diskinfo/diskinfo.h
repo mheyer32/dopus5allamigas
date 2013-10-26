@@ -53,7 +53,9 @@ enum
 	FREESHADOWPEN,
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	NewConfigWindow		new_win;
@@ -81,7 +83,9 @@ typedef struct
 
 	unsigned char	areabuf[AREAVERTEX*5] __attribute__((aligned (4)));
 } diskinfo_data;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 enum
 {
 	DISKINFO_LAYOUT,

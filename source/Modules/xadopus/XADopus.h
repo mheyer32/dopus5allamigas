@@ -31,7 +31,9 @@
 #define ADDNODEF_SORT		1		// Sort names
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 //--- from include/dopus/modules.h
 struct function_entry
@@ -100,4 +102,6 @@ struct MyPacket
 	char *a7, *a8;
 };
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 

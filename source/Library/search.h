@@ -24,7 +24,9 @@ For more information on Directory Opus for Windows please see:
 #define _SEARCH_H
 
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 // Data to store search results
 typedef struct
@@ -35,7 +37,9 @@ typedef struct
 	long	v_search_last_line_pos;		// Last line position searched
 } search_handle;
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 
 long search_buffer(

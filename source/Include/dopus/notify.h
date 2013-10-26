@@ -30,7 +30,9 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 // Notification message
 typedef struct
@@ -85,6 +87,8 @@ void RemoveNotifyRequest(APTR);
 void ReplyFreeMsg(struct Message *);
 void SetNotifyRequest(APTR,ULONG,ULONG);
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 #endif

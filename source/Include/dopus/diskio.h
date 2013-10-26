@@ -30,7 +30,9 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
- #pragma pack(2) 
+ #ifndef __mc68000__
+#pragma pack(2)
+#endif 
 typedef struct
 {
 	struct MsgPort			*dh_Port;	// Message port
@@ -45,7 +47,9 @@ typedef struct
 	unsigned long			dh_BlockSize;	// Block size
 	struct DateStamp		dh_Stamp;	// not used
 } DiskHandle;
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 // Some third-party DOS types
 #define ID_AFS_PRO		0x41465301

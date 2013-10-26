@@ -41,7 +41,9 @@ struct ArgArray
 	ULONG		aa_Count;
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 struct ArgArrayEntry
 {
@@ -50,7 +52,9 @@ struct ArgArrayEntry
 	char		ae_String[1];
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 #define AAF_ALLOW_DIRS	(1<<0)
 

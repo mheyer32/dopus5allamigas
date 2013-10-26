@@ -36,7 +36,9 @@ For more information on Directory Opus for Windows please see:
 
 #define ID_BUSY		0x42555359
 
-#pragma pack(2) 
+#ifndef __mc68000__
+#pragma pack(2)
+#endif 
 
 typedef struct
 {
@@ -92,7 +94,9 @@ struct LoginPkt
 	char			*password;
 };
 
-#pragma pack() 
+#ifndef __mc68000__
+#pragma pack()
+#endif 
 
 BOOL ASM L_WB_LaunchNew(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *));
 BOOL ASM L_WB_LaunchNotify(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *),REG(a3, struct Process **),REG(a4, IPCData *),REG(d2, ULONG));

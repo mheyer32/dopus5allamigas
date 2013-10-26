@@ -38,7 +38,9 @@ enum
 	FI_REPORT
 };
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _FunctionEntry
 {
 	struct MinNode		node;
@@ -47,5 +49,7 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
+#ifndef __mc68000__
 #pragma pack()
+#endif
 

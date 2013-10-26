@@ -9,7 +9,9 @@
 #include "workbench/workbench.h"
 #endif
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 
 
 /* Programs should NOT change anything in the librarybase!
@@ -143,7 +145,9 @@ struct NewIconsPrefs
    ULONG fomode;        /* Font Outline mode (see NIFOM_#? definitions) */
 };
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 
 #endif  /* LIBRARIES_NEWICON_H */

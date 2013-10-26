@@ -18,7 +18,9 @@ MODID_CREATE_FT
 /* How many bytes to look at at start of file */
 #define BYTECOUNT	16
 
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct
 {
 	struct Screen		*screen;
@@ -121,7 +123,9 @@ typedef struct
 	ULONG			a4;
 } creator_data;
 
+#ifndef __mc68000__
 #pragma pack()
+#endif
 
 extern ConfigWindow _finder_window;
 extern ObjectDef _finder_objects[];
@@ -208,7 +212,9 @@ FTOP_ENDSECTION		// End of a section (255)
 };
 
 /* YUCK! should not be here */
+#ifndef __mc68000__
 #pragma pack(2)
+#endif
 typedef struct _FunctionEntry
 {
 	struct MinNode		node;
@@ -217,4 +223,6 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
+#ifndef __mc68000__
 #pragma pack()
+#endif
