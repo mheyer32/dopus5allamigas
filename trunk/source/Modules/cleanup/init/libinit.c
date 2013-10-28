@@ -432,7 +432,7 @@ const USED_VAR ULONG __abox__ = 1;
 /* generic StackSwap() function which calls function() surrounded by
    StackSwap() calls */
 
-#if defined(__amigaos3__) && !defined(__AROS__)
+#if defined(__amigaos3__)
 ULONG stackswap_call(struct StackSwapStruct *stack,
                      ULONG (*function)(struct LibraryHeader *),
                      struct LibraryHeader *arg);
