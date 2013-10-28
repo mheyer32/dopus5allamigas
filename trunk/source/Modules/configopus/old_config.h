@@ -62,7 +62,7 @@
 #define FTFUNC_READ        10
 #define FTFUNC_SHOW        11
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -289,7 +289,7 @@ typedef struct _ConfigStuff {
 	Hotkey		*firsthotkey;	// First hotkey
 	APTR		memory;
 } ConfigStuff;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

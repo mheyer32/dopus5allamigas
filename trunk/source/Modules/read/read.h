@@ -37,7 +37,7 @@ enum
 #define READCHUNK_SIZE		65536
 #define READ_READ_SIZE		32768
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 typedef struct
@@ -184,7 +184,7 @@ struct read_startup
 	struct IBox	dims;
 	BOOL		got_pos;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

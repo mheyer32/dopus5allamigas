@@ -68,7 +68,7 @@ For more information on Directory Opus for Windows please see:
 //
 //	Every FTP server has an ftp_info structure:
 //
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct ftp_info
@@ -96,7 +96,7 @@ int                     fi_doing_noop;		// GP Flag to suppress log output
 int                     fi_buffer_left;		// GP
 char                   *fi_buffer_pos;		// GP
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

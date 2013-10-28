@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 
 // Protect GUI message
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct protectgui_msg
@@ -37,7 +37,7 @@ ULONG          pm_current;
 ULONG          pm_set_mask;
 ULONG          pm_clear_mask;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

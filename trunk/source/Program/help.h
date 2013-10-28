@@ -44,7 +44,7 @@ For more information on Directory Opus for Windows please see:
 #define HELP_MAIN			"Main"
 #define HELP_APPMENUITEM		"AppMenuItem"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -54,7 +54,7 @@ typedef struct
 	char		*name;
 } MenuHelp;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

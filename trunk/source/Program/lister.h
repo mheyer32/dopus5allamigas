@@ -43,7 +43,7 @@ For more information on Directory Opus for Windows please see:
 
 #define KEY_SEL_OFFSET	12
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -55,7 +55,7 @@ typedef struct
 	short		type;
 } ListerWaiter;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -64,7 +64,7 @@ typedef struct
 #define LISTERWAIT_BUSY			2
 #define LISTERWAIT_AUTO_CMD		3
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -75,7 +75,7 @@ typedef struct
 	ULONG	flags;
 } ProgressPacket;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -194,7 +194,7 @@ enum
 // Maximum length we can display in a window
 #define MAXDISPLAYLENGTH  256
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -455,7 +455,7 @@ typedef struct ListerWindow
 	struct RastPort			render_rast;
 } Lister;	
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -686,7 +686,7 @@ void lister_receive_drop(Lister *dest,struct _DOpusAppMessage *amsg);
 #define DROPF_ICON_MODE	(1<<1)	// Source lister in icon mode
 #define DROPF_PARENT	(1<<2)	// Dropped on parent area
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -697,7 +697,7 @@ typedef struct
 	struct DateStamp	date;
 } devname_change;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

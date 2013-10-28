@@ -1,4 +1,4 @@
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -31,7 +31,7 @@ typedef struct
 	char			*settings_name;
 	char			last_saved[256];
 } config_settings_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

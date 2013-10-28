@@ -53,7 +53,7 @@ For more information on Directory Opus for Windows please see:
 #include "string_data.h"
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -170,7 +170,7 @@ struct LibData
 	#endif
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -180,7 +180,7 @@ struct LibData
 #include "dos_patch.h"
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -251,7 +251,7 @@ void lsprintfa __ARGS((char *,...)); // unused ??
 //void __asm LSprintf(register __a3 char *buffer,register __a0 char *string,register __a1 APTR data);
 void ASM LSprintf(char *buffer, char *string, APTR data);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -73,7 +73,7 @@ enum {
 	MAIN_MENU_EVENT,			// Menu event from a sub-process
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -92,7 +92,7 @@ typedef struct _rego_data
 	long			checksum;
 } rego_data;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -151,7 +151,7 @@ typedef struct _rego_data
 #define REQ_OFF(save) { save=main_proc->pr_WindowPtr; main_proc->pr_WindowPtr=(APTR)-1; }
 #define REQ_ON(save) { main_proc->pr_WindowPtr=save; }
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -176,7 +176,7 @@ typedef struct
 	char	name[2];
 } env_packet;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -216,7 +216,7 @@ void Module_Expunge(void);
 #endif
 
 #if defined(__amigaos4__)
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct LocaleBase
@@ -224,7 +224,7 @@ struct LocaleBase
 	struct Library lb_LibNode;
 	BOOL           lb_SysPatches;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

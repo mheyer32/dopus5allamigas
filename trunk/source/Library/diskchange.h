@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DISKCHANGE_H
 #define _DISKCHANGE_H
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -36,7 +36,7 @@ typedef struct
 	unsigned long		flags;
 } DiskChangeData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

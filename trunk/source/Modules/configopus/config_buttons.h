@@ -1,4 +1,4 @@
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct _bank_node
@@ -74,7 +74,7 @@ typedef struct
 
 	ImageRemap		remap;
 } config_buttons_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

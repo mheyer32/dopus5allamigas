@@ -41,7 +41,7 @@ struct ArgArray
 	ULONG		aa_Count;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -52,7 +52,7 @@ struct ArgArrayEntry
 	char		ae_String[1];
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

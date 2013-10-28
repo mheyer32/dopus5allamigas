@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -80,7 +80,7 @@ APTR OpenImage(char *name,OpenImageInfo *);
 BOOL RemapImage(APTR,struct Screen *,ImageRemap *);
 short RenderImage(struct RastPort *rp,APTR image,unsigned short left,unsigned short top,struct TagItem *tags);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

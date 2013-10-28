@@ -1,7 +1,3 @@
-//#include <Library/dopusbase.h>
-//#include <Program/dopus_config.h>
-//#include "configopus.h"
-
 #include "amiga.h"
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
@@ -25,10 +21,9 @@ extern struct UtilityBase	*UtilityBase;
 #else
 extern struct Library		*UtilityBase;
 #endif
-//extern struct Library		*LocaleBase;
 extern struct DOpusLocale	*locale;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -55,7 +50,7 @@ typedef struct _SubOptionHandle {
 	ULONG name;		// Option name ID
 	ObjectDef *objects;	// Object list
 } SubOptionHandle;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -72,7 +67,7 @@ IPCData *SAVEDS Local_IPC_ProcStartup(
                          IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
                          IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif						 
 typedef struct
@@ -94,7 +89,7 @@ typedef struct
 	short			lock_count;
 	short			flags;
 } CfgDragInfo;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

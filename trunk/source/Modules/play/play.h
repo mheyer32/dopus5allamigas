@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 
 #define ENV_PLAY	"dopus/Player"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -74,7 +74,7 @@ typedef struct
 
 	ULONG		flags;
 } play_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

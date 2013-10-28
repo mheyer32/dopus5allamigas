@@ -1,4 +1,4 @@
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -123,7 +123,7 @@ typedef struct
 	struct MinNode	node;
 	ULONG		handle;
 } ReaderNode;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

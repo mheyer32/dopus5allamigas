@@ -36,7 +36,7 @@ For more information on Directory Opus for Windows please see:
 
 #define ID_BUSY		0x42555359
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -94,7 +94,7 @@ struct LoginPkt
 	char			*password;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

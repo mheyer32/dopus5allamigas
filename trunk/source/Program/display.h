@@ -31,7 +31,7 @@ For more information on Directory Opus for Windows please see:
 #define NAME_PATTERNS		"dopus_pattern_stuff"
 
 // Defines information about a GUI element
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -300,7 +300,7 @@ typedef struct
 	ULONG			env_BackgroundBorderColour[4];	// Border colour
 } GUI_Glue;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

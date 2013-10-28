@@ -772,7 +772,7 @@ typedef VOID ASM (*REF_CALLBACK)(REG(d0, ULONG iclass), REG(a0, APTR window), RE
 *
 */
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -1303,7 +1303,7 @@ struct AllocBitmapPatchNode
 	struct Task	*abp_Task;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

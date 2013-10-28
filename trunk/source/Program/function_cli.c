@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 #include "eliza.h"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -39,7 +39,7 @@ typedef struct
 	struct MsgPort	*reply_port;
 } CLIData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

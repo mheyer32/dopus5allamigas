@@ -1,4 +1,4 @@
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -89,7 +89,7 @@ typedef struct _FuncEdData
 
 	char			label[80];
 } FuncEdData;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -112,7 +112,7 @@ extern ObjectDef
 #define FUNCTYPE_FILETYPE	3
 #define FUNCTYPE_HOTKEY		4
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct _FunctionEntry {
@@ -120,7 +120,7 @@ typedef struct _FunctionEntry {
 	int		type;		// Entry type
 	char		buffer[256];	// Entry buffer
 } FunctionEntry;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

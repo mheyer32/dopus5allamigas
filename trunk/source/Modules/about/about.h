@@ -32,7 +32,7 @@ For more information on Directory Opus for Windows please see:
 #define logo_mod	8
 #define logo_frames	10
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -44,7 +44,7 @@ typedef struct
 	UWORD	*imagedata;
 	ULONG	*palette;
 } image_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -83,7 +83,7 @@ enum
 	GAD_REGISTRATION_9,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -105,7 +105,7 @@ typedef struct
 	char		*trans_info;
 	char		*message;
 } about_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

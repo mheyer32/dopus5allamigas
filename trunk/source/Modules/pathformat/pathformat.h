@@ -55,7 +55,7 @@ enum
 	MODE_ACTION
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -82,7 +82,7 @@ typedef struct
 	ULONG			seconds;
 	ULONG			micros;
 } config_path_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

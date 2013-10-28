@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
  
@@ -103,7 +103,7 @@ void IPC_ListCommand(struct ListLock *,ULONG,ULONG,ULONG,BOOL);
 IPCData *IPC_ProcStartup(ULONG *,ULONG (*__asm)(register __a0 IPCData *,register __a1 APTR));
 void IPC_Reply(IPCMessage *);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

@@ -25,7 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "show.strings"
 #include "module_deps.h"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 typedef struct
@@ -80,7 +80,7 @@ typedef struct
 
 	struct BitMap		*scr_bm;
 } show_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

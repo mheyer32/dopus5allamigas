@@ -50,7 +50,7 @@ enum
 	FTTYPE_USER_10,			// UserFunc10
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -71,7 +71,7 @@ typedef struct
 	unsigned long		disk_type;	// Disk type
 } MatchHandle;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -139,7 +139,7 @@ enum {
 };
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -157,7 +157,7 @@ typedef struct
 	char		name[1];
 } SniffData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

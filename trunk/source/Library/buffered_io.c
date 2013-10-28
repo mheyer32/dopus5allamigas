@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -39,7 +39,7 @@ typedef struct
 	void		*dos;			// DOS library pointer
 } BufFile;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 #undef TRAP_SEMAPHORE
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -46,7 +46,7 @@ typedef struct SemaphoreNode
 	struct MinList			waiters;
 } SemaphoreNode;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

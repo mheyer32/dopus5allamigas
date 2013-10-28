@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define _DRAG_ROUTINES_H
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -55,7 +55,7 @@ typedef struct _DragInfo {
 	long		pad[4];
 } DragInfo;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -27,7 +27,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 #include "layout_routines.h"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -71,7 +71,7 @@ typedef struct
 	int string_len_2;
 } simplereq_data;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

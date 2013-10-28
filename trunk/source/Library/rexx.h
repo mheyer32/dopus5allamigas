@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define _REXX_H
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -35,7 +35,7 @@ struct RexxStem
 	char		rs_Value[2];
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

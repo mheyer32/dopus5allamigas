@@ -18,7 +18,7 @@ MODID_CREATE_FT
 /* How many bytes to look at at start of file */
 #define BYTECOUNT	16
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -123,7 +123,7 @@ typedef struct
 	ULONG			a4;
 } creator_data;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -212,7 +212,7 @@ FTOP_ENDSECTION		// End of a section (255)
 };
 
 /* YUCK! should not be here */
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct _FunctionEntry
@@ -223,6 +223,6 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif

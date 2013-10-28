@@ -41,7 +41,7 @@ enum {
 	BUTTONS_ICONIFY,		// Iconify
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -167,7 +167,7 @@ typedef struct
 	struct AppMessage *appmsg;
 } buttons_edit_packet;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

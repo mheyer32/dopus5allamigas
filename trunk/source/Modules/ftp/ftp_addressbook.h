@@ -51,7 +51,7 @@ LONG   port;
 };
 */
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct short_site_entry
@@ -80,7 +80,7 @@ LONG			se_port;
 BOOL			se_has_custom_env;
 struct ftp_environment	se_local_env;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -104,7 +104,7 @@ struct ftp_environment	se_local_env;
 
 // wt_type defines as MSB parenttype LSB type
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct display_globals {
@@ -196,7 +196,7 @@ struct window_params {
 							// to allow orderly aborts of main process
 
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -214,7 +214,7 @@ struct window_params {
 //	We can't include them ourselved becuase of loads
 //	of conflicts and stuff.
 /**********************************************************/
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -242,7 +242,7 @@ typedef struct _FunctionEntry {
 	int		type;		// Entry type
 	char		buffer[256];	// Entry buffer
 } FunctionEntry;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

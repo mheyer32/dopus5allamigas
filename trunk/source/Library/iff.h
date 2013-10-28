@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _IFF_H
 #define _IFF_H
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -62,7 +62,7 @@ typedef struct
 	char			chk_Data[1];
 } IFFChunkData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

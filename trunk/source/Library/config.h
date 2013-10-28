@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _CONFIG_H
 #define _CONFIG_H
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -357,7 +357,7 @@ typedef struct _ConfigStuff {
 #define SCRFLAGS_HALFHEIGHT 4
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

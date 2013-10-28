@@ -23,17 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #define CATCOMP_NUMBERS
 #include "diskinfo.strings"
-//#include "modules_lib.h"
 #include "module_deps.h"
-
-
-//#ifdef __amigaos3__
-//#include <libraries/mathffp.h>
-//#include <proto/mathffp.h>
-//#include <proto/mathtrans.h>
-//struct Library * MathTransBase;
-//struct Library * MathBase;
-//#endif
 
 #ifndef PI
 #define PI       ((float) 3.141592653589793)
@@ -53,7 +43,7 @@ enum
 	FREESHADOWPEN,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -83,7 +73,7 @@ typedef struct
 
 	unsigned char	areabuf[AREAVERTEX*5] __attribute__((aligned (4)));
 } diskinfo_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 enum
@@ -114,7 +104,6 @@ BOOL diskinfo_info(diskinfo_data *);
 void get_dostype_string(ULONG,char *);
 void diskinfo_show_space(diskinfo_data *,unsigned long,short,short);
 void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,ULONG,ULONG);
-//void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,unsigned long,unsigned long);
 
 #define MathBase		(data->maths)
 #define MathTransBase		(data->maths1)

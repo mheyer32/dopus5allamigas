@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -87,7 +87,7 @@ void RemoveNotifyRequest(APTR);
 void ReplyFreeMsg(struct Message *);
 void SetNotifyRequest(APTR,ULONG,ULONG);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

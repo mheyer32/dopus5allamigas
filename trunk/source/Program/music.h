@@ -21,7 +21,7 @@ For more information on Directory Opus for Windows please see:
 
 */
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -41,7 +41,7 @@ struct MusicBase
     char   *ml_SongName;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

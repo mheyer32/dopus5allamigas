@@ -35,7 +35,7 @@ enum
 };
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct _ProgressWindow
@@ -86,7 +86,7 @@ typedef struct _ProgressWindow
 	struct IBox		pw_Coords[PROG_LAST+1];	// Coordinates
 } ProgressWindow;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
