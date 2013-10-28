@@ -41,9 +41,6 @@ For more information on Directory Opus for Windows please see:
 #include <arpa/telnet.h>
 #include <netdb.h>
 #include <time.h>
-//#include <sys/time.h>
-
-#include <dopus/hooks.h>
 
 #define CMDBUFSIZE 256
 #define REPLYTIMEOUT 60
