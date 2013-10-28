@@ -25,7 +25,7 @@ For more information on Directory Opus for Windows please see:
 #define ID_LOUT		MAKE_ID('L','O','U','T')
 #define ID_ICON		MAKE_ID('I','C','O','N')
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -77,7 +77,7 @@ typedef struct position_record
 	char			name[1];	// Full pathname
 } position_rec;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

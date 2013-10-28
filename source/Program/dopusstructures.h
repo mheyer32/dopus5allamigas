@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef DOPUS_STRUCTURES
 #define DOPUS_STRUCTURES
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -246,7 +246,7 @@ struct RLEinfo {
 	int offset;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

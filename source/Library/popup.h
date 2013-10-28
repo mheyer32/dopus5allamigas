@@ -66,7 +66,7 @@ enum
 	SUB_BIG_HI,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -142,7 +142,7 @@ typedef struct
 	BOOL			locked;		// Locked open
 } PopUpData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

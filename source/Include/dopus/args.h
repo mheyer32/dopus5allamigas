@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
- #ifndef __mc68000__
+ #ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -45,7 +45,7 @@ typedef struct
 	short		FA_DoneArgs;	// DOpus uses this flag for its own purposes
 } FuncArgs;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

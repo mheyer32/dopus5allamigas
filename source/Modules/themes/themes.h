@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 #include <dopus/hooks.h>
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 typedef struct _FunctionEntry
@@ -37,7 +37,7 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

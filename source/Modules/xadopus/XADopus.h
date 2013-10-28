@@ -27,15 +27,13 @@
 
 #define DOpusGetString GetString
 
-//--- from include/dopus/lists.h
 #define ADDNODEF_SORT		1		// Sort names
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
-//--- from include/dopus/modules.h
 struct function_entry
 {
 	ULONG			pad[2];
@@ -102,6 +100,6 @@ struct MyPacket
 	char *a7, *a8;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 

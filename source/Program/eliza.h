@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 
 #define MAX_BUFFER 512
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -46,7 +46,7 @@ struct eliza_data
 	int keyword_size, wordin_size, wordout_size;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

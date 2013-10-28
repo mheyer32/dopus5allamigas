@@ -38,7 +38,7 @@ enum
 	FUNCTION_GET_ICONS,			// Get icons
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -76,7 +76,7 @@ typedef struct _InstructionParsed
 	unsigned short		count;
 } InstructionParsed;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -94,7 +94,7 @@ typedef struct _InstructionParsed
 #define FUNCENTF_LINK			(1<<11)	// Link
 #define FUNCENTF_FAKE_ICON		(1<<12)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -107,7 +107,7 @@ typedef struct _PathNode
 	ULONG			flags;
 } PathNode;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -120,7 +120,7 @@ typedef struct _PathNode
 #define LISTNF_RESCAN		(1<<6)	// Rescan this list
 #define LISTNF_NO_REFRESH	(1<<7)	// Don't refresh this lister
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -153,7 +153,7 @@ typedef struct
 	char			fib_FileName[1];
 } FileChange;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -167,7 +167,7 @@ typedef struct
 #define FCF_SHOW	1
 #define FCF_SELECT	2
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -317,7 +317,7 @@ typedef struct _FunctionReturn {
 	char	*result;
 } FunctionReturn;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

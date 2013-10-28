@@ -125,7 +125,7 @@ enum
 };
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -151,7 +151,7 @@ typedef struct _CommandList
 	char		*help_name;
 } CommandList;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -245,7 +245,7 @@ enum {
 #define COPY_FAILED		0	// Failed
 #define COPY_OK			1	// Ok
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -257,7 +257,7 @@ typedef struct _ModuleNode
 	short			flags;
 } ModuleNode;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

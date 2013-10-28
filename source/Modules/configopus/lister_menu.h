@@ -5,7 +5,7 @@ enum
 	TYPE_SCRIPTS,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -63,7 +63,7 @@ typedef struct
 
 	Att_List		*script_list;
 } lister_menu_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

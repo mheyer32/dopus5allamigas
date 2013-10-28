@@ -37,7 +37,7 @@ void ASM AsmFreePooled(REG(a0, void *), REG(a1, void *), REG(d0, ULONG), REG(a6,
 #endif
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -54,7 +54,7 @@ typedef struct
 	ULONG			check_val;	// Header check value
 } MemHandle;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

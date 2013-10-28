@@ -19,7 +19,7 @@ enum
 	PICMENU_WHITE,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -107,7 +107,7 @@ typedef struct
 	struct MinList		sound_list;
 	Att_List		*script_list;
 } config_env_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

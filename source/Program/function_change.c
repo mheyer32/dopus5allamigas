@@ -28,7 +28,7 @@ static int function_change_get_comment(FunctionHandle *handle,char *file,char *b
 static int function_change_get_protect(FunctionHandle *handle,char *file,ULONG old_prot,unsigned char *masks);
 static int function_change_get_date(FunctionHandle *handle,char *file,struct DateStamp *date);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -39,7 +39,7 @@ typedef union
 	struct DateStamp	date;
 } ChangeData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

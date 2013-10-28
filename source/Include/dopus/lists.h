@@ -29,7 +29,7 @@ For more information on Directory Opus for Windows please see:
  List management
 
  *****************************************************************************/
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -101,7 +101,7 @@ long GetSemaphore(struct SignalSemaphore *,long,APTR);
 void InitListLock(struct ListLock *,APTR);
 BOOL IsListLockEmpty(struct ListLock *);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

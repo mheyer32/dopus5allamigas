@@ -70,7 +70,7 @@ enum
 #define COPY_UPDATE_COPY	(1<<16)
 #define COPY_NEWER_COPY		(1<<17)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -101,7 +101,7 @@ typedef struct
 	} func;
 } CopyData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

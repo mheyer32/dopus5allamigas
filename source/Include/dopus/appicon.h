@@ -34,7 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <workbench/workbench.h>
 #endif
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -110,7 +110,7 @@ BOOL GetWBArgPath(struct WBArg *,char *,long);
 void ReplyAppMessage(DOpusAppMessage *);
 BOOL SetWBArg(DOpusAppMessage *,short,BPTR,char *,APTR);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

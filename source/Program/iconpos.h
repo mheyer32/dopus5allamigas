@@ -22,7 +22,7 @@ For more information on Directory Opus for Windows please see:
 */
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -43,7 +43,7 @@ typedef struct
 	iconpos_data		ip_Data;
 } iconpos_info;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

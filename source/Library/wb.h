@@ -305,7 +305,7 @@ void free_app_entry(AppEntry *entry,WB_Data *);
 AppEntry *find_app_entry(AppEntry *entry,WB_Data *wb_data);
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif  
 typedef struct
@@ -317,7 +317,7 @@ typedef struct
 	APTR			doc_Image2;
 	APTR			doc_Data;
 } DiskObjectCopy;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif  
 

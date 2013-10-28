@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 struct device_data
@@ -38,7 +38,7 @@ struct device_data
 	short				valid;		// Validating?
 	char				fsys[6];	// File system
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

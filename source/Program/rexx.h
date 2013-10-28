@@ -50,7 +50,7 @@ For more information on Directory Opus for Windows please see:
 #define RXMF_NO_INC		(1<<1)
 #define RXMF_SYNC		(1<<2)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -74,7 +74,7 @@ typedef struct
 	char		args[1];
 } RexxRequester;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -268,7 +268,7 @@ enum
 #define RXERR_NO_LISTER		20	// Lister couldn't open
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -282,13 +282,13 @@ typedef struct _FunctionTrap
 	ULONG			pad[4];
 } FunctionTrap;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
 #define FTRAPF_SIGNAL		(1<<0)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -325,7 +325,7 @@ typedef struct
 	APTR			progress;
 } RexxProgress;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -419,7 +419,7 @@ void rexx_send_command(char *command,BOOL);
 #define HA_Value	0x02
 #define HA_Qualifier	0x03
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -430,7 +430,7 @@ typedef struct
 	ULONG	ha_Data;
 } HandlerArg;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -447,7 +447,7 @@ short STDARGS rexx_handler_msg_args(
 
 long rexx_set_appicon(char *str,struct RexxMsg *msg);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -458,13 +458,13 @@ typedef struct
 	IPCMessage	*ipc_msg;
 } RexxMsgTracker;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
 BOOL rexx_send_msg(struct MinList *list,IPCMessage **imsg,struct MsgPort *port);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -474,7 +474,7 @@ typedef struct
 	struct RexxMsg	*rx_msg;
 } RexxDespatch;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

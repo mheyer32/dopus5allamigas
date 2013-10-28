@@ -34,7 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <dopus/dopusbase.h>
 #endif
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -264,7 +264,7 @@ extern ModuleInfo module_info;
 #endif
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

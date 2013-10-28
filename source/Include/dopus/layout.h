@@ -34,7 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <libraries/gadtools.h>
 #endif
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -500,7 +500,7 @@ struct MsgPort *GetWindowAppPort(struct Window *);
 #define RECTHEIGHT(rect)	(1+(rect)->MaxY-(rect)->MinY)
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

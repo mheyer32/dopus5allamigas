@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 
 #include <libraries/newicon.h>
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -62,7 +62,7 @@ typedef struct
 */
 } Image_Data;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

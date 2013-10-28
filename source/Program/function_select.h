@@ -46,7 +46,7 @@ enum
 	GAD_SELECT_PROTECTION,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -67,7 +67,7 @@ typedef struct
 	short		include;		// Include/exclude
 } SelectData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

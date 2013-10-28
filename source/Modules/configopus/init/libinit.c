@@ -51,7 +51,7 @@
  * On MorphOS we just mark library as non-executable.
  */
 
-#if defined(__mc68000__) || defined(__amigaos4__)
+#if defined(__amigaos3__) || defined(__amigaos4__)
 int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
@@ -443,7 +443,7 @@ const USED_VAR ULONG __abox__ = 1;
 /* generic StackSwap() function which calls function() surrounded by
    StackSwap() calls */
 
-#if defined(__mc68000__) && !defined(__AROS__)
+#if defined(__amigaos3__) && !defined(__AROS__)
 ULONG stackswap_call(struct StackSwapStruct *stack,
                      ULONG (*function)(struct LibraryHeader *),
                      struct LibraryHeader *arg);

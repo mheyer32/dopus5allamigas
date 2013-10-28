@@ -25,7 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "config.h"
 #include <Program/dopus_config.h>
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -36,7 +36,7 @@ typedef struct {
 	short				error;
 } string_handle;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

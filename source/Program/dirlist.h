@@ -30,7 +30,7 @@ For more information on Directory Opus for Windows please see:
 #define RESORT_SEPARATE		8
 
 // Holds Envoy information about an entry
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -76,7 +76,7 @@ typedef struct DirectoryEntry {
 	struct TagItem		*de_Tags;		// Extension tags
 } DirEntry;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -131,7 +131,7 @@ typedef struct DirectoryEntry {
 #define ENTRYTYPE(t) ((t==0)?ENTRY_DEVICE:((t<0)?ENTRY_FILE:ENTRY_DIRECTORY))
 
 // Holds information about a directory list
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -232,7 +232,7 @@ typedef struct DirectoryBuffer
 	ULONG			pad4[7];
 } DirBuffer;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -268,7 +268,7 @@ typedef struct DirectoryBuffer
 #define CUSTF_LEAVEGAUGE	(1<<8)	// Leave fuel gauge alone
 #define CUSTF_SYNCTRAPS		(1<<9)	// Synchronous trap messages
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -281,7 +281,7 @@ struct title_entry
 	VersionInfo		version;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

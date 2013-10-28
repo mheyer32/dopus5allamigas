@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _BOOPSI_H
 #define _BOOPSI_H
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -279,7 +279,7 @@ struct gpRenderExt
 
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

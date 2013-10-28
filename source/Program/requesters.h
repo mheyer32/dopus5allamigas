@@ -35,7 +35,7 @@ For more information on Directory Opus for Windows please see:
 #define EXISTREPLACE_AGAIN		2
 #define EXISTREPLACE_ABORT2		3
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -47,7 +47,7 @@ struct super_request_data
 	short ret_val,gad_count;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

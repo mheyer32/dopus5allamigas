@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_BACKDROP
 #define _DOPUS_BACKDROP
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -133,7 +133,7 @@ typedef struct _BackdropInfo
 	struct Region		*temp_region;
 } BackdropInfo;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -198,7 +198,7 @@ enum
 #define BACKDROP_GROUP_OBJECT	(1<<30)
 #define BACKDROP_ICON_VIEW	(1<<29)
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -229,7 +229,7 @@ typedef struct
 	PopUpHandle		*popup;
 } GroupData;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

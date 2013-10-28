@@ -74,7 +74,7 @@ enum
 	IDM_COUNT
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -179,7 +179,7 @@ typedef struct
 
 	char			tempname[256];
 } icon_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

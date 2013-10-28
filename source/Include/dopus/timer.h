@@ -29,7 +29,7 @@ For more information on Directory Opus for Windows please see:
  Timer
 
  *****************************************************************************/
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
  
@@ -41,7 +41,7 @@ typedef struct TimerHandle
 	short			active;		// Indicates active request
 } TimerHandle;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

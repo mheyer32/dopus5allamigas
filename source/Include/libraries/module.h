@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_MODULES
 #define _DOPUS_MODULES
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -63,7 +63,7 @@ typedef struct
 	ULONG		function_count;	// Number of functions in module
 	ModuleFunction	function[1];	// Definition of first function
 } ModuleInfo;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif	
 
@@ -120,7 +120,7 @@ struct progress_packet
 	ULONG			count;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif	
 struct endentry_packet
@@ -135,7 +135,7 @@ struct addchange_packet
 	UWORD			change;
 	APTR			data;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif	
 
@@ -169,7 +169,7 @@ struct sortlist_packet
 	long			dir_count;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif	
 struct replacereq_packet
@@ -191,7 +191,7 @@ struct DOpusScreenData
 	unsigned short		pen_array[16];
 	short			pen_count;
 };	
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif	
 
@@ -246,7 +246,7 @@ struct command_packet
 #ifndef DEF_DOPUSCOMMANDLIST
 #define DEF_DOPUSCOMMANDLIST
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif	
 struct DOpusCommandList
@@ -258,7 +258,7 @@ struct DOpusCommandList
 	char		*dcl_Module;
 	char		*dcl_Help;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif	
 

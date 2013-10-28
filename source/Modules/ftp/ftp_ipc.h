@@ -33,7 +33,7 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_opusftp.h"
 
 // Sub-process data used when launching new processes
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct subproc_data
@@ -43,7 +43,7 @@ IPCData			*spd_ipc;
 IPCData			*spd_owner_ipc;
 //ULONG			spd_a4;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -119,7 +119,7 @@ MKDIR_READ   = 1 << 4
 };
 
 // Generic FTP message with ARexx forwarding
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct ftp_msg
@@ -133,7 +133,7 @@ int                fm_filecount;
 int                fm_dircount;
 struct entry_info *fm_entries;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 // Delete flags (Don't use bits 1-3)
@@ -145,7 +145,7 @@ struct entry_info *fm_entries;
 #define OPTIONS_OPT_DEFAULT		(1<<4)	// DEFAULT option of FTPOptions
 
 // Quit message
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct quit_msg
@@ -170,7 +170,7 @@ struct Window          *cm_window;		// Window to open requester over
 ULONG                   cm_handle;		// Lister handle if called with one
 struct site_entry       cm_site;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -185,7 +185,7 @@ struct site_entry       cm_site;
 #define CMD_OPT_LONG			(1<<5)	// Show long result
 
 // FindFile message
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct findfile_msg
@@ -238,7 +238,7 @@ struct ftp_node       *xm_rm_dest;	// Destination FTP server
 char                  *xm_rm_file;	// For ftp-ftp transfer
 struct SignalSemaphore xm_rm_semaphore;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -265,7 +265,7 @@ struct SignalSemaphore xm_rm_semaphore;
 #define XFER_SUBDIR			(1<<23)	// Drop onto a subdirectory
 
 // Trapped Opus command that uses a temporary file
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct traptemp_msg
@@ -283,7 +283,7 @@ struct _endpoint *fm_endpoint;		// Endpoint of the lister being asked
 void             *fm_arg1;		// Argument to command (which entry to act on)
 void             *fm_arg2;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 // Favours one FTP lister can ask another
@@ -310,7 +310,7 @@ FAVOUR_ENDLIST,
 };
 
 // Edit message
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 struct edit_msg
@@ -327,7 +327,7 @@ struct rename_msg
 char *rm_names;
 char *rm_newname;
 };
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 /*

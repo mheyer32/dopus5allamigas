@@ -2,7 +2,7 @@
 #define _CONFIGOPUS_H_
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -126,7 +126,7 @@ enum
 };
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

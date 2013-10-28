@@ -1,4 +1,4 @@
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -64,7 +64,7 @@ typedef struct
 	unsigned long		tick_count;
 	unsigned long		last_tick;
 } lister_buttons_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

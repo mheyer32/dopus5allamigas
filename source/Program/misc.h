@@ -35,7 +35,7 @@ enum
 #define READFILE_NOT_FOUND	-1
 #define READFILE_NO_MEMORY	-2
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -47,7 +47,7 @@ typedef struct
 	IPCData		*ipc;
 } MiscStartup;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -100,7 +100,7 @@ short error_saving(short err,struct Window *window,long txt,long buttons);
 BOOL check_closescreen(struct Screen *screen);
 BOOL check_qualifier(UWORD,UWORD,UWORD,UWORD);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -122,7 +122,7 @@ typedef struct
 	char			data[1];
 } iconopen_packet;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
@@ -130,7 +130,7 @@ iconopen_packet *get_icon_packet(struct _BackdropInfo *,struct _BackdropObject *
 
 struct IntuiMessage *check_refresh_msg(struct Window *window,ULONG mask);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -140,7 +140,7 @@ struct Window *WhichWindow(
 	short y,
 	unsigned short flags);
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

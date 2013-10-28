@@ -32,7 +32,7 @@ static char FAR
 		"New_WShell",
 		"Background CLI",0};
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 		
@@ -42,7 +42,7 @@ typedef struct
 	BPTR	lock;
 } PathListEntry;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

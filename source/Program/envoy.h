@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_ENVOY
 #define _DOPUS_ENVOY
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -42,7 +42,7 @@ struct GroupInfo
 	UWORD	gi_GroupID;
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

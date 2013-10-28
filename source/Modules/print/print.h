@@ -25,7 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include "print.strings"
 #include "module_deps.h"
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -82,7 +82,7 @@ typedef struct
 
 	struct FileRequester	*filereq;
 } print_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -10,7 +10,7 @@ enum
 	MENU_SUB,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -58,7 +58,7 @@ typedef struct
 	short			flags;
 	IPCData			*ipc;
 } menu_node;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -79,7 +79,7 @@ extern ConfigWindow join_window,split_window;
 extern ObjectDef join_objects[],split_objects[];
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct
@@ -118,7 +118,7 @@ typedef struct _FunctionEntry
 	short			type;
 	short			flags;
 } FunctionEntry;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

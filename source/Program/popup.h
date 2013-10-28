@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef DOPUS_POPUP_STUFF
 #define DOPUS_POPUP_STUFF
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -38,7 +38,7 @@ typedef struct _PopUpExt
 	ULONG			pe_Flags;		// Flags
 } PopUpExt;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -53,7 +53,7 @@ enum
 	GAD_SET_AS_DEFAULTS,
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 typedef struct {
@@ -73,7 +73,7 @@ typedef struct {
 	ULONG			mod_id;
 	ListFormatStorage	def_format_copy;
 } config_lister_data;
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

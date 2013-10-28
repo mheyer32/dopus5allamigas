@@ -183,7 +183,7 @@ struct DOpusCommandList
 
 #endif
  
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif 
 
@@ -500,7 +500,7 @@ typedef struct
 
 } DOpusCallbackInfo;
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif 
 

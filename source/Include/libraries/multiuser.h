@@ -39,7 +39,7 @@
 # include <libraries/locale.h>
 #endif /* LIBRARIES_LOCALE_H */
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -218,7 +218,7 @@ struct muMonMsg
 #define muTrgF_CheckPasswdFail   (1 << muTrgB_CheckPasswdFail)
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

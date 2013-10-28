@@ -9,7 +9,7 @@
 #include "workbench/workbench.h"
 #endif
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -145,7 +145,7 @@ struct NewIconsPrefs
    ULONG fomode;        /* Font Outline mode (see NIFOM_#? definitions) */
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 

@@ -28,7 +28,7 @@
 #define SYSINFOVERSION	2L
 
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack(2)
 #endif
 
@@ -222,7 +222,7 @@ struct SI_TaskCpuUsage {
 	LONG	reserved[8];		/* Reserved for future use		*/
 };
 
-#ifndef __mc68000__
+#ifndef __amigaos3__
 #pragma pack()
 #endif
 
