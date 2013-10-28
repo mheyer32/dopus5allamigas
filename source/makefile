@@ -187,9 +187,7 @@ endif
 	@$(COPY) bin.$(NAME)/dopus5.library Dopus5/Libs
 	@$(COPY) bin.$(NAME)/*.module Dopus5/Modules
 	@$(COPY) bin.$(NAME)/DirectoryOpus Dopus5
-# Temporary change until DOpusRT5 is fixed
-#	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
-	@$(COPY) ../archive/DOpusRT5  Dopus5/C
+	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
 	@$(COPY) bin.$(NAME)/LoadDB Dopus5/C
 	@$(COPY) bin.$(NAME)/viewfont Dopus5/C
 	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
