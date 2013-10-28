@@ -46,6 +46,8 @@ For more information on Directory Opus for Windows please see:
 #include <proto/wb.h>
 #endif
 
+#include <SDI/SDI_compiler.h>  // for cross-platform hooks
+
 
 #ifndef __amigaos3__
 #pragma pack(2)
@@ -2422,7 +2424,6 @@ struct AllocBitmapPatchNode
 #pragma pack()
 #endif
 
-
 /*****************************************************************************
 
  Directory Opus Direct Hooks
@@ -2452,7 +2453,6 @@ struct AllocBitmapPatchNode
 #define DCRFF_SCREENPARENT	(1<<30)
 #define DCRFF_REJECTICONS	(1<<31)
 
-
 // Flags for dc_RefreshLister()
 #define HOOKREFRESH_DATE	(1<<0)
 #define HOOKREFRESH_FULL	(1<<1)
@@ -2475,10 +2475,6 @@ enum
 #ifdef	DOPUSHOOK_INCLUDE_FORMAT
 
 
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif  
-
 // Sort format
 struct SortFormat {
 	BYTE	sf_Sort;			// Sort method
@@ -2488,31 +2484,6 @@ struct SortFormat {
 
 #define SORT_REVERSE			(1<<0)	// Sort in reverse order
 
-// List format
-struct ListFormat {
-
-	// Colour fields, not used at present
-	UBYTE			lf_FilesUnsel[2];	// Unselected files
-	UBYTE			lf_FilesSel[2];		// Selected files
-	UBYTE			lf_DirsUnsel[2];	// Unselected directories
-	UBYTE			lf_DirsSel[2];		// Selected directories
-
-	// Sort information
-	struct SortFormat	lf_Sort;		// Sort method
-	BYTE			lf_DisplayPos[16];	// Item display position
-	BYTE			lf_DisplayLen[15];	// Display length (not used)
-
-	UBYTE			lf_Flags;		// See LFORMATF_xxx below
-
-	// Not used
-	BYTE			lf_ShowFree;		// Show free space type
-
-	// You must call ParsePattern() yourself
-	char			lf_ShowPattern[40];	// Show pattern
-	char			lf_HidePattern[40];	// Hide pattern
-	char			lf_ShowPatternP[40];	// Show pattern parsed
-	char			lf_HidePatternP[40];	// Hide pattern parsed
-};
 
 #define LFORMATF_REJECT_ICONS		(1<<0)	// Reject icons
 #define LFORMATF_HIDDEN_BIT		(1<<1)	// Respect the H bit
@@ -2573,6 +2544,10 @@ struct DOpusCommandList
 
 #endif
  
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif 
+
 // Use this command to get the address of the hooks from the Opus process.
 // Send it to the main Opus IPC, and supply the address of a DOpusCallbackInfo
 // structure in the data field of the message.

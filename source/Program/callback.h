@@ -20,6 +20,8 @@ For more information on Directory Opus for Windows please see:
                  http://www.gpsoft.com.au
 
 */
+#ifndef __CALLBACK_H__
+#define __CALLBACK_H__
 
 #define MAINCMD_GET_CALLBACKS	0x40100
 
@@ -243,6 +245,7 @@ long ASM HookFileRequest(
 	REG(d0, ULONG flags),
 	REG(d1, char *pattern));
 
+/*
 #ifndef __amigaos3__
 #pragma pack(2)
 #endif
@@ -309,6 +312,7 @@ typedef struct
 #ifndef __amigaos3__
 #pragma pack()
 #endif
+*/
 
 #define DOPUS_HOOK_COUNT	52
 
@@ -333,10 +337,14 @@ typedef struct
 #define HOOKREFRESH_DATE	(1<<0)
 #define HOOKREFRESH_FULL	(1<<1)
 
-long HookInitHooks(DOpusCallbackInfo *);
 
+long HookInitHooks(DOpusCallbackInfo *);
+/*
 enum
 {
 	EE_NAME,		// Get name pointer (READ ONLY!)
 	EE_TYPE,		// Get type (<0 = file, >0 = dir)
 };
+*/
+
+#endif
