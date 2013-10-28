@@ -2470,9 +2470,9 @@ enum
 // Flags for dc_ReplaceReq()
 #define REPREQF_NOVERSION	(1<<16)		// No 'version' button
 
-
-// Define this if you want to use dc_ResortLister
-#ifdef	DOPUSHOOK_INCLUDE_FORMAT
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif 
 
 
 // Sort format
@@ -2482,40 +2482,36 @@ struct SortFormat {
 	BYTE	sf_Separation;			// File separation
 };
 
-#define SORT_REVERSE			(1<<0)	// Sort in reverse order
+// List format
+struct ListFormat {
 
+	// Colour fields, not used at present
+	UBYTE			lf_FilesUnsel[2];	// Unselected files
+	UBYTE			lf_FilesSel[2];		// Selected files
+	UBYTE			lf_DirsUnsel[2];	// Unselected directories
+	UBYTE			lf_DirsSel[2];		// Selected directories
+
+	// Sort information
+	struct SortFormat	lf_Sort;		// Sort method
+	BYTE			lf_DisplayPos[16];	// Item display position
+	BYTE			lf_DisplayLen[15];	// Display length (not used)
+
+	UBYTE			lf_Flags;		// See LFORMATF_xxx below
+
+	// Not used
+	BYTE			lf_ShowFree;		// Show free space type
+
+	// You must call ParsePattern() yourself
+	char			lf_ShowPattern[40];	// Show pattern
+	char			lf_HidePattern[40];	// Hide pattern
+	char			lf_ShowPatternP[40];	// Show pattern parsed
+	char			lf_HidePatternP[40];	// Hide pattern parsed
+};
 
 #define LFORMATF_REJECT_ICONS		(1<<0)	// Reject icons
 #define LFORMATF_HIDDEN_BIT		(1<<1)	// Respect the H bit
 #define LFORMATF_ICON_VIEW		(1<<2)	// Default to icon view
 #define LFORMATF_SHOW_ALL		(1<<3)	// Show all
-
-// Used for the sf_Sort and lf_DisplayPos fields
-enum
-{
-	DISPLAY_NAME,
-	DISPLAY_SIZE,
-	DISPLAY_PROTECT,
-	DISPLAY_DATE,
-	DISPLAY_COMMENT,
-	DISPLAY_FILETYPE,
-	DISPLAY_OWNER,
-	DISPLAY_GROUP,
-	DISPLAY_NETPROT,
-	DISPLAY_VERSION,
-
-	DISPLAY_LAST
-};
-
-// Used for the sf_Separation field
-enum
-{
-	SEPARATE_MIX,
-	SEPARATE_DIRSFIRST,
-	SEPARATE_FILESFIRST,
-};
-
-#endif
 
 
 // Used for the dc_GetPointer/dc_FreePointer hooks
@@ -2544,9 +2540,6 @@ struct DOpusCommandList
 
 #endif
  
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif 
 
 // Use this command to get the address of the hooks from the Opus process.
 // Send it to the main Opus IPC, and supply the address of a DOpusCallbackInfo
