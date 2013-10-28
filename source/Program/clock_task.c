@@ -538,6 +538,7 @@ IPC_EntryCode(clock_proc)
 										strcat(GUI->screen_title," - ");
 										strcat(GUI->screen_title,titlebuf);
 									}
+									SetWindowTitles(IntuitionBase->ActiveWindow,(char *)-1,(char *)GUI->screen_title);
 #endif
 
 									// Remember position
@@ -625,9 +626,7 @@ void clock_show_memory(struct RastPort *rp,long msg,long clock_x,char *error)
 			AvailMem(MEMF_ANY)-chipmem);
 	}
 
-#ifdef USE_SCREENTITLE
-	SetWindowTitles(IntuitionBase->ActiveWindow,(char *)-1,(char *)GUI->screen_title);
-#else
+#ifndef USE_SCREENTITLE
 	// Render text
 	Move(rp,5,rp->Font->tf_Baseline+1);
 	Text(rp,GUI->screen_title,strlen(GUI->screen_title));
@@ -922,7 +921,7 @@ APTR clock_show_custom_title(
 				year-=(year/30)*30;					// Reduce modulo 30 to give 0>=y>=29
 
 				// If font is big enough, we have a graphical moon
-#ifndef __AROS__
+#ifndef USE_SCREENTITLE
 				if (rp->TxHeight>=8)
 				{
 					// Save moon day and position
@@ -1042,9 +1041,7 @@ APTR clock_show_custom_title(
 	title_buffer[pos]=0;
 
 	// Render text
-#ifdef USE_SCREENTITLE
-	SetWindowTitles(IntuitionBase->ActiveWindow,(char *)-1,(char *)GUI->screen_title);
-#else
+#ifndef USE_SCREENTITLE
 	Move(rp,5,rp->Font->tf_Baseline+1);
 	Text(rp,title_buffer,(moon_day>-1)?moon_pos:strlen(title_buffer));
 
