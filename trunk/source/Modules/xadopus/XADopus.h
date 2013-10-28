@@ -19,11 +19,7 @@
 
 #define XADopus_NUMBERS
 #include "XADopus.strings"
-
-
 #include "module_deps.h"
-#include <dopus/modules.h>
-#include <dopus/hooks.h>
 
 #define DOpusGetString GetString
 

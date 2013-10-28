@@ -24,7 +24,6 @@ For more information on Directory Opus for Windows please see:
 #define CATCOMP_NUMBERS
 #include "themes.strings"
 #include "module_deps.h"
-#include <dopus/hooks.h>
 
 #ifndef __amigaos3__
 #pragma pack(2)
