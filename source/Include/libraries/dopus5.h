@@ -2452,18 +2452,6 @@ struct AllocBitmapPatchNode
 #define DCRFF_SCREENPARENT	(1<<30)
 #define DCRFF_REJECTICONS	(1<<31)
 
-#if 0
-// Holds version information (used by HFFS_VERSION)
-typedef struct _VersionInfo {
-	UWORD		vi_Version;		// Major version #
-	UWORD		vi_Revision;		// Minor revision #
-	long		vi_Days;		// Days of date
-	ULONG		vi_Flags;		// Flags
-	char		vi_Char;		// Version character
-	char		vi_String[1];		// Version string
-} VersionInfo;
-#endif
-
 
 // Flags for dc_RefreshLister()
 #define HOOKREFRESH_DATE	(1<<0)
@@ -2487,6 +2475,9 @@ enum
 #ifdef	DOPUSHOOK_INCLUDE_FORMAT
 
 
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif  
 
 // Sort format
 struct SortFormat {
@@ -2582,10 +2573,6 @@ struct DOpusCommandList
 
 #endif
  
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif 
-
 // Use this command to get the address of the hooks from the Opus process.
 // Send it to the main Opus IPC, and supply the address of a DOpusCallbackInfo
 // structure in the data field of the message.
