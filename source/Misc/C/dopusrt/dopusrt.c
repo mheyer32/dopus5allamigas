@@ -22,6 +22,9 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include <proto/exec.h>
+#include <proto/dos.h>
+#include <signal.h>
+#include <stdio.h>
 
 #include <proto/dopus5.h>
 #include <version/dopus_version.h>
@@ -29,62 +32,57 @@ For more information on Directory Opus for Windows please see:
 
 #include <SDI/SDI_compiler.h>
 
+#define TEMPLATE "ARGS/F"
+
+enum
+{
+	RT_ARGS, RT_MAX
+};
+
 const char USED_VAR version[] = "\0$VER: DOpusRT "CMD_STRING;
 
-int main(int argc, char **command)
+int main(int argc, char **argv)
 {
-	struct Library *DOpusBase;
+	struct Library *DOpusBase = NULL;
 	#ifdef __amigaos4__
-	struct DOpusIFace 		*IDOpus = NULL;
+	struct DOpusIFace *IDOpus = NULL;
 	#endif
-	
-	char *ptr,*lfptr=0;
-	BOOL quote=0;
+	LONG args[RT_MAX] = {0};
+	struct RDArgs *argsdata;
+	char buffer[1024] = {0};
+	char *command = buffer;
 
-	// Skip to first argument
-	if (**command=='\"')
-	{
-		quote=1;
-		++command;
-	}
-	while (**command)
-	{
-		if (**command==' ' && !quote) break;
-		else if (**command=='\"' && quote)
-		{
-			++command;
-			break;
-		}
-		++command;
-	}
-	while (**command==' ') ++command;
+	signal(SIGINT, SIG_IGN);
 
-	// Strip linefeed
-	ptr=*command;
-	while (*ptr)
+	argsdata = ReadArgs(TEMPLATE, args, NULL);
+	if (!argsdata)
+		return(RETURN_ERROR);
+	if (!args[RT_ARGS])
 	{
-		if (*ptr=='\n')
-		{
-			*ptr=0;
-			lfptr=ptr;
-			break;
-		}
-		++ptr;
+		FreeArgs(argsdata);
+		return(RETURN_ERROR);
 	}
+
+	sprintf(buffer, "\"%s\"", (const char *)args[RT_ARGS]);
+	FreeArgs(argsdata);
 
 	// Valid arguments?
-	if (**command)
+	if (*command)
 	{
 		// Open dopus library
 		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",43)))
-			return(0);
+			return(RETURN_ERROR);
 			
 		#ifdef __amigaos4__
-		IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
+		if (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
+		{
+			CloseLibrary(DOpusBase);
+			return(RETURN_ERROR);
+		}
 		#endif
 	
 		// Launch program
-		WB_Launch(*command,0,LAUNCH_WAIT);
+		WB_Launch(command,NULL,LAUNCH_WAIT);
 
 		// Close library
 		#ifdef __amigaos4__
@@ -93,8 +91,5 @@ int main(int argc, char **command)
 		CloseLibrary(DOpusBase);
 	}
 
-	// Put linefeed back
-	if (lfptr) *lfptr='\n';
-
-	return(0);
+	return(RETURN_OK);
 }
