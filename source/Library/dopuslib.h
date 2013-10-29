@@ -124,8 +124,6 @@ struct LibData
 	ULONG			old_openlib;
 	struct MyLibrary	dt_lib;
 
-	//ULONG a4;
-
 	IPCData			*fake_wb;
 	struct MyLibrary	*dopus_base;
 	struct Library		*gfx_base;

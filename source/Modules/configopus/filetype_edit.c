@@ -42,9 +42,6 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 	data->func_startup.asl_base=AslBase;
 	data->func_startup.layers_base=LayersBase;
 
-	// Supply a4
-	//data->func_startup.a4=getreg(REG_A4);
-
 	// Supply locale
 	data->func_startup.locale=locale;
 

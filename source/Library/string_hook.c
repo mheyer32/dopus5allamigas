@@ -42,8 +42,6 @@ HookData *LIBFUNC L_GetEditHook(
 		#else
 		hook->hook.h_Entry=(ULONG (*)())string_edit_hook;
 		#endif
-		//hook->a4=getreg(REG_A4);
-		//hook->a6=getreg(REG_A6);
 		hook->type=type;
 		hook->flags=flags;
 
@@ -93,10 +91,6 @@ ULONG ASM string_edit_hook(
 
 	// Cache buffer position
 	buffer_pos=work->StringInfo->BufferPos;
-
-	// Fix registers
-	//putreg(REG_A4,hook->a4);
-	//putreg(REG_A6,hook->a6);
 
 	// Key press?
 	while (*msg==SGH_KEY)

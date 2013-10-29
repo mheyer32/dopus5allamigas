@@ -1275,8 +1275,6 @@ ULONG                            retval  = 0;
 
 if	(data)
 	{
-	//putreg( REG_A4, data->spd_a4 );
-
 	ogp = data->spd_ogp;
 
 	data->spd_ipc = ipc;	/* 'ipc' points to this task's tc_UserData field */
@@ -3433,8 +3431,6 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 	// This returns true if 'data' is filled in correctly
 	if	(IPC_ProcStartup( (ULONG *)&data, ftplister_init ))
 		{
-		// Setup a4 correctly; from this point on we have access to global data
-		//putreg( REG_A4, data->spd_a4 );
 
 		og               = data->spd_ogp;
 		mld.mld_ipc      = data->spd_ipc;
