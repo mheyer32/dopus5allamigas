@@ -24,9 +24,6 @@ void ButtonEditor(void)
 	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&startup,_buttoned_init)))
 		return;
 
-	// Fix A4
-	//putreg(REG_A4,startup->func_startup.a4);
-
 	// Get data pointer
 	data=startup->data;
 	NewList((struct List *)&data->editors);

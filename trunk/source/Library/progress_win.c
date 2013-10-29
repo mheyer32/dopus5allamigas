@@ -68,8 +68,7 @@ ProgressWindow *LIBFUNC L_OpenProgressWindow(
 	if (prog->pw_Flags&PWF_FILESIZE && prog->pw_Flags&PWF_GRAPH)
 		prog->pw_Flags|=PWF_SWAP;
 
-	// Save A4 and library pointer
-	//prog->pw_A4=(LONG)getreg(REG_A4);
+	// Save library pointer
 	prog->pw_Lib=lib;
 
 	// Initialise task name
@@ -208,9 +207,6 @@ void SAVEDS progress_task(void)
 	// Do startup
 	if (!(ipc=L_IPC_ProcStartup((APTR)&prog,0)))
 		return;
-
-	// Fix A4 pointer
-	//putreg(REG_A4,prog->pw_A4);
 
 /*
 	// Debug?

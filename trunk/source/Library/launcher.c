@@ -333,9 +333,6 @@ void SAVEDS launcher_proc(void)
 	if (!(ipc=L_IPC_ProcStartup((ULONG *)&data,0)))
 		return;
 
-	// Set a4
-	//putreg(REG_A4,data->a4);
-
 #ifdef FAKEWB
 	// Install fake workbench task
 	install_fake_workbench(data);

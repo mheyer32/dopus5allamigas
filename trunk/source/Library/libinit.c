@@ -1517,10 +1517,6 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 		data->flags|=LIBDF_FT_CACHE;
 	}
 
-	// Save a4
-	//data->a4=(ULONG)getreg(REG_A4);
-
-
 	// Create some memory handles
 	data->memory=L_NewMemHandle(sizeof(IPCMessage)<<5,sizeof(IPCMessage)<<4,MEMF_CLEAR|MEMF_PUBLIC);
 	data->dos_list_memory=L_NewMemHandle(1024,512,MEMF_CLEAR);

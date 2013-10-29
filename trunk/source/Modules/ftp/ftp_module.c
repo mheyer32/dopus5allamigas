@@ -96,7 +96,6 @@ if	(!hooks->dc_CheckDesktop) // new 2/5/97
 // Allocate data for the new process
 if	((mldata = AllocVec( sizeof(struct modlaunch_data), MEMF_CLEAR )))
 	{
-	//mldata->mld_a4            = getreg(REG_A4);	// Instead of __saveds
 	mldata->mld_screen        = og.og_screen;	// Opus's screen (should be passed to support multiple Opuses)
 	mldata->mld_function_ipc  = function_ipc;	// Module IPC for new callback hooks
 	mldata->mld_func_callback = func_callback;	// Opus's old callback hook

@@ -219,7 +219,6 @@ if	((data = AllocVec( sizeof(struct subproc_data), MEMF_CLEAR )))
 	int stack =4096*2;
 	data->spd_ogp = og;
 	data->spd_owner_ipc = ipc;
-	//data->spd_a4 = getreg(REG_A4);
 
 	// Listers now have 8k stack * stack_multiplier for recursive safety
 	if	(!IPC_Launch( tasklist, &ipcd, name, (ULONG)proc_code, stack, (ULONG)data, (struct Library *)DOSBase ))
@@ -3179,9 +3178,6 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 		if	(IPC_ProcStartup( (ULONG *)&mldata, dopus_ftp_init ))
 #undef DOpusBase
 			{
-			// Setup a4 correctly; from this point on we have access to global data
-			//putreg( REG_A4, mldata->mld_a4 );
-
 			// Fix pointer to global info
 			og = mldata->mld_og;
 

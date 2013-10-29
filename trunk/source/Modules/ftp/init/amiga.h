@@ -127,14 +127,5 @@ char *stpblk(char *p);
 #undef stptok
 char *stptok(const char *s, char *tok, size_t toklen, char *brk);
 
-/*
-#if defined(__MORPHOS__)
-#define getreg(x) x
-#define putreg(x,y) x = y
-#else
-#define getreg(x) 0
-#define putreg(x,y)
-#endif
-*/
 
 #endif

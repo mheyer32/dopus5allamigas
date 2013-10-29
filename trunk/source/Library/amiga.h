@@ -137,16 +137,4 @@ extern ULONG GlobalStuffChar;
 int stccpy(char *p, const char *q, int n);
 #endif
 
-/* dummy replacements for SASC getreg() & putreg() functions */
-
-/*
-#if defined(__MORPHOS__)
-#define getreg(x) x
-#define putreg(x,y) x = y
-#else
-#define getreg(x) 0
-#define putreg(x,y)
-#endif
-*/
-
 #endif /* _AMIGA_H */

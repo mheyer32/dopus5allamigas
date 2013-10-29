@@ -641,8 +641,6 @@ DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)finder_creator_proc_init );
 
-//putreg( REG_A4, data->a4 );
-
 strcpy( path, data->current_entry_path );
 name = FilePart( path );
 *name = 0;
@@ -707,8 +705,6 @@ return;
 static int finder_create_filetype( finder_data *data )
 {
 int ok = FALSE;
-
-//data->a4 = getreg( REG_A4 );
 
 // Launch a new task
 IPC_Launch(
@@ -819,8 +815,6 @@ DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)finder_editor_proc_init );
 
-//putreg( REG_A4, data->a4 );
-
 if	(data->best_installed_ft && (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", 47 )))
 	{
 	#ifdef __amigaos4__	
@@ -866,8 +860,6 @@ return;
 int finder_edit_filetype( finder_data *data )
 {
 int ok = FALSE;
-
-//data->a4 = getreg( REG_A4 );
 
 // Launch a new task
 IPC_Launch(
@@ -2265,8 +2257,6 @@ DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)creator_editor_proc_init );
 
-//putreg( REG_A4, data->a4 );
-
 // Make a filetype from our current information if filetype has been changed
 if	(!data->filetype || !data->edited)
 	creator_create_filetype( data );
@@ -2356,8 +2346,6 @@ if	(data->editor_ipc)
 	IPC_Command( data->editor_ipc, IPC_ACTIVATE, 0, 0, 0, (struct MsgPort *)-1 );
 else
 	{
-//	data->a4 = getreg( REG_A4 );
-
 	// Launch a new task
 	IPC_Launch(
 		0,					// List to add task to (optional, but useful)
