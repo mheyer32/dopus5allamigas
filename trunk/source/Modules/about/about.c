@@ -785,7 +785,7 @@ void get_message(about_data *data)
 	short size;
 
 	// Get size we need
-	size=strlen(about_message);
+	size=strlen((char *)about_message);
 	if (data->trans_info) size+=strlen(data->trans_info);
 	size+=4;
 

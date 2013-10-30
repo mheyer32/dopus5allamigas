@@ -20,7 +20,7 @@ For more information on Directory Opus for Windows please see:
                  http://www.gpsoft.com.au
 
 */
-#include "amiga.h"
+#include <dopus/common.h>
 
 FAR UWORD
 	andrew_data[]={

@@ -2,7 +2,9 @@
 #ifndef _LIB_PROTOS_H
 #define _LIB_PROTOS_H
 
-#include <SDI/SDI_lib.h>
+#include <dopus/common.h>
+#include <proto/dopus5.h>
+#include <proto/module.h>
 
 /* init.c */
 ULONG freeBase(struct LibraryHeader* lib);
@@ -61,9 +63,6 @@ struct Node *GetTail(struct List *list);
 
 // protos:
 
-#include "amiga.h"
-#include <proto/dopus5.h>
-#include <proto/module.h>
 
 LIBPROTO(L_Module_Entry, int, 	REG(a0, char *args),
 								REG(a1, struct Screen *screen),
@@ -73,9 +72,6 @@ LIBPROTO(L_Module_Entry, int, 	REG(a0, char *args),
 								REG(d1, EXT_FUNC(func_callback)));
 	
 LIBPROTO(L_Module_Identify, ModuleInfo *, REG(d0, int num));
-
-
-
 
 
 #endif /* _LIB_PROTOS_H */
