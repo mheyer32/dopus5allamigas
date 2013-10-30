@@ -308,11 +308,11 @@ BOOL diskinfo_info(diskinfo_data *data)
 	device=DeviceFromLock(lock,data->path);
 
 	// Build title and set it
-	lsprintf(data->title,GetString(locale,MSG_DISKINFO_TITLE),doslist->dol_Name,data->path);
+	lsprintf(data->title,GetString(locale,MSG_DISKINFO_TITLE),(APTR)doslist->dol_Name,data->path);
 	SetWindowTitles(data->window,data->title,(char *)-1);
 
 	// Fill out name field
-	lsprintf(data->volume,"%b",doslist->dol_Name);
+	lsprintf(data->volume,"%b",(APTR)doslist->dol_Name);
 	SetGadgetValue(data->objlist,GAD_NAME,(ULONG)data->volume);
 
 	// Display type
@@ -331,11 +331,11 @@ BOOL diskinfo_info(diskinfo_data *data)
 		if ((startup=(struct FileSysStartupMsg *)BADDR(device->dol_misc.dol_handler.dol_Startup)))
 		{
 			// Get device name
-			lsprintf(data->buffer+128,"%b",startup->fssm_Device);
+			lsprintf(data->buffer+128,"%b",(APTR)startup->fssm_Device);
 			lsprintf(data->buffer,"%s, %s %ld",
 				data->buffer+128,
 				GetString(locale,MSG_UNIT),
-				startup->fssm_Unit);
+				(APTR)startup->fssm_Unit);
 		}
 	}
 
@@ -433,7 +433,7 @@ BOOL diskinfo_info(diskinfo_data *data)
 		lsprintf(
 			data->buffer,
 			GetString(locale,(data->info.id_NumSoftErrors>1)?MSG_ERRORS:MSG_ERROR),
-			data->info.id_NumSoftErrors);
+			(APTR)data->info.id_NumSoftErrors);
 		SetGadgetValue(data->objlist,GAD_ERRORS,(ULONG)data->buffer);
 	}
 

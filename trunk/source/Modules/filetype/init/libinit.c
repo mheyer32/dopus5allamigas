@@ -19,18 +19,9 @@
  $Id: libinit.c 274 2012-04-03 18:06:48Z thboeckel $
 
 ***************************************************************************/
-#include <stdlib.h>
-
-#include "amiga.h"
-
-#include <proto/exec.h>
-#include <proto/dos.h>
-#include <proto/locale.h>
-#include <proto/utility.h>
-#include <exec/execbase.h>
 #include <exec/resident.h>
 
-#include "macros.h"
+#include <dopus/lib_macros.h>
 #include "base.h"
 #include "lib_protos.h"
 
@@ -88,13 +79,6 @@ struct ExecBase *SysBase = NULL;
 
 #ifdef __AROS__
 struct Library *aroscbase = NULL;
-#ifdef __arm__
-#include <aros/symbolsets.h>
-THIS_PROGRAM_HANDLES_SYMBOLSET(INIT)
-THIS_PROGRAM_HANDLES_SYMBOLSET(EXIT)
-DEFINESET(INIT)
-DEFINESET(EXIT)
-#endif
 #endif
 
 /* reorganize it to match necessary declarations for MORPHOS and AROS */
@@ -366,15 +350,9 @@ STATIC CONST CONST_APTR LibVectors[] =
   (CONST_APTR)FUNCARRAY_32BIT_NATIVE,
   #endif
   #if defined(__AROS__)
-#ifdef __arm__
-  (CONST_APTR)AROS_SLIB_ENTRY(LibOpen, DOpus, 1),
-  (CONST_APTR)AROS_SLIB_ENTRY(LibClose, DOpus, 2),
-  (CONST_APTR)AROS_SLIB_ENTRY(LibExpunge, DOpus, 3),
-#else
   (CONST_APTR)AROS_SLIB_ENTRY(LibOpen, DOpus),
   (CONST_APTR)AROS_SLIB_ENTRY(LibClose, DOpus),
   (CONST_APTR)AROS_SLIB_ENTRY(LibExpunge, DOpus),
-#endif
   #else
   (CONST_APTR)LibOpen,
   (CONST_APTR)LibClose,
@@ -588,10 +566,6 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
      GETINTERFACE(INewlib, NewlibBase))
   #endif
 #ifdef __AROS__
-#ifdef __arm__
-  if (!set_call_funcs(SETNAME(INIT), 1, 1))
-    return(NULL);
-#endif
   if(aroscbase = OpenLibrary("arosc.library", 41))
 #endif
   {
@@ -663,9 +637,6 @@ STATIC BPTR LibDelete(struct LibraryHeader *base)
     CloseLibrary(aroscbase);
     aroscbase = NULL;
   }
-#ifdef __arm__
-  set_call_funcs(SETNAME(EXIT), -1, 0);
-#endif
 #endif
 
   // make sure the system deletes the library as well.

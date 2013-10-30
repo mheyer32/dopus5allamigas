@@ -8,13 +8,12 @@
 
 #include "filetype.h"
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 #include <proto/module.h>
 
 
-#include <string.h>
 #include <math.h>
 
 
