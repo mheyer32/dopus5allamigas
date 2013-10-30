@@ -21,21 +21,13 @@
 ***************************************************************************/
 #include <stdlib.h>
 
-#include "amiga.h"
-
-#include <proto/exec.h>
-#include <proto/dos.h>
-#include <proto/locale.h>
-#include <proto/utility.h>
-#include <exec/execbase.h>
 #include <exec/resident.h>
 
-#include "macros.h"
+#include <dopus/lib_macros.h>
 #include "base.h"
 #include "lib_protos.h"
 
 #include "module_deps.h"
-#include <debug/dopus_debug.h>
 
 /****************************************************************************/
 

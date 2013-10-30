@@ -20,7 +20,7 @@ For more information on Directory Opus for Windows please see:
                  http://www.gpsoft.com.au
 
 */
-#include "amiga.h"
+#include <dopus/common.h>
 
 FAR UWORD
 	jon_data[]={
@@ -193,7 +193,7 @@ FAR UWORD
 		0x0000,0x0000,0x003f,0xf000,0x0000,0x0000,0x0000,0x000e,
 		0xe000,0x0000,0x0000,0x0000,0x003e,0xf000,0x0000};
 
-extern ULONG
+ULONG
 	jon_palette[]={
 		0x00100000,
 		0x00000000,0x00000000,0x00000000,

@@ -22,8 +22,6 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "cleanup.h"
-//#include "dopusprog:position.h"
-//#include "dopusprog:main_commands.h"
 #include <Program/position.h>
 #include <Program/main_commands.h>
 

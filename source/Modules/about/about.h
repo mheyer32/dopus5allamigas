@@ -23,7 +23,6 @@ For more information on Directory Opus for Windows please see:
 #ifndef _ABOUT_H
 #define _ABOUT_H
 
-//#include "modules_lib.h"
 #include "module_deps.h"
 
 
@@ -112,3 +111,4 @@ typedef struct
 extern unsigned char about_message[];
 
 #endif
+
