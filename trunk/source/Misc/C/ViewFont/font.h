@@ -22,6 +22,7 @@
 #endif
 #include <version/dopus_version.h>
 #include <debug/dopus_debug.h>
+#include <dopus/common.h>
 
 enum
 {

@@ -23,6 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "play.h"
 #include <devices/audio.h>
+#include <dopus/common.h>
 #if defined(__amigaos3__) || defined(__MORPHOS__)
 static char *modtypes[]={"SoundTracker","MED","Octalyzer","SoundTracker 15"};
 #endif
