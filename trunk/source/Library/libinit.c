@@ -97,6 +97,13 @@ struct ExecBase *SysBase = NULL;
 
 #ifdef __AROS__
 struct Library *aroscbase = NULL;
+#ifdef __arm__
+#include <aros/symbolsets.h>
+THIS_PROGRAM_HANDLES_SYMBOLSET(INIT)
+THIS_PROGRAM_HANDLES_SYMBOLSET(EXIT)
+DEFINESET(INIT)
+DEFINESET(EXIT)
+#endif
 #endif
 
 /* reorganize it to match necessary declarations for MORPHOS and AROS */
@@ -973,6 +980,10 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
      GETINTERFACE(INewlib, NewlibBase))
   #endif
 #ifdef __AROS__
+#ifdef __arm__
+  if (!set_call_funcs(SETNAME(INIT), 1, 1))
+    return(NULL);
+#endif
   if(aroscbase = OpenLibrary("arosc.library", 41))
 #endif
   {
@@ -1038,6 +1049,9 @@ STATIC BPTR LibDelete(struct LibraryHeader *base)
     CloseLibrary(aroscbase);
     aroscbase = NULL;
   }
+#ifdef __arm__
+  set_call_funcs(SETNAME(EXIT), -1, 0);
+#endif
 #endif
 
   // make sure the system deletes the library as well.
