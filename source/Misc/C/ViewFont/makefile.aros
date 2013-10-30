@@ -33,7 +33,7 @@ LIBS     :=
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = font_data.o font.o font_strings.o lsprintf.o
+OBJS = font_data.o font.o font_strings.o
 
 all : $(TARGET)
 

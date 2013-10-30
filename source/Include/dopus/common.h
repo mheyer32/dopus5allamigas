@@ -89,6 +89,7 @@
 
 #ifdef __AROS__
 #include <proto/alib.h>
+#include <graphics/gfxbase.h>
 #endif
 
 #include <dopus/debug.h>

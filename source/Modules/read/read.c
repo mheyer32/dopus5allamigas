@@ -25,6 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include <proto/module.h>
 #include <proto/diskfont.h>
 #include <proto/input.h>
+#include <dopus/common.h>
 
 #if defined(__amigaos3__) || defined(__AROS__)
 struct Device *InputBase = NULL;
