@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define CATCOMP_BLOCK
 #include "diskcopy.strings"
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
 

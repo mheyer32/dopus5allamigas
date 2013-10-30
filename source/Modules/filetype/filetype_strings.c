@@ -1,7 +1,7 @@
 #define CATCOMP_BLOCK
 #include "filetype.strings"
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
 
