@@ -19,16 +19,6 @@
 
 #include "XADopus.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <proto/exec.h>
-#include <proto/dos.h>
-
-#include <proto/xadmaster.h>
-#include <libraries/xadmaster.h>
-
 char *viewcmds="Read Play Show HexRead AnsiRead IconInfo";
 
 #ifdef __amigaos4__ 

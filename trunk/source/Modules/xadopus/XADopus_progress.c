@@ -18,13 +18,6 @@
 */
 
 #include "XADopus.h"
-#include <stdio.h>
-
-#include <libraries/xadmaster.h>
-
-#include <proto/exec.h>
-#include <proto/dos.h>
-#include <proto/xadmaster.h>
 
 #ifdef __amigaos4__
 LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a2, int skip),REG(a1, struct xadProgressInfo *xpi))
