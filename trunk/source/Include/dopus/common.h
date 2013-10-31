@@ -137,12 +137,16 @@ int stccpy(char *p, const char *q, int n);
 		APTR args[] = { __VA_ARGS__ }; \
 		RawDoFmt(fmt, &args, (void (*))"\x16\xC0\x4E\x75", buf); \
 	})
+#define LSprintf(buffer, string, data) \
+	RawDoFmt(string, data, (void (*))"\x16\xC0\x4E\x75", buffer)
 #else
 #define lsprintf(buf,fmt,...) \
 	({ \
 		APTR args[] = { __VA_ARGS__ }; \
 		RawDoFmt((STRPTR)fmt, &args, NULL, buf); \
 	})
+#define LSprintf(buffer, string, data) \
+	RawDoFmt(string, data, NULL, buffer)
 #endif
 
 
