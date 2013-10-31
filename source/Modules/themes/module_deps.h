@@ -1,11 +1,9 @@
 #ifndef _MODULE_DEPS_H
 #define _MODULE_DEPS_H
 
-#include "amiga.h"
 #include "base.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
-#include <version/dopus_version.h>
 
 extern struct DOpusLocale *locale;
 #ifdef __AROS__
@@ -41,21 +39,6 @@ extern struct Library *DiskfontBase;
 extern struct Library *AslBase;
 
 void init_locale_data(struct DOpusLocale *);
-
-#if defined(__amigaos3__)
-extern ULONG GlobalStuffChar;
-#define DOPUS_RAWFMTFUNC (APTR)&GlobalStuffChar
-#else
-#define DOPUS_RAWFMTFUNC NULL
-#endif
-
-#define lsprintf(buf,fmt,...) \
-	({ \
-		IPTR argsa[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, &argsa, DOPUS_RAWFMTFUNC, buf); \
-	})
-
-
 
 
 #define userlibname "themes.module"

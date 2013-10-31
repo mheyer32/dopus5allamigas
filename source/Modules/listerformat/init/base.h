@@ -24,6 +24,8 @@
 #ifndef _BASE_H
 #define _BASE_H
 
+#include <dopus/common.h>
+
 struct LibraryHeader
 {
   struct Library          libBase;

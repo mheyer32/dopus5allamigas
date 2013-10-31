@@ -142,8 +142,8 @@ int stccpy(char *p, const char *q, int n);
 #else
 #define lsprintf(buf,fmt,...) \
 	({ \
-		APTR args[] = { __VA_ARGS__ }; \
-		RawDoFmt((STRPTR)fmt, &args, NULL, buf); \
+		APTR vargs[] = { __VA_ARGS__ }; \
+		RawDoFmt((STRPTR)fmt, &vargs, NULL, buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	RawDoFmt(string, data, NULL, buffer)

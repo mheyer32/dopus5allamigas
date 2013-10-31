@@ -20,7 +20,6 @@
 #define XADopus_BLOCK
 #include "XADopus.strings"
 
-#include "amiga.h"
 #include <proto/dopus5.h>
 #include <proto/module.h>
 
