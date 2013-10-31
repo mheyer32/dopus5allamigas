@@ -1,6 +1,5 @@
 /* Replacement functions */
 
-#include "amiga.h"
 
 int stccpy(char *p, const char *q, int n)
 {

@@ -22,7 +22,6 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "dopus.h"
-#include "amiga.h"
 
 #define is_digit(c) ((c)>='0' && (c)<='9')
 

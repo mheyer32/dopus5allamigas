@@ -30,23 +30,16 @@ For more information on Directory Opus for Windows please see:
 
 // INLINE copy_mem!!!!!!!!!!
 
-//#define DEBUG
-
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 
-#include "amiga.h"
-#include <version/dopus_version.h>
+#include <dopus/common.h>
 
 #include "main_commands.h"
 
 // Locale
 #define CATCOMP_NUMBERS
 #include "string_data.h"
-
-// Version number
-#define DOPUS_VERSION  5
-#define DOPUS_REV      "0"
 
 #define APPWINID     1
 
@@ -73,6 +66,11 @@ enum {
 	MAIN_MENU_EVENT,			// Menu event from a sub-process
 };
 
+
+#define REQ_OFF(save) { save=main_proc->pr_WindowPtr; main_proc->pr_WindowPtr=(APTR)-1; }
+#define REQ_ON(save) { main_proc->pr_WindowPtr=save; }
+
+
 #ifndef __amigaos3__
 #pragma pack(2)
 #endif
@@ -91,6 +89,35 @@ typedef struct _rego_data
 	short			pirate_count;
 	long			checksum;
 } rego_data;
+
+typedef struct
+{
+	ULONG id;
+	struct MenuItem *menu;
+	struct Window *window;
+} MenuEvent;
+
+typedef struct
+{
+	long	offset;
+	APTR	function;
+} PatchList;
+
+extern char register_name[];
+
+typedef struct
+{
+	short	type;
+	char	name[2];
+} env_packet;
+
+#if defined(__amigaos4__)
+struct LocaleBase
+{
+	struct Library lb_LibNode;
+	BOOL           lb_SysPatches;
+};
+#endif /* __amigaos4__ */
 
 #ifndef __amigaos3__
 #pragma pack()
@@ -148,38 +175,6 @@ typedef struct _rego_data
 
 #include "callback.h"
 
-#define REQ_OFF(save) { save=main_proc->pr_WindowPtr; main_proc->pr_WindowPtr=(APTR)-1; }
-#define REQ_ON(save) { main_proc->pr_WindowPtr=save; }
-
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif
-
-typedef struct
-{
-	ULONG id;
-	struct MenuItem *menu;
-	struct Window *window;
-} MenuEvent;
-
-typedef struct
-{
-	long	offset;
-	APTR	function;
-} PatchList;
-
-extern char register_name[];
-
-typedef struct
-{
-	short	type;
-	char	name[2];
-} env_packet;
-
-#ifndef __amigaos3__
-#pragma pack()
-#endif
-
 
 #define WBArgDir(a) (!(a)->wa_Name || !*(a)->wa_Name)
 
@@ -189,14 +184,17 @@ typedef struct
 #define SNIFF_BOTH	1
 #define SNIFF_USER	2
 
-
 #define FILENAME_LEN	31
 
-/* Long word alignement (mainly used to get
- * FIB or DISK_INFO as auto variables)
- */
-#define D_S(type,name) char a_##name[sizeof(type)+3]; \
-					   type *name = (type *)((LONG)(a_##name+3) & ~3);
+/***  an offset to correctly position the iconify and padlock
+      gadgets in the window titlebar
+****/
+#ifdef __amigaos4__
+#define TBGADGETOFFSET -10
+#else
+#define TBGADGETOFFSET 0
+#endif
+
 
 /*********************************************************************/
 
@@ -215,19 +213,4 @@ typedef struct
 void Module_Expunge(void);
 #endif
 
-#if defined(__amigaos4__)
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif
-struct LocaleBase
-{
-	struct Library lb_LibNode;
-	BOOL           lb_SysPatches;
-};
-#ifndef __amigaos3__
-#pragma pack()
-#endif
-
-#endif /* __amigaos4__ */
-
-#endif
+#endif /* DOPUS_INCLUDE */
