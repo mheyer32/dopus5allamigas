@@ -86,18 +86,6 @@ void init_locale_data(struct DOpusLocale *);
 void free_locale_data(struct DOpusLocale *);
 
 // Miscellaneous prototypes
-#if defined(__amigaos3__)
-extern ULONG GlobalStuffChar;
-#define DOPUS_RAWFMTFUNC (APTR)&GlobalStuffChar
-#else
-#define DOPUS_RAWFMTFUNC NULL
-#endif
-
-#define lsprintf(buf,fmt,...) \
-	({ \
-		IPTR args[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, (APTR)&args, DOPUS_RAWFMTFUNC, buf); \
-	})
 void STDARGS ArgArrayDone(void);
 
 // clock_task.c
