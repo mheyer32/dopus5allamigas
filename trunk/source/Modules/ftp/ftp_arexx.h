@@ -24,7 +24,6 @@ For more information on Directory Opus for Windows please see:
 #ifndef _AREXX_H
 #define _AREXX_H
 
-#include "amiga.h"
 
 // For rexx_lst_prog_init()
 #define PROGRESS_LISTER		(0)

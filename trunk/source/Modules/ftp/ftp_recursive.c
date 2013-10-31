@@ -26,10 +26,10 @@ For more information on Directory Opus for Windows please see:
 //
 // gp 4/5/98 changed site-site selectwait time to 1 secs from 20 micros
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
- 
+
 #include "ftp.h"
 #include "ftp_recursive.h"
 #include "ftp_opusftp.h"

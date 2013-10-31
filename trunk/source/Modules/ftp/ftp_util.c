@@ -27,7 +27,7 @@ For more information on Directory Opus for Windows please see:
  *		Dates for these are set at 0 time 1/1/78
  */
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
 
