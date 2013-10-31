@@ -21,7 +21,7 @@ For more information on Directory Opus for Windows please see:
 
 */
 
-#include "amiga.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 #include <proto/module.h>

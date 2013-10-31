@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #define CATCOMP_BLOCK
 #include "ftp.strings"
-#include "amiga.h"
+
 #include <proto/dopus5.h>
 #include <proto/module.h>
 
