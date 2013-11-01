@@ -57,10 +57,16 @@ void init_xfer_time( struct update_info *ui )
 #ifdef __AROS__
 struct Device *TimerBase = GetTimerBase();
 #else
-struct Library *TimerBase = GetTimerBase();
+	#ifndef __amigaos3__
+	struct Library *TimerBase = GetTimerBase();
+	#endif
 #endif
 #ifdef __amigaos4__
 struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
+#endif
+
+#ifdef __amigaos3__
+TimerBase = (struct Device *)GetTimerBase();
 #endif
 
 GetSysTime(&ui->ui_start );
@@ -389,12 +395,17 @@ char info_time[256];
 #ifdef __AROS__
 struct Device *TimerBase = GetTimerBase();
 #else
-struct Library *TimerBase = GetTimerBase();
+	#ifndef __amiagos3__
+	struct Library *TimerBase = GetTimerBase();
+	#endif
 #endif
 #ifdef __amigaos4__
 struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
 #endif
 
+#ifdef __amigaos3__
+TimerBase = (struct Device *)GetTimerBase();
+#endif
 
 // init buffers
 *info_bytes=*info_time=0;
@@ -521,10 +532,16 @@ int getput_update( struct update_info *ui, unsigned int total, unsigned int byte
 #ifdef __AROS__
 struct Device *TimerBase = GetTimerBase();
 #else
-struct Library *TimerBase = GetTimerBase();
+	#ifndef __amigaos3__
+	struct Library *TimerBase = GetTimerBase();
+	#endif
 #endif
 #ifdef __amigaos4__
 struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
+#endif
+
+#ifdef __amigaos3__
+TimerBase = (struct Device *)GetTimerBase();
 #endif
 
 // Did we get an improved byte total?
