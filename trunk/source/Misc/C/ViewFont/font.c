@@ -33,8 +33,8 @@ int main(int argc,char **argv)
 	data->args=
 		ReadArgs(
 			"FONT,SIZE/N,B=BOLD/S,I=ITALIC/S,U=ULINE/S,PUBSCREEN/K",
-			data->arg_array,
-			0);
+			(APTR)data->arg_array,
+			NULL);
 
 	// Default to topaz 8
 #ifdef __AROS__

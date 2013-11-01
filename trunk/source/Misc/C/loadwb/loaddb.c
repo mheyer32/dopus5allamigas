@@ -21,18 +21,8 @@ For more information on Directory Opus for Windows please see:
 
 */
 
-#include <SDI/SDI_compiler.h>
-#include <SDI/SDI_stdarg.h>
-
-#include <strings.h>
-
-#include <proto/exec.h>
-#include <proto/input.h>
-#include <proto/intuition.h>
-
+#include <dopus/common.h>
 #include <proto/dopus5.h>
-#include <version/dopus_version.h>
-#include <debug/dopus_debug.h>
 
 #if defined(__amigaos3__) || defined(__AROS__)
 struct Device			*InputBase = NULL;
@@ -79,7 +69,7 @@ int main(int argc, char **arg_string)
 		arg_array[a]=0;
 
 	// Parse arguments
-	if ((args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",arg_array,0)))
+	if ((args=ReadArgs("-DEBUG/S,DELAY/S,CLEANUP/S,NEWPATH/S",(APTR)arg_array,NULL)))
 	{
 		// Free arguments
 		FreeArgs(args);
@@ -166,7 +156,7 @@ int main(int argc, char **arg_string)
 	}
 
 	// Find argument pointer
-	for (a=0;arg_string[a] && arg_string[a]!=' ';a++);
+	for (a=0;arg_string[a] && (int)arg_string[a]!=' ';a++);
 	if (arg_string[a]) arg_ptr=(char *)arg_string+a;
 
 	// Try to run DOpus?

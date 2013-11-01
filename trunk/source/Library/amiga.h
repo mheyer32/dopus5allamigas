@@ -3,81 +3,7 @@
 #ifndef _AMIGA_H
 #define _AMIGA_H
 
-// Temporary defines
-#undef __chip
-#define __chip
-
-// End Temporary defines
-
-#define __ARGS(x) x
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-// we use now some VARARGS68K based function to do os4 specifc patching, so to avoid compiler errors/warnings
-// amiga_compiler.h should come before any SDI includes. Till VARARGS68K is in use, such include should stay here.
-#ifdef __amigaos4__
-#include <amiga_compiler.h>  
-#endif
-#include <SDI/SDI_compiler.h>
-#include <SDI/SDI_lib.h>
-#include <SDI/SDI_stdarg.h>
-
-#include <proto/exec.h>
-#include <proto/dos.h>
-#include <proto/graphics.h>
-#include <proto/intuition.h>
-#include <proto/wb.h>
-#include <proto/icon.h>
-#include <proto/iffparse.h>
-#include <proto/locale.h>
-#include <proto/commodities.h>
-#include <proto/asl.h>
-#include <proto/gadtools.h>
-#include <proto/console.h>
-#include <proto/utility.h>
-#include <proto/datatypes.h>
-#include <proto/layers.h>
-#include <proto/rexxsyslib.h>
-
-#include <exec/memory.h>
-#include <exec/resident.h>
-#include <dos/dostags.h>
-#include <dos/filehandler.h>
-#include <devices/trackdisk.h>
-#include <graphics/gfxmacros.h>
-#include <intuition/gadgetclass.h>
-#include <intuition/imageclass.h>
-#include <intuition/icclass.h>
-#include <intuition/sghooks.h>
-#include <workbench/startup.h>
-#include <workbench/icon.h>
-#include <prefs/wbpattern.h>
-#include <prefs/prefhdr.h>
-#include <prefs/font.h>
-#include <datatypes/animationclass.h>
-#include <datatypes/textclass.h>
-
-#ifdef __amigaos3__
-#include <clib/alib_protos.h>
-#endif
-
-#ifdef __AROS__
-#include <intuition/cghooks.h>
-#include <graphics/gfxbase.h>
-#endif
-
-#include <debug/dopus_debug.h>
-
-#if defined(__amigaos3__)
-extern ULONG GlobalStuffChar;
-#define DOPUS_RAWFMTFUNC (APTR)&GlobalStuffChar
-#else
-#define DOPUS_RAWFMTFUNC NULL
-#endif
+#include <dopus/common.h>
 
 #ifdef __amigaos4__
 
@@ -115,26 +41,6 @@ extern ULONG GlobalStuffChar;
 #define SendNotifyMsg(par1,par2,par3,par4,par5,par6)		L_SendNotifyMsg(par1,par2,par3,par4,par5,par6,dopuslibbase_global)
 #define DoSimpleRequest(par1,par2)		L_DoSimpleRequest(par1,par2,dopuslibbase_global)
 
-#endif
-
-/* Long word alignement (mainly used to get
- * FIB or DISK_INFO as auto variables)
- */
-#define D_S(type,name) char a_##name[sizeof(type)+3]; \
-                       type *name = (type *)((LONG)(a_##name+3) & ~3);
-
-// no need for old functions
-#undef UDivMod32
-#define UDivMod32(x,y)( ((ULONG) x) / ((ULONG) y) )
-#undef SDivMod32
-#define SDivMod32(x,y) ( ((LONG) x) / ((LONG) y) )
-#undef UMult32
-#define UMult32(x,y) ( ((ULONG) x) * ((ULONG) y) )
-
-/* Replacement functions for functions not available in some SDKs/GCCs */
-#if !defined(__MORPHOS__) && !defined(__AROS__)
-#undef stccpy
-int stccpy(char *p, const char *q, int n);
 #endif
 
 #endif /* _AMIGA_H */

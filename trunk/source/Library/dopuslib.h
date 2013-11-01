@@ -240,14 +240,7 @@ extern ULONG GlobalStuffChar;
 #define DOPUS_RAWFMTFUNC NULL
 #endif
 
-#define lsprintf(buf,fmt,...) \
-	({ \
-		IPTR args[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, &args, DOPUS_RAWFMTFUNC, buf); \
-	})
 void lsprintfa __ARGS((char *,...)); // unused ??
-//void __asm LSprintf(register __a3 char *buffer,register __a0 char *string,register __a1 APTR data);
-void ASM LSprintf(char *buffer, char *string, APTR data);
 
 #ifndef __amigaos3__
 #pragma pack()
