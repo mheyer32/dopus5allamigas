@@ -23,11 +23,11 @@
 #include <proto/locale.h>
 #include <exec/resident.h>
 
+#include "dopuslib.h"
 #include <dopus/lib_macros.h>
 #include "base.h"
 #include "lib_protos.h"
 
-#include "dopuslib.h"
 #include "boopsi.h"
 
 /****************************************************************************/

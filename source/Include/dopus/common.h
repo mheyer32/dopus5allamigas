@@ -134,8 +134,8 @@ int stccpy(char *p, const char *q, int n);
 #if defined(__amigaos3__)
 #define lsprintf(buf,fmt,...) \
 	({ \
-		APTR args[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, &args, (void (*))"\x16\xC0\x4E\x75", buf); \
+		APTR vargs[] = { __VA_ARGS__ }; \
+		RawDoFmt(fmt, &vargs, (void (*))"\x16\xC0\x4E\x75", buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	RawDoFmt(string, data, (void (*))"\x16\xC0\x4E\x75", buffer)
