@@ -86,7 +86,7 @@ void init_locale_data(struct DOpusLocale *);
 void free_locale_data(struct DOpusLocale *);
 
 // Miscellaneous prototypes
-void STDARGS ArgArrayDone(void);
+//void STDARGS ArgArrayDone(void);
 
 // clock_task.c
 IPC_EntryProto(clock_proc, extern);
