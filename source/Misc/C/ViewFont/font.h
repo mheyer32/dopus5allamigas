@@ -1,27 +1,13 @@
 #define CATCOMP_NUMBERS
 #define __ARGS(x) x
 
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
 
 #include "font.strings"
-#include <SDI/SDI_compiler.h>
-#include <SDI/SDI_stdarg.h>
-#include <proto/exec.h>
-#include <proto/dos.h>
-#include <proto/locale.h>
-#include <proto/layers.h>
-#include <proto/asl.h>
-#include <proto/diskfont.h>
-#include <proto/wb.h>
+
 #include <proto/dopus5.h>
-#include <libraries/gadtools.h>
 #ifdef __AROS__
 #include <diskfont/diskfont.h>
 #endif
-#include <version/dopus_version.h>
-#include <debug/dopus_debug.h>
 #include <dopus/common.h>
 
 enum

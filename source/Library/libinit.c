@@ -19,22 +19,14 @@
  $Id: libinit.c 274 2012-04-03 18:06:48Z thboeckel $
 
 ***************************************************************************/
-#include <stdlib.h>
 
-#include <proto/exec.h>
-#include <proto/dos.h>
 #include <proto/locale.h>
-#include <proto/utility.h>
-#include <exec/execbase.h>
 #include <exec/resident.h>
 
-#include "macros.h"
+#include <dopus/lib_macros.h>
 #include "base.h"
 #include "lib_protos.h"
 
-#include <version/dopus_version.h>
-
-#include "dopusbase.h" //??
 #include "dopuslib.h"
 #include "boopsi.h"
 
