@@ -200,4 +200,11 @@ int do_lister_srcport( IPCMessage *msg );
 // Convert PASV reply to address
 BOOL pasv_to_address( struct sockaddr_in *address, const char *buf );
 
+// Custom string functions
+#if !defined(__MORPHOS__) && !defined(__AROS__)
+char *stpblk(char *p);
 #endif
+char *stptok(const char *s, char *tok, size_t toklen, char *brk);
+
+#endif /* _FTP_H */
+
