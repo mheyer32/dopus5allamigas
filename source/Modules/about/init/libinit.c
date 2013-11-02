@@ -21,6 +21,7 @@
 ***************************************************************************/
 
 #include <exec/resident.h>
+#include <dopus/common.h>
 
 #include <dopus/lib_macros.h>
 #include "base.h"
