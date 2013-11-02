@@ -27,8 +27,8 @@ For more information on Directory Opus for Windows please see:
 #include <stdio.h>
 
 #include <proto/dopus5.h>
-#include <version/dopus_version.h>
-#include <debug/dopus_debug.h>
+#include <dopus/version.h>
+#include <dopus/debug.h>
 
 #include <SDI/SDI_compiler.h>
 
