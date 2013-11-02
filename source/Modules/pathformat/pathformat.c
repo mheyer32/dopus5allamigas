@@ -22,7 +22,7 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "pathformat.h"
-#include <Program/position.h>
+#include <dopus/position.h>
 
 #ifdef __amigaos4__
 struct CommoditiesIFace *ICommodities;

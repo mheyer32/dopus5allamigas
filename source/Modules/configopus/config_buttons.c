@@ -1,6 +1,6 @@
 #include "config_lib.h"
 #include "config_buttons.h"
-#include <Program/main_commands.h>
+#include <dopus/main_commands.h>
 
 int LIBFUNC L_Config_Buttons(
 	REG(a0, ButtonsStartup *startup),
