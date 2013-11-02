@@ -69,6 +69,7 @@
 #include <intuition/gadgetclass.h>
 #include <intuition/imageclass.h>
 #include <intuition/icclass.h>
+#include <intuition/cghooks.h>
 #include <intuition/sghooks.h>
 #include <workbench/startup.h>
 #include <workbench/icon.h>
@@ -151,3 +152,4 @@ int stccpy(char *p, const char *q, int n);
 
 
 #endif /* DOPUS_COMMON_H */
+
