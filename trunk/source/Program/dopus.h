@@ -34,7 +34,7 @@ For more information on Directory Opus for Windows please see:
 #include <proto/configopus.h>
 
 #include <dopus/common.h>
-#include <dopus/main_commands.h>
+#include "main_commands.h"
 
 // Locale
 #define CATCOMP_NUMBERS
@@ -135,7 +135,7 @@ struct LocaleBase
 #include "app_msg.h"
 #include "function_launch.h"
 #include "function_protos.h"
-#include <dopus/function_data.h>
+#include "function_data.h"
 #include "config.h"
 #include "environment.h"
 
@@ -158,7 +158,7 @@ struct LocaleBase
 #include "scripts.h"
 #include "start_menu.h"
 
-#include <dopus/position.h>
+#include "position.h"
 #include "dopusdata.h"
 #include "palette_routines.h"
 #include "envoy.h"

@@ -3,14 +3,14 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-NAME     := diskcopy.module
+# NAME is assigned in makefile.objs
 DESTDIR  := ../../bin.mos
 TARGET   := $(DESTDIR)/$(NAME)
 
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
 DEBUG := 
-STRIP := ppc-morphos-strip --remove-section=.comment  $(TARGET)
+STRIP := ppc-morphos-strip --remove-section=.comment $(TARGET)
 else
 DEBUG := -DDEBUG
 STRIP := 
@@ -19,7 +19,7 @@ endif
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../diskcopy -Iinit
+INCLUDES := -I../../Include -Iinit -Iinit/../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
@@ -29,7 +29,7 @@ LIBS     := -ldebug
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS) init/mos_ppc_libstub.o
+OBJS = $(COMMON_OBJS) $(MOS_OBJS)
 
 ECHO = echo
 ECHE = echo -e

@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #define CATCOMP_NUMBERS
 #include "icon.strings"
 #include "module_deps.h"
-#include <dopus/main_commands.h>
+#include <dopus/mod_icon.h>
 
 #define BACKDROP_GROUP_OBJECT	(1<<30)
 
