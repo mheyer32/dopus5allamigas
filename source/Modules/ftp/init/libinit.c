@@ -24,7 +24,7 @@
 #include <dopus/common.h>
 
 #include <dopus/lib_macros.h>
-#include "base.h"
+#include <dopus/mod_base.h>
 #include "lib_protos.h"
 
 #include "module_deps.h"

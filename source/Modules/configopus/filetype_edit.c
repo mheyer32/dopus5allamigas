@@ -1,6 +1,6 @@
 #include "config_lib.h"
 #include "config_filetypes.h"
-#include <dopus/main_commands.h>
+#include <dopus/mod_configopus.h>
 
 // Edit a filetype (library function)
 

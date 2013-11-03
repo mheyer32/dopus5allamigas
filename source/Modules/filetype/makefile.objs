@@ -1,2 +1,10 @@
-COMMON_OBJS = init/libinit.o filetype.o filetype_data.o filetype_strings.o
+NAME := filetype.module
 
+COMMON_OBJS := 	init/libinit.o filetype.o filetype_data.o filetype_strings.o
+
+OS4_OBJS    :=	init/aos4_ppc_libstub.o \
+				init/aos4_68k_to_ppc_vectors.o
+
+OS3_OBJS    :=	init/68k_asm_a4_a5.o
+
+MOS_OBJS    :=	init/mos_ppc_libstub.o

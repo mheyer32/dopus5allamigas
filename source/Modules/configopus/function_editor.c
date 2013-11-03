@@ -1,5 +1,5 @@
 #include "config_lib.h"
-#include <dopus/function_data.h>
+#include <dopus/mod_configopus.h>
 #include "config_buttons.h"
 
 #define FUNCF_PRIVATE			(1<<26) // Function is private
