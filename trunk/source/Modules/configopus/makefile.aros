@@ -19,12 +19,12 @@ else
 ARCH := $(shell uname -m)
 endif
 
-NAME     := configopus.module
+# NAME is assigned in makefile.objs
 DESTDIR  := ../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include -I../../../Include -I../configopus -Iinit
+OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+INCLUDES := -I../../Include -Iinit -Iinit/../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
 CC       := $(ARCH)-aros-gcc

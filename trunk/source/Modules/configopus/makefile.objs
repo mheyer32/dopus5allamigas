@@ -1,30 +1,26 @@
-COMMON_OBJS = init/libinit.o \
-		config.o config_drag.o \
-		config_settings.o \
-		config_environment.o config_environment_data.o \
-		config_environment_lister.o \
-		config_environment_desktop.o \
-		config_environment_palette.o \
-		config_environment_output.o \
-		config_environment_sounds.o \
-		config_environment_display.o \
-		config_environment_icons.o \
-		config_environment_picture.o \
-		config_environment_paths.o \
-		config_buttons.o config_buttons_data.o config_buttons_god.o config_buttons_support.o \
-		button_editor.o button_editor_data.o \
-		function_editor.o function_editor_data.o \
-		select_colours.o select_colours_data.o \
-		config_convert.o config_convert_data.o old_config.o \
-		config_filetypes.o config_filetypes_data.o \
-		filetype_edit.o \
-		filetype_editor.o fileclass_editor.o \
-		lister_menu.o lister_menu_data.o \
-		config_menus.o config_menus_data.o \
-		config_menus_edit.o config_menus_io.o \
-		config_menus_drag.o \
-		function_export.o \
-		edit.o \
-		string_data.o \
-		ipc.o 
+NAME := configopus.module
 
+COMMON_OBJS := 	init/libinit.o config.o config_drag.o config_settings.o \
+		config_environment.o config_environment_data.o \
+		config_environment_lister.o config_environment_desktop.o \
+		config_environment_palette.o config_environment_output.o \
+		config_environment_sounds.o config_environment_display.o \
+		config_environment_icons.o config_environment_picture.o \
+		config_environment_paths.o config_buttons.o \
+		config_buttons_data.o config_buttons_god.o \
+		config_buttons_support.o button_editor.o button_editor_data.o \
+		function_editor.o function_editor_data.o select_colours.o \
+		select_colours_data.o config_convert.o config_convert_data.o \
+		old_config.o config_filetypes.o config_filetypes_data.o \
+		filetype_edit.o filetype_editor.o fileclass_editor.o \
+		lister_menu.o lister_menu_data.o config_menus.o \
+		config_menus_data.o config_menus_edit.o config_menus_io.o \
+		config_menus_drag.o function_export.o edit.o \
+		string_data.o ipc.o 
+
+OS4_OBJS    :=	init/amiga.o init/aos4_ppc_libstub.o \
+				init/aos4_68k_to_ppc_vectors.o
+
+OS3_OBJS    :=	init/amiga.o init/68k_asm_a4_a5.o
+
+MOS_OBJS    :=	init/mos_ppc_libstub.o
