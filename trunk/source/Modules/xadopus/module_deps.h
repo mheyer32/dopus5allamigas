@@ -1,9 +1,10 @@
 #ifndef _MODULE_DEPS_H
 #define _MODULE_DEPS_H
 
-#include "base.h"
+#include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
+#include <proto/xadmaster.h>
 
 extern struct DOpusLocale *locale;
 #ifdef __AROS__

@@ -1,3 +1,11 @@
-COMMON_OBJS = init/libinit.o XADopus_strings.o \
-              XADopus.o XADopus_data.o XADopus_progress.o
+NAME := xadopus.module
 
+COMMON_OBJS := 	init/libinit.o XADopus_strings.o \
+				XADopus.o XADopus_data.o XADopus_progress.o
+
+OS4_OBJS    :=	init/aos4_ppc_libstub.o \
+				init/aos4_68k_to_ppc_vectors.o
+
+OS3_OBJS    :=	init/68k_asm_a4_a5.o
+
+MOS_OBJS    :=	init/mos_ppc_libstub.o

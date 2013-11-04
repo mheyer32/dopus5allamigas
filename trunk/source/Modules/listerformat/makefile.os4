@@ -3,7 +3,7 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-NAME     := listerformat.module 
+# NAME is assigned in makefile.objs
 DESTDIR  := ../../bin.os4
 TARGET   := $(DESTDIR)/$(NAME)
 
@@ -21,17 +21,17 @@ OPTIMIZE := -O2
 C_LIB :=  -mcrt=newlib
 DEBUGSYM := -gstabs 
 OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__ -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../listerformat -Iinit
+INCLUDES := -I../../Include -Iinit -Iinit/../
 LDFLAGS  := $(C_LIB) -nostartfiles
 WARNINGS := -Wall
 CC       := ppc-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE)
-#LIBS     := -lamiga -ldebug
+LIBS     := 
 
-REMOVE = rm -f
+REMOVE  := rm -f
 MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS) init/amiga.o init/aos4_ppc_libstub.o init/aos4_68k_to_ppc_vectors.o
+OBJS = $(COMMON_OBJS) $(OS4_OBJS)
 
 all : $(TARGET)
 

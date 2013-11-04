@@ -1,2 +1,11 @@
-COMMON_OBJS = init/libinit.o read.o read_data.o read_strings.o
+NAME := read.module
+
+COMMON_OBJS := 	init/libinit.o read.o read_data.o read_strings.o
+
+OS4_OBJS    :=	init/amiga.o init/aos4_ppc_libstub.o \
+				init/aos4_68k_to_ppc_vectors.o
+
+OS3_OBJS    :=	init/amiga.o init/68k_asm_a4_a5.o
+
+MOS_OBJS    :=	init/mos_ppc_libstub.o
 
