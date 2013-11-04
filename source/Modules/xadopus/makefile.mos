@@ -3,7 +3,7 @@ include makefile.objs
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
 
-NAME     := xadopus.module
+# NAME is assigned in makefile.objs
 DESTDIR  := ../../bin.mos
 TARGET   := $(DESTDIR)/$(NAME)
 
@@ -19,7 +19,7 @@ endif
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../xadopus -Iinit
+INCLUDES := -I../../Include -Iinit -Iinit/../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
@@ -29,7 +29,7 @@ LIBS     := -ldebug
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS) init/mos_ppc_libstub.o
+OBJS = $(COMMON_OBJS) $(MOS_OBJS)
 
 ECHO = echo
 ECHE = echo -e

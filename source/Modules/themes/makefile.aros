@@ -19,12 +19,12 @@ else
 ARCH := $(shell uname -m)
 endif
 
-NAME     := themes.module
+# NAME is assigned in makefile.objs
 DESTDIR  := ../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
 OPTIONS  := -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
-INCLUDES := -I../ -I../../ -I../Include -I../../Include  -I../themes -Iinit
+INCLUDES := -I../../Include -Iinit -Iinit/../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
 CC       := $(ARCH)-aros-gcc
