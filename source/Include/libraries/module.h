@@ -65,7 +65,7 @@ typedef struct
 } ModuleInfo;
 #ifndef __amigaos3__
 #pragma pack()
-#endif	
+#endif
 
 #define MODULEF_CALL_STARTUP		(1<<0)	// Call ModuleEntry() on startup
 #define MODULEF_STARTUP_SYNC		(1<<1)	// Run Synchronously on startup
@@ -113,6 +113,9 @@ enum
 	EXTCMD_LOAD_FILE,		// Load files to listers
 };
 
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif	
 struct progress_packet
 {
 	struct _PathNode	*path;
@@ -120,9 +123,6 @@ struct progress_packet
 	ULONG			count;
 };
 
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif	
 struct endentry_packet
 {
 	struct _FunctionEntry	*entry;
@@ -135,9 +135,6 @@ struct addchange_packet
 	UWORD			change;
 	APTR			data;
 };
-#ifndef __amigaos3__
-#pragma pack()
-#endif	
 
 struct addfile_packet
 {
@@ -169,9 +166,6 @@ struct sortlist_packet
 	long			dir_count;
 };
 
-#ifndef __amigaos3__
-#pragma pack(2)
-#endif	
 struct replacereq_packet
 {
 	struct Window		*window;
@@ -222,15 +216,18 @@ enum
 	MODPTR_SCRIPTS,
 };
 
+#define POINTERF_COPY		(1<<0)
+#define POINTERF_LOCKED		(1<<16)
+
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif
 struct pointer_packet
 {
 	ULONG		type;
 	APTR		pointer;
 	ULONG		flags;
 };
-
-#define POINTERF_COPY		(1<<0)
-#define POINTERF_LOCKED		(1<<16)
 
 struct command_packet
 {
@@ -239,6 +236,9 @@ struct command_packet
 	char		*result;
 	ULONG		rc;
 };
+#ifndef __amigaos3__
+#pragma pack()
+#endif
 
 #define COMMANDF_RESULT		(1<<0)
 #define COMMANDF_RUN_SCRIPT	(1<<1)
@@ -248,7 +248,7 @@ struct command_packet
 
 #ifndef __amigaos3__
 #pragma pack(2)
-#endif	
+#endif
 struct DOpusCommandList
 {
 	struct Node	dcl_Node;
@@ -260,8 +260,35 @@ struct DOpusCommandList
 };
 #ifndef __amigaos3__
 #pragma pack()
-#endif	
-
 #endif
+
+#endif /* DEF_DOPUSCOMMANDLIST */
+
+/***************************************************************************/
+
+#ifndef __amigaos3__
+#pragma pack(2)
+#endif
+struct LibraryHeader
+{
+  struct Library          libBase;
+  UWORD                   initialized;
+  struct Library          *sysBase;
+  BPTR                    segList;
+  struct SignalSemaphore  libSem;
+};
+#ifndef __amigaos3__
+#pragma pack()
+#endif
+
+/***************************************************************************/
+
+#if defined(__MORPHOS__)
+#define __TEXTSEGMENT__ __attribute__((section(".text")))
+#else
+#define __TEXTSEGMENT__
+#endif
+
+/***************************************************************************/
 
 #endif
