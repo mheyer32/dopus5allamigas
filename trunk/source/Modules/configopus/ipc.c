@@ -1,7 +1,11 @@
 #include "config_lib.h"
 
+#ifdef __amigaos3__
+extern struct ExecBase *SysBase;
+#endif
+
 // Generic IPC startup code
-#warning We already have a global DOpusbase libbase, remove this!
+
 IPCData *SAVEDS Local_IPC_ProcStartup(
 	ULONG *data,
 	ULONG (*code)(IPCData *,APTR))

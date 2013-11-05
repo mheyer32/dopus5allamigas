@@ -23,8 +23,8 @@ For more information on Directory Opus for Windows please see:
 
 #include "cleanup.h"
 
-#include <dopus/mod_cleanup.h>
-
+#include <Program/position.h>
+#include <Program/main_commands.h>
 
 char *version="$VER: cleanup.module 68.0 (3.10.98)";
 
