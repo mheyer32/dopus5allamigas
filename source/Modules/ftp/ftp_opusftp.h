@@ -569,7 +569,11 @@ typedef struct
 #pragma pack()
 #endif
 
-#include <dopus/mod_ftp.h>
+#include <Program/reselect.h>
+#include <Program/pattern.h>
+#include <Program/toolbar.h>
+#include <Program/lister.h>
+#include <Program/dirlist.h>
 
 /********************************/
 

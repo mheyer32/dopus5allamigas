@@ -19,7 +19,7 @@ endif
 OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -DAROS_ALMOST_COMPATIBLE -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../../Include -Iinit -Iinit/../
+INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall
 CC       := ppc-morphos-gcc -noixemul
