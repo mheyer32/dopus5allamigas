@@ -19,11 +19,11 @@
  $Id: libinit.c 274 2012-04-03 18:06:48Z thboeckel $
 
 ***************************************************************************/
+
 #include <exec/resident.h>
 #include <dopus/common.h>
 
 #include <dopus/lib_macros.h>
-#include <dopus/mod_base.h>
 #include "lib_protos.h"
 
 #include "module_deps.h"
