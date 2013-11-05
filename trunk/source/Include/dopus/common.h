@@ -135,8 +135,8 @@ int stccpy(char *p, const char *q, int n);
 #if defined(__amigaos3__)
 #define lsprintf(buf,fmt,...) \
 	({ \
-		APTR vargs[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, &vargs, (void (*))"\x16\xC0\x4E\x75", buf); \
+		IPTR vargs[] = { __VA_ARGS__ }; \
+		RawDoFmt(fmt, (APTR)&vargs, (void (*))"\x16\xC0\x4E\x75", buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	RawDoFmt(string, data, (void (*))"\x16\xC0\x4E\x75", buffer)
@@ -144,7 +144,7 @@ int stccpy(char *p, const char *q, int n);
 #define lsprintf(buf,fmt,...) \
 	({ \
 		IPTR vargs[] = { __VA_ARGS__ }; \
-		RawDoFmt((STRPTR)fmt, &vargs, NULL, buf); \
+		RawDoFmt(fmt, (APTR)&vargs, NULL, buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	RawDoFmt(string, data, NULL, buffer)
