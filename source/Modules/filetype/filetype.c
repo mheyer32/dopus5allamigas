@@ -16,6 +16,9 @@
 
 #include <math.h>
 
+#ifdef __amigaos3__
+extern struct ExecBase *SysBase;
+#endif
 
 #define min(a,b)    ((a) < (b) ? (a) : (b))
 #define max(a,b)    ((a) > (b) ? (a) : (b))
