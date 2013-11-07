@@ -13,3 +13,6 @@ OS4_OBJS    :=	init/aos4_ppc_libstub.o \
 OS3_OBJS    :=	init/68k_asm_a4_a5.o
 
 MOS_OBJS    :=	init/mos_ppc_libstub.o
+
+OS3_INCLUDE :=	-I/usr/local/amiga/m68k-amigaos/netinclude
+
