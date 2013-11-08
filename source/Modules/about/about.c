@@ -793,6 +793,6 @@ void get_message(about_data *data)
 	if ((data->message=AllocVec(size,0)))
 	{
 		// Build message
-		lsprintf(data->message,about_message,data->trans_info);
+		lsprintf(data->message,about_message,(IPTR)data->trans_info);
 	}
 }
