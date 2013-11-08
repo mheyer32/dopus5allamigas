@@ -47,7 +47,7 @@ typedef struct
 #pragma pack()
 #endif
 
-#define image_count	17
+#define image_count	1
 #define image_special	14
 
 extern ConfigWindow	about_window;

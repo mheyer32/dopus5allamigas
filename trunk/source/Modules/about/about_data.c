@@ -808,8 +808,8 @@ UWORD
 		0x0000,0x0000,0x0000,0x0000}};
 
 image_data images[image_count]={
-	{71,67,4,335,jon_data,jon_palette},
-	{70,67,4,335,greg_data,greg_palette},
+	{71,67,4,335,jon_data,jon_palette}}; //,
+/*	{70,67,4,335,greg_data,greg_palette},
 	{70,67,4,330,andrew_data,andrew_palette},
 	{50,67,3,268,ben_data,ben_palette},
 	{70,67,4,335,dave_data,dave_palette},
@@ -824,7 +824,7 @@ image_data images[image_count]={
 	{70,67,4,335,martin_data,martin_palette},
 	{70,67,4,335,coopers_data,coopers_palette},
 	{70,67,4,335,juggler_data,juggler_palette},
-	{70,67,4,335,tick_data,tick_palette}};
+	{70,67,4,335,tick_data,tick_palette}}; */
 
 unsigned char about_message[]=
 	{0xBC,0x97,0x8E,0x9B,0x9D,0x8C,0x91,0x8E,0x87,0xE0,0xB1,0x90,0x8B,0x8D,0xE0,0xCB,
