@@ -128,7 +128,7 @@ int main(int argc, char **arg_string)
 	if (!run_wb && !(OpenDevice("input.device",0,(struct IORequest *)&input_req,0)))
 	{
 		// Get input base
-		InputBase=(struct Library *)input_req.io_Device;
+		InputBase=(APTR)input_req.io_Device;
 		#ifdef __amigaos4__
 		IInput = (struct InputIFace *)GetInterface(InputBase,"main",1,NULL);
 		#endif
