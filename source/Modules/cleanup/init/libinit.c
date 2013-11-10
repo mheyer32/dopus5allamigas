@@ -188,7 +188,7 @@ static struct LibraryHeader * LIBFUNC LibInit    (struct LibraryHeader *base, BP
 static BPTR                   LIBFUNC LibExpunge (struct LibraryManagerInterface *Self);
 static struct LibraryHeader * LIBFUNC LibOpen    (struct LibraryManagerInterface *Self, ULONG version);
 static BPTR                   LIBFUNC LibClose   (struct LibraryManagerInterface *Self);
-static LONG                   LIBFUNC LibNull    (void);
+static LONG USED              LIBFUNC LibNull    (void);
 
 #elif defined(__MORPHOS__)
 
@@ -587,12 +587,6 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
   if(aroscbase = OpenLibrary("arosc.library", 41))
 #endif
   {
-/***    #if defined(DEBUG)
-    // this must be called ahead of any debug output, otherwise we get stuck
-    InitDebug();
-    #endif
-    D(DBF_STARTUP, "LibInit()");
-*/
     // cleanup the library header structure beginning with the
     // library base.
     base->libBase.lib_Node.ln_Type = NT_LIBRARY;
@@ -961,7 +955,6 @@ ULONG freeBase(struct LibraryHeader *lib)
 
 ULONG initBase(struct LibraryHeader *lib)
 {
-//***  ENTER();
 
   if ((DOSBase = (APTR)OpenLibrary("dos.library", 37)) != NULL && GETINTERFACE(IDOS, DOSBase))
   if ((UtilityBase = (APTR)OpenLibrary("utility.library", 37)) != NULL && GETINTERFACE(IUtility, UtilityBase))
