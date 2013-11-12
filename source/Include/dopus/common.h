@@ -137,7 +137,7 @@ int stccpy(char *p, const char *q, int n);
 	({ \
 		static ULONG StuffChar = 0x16c04e75; \
 		IPTR vargs[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, (APTR)&vargs, (void (*))&StuffChar, buf); \
+		RawDoFmt((STRPTR)fmt, (APTR)&vargs, (void (*))&StuffChar, (APTR)buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	({ \
@@ -148,7 +148,7 @@ int stccpy(char *p, const char *q, int n);
 #define lsprintf(buf,fmt,...) \
 	({ \
 		IPTR vargs[] = { __VA_ARGS__ }; \
-		RawDoFmt(fmt, (APTR)&vargs, NULL, buf); \
+		RawDoFmt((STRPTR)fmt, (APTR)&vargs, NULL, (APTR)buf); \
 	})
 #define LSprintf(buffer, string, data) \
 	RawDoFmt(string, data, NULL, buffer)

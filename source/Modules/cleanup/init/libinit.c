@@ -1018,7 +1018,7 @@ int UserLibInit()
 		return 1;
 	init_locale_data(locale);
 
-	if ((LocaleBase=OpenLibrary("locale.library",38)))
+	if ((LocaleBase=(APTR)OpenLibrary("locale.library",38)))
 	{
 		locale->li_LocaleBase=LocaleBase;
 		if (module_info.locale_name) locale->li_Catalog=OpenCatalogA(NULL,module_info.locale_name,0);
@@ -1040,7 +1040,7 @@ void UserLibCleanup()
 		{
 			CloseLocale(locale->li_Locale);
 			CloseCatalog(locale->li_Catalog);
-			CloseLibrary(LocaleBase);
+			CloseLibrary((struct Library *)LocaleBase);
 		}
 		FreeVec(locale);
 	}
