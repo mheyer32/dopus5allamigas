@@ -480,8 +480,8 @@ void show_device_info(diskcopy_data *data,short list)
 		// Build info string
 		lsprintf(info_buf,
 			GetString(locale,MSG_DISKCOPY_STATUS),
-			data->disk_name,
-			size_buf);
+			(IPTR)data->disk_name,
+			(IPTR)size_buf);
 	}
 	else info_buf[0]=0;
 
@@ -603,9 +603,9 @@ BOOL start_diskcopy(diskcopy_data *data)
 
 	// Initialise status title
 	lsprintf(data->status_title,"%s %s %s",
-		GetString(locale,MSG_DISKCOPY_TITLE),
-		node->node.ln_Name,
-		GetString(locale,MSG_DISKCOPY_TO_TITLE));
+		(IPTR)GetString(locale,MSG_DISKCOPY_TITLE),
+		(IPTR)node->node.ln_Name,
+		(IPTR)GetString(locale,MSG_DISKCOPY_TO_TITLE));
 
 	// Go through destination list	
 	for (node=(Att_Node *)data->dest_list->list.lh_Head;
@@ -660,10 +660,10 @@ BOOL start_diskcopy(diskcopy_data *data)
 					// Put up requester
 					msg=SimpleRequestTags(
 						data->window,
-						0,
+						NULL,
 						GetString(locale,MSG_RETRY_REMOVE_CANCEL),
 						GetString(locale,msg),
-						node->node.ln_Name);
+						(IPTR)node->node.ln_Name);
 
 					// Retry?
 					if (msg==1) continue;
@@ -722,12 +722,12 @@ BOOL start_diskcopy(diskcopy_data *data)
 
 	// Open status window
 	if ((status=OpenProgressWindowTags(
-		PW_Screen,data->screen,
-		PW_Title,data->status_title,
-		PW_SigTask,data->ipc->proc,
+		PW_Screen,(IPTR)data->screen,
+		PW_Title,(IPTR)data->status_title,
+		PW_SigTask,(IPTR)data->ipc->proc,
 		PW_SigBit,data->abort_bit,
 		PW_Flags,PWF_INFO|PWF_GRAPH,
-		PW_Info,GetString(locale,MSG_DISKCOPY_COPYING),
+		PW_Info,(IPTR)GetString(locale,MSG_DISKCOPY_COPYING),
 		TAG_END)))
 	{
 		struct Window *window=0;
@@ -736,7 +736,7 @@ BOOL start_diskcopy(diskcopy_data *data)
 		ok=do_diskcopy(data,status);
 
 		// Get window pointer
-		GetProgressWindowTags(status,PW_Window,&window,TAG_END);
+		GetProgressWindowTags(status,PW_Window,(IPTR)&window,TAG_END);
 
 		// Is window not active?
 		if (!window || !(window->Flags&WFLG_WINDOWACTIVE)) noactive=1;
@@ -826,7 +826,7 @@ BOOL do_diskcopy(diskcopy_data *data,APTR status)
 	struct Window *window=0;
 
 	// Get window pointer
-	GetProgressWindowTags(status,PW_Window,&window,TAG_END);
+	GetProgressWindowTags(status,PW_Window,(IPTR)&window,TAG_END);
 
 	// Calculate track size
 	track_size=
@@ -1002,7 +1002,7 @@ BOOL do_diskcopy(diskcopy_data *data,APTR status)
 				0,
 				GetString(locale,MSG_PROCEED_CANCEL),
 				GetString(locale,MSG_INSERT_DESTINATION),
-				data->source->dh_name)))
+				(IPTR)data->source->dh_name)))
 			{
 				abort=1;
 				break;
@@ -1266,7 +1266,7 @@ BOOL do_diskcopy(diskcopy_data *data,APTR status)
 				0,
 				GetString(locale,MSG_PROCEED_CANCEL),
 				GetString(locale,MSG_INSERT_SOURCE),
-				data->source->dh_name)))
+				(IPTR)data->source->dh_name)))
 			{
 				abort=1;
 				break;
@@ -1288,7 +1288,7 @@ BOOL do_diskcopy(diskcopy_data *data,APTR status)
 		if (data->default_bump)
 		{
 			SetProgressWindowTags(status,
-				PW_Info,GetString(locale,MSG_BUMPING_NAMES),
+				PW_Info,(IPTR)GetString(locale,MSG_BUMPING_NAMES),
 				TAG_END);
 		}
 
@@ -1386,9 +1386,9 @@ short diskcopy_error(
 		0,
 		GetString(locale,buttons),
 		GetString(locale,message),
-		device,
+		(IPTR)device,
 		track,
-		GetString(locale,errortext));
+		(IPTR)GetString(locale,errortext));
 }
 
 

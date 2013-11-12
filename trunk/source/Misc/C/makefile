@@ -69,49 +69,51 @@ endif
 
 
 .PHONY : all
-all : dopusrt loaddb viewfont
+all: dopusrt loaddb viewfont
+	@echo " "
 
 .PHONY : dopusrt
 dopusrt:
 	@echo " "
 	@echo "================== dopusrt ================="
-	@$(MAKE) -C dopusrt -f makefile.$(PLATFORM)
+	@$(MAKE) --no-print-directory -C dopusrt -f makefile.$(PLATFORM)
 
 .PHONY : loaddb
 loaddb:
 	@echo " "
 	@echo "================== loaddb =================="
-	@$(MAKE) -C loadwb -f makefile.$(PLATFORM)
+	@$(MAKE) --no-print-directory -C loadwb -f makefile.$(PLATFORM)
 
 .PHONY : viewfont
 viewfont:
 	@echo " "
 	@echo "================= viewfont ================="
-	@$(MAKE) -C ViewFont -f makefile.$(PLATFORM)
+	@$(MAKE) --no-print-directory -C ViewFont -f makefile.$(PLATFORM)
 
 
 ###########################################################
 
 .PHONY : clean
-clean:	clean-dopusrt clean-loaddb clean-viewfont
+clean: clean-dopusrt clean-loaddb clean-viewfont
+	@echo " "
 
 .PHONY : clean-dopusrt
 clean-dopusrt:
 	@echo " "
 	@echo "--------------- clean dopusrt --------------"
-	@$(MAKE) -C dopusrt -f makefile.$(PLATFORM) clean
+	@$(MAKE) --no-print-directory -C dopusrt -f makefile.$(PLATFORM) clean
 	
 .PHONY : clean-loaddb
 clean-loaddb:
 	@echo " "
 	@echo "--------------- clean loaddb ---------------"
-	@$(MAKE) -C loadwb -f makefile.$(PLATFORM) clean
+	@$(MAKE) --no-print-directory -C loadwb -f makefile.$(PLATFORM) clean
 
 .PHONY : clean-viewfont
 clean-viewfont:
 	@echo " "
 	@echo "-------------- clean viewfont --------------"
-	@$(MAKE) -C ViewFont -f makefile.$(PLATFORM) clean
+	@$(MAKE) --no-print-directory -C ViewFont -f makefile.$(PLATFORM) clean
 
 
 ###########################################################
