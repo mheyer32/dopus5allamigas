@@ -85,7 +85,7 @@ int LIBFUNC L_Module_Entry(
 
 			// >=39?
 			#ifdef __amigaos4__
-			if((struct Library*)DOSBase->lib_Version>=39)
+			if(((struct Library*)DOSBase)->lib_Version>=39)
 			#else
 			if (DOSBase->dl_lib.lib_Version>=39)
 			#endif
@@ -342,7 +342,7 @@ BOOL format_open(format_data *data,BOOL noactive)
 
 	// If <39, disable International and Caching
 	#ifdef __amigaos4__
-	if((struct Library*)DOSBase->lib_Version<39)
+	if(((struct Library*)DOSBase)->lib_Version<39)
 	#else
 	if (DOSBase->dl_lib.lib_Version<39)
 	#endif
@@ -501,7 +501,7 @@ void show_device_info(format_data *data)
 		BytesToString(size,size_buf,1,0);
 
 		// Build display string
-		lsprintf(info_buf,GetString(locale,MSG_FORMAT_STATUS),tracks,track_size,size_buf);
+		lsprintf(info_buf,GetString(locale,MSG_FORMAT_STATUS),tracks,track_size,(IPTR)size_buf);
 	}
 	else info_buf[0]=0;
 
@@ -643,9 +643,9 @@ BOOL start_format(format_data *data,unsigned short type,BOOL reopen)
 			0,
 			GetString(locale,MSG_PROCEED_CANCEL),
 			GetString(locale,MSG_DISK_NOT_BLANK),
-			disk->dh_name,
-			data->disk_name,
-			size_buf)) blank=1;
+			(IPTR)disk->dh_name,
+			(IPTR)data->disk_name,
+			(IPTR)size_buf)) blank=1;
 	}
 
 	// Fail?
@@ -721,16 +721,18 @@ BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *noa
 	*noactive=0;
 
 	// Build status title window
-	lsprintf(data->status_title,"%s %s",GetString(locale,MSG_FORMAT_TITLE),disk->dh_name);
+	lsprintf(data->status_title,"%s %s",
+			(IPTR)GetString(locale,MSG_FORMAT_TITLE),
+			(IPTR)disk->dh_name);
 
 	// Open status window
 	if (!(status=OpenProgressWindowTags(
-		PW_Screen,data->screen,
-		PW_Title,data->status_title,
-		PW_SigTask,data->ipc->proc,
-		PW_SigBit,data->abort_bit,
+		PW_Screen,(IPTR)data->screen,
+		PW_Title,(IPTR)data->status_title,
+		PW_SigTask,(IPTR)data->ipc->proc,
+		PW_SigBit,(IPTR)data->abort_bit,
 		PW_Flags,PWF_INFO|PWF_GRAPH,
-		PW_Info,GetString(locale,MSG_FORMAT_SETTING_UP),
+		PW_Info,(IPTR)GetString(locale,MSG_FORMAT_SETTING_UP),
 		TAG_END))) return 0;
 
 	// Inhibit the drive
@@ -753,7 +755,7 @@ BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *noa
 	{
 		// Display status text
 		SetProgressWindowTags(status,
-			PW_Info,GetString(locale,MSG_FORMAT_INITIALISING),
+			PW_Info,(IPTR)GetString(locale,MSG_FORMAT_INITIALISING),
 			TAG_END);
 
 		// Initialise disk
@@ -770,7 +772,7 @@ BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *noa
 
 	// Display status text
 	SetProgressWindowTags(status,
-		PW_Info,GetString(locale,MSG_FORMAT_CLEANING_UP),
+		PW_Info,(IPTR)GetString(locale,MSG_FORMAT_CLEANING_UP),
 		TAG_END);
 
 	// Turn motor off
@@ -790,11 +792,11 @@ BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *noa
 
 		// Display status text
 		SetProgressWindowTags(status,
-			PW_Info,GetString(locale,MSG_FORMAT_MAKING_TRASH),
+			PW_Info,(IPTR)GetString(locale,MSG_FORMAT_MAKING_TRASH),
 			TAG_END);
 
 		// Build trashcan name
-		lsprintf(trash_name,"%sTrashcan",disk->dh_name);
+		lsprintf(trash_name,"%sTrashcan",(IPTR)disk->dh_name);
 
 		// Create directory
 		if ((lock=CreateDir(trash_name)))
@@ -811,7 +813,7 @@ BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *noa
 	}
 
 	// Get window pointer
-	GetProgressWindowTags(status,PW_Window,&window,TAG_END);
+	GetProgressWindowTags(status,PW_Window,(IPTR)&window,TAG_END);
 
 	// Is window not active?
 	if (!window || !(window->Flags&WFLG_WINDOWACTIVE)) *noactive=1;
@@ -860,12 +862,12 @@ BOOL do_raw_format(
 
 	// Get progress window
 	GetProgressWindowTags(status,
-		PW_Window,&window,
+		PW_Window,(IPTR)&window,
 		TAG_END);
 
 	// Display status text
 	SetProgressWindowTags(status,
-		PW_Info,GetString(locale,MSG_FORMAT_FORMATTING),
+		PW_Info,(IPTR)GetString(locale,MSG_FORMAT_FORMATTING),
 		PW_FileCount,track_count,
 		TAG_END);
 
@@ -1018,7 +1020,7 @@ void do_install(format_data *data,DiskHandle *disk,APTR status)
 
 	// Show status text
 	SetProgressWindowTags(status,
-		PW_Info,GetString(locale,MSG_INSTALLING_DISK),
+		PW_Info,(IPTR)GetString(locale,MSG_INSTALLING_DISK),
 		TAG_END);
 
 	// Copy standard 2.0 bootblock into buffer

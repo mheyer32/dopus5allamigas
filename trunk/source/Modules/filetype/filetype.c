@@ -27,11 +27,17 @@ extern struct ExecBase *SysBase;
 
 // replacements for the C library memory functions, which can't be used in shared libraries
 void free(void *ptr) { return FreeVec(ptr); }
-char *strdup (const char *orig) { char *copy = AllocVec(strlen(orig)+1, MEMF_ANY); if (copy) CopyMem(orig, copy, strlen(orig)+1); return copy;}
+char *strdup (const char *orig)
+{
+	char *copy = AllocVec(strlen(orig)+1, MEMF_ANY);
+	if (copy)
+		CopyMem((APTR)orig, copy, strlen(orig)+1);
+	return copy;}
 
 
 
-#warning Should not be here - YUCK
+#warning Should not be here - Disabled - Remove eventually.
+/* Commented out - If no problems arise then remove.
 typedef struct _PathNode
 {
 	struct MinNode		node;
@@ -41,6 +47,7 @@ typedef struct _PathNode
 	struct MinList		change_list;
 	UWORD			flags;
 } PathNode;
+*/
 
 static Cfg_FiletypeList *creator_generic(
 	char *args,
@@ -90,7 +97,7 @@ static int STDARGS my_SimpleRequest(
 	char *text)
 {
 char buffer[1024] = {'0'};
-lsprintf(buffer, message, text);
+lsprintf(buffer, message, (IPTR)text);
 
 return (int)SimpleRequest( window, title, buttons, buffer, 0, 0, 0, 0);
 //return SimpleRequest( window, title, buttons, message, 0, (APTR)(((ULONG *)&message) + 1), 0, 0);
@@ -379,7 +386,10 @@ char buffer[NODENAMELEN + 2 + 2 + 1];
 int ok = FALSE;
 int number;
 
-lsprintf( buffer, "%4ld\a\x5%s\a\xa%s", ft->type.priority, ft->type.id, ft->type.name );
+lsprintf( buffer, "%4ld\a\x5%s\a\xa%s",
+		ft->type.priority,
+		(IPTR)ft->type.id,
+		(IPTR)ft->type.name );
 
 SetGadgetChoices( data->list, GAD_FIND_LISTVIEW, (APTR)~0 );
 
@@ -1999,7 +2009,7 @@ if	(data->master_fti.fti_flags & FTIF_FILENAME)
 	{
 	if	(data->master_fti.fti_flags & FTIF_FILENAME_END)
 		{
-		lsprintf( buf, "#?%s", data->master_fti.fti_filename );
+		lsprintf( buf, "#?%s", (IPTR)data->master_fti.fti_filename );
 		data->match_name = strdup( buf );
 		}
 	else

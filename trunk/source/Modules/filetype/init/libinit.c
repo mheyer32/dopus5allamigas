@@ -188,7 +188,7 @@ static struct LibraryHeader * LIBFUNC LibInit    (struct LibraryHeader *base, BP
 static BPTR                   LIBFUNC LibExpunge (struct LibraryManagerInterface *Self);
 static struct LibraryHeader * LIBFUNC LibOpen    (struct LibraryManagerInterface *Self, ULONG version);
 static BPTR                   LIBFUNC LibClose   (struct LibraryManagerInterface *Self);
-static LONG                   LIBFUNC LibNull    (void);
+static LONG USED              LIBFUNC LibNull    (void);
 
 #elif defined(__MORPHOS__)
 
@@ -1047,7 +1047,7 @@ void UserLibCleanup()
 		{
 			CloseLocale(locale->li_Locale);
 			CloseCatalog(locale->li_Catalog);
-			CloseLibrary((APTR)LocaleBase);
+			CloseLibrary((struct Library *)LocaleBase);
 		}
 		FreeVec(locale);
 	}

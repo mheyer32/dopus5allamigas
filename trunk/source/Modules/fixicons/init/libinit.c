@@ -188,7 +188,7 @@ static struct LibraryHeader * LIBFUNC LibInit    (struct LibraryHeader *base, BP
 static BPTR                   LIBFUNC LibExpunge (struct LibraryManagerInterface *Self);
 static struct LibraryHeader * LIBFUNC LibOpen    (struct LibraryManagerInterface *Self, ULONG version);
 static BPTR                   LIBFUNC LibClose   (struct LibraryManagerInterface *Self);
-static LONG                   LIBFUNC LibNull    (void);
+static LONG USED              LIBFUNC LibNull    (void);
 
 #elif defined(__MORPHOS__)
 
@@ -1025,7 +1025,7 @@ int UserLibInit()
 		return 1;
 	init_locale_data(locale);
 
-	if ((LocaleBase=OpenLibrary("locale.library",38)))
+	if ((LocaleBase=(APTR)OpenLibrary("locale.library",38)))
 	{
 		locale->li_LocaleBase=LocaleBase;
 		if (module_info.locale_name) locale->li_Catalog=OpenCatalogA(NULL,module_info.locale_name,0);
@@ -1047,7 +1047,7 @@ void UserLibCleanup()
 		{
 			CloseLocale(locale->li_Locale);
 			CloseCatalog(locale->li_Catalog);
-			CloseLibrary(LocaleBase);
+			CloseLibrary((struct Library *)LocaleBase);
 		}
 		FreeVec(locale);
 	}

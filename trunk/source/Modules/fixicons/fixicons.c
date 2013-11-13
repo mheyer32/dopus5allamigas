@@ -108,9 +108,9 @@ ULONG				flags;
 BPTR open_temp_file( char *filename, IPCData *ipc )
 {
 unsigned short a;
-ULONG          micros, secs;
-int            temp_key;
-BPTR           file=NULL;
+ULONG  micros, secs;
+int    temp_key;
+BPTR   file = 0;
 
 // Get temporary key
 temp_key = (ULONG)ipc;
@@ -140,7 +140,7 @@ int i, f = 0;
 char buf[512] = "";
 
 strcpy( buf, GetString( locale, result ? MSG_FIXED : MSG_COULDNT_FIX ) );
-lsprintf( buf + strlen(buf), " %s.info", path );
+lsprintf( buf + strlen(buf), " %s.info", (IPTR)path );
 
 if	(flags)
 	{
@@ -150,7 +150,9 @@ if	(flags)
 		{
 		if	(flags & (1 << i))
 			{
-			lsprintf( buf + strlen(buf), "%s%s", f ? ", " : "", GetString(locale,MSG_ANB+i-1) );
+			lsprintf( buf + strlen(buf), "%s%s",
+					(IPTR)(f ? ", " : ""),
+					(IPTR)GetString(locale,MSG_ANB+i-1) );
 			f = 1;
 			}
 		}
@@ -331,7 +333,7 @@ if	(!l->isicon && (l->lock = Lock( path, ACCESS_READ )))
 			more_files = ExNext( l->lock, &l->fib );
 
 			// Update progress window
-			SetProgressWindowTags(progress,PW_FileName,FilePart(path),TAG_END);
+			SetProgressWindowTags(progress,PW_FileName,(IPTR)FilePart(path),TAG_END);
 
 			fix_icon( progress, l->newpath, args, l->newxoff, l->newyoff, outfile, changes );
 
@@ -350,7 +352,7 @@ if	(!l->isicon && (l->lock = Lock( path, ACCESS_READ )))
 						more_files = ExNext( l->lock, &l->fib );
 
 					// Update progress window
-					SetProgressWindowTags(progress,PW_FileName,FilePart(path),TAG_END);
+					SetProgressWindowTags(progress,PW_FileName,(IPTR)FilePart(path),TAG_END);
 
 					fix_icon( progress, l->newpath, args, l->newxoff, l->newyoff, outfile, changes );
 					} while (more_files);
@@ -510,8 +512,8 @@ if	(!args || !args->FA_Arguments[FI_NFO])
 
 // Open progress window
 progress=OpenProgressWindowTags(
-	PW_Screen,screen,
-	PW_Title,GetString(locale,MSG_FIXING_ICONS),
+	PW_Screen,(IPTR)screen,
+	PW_Title,(IPTR)GetString(locale,MSG_FIXING_ICONS),
 	PW_Flags,PWF_FILENAME|PWF_GRAPH|PWF_ABORT,
 	PW_FileCount,Att_NodeCount(files),
 	TAG_END);
@@ -537,7 +539,7 @@ for	(node=(Att_Node *)files->list.lh_Head;node->node.ln_Succ;node=(Att_Node *)no
 	// Update progress window
 	SetProgressWindowTags(
 		progress,
-		PW_FileName,FilePart(path),
+		PW_FileName,(IPTR)FilePart(path),
 		PW_FileNum,count,
 		TAG_END);
 
@@ -555,19 +557,23 @@ CloseProgressWindow(progress);
 if	(outfile)
 	{
 	struct command_packet packet = {0};
-	char                  buf[256];
+	char buf[256];
 
 	// No files changed?
 	if	(changes)
-		lsprintf( buf, "\n%ld %s\n", changes, GetString(locale,MSG_CHANGES_MADE) );
+		lsprintf( buf, "\n%ld %s\n",
+				changes,
+				(IPTR)GetString(locale,MSG_CHANGES_MADE) );
 	else
-		lsprintf( buf, "%s %s\n", GetString(locale,MSG_NO), GetString(locale,MSG_CHANGES_MADE) );
+		lsprintf( buf, "%s %s\n",
+				(IPTR)GetString(locale,MSG_NO),
+				(IPTR)GetString(locale,MSG_CHANGES_MADE) );
 
-	FPuts( outfile, buf );
+	FPuts( outfile, (STRPTR)buf );
 
 	Close( outfile );
 
-	lsprintf( buf, "dopus read delete %s", temp_filename );
+	lsprintf( buf, "dopus read delete %s", (IPTR)temp_filename );
 
 	packet.command = buf;
 
