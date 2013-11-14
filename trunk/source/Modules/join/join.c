@@ -27,9 +27,6 @@ For more information on Directory Opus for Windows please see:
 struct Device *TimerBase;
 #endif
 
-#ifdef __amigaos4__
-struct TimerIFace *ITimer;
-#endif
 
 void get_trunc_filename(char *source,char *dest);
 
@@ -67,10 +64,10 @@ int LIBFUNC L_Module_Entry(
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&data->timer_req,0))
 		data->TimerBase=(struct Library *)data->timer_req.tr_node.io_Device;
 	#ifdef __amigaos4__
-	struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
+	data->ITimer = (struct TimerIFace *)GetInterface((struct Library *)data->TimerBase,"main",1,NULL); 
 	#endif
-		
-		
+
+
 	// Create list, open window
 	if (!(data->join_list=Att_NewList(LISTF_POOL)) ||
 		!(join_open(data)))
@@ -581,7 +578,7 @@ void join_free(join_data *data)
 		// Close timer device
 		if (data->TimerBase) {
 		#ifdef __amigaos4__
-		DropInterface((struct Interface *)ITimer); 
+		if (data->ITimer) DropInterface((struct Interface *)data->ITimer); 
 		#endif
 		CloseDevice((struct IORequest *)&data->timer_req);
 		}
@@ -778,7 +775,7 @@ short join_check_filename(join_data *data)
 					0,
 					GetString(locale,MSG_REPLACE_RENAME_ABORT),
 					GetString(locale,MSG_FILE_EXISTS),
-					fib->fib_FileName);
+					(IPTR)fib->fib_FileName);
 
 				// Replace?
 				if (res==1) ok=1;
@@ -826,11 +823,11 @@ BOOL join_do_join(join_data *data)
 			data->window,
 			0,
 			0,
-			AR_Window,data->window,
-			AR_Message,GetString(locale,MSG_ENTER_FILENAME),
-			AR_Button,GetString(locale,MSG_OK),
-			AR_Button,GetString(locale,MSG_CANCEL),
-			AR_Buffer,buf,
+			AR_Window,(IPTR)data->window,
+			AR_Message,(IPTR)GetString(locale,MSG_ENTER_FILENAME),
+			AR_Button,(IPTR)GetString(locale,MSG_OK),
+			AR_Button,(IPTR)GetString(locale,MSG_CANCEL),
+			AR_Buffer,(IPTR)buf,
 			AR_BufLen,256,
 			TAG_END))) break;
 
@@ -855,6 +852,9 @@ BOOL join_join_files(join_data *data)
 	Att_Node *node;
 	char *initial_buffer,*ptr;
 	struct Library *TimerBase;
+	#ifdef __amigaos4__
+	struct TimerIFace *ITimer;
+	#endif
 
 	// Get file count
 	count=Att_NodeCount(data->join_list);
@@ -862,7 +862,7 @@ BOOL join_join_files(join_data *data)
 	// Get timer pointer
 	TimerBase=data->TimerBase;
 	#ifdef __amigaos4__
-	struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL);
+	ITimer = data->ITimer;
 	#endif
 	
 	// Allocate buffer
@@ -871,8 +871,8 @@ BOOL join_join_files(join_data *data)
 
 	// Open progress window
 	progress=OpenProgressWindowTags(
-		PW_Window,data->window,
-		PW_Title,GetString(locale,MSG_JOINING_FILES),
+		PW_Window,(IPTR)data->window,
+		PW_Title,(IPTR)GetString(locale,MSG_JOINING_FILES),
 		PW_Flags,PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT,
 		PW_FileCount,count,
 		TAG_END);
@@ -930,7 +930,7 @@ BOOL join_join_files(join_data *data)
 		// Set filename and size in progress indicator
 		SetProgressWindowTags(
 			progress,
-			PW_FileName,fib->fib_FileName,
+			PW_FileName,(IPTR)fib->fib_FileName,
 			PW_FileNum,count,
 			PW_FileSize,fib->fib_Size<<1,
 			TAG_END);
@@ -1005,7 +1005,7 @@ BOOL join_join_files(join_data *data)
 			read_size=(fib->fib_Size>buffer_size)?buffer_size:fib->fib_Size;
 
 			// Get current time
-			if (TimerBase) GetSysTime(&start);
+			if (TimerBase) GetSysTime((APTR)&start);
 
 			// Read data
 			while ((size=Read(in,file_buffer,read_size))<1)
@@ -1068,10 +1068,10 @@ BOOL join_join_files(join_data *data)
 			if (TimerBase)
 			{
 				// Get current time
-				GetSysTime(&end);
+				GetSysTime((APTR)&end);
 
 				// Calculate time that portion of the copy took
-				SubTime(&end,&start);
+				SubTime((APTR)&end,(APTR)&start);
 				copytime=(end.tv_secs*1000000)+end.tv_micro;
 			}
 
@@ -1130,10 +1130,10 @@ short join_show_error(join_data *data,short msg,char *name,BOOL remove)
 	// Get error text
 	Fault((err=IoErr()),"",fault,80);
 	get_trunc_filename(FilePart(name),file);
-	lsprintf(text,GetString(locale,msg),file);
+	lsprintf(text,GetString(locale,msg),(IPTR)file);
 
 	// Build text
-	lsprintf(buf,GetString(locale,MSG_JOIN_ERROR),text,err,fault);
+	lsprintf(buf,GetString(locale,MSG_JOIN_ERROR),(IPTR)text,err,(IPTR)fault);
 
 	// Show requester
 	return (short)AsyncRequestTags(
@@ -1142,11 +1142,11 @@ short join_show_error(join_data *data,short msg,char *name,BOOL remove)
 		data->window,
 		0,
 		0,
-		AR_Window,data->window,
-		AR_Message,buf,
-		AR_Button,GetString(locale,(name)?MSG_JOIN_RETRY:MSG_OK),
-		(remove)?AR_Button:TAG_IGNORE,(remove)?GetString(locale,MSG_REMOVE):0,
-		(name)?AR_Button:TAG_IGNORE,GetString(locale,MSG_CANCEL),
+		AR_Window,(IPTR)data->window,
+		AR_Message,(IPTR)buf,
+		AR_Button,(IPTR)GetString(locale,(name)?MSG_JOIN_RETRY:MSG_OK),
+		(remove)?AR_Button:TAG_IGNORE,(IPTR)((remove)?GetString(locale,MSG_REMOVE):0),
+		(name)?AR_Button:TAG_IGNORE,(IPTR)(GetString(locale,MSG_CANCEL)),
 		TAG_END);
 }
 
@@ -1322,11 +1322,11 @@ short split_split_file(join_data *data)
 
 	// Open progress window
 	progress=OpenProgressWindowTags(
-		PW_Window,data->window,
-		PW_Title,GetString(locale,MSG_SPLITTING_FILE),
+		PW_Window,(IPTR)data->window,
+		PW_Title,(IPTR)GetString(locale,MSG_SPLITTING_FILE),
 		PW_Flags,PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT,
 		PW_FileCount,num,
-		PW_FileName,fib->fib_FileName,
+		PW_FileName,(IPTR)fib->fib_FileName,
 		PW_FileSize,filesize<<1,
 		TAG_END);
 
@@ -1342,7 +1342,7 @@ short split_split_file(join_data *data)
 		long totalBlocks;
 
 		// Build filename
-		lsprintf(outname,"%s.%03ld",stem,count++);
+		lsprintf(outname,"%s.%03ld",(IPTR)stem,count++);
 
 		// Update progress window
 		SetProgressWindowTags(progress,PW_FileNum,count,TAG_END);
@@ -1369,7 +1369,7 @@ short split_split_file(join_data *data)
 				while (floppy)
 				{
 					// Build text
-					lsprintf(data->buf,GetString(locale,MSG_ENTER_DISK),device);
+					lsprintf(data->buf,GetString(locale,MSG_ENTER_DISK),(IPTR)device);
 
 					// Show requester for next disk
 					if (!(AsyncRequestTags(
@@ -1378,10 +1378,10 @@ short split_split_file(join_data *data)
 						data->window,
 						0,
 						0,
-						AR_Window,data->window,
-						AR_Message,data->buf,
-						AR_Button,GetString(locale,MSG_OK),
-						AR_Button,GetString(locale,MSG_CANCEL),
+						AR_Window,(IPTR)data->window,
+						AR_Message,(IPTR)data->buf,
+						AR_Button,(IPTR)GetString(locale,MSG_OK),
+						AR_Button,(IPTR)GetString(locale,MSG_CANCEL),
 						TAG_END)))
 					{
 						fail=1;

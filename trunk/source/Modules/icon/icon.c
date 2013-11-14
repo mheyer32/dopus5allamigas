@@ -370,9 +370,9 @@ void build_title( icon_data *data )
 // Build title
 lsprintf( data->title,
 	GetString(locale,MSG_ICON_TITLE),
-	GetString(locale,data->icon_mode ? MSG_ICON_NEWICON : MSG_ICON_OLDICON),
-	data->object_name,
-	GetString(locale,icon_type_labels[data->label+1]) );
+	(IPTR)(GetString(locale,data->icon_mode ? MSG_ICON_NEWICON : MSG_ICON_OLDICON)),
+	(IPTR)data->object_name,
+	(IPTR)GetString(locale,icon_type_labels[data->label+1]) );
 
 // Got an author?
 if	(*data->author)
@@ -380,7 +380,7 @@ if	(*data->author)
 	// Add to title buffer
 	lsprintf(data->title+strlen(data->title),
 		GetString(locale,MSG_AUTHOR),
-		data->author);
+		(IPTR)data->author);
 	}
 }
 
@@ -403,8 +403,10 @@ if	((data->tool_list = Att_NewList( LISTF_POOL )))
 			if	(!*data->author)
 				{
 				// Author string?
-				if	(*data->icon->do_ToolTypes[num]/*[0]*/=='»' ||
-					*data->icon->do_ToolTypes[num]/*[0]*/=='«')
+//				if	(*data->icon->do_ToolTypes[num]/*[0]*/=='»' ||
+//					*data->icon->do_ToolTypes[num]/*[0]*/=='«')
+				if	('»' == (char)*data->icon->do_ToolTypes[num]/*[0]*/ ||
+					'«' == (char)*data->icon->do_ToolTypes[num]/*[0]*/)
 					{
 					char *ptr;
 
@@ -633,7 +635,7 @@ if	(!data->first_remap)
 	}
 
 build_title( data );
-SetWindowTitles( data->window, data->title, (UBYTE *)-1 );
+SetWindowTitles( data->window, data->title, (STRPTR)-1 );
 
 // Set error pointer
 ((struct Process *)FindTask(0))->pr_WindowPtr = data->window;
@@ -731,7 +733,7 @@ SetGadgetValue( data->list, GAD_ICON_BYTES, (ULONG)buf );
 SetGadgetValue( data->list, GAD_ICON_STACK, (data->icon->do_StackSize == 0) ? 4000 : data->icon->do_StackSize );
 
 // Date
-lsprintf( buf, "%s %s", data->datebuf, data->timebuf );
+lsprintf( buf, "%s %s", (IPTR)data->datebuf, (IPTR)data->timebuf );
 SetGadgetValue( data->list, GAD_ICON_LAST_CHANGED, (ULONG)buf );
 
 // Comment
@@ -1009,7 +1011,7 @@ if	((obj = GetObject( data->list, GAD_ICON_TOOLTYPES )))
 		{
 		drop_item = (x << 16) | y;
 
-		GetAttr( DLV_GetLine, GADGET(obj), &drop_item );
+		GetAttr( DLV_GetLine, (Object *)GADGET(obj), &drop_item );
 
 		// Item dragged onto itself?
 		if	(data->drag_item == drop_item)
@@ -1301,11 +1303,11 @@ if	(option)
 					win,
 					0,
 					0,
-					AR_Window,	win,
-					AR_Message,	GetString(locale,MSG_ICON_MODIFIED),
-					AR_Button,	GetString(locale,MSG_ICON_SAVE),
-					AR_Button,	GetString(locale,MSG_ICON_DONT_SAVE),
-					AR_Button,	GetString(locale,MSG_ICON_CANCEL),
+					AR_Window,	(IPTR)win,
+					AR_Message,	(IPTR)GetString(locale,MSG_ICON_MODIFIED),
+					AR_Button,	(IPTR)GetString(locale,MSG_ICON_SAVE),
+					AR_Button,	(IPTR)GetString(locale,MSG_ICON_DONT_SAVE),
+					AR_Button,	(IPTR)GetString(locale,MSG_ICON_CANCEL),
 					TAG_DONE );
 
 					ClearWindowBusy( data->window );
@@ -1619,7 +1621,7 @@ if	((icon = GetCachedDiskObject( data->name, GCDOF_NOCACHE )))
 
 		// Report whether new icon or not
 		build_title( data );
-		SetWindowTitles( data->window, data->title, (UBYTE *)-1 );
+		SetWindowTitles( data->window, data->title, (STRPTR)-1 );
 
 		// Get icon image pointers
 		icon_switch_image( data, data->icon_mode );
@@ -1771,7 +1773,9 @@ BOOL ok = FALSE;
 
 if	(icon_save_temp( data, data->name ))
 	{
-	lsprintf( command, "%s %s", data->edit_command, data->tempname );
+	lsprintf( command, "%s %s",
+			(IPTR)data->edit_command,
+			(IPTR)data->tempname );
 
 	if	(WB_LaunchNotify(
 		command,
@@ -1909,18 +1913,18 @@ res = AsyncRequestTags(
 	data->window,
 	0,
 	0,
-	AR_Window,	data->window,
-	AR_Title,	GetString(locale,MSG_PICK_EDITOR),
-	AR_Message,	GetString(locale,MSG_ENTER_FUNCTION),
-	AR_Button,	GetString(locale,MSG_ICON_SAVE),
-	AR_Button,	GetString(locale,MSG_USE),
-	AR_Button,	GetString(locale,MSG_ICON_CANCEL),
-	AR_Buffer,	buffer,
+	AR_Window,	(IPTR)data->window,
+	AR_Title,	(IPTR)GetString(locale,MSG_PICK_EDITOR),
+	AR_Message,	(IPTR)GetString(locale,MSG_ENTER_FUNCTION),
+	AR_Button,	(IPTR)GetString(locale,MSG_ICON_SAVE),
+	AR_Button,	(IPTR)GetString(locale,MSG_USE),
+	AR_Button,	(IPTR)GetString(locale,MSG_ICON_CANCEL),
+	AR_Buffer,	(IPTR)buffer,
 	AR_BufLen,	256,
-	AR_CheckMark,	GetString(locale,MSG_USE_ICONEDIT),
-	AR_CheckPtr,	&use_iconedit,
-	AR_Flags,	SRF_CHECKMARK,
-	AR_Requester,	WINREQUESTER(data->window),
+	AR_CheckMark,	(IPTR)GetString(locale,MSG_USE_ICONEDIT),
+	AR_CheckPtr,	(IPTR)&use_iconedit,
+	AR_Flags,		SRF_CHECKMARK,
+	AR_Requester,	(IPTR)WINREQUESTER(data->window),
 	TAG_DONE );
 
 ClearWindowBusy( data->window );
@@ -2163,7 +2167,7 @@ FOREVER
 					{
 					drop_item = (p->x << 16) | p->y;
 
-					GetAttr( DLV_GetLine, GADGET(obj), &drop_item );
+					GetAttr( DLV_GetLine, (Object *)GADGET(obj), &drop_item );
 
 					// Find drop node
 					if	(drop_item != -1)
@@ -2554,7 +2558,7 @@ FOREVER
 
 										// Report whether new icon or not
 										build_title( data );
-										SetWindowTitles( data->window, data->title, (UBYTE *)-1 );
+										SetWindowTitles( data->window, data->title, (STRPTR)-1 );
 										}
 
 									// Strip NewIcons
@@ -2569,7 +2573,7 @@ FOREVER
 
 										// Report whether new icon or not
 										build_title( data );
-										SetWindowTitles( data->window, data->title, (UBYTE *)-1 );
+										SetWindowTitles( data->window, data->title, (STRPTR)-1 );
 
 										data->newicon_path[0] = 0;
 										}
@@ -3081,7 +3085,7 @@ if	((count += Att_NodeCount( data->tool_list )) > 0)
 			}
 		}
 	}
-icon_pointer->do_ToolTypes = types;
+icon_pointer->do_ToolTypes = (STRPTR *)types;
 
 if	(NewIconBase)
 	{
@@ -3090,7 +3094,7 @@ if	(NewIconBase)
 	struct NewDiskObject *newobj = 0;
 
 	// Try to get destination icon
-	if	(!(dest = GetNewDiskObject( data->icon_name )))
+	if	(!(dest = GetNewDiskObject( (APTR)data->icon_name )))
 		dest = GetDefNewDiskObject( data->icon_type );
 
 	if	(dest)
@@ -3102,7 +3106,7 @@ if	(NewIconBase)
 
 		// Save icon pointers
 		old_DefaultTool = dest->ndo_StdObject->do_DefaultTool;
-		old_ToolTypes   = dest->ndo_StdObject->do_ToolTypes;
+		old_ToolTypes   = (char **)dest->ndo_StdObject->do_ToolTypes;
 		old_Render      = dest->ndo_StdObject->do_Gadget.GadgetRender;
 		old_Select      = dest->ndo_StdObject->do_Gadget.SelectRender;
 		old_Normal      = dest->ndo_NormalImage;
@@ -3165,7 +3169,7 @@ if	(NewIconBase)
 		SetIconFlags( dest->ndo_StdObject, GetIconFlags( data->icon ) );
 
 		// Save icon with new image
-		if (PutNewDiskObject( save_name, dest ))
+		if (PutNewDiskObject( (APTR)save_name, dest ))
 		{
 			data->modified = FALSE;
 			ok = TRUE;
@@ -3174,7 +3178,7 @@ if	(NewIconBase)
 		if (err)
 		{
 			char buf[200],name[115];
-			lsprintf(name,"%s.info",FilePart(save_name));
+			lsprintf(name,"%s.info",(IPTR)FilePart(save_name));
 			Fault(IoErr(),name,buf,sizeof(buf));
 			AsyncRequestTags(
 				data->ipc,
@@ -3182,15 +3186,15 @@ if	(NewIconBase)
 				data->window,
 				0,
 				0,
-				AR_Window, data->window,
-				AR_Message, buf,
-				AR_Button, GetString(locale,MSG_OK),
+				AR_Window, (IPTR)data->window,
+				AR_Message, (IPTR)buf,
+				AR_Button, (IPTR)GetString(locale,MSG_OK),
 				TAG_DONE );
 		}
 
 		// Restore icon pointers
 		dest->ndo_StdObject->do_DefaultTool         = old_DefaultTool;
-		dest->ndo_StdObject->do_ToolTypes           = old_ToolTypes;
+		dest->ndo_StdObject->do_ToolTypes           = (STRPTR *)old_ToolTypes;
 		dest->ndo_StdObject->do_Gadget.GadgetRender = old_Render;
 		dest->ndo_StdObject->do_Gadget.SelectRender = old_Select;
 		dest->ndo_NormalImage                       = old_Normal;
@@ -3229,7 +3233,7 @@ else
 	if (err)
 	{
 		char buf[200],name[115];
-		lsprintf(name,"%s.info",FilePart(save_name));
+		lsprintf(name,"%s.info",(IPTR)FilePart(save_name));
 		Fault(IoErr(),name,buf,sizeof(buf));
 		AsyncRequestTags(
 			data->ipc,
@@ -3237,9 +3241,9 @@ else
 			data->window,
 			0,
 			0,
-			AR_Window, data->window,
-			AR_Message, buf,
-			AR_Button, GetString(locale,MSG_OK),
+			AR_Window, (IPTR)data->window,
+			AR_Message, (IPTR)buf,
+			AR_Button, (IPTR)GetString(locale,MSG_OK),
 			TAG_DONE );
 	}
 	}
@@ -3447,7 +3451,7 @@ else
 #endif
 icon=GetIconTags(data->name,
 		ICONGETA_FailIfUnavailable,TRUE,
-		ICONGETA_Screen,data->window->WScreen,
+		ICONGETA_Screen,(IPTR)data->window->WScreen,
 		TAG_DONE);
 
 // Try and get icon
@@ -3608,7 +3612,7 @@ if	(icon)
 
 		// Report whether new icon or not
 		build_title( data );
-		SetWindowTitles( data->window, data->title, (UBYTE *)-1 );
+		SetWindowTitles( data->window, data->title, (STRPTR)-1 );
 
 		// Get icon image pointers
 		icon_switch_image( data, data->icon_mode );
@@ -3741,7 +3745,7 @@ if	(data->icon)
 			}
 		}
 
-	data->icon->do_ToolTypes = types;
+	data->icon->do_ToolTypes = (STRPTR *)types;
 
 
 	if	(PutDiskObject(save_name,data->icon))
@@ -3752,7 +3756,7 @@ if	(data->icon)
 	else if (err)
 		{
 		char buf[200],name[115];
-		lsprintf(name,"%s.info",FilePart(save_name));
+		lsprintf(name,"%s.info",(IPTR)FilePart(save_name));
 		Fault(IoErr(),name,buf,sizeof(buf));
 		AsyncRequestTags(
 			data->ipc,
@@ -3760,9 +3764,9 @@ if	(data->icon)
 			data->window,
 			0,
 			0,
-			AR_Window, data->window,
-			AR_Message, buf,
-			AR_Button, GetString(locale,MSG_OK),
+			AR_Window, (IPTR)data->window,
+			AR_Message, (IPTR)buf,
+			AR_Button, (IPTR)GetString(locale,MSG_OK),
 			TAG_DONE );
 		}
 	
