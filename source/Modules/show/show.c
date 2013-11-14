@@ -340,7 +340,7 @@ int LIBFUNC L_Module_Entry(
 
 				// Decode data into display
 				DecodeILBM(
-					data->ilbm->image.body.data,
+					(STRPTR)data->ilbm->image.body.data,
 					data->ilbm->header.w,
 					data->ilbm->header.h,
 					data->ilbm->header.nPlanes,
@@ -994,7 +994,7 @@ void show_next_frame(show_data *data)
 			// RLE
 			case 0:
 				DecodeILBM(
-					frame->delta,
+					(STRPTR)frame->delta,
 					data->ilbm->header.w,
 					data->ilbm->header.h,
 					data->ilbm->header.nPlanes,
@@ -1064,7 +1064,7 @@ void do_riff(
 					{
 						AnimDecodeRIFFXor(
 							data,
-							bitmap->Planes[plane],
+							(STRPTR)bitmap->Planes[plane],
 							bitmap->BytesPerRow,
 							sourcewidth);
 					}
@@ -1074,7 +1074,7 @@ void do_riff(
 					{
 						AnimDecodeRIFFSet(
 							data,
-							bitmap->Planes[plane],
+							(STRPTR)bitmap->Planes[plane],
 							bitmap->BytesPerRow,
 							sourcewidth);
 					}
@@ -1440,7 +1440,7 @@ short show_print(
 				{
 					lsprintf(title,
 						GetString(locale,MSG_ANIM_TITLE),
-						FilePart(data->file),
+						(IPTR)FilePart(data->file),
 						data->frame_num,
 						data->frame_count,
 						data->ilbm->header.w,
@@ -1451,7 +1451,7 @@ short show_print(
 				{
 					lsprintf(title,
 						GetString(locale,MSG_ILBM_TITLE),
-						FilePart(data->file),
+						(IPTR)FilePart(data->file),
 						data->width,
 						data->height,
 						data->depth);

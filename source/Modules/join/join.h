@@ -78,6 +78,11 @@ enum
 extern ConfigWindow join_window,split_window;
 extern ObjectDef join_objects[],split_objects[];
 
+#ifdef __amigaos4__
+#define JPTR struct TimerIFace *
+#else
+#define JPTR APTR
+#endif
 
 #ifndef __amigaos3__
 #pragma pack(2)
@@ -102,6 +107,7 @@ typedef struct
 
 	struct timerequest	timer_req;
 	struct Library		*TimerBase;
+	JPTR				ITimer;
 
 	short			function;
 

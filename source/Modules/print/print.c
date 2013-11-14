@@ -310,17 +310,17 @@ void print_print(print_data *data)
 
 	// Open progress window
 	if (!(data->progress=OpenProgressWindowTags(
-		PW_Screen,data->screen,
-		PW_Title,GetString(locale,MSG_PRINTING_TITLE),
-		PW_SigTask,data->ipc->proc,
+		PW_Screen,(IPTR)data->screen,
+		PW_Title,(IPTR)GetString(locale,MSG_PRINTING_TITLE),
+		PW_SigTask,(IPTR)data->ipc->proc,
 		PW_SigBit,data->abort_bit,
 		PW_Flags,PWF_INFO|PWF_GRAPH,
-		PW_Info,GetString(locale,MSG_OPENING_PRINTER),
+		PW_Info,(IPTR)GetString(locale,MSG_OPENING_PRINTER),
 		TAG_END))) return;
 
 	// Get progress window pointer
 	data->prog_win=0;
-	GetProgressWindowTags(data->progress,PW_Window,&data->prog_win,0);
+	GetProgressWindowTags(data->progress,PW_Window,(IPTR)&data->prog_win,0);
 
 	// Get line width
 	data->line_width=(data->right_margin-data->left_margin)+1;
@@ -424,7 +424,7 @@ void print_print(print_data *data)
 
 			// Show filename, reset progress bar
 			SetProgressWindowTags(data->progress,
-				PW_Info,FilePart(node->ln_Name),
+				PW_Info,(IPTR)FilePart(node->ln_Name),
 				PW_FileCount,1,
 				PW_FileNum,0,
 				TAG_END);
@@ -872,7 +872,7 @@ BOOL print_header_footer(print_data *data,short which)
 		short len;
 
 		// Build page string
-		lsprintf(page,"%s%ld",GetString(locale,MSG_PRINT_PAGENUM),data->page);
+		lsprintf(page,"%s%ld",(IPTR)GetString(locale,MSG_PRINT_PAGENUM),data->page);
 		if ((len=strlen(page))>data->line_width-1)
 			len=data->line_width-1;
 

@@ -92,7 +92,7 @@ int LIBFUNC L_Module_Entry(
 
 	// Get input.device base
 	if (!OpenDevice("input.device",0,(struct IORequest *)&data->input_req,0))
-		InputBase=data->input_base=(struct Library *)data->input_req.io_Device;
+		InputBase = (APTR)(data->input_base = (APTR)data->input_req.io_Device);
 	#ifdef __amigaos4__
 	IInput = (struct InputIFace *)GetInterface(data->input_base,"main",1,NULL); 
 	#endif
@@ -221,7 +221,7 @@ int LIBFUNC L_Module_Entry(
 			data->file=node->ln_Name;
 
 			// Show title
-			lsprintf(data->title,GetString(locale,MSG_READING_FILE),FilePart(data->file));
+			lsprintf(data->title,GetString(locale,MSG_READING_FILE),(IPTR)FilePart(data->file));
 			SetWindowTitles(data->window,data->title,(char *)-1);
 
 			// Set busy pointer
@@ -365,7 +365,7 @@ struct Window *read_open_window(read_data *data)
 			modeid=GetVPModeID(&screen->ViewPort);
 
 		// Public screen name
-		lsprintf(data->screen_name,"dopus text viewer - %lx",data);
+		lsprintf(data->screen_name,"dopus text viewer - %lx",(IPTR)data);
 
 		// Open screen
 		pens[0]=(UWORD)~0;
@@ -667,9 +667,9 @@ BOOL read_file(read_data *data,ULONG type)
 			// If file is bigger than the chunk size, we'll show a progress window
 			if (fib->fib_Size>READCHUNK_SIZE)
 				data->progress=OpenProgressWindowTags(
-								PW_Window,data->window,
-								PW_Title,GetString(locale,MSG_READING_FILE_TITLE),
-								PW_SigTask,FindTask(0),
+								PW_Window,(IPTR)data->window,
+								PW_Title,(IPTR)GetString(locale,MSG_READING_FILE_TITLE),
+								PW_SigTask,(IPTR)FindTask(0),
 								PW_SigBit,data->abort_bit,
 								PW_FileCount,fib->fib_Size,
 								PW_Flags,PWF_GRAPH,
@@ -882,7 +882,7 @@ BOOL read_set_mode(read_data *data,short mode,BOOL keep_pos)
 					// Update
 					SetProgressWindowTags(
 						data->progress,
-						PW_Title,GetString(locale,MSG_COUNTING_LINES),
+						PW_Title,(IPTR)GetString(locale,MSG_COUNTING_LINES),
 						PW_FileCount,data->text_buffer_size,
 						PW_FileNum,0,
 						TAG_END);
@@ -1024,7 +1024,7 @@ BOOL read_set_mode(read_data *data,short mode,BOOL keep_pos)
 	{
 		// Try to allocate pens?
 		#ifdef __amigaos4__
-		if ( (struct Library*)GfxBase->lib_Version>=39 && !data->pen_alloc)
+		if ( ((struct Library*)GfxBase)->lib_Version>=39 && !data->pen_alloc)
 		#else
 		if (GfxBase->LibNode.lib_Version>=39 && !data->pen_alloc)
 		#endif
@@ -1353,7 +1353,7 @@ BOOL read_view(read_data *data)
 						while ((item=ItemAddress(data->window->MenuStrip,(UWORD)msg_copy.Code)))
 						{
 							// Get real ID
-							itemid=(UWORD)(GTMENUITEM_USERDATA(item));
+							itemid=(UWORD)(ULONG)(GTMENUITEM_USERDATA(item));
 
 							switch (itemid)
 							{
@@ -1434,10 +1434,10 @@ BOOL read_view(read_data *data)
 										(modeid>>16)&0xffff,
 										modeid&0xffff,
 										fontsize,
-										fontname,
-										editor[0],
-										editor[1],
-										editor[2]);
+										(IPTR)fontname,
+										(IPTR)editor[0],
+										(IPTR)editor[1],
+										(IPTR)editor[2]);
 
 									// Set variable
 									SetEnv("dopus/Text Viewer",data->line_buffer,TRUE);
@@ -1527,7 +1527,7 @@ BOOL read_view(read_data *data)
 										lsprintf(
 											data->line_buffer,
 											editor[data->mode],
-											data->file,
+											(IPTR)data->file,
 											0,0,0,0,0,0,0,0);
 
 										// Launch editor
@@ -1573,7 +1573,7 @@ BOOL read_view(read_data *data)
 									unsigned long top;
 
 									// Get new top
-									GetAttr(PGA_Top,data->vert_scroller,(ULONG *)&top);
+									GetAttr(PGA_Top,(Object *)data->vert_scroller,(ULONG *)&top);
 									if (data->slider_div>1)
 									{
 										top=UMult32(top,data->slider_div);
@@ -1604,7 +1604,7 @@ BOOL read_view(read_data *data)
 									long top;
 
 									// Get new top
-									GetAttr(PGA_Top,data->horiz_scroller,(ULONG *)&top);
+									GetAttr(PGA_Top,(Object *)data->horiz_scroller,(ULONG *)&top);
 
 									// Scroll display
 									if (top!=data->left) read_show_text(data,top-data->left,0,0);
@@ -2269,7 +2269,7 @@ void read_init(read_data *data)
 	if (data->mode==MODE_ANSI)
 	{
 		#ifdef __amigaos4__
-		if ( (struct Library*)GfxBase->lib_Version>=39)
+		if ( ((struct Library*)GfxBase)->lib_Version>=39)
 		#else
 		if (GfxBase->LibNode.lib_Version>=39)
 		#endif
@@ -2280,7 +2280,7 @@ void read_init(read_data *data)
 	else
 	{
 		#ifdef __amigaos4__
-		if ( (struct Library*)GfxBase->lib_Version>=39)
+		if ( ((struct Library*)GfxBase)->lib_Version>=39)
 		#else
 		if (GfxBase->LibNode.lib_Version>=39)
 		#endif
@@ -2314,11 +2314,11 @@ void read_build_title(read_data *data)
 	{
 		// Display title
 		lsprintf(data->title,GetString(locale,MSG_FILE_TITLE),
-			FilePart(data->file),
-			data->date,
+			(IPTR)FilePart(data->file),
+			(IPTR)data->date,
 			data->lines,
 			data->size,
-			mode_string[data->mode],
+			(IPTR)mode_string[data->mode],
 			data->tab_size);
 		SetWindowTitles(data->window,data->title,(char *)-1);
 	}
@@ -2671,7 +2671,7 @@ void read_display_text(read_data *data,read_line *text,long line,text_chunk *chu
 
 		// Reset colour
 		#ifdef __amigaos4__
-		if ( (struct Library*)GfxBase->lib_Version>=39)
+		if ( ((struct Library*)GfxBase)->lib_Version>=39)
 		#else		
 		if (GfxBase->LibNode.lib_Version>=39)
 		#endif

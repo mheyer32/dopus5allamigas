@@ -53,7 +53,7 @@ int LIBFUNC L_Module_Entry(
 		strcpy(filename,(char *)args->FA_Arguments[0]);
 		if (!strchr(filename,'/') && !strchr(filename,':'))
 		{
-			lsprintf(filename,"D5THEMES:%s",(char *)args->FA_Arguments[0]);
+			lsprintf(filename,"D5THEMES:%s",(IPTR)args->FA_Arguments[0]);
 		}	
 		if (mod_id!=CONVERTTHEME && (strlen(filename)<7 || stricmp(filename+strlen(filename)-6,".theme")!=0))
 			strcat(filename,".theme");
@@ -140,9 +140,9 @@ int LIBFUNC L_Module_Entry(
 					0,
 					0,
 					0,
-					AR_Screen,screen,
-					AR_Message,filename,
-					AR_Button,GetString(locale,MSG_OK),
+					AR_Screen,(IPTR)screen,
+					AR_Message,(IPTR)filename,
+					AR_Button,(IPTR)GetString(locale,MSG_OK),
 					TAG_END);
 			}
 		}
@@ -219,7 +219,7 @@ int LIBFUNC L_Module_Entry(
 						char *ptr;
 						for (ptr=node->node.ln_Name;*ptr;ptr++)
 							if (*ptr==' ') *ptr='_';
-						lsprintf(filename,"D5THEMES:%s.theme",node->node.ln_Name);
+						lsprintf(filename,"D5THEMES:%s.theme",(IPTR)node->node.ln_Name);
 					}
 					else
 						filename[0]=0;
@@ -280,7 +280,7 @@ int LIBFUNC L_Module_Entry(
 			//info.dc_GetPort(port);
 
 			// Build ARexx command to send to DOpus
-			lsprintf(command,"%s %s %s",filename,port,apply);
+			lsprintf(command,"%s %s %s",(IPTR)filename,(IPTR)port,(IPTR)apply);
 			DC_CALL4(infoptr, dc_SendCommand,
 				DC_REGA0, 0,
 				DC_REGA1, command,
@@ -321,7 +321,7 @@ int LIBFUNC L_Module_Entry(
 				strcpy(dest,(char *)args->FA_Arguments[1]);
 				if (!strchr(dest,'/') && !strchr(dest,':'))
 				{	
-					lsprintf(dest,"D5THEMES:%s",(char *)args->FA_Arguments[0]);
+					lsprintf(dest,"D5THEMES:%s",(IPTR)args->FA_Arguments[0]);
 				}	
 			}
 
@@ -377,9 +377,9 @@ int LIBFUNC L_Module_Entry(
 						0,
 						0,
 						0,
-						AR_Screen,screen,
-						AR_Message,filename,
-						AR_Button,GetString(locale,MSG_OK),
+						AR_Screen,(IPTR)screen,
+						AR_Message,(IPTR)filename,
+						AR_Button,(IPTR)GetString(locale,MSG_OK),
 						TAG_END);
 				}
 			}
@@ -428,7 +428,7 @@ long save_theme(struct Screen *screen,DOpusCallbackInfo *info,char *filename,BOO
 		pkt.gpp_Type=MODPTR_SCRIPTS;
 		pkt.gpp_Ptr=0;
 		
-		if ((list=DC_CALL1(info, dc_GetPointer, DC_REGA0, &pkt)))
+		if ((list=(APTR)DC_CALL1(info, dc_GetPointer, DC_REGA0, &pkt)))
 		//if ((list=DC_GetPointer(info,&pkt)))
 		//if ((list=info->dc_GetPointer(&pkt)))
 		{
@@ -440,9 +440,9 @@ long save_theme(struct Screen *screen,DOpusCallbackInfo *info,char *filename,BOO
 
 		// Open progress indicator
 		progress=OpenProgressWindowTags(
-					PW_Screen,screen,
-					PW_Title,"Directory Opus Themes",
-					PW_Info,GetString(locale,MSG_BUILDING_THEME),
+					PW_Screen,(IPTR)screen,
+					PW_Title,(IPTR)"Directory Opus Themes",
+					PW_Info,(IPTR)GetString(locale,MSG_BUILDING_THEME),
 					PW_Flags,PWF_INFO|PWF_GRAPH,
 					PW_FileCount,count,
 					PW_FileNum,0,
@@ -486,7 +486,7 @@ long save_theme(struct Screen *screen,DOpusCallbackInfo *info,char *filename,BOO
 	pkt.gpp_Type=MODPTR_SCRIPTS;
 	pkt.gpp_Ptr=0;
 	
-	if ((list=DC_CALL1(info, dc_GetPointer, DC_REGA0, &pkt)))
+	if ((list=(APTR)DC_CALL1(info, dc_GetPointer, DC_REGA0, &pkt)))
 	//if ((list=DC_GetPointer(info,&pkt)))
 	//if ((list=info->dc_GetPointer(&pkt)))
 	{
@@ -576,7 +576,7 @@ void write_theme_intro(APTR file,char *filename)
 	lsprintf(buf,	"/* D5THEME\n\n"
 					"   %s\n\n"
 					"   Directory Opus Magellan II Theme File\n"
-					"*/\n\n",	FilePart(filename));
+					"*/\n\n",	(IPTR)FilePart(filename));
 	WriteBuf(file,buf,-1);
 
 	// Bit that gets the ARexx port
@@ -616,7 +616,7 @@ BOOL save_theme_background(APTR file,DOpusCallbackInfo *info,char *type,struct M
 		SetProgressWindowTags(progress,PW_FileInc,1,TAG_END);
 
 	// Get settings
-	lsprintf(buf,"dopus query background %s",type);
+	lsprintf(buf,"dopus query background %s",(IPTR)type);
 	DC_CALL5(info, dc_RexxCommand,
 		DC_REGA0, buf,
 		DC_REGA1, buf2,
@@ -650,15 +650,15 @@ BOOL save_theme_background(APTR file,DOpusCallbackInfo *info,char *type,struct M
 
 			// Try to copy file
 			if (theme_copy_file(temp,dest))
-				lsprintf(temp,"D5THEMES:%s/Screens/%s",FilePart(build_path),FilePart(dest));
+				lsprintf(temp,"D5THEMES:%s/Screens/%s",(IPTR)FilePart(build_path),(IPTR)FilePart(dest));
 			else
 				ret=0;
 		}
-		lsprintf(buf,"\tdopus  set  background \"\'%s\'\"",temp);
+		lsprintf(buf,"\tdopus  set  background \"\'%s\'\"",(IPTR)temp);
 	}
 	else
 	{
-		lsprintf(buf,"\tdopus clear background %s",type);
+		lsprintf(buf,"\tdopus clear background %s",(IPTR)type);
 		ptr=0;
 	}
 
@@ -682,7 +682,7 @@ BOOL save_theme_sound(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPor
 		SetProgressWindowTags(progress,PW_FileInc,1,TAG_END);
 
 	// Get settings
-	lsprintf(buf,"dopus query sound \"%s\"",type);
+	lsprintf(buf,"dopus query sound \"%s\"",(IPTR)type);
 	DC_CALL5(info, dc_RexxCommand,
 		DC_REGA0, buf,
 		DC_REGA1, buf2,
@@ -716,15 +716,15 @@ BOOL save_theme_sound(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPor
 
 			// Try to copy file
 			if (theme_copy_file(temp,dest))
-				lsprintf(temp,"D5THEMES:%s/Sounds/%s",FilePart(build_path),FilePart(dest));
+				lsprintf(temp,"D5THEMES:%s/Sounds/%s",(IPTR)FilePart(build_path),(IPTR)FilePart(dest));
 			else
 				ret=0;
 		}
-		lsprintf(buf,"\tdopus  set  sound \"\'%s\'\" \"\'%s\'\"",type,temp);
+		lsprintf(buf,"\tdopus  set  sound \"\'%s\'\" \"\'%s\'\"",(IPTR)type,(IPTR)temp);
 	}
 	else
 	{
-		lsprintf(buf,"\tdopus clear sound \"\'%s\'\"",type);
+		lsprintf(buf,"\tdopus clear sound \"\'%s\'\"",(IPTR)type);
 		ptr=0;
 	}
 
@@ -742,7 +742,7 @@ BOOL save_theme_font(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPort
 	char buf[200],buf2[140],temp[80],*ptr;
 
 	// Get settings
-	lsprintf(buf,"dopus query font %s",type);
+	lsprintf(buf,"dopus query font %s",(IPTR)type);
 	DC_CALL5(info, dc_RexxCommand,
 		DC_REGA0, buf,
 		DC_REGA1, buf2,
@@ -757,7 +757,7 @@ BOOL save_theme_font(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPort
 	rexx_parse_word(&ptr,temp,78);
 
 	// Write command to rexx script
-	lsprintf(buf,"\tdopus set font %s \"\'%s\'\"",type,temp);
+	lsprintf(buf,"\tdopus set font %s \"\'%s\'\"",(IPTR)type,(IPTR)temp);
 	WriteBuf(file,buf,-1);
 	WriteBuf(file,ptr,-1);
 	WriteBuf(file,"\n",1);
@@ -771,7 +771,7 @@ BOOL save_theme_pens(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPort
 	char buf[150],buf2[100];
 
 	// Get settings
-	lsprintf(buf,"dopus query pens %s",type);
+	lsprintf(buf,"dopus query pens %s",(IPTR)type);
 	DC_CALL5(info, dc_RexxCommand,
 		DC_REGA0, buf,
 		DC_REGA1, buf2,
@@ -782,7 +782,7 @@ BOOL save_theme_pens(APTR file,DOpusCallbackInfo *info,char *type,struct MsgPort
 	//info->dc_RexxCommand(buf,buf2,sizeof(buf2),reply_port,0);
 
 	// Write command to rexx script
-	lsprintf(buf,"\tdopus set pens %s %s\n",type,buf2);
+	lsprintf(buf,"\tdopus set pens %s %s\n",(IPTR)type,(IPTR)buf2);
 	WriteBuf(file,buf,-1);
 	return 1;
 }
@@ -804,7 +804,7 @@ BOOL save_theme_palette(APTR file,DOpusCallbackInfo *info,struct MsgPort *reply_
 	//info->dc_RexxCommand("dopus query palette",buf2,sizeof(buf2),reply_port,0);
 
 	// Write command to rexx script
-	lsprintf(buf,"\tdopus set palette %s\n",buf2);
+	lsprintf(buf,"\tdopus set palette %s\n",(IPTR)buf2);
 	WriteBuf(file,buf,-1);
 	return 1;
 }
@@ -1058,9 +1058,9 @@ short convert_theme(DOpusCallbackInfo *info,char *source,char *dest)
 	WriteBuf(file,	"\tdopus  set  background on\n", -1);
 	if (wallpaper[0])
 		lsprintf(buf,	"\tdopus  set  background \"'%s'\" desktop %s precision exact\n",
-						wallpaper,
-						(stretch)?"stretch":
-						(tile)?"tile":"center");
+						(IPTR)wallpaper,
+						(IPTR)((stretch)?"stretch":
+						(tile)?"tile":"center"));
 	else
 		lsprintf(buf,	"\tdopus clear background desktop\n");
 	WriteBuf(file,	buf, -1);
@@ -1082,14 +1082,14 @@ short convert_theme(DOpusCallbackInfo *info,char *source,char *dest)
 		{
 			// Build full name
 			lsprintf(buf,"[AppEvents\\Schemes\\Apps\\%s\\%s\\.Current]",
-				(num==0)?"Explorer":".Default",
-				sound_lookup[num+1]);
+				(IPTR)((num==0)?"Explorer":".Default"),
+				(IPTR)sound_lookup[num+1]);
 
 			// Find this sound
 			node=(Att_Node *)FindNameI(&sounds->list,buf);
 
 			// Default to no sound
-			lsprintf(buf,	"\tdopus clear sound \"'%s'\"\n",sound_lookup[num]);
+			lsprintf(buf, "\tdopus clear sound \"'%s'\"\n", (IPTR)sound_lookup[num]);
 
 			// Sound found?
 			if (node)
@@ -1098,8 +1098,8 @@ short convert_theme(DOpusCallbackInfo *info,char *source,char *dest)
 				if (name && *name)
 				{
 					lsprintf(buf,	"\tdopus  set  sound \"'%s'\" \"'%s'\" 64\n",
-									sound_lookup[num],
-									name);
+									(IPTR)sound_lookup[num],
+									(IPTR)name);
 				}
 			}
 
