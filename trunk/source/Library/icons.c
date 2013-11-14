@@ -91,7 +91,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 #ifdef __AROS__
 	// try DeleteFile too, in case it was an orphan icon
 	if (!result)
-		result=DeleteFile(name);
+		result=DeleteFile(full_name);
 #endif
 
 	// Succeeded?
