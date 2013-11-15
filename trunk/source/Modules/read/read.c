@@ -82,11 +82,6 @@ int LIBFUNC L_Module_Entry(
 	data->abort_bit=-1;
 
 #ifdef __AROS__
-	if (!(data->input_req.io_Message.mn_ReplyPort = CreateMsgPort()))
-	{
-		read_free(data,(struct read_startup *)mod_id,ipc);
-		return 0;
-	}
 	data->input_req.io_Message.mn_Length = sizeof(data->input_req);
 #endif
 
@@ -320,9 +315,6 @@ void read_free(read_data *data,struct read_startup *startup,IPCData *ipc)
 			DropInterface((struct Interface *)IInput);
 			#endif
 			CloseDevice((struct IORequest *)&data->input_req);
-#ifdef __AROS__
-			DeleteMsgPort(data->input_req.io_Message.mn_ReplyPort);
-#endif
 		}
 		
 		// Free file requester
