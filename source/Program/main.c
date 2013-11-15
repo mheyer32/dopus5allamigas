@@ -394,8 +394,6 @@ void startup_open_libraries()
 
 	// Get input.device base
 #ifdef __AROS__
-	if (!(input_req.io_Message.mn_ReplyPort = CreateMsgPort()))
-		quit(0);
 	input_req.io_Message.mn_Length = sizeof(input_req);
 #endif
 	if (!OpenDevice("input.device",0,(struct IORequest *)&input_req,0)) {

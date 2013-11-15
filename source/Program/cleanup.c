@@ -194,9 +194,6 @@ void quit(BOOL script)
 	DropInterface((struct Interface *)IInput);
 	#endif
 	CloseDevice((struct IORequest *)&input_req);
-#ifdef __AROS__
-	DeleteMsgPort(input_req.io_Message.mn_ReplyPort);
-#endif
 	}
 
 	// Close timer device

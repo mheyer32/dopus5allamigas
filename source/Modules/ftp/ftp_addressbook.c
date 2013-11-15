@@ -106,9 +106,7 @@ struct IOStdReq input_req;
 BOOL qualified=FALSE;
 
 #ifdef __AROS__
-	if (!(input_req.io_Message.mn_ReplyPort = CreateMsgPort()))
-		return FALSE;
-	input_req.io_Message.mn_Length = sizeof(input_req);
+input_req.io_Message.mn_Length = sizeof(input_req);
 #endif
 
 if (!(OpenDevice("input.device",0,(struct IORequest *)&input_req,0)))
@@ -131,9 +129,6 @@ if (!(OpenDevice("input.device",0,(struct IORequest *)&input_req,0)))
  // Close input device
  CloseDevice((struct IORequest *)&input_req);
  InputBase = NULL;
-#ifdef __AROS__
-	DeleteMsgPort(input_req.io_Message.mn_ReplyPort);
-#endif
 }
 
 return qualified;
