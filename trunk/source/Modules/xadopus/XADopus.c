@@ -33,9 +33,9 @@ void ErrorReq(struct xoData *data, char *Mess)
 	AsyncRequestTags(
 		data->ipc,
 		REQTYPE_SIMPLE,
-		0,
-		0,
-		0,
+		NULL,
+		NULL,
+		NULL,
 		AR_Screen,data->screen,
 		AR_Message,Mess,
 		AR_Title,DOpusGetString(locale,MSG_ERROR),
@@ -44,6 +44,37 @@ void ErrorReq(struct xoData *data, char *Mess)
 		TAG_END);
 }  
 ///
+
+BOOL PasswordReq(struct xoData *data)
+{
+	int retval;
+
+	D(bug("password requester for %s\n",data->arcname));
+	data->password[0] = 0; // clear the password string
+#warning Put 'Enter password' into the catalog!
+	retval = AsyncRequestTags(
+			data->ipc,
+			REQTYPE_SIMPLE,
+			NULL,
+			NULL,
+			NULL,
+			AR_Screen,data->screen,
+			(data->listw)?AR_Window:TAG_END,data->listw,
+			AR_Message,"Enter password",
+			AR_Buffer,data->password,
+			AR_BufLen,sizeof(data->password),
+			AR_Button,DOpusGetString(locale,MSG_OK),
+			AR_Button,DOpusGetString(locale,MSG_ABORT),
+			AR_Flags,SRF_SECURE,
+			TAG_END);
+
+	if (!retval)
+		data->password[0] = 0;
+
+	D(bug("retval %d password '%s'\n",retval,data->password));
+
+	return (retval != 0);
+}
 
 /// BuildTree
 void ChangeDir(struct xoData *data, struct Tree *cur)
@@ -387,6 +418,8 @@ void _doubleclick(struct xoData *data, char *name, char *qual)
 {
 	struct Tree *tmp=data->cur->Child;
 	struct TempFile *tf;
+	xadERROR err;
+	BOOL retry;
 
 	while(strcmp(tmp->fib.fib_FileName,name)) tmp=tmp->Next;
 
@@ -396,20 +429,29 @@ void _doubleclick(struct xoData *data, char *name, char *qual)
 	} else if((tf=AllocVec(sizeof(struct TempFile),MEMF_ANY))) {
 		AddTail((struct List *)&data->Temp,(struct Node *)tf);
 		sprintf(tf->FileName,"T:%s",name);
+		do {
+			retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
-		if(data->ArcMode == XADCF_DISKARCHIVER)
-			xadDiskFileUnArc(data->ArcInf,
-				XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-				XAD_OUTFILENAME,	tf->FileName,
-				XAD_OVERWRITE,		TRUE,
-				TAG_DONE);
-		else
+			if(data->ArcMode == XADCF_DISKARCHIVER)	{
+				err = xadDiskFileUnArc(data->ArcInf,
+					XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+					XAD_OUTFILENAME,	tf->FileName,
+					XAD_OVERWRITE,		TRUE,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					TAG_DONE);
+			} else
 #endif
-			xadFileUnArc(data->ArcInf,
-				XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-				XAD_OUTFILENAME,	tf->FileName,
-				XAD_OVERWRITE,		TRUE,
-				TAG_DONE);
+			{
+				err = xadFileUnArc(data->ArcInf,
+					XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+					XAD_OUTFILENAME,	tf->FileName,
+					XAD_OVERWRITE,		TRUE,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					TAG_DONE);
+			}
+			if (err == XADERR_PASSWORD)
+				retry = PasswordReq(data);
+		} while (retry);
 		LaunchCommand(data,"DoubleClick",tf->FileName,qual);
 	}
 }
@@ -449,6 +491,8 @@ void _viewcommand(struct xoData *data,char *com,char *name)
 	struct Tree *tmp=data->cur->Child;
 	struct TempFile *tf;
 	DOpusCallbackInfo *infoptr = &data->hook;
+	xadERROR err;
+	BOOL retry;
 
 	while(tmp) {
 		while(tmp && (sprintf(data->buf,"\"%s\"",tmp->fib.fib_FileName)) && (!strstr(name,data->buf)) )
@@ -457,20 +501,29 @@ void _viewcommand(struct xoData *data,char *com,char *name)
 			if((tf=AllocVec(sizeof(struct TempFile),MEMF_ANY))) {
 				AddTail((struct List *)&data->Temp,(struct Node *)tf);
 				sprintf(tf->FileName,"T:%s",tmp->fib.fib_FileName);
+				do {
+					retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
-				if(data->ArcMode == XADCF_DISKARCHIVER)
-					xadDiskFileUnArc(data->ArcInf,
-						XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-						XAD_OUTFILENAME,	tf->FileName,
-						XAD_OVERWRITE,		TRUE,
-						TAG_DONE);
-				else
+					if(data->ArcMode == XADCF_DISKARCHIVER)	{
+						err=xadDiskFileUnArc(data->ArcInf,
+							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+							XAD_OUTFILENAME,	tf->FileName,
+							XAD_OVERWRITE,		TRUE,
+							(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+							TAG_DONE);
+					} else
 #endif
-					xadFileUnArc(data->ArcInf,
-						XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-						XAD_OUTFILENAME,	tf->FileName,
-						XAD_OVERWRITE,		TRUE,
-						TAG_DONE);
+					{
+						err=xadFileUnArc(data->ArcInf,
+							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+							XAD_OUTFILENAME,	tf->FileName,
+							XAD_OVERWRITE,		TRUE,
+							(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+							TAG_DONE);
+					}
+					if (err == XADERR_PASSWORD)
+						retry = PasswordReq(data);
+				} while (retry);
 				sprintf(data->buf,"lister select %s \"%s\" off",data->lists,tmp->fib.fib_FileName);
 				DC_CALL4(infoptr, dc_SendCommand,
 					DC_REGA0, IPCDATA(data->ipc),
@@ -509,6 +562,8 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 	BOOL over=FALSE,skip;
 	BPTR dir;
 	DOpusCallbackInfo *infoptr = &data->hook;
+	xadERROR err;
+	BOOL retry;
 	
 	FileName=AllocVec(1024,0);
 	TreeName=AllocVec(1024,0);
@@ -568,28 +623,34 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 						PW_FileSize,   tmp->xfi->xfi_Size,
 						PW_Info,			"",
 						TAG_DONE);
+						do {
+							retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
-					if(data->ArcMode == XADCF_DISKARCHIVER) {
-						if((xadDiskFileUnArc(data->ArcInf,
-							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-							XAD_OUTFILENAME,	FileName,
-							XAD_MAKEDIRECTORY, TRUE,
-							XAD_PROGRESSHOOK, &prhk,
-							XAD_OVERWRITE, FALSE,
-							TAG_DONE)==XADERR_BREAK) ||
-							CheckProgressAbort(data->ptr))
-								over=TRUE;
-					} else
+							if(data->ArcMode == XADCF_DISKARCHIVER) {
+								err=xadDiskFileUnArc(data->ArcInf,
+									XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+									XAD_OUTFILENAME,	FileName,
+									XAD_MAKEDIRECTORY, TRUE,
+									XAD_PROGRESSHOOK, &prhk,
+									XAD_OVERWRITE, FALSE,
+									(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+									TAG_DONE);
+							} else
 #endif
-					if((xadFileUnArc(data->ArcInf,
-							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-							XAD_OUTFILENAME,	FileName,
-							XAD_MAKEDIRECTORY, TRUE,
-							XAD_PROGRESSHOOK, &prhk,
-							XAD_OVERWRITE, FALSE,
-							TAG_DONE)==XADERR_BREAK) ||
-							CheckProgressAbort(data->ptr))
+								err=xadFileUnArc(data->ArcInf,
+									XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
+									XAD_OUTFILENAME,	FileName,
+									XAD_MAKEDIRECTORY, TRUE,
+									XAD_PROGRESSHOOK, &prhk,
+									XAD_OVERWRITE, FALSE,
+									(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+									TAG_DONE);
+
+							if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
 								over=TRUE;
+							else if (err == XADERR_PASSWORD)
+								retry = PasswordReq(data);
+						} while (retry && !over);
 				} else {
 					xfi=data->ArcInf->xai_FileInfo;
 					strcpy(Drawer,&data->listpath[strlen(data->rootpath)]);
@@ -612,27 +673,34 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 								&& (xfi->xfi_Flags & XADFIF_DIRECTORY)) {
 									if((dir=CreateDir(TreeName)))
 										UnLock(dir);
+							} else do {
+								retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
-							} else if(data->ArcMode == XADCF_DISKARCHIVER) {
-								if((xadDiskFileUnArc(data->ArcInf,
-									XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-									XAD_OUTFILENAME,	TreeName,
-									XAD_MAKEDIRECTORY,	TRUE,
-									XAD_PROGRESSHOOK,	&prhk,
-									XAD_OVERWRITE,		FALSE,
-									TAG_DONE)==XADERR_BREAK) ||
-									CheckProgressAbort(data->ptr))
-										over=TRUE;
+								if(data->ArcMode == XADCF_DISKARCHIVER) {
+									err=xadDiskFileUnArc(data->ArcInf,
+										XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
+										XAD_OUTFILENAME,	TreeName,
+										XAD_MAKEDIRECTORY,	TRUE,
+										XAD_PROGRESSHOOK,	&prhk,
+										XAD_OVERWRITE,		FALSE,
+										(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+										TAG_DONE);
+								} else 
 #endif
-                        				} else if((xadFileUnArc(data->ArcInf,
-									XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-									XAD_OUTFILENAME,	TreeName,
-									XAD_MAKEDIRECTORY,	TRUE,
-									XAD_PROGRESSHOOK,	&prhk,
-									XAD_OVERWRITE,		FALSE,
-									TAG_DONE)==XADERR_BREAK) ||
-									CheckProgressAbort(data->ptr))
-										over=TRUE;
+									err=xadFileUnArc(data->ArcInf,
+										XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
+										XAD_OUTFILENAME,	TreeName,
+										XAD_MAKEDIRECTORY,	TRUE,
+										XAD_PROGRESSHOOK,	&prhk,
+										XAD_OVERWRITE,		FALSE,
+										(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+										TAG_DONE);
+
+								if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
+									over=TRUE;
+								else if (err == XADERR_PASSWORD)
+									retry = PasswordReq(data);
+							} while (retry && !over);
 						}
 
 						xfi=xfi->xfi_Next;
@@ -785,6 +853,8 @@ BOOL ExtractF(struct xoData *data)
 	BPTR dir;
 	ULONG total=1;
 	BOOL over=FALSE;
+	xadERROR err;
+	BOOL retry;
 
 	prhk.h_Entry=(ULONG (*)()) L_ProgressHook;
 	prhk.h_Data=data;
@@ -825,28 +895,34 @@ BOOL ExtractF(struct xoData *data)
 		else if(xfi->xfi_Flags & XADFIF_DIRECTORY) {
 			if((dir=CreateDir(FileName)))
 				UnLock(dir);
+		} else do {
+			retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
-		} else if(data->ArcMode == XADCF_DISKARCHIVER) {
-			if((xadDiskFileUnArc(data->ArcInf,
-				XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-				XAD_OUTFILENAME,	FileName,
-				XAD_MAKEDIRECTORY,	TRUE,
-				XAD_PROGRESSHOOK,	&prhk,
-				XAD_OVERWRITE,		FALSE,
-				TAG_DONE)==XADERR_BREAK) ||
-				CheckProgressAbort(data->ptr))
-					over=TRUE;
+			if(data->ArcMode == XADCF_DISKARCHIVER) {
+				err=xadDiskFileUnArc(data->ArcInf,
+					XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
+					XAD_OUTFILENAME,	FileName,
+					XAD_MAKEDIRECTORY,	TRUE,
+					XAD_PROGRESSHOOK,	&prhk,
+					XAD_OVERWRITE,		FALSE,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					TAG_DONE);
+			} else
 #endif
-		} else if((xadFileUnArc(data->ArcInf,
-				XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-				XAD_OUTFILENAME,	FileName,
-				XAD_MAKEDIRECTORY, TRUE,
-				XAD_PROGRESSHOOK, &prhk,
-				XAD_OVERWRITE, FALSE,
-				TAG_DONE)==XADERR_BREAK) ||
-				CheckProgressAbort(data->ptr))
-					over=TRUE;
+				err=xadFileUnArc(data->ArcInf,
+					XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
+					XAD_OUTFILENAME,	FileName,
+					XAD_MAKEDIRECTORY, TRUE,
+					XAD_PROGRESSHOOK, &prhk,
+					XAD_OVERWRITE, FALSE,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					TAG_DONE);
 
+			if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
+				over=TRUE;
+			else if (err == XADERR_PASSWORD)
+				retry = PasswordReq(data);
+		} while (retry && !over);
 		xfi=xfi->xfi_Next;
 	}
 	
@@ -890,6 +966,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 	data.DOpusBase = DOpusBase;
 	data.DOSBase = DOSBase;
 	data.UtilityBase = UtilityBase;
+	data.password[0] = 0;
 	
 	NewList((struct List *)&data.Temp);
 
