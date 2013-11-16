@@ -84,11 +84,7 @@ int LIBFUNC L_Module_Entry(
 				data->info.id_DiskType==ID_FASTDIR_FFS_DISK) data->default_ffs=1;
 
 			// >=39?
-			#ifdef __amigaos4__
 			if(((struct Library*)DOSBase)->lib_Version>=39)
-			#else
-			if (DOSBase->dl_lib.lib_Version>=39)
-			#endif
 			{
 				// International?
 				if (data->info.id_DiskType==ID_INTER_DOS_DISK ||
@@ -341,11 +337,7 @@ BOOL format_open(format_data *data,BOOL noactive)
 	}
 
 	// If <39, disable International and Caching
-	#ifdef __amigaos4__
 	if(((struct Library*)DOSBase)->lib_Version<39)
-	#else
-	if (DOSBase->dl_lib.lib_Version<39)
-	#endif
 	{
 		DisableObject(data->list,GAD_FORMAT_INTERNATIONAL,TRUE);
 		DisableObject(data->list,GAD_FORMAT_CACHING,TRUE);
