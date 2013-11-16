@@ -1015,11 +1015,7 @@ BOOL read_set_mode(read_data *data,short mode,BOOL keep_pos)
 	if (mode==MODE_ANSI)
 	{
 		// Try to allocate pens?
-		#ifdef __amigaos4__
 		if ( ((struct Library*)GfxBase)->lib_Version>=39 && !data->pen_alloc)
-		#else
-		if (GfxBase->LibNode.lib_Version>=39 && !data->pen_alloc)
-		#endif
 		{
 			// Don't try unless screen is deeper than 8 colours
 			if (data->window->WScreen->RastPort.BitMap->Depth>3)
@@ -2260,22 +2256,14 @@ void read_init(read_data *data)
 	// Write mask
 	if (data->mode==MODE_ANSI)
 	{
-		#ifdef __amigaos4__
 		if ( ((struct Library*)GfxBase)->lib_Version>=39)
-		#else
-		if (GfxBase->LibNode.lib_Version>=39)
-		#endif
 			SetWriteMask(data->window->RPort,0xffffffff);
 		else
 			SetWrMsk(data->window->RPort,0xff);
 	}
 	else
 	{
-		#ifdef __amigaos4__
 		if ( ((struct Library*)GfxBase)->lib_Version>=39)
-		#else
-		if (GfxBase->LibNode.lib_Version>=39)
-		#endif
 			SetMaxPen(data->window->RPort,data->drawinfo->dri_Pens[TEXTPEN]);
 		else
 			SetWrMsk(data->window->RPort,data->drawinfo->dri_Pens[TEXTPEN]);
@@ -2662,11 +2650,7 @@ void read_display_text(read_data *data,read_line *text,long line,text_chunk *chu
 		bpen=data->drawinfo->dri_Pens[BACKGROUNDPEN];
 
 		// Reset colour
-		#ifdef __amigaos4__
 		if ( ((struct Library*)GfxBase)->lib_Version>=39)
-		#else		
-		if (GfxBase->LibNode.lib_Version>=39)
-		#endif
 		{
 			SetABPenDrMd(data->window->RPort,fpen,bpen,JAM2);
 		}
