@@ -25,6 +25,9 @@
 
 #define ADDNODEF_SORT		1		// Sort names
 
+#ifdef __amigaos3__
+#define xadERROR LONG
+#endif
 
 #ifndef __amigaos3__
 #pragma pack(2)

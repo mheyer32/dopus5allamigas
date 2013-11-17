@@ -36,13 +36,13 @@ void ErrorReq(struct xoData *data, char *Mess)
 		NULL,
 		NULL,
 		NULL,
-		AR_Screen,data->screen,
-		AR_Message,Mess,
-		AR_Title,DOpusGetString(locale,MSG_ERROR),
-		AR_Button,DOpusGetString(locale,MSG_OK),
-		(data->listw)?AR_Window:TAG_END,data->listw,
+		AR_Screen,(IPTR)data->screen,
+		AR_Message,(IPTR)Mess,
+		AR_Title,(IPTR)DOpusGetString(locale,MSG_ERROR),
+		AR_Button,(IPTR)DOpusGetString(locale,MSG_OK),
+		(data->listw)?AR_Window:TAG_END,(IPTR)data->listw,
 		TAG_END);
-}  
+}
 ///
 
 BOOL PasswordReq(struct xoData *data)
@@ -58,13 +58,13 @@ BOOL PasswordReq(struct xoData *data)
 			NULL,
 			NULL,
 			NULL,
-			AR_Screen,data->screen,
-			(data->listw)?AR_Window:TAG_END,data->listw,
-			AR_Message,"Enter password",
-			AR_Buffer,data->password,
+			AR_Screen,(IPTR)data->screen,
+			(data->listw)?AR_Window:TAG_END,(IPTR)data->listw,
+			AR_Message,(IPTR)"Enter password",
+			AR_Buffer,(IPTR)data->password,
 			AR_BufLen,sizeof(data->password),
-			AR_Button,DOpusGetString(locale,MSG_OK),
-			AR_Button,DOpusGetString(locale,MSG_ABORT),
+			AR_Button,(IPTR)DOpusGetString(locale,MSG_OK),
+			AR_Button,(IPTR)DOpusGetString(locale,MSG_ABORT),
 			AR_Flags,SRF_SECURE,
 			TAG_END);
 
@@ -83,12 +83,12 @@ void ChangeDir(struct xoData *data, struct Tree *cur)
 	struct List list;
 	UWORD dc=0, fc=0;
 	DOpusCallbackInfo *infoptr = &data->hook;
-	
+
 	DC_CALL2(infoptr, dc_LockFileList,
 		DC_REGA0, data->listh,
 		DC_REGD0, TRUE);
 	//data->hook.dc_LockFileList(data->listh,TRUE);
-	
+
 	if(data->cur) {
 		tmp=data->cur->Child;
 		while(tmp) {
@@ -99,17 +99,17 @@ void ChangeDir(struct xoData *data, struct Tree *cur)
 			tmp=tmp->Next;
 		}
 	}
-	
+
 	data->cur=cur;
 	cur=cur->Child;
 
 	NewList(&list);
-	
+
 	while(cur) {
-		cur->entry=DC_CALL3(infoptr, dc_CreateFileEntry,
+		cur->entry=(APTR)DC_CALL3(infoptr, dc_CreateFileEntry,
 				DC_REGA0, data->listh,
 				DC_REGA1, &cur->fib,
-				DC_REGD0, NULL);
+				DC_REGD0, (IPTR)NULL);
 		//cur->entry=data->hook.dc_CreateFileEntry(data->listh, &cur->fib, NULL);
 		AddTail(&list,cur->entry);
 
@@ -146,19 +146,19 @@ struct Tree *FindDrw(struct xoData *data, UBYTE *path)
 		if(!cur->Child) {
 			cur->Child=AllocMemH(data->rhand,sizeof(struct Tree));
 			cur=cur->Child;
-			strcpy(cur->fib.fib_FileName,buf);
+			strcpy(cur->fib.fib_FileName,(STRPTR)buf);
 			cur->fib.fib_DirEntryType=1;
 			*cur->fib.fib_Comment=cur->fib.fib_Size=cur->fib.fib_Protection=0;
 			DateStamp(&cur->fib.fib_Date);
 		} else {
 			cur=cur->Child;
-			while(strcmp(cur->fib.fib_FileName,buf)) {
+			while(strcmp(cur->fib.fib_FileName,(STRPTR)buf)) {
 				if(cur->Next)
 					cur=cur->Next;
 				else {
 					cur->Next=AllocMemH(data->rhand,sizeof(struct Tree));
 					cur=cur->Next;
-					strcpy(cur->fib.fib_FileName,buf);
+					strcpy(cur->fib.fib_FileName,(STRPTR)buf);
 					cur->fib.fib_DirEntryType=1;
 					*cur->fib.fib_Comment=cur->fib.fib_Size=cur->fib.fib_Protection=0;
 					DateStamp(&cur->fib.fib_Date);
@@ -178,7 +178,7 @@ void BuildTree(struct xoData *data)
 	xfi = data->ArcInf->xai_FileInfo;
 
 	while(xfi) {
-		tree=FindDrw(data, xfi->xfi_FileName);
+		tree=FindDrw(data, (UBYTE *)xfi->xfi_FileName);
 		name=FilePart(xfi->xfi_FileName);
 		dup=FALSE;
 
@@ -209,8 +209,8 @@ void BuildTree(struct xoData *data)
 				strcpy(tree->fib.fib_Comment,xfi->xfi_Comment);
 			else
 				*tree->fib.fib_Comment=0;
-			xadConvertDates(XAD_DATEXADDATE,	&xfi->xfi_Date,
-					XAD_GETDATEDATESTAMP,	&tree->fib.fib_Date,
+			xadConvertDates(XAD_DATEXADDATE,	(IPTR)&xfi->xfi_Date,
+					XAD_GETDATEDATESTAMP,	(IPTR)&tree->fib.fib_Date,
 					TAG_DONE);
 			tree->fib.fib_Protection=xfi->xfi_Protection;
 			if(xfi->xfi_Flags & XADFIF_DIRECTORY)
@@ -235,7 +235,7 @@ void BuildTree(struct xoData *data)
 /// MsgPort
 BOOL AllocPort(struct xoData *data)
 {
-	UWORD c=0;
+	//UWORD c=0;
 	DOpusCallbackInfo *infoptr = &data->hook;
 
 	if((data->mp=CreateMsgPort())) {
@@ -248,7 +248,7 @@ BOOL AllocPort(struct xoData *data)
 			sprintf(data->mp_name,"XADopus_%d",c);
 			c++;
 		} while(FindPort(data->mp_name));
-		
+
 		AddPort(data->mp);
 		Permit();
 #else
@@ -336,7 +336,7 @@ void FreePort(struct xoData *data)
 void RemoveTemp(struct xoData *data)
 {
 	struct TempFile *tf;
-	
+
 	while((tf=(struct TempFile *)RemHead((struct List *)&data->Temp))) {
 		DeleteFile(tf->FileName);
 		FreeVec(tf);
@@ -348,7 +348,7 @@ void RemoveTemp(struct xoData *data)
 void LaunchCommand(struct xoData *data, char *cmd, char *name, char *qual)
 {
 	DOpusCallbackInfo *infoptr = &data->hook;
-	
+
 	sprintf(data->buf,"lister set %s busy on wait",data->lists);
 	DC_CALL4(infoptr, dc_SendCommand,
 		DC_REGA0, IPCDATA(data->ipc),
@@ -389,7 +389,7 @@ void LaunchCommand(struct xoData *data, char *cmd, char *name, char *qual)
 void _scandir(struct xoData *data, char *listh, char *path)
 {
 	DOpusCallbackInfo *infoptr = &data->hook;
-	
+
 	sprintf(data->buf,"command source %s ScanDir %s",listh,path);
 	DC_CALL4(infoptr, dc_SendCommand,
 		DC_REGA0, IPCDATA(data->ipc),
@@ -402,7 +402,7 @@ void _scandir(struct xoData *data, char *listh, char *path)
 void _cd(struct xoData *data, struct Tree *cur)
 {
 	DOpusCallbackInfo *infoptr = &data->hook;
-	
+
 	sprintf(data->buf,"lister set %s path %s",data->lists,data->listpath);
 	DC_CALL4(infoptr, dc_SendCommand,
 		DC_REGA0, IPCDATA(data->ipc),
@@ -435,18 +435,18 @@ void _doubleclick(struct xoData *data, char *name, char *qual)
 			if(data->ArcMode == XADCF_DISKARCHIVER)	{
 				err = xadDiskFileUnArc(data->ArcInf,
 					XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-					XAD_OUTFILENAME,	tf->FileName,
+					XAD_OUTFILENAME,	(IPTR)tf->FileName,
 					XAD_OVERWRITE,		TRUE,
-					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 					TAG_DONE);
 			} else
 #endif
 			{
 				err = xadFileUnArc(data->ArcInf,
 					XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-					XAD_OUTFILENAME,	tf->FileName,
+					XAD_OUTFILENAME,	(IPTR)tf->FileName,
 					XAD_OVERWRITE,		TRUE,
-					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 					TAG_DONE);
 			}
 			if (err == XADERR_PASSWORD)
@@ -464,7 +464,7 @@ void _parent(struct xoData *data)
 	while(*path++!=':');
 
 	if(*path) {
-		tmp=FindDrw(data,path);
+		tmp=FindDrw(data,(UBYTE *)path);
 		*((char *)PathPart(path))=0;
 		_cd(data,tmp);
 	}
@@ -473,7 +473,7 @@ void _parent(struct xoData *data)
 void _root(struct xoData *data)
 {
 	DOpusCallbackInfo *infoptr = &data->hook;
-	
+
 	strcpy(data->listpath, data->rootpath);
 	sprintf(data->buf,"lister set %s path %s",data->lists,data->listpath);
 	DC_CALL4(infoptr, dc_SendCommand,
@@ -507,18 +507,18 @@ void _viewcommand(struct xoData *data,char *com,char *name)
 					if(data->ArcMode == XADCF_DISKARCHIVER)	{
 						err=xadDiskFileUnArc(data->ArcInf,
 							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-							XAD_OUTFILENAME,	tf->FileName,
+							XAD_OUTFILENAME,	(IPTR)tf->FileName,
 							XAD_OVERWRITE,		TRUE,
-							(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+							(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 							TAG_DONE);
 					} else
 #endif
 					{
 						err=xadFileUnArc(data->ArcInf,
 							XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-							XAD_OUTFILENAME,	tf->FileName,
+							XAD_OUTFILENAME,	(IPTR)tf->FileName,
 							XAD_OVERWRITE,		TRUE,
-							(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+							(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 							TAG_DONE);
 					}
 					if (err == XADERR_PASSWORD)
@@ -564,11 +564,11 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 	DOpusCallbackInfo *infoptr = &data->hook;
 	xadERROR err;
 	BOOL retry;
-	
+
 	FileName=AllocVec(1024,0);
 	TreeName=AllocVec(1024,0);
 	Drawer=AllocVec(1024,0);
-	
+
 	prhk.h_Entry=(ULONG (*)()) L_ProgressHook;
 	prhk.h_Data=data;
 
@@ -577,8 +577,8 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 	data->All=5;
 
 	data->ptr=OpenProgressWindowTags(
-		PW_Window,	data->listw,
-		PW_Title,	DOpusGetString(locale,MSG_EXTRACTING),
+		PW_Window,	(IPTR)data->listw,
+		PW_Title,	(IPTR)DOpusGetString(locale,MSG_EXTRACTING),
 		PW_FileCount,	total,
 		PW_FileSize,	1,
 		PW_Flags,	PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT|PWF_INFO,
@@ -594,13 +594,13 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 				sprintf(TreeName,DOpusGetString(locale,MSG_RENAME_FORM),tmp->fib.fib_FileName);
 				strcpy(Drawer,tmp->fib.fib_FileName);
 				switch(AsyncRequestTags(data->ipc,REQTYPE_SIMPLE,NULL,NULL,NULL,
-							AR_Window,data->listw,
-							AR_Message,TreeName,
-							AR_Buffer,Drawer,
+							AR_Window,(IPTR)data->listw,
+							AR_Message,(IPTR)TreeName,
+							AR_Buffer,(IPTR)Drawer,
 							AR_BufLen,200,
-							AR_Button,DOpusGetString(locale,MSG_RENAME),
-							AR_Button,DOpusGetString(locale,MSG_SKIP),
-							AR_Button,DOpusGetString(locale,MSG_ABORT),
+							AR_Button,(IPTR)DOpusGetString(locale,MSG_RENAME),
+							AR_Button,(IPTR)DOpusGetString(locale,MSG_SKIP),
+							AR_Button,(IPTR)DOpusGetString(locale,MSG_ABORT),
 							AR_Flags,SRF_PATH_FILTER,
 							TAG_END)) {
 					case 0:
@@ -617,33 +617,33 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 			if(!skip) {
 				if(tmp->fib.fib_DirEntryType<0) {
 					SetProgressWindowTags(data->ptr,
-						PW_FileName,   tmp->fib.fib_FileName,
-						PW_FileNum,		++count,
-						PW_FileDone,	0,
-						PW_FileSize,   tmp->xfi->xfi_Size,
-						PW_Info,			"",
+						PW_FileName,   (IPTR)tmp->fib.fib_FileName,
+						PW_FileNum,     ++count,
+						PW_FileDone,    0,
+						PW_FileSize,    tmp->xfi->xfi_Size,
+						PW_Info,       (IPTR)"",
 						TAG_DONE);
 						do {
 							retry = FALSE;
 #if !defined(__AROS__) && !defined(__MORPHOS__)
 							if(data->ArcMode == XADCF_DISKARCHIVER) {
 								err=xadDiskFileUnArc(data->ArcInf,
-									XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-									XAD_OUTFILENAME,	FileName,
+									XAD_ENTRYNUMBER,   tmp->xfi->xfi_EntryNumber,
+									XAD_OUTFILENAME,   (IPTR)FileName,
 									XAD_MAKEDIRECTORY, TRUE,
-									XAD_PROGRESSHOOK, &prhk,
-									XAD_OVERWRITE, FALSE,
-									(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+									XAD_PROGRESSHOOK,  (IPTR)&prhk,
+									XAD_OVERWRITE,     FALSE,
+									(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 									TAG_DONE);
 							} else
 #endif
 								err=xadFileUnArc(data->ArcInf,
-									XAD_ENTRYNUMBER,	tmp->xfi->xfi_EntryNumber,
-									XAD_OUTFILENAME,	FileName,
+									XAD_ENTRYNUMBER,   tmp->xfi->xfi_EntryNumber,
+									XAD_OUTFILENAME,   (IPTR)FileName,
 									XAD_MAKEDIRECTORY, TRUE,
-									XAD_PROGRESSHOOK, &prhk,
+									XAD_PROGRESSHOOK,  (IPTR)&prhk,
 									XAD_OVERWRITE, FALSE,
-									(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+									(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 									TAG_DONE);
 
 							if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
@@ -657,7 +657,7 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 					AddPart(Drawer,tmp->fib.fib_FileName,1024);
 					total=strlen(Drawer);
 					SetProgressWindowTags(data->ptr,
-						PW_FileName,   tmp->fib.fib_FileName,
+						PW_FileName,   (IPTR)tmp->fib.fib_FileName,
 						PW_FileNum,		++count,
 						TAG_DONE);
 					while(xfi && (!over)) {
@@ -665,7 +665,7 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 							strcpy(TreeName,FileName);
 							AddPart(TreeName,&xfi->xfi_FileName[total+1],1024);
 							SetProgressWindowTags(data->ptr,
-								PW_Info,   	&xfi->xfi_FileName[total],
+								PW_Info,   	(IPTR)&xfi->xfi_FileName[total],
 								PW_FileDone,	0,
 								PW_FileSize,	xfi->xfi_Size,
 								TAG_DONE);
@@ -679,21 +679,21 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 								if(data->ArcMode == XADCF_DISKARCHIVER) {
 									err=xadDiskFileUnArc(data->ArcInf,
 										XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-										XAD_OUTFILENAME,	TreeName,
+										XAD_OUTFILENAME,	(IPTR)TreeName,
 										XAD_MAKEDIRECTORY,	TRUE,
-										XAD_PROGRESSHOOK,	&prhk,
+										XAD_PROGRESSHOOK,	(IPTR)&prhk,
 										XAD_OVERWRITE,		FALSE,
-										(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+										(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 										TAG_DONE);
 								} else 
 #endif
 									err=xadFileUnArc(data->ArcInf,
 										XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-										XAD_OUTFILENAME,	TreeName,
+										XAD_OUTFILENAME,	(IPTR)TreeName,
 										XAD_MAKEDIRECTORY,	TRUE,
-										XAD_PROGRESSHOOK,	&prhk,
+										XAD_PROGRESSHOOK,	(IPTR)&prhk,
 										XAD_OVERWRITE,		FALSE,
-										(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+										(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 										TAG_DONE);
 
 								if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
@@ -818,25 +818,25 @@ BOOL ExtractD(struct xoData *data)
 			}
 			UnLockDosList(LDF_DEVICES|LDF_READ);
 			
-			#warning !! right fix ? was too few arguments initially for SelectionList !!
+			#warning! right fix ? was too few args for SelectionList.
 			//sel=SelectionList(list,data->listw,NULL,DOpusGetString(locale,MSG_SELECT_DEST),-1,NULL,NULL,DOpusGetString(locale,MSG_OK),DOpusGetString(locale,MSG_ABORT));
 			sel=SelectionList(list,data->listw,NULL,DOpusGetString(locale,MSG_SELECT_DEST),-1,0,NULL,DOpusGetString(locale,MSG_OK),DOpusGetString(locale,MSG_ABORT), NULL,NULL);
 			
-			if((sel>=0) && (dev=xadAllocObject(XADOBJ_DEVICEINFO,NULL))) {
+			if((sel>=0) && (dev=xadAllocObject(XADOBJ_DEVICEINFO,(IPTR)NULL))) {
 				SetProgressWindowTags(data->ptr,
-						PW_FileName,	FilePart(data->arcname),
-						PW_Info,	"",
+						PW_FileName,	(IPTR)FilePart(data->arcname),
+						PW_Info,	    (IPTR)"",
 						PW_FileDone,	0,
 						PW_FileSize,	(xdi->xdi_TotalSectors*xdi->xdi_SectorSize),
 						TAG_DONE);
 				dev->xdi_DOSName=Att_NodeName(list,sel);
 				xadDiskUnArc(data->ArcInf,
 						XAD_ENTRYNUMBER,	1,
-						XAD_OUTDEVICE,		dev,
-						XAD_VERIFY,		TRUE,
-						XAD_PROGRESSHOOK,	&prhk,
+						XAD_OUTDEVICE,		(IPTR)dev,
+						XAD_VERIFY,			TRUE,
+						XAD_PROGRESSHOOK,	(IPTR)&prhk,
 						TAG_DONE);  
-				xadFreeObject(dev,NULL);
+				xadFreeObject(dev,(IPTR)NULL);
 			}
 		}
 		Att_RemList(list,0);
@@ -860,14 +860,14 @@ BOOL ExtractF(struct xoData *data)
 	prhk.h_Data=data;
 
 	data->All=5;
-	
+
 	xfi=data->ArcInf->xai_FileInfo;
 	while(xfi->xfi_Next) {
 		total++;
 		xfi=xfi->xfi_Next;
 	}
 	xfi=data->ArcInf->xai_FileInfo;
-	
+
 	SetProgressWindowTags(data->ptr,
 		PW_FileCount, total,
 		PW_FileSize, 0,
@@ -880,13 +880,13 @@ BOOL ExtractF(struct xoData *data)
 		*((char *)FilePart(FileName))=0;
 
 		SetProgressWindowTags(data->ptr,
-			PW_FileName,	FilePart(xfi->xfi_FileName),
-			PW_FileNum,	++total,
-			PW_Info,   	FileName,
+			PW_FileName,	(IPTR)FilePart(xfi->xfi_FileName),
+			PW_FileNum,	    ++total,
+			PW_Info,        (IPTR)FileName,
 			PW_FileDone,	0,
 			PW_FileSize,	xfi->xfi_Size,
 			TAG_DONE);
-		
+
 		strcpy(FileName,data->listpath);
 		AddPart(FileName,xfi->xfi_FileName,1024);
 
@@ -901,21 +901,21 @@ BOOL ExtractF(struct xoData *data)
 			if(data->ArcMode == XADCF_DISKARCHIVER) {
 				err=xadDiskFileUnArc(data->ArcInf,
 					XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-					XAD_OUTFILENAME,	FileName,
+					XAD_OUTFILENAME,	(IPTR)FileName,
 					XAD_MAKEDIRECTORY,	TRUE,
-					XAD_PROGRESSHOOK,	&prhk,
+					XAD_PROGRESSHOOK,	(IPTR)&prhk,
 					XAD_OVERWRITE,		FALSE,
-					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 					TAG_DONE);
 			} else
 #endif
 				err=xadFileUnArc(data->ArcInf,
-					XAD_ENTRYNUMBER,	xfi->xfi_EntryNumber,
-					XAD_OUTFILENAME,	FileName,
+					XAD_ENTRYNUMBER,   xfi->xfi_EntryNumber,
+					XAD_OUTFILENAME,   (IPTR)FileName,
 					XAD_MAKEDIRECTORY, TRUE,
-					XAD_PROGRESSHOOK, &prhk,
-					XAD_OVERWRITE, FALSE,
-					(*data->password)?XAD_PASSWORD:TAG_IGNORE, data->password,
+					XAD_PROGRESSHOOK,  (IPTR)&prhk,
+					XAD_OVERWRITE,     FALSE,
+					(*data->password)?XAD_PASSWORD:TAG_IGNORE, (IPTR)data->password,
 					TAG_DONE);
 
 			if(err==XADERR_BREAK || CheckProgressAbort(data->ptr))
@@ -925,9 +925,9 @@ BOOL ExtractF(struct xoData *data)
 		} while (retry && !over);
 		xfi=xfi->xfi_Next;
 	}
-	
+
 	return(over);
-}                       
+}
 ///
 
 /// Main
@@ -964,10 +964,10 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 	data.cur = NULL;
 	data.locale = locale;
 	data.DOpusBase = DOpusBase;
-	data.DOSBase = DOSBase;
+	data.DOSBase = (APTR)DOSBase;
 	data.UtilityBase = UtilityBase;
 	data.password[0] = 0;
-	
+
 	NewList((struct List *)&data.Temp);
 
 	data.hook.dc_Count=DOPUS_HOOK_COUNT;
@@ -980,15 +980,15 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 
 	if(!(data.rhand = NewMemHandle(0, 0, MEMF_CLEAR))) return(0);
 
-	if(!(data.listp2=DC_CALL2(infoptr, dc_GetSource,
+	if(!(data.listp2=(APTR)DC_CALL2(infoptr, dc_GetSource,
 		DC_REGA0, IPCDATA(ipc),
 		DC_REGA1, arcname))) return 0;
-		
+
 	DC_CALL1(infoptr, dc_FirstEntry, DC_REGA0, IPCDATA(ipc));
-	
-	if(!(Entry=DC_CALL1(infoptr, dc_GetEntry, DC_REGA0, IPCDATA(ipc)))) return 0;
-	
-	
+
+	if(!(Entry=(APTR)DC_CALL1(infoptr, dc_GetEntry, DC_REGA0, IPCDATA(ipc)))) return 0;
+
+
 	filename = (STRPTR)DC_CALL2(infoptr, dc_ExamineEntry,
 					DC_REGA0, Entry,
 					DC_REGD0, EE_NAME);
@@ -1012,7 +1012,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 
 	if(mod_id == 1)
 	{
-		if(!(data.destp = DC_CALL2(infoptr, dc_GetDest,
+		if(!(data.destp = (APTR)DC_CALL2(infoptr, dc_GetDest,
 			DC_REGA0, IPCDATA(ipc),
 			DC_REGA1, data.listpath)))
 			return 0;
@@ -1022,12 +1022,12 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					DC_REGD0, 0);
 		/*if(!(data.destp = data.hook.dc_GetDest(IPCDATA(ipc), data.listpath))) return(0);
 		data.hook.dc_EndDest(IPCDATA(ipc), 0);*/
-		
+
 		data.listh = (ULONG)data.listp2->lister;
-		data.listw = DC_CALL1(infoptr, dc_GetWindow, DC_REGA0, data.listp2);
+		data.listw = (APTR)DC_CALL1(infoptr, dc_GetWindow, DC_REGA0, data.listp2);
 		//data.listw = data.hook.dc_GetWindow(data.listp2);
 		sprintf(data.lists, "%lu", data.listh);
-		
+
 		sprintf(buf,"lister query %s numselentries", data.lists);
 		total=DC_CALL4(infoptr, dc_SendCommand,
 			DC_REGA0, IPCDATA(ipc),
@@ -1035,30 +1035,30 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 			DC_REGA2, NULL,
 			DC_REGD0, 0);
 		//total=data.hook.dc_SendCommand(IPCDATA(ipc),buf,NULL,NULL);
-		
+
 		data.ptr=OpenProgressWindowTags(
-				PW_Window,	data.listw,
-				PW_Title,	DOpusGetString(locale,MSG_EXTRACTING),
+				PW_Window,	(IPTR)data.listw,
+				PW_Title,	(IPTR)DOpusGetString(locale,MSG_EXTRACTING),
 				PW_FileCount,	total,
 				PW_Flags,	PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT|PWF_INFO,
 				TAG_DONE);
 
-		if((data.ArcInf=xadAllocObject(XADOBJ_ARCHIVEINFO,NULL))) {
+		if((data.ArcInf=xadAllocObject(XADOBJ_ARCHIVEINFO,(IPTR)NULL))) {
 			ULONG count=0;
 			while(Entry && (!over)) {
 				SetProgressWindowTags(data.ptr,
-					PW_Info,	FilePart(arcname),
-					PW_FileName,	DOpusGetString(locale,MSG_OPENING_ARC),
-					PW_FileNum,	++count,
-					PW_FileCount,	total,
+					PW_Info,      (IPTR)FilePart(arcname),
+					PW_FileName,  (IPTR)DOpusGetString(locale,MSG_OPENING_ARC),
+					PW_FileNum,	  ++count,
+					PW_FileCount, total,
 					TAG_DONE);
 
-				if(!(err=xadGetInfo(data.ArcInf,XAD_INFILENAME, arcname, TAG_DONE)))
+				if(!(err=xadGetInfo(data.ArcInf,XAD_INFILENAME, (IPTR)arcname, TAG_DONE)))
 					data.ArcMode=data.ArcInf->xai_Client->xc_Flags & XADCF_DISKARCHIVER;
 				
 				if(err == XADERR_FILETYPE) { 			
 					// *** DISKIMAGE
-					if(!(err=xadGetDiskInfo(data.ArcInf, XAD_INFILENAME, arcname, TAG_DONE))) {
+					if(!(err=xadGetDiskInfo(data.ArcInf, XAD_INFILENAME, (IPTR)arcname, TAG_DONE))) {
 						data.ArcMode=XADCF_DISKARCHIVER;
 						over=ExtractF(&data);
 						xadFreeInfo(data.ArcInf);
@@ -1067,11 +1067,11 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					// *** DISKARCHIVE
 					struct TagItem ti[2];
 					switch(AsyncRequestTags(ipc,REQTYPE_SIMPLE,NULL,NULL,NULL,
-								AR_Window,data.listw,
-								AR_Message,DOpusGetString(locale,MSG_DISKARC_EXTRACT),
-								AR_Button,DOpusGetString(locale,MSG_FILES),
-								AR_Button,DOpusGetString(locale,MSG_DISK),
-								AR_Button,DOpusGetString(locale,MSG_ABORT),
+								AR_Window,(IPTR)data.listw,
+								AR_Message,(IPTR)DOpusGetString(locale,MSG_DISKARC_EXTRACT),
+								AR_Button,(IPTR)DOpusGetString(locale,MSG_FILES),
+								AR_Button,(IPTR)DOpusGetString(locale,MSG_DISK),
+								AR_Button,(IPTR)DOpusGetString(locale,MSG_ABORT),
 								AR_Flags,SRF_PATH_FILTER,
 								TAG_END)) {
 						case 0:
@@ -1084,7 +1084,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 							ti[0].ti_Tag  = XAD_INFILENAME;
 							ti[0].ti_Data = (ULONG) arcname;
 							ti[1].ti_Tag  = TAG_DONE;
-							if(!(err=xadGetDiskInfo(data.ArcInf, XAD_INDISKARCHIVE, ti, TAG_DONE)))
+							if(!(err=xadGetDiskInfo(data.ArcInf, XAD_INDISKARCHIVE, (IPTR)ti, TAG_DONE)))
 								over=ExtractF(&data);
 							break;
 					}
@@ -1100,7 +1100,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					DC_REGA0, IPCDATA(ipc),
 					DC_REGA1, Entry,
 					DC_REGD0, TRUE);
-				Entry=DC_CALL1(infoptr, dc_GetEntry, DC_REGA0, IPCDATA(ipc));
+				Entry=(APTR)DC_CALL1(infoptr, dc_GetEntry, DC_REGA0, IPCDATA(ipc));
 				/*data.hook.dc_EndEntry(IPCDATA(ipc),Entry,TRUE);
 				Entry=data.hook.dc_GetEntry(IPCDATA(ipc));*/
 				if (Entry) {
@@ -1116,9 +1116,9 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 				DC_REGD0, 0);
 			//data.hook.dc_SendCommand(IPCDATA(ipc),buf,NULL,NULL);
 
-			xadFreeObject(data.ArcInf,NULL);
+			xadFreeObject(data.ArcInf,(IPTR)NULL);
 		}
-		
+
 		if(data.ptr)
 			CloseProgressWindow(data.ptr);
 		return(1);
@@ -1137,14 +1137,13 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 	data.hook.dc_UnlockSource(IPCDATA(ipc));*/
 
 
-
 //		data.listh = (ULONG)data.listp2->lister;
 //		sprintf(data.lists, "%d", data.listh);
 
 	if(!DC_CALL4(infoptr, dc_SendCommand,
 			DC_REGA0, IPCDATA(ipc),
 			DC_REGA1, "lister new",
-			DC_REGA2, &result,
+			DC_REGA2, (APTR)&result,
 			DC_REGD0, COMMANDF_RESULT))
 	//if(!data.hook.dc_SendCommand(IPCDATA(ipc), "lister new", &result, COMMANDF_RESULT))
 	{
@@ -1204,19 +1203,19 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 			data.listp.lister = (APTR)data.listh;
 			*data.listp.buffer = data.listp.flags = 0;
 			data.listp.path = data.listp.buffer;
-			data.listw = DC_CALL1(infoptr, dc_GetWindow, DC_REGA0, &data.listp);
+			data.listw = (APTR)DC_CALL1(infoptr, dc_GetWindow, DC_REGA0, &data.listp);
 			//data.listw = data.hook.dc_GetWindow(&data.listp);			
 			
-			if((data.ArcInf = xadAllocObject(XADOBJ_ARCHIVEINFO, NULL)))
+			if((data.ArcInf = xadAllocObject(XADOBJ_ARCHIVEINFO, (IPTR)NULL)))
 			{
-				err = xadGetInfo(data.ArcInf, XAD_INFILENAME, arcname, TAG_DONE);
+				err = xadGetInfo(data.ArcInf, XAD_INFILENAME, (IPTR)arcname, TAG_DONE);
 				if(!err)
 				{
 					data.ArcMode = data.ArcInf->xai_Client->xc_Flags & XADCF_DISKARCHIVER;
 				}
 				else if(err == XADERR_FILETYPE)
 				{
-					if(!(err = xadGetDiskInfo(data.ArcInf, XAD_INFILENAME, arcname, TAG_DONE)))
+					if(!(err = xadGetDiskInfo(data.ArcInf, XAD_INFILENAME, (IPTR)arcname, TAG_DONE)))
 					{
 						data.ArcMode = XADCF_DISKARCHIVER;
 					}
@@ -1229,7 +1228,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					ti[0].ti_Tag  = XAD_INFILENAME;
 					ti[0].ti_Data = (ULONG) arcname;
 					ti[1].ti_Tag  = TAG_DONE;
-					err = xadGetDiskInfo(data.ArcInf, XAD_INDISKARCHIVE, ti, TAG_DONE);
+					err = xadGetDiskInfo(data.ArcInf, XAD_INDISKARCHIVE, (IPTR)ti, TAG_DONE);
 				}
 
 				if(!err)
@@ -1323,7 +1322,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					//data.hook.dc_SendCommand(IPCDATA(ipc), buf, NULL, NULL);
 					ErrorReq(&data, xadGetErrorText(err));
 				}
-				xadFreeObject(data.ArcInf,NULL);
+				xadFreeObject(data.ArcInf,(IPTR)NULL);
 			}
 			FreePort(&data);
 		}
