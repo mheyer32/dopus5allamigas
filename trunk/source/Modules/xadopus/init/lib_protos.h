@@ -5,6 +5,7 @@
 #include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
+#include "module_deps.h"
 
 /* init.c */
 ULONG freeBase(struct LibraryHeader* lib);

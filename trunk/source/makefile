@@ -75,7 +75,7 @@ TYPE := _debug
 VERSION := _90_dev_
 endif
 ###########################################################
-# Sets compile system
+# Sets compile system.
 HOST := $(shell uname)
 ifeq ($(HOST), AmigaOS)
 	SYSTEM := amiga
@@ -104,6 +104,11 @@ BASEARC := basedata.lha
 REMOVE := rm -rf
 COPY := cp -p
 MAKEDIR := mkdir -p
+ifeq ($(PLATFORM), os4)
+DATE := gdate
+else
+DATE := date
+endif
 ###########################################################
 
 
@@ -193,6 +198,7 @@ endif
 	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
 	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
 	@$(REMOVE) Dopus5
+	@echo ">>>>>Release date:" $(shell $(DATE) "+%m/%d/%Y")
 
 ###########################################################
 
@@ -217,3 +223,4 @@ os4: mos
 aros: mos
 mos:
 	-@sh -c "echo -n"
+

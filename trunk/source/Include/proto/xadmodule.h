@@ -14,6 +14,9 @@
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
 #endif
+#ifndef LIBRARIES_XADMASTER_H
+#include <libraries/xadmaster.h>
+#endif
 
 #include <libraries/module.h>
 
