@@ -29,7 +29,8 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 	struct Library *DOpusBase;
 	struct DosLibrary *DOSBase;
 	struct Library *UtilityBase;
-	struct TagItem tags[] = {{PW_FileDone, 0, TAG_DONE}};
+//	struct TagItem tags[] = {{PW_FileDone, 0, TAG_DONE}};
+	struct TagItem tags[] = {{PW_FileDone, 0}, {TAG_DONE}};
 /*	struct TagItem reqtags[]={AR_Window,0,AR_Message,0, AR_Button,0,
 					AR_Button,0, AR_Button,0, AR_Button,0,
 					AR_Button,0, AR_Button,0, TAG_DONE};*/
@@ -40,9 +41,9 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 
 	tags[0].ti_Data = xpi->xpi_CurrentSize;
 
-	if(!(DOpusBase=data->DOpusBase)) return(NULL);
-	if(!(DOSBase=data->DOSBase)) return(NULL);
-	if(!(UtilityBase=data->UtilityBase)) return(NULL);
+	if(!(DOpusBase=data->DOpusBase)) return(0);
+	if(!(DOSBase=data->DOSBase)) return(0);
+	if(!(UtilityBase=data->UtilityBase)) return(0);
 
 	SetProgressWindow(data->ptr, tags);
 
@@ -97,7 +98,7 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 					DC_REGD0, 0);
 				//rc = data->hook.dc_SendCommand(IPCDATA(data->ipc), data->buf, NULL, NULL);
 
-				if(!rc) ret = NULL;
+				if(!rc) ret = 0;
 				else
 				{
 					if(rc <= 2) ret |= XADPIF_OVERWRITE;
