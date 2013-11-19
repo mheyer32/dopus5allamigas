@@ -104,13 +104,11 @@ BASEARC := basedata.lha
 REMOVE := rm -rf
 COPY := cp -p
 MAKEDIR := mkdir -p
-ifeq ($(PLATFORM), os4)
-DATE := gdate
-else
 DATE := date
-endif
 ###########################################################
-
+ifeq ($(PLATFORM), os4)
+SHELL := sh
+endif
 
 .PHONY : all
 all : program library modules commands
