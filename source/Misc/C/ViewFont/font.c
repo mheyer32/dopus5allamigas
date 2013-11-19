@@ -196,7 +196,7 @@ int main(int argc,char **argv)
 								break;
 
 							// Get ID
-							id=(UWORD)(ULONG)GTMENUITEM_USERDATA(item);
+							id=GTMENUITEM_USERDATA(item);
 
 							// Fall through
 						}
