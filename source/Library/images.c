@@ -713,8 +713,8 @@ Image_Data *read_image(char *name,OpenImageInfo *info)
 	if (name) len=strlen(name);
 	if (!info && len>5 && strcmp(&name[len-5],".info")==0)
 	{
-		struct DiskObject *obj=0;
-		struct NewDiskObject *ndo=0;
+		struct DiskObject *obj=NULL;
+		struct NewDiskObject *ndo=NULL;
 		char *path;
 
 		// Get name without .info
@@ -729,7 +729,7 @@ Image_Data *read_image(char *name,OpenImageInfo *info)
 			struct Screen *screen;
 			if	((screen=LockPubScreen(0)))
 			{
-				if	((obj=GetIconTags(path,ICONGETA_Screen,screen,
+				if	((obj=GetIconTags(path,ICONGETA_Screen,(Tag)screen,
 						TAG_DONE)))
 				{
 					struct Image *image;
@@ -737,8 +737,8 @@ Image_Data *read_image(char *name,OpenImageInfo *info)
 
 					IsPaletteMapped=IsNewIcon=FALSE;
 
-					IconControl(obj,ICONCTRLA_IsPaletteMapped,&IsPaletteMapped,
-						ICONCTRLA_IsNewIcon,&IsNewIcon,
+					IconControl(obj,ICONCTRLA_IsPaletteMapped,(Tag)&IsPaletteMapped,
+						ICONCTRLA_IsNewIcon,(Tag)&IsNewIcon,
 							TAG_DONE);
 
 					if	(!IsPaletteMapped && !IsNewIcon)
@@ -773,7 +773,7 @@ Image_Data *read_image(char *name,OpenImageInfo *info)
 
 			// Got NewIcons library?
 			if (NewIconBase &&
-				(ndo=GetNewDiskObject(path)))
+				(ndo=GetNewDiskObject((UBYTE *)path)))
 			{
 				// Got a newstyle icon?
 				if (ndo->ndo_NormalImage)
@@ -983,7 +983,7 @@ Image_Data *read_image(char *name,OpenImageInfo *info)
 
 							// Decode RLE into second buffer
 							L_DecodeILBM(
-								frame->delta,
+								(char *)frame->delta,
 								ilbm->header.w,
 								ilbm->header.h,
 								ilbm->header.nPlanes,

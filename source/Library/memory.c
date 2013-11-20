@@ -88,8 +88,9 @@ void *LIBFUNC L_NewMemHandle(
 	if (puddle_size>0)
 	{
 		handle->pool_header=
-			 (((struct Library *)SysBase)->lib_Version>=39)?	CreatePool(type,puddle_size,thresh_size):
-										AsmCreatePool(type,puddle_size,thresh_size,SysBase);
+			 (((struct Library *)SysBase)->lib_Version>=39)?
+				CreatePool(type,puddle_size,thresh_size):
+				AsmCreatePool(type,puddle_size,thresh_size,(APTR)SysBase);
 	}
 
 	// Return handle
@@ -110,7 +111,7 @@ void LIBFUNC L_FreeMemHandle(REG(a0, MemHandle *handle))
 			if (((struct Library *)SysBase)->lib_Version>=39)
 				DeletePool(handle->pool_header);
 			else
-				AsmDeletePool(handle->pool_header,SysBase);
+				AsmDeletePool(handle->pool_header,(APTR)SysBase);
 		}
 
 		// Otherwise, free all memory allocations
@@ -143,7 +144,7 @@ void LIBFUNC L_ClearMemHandle(REG(a0, MemHandle *handle))
 				if ( ((struct Library *)SysBase)->lib_Version>=39)
 					DeletePool(handle->pool_header);
 				else
-					AsmDeletePool(handle->pool_header,SysBase);
+					AsmDeletePool(handle->pool_header,(APTR)SysBase);
 				handle->pool_header=0;
 			}
 
@@ -184,8 +185,9 @@ void LIBFUNC L_ClearMemHandle(REG(a0, MemHandle *handle))
 			{
 				// Try to create a new pool. If this fails we'll be using allocation lists from now on
 				handle->pool_header=
-					( ((struct Library *)SysBase)->lib_Version>=39)?	CreatePool(handle->type,handle->puddle_size,handle->thresh_size):
-												AsmCreatePool(handle->type,handle->puddle_size,handle->thresh_size,SysBase);
+					( ((struct Library *)SysBase)->lib_Version>=39)?
+						CreatePool(handle->type,handle->puddle_size,handle->thresh_size):
+						AsmCreatePool(handle->type,handle->puddle_size,handle->thresh_size,(APTR)SysBase);
 			}
 		}
 
@@ -232,8 +234,9 @@ void *LIBFUNC L_AllocMemH(
 		if (handle->pool_header)
 		{
 			// Use exec routines under 39, lib routines before that
-			mem=( ((struct Library *)SysBase)->lib_Version>=39)?	AllocPooled(handle->pool_header,size):
-											AsmAllocPooled(handle->pool_header,size,SysBase);
+			mem=( ((struct Library *)SysBase)->lib_Version>=39)?
+			AllocPooled(handle->pool_header,size):
+			AsmAllocPooled(handle->pool_header,size,(APTR)SysBase);
 
 			// If successful
 			if (mem)
@@ -331,7 +334,7 @@ void LIBFUNC L_FreeMemH(REG(a0, void *memory))
 					if( ((struct Library *)SysBase)->lib_Version>=39)
 						FreePooled(handle->pool_header,mem,mem[1]);
 					else
-						AsmFreePooled(handle->pool_header,mem,mem[1],SysBase);
+						AsmFreePooled(handle->pool_header,mem,mem[1],(APTR)SysBase);
 				}
 
 				// Otherwise

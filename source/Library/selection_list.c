@@ -375,7 +375,7 @@ short LIBFUNC L_SelectionList(
 
 					// Get path from first argument
 					L_DevNameFromLockDopus(amsg->am_ArgList[0].wa_Lock,buf,256,lib);
-					AddPart(buf,(flags&SLF_FILE_FIELD)?amsg->am_ArgList[0].wa_Name:"",256);
+					AddPart(buf,(flags&SLF_FILE_FIELD)?(STRPTR)amsg->am_ArgList[0].wa_Name:(STRPTR)"",256);
 					L_SetGadgetValue(objlist,GAD_SELECTION_DIR_FIELD,(ULONG)buf);
 				}
 				ReplyMsg((struct Message *)amsg);

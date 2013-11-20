@@ -62,7 +62,7 @@ struct DiskObject *LIBFUNC L_GetCachedDefDiskObject(
 		case WBDISK:
 			name="env:sys/def_disk";
 			break;
-	
+
 		case WBDRAWER:
 			name="env:sys/def_drawer";
 			break;
@@ -78,13 +78,13 @@ struct DiskObject *LIBFUNC L_GetCachedDefDiskObject(
 		case WBGARBAGE:
 			name="env:sys/def_trashcan";
 			break;
-	
+
 		case WBKICK:
 			name="env:sys/def_kick";
 			break;
 		}
-	
-	
+
+
 	if	(IconBase->lib_Version>=44)
 	{
 	// using the new calls here results in a failure when image is written! ??
@@ -100,12 +100,12 @@ struct DiskObject *LIBFUNC L_GetCachedDefDiskObject(
 		{
 			if (name) icon=GetIconTags(name,
 				ICONGETA_FailIfUnavailable,TRUE,
-				ICONGETA_Screen,*libdata->backfill_screen,
+				ICONGETA_Screen,(Tag)*libdata->backfill_screen,
 				TAG_DONE);
-					
+
 			if (!icon) icon=GetIconTags(NULL,
 					ICONGETA_GetDefaultType,type,
-					ICONGETA_Screen,*libdata->backfill_screen,
+					ICONGETA_Screen,(Tag)*libdata->backfill_screen,
 					TAG_DONE);
 		}
 
@@ -124,7 +124,7 @@ struct DiskObject *LIBFUNC L_GetCachedDefDiskObject(
 		if (name && (icon=L_GetCachedDiskObject(name,flags,libbase)))
 			return icon;
 
-	
+
 		// Get icon the normal way
 		
 		if ((icon=GetDefDiskObject(type)))
@@ -232,14 +232,14 @@ struct DiskObject *LIBFUNC L_GetCachedDiskObject(
 		if (data->backfill_screen)
 			icon=GetIconTags(name,
 				ICONGETA_FailIfUnavailable,TRUE,
-				ICONGETA_Screen,*data->backfill_screen,
+				ICONGETA_Screen,(Tag)*data->backfill_screen,
 				TAG_DONE);
 
 
 		return icon;
 		}
-		
-		
+
+
 
 	// Got NewIcons, and NewIcons is enabled?
 
@@ -663,3 +663,4 @@ void LIBFUNC L_SetNewIconsFlags(
 		}
 	}
 }
+
