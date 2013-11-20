@@ -1,22 +1,25 @@
 /***************************************************************************
 
- codesets.library - Amiga shared library for handling different codesets
- Copyright (C) 2001-2005 by Alfonso [alfie] Ranieri <alforan@tin.it>.
- Copyright (C) 2005-2010 by codesets.library Open Source Team
+Directory Opus 5
+Original APL release version 5.82
+Copyright 1993-2012 Jonathan Potter & GP Software
 
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 2.1 of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the AROS Public License version 1.1.
 
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+AROS Public License for more details.
 
- codesets.library project: http://sourceforge.net/projects/codesetslib/
+The release of Directory Opus 5 under the GPL in NO WAY affects
+the existing commercial status of Directory Opus for Windows.
 
- $Id: libinit.c 274 2012-04-03 18:06:48Z thboeckel $
+Directory Opus 5 project: http://sourceforge.net/projects/dopus5allamigas/
+
+For more information on Directory Opus for Windows please see:
+
+                 http://www.gpsoft.com.au
 
 ***************************************************************************/
 
@@ -1329,7 +1332,7 @@ ULONG freeBase(struct LibraryHeader *lib)
     CloseLibrary((struct Library *)GfxBase);
     GfxBase = NULL;
   }  
-  
+
   // close utility.library
   if(UtilityBase != NULL)
   {
@@ -1344,7 +1347,7 @@ ULONG freeBase(struct LibraryHeader *lib)
 #warning ! to avoid crash on exit of os4 library when use it from native binaryes. todo: invistigate, understand and do normally.
 #if 0
     DROPINTERFACE(IDOS);
-#endif	
+#endif
     CloseLibrary((struct Library *)DOSBase);
     DOSBase = NULL;
   }
@@ -1371,7 +1374,7 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 37)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
   {
-  
+
     // we have to please the internal utilitybase
     // pointers of libnix and clib2
     #if !defined(__NEWLIB__) && !defined(__AROS__)
@@ -1423,7 +1426,7 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	if (!(data=AllocVec(sizeof(struct LibData),MEMF_CLEAR)))
 		return 1;
 
-		
+
 	libbase->ml_UserData=(ULONG)data;
 
 	// Check for OS 3.5 icon library
@@ -1431,12 +1434,11 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 
 	if	(IconBase->lib_Version>=44) {
 		data->flags|=LIBDF_USING_OS35;
-	}	
+	}
 	else {
-		NewIconBase=(struct Library *)OpenLibrary("newicon.library",0); GETINTERFACE(INewIcon, NewIconBase);
-	}	
+		NewIconBase=(struct Library *)OpenLibrary("newicon.library",0);
+	}
 
-		
 
 	// Open timer device
 	if (OpenDevice("timer.device",UNIT_VBLANK,&data->timer_io,0))
@@ -1444,12 +1446,14 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	data->TimerBase=(struct Library *)data->timer_io.io_Device;
 
 
-
 	// Is CyberGfx library already in system? If so, open it for ourselves
 	if (FindName(&((struct ExecBase *)SysBase)->LibList,"cybergraphics.library")) {
-		CyberGfxBase=OpenLibrary("cybergraphics.library",0); GETINTERFACE(ICyberGfx, CyberGfxBase);
+		CyberGfxBase=OpenLibrary("cybergraphics.library",0);
+		#ifdef __amigaos4__
+		GETINTERFACE(ICyberGfx, CyberGfxBase);
+		#endif
     }
-	
+
 	// Get topaz font
 	if (!(topaz_font=OpenFont(&topaz_attr))) return 1;
 

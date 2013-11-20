@@ -589,7 +589,7 @@ void SAVEDS launcher_proc(void)
 				ErrorNode *error;
 
 				// Show error
-				if ((error=v_launch_error(data,0,MSG_SICK_OF_WAITING,MSG_WAIT_CANCEL,proc->name)))
+				if ((error=v_launch_error(data,0,MSG_SICK_OF_WAITING,MSG_WAIT_CANCEL,(IPTR)proc->name)))
 				{
 					// Store launch proc in error node
 					error->proc=proc;
@@ -1146,7 +1146,7 @@ LaunchProc *launcher_launch(
 	if (cur_dir) UnLock(cur_dir);
 
 	// If failed, show error
-	if (!result) v_launch_error(data,packet,MSG_UNABLE_TO_OPEN_TOOL,MSG_OK,proc_name);
+	if (!result) v_launch_error(data,packet,MSG_UNABLE_TO_OPEN_TOOL,MSG_OK,(IPTR)proc_name);
 
 	// Free icon
 	if (icon) FreeDiskObject(icon);
@@ -1683,7 +1683,7 @@ BOOL doslist_get(struct LibData *data,struct MinList *list,APTR memory,ULONG fla
 		}
 
 		// Build name buffer with colon
-		lsprintf(buf,"%s:",name+5);
+		lsprintf(buf,"%s:",(IPTR)name+5);
 
 		// Get handler
 		if (!(devproc=GetDeviceProc(buf,NULL)))
@@ -1781,7 +1781,7 @@ BOOL doslist_get(struct LibData *data,struct MinList *list,APTR memory,ULONG fla
 						if (doslist_check_double(data,(struct List *)list,found->dle_Node.ln_Name+5))
 						{
 							// Copy name, with trailing colon
-							lsprintf(name,"%s:",found->dle_Node.ln_Name+5);
+							lsprintf(name,"%s:",(IPTR)found->dle_Node.ln_Name+5);
 
 							// Send notification
 							if (msg_list) Att_NewNode(msg_list,name,(ULONG)-1,ADDNODE_EXCLUSIVE);
@@ -1813,7 +1813,7 @@ BOOL doslist_get(struct LibData *data,struct MinList *list,APTR memory,ULONG fla
 					char name[80];
 
 					// Get volume name
-					lsprintf(name,"%s:",found->dle_Node.ln_Name);
+					lsprintf(name,"%s:",(IPTR)found->dle_Node.ln_Name);
 
 					// Send notification based on name
 					if (msg_list) Att_NewNode(msg_list,name,(found->dle_Node.ln_Pri==DL_ADDED)?1:0,ADDNODE_EXCLUSIVE);
@@ -1950,7 +1950,7 @@ BOOL doslist_check_double(struct LibData *data,struct List *list,char *name)
 					char name[20];
 
 					// Build disk name
-					lsprintf(name,"%s%ld:",device_check_name[a],unit);
+					lsprintf(name,"%s%ld:",(IPTR)device_check_name[a],unit);
 
 					// See if disk is valid
 					if ((lock=Lock(name,ACCESS_READ)))
