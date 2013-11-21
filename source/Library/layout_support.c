@@ -847,7 +847,7 @@ STRPTR LIBFUNC L_GetString(
 #define LocaleBase	li->li_LocaleBase
 	// Get string from locale
 	if (li->li_Catalog && LocaleBase &&
-		(builtIn=GetCatalogStr(li->li_Catalog,stringNum,0)))
+		(builtIn=(STRPTR)GetCatalogStr(li->li_Catalog,stringNum,0)))
 		return builtIn;
 #undef LocaleBase
 
@@ -1299,7 +1299,7 @@ struct Gadget *LIBFUNC L_FindKeyEquivalent(
 										}
 
 										// Get old selection
-										GetAttr(DLV_Selected,gadget,&old);
+										GetAttr(DLV_Selected,(Object *)gadget,&old);
 
 										// Change selection
 										SetGadgetAttrs(gadget,list->window,0,
@@ -1307,7 +1307,7 @@ struct Gadget *LIBFUNC L_FindKeyEquivalent(
 											TAG_END);
 
 										// Get current selection
-										GetAttr(DLV_Selected,gadget,&sel);
+										GetAttr(DLV_Selected,(Object *)gadget,&sel);
 
 										// Has it changed?
 										if (sel!=old)
@@ -1343,7 +1343,7 @@ struct Gadget *LIBFUNC L_FindKeyEquivalent(
 											TAG_END);
 
 										// Get selection
-										GetAttr(DPG_Pen,gadget,&sel);
+										GetAttr(DPG_Pen,(Object *)gadget,&sel);
 										msg->Code=sel;
 									}
 									break;

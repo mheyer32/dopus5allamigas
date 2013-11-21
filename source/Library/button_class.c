@@ -154,7 +154,7 @@ ULONG LIBFUNC button_dispatch(
 					data->flags|=BUTTONF_CHECK;
 
 					// Get image
-					((CheckData *)data)->check_image=
+					((CheckData *)data)->check_image=(struct Image *)
 						NewObject(
 							0,"dopusiclass",
 							DIA_Type,IM_CHECK,
@@ -721,7 +721,7 @@ ULONG LIBFUNC button_dispatch(
 			if (data->flags&BUTTONF_CHECK)
 			{
 				// Free image
-				DisposeObject(((CheckData *)data)->check_image);
+				DisposeObject((Object *)((CheckData *)data)->check_image);
 			}
 
 			// View?

@@ -93,7 +93,7 @@ ULONG ASM SAVEDS palette_dispatch(
 						ptr=(char *)gadget->GadgetText;
 					else
 					if (!(gadget->Flags&GFLG_LABELIMAGE))
-						ptr=gadget->GadgetText->IText;
+						ptr=(char *)gadget->GadgetText->IText;
 
 					// Got a title?
 					if (ptr)
