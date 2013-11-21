@@ -113,7 +113,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 		if (((a%2)==1 && flags&SCROLL_VERT) ||
 			((a%2)==0 && flags&SCROLL_HORIZ))
 		{
-			if (!(image[a]=
+			if (!(image[a]=(struct Image *)
 				NewObject(0,"sysiclass",
 					SYSIA_Size,(window->WScreen->Flags&SCREENHIRES)?SYSISIZE_MEDRES:SYSISIZE_LOWRES,
 					SYSIA_Which,LEFTIMAGE+a,
@@ -127,7 +127,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 	if (flags&SCROLL_VERT)
 	{
 		// Create vertical slider
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"propgclass",
 				GA_ID,GAD_VERT_SCROLLER,
 				GA_RelRight,-(window->BorderRight-5),
@@ -148,7 +148,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 		DoMethod((Object *)gadget,OM_ADDTAIL,list);
 
 		// Up arrow
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"buttongclass",
 				GA_ID,GAD_VERT_ARROW_UP,
 				GA_Image,image[1],
@@ -164,7 +164,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 		DoMethod((Object *)gadget,OM_ADDTAIL,list);
 
 		// Down arrow
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"buttongclass",
 				GA_ID,GAD_VERT_ARROW_DOWN,
 				GA_Image,image[3],
@@ -184,7 +184,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 	if (flags&SCROLL_HORIZ)
 	{
 		// Create horizontal slider
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"propgclass",
 				GA_ID,GAD_HORIZ_SCROLLER,
 				(gadget)?GA_Previous:TAG_IGNORE,gadget,
@@ -206,7 +206,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 		DoMethod((Object *)gadget,OM_ADDTAIL,list);
 
 		// Left arrow
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"buttongclass",
 				GA_ID,GAD_HORIZ_ARROW_LEFT,
 				GA_Image,image[0],
@@ -222,7 +222,7 @@ struct Gadget *LIBFUNC L_AddScrollBars(
 		DoMethod((Object *)gadget,OM_ADDTAIL,list);
 
 		// Right arrow
-		if (!(gadget=
+		if (!(gadget=(struct Gadget *)
 			NewObject(0,"buttongclass",
 				GA_ID,GAD_HORIZ_ARROW_RIGHT,
 				GA_Image,image[2],
@@ -253,7 +253,7 @@ struct Gadget *LIBFUNC L_FindBOOPSIGadget(
 
 	// Go through list
 	object_ptr=list->lh_Head;
-	while ((object=NextObject(&object_ptr)))
+	while ((object=NextObject((APTR)&object_ptr)))
 	{
 		class=OCLASS(object);
 		if (class->cl_Super->cl_ID &&
@@ -273,7 +273,7 @@ void LIBFUNC L_BOOPSIFree(REG(a0, struct List *list))
 	Object *object;
 
 	object_ptr=list->lh_Head;
-	while ((object=NextObject(&object_ptr)))
+	while ((object=NextObject((APTR)&object_ptr)))
 		DisposeObject(object);
 	NewList(list);
 }
@@ -329,7 +329,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 		drinfo=GetScreenDrawInfo(screen);
 
 		// Get depth gadget image
-		if ((image=NewObject(
+		if ((image=(struct Image *)NewObject(
 					0,
 					"sysiclass",
 					SYSIA_DrawInfo,drinfo,
@@ -340,14 +340,14 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 			depth_width=image->Width;
 
 			// Free image
-			DisposeObject(image);
+			DisposeObject((Object *)image);
 		}
 
 		// Need zoom size?
 		if (!cover_zoom)
 		{
 			// Get zoom gadget image
-			if ((image=NewObject(
+			if ((image=(struct Image *)NewObject(
 						0,
 						"sysiclass",
 						SYSIA_DrawInfo,drinfo,
@@ -358,7 +358,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 				zoom_width=image->Width;
 
 				// Free image
-				DisposeObject(image);
+				DisposeObject((Object *)image);
 			}
 		}
 
@@ -408,7 +408,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 			{
 				APTR drawinfo = GetScreenDrawInfo(screen);
 
-				image = NewObject(0, "sysiclass",
+				image = (struct Image *)NewObject(0, "sysiclass",
 					SYSIA_Which, type == IM_ICONIFY ? ICONIFYIMAGE : LOCKIMAGE,
 					SYSIA_DrawInfo, drawinfo,
 					TAG_END);
@@ -419,7 +419,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 #endif
 
 		default:
-			image = NewObject(0, "dopusiclass",
+			image = (struct Image *)NewObject(0, "dopusiclass",
 				DIA_Type, type,
 				IA_Width, width,
 				IA_Height, screen->WBorTop+screen->Font->ta_YSize+1,
@@ -429,7 +429,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 	if (type == IM_GAUGE || image != NULL)
 	{
 		// Create gadget
-		if ((gadget=NewObject(0,(type==IM_GAUGE)?"dopusgaugeclass":"dopusbuttongclass",
+		if ((gadget=(struct Gadget *)NewObject(0,(type==IM_GAUGE)?"dopusgaugeclass":"dopusbuttongclass",
 			GA_ID,id,
 			(type==IM_GAUGE)?GA_Left:GA_RelRight,(type==IM_GAUGE)?left:left-image->Width-1,
 			GA_Top,top,
@@ -449,7 +449,7 @@ struct Gadget *LIBFUNC L_CreateTitleGadget(
 		}
 
 		// Failed
-		DisposeObject(image);
+		DisposeObject((Object *)image);
 	}
 
 	if (pubscr) UnlockPubScreen(0,pubscr);

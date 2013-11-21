@@ -39,7 +39,7 @@ short LIBFUNC L_DoSimpleRequest(
 	UWORD gadgetid=0;
 
 	#ifdef __amigaos4__
-	libbase = dopuslibbase_global;
+	libbase = (struct Library *)dopuslibbase_global;
 	#endif
 
 	// Allocate memory handle
@@ -464,7 +464,7 @@ short LIBFUNC L_SimpleRequest(
 	short gadget_count,a;
 
 	#ifdef __amigaos4__
-	libbase = dopuslibbase_global;
+	libbase = (struct Library *)dopuslibbase_global;
 	#endif
 	
 	// Allocate some storage space

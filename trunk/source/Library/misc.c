@@ -170,7 +170,7 @@ BOOL LIBFUNC L_ConvertRawKey(
 		ConsoleDevice=console_req.io_Device;
 
 		#ifdef __amigaos4__
-        IConsole = (struct ConsoleIFace *)GetInterface(ConsoleDevice,"main",1,NULL);
+        IConsole = (struct ConsoleIFace *)GetInterface((struct Library *)ConsoleDevice,"main",1,NULL);
         #endif
 		
 		// Build fake input event
