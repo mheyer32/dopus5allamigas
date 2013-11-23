@@ -331,7 +331,7 @@ ILBMHandle *LIBFUNC L_ReadILBM(
 
 				// Decode body
 				L_DecodeILBM(
-					body,
+					(char *)body,
 					ilbm->header.w,
 					ilbm->header.h,
 					ilbm->header.nPlanes,
@@ -406,7 +406,7 @@ ILBMHandle *LIBFUNC L_ReadILBM(
 
 					// Decode body
 					L_DecodeILBM(
-						body,
+						(char *)body,
 						ilbm->header.w,
 						ilbm->header.h,
 						ilbm->header.nPlanes,
@@ -587,22 +587,22 @@ void LIBFUNC L_DecodeILBM(
 							// Get start
 							if (plane<8)
 							{
-								ptr=buffer;
+								ptr=(char *)buffer;
 								pnum=plane;
 							}
 							else
 							if (plane<16)
 							{
-								ptr=buffer+1;
+								ptr=(char *)buffer+1;
 								pnum=plane-8;
 							}
 							else
 							{
-								ptr=buffer+2;
+								ptr=(char *)buffer+2;
 								pnum=plane-16;
 							}
 						}
-						else ptr=buffer;
+						else ptr=(char *)buffer;
 					}
 					else ptr=(char *)(dest->Planes[plane]+bmoffset);
 
@@ -791,7 +791,7 @@ void LIBFUNC L_DecodeRLE(REG(a0, RLEinfo *rle))
 
 	planes=rle->imagedepth;
 	if (rle->masking==1) ++planes;
-	source=rle->sourceptr;
+	source=(char *)rle->sourceptr;
 	bpr=rle->imagebpr;
 	destbpr=rle->destbpr;
 

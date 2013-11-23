@@ -67,7 +67,7 @@ struct MyLibrary
         ULONG              ml_UserData;
 };
 #ifdef __amigaos4__
-struct MyLibrary *dopuslibbase_global;
+APTR dopuslibbase_global;
 #endif
 
 typedef struct //Moved here from wb.h
