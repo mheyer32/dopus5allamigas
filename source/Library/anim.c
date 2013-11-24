@@ -37,7 +37,7 @@ void LIBFUNC L_AnimDecodeRIFFXor(
 	for (column=0;column<sourcebytes;column++)
 	{
 		// Get pointer to delta column
-		data=plane+column;
+		data=(unsigned char *)plane+column;
 
 		// Number of operations in this column
 		opcount=*delta++;
@@ -101,7 +101,7 @@ void LIBFUNC L_AnimDecodeRIFFSet(
 	for (column=0;column<sourcebytes;column++)
 	{
 		// Get pointer to delta column
-		data=plane+column;
+		data=(unsigned char *)plane+column;
 
 		// Number of operations in this column
 		opcount=*delta++;

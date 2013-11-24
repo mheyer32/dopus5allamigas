@@ -338,7 +338,7 @@ int LIBFUNC L_SaveFiletypeList(
 				break;
 
 			// Write recognition and icon path
-			if (!(write_string(iff,type->recognition)) ||
+			if (!(write_string(iff,(char *)type->recognition)) ||
 				!(write_string(iff,type->icon_path)))
 				break;
 
