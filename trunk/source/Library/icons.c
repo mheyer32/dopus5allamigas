@@ -248,7 +248,7 @@ BOOL LIBFUNC L_WriteIcon(
 		write_obj.do_Magic=(UWORD)~WB_DISKMAGIC;
 
 		// Write the NewIcon
-		result=PutNewDiskObject(name,nido->nido_NewDiskObject);
+		result=PutNewDiskObject((UBYTE *)name,nido->nido_NewDiskObject);
 
 		// Restore the DiskObject pointer in the NewIcon
 		nido->nido_NewDiskObject->ndo_StdObject=temp;

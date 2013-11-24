@@ -160,7 +160,7 @@ Cfg_Filetype *LIBFUNC L_CopyFiletype(
 		type->type=orig->type;
 
 		// Copy recognition string and icon path
-		type->recognition=copy_string(memory,orig->recognition);
+		type->recognition=(unsigned char *)copy_string(memory,(char *)orig->recognition);
 		type->icon_path=copy_string(memory,orig->icon_path);
 
 		// Copy action strings
