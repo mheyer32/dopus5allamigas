@@ -280,10 +280,13 @@ int request_file(
 	// Display requester
 	ret=AslRequest(filereq,0);
 
-	// Build path
-	strcpy(buffer,filereq->fr_Drawer);
-	AddPart(buffer,filereq->fr_File,256);
-	if (!*buffer || !*filereq->fr_File) ret=0;
+	if (ret)
+	{
+		// Build path
+		strcpy(buffer,filereq->fr_Drawer);
+		AddPart(buffer,filereq->fr_File,256);
+		if (!*buffer || !*filereq->fr_File) ret=0;
+	}
 
 	// Save coordinates
 	GetSemaphore(&GUI->req_lock,SEMF_EXCLUSIVE,0);
