@@ -16,12 +16,6 @@ int main(int argc,char **argv)
 	}
 #endif
 
-	if (!(font_openlibs()))
-	{
-		font_free(0);
-		return(10);
-	}
-
 	// Allocate data
 	if (!(data=AllocVec(sizeof(font_data),MEMF_CLEAR)))
 	{
@@ -471,31 +465,6 @@ void font_free(font_data *data)
 	DropInterface((struct Interface *)IDOpus);
 #endif
 	CloseLibrary(DOpusBase);
-#if 0 //defined(__amigaos3__) || defined(__MORPHOS__)
-	if (LayersBase) CloseLibrary(LayersBase);
-	if (AslBase) CloseLibrary(AslBase);
-	if (DiskfontBase) CloseLibrary(DiskfontBase);
-	if (LocaleBase) CloseLibrary((struct Library *)LocaleBase);
-	if (WorkbenchBase) CloseLibrary(WorkbenchBase);
-#endif
-}
-
-
-int font_openlibs(void)
-{
-#if 0 //defined(__amigaos3__) || defined(__MORPHOS__)
-	if (!(LayersBase = OpenLibrary("layers.library", 37)))
-		return(0);
-	if (!(AslBase = OpenLibrary("asl.library", 37)))
-		return(0);
-	if (!(DiskfontBase = OpenLibrary("diskfont.library", 37)))
-		return(0);
-	if (!(LocaleBase = (struct LocaleBase *)OpenLibrary("locale.library", 37)))
-		return(0);
-	if (!(WorkbenchBase = OpenLibrary("workbench.library", 37)))
-		return(0);
-#endif
-	return(1);
 }
 
 
@@ -847,15 +816,6 @@ void font_ask_name(font_data *data)
 	else ClearWindowBusy(data->window);
 }
 
-/* Not needed for OS3+ & won't compile with newer includes.
-// varargs AslRequestTags
-BOOL STDARGS AslRequestTags(
-	APTR req,
-	Tag tag1,...)
-{
-	return AslRequest(req,(struct TagItem *)&tag1);
-}
-*/
 
 // Refresh hook
 ULONG ASM SAVEDS font_refresh(

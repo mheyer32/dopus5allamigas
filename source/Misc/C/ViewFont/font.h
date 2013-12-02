@@ -94,20 +94,9 @@ enum
 
 
 extern struct Library *DOpusBase;
-
 #ifdef __amigaos4__
 extern struct DOpusIFace *IDOpus;
-extern struct Library *LocaleBase;
-#elif defined(__MORPHOS__)
-extern struct Library *LocaleBase;
-#else
-extern struct LocaleBase *LocaleBase;
 #endif
-
-extern struct Library *LayersBase;
-extern struct Library *AslBase;
-extern struct Library *DiskfontBase;
-extern struct Library *WorkbenchBase;
 
 extern MenuData font_menus[];
 
