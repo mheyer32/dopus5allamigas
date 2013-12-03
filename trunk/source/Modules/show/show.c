@@ -1571,7 +1571,7 @@ short show_print(
 BOOL show_get_dtpic(show_data *data,struct Node *node)
 {
 	// Enable DOS requesters
-	((struct Process *)FindTask(0))->pr_WindowPtr=0;
+	((struct Process *)FindTask(NULL))->pr_WindowPtr=0;
 
 	// Try for datatypes
 	if (DataTypesBase)
@@ -1605,7 +1605,7 @@ BOOL show_get_dtpic(show_data *data,struct Node *node)
 			else
 			{
 				struct DataType *dt;
-				long horiz,vert;
+				//long horiz,vert;
 
 				// Get attributes of picture
 				GetDTAttrs(data->dt_object,
@@ -1614,9 +1614,14 @@ BOOL show_get_dtpic(show_data *data,struct Node *node)
 							PDTA_NumColors,&data->numcolours,
 							PDTA_BitMap,&data->dt_bm,
 							DTA_DataType,(ULONG *)&dt,
-							DTA_NominalVert,&vert,
-							DTA_NominalHoriz,&horiz,
+							/*DTA_NominalVert,&vert,
+							DTA_NominalHoriz,&horiz,*/
 							TAG_END);
+
+#ifdef __AROS__
+				if (!data->dt_bm)
+					GetDTAttrs(data->dt_object,	PDTA_DestBitMap,&data->dt_bm, TAG_END);
+#endif
 
 				// Store screen size
 				data->width=data->frameinfo.fri_Dimensions.Width;
@@ -1631,7 +1636,7 @@ BOOL show_get_dtpic(show_data *data,struct Node *node)
 				if (!data->numcolours) data->numcolours=2<<(data->depth-1);
 
 				// Disable DOS requesters
-				((struct Process *)FindTask(0))->pr_WindowPtr=(APTR)-1;
+				((struct Process *)FindTask(NULL))->pr_WindowPtr=(APTR)-1;
 
 				// Return success
 				data->pic_ok=1;
@@ -1641,7 +1646,7 @@ BOOL show_get_dtpic(show_data *data,struct Node *node)
 	}
 
 	// Disable DOS requesters
-	((struct Process *)FindTask(0))->pr_WindowPtr=(APTR)-1;
+	((struct Process *)FindTask(NULL))->pr_WindowPtr=(APTR)-1;
 
 	// Failed
 	return 0;
