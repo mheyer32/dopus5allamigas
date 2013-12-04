@@ -705,6 +705,7 @@ typedef VOID ASM (*REF_CALLBACK)(REG(d0, ULONG iclass), REG(a0, APTR window), RE
 #define LIBDF_NO_CUSTOM_DRAG	(1<<8)
 #define LIBDF_THIN_BORDERS	(1<<9)
 #define LIBDF_USING_OS35	(1<<10) // gjp
+#define LIBDF_NO_PATCHES	(1<<11) // No system patches
 
 // REXX stuff
 #define RexxTag_Arg0		( TAG_USER + 0x1 )

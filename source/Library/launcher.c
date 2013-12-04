@@ -364,7 +364,8 @@ void SAVEDS launcher_proc(void)
 	data->task_count+=L_Att_NodeCount((Att_List *)&((struct ExecBase *)SysBase)->TaskWait);
 
 	// Install patches
-	WB_Install_Patch();	
+	if (!(data->flags & LIBDF_NO_PATCHES))
+		WB_Install_Patch();	
 	Permit();
 
 	// Get a dos list copy
