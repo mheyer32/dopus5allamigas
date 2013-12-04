@@ -1516,7 +1516,7 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	if (GetVar("dopus/OuEstLeMinibar",buf,2,GVF_GLOBAL_ONLY)>-1)
 		data->flags|=LIBDF_NOSTIPPLE;
 
-		
+
 	// Variable set to install DOS patches
 	if (GetVar("dopus/DOSPatch",buf,2,GVF_GLOBAL_ONLY)>-1)
 		data->flags|=LIBDF_DOS_PATCH;
@@ -1532,6 +1532,9 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 		// Set cache flag
 		data->flags|=LIBDF_FT_CACHE;
 	}
+	// Variable set to NOT install any system patches
+	if (GetVar("dopus/NoSysPatch",buf,2,GVF_GLOBAL_ONLY)>-1)
+		data->flags|=LIBDF_NO_PATCHES;
 
 	// Create some memory handles
 	data->memory=L_NewMemHandle(sizeof(IPCMessage)<<5,sizeof(IPCMessage)<<4,MEMF_CLEAR|MEMF_PUBLIC);
