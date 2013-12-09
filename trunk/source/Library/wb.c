@@ -290,10 +290,12 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 		}
 
 		// Otherwise, pass to OS
-/*		else
+		else
 		{
 			object=
-				((APTR ASM (*)
+				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], wb_data->wb_base, IWorkbench,
+					d0, id, d1, userdata, a0, text, a1, port, a2, lock, a3, icon, a4, tags);
+			/*	((APTR ASM (*)
 					(REG(d0, ULONG),
 					REG(d1, ULONG),
 					REG(a0, char *),
@@ -302,10 +304,11 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 					REG(a3, struct DiskObject *),
 					REG(a4, struct TagItem *),
 					REG(a6, struct Library *)))wb_data->old_function[WB_PATCH_ADDAPPICONA])
-					(id,userdata,text,port,lock,icon,tags,wb_data->wb_base);
+					(id,userdata,text,port,lock,icon,tags,wb_data->wb_base);*/
+
 			if (app_entry) app_entry->os_object=object;
 		}
-*/
+
 		// Send notification
 		if (app_entry)
 			L_SendNotifyMsg(DN_APP_ICON_LIST,(ULONG)app_entry,0,FALSE,0,0,libbase);
