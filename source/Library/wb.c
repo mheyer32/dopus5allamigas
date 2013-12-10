@@ -292,20 +292,15 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 		// Otherwise, pass to OS
 		else
 		{
+		#ifdef __amigaos3__
+			object=
+				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], wb_data->wb_base, IWorkbench,
+					d0, id, d1, userdata, a0, text, a1, port, a2, lock, a3, icon, d7, tags);
+		#else
 			object=
 				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], wb_data->wb_base, IWorkbench,
 					d0, id, d1, userdata, a0, text, a1, port, a2, lock, a3, icon, a4, tags);
-			/*	((APTR ASM (*)
-					(REG(d0, ULONG),
-					REG(d1, ULONG),
-					REG(a0, char *),
-					REG(a1, struct MsgPort *),
-					REG(a2, BPTR),
-					REG(a3, struct DiskObject *),
-					REG(a4, struct TagItem *),
-					REG(a6, struct Library *)))wb_data->old_function[WB_PATCH_ADDAPPICONA])
-					(id,userdata,text,port,lock,icon,tags,wb_data->wb_base);*/
-
+		#endif
 			if (app_entry) app_entry->os_object=object;
 		}
 
