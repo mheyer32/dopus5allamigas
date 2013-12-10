@@ -82,7 +82,7 @@ For more information on Directory Opus for Windows please see:
 	} \
 	ret name(t1 n1, t2 n2, t3 n3) {
 
-#define PATCHED_5(ret,name,r1,t1,n1,r2,t2,n2 r3,t3,n3,r4,t4,n4,r5,t5,n5) \
+#define PATCHED_5(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3,r4,t4,n4,r5,t5,n5) \
 	ret name##_stubs(APTR __local_iface, REG(r1, t1 n1),REG(r2, t2 n2),REG(r3,t3 n3), REG(r4, t4 n4), REG(r5, t5 n5)) \
 	{ \
 		extern ret name(REG(r1, t1 n1),REG(r2, t2 n2), REG(r3, t3 n3), REG(r4, t4 n4), REG(r5, t5 n5)); \
