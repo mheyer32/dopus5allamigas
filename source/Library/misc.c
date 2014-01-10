@@ -941,6 +941,33 @@ void LIBFUNC L_SetEnv(
 	REG(a1, char *data),
 	REG(d0, BOOL save))
 {
+#ifdef __AROS__
+	// same as below. we really need a recursive mkdir function...
+
+	char path[256] = "ENV:";
+	char *ptr;
+	BPTR pathlock;
+
+	strncat(path, name, sizeof(path));
+	*PathPart(path) = '\0';
+
+	for (ptr = path + 1; *ptr; ptr++)
+	{
+		if(*ptr == '/')
+		{
+			*ptr = '\0';
+
+			if ((pathlock = Lock(path, ACCESS_READ)) || (pathlock = CreateDir(path)))
+				UnLock(pathlock);
+
+			*ptr = '/';
+		}
+	}
+
+	if ((pathlock = Lock(path, ACCESS_READ)) || (pathlock = CreateDir(path)))
+		UnLock(pathlock);
+#endif
+
 	// Set variable
 	if ((SetVar(name,data,-1,GVF_GLOBAL_ONLY)) && save)
 	{
