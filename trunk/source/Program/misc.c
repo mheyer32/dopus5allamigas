@@ -318,7 +318,7 @@ LONG GetDiskInfo(char *device,struct InfoData *info)
 	{
 		//res=Info(proc->dvp_Lock,info);
 		BPTR lock;
-		if (!(lock=Lock(device,SHARED_LOCK)))
+		if ((lock=Lock(device,SHARED_LOCK)))
 		{
 			res=Info(lock,info);
 			UnLock(lock);
