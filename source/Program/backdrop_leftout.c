@@ -114,7 +114,6 @@ void backdrop_leave_icons_out(BackdropInfo *info,BackdropObject *only_one,BOOL s
 {
 	BackdropObject *object=0;
 	BOOL save=0;
-	D(bug("Entered\n"));
 
 	// Lock icon list
 	lock_listlock(&info->objects,0);
@@ -204,7 +203,6 @@ BackdropObject *backdrop_leave_out(
 	BackdropObject *object;
 	struct List *search;
 	char path[262];
-	D(bug("Entered\n"));
 
 	// Lock object
 	if (!(lock=Lock(name,ACCESS_READ)))
@@ -578,13 +576,16 @@ void backdrop_add_leftouts(BackdropInfo *info)
 						if (*leftout)
 						{
 							snprintf(buf, sizeof(buf), "%s%s", object->name, leftout);
-
+#if 1
+							backdrop_leave_out(info,buf,BLOF_PERMANENT|BLOF_REFRESH,-1,-1);
+#else
 							if ((newobject=backdrop_leftout_new(info,buf,0,BLNF_CUSTOM_LABEL)))
 							{
 								stccpy(newobject->device_name,FilePart(buf),GUI->def_filename_length+1);
 
 								backdrop_get_icon(info,newobject,GETICON_CD);
 							}
+#endif
 						}
 					}
 
