@@ -126,6 +126,11 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 			// Copy name
 			strcpy(name,ptr);
 
+#ifdef __AROS__
+			if (stricmp(name,"Disk.info")==0)
+				ok=0;
+			else
+#endif
 			// Not an icon?
 			if (!(iptr=isicon(name))) ok=0;
 
