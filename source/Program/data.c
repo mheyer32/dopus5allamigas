@@ -34,10 +34,10 @@ char *__procname="dopus";
 // os4 ifaces
 #ifdef __amigaos4__
 struct DOpusIFace 		*IDOpus 		= NULL;
-struct ConfigOpusIFace	*IConfigOpus	= NULL;
+/*struct ConfigOpusIFace	*IConfigOpus	= NULL;
 struct ModuleIFace		*IModule 		= NULL;
 
-struct SysInfoIFace		*ISysInfo 		= NULL;
+struct SysInfoIFace		*ISysInfo 		= NULL;*/
 struct muIFace			*Imu 			= NULL;
 
 
@@ -77,7 +77,9 @@ struct Library			*DiskfontBase	= NULL;
 struct Library			*LayersBase		= NULL;
 struct Library			*WorkbenchBase	= NULL;
 struct Library			*CxBase			= NULL;
+#if defined(__amigaos3__)
 struct Library			*ConfigOpusBase = NULL;
+#endif
 #ifdef __AROS__
 struct RxsLib			*RexxSysBase	= NULL;
 #elif !defined(__amigaos3__)

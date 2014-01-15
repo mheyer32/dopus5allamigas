@@ -412,6 +412,9 @@ void key_finder(IPCData *ipc)
 			{
 #ifndef __amigaos3__
 				struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+				struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 				// Get config library
 				if ((ConfigOpusBase=OpenModule(config_name)))

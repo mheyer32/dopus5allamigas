@@ -36,7 +36,18 @@ extern UWORD __chip moon_big_data[8][2][13],moon_small_data[8][2][9];
 #define MOON_BIG_SIZE	13
 #define MOON_SMALL_SIZE	9
 
+#ifdef __amigaos4__
+APTR clock_show_custom_title(
+	struct RastPort *rp,
+	long clock_x,
+	long days,
+	struct DateStamp *date,
+	struct SysInfo *si,
+	struct Library *SysInfoBase,
+	struct SysInfoIFace *ISysInfo);
+#else
 APTR clock_show_custom_title(struct RastPort *rp,long clock_x,long days,struct DateStamp *date,struct SysInfo *si,struct Library *SysInfoBase);
+#endif
 
 // Clock task
 IPC_EntryCode(clock_proc)
@@ -56,6 +67,9 @@ IPC_EntryCode(clock_proc)
 	char *error_txt=0;
 	short bar_x=0,last_x=0,clock_on=0,error_time=0;
 	struct Library *SysInfoBase;
+#ifdef __amigaos4__
+	struct SysInfoIFace *ISysInfo;
+#endif
 	struct SysInfo *si=0;
 
 	// Do startup
@@ -515,9 +529,15 @@ IPC_EntryCode(clock_proc)
 									if (environment->env->scr_title_text[0] && !error_txt)
 									{
 										// Show custom title
+#ifdef __amigaos4__
+										clock_show_custom_title(
+											&clock_rp,
+											(GUI->flags&GUIF_CLOCK)?clock_x:last_x,days,&date.dat_Stamp,si,SysInfoBase,ISysInfo);
+#else
 										clock_show_custom_title(
 											&clock_rp,
 											(GUI->flags&GUIF_CLOCK)?clock_x:last_x,days,&date.dat_Stamp,si,SysInfoBase);
+#endif
 										
 									}
 
@@ -678,6 +698,16 @@ void title_error(char *txt,short time)
 #define TITLE_SIZE	256
 
 // Show custom title
+#ifdef __amigaos4__
+APTR clock_show_custom_title(
+	struct RastPort *rp,
+	long clock_x,
+	long days,
+	struct DateStamp *date,
+	struct SysInfo *si,
+	struct Library *SysInfoBase,
+	struct SysInfoIFace *ISysInfo)
+#else
 APTR clock_show_custom_title(
 	struct RastPort *rp,
 	long clock_x,
@@ -685,6 +715,7 @@ APTR clock_show_custom_title(
 	struct DateStamp *date,
 	struct SysInfo *si,
 	struct Library *SysInfoBase)
+#endif
 {
 	char *ptr,*format,*title_buffer;
 	short pos=0,moon_day=-1,moon_pos=0;

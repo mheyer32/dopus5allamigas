@@ -1726,6 +1726,9 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 	if (main_ipc && GetVar("dopus/PatchWBInfo",buf,2,GVF_GLOBAL_ONLY)>0 && buf[0]=='1')
 	{
 		struct Library *ModuleBase;
+#ifdef __amigaos4__
+		struct ModuleIFace *IModule;
+#endif
 
 		// Open the icon.module
 		if ((ModuleBase=OpenLibrary("dopus5:modules/icon.module",0)))

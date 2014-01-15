@@ -30,6 +30,9 @@ DOPUS_FUNC(function_configure)
 {
 	Lister *lister;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	ListFormat format;
 	ListFormat *pass_format=0;
 	ULONG ret;

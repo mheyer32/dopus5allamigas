@@ -20,7 +20,7 @@ DEBUGSYM :=
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../../Include
 LDFLAGS  := -noixemul
-#WARNINGS := -Wall
+WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUGSYM) $(OPTIMIZE) -noixemul
 LIBS     := -lamiga -ldebug

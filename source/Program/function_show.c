@@ -31,6 +31,9 @@ DOPUS_FUNC(function_show)
 	FunctionEntry *entry;
 	Att_List *list;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	short ret=0,count=0,funcid;
 	BOOL sync_flag=0;
 
@@ -150,6 +153,9 @@ DOPUS_FUNC(function_show)
 			if (sync_flag)
 			{
 				struct Library *ModuleBase;
+#ifdef __amigaos4__
+				struct ModuleIFace *IModule;
+#endif
 
 				// Get read module
 				if ((ModuleBase=OpenModule("read.module")))

@@ -1202,6 +1202,9 @@ BOOL start_edit(StartMenu *menu)
 {
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+	struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 	Cfg_ButtonBank *bank;
 	BOOL ret=0,show=0;

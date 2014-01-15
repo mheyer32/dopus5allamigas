@@ -128,6 +128,9 @@ static void format_code(void)
 struct Library	*DOpusBase;
 struct format_data *data = 0;
 struct Library *ModuleBase;
+#ifdef __amigaos4__
+struct ModuleIFace *IModule;
+#endif
 BOOL result=0;
 int function_no=2;
 

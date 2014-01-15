@@ -132,7 +132,7 @@ struct NewIconIFace 	*INewIcon = NULL;
 #if !defined(__NEWLIB__)
 struct UtilityIFace		*__IUtility = NULL; //clib2 
 #endif
-struct ModuleIFace		*IModule = NULL;
+//struct ModuleIFace		*IModule = NULL;
 struct MusicIFace		*IMUSIC = NULL;
 
 #elif defined(__MORPHOS__)

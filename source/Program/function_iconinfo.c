@@ -32,6 +32,9 @@ DOPUS_FUNC(function_iconinfo)
 	Att_List *list;
 	Att_Node *node;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	short ret;
 
 	// Create source list

@@ -18,7 +18,7 @@ endif
 
 OPTIMIZE := -O2
 DEBUGSYM := 
-OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -m68020-60 -D__amigaos3__ -D__USE_SYSBASE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../ $(OS3_INCLUDE)
 LDFLAGS  := -nostartfiles -noixemul
 WARNINGS := -Wall

@@ -32,6 +32,9 @@ DOPUS_FUNC(function_printdir)
 	BPTR lock;
 	APTR outfile;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 
 	// Get source path
 	if (!(path=function_path_current(&handle->source_paths)))
