@@ -226,7 +226,7 @@ void quit(BOOL script)
 #endif
 
 	#ifdef __amigaos4__
-	DropInterface((struct Interface *)INewIcon);
+	DropInterface((struct Interface *)ICyberGfx);
 	#endif
 	CloseLibrary(CyberGfxBase);
 	

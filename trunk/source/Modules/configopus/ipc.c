@@ -1,8 +1,8 @@
 #include "config_lib.h"
 
-#ifdef __amigaos3__
+/*#ifdef __amigaos3__
 extern struct ExecBase *SysBase;
-#endif
+#endif*/
 
 // Generic IPC startup code
 

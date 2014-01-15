@@ -82,6 +82,9 @@ IPC_EntryCode(misc_proc)
 	ULONG change=0;
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+	struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 
 	// Do startup
@@ -537,6 +540,9 @@ IPC_EntryCode(misc_proc)
 			case MENU_ICON_DISKINFO:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 					struct List list;
 					struct Node node;
 
@@ -707,6 +713,9 @@ IPC_EntryCode(misc_proc)
 			case FUNC_SMARTREAD:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 					struct read_startup *read;
 
 					// Get startup
@@ -748,6 +757,9 @@ IPC_EntryCode(misc_proc)
 			case MENU_PRINT:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 
 					// Get print module
 					if ((ModuleBase=OpenModule("print.module")))
@@ -923,6 +935,9 @@ IPC_EntryCode(misc_proc)
 			case SHOW_PICTURE:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 					struct List list;
 					struct Node node;
 
@@ -956,6 +971,9 @@ IPC_EntryCode(misc_proc)
 			case FUNC_ICONINFO:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 
 					// Open module
 					if ((ModuleBase=OpenModule(
@@ -1019,6 +1037,9 @@ IPC_EntryCode(misc_proc)
 			case MODULE_STARTUP:
 				{
 					struct Library *ModuleBase;
+#ifdef __amigaos4__
+					struct ModuleIFace *IModule;
+#endif
 
 					// Get library base
 					if ((ModuleBase=(struct Library *)startup->data))

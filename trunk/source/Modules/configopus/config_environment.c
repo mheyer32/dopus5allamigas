@@ -745,6 +745,9 @@ unsigned long LIBFUNC L_Config_Environment(
 							case GAD_ENVIRONMENT_LISTER_EDIT_FORMAT:
 							{
 								struct Library *ModuleBase;
+#ifdef __amigaos4__
+								struct ModuleIFace *IModule;
+#endif
 
 								// Make window busy
 								SetWindowBusy(data->window);

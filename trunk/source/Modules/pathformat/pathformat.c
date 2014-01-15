@@ -761,6 +761,9 @@ void config_paths_edit(config_path_data *data)
 	{
 		position_rec *pos=(position_rec *)data->path_sel->data;
 		struct Library *ModuleBase;
+#ifdef __amigaos4__
+		struct ModuleIFace *IModule;
+#endif
 		ListFormat format;
 		short ret=0;
 

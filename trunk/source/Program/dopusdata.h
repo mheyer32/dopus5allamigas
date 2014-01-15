@@ -26,9 +26,9 @@ For more information on Directory Opus for Windows please see:
 
 
 // Library bases
-#ifndef __amigaos4__
+/*#ifndef __amigaos4__
 extern struct ExecBase			*SysBase;
-#endif
+#endif*/
 
 extern struct IntuitionBase		*IntuitionBase;
 extern struct GfxBase			*GfxBase;

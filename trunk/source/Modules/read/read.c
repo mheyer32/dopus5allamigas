@@ -3941,6 +3941,9 @@ read_line ASM *read_alloc_node(REG(a0, read_data *data))
 void read_print(read_data *data)
 {
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 
 	// Set busy pointer
 	SetBusyPointer(data->window);

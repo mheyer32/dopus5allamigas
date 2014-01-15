@@ -3148,6 +3148,9 @@ void dopus_ftp( void )
 struct main_event_data  med = {0};
 struct opusftp_globals *og;
 struct Library         *L_DOpusBase, *ourbase;		/* Local copy needed before we have A4 ! */
+#ifdef __amigaos4__
+struct ModuleIFace *IModule;
+#endif
 struct modlaunch_data  *mldata;				/* Data from the module when we are launched */
 struct MsgPort         *rexport, *nfyport = 0;		/* Our ARexx and Opus Notify  message ports */
 ULONG                   sigbits, ipcbit, rexbit, nfybit;/* Signal bits we wait on */

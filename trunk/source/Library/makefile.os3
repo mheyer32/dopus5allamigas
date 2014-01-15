@@ -18,7 +18,7 @@ STRIP :=
 endif
 
 DEBUGSYM := 
-OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -m68020-60 -D__amigaos3__ -D__USE_SYSBASE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -nostartfiles -noixemul
 WARNINGS := -Wall

@@ -75,6 +75,9 @@ void config_env_store_sound(config_env_data *data)
 void config_env_test_sound(config_env_data *data)
 {
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	BOOL ok=0;
 
 	// Busy the window

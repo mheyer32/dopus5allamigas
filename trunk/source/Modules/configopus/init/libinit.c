@@ -118,12 +118,12 @@ struct RexxSysIFace 	*IRexxSys = NULL;
 struct NewIconIFace 	*INewIcon = NULL;
 
 struct DOpusIFace 		*IDOpus = NULL;
-struct ConfigOpusIFace	*IConfigOpus = NULL;
+//struct ConfigOpusIFace	*IConfigOpus = NULL;
 
 #if !defined(__NEWLIB__)
 struct UtilityIFace		*__IUtility = NULL; //clib2 
 #endif
-struct ModuleIFace		*IModule = NULL;
+//struct ModuleIFace		*IModule = NULL;
 struct MusicIFace		*IMUSIC = NULL;
 
 #elif defined(__MORPHOS__)

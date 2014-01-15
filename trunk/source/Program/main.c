@@ -311,6 +311,9 @@ void startup_check_duplicate()
 void startup_run_update()
 {
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 
 	// Try and get update.module
 	if ((ModuleBase=OpenLibrary("dopus5:modules/update.module",0)))

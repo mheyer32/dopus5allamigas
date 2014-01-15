@@ -38,6 +38,9 @@ void show_about(struct Screen *screen,IPCData *ipc)
 
 	char buf[80],*buffer;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	Att_List *list;
 	Att_Node *node;
 

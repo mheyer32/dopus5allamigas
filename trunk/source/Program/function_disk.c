@@ -27,7 +27,10 @@ For more information on Directory Opus for Windows please see:
 // DISKCOPY, FORMAT internal functions
 DOPUS_FUNC(function_disk)
 {
-	struct Library *ModuleBase=0;
+	struct Library *ModuleBase=NULL;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 	struct List list;
 	struct Node *node;
 	short ret=0;

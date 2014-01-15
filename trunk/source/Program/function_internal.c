@@ -136,6 +136,9 @@ int function_internal_command(
 	if (command->flags&FUNCF_EXTERNAL_FUNCTION)
 	{
 		struct Library *ModuleBase;
+#ifdef __amigaos4__
+		struct ModuleIFace *IModule;
+#endif
 		char *work_buf=0,*buffer;
 
 		// Need to allocate buffer?

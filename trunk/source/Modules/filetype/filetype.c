@@ -16,9 +16,9 @@
 
 #include <math.h>
 
-#ifdef __amigaos3__
+/*#ifdef __amigaos3__
 extern struct ExecBase *SysBase;
-#endif
+#endif*/
 
 #define min(a,b)    ((a) < (b) ? (a) : (b))
 #define max(a,b)    ((a) > (b) ? (a) : (b))
@@ -821,6 +821,9 @@ void SAVEDS finder_editor_proc_code( void )
 finder_data *data;
 struct Library *DOpusBase;
 struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+struct ConfigOpusIFace *IConfigOpus;
+#endif
 Cfg_Filetype *edited_filetype;
 
 DOpusBase = GET_DOPUSLIB;
@@ -2262,6 +2265,9 @@ void SAVEDS creator_editor_proc_code( void )
 creator_data *data;
 struct Library *DOpusBase;
 struct Library *ConfigOpusBase;
+#ifdef __amigaos4__	
+struct ConfigOpusIFace *IConfigOpus;
+#endif
 Cfg_Filetype *edited_filetype;
 int ok = FALSE;
 

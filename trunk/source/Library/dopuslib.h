@@ -201,9 +201,9 @@ typedef struct {
 
 #define DNF_OK		(1<<0)
 
-#ifndef __amigaos4__
+/*#ifndef __amigaos4__
 extern struct ExecBase	*SysBase;
-#endif
+#endif*/
 extern struct Library *GadToolsBase;
 extern struct Library *AslBase;
 #ifdef __AROS__

@@ -369,6 +369,9 @@ void buttons_edit(
 	ButtonsStartup startup;
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+	struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 	IPCData *ipc;
 	long ret,command;

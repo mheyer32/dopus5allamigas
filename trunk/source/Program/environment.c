@@ -891,6 +891,9 @@ IPC_EntryCode(environment_proc)
 {
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+	struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 	IPCData *ipc;
 	env_packet *packet=0;

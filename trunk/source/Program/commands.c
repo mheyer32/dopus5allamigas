@@ -224,6 +224,9 @@ void init_commands_scan(short type)
 		else
 		{
 			struct Library *ModuleBase;
+#ifdef __amigaos4__
+			struct ModuleIFace *IModule;
+#endif
 
 			// Try to open library
 			if ((ModuleBase=OpenLibrary(anchor->ap_Buf,0)))
@@ -375,6 +378,9 @@ void command_expunge(char *name)
 {
 	CommandList *cmd,*next;
 	struct Library *ModuleBase;
+#ifdef __amigaos4__
+	struct ModuleIFace *IModule;
+#endif
 
 	// Lock command list
 	lock_listlock(&GUI->command_list,TRUE);
@@ -627,6 +633,9 @@ void command_new(BackdropInfo *info,IPCData *ipc,char *filename)
 	APTR iff=0;
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
+#ifdef __amigaos4__
+	struct ConfigOpusIFace *IConfigOpus;
+#endif
 #endif
 
 	// Initialise buffers
