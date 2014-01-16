@@ -1600,14 +1600,14 @@ return ok;
 static int creator_get_datatype( struct filetype_info *fti, BPTR lock )
 {
 int ok = FALSE;
-struct Library *DataTypesBase;
+//struct Library *DataTypesBase;
 struct DataType *dt;
 
-if	((DataTypesBase = OpenLibrary ("datatypes.library", 39)))
+/*if	((DataTypesBase = OpenLibrary ("datatypes.library", 39)))
 	{
 	#ifdef __amigaos4__
 	IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
-	#endif
+	#endif*/
 	
 	if	((dt = ObtainDataTypeA( DTST_FILE, (APTR)lock, NULL )))
 		{
@@ -1622,11 +1622,11 @@ if	((DataTypesBase = OpenLibrary ("datatypes.library", 39)))
 		ReleaseDataType( dt );
 		}
 		
-	#ifdef __amigaos4__
+	/*#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDataTypes);
 	#endif 
 	CloseLibrary( DataTypesBase );
-	}
+	}*/
 
 return ok;
 }

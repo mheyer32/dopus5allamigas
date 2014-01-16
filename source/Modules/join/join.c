@@ -23,8 +23,10 @@ For more information on Directory Opus for Windows please see:
 
 #include "join.h"
 
-#ifndef __MORPHOS__
-struct Device *TimerBase;
+#ifdef __amigaos3__
+// dummy TimerBase to get amiga.lib to link
+// timer.device calls are inlined, so it's not actually used
+struct Device *TimerBase = NULL;
 #endif
 
 
@@ -62,10 +64,12 @@ int LIBFUNC L_Module_Entry(
 
 	// Get timer.device base
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&data->timer_req,0))
+	{
 		data->TimerBase=(struct Library *)data->timer_req.tr_node.io_Device;
-	#ifdef __amigaos4__
-	data->ITimer = (struct TimerIFace *)GetInterface((struct Library *)data->TimerBase,"main",1,NULL); 
-	#endif
+		#ifdef __amigaos4__
+		data->ITimer = (struct TimerIFace *)GetInterface((struct Library *)data->TimerBase,"main",1,NULL); 
+		#endif
+	}
 
 
 	// Create list, open window

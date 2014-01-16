@@ -53,9 +53,10 @@ For more information on Directory Opus for Windows please see:
 #include "ftp_util.h"			// for cat_bytes()
 
 
-#ifdef __amigaos4__
-struct TimerIFace *ITimer;
-struct InputIFace *IInput;
+#ifdef __amigaos3__
+// dummy TimerBase to get amiga.lib to link
+// timer.device calls are inlined, so it's not actually used
+struct Device *TimerBase = NULL;
 #endif
 
 #define	UPDATE_BYTE_LIMIT	(5*1024)

@@ -46,10 +46,10 @@ int LIBFUNC L_Module_Entry(
 		return 0;
 
 	// Open datatypes library
-	DataTypesBase=OpenLibrary("datatypes.library",0);
+	/*DataTypesBase=OpenLibrary("datatypes.library",0);
 	#ifdef __amigaos4__
 	IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
-	#endif
+	#endif*/
 
 	// Open timer
 	if (!(data->timer=AllocTimer(UNIT_MICROHZ,0)))
@@ -674,10 +674,10 @@ void show_free(show_data *data)
 		FreeTimer(data->timer);
 
 		// Close library
-		#ifdef __amigaos4__
+		/*#ifdef __amigaos4__
 		DropInterface((struct Interface *)IDataTypes);
 		#endif 
-		CloseLibrary(DataTypesBase);
+		CloseLibrary(DataTypesBase);*/
 
 		// Free data
 		FreeVec(data);

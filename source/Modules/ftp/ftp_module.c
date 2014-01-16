@@ -526,9 +526,9 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 			{
 			D(bug( "not launching dopus_ftp\n" ));
 			if	(ftpport)
-				;D(bug( "\tbecause it's already running\n" ));
+				D(bug( "\tbecause it's already running\n" ));
 			if	(mod_id == ID_QUIT)
-				;D(bug( "\tbecause function is quit\n" ));
+				D(bug( "\tbecause function is quit\n" ));
 
 			okay = TRUE;
 			}

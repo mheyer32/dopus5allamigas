@@ -103,7 +103,7 @@ struct Library		*RexxSysBase = NULL;
 struct DOSIFace      	*IDOS = NULL;
 struct UtilityIFace  	*IUtility = NULL;
 struct LocaleIFace   	*ILocale = NULL;
-struct ConsoleIFace 	*IConsole = NULL;
+//struct ConsoleIFace 	*IConsole = NULL;
 struct GraphicsIFace 	*IGraphics = NULL;
 struct CyberGfxIFace 	*ICyberGfx = NULL;
 struct IntuitionIFace 	*IIntuition = NULL;
@@ -115,7 +115,7 @@ struct IconIFace 		*IIcon = NULL;
 struct WorkbenchIFace 	*IWorkbench = NULL;
 struct DataTypesIFace 	*IDataTypes = NULL;
 struct RexxSysIFace 	*IRexxSys = NULL;
-struct NewIconIFace 	*INewIcon = NULL;
+//struct NewIconIFace 	*INewIcon = NULL;
 
 struct DOpusIFace 		*IDOpus = NULL;
 //struct ConfigOpusIFace	*IConfigOpus = NULL;
@@ -124,7 +124,7 @@ struct DOpusIFace 		*IDOpus = NULL;
 struct UtilityIFace		*__IUtility = NULL; //clib2 
 #endif
 //struct ModuleIFace		*IModule = NULL;
-struct MusicIFace		*IMUSIC = NULL;
+//struct MusicIFace		*IMUSIC = NULL;
 
 #elif defined(__MORPHOS__)
 struct IntuitionBase    *IntuitionBase;
@@ -153,13 +153,13 @@ struct Library 			*DiskFontBase = NULL;
 struct Library 			*IconBase = NULL;
 struct Library 			*WorkbenchBase = NULL;
 struct Library 			*DataTypesBase = NULL;
-struct Library 			*NewIconBase = NULL;
+//struct Library 			*NewIconBase = NULL;
 
-#if defined(__MORPHOS__)
+/*#if defined(__MORPHOS__)
 struct Library  			*ConsoleDevice = NULL;
 #else
 struct Device  			*ConsoleDevice = NULL;
-#endif
+#endif*/
 
 #ifdef __AROS__
 struct UtilityBase		*UtilityBase = NULL;
@@ -846,12 +846,12 @@ ULONG freeBase(struct LibraryHeader *lib)
   }
 
   // close newicon.library
-  if(NewIconBase != NULL)
+  /*if(NewIconBase != NULL)
   {
     DROPINTERFACE(INewIcon);
     CloseLibrary((struct Library *)NewIconBase);
     NewIconBase = NULL;
-  }
+  }*/
   
   
   // close locale.library

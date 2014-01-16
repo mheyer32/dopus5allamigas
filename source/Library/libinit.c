@@ -115,7 +115,7 @@ struct Library		*RexxSysBase = NULL;
 struct DOSIFace      	*IDOS = NULL;
 struct UtilityIFace  	*IUtility = NULL;
 struct LocaleIFace   	*ILocale = NULL;
-struct ConsoleIFace 	*IConsole = NULL;
+//struct ConsoleIFace 	*IConsole = NULL;
 struct GraphicsIFace 	*IGraphics = NULL;
 struct CyberGfxIFace 	*ICyberGfx = NULL;
 struct IntuitionIFace 	*IIntuition = NULL;
@@ -133,7 +133,7 @@ struct NewIconIFace 	*INewIcon = NULL;
 struct UtilityIFace		*__IUtility = NULL; //clib2 
 #endif
 //struct ModuleIFace		*IModule = NULL;
-struct MusicIFace		*IMUSIC = NULL;
+//struct MusicIFace		*IMUSIC = NULL;
 
 #elif defined(__MORPHOS__)
 struct IntuitionBase    *IntuitionBase;
@@ -160,11 +160,11 @@ struct Library 			*WorkbenchBase = NULL;
 struct Library 			*DataTypesBase = NULL;
 struct Library 			*NewIconBase = NULL;
 
-#if defined(__MORPHOS__)
+/*#if defined(__MORPHOS__)
 struct Library  			*ConsoleDevice = NULL;
 #else
 struct Device  			*ConsoleDevice = NULL;
-#endif
+#endif*/
 
 #ifdef __AROS__
 struct UtilityBase		*UtilityBase = NULL;

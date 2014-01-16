@@ -155,6 +155,9 @@ typedef struct
 	short			icon_mode;
 
 	struct Library		*newicon_base;
+#ifdef __amigaos4__
+	struct NewIconIFace 	*newicon_iface;
+#endif
 
 	struct DiskObject	*new_oldicon;
 	struct DiskObject	*new_newicon;
