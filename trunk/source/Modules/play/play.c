@@ -45,16 +45,16 @@ int LIBFUNC L_Module_Entry(
 		return 0;
 
 	// Try to open datatypes
-	if ((DataTypesBase=OpenLibrary("datatypes.library",0)))
+	/*if ((DataTypesBase=OpenLibrary("datatypes.library",0)))
 	{
 		#ifdef __amigaos4__
 		IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
-		#endif
+		#endif*/
 
 		// Allocate signal for dt to talk to us with
 		data->dt_signal=AllocSignal(-1);
-	}
-	else data->dt_signal=-1;
+	/*}
+	else data->dt_signal=-1;*/
 
 	// Allocate message port
 	data->app_port=CreateMsgPort();
@@ -155,10 +155,10 @@ void play_free(play_data *data)
 		DeleteMsgPort(data->app_port);
 
 		// Close datatypes
-		#ifdef __amigaos4__
+		/*#ifdef __amigaos4__
 		DropInterface((struct Interface *)IDataTypes);
 		#endif 
-		if (DataTypesBase) CloseLibrary(DataTypesBase);
+		if (DataTypesBase) CloseLibrary(DataTypesBase);*/
 
 		// Close music library
 		if (MUSICBase) CloseLibrary(MUSICBase);

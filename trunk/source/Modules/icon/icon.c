@@ -46,6 +46,7 @@ BOOL icon_save_44( icon_data *data, char *save_name ,BOOL err);
 #define AREA_TYPE_ICON_TOOLTYPES 2
 
 #define NewIconBase	(data->newicon_base)
+#define INewIcon	(data->newicon_iface)
 
 int LIBFUNC L_Module_Entry(
 	REG(a0, struct List *files),
@@ -86,7 +87,7 @@ if	((data->app_port = CreateMsgPort())
 		// Open NewIcon library
 		data->newicon_base = OpenLibrary( "newicon.library", 0 );
 		#ifdef __amigaos4__
-		INewIcon=(struct NewIconIFace *)GetInterface(data->newicon_base,"main",1,NULL); 
+		data->newicon_iface=(struct NewIconIFace *)GetInterface(data->newicon_base,"main",1,NULL); 
 		#endif
 
 		// Get decimal separator
@@ -259,10 +260,10 @@ if	((data->app_port = CreateMsgPort())
 		// Close libraries
 		if	(data->newicon_base) {
 			#ifdef __amigaos4__
-			DropInterface((struct Interface *)INewIcon);
+			DropInterface((struct Interface *)data->newicon_iface);
 			#endif 
 			CloseLibrary( data->newicon_base );
-		}	
+		}
 
 		RemoveNotifyRequest( data->notify_req );
 		}

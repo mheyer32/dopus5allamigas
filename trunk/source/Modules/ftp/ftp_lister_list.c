@@ -39,10 +39,6 @@ For more information on Directory Opus for Windows please see:
 
 extern const char *months[];
 
-#ifdef __amigaos3__
-struct Device *TimerBase;
-#endif
-
 /********************************/
 
 //
@@ -52,19 +48,13 @@ struct Device *TimerBase;
 static int list_update( struct update_info *ui, char *line )
 {
 struct entry_info entry = {0};
-#ifdef __AROS__
-struct Device *TimerBase = GetTimerBase();
+#if defined(__AROS__) || defined (__amigaos3__)
+struct Device *TimerBase = (struct Device *)GetTimerBase();
 #else
-	#ifndef __amigaos3__
-	struct Library *TimerBase = GetTimerBase();
-	#endif
+struct Library *TimerBase = GetTimerBase();
 #endif
 #ifdef __amigaos4__
 struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
-#endif
-
-#ifdef __amigaos3__
-TimerBase = (struct Device *)GetTimerBase();
 #endif
 
 // Valid?
@@ -273,21 +263,15 @@ int lsresult;
 BOOL abort = FALSE;
 struct update_info *ui;
 ULONG handle;
-#ifdef __AROS__
-struct Device *TimerBase = GetTimerBase();
+#if defined(__AROS__) || defined (__amigaos3__)
+struct Device *TimerBase = (struct Device *)GetTimerBase();
 #else
-	#ifndef __amigaos3__
-	struct Library *TimerBase = GetTimerBase();
-	#endif
+struct Library *TimerBase = GetTimerBase();
 #endif
 #ifdef __amigaos4__
 struct TimerIFace *ITimer = (struct TimerIFace *)GetInterface(TimerBase,"main",1,NULL); 
 #endif
 int progress = ftpnode->fn_site.se_env->e_progress_window;
-
-#ifdef __amigaos3__
-TimerBase = (struct Device *)GetTimerBase();
-#endif
 
 D(bug( "lister_list()\n" ));
 

@@ -139,10 +139,10 @@ int LIBFUNC L_Module_Entry(
 	}
 
 	// Get datatypes library
-	DataTypesBase=OpenLibrary("datatypes.library",0);
+	/*DataTypesBase=OpenLibrary("datatypes.library",0);
 	#ifdef __amigaos4__
 	IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
-	#endif
+	#endif*/
 
 	// Initialise
 	for (a=0;a<logo_frames;a++)
@@ -465,10 +465,10 @@ int LIBFUNC L_Module_Entry(
 	FreeTimer(timer);
 	
 	// close library
-	#ifdef __amigaos4__
+	/*#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDataTypes);
 	#endif 
-	CloseLibrary(DataTypesBase);
+	CloseLibrary(DataTypesBase);*/
 
 	count=0;
 	return ret;
