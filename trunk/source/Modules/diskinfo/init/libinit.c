@@ -579,11 +579,11 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
      GETINTERFACE(INewlib, NewlibBase))
   #endif
 #ifdef __AROS__
-#ifdef __arm__
-  if (!set_call_funcs(SETNAME(INIT), 1, 1))
+  if(!(aroscbase = OpenLibrary("arosc.library", 41)))
     return(NULL);
+#ifdef __arm__
+  if (set_call_funcs(SETNAME(INIT), 1, 1))
 #endif
-  if(aroscbase = OpenLibrary("arosc.library", 41))
 #endif
   {
 /***    #if defined(DEBUG)
@@ -649,14 +649,14 @@ STATIC BPTR LibDelete(struct LibraryHeader *base)
   }
   #endif
 #ifdef __AROS__
+#ifdef __arm__
+  set_call_funcs(SETNAME(EXIT), -1, 0);
+#endif
   if(aroscbase)
   {
     CloseLibrary(aroscbase);
     aroscbase = NULL;
   }
-#ifdef __arm__
-  set_call_funcs(SETNAME(EXIT), -1, 0);
-#endif
 #endif
 
   // make sure the system deletes the library as well.
