@@ -1044,6 +1044,9 @@ IPC_EntryCode(misc_proc)
 					// Get library base
 					if ((ModuleBase=(struct Library *)startup->data))
 					{
+						#ifdef __amigaos4__	
+						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						#endif
 						// Call function
 						Module_Entry(
 							0,
