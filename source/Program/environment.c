@@ -123,6 +123,15 @@ BOOL environment_open(Cfg_Environment *env,char *name,BOOL first,APTR prog)
 		strcpy(env->user_menu_path,opendata->user_menu_path);
 		strcpy(env->scripts_path,opendata->scripts_path);
 		strcpy(env->hotkeys_path,opendata->hotkeys_path);
+		
+		// Get maximum filename length
+		// we have to do this before the listers are opened
+		GUI->def_filename_length=environment->env->settings.max_filename;
+		if (GUI->def_filename_length<FILENAME_LEN)
+			GUI->def_filename_length=FILENAME_LEN;
+		else
+		if (GUI->def_filename_length>107)
+			GUI->def_filename_length=107;
 	}
 
 	// Successful?
@@ -320,25 +329,25 @@ BOOL environment_open(Cfg_Environment *env,char *name,BOOL first,APTR prog)
 	SetLibraryFlags((env->env->display_options&DISPOPTF_SHIFT_APPICONS)?LIBDF_REDIRECT_TOOLS:0,LIBDF_REDIRECT_TOOLS);
 
 	// Set library flag for borderless icons
-	SetLibraryFlags((environment->env->desktop_flags&DESKTOPF_NO_BORDERS)?LIBDF_BORDERS_OFF:0,LIBDF_BORDERS_OFF);
+	SetLibraryFlags((env->env->desktop_flags&DESKTOPF_NO_BORDERS)?LIBDF_BORDERS_OFF:0,LIBDF_BORDERS_OFF);
 
 	// No icon caching?
-	SetLibraryFlags((environment->env->desktop_flags&DESKTOPF_NO_CACHE)?LIBDF_NO_CACHING:0,LIBDF_NO_CACHING);
+	SetLibraryFlags((env->env->desktop_flags&DESKTOPF_NO_CACHE)?LIBDF_NO_CACHING:0,LIBDF_NO_CACHING);
 
 	// Set NewIcons flags
-	SetNewIconsFlags(environment->env->env_NewIconsFlags,environment->env->env_NewIconsPrecision);
+	SetNewIconsFlags(env->env->env_NewIconsFlags,env->env->env_NewIconsPrecision);
 
 	// No custom drag?
-	SetLibraryFlags((environment->env->desktop_flags&DESKTOPF_NO_CUSTOMDRAG)?LIBDF_NO_CUSTOM_DRAG:0,LIBDF_NO_CUSTOM_DRAG);
+	SetLibraryFlags((env->env->desktop_flags&DESKTOPF_NO_CUSTOMDRAG)?LIBDF_NO_CUSTOM_DRAG:0,LIBDF_NO_CUSTOM_DRAG);
 
 	// Thin borders?
-	SetLibraryFlags((environment->env->display_options&DISPOPTF_THIN_BORDERS)?LIBDF_THIN_BORDERS:0,LIBDF_THIN_BORDERS);
+	SetLibraryFlags((env->env->display_options&DISPOPTF_THIN_BORDERS)?LIBDF_THIN_BORDERS:0,LIBDF_THIN_BORDERS);
 
 	// Update pathlist environment variable
 	env_update_pathlist();
 
 	// Set popup delay
-	SetPopUpDelay(environment->env->settings.popup_delay);
+	SetPopUpDelay(env->env->settings.popup_delay);
 
 	// Fix MUFS library
 	env_fix_mufs();
@@ -348,14 +357,6 @@ BOOL environment_open(Cfg_Environment *env,char *name,BOOL first,APTR prog)
 
 	// Initialise sound events
 	InitSoundEvents(TRUE);
-
-	// Get maximum filename length
-	GUI->def_filename_length=environment->env->settings.max_filename;
-	if (GUI->def_filename_length<FILENAME_LEN)
-		GUI->def_filename_length=FILENAME_LEN;
-	else
-	if (GUI->def_filename_length>107)
-		GUI->def_filename_length=107;
 
 	return success;
 }

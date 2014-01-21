@@ -104,7 +104,40 @@ APTR LIBFUNC L_GetMatchHandle(
 		}
 
 		// Get full name
+#if 1
+		{
+			LONG error=0;
+			LONG size;
+			
+			for(size=256; handle->fullname==NULL && error==0; size+=256)
+			{
+				handle->fullname=AllocVec(size,MEMF_CLEAR);
+				if (handle->fullname)
+				{
+					if (!NameFromLock(handle->lock,handle->fullname,size))
+					{
+						error=IoErr();
+						if (error==ERROR_LINE_TOO_LONG)
+						{
+							error=0;
+							FreeVec(handle->fullname);
+							handle->fullname=NULL;
+						}
+					}
+				}
+				else
+					error=IoErr();
+			}
+			
+			if (!handle->fullname)
+			{
+				L_FreeMatchHandle(handle);
+				return 0;
+			}
+		}
+#else
 		NameFromLock(handle->lock,handle->fullname,256);
+#endif
 
 		// Is it a file?
 		if (handle->fib.fib_DirEntryType<0)
@@ -159,6 +192,8 @@ void LIBFUNC L_FreeMatchHandle(REG(a0, MatchHandle *handle))
 	// Valid handle?
 	if (handle)
 	{
+		FreeVec(handle->fullname);
+
 		// Close file
 		L_CloseBuf(handle->file);
 
