@@ -41,7 +41,9 @@ typedef struct
 	ULONG			chunk_size;	// Size of last chunk
 	struct DataType		*datatype;	// DataType handle
 	long			flags;
-	char			fullname[256];
+	//char			fullname[256];
+	char 			*fullname;
+	char			pad1[252];		// the fields below are only accessed fron Library/filetypes.c, but just to be sure
 	struct InfoData		info;		// Disk information
 	unsigned long		disk_type;	// Disk type
 } MatchHandle;
