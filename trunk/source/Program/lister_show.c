@@ -403,11 +403,29 @@ void lister_draw_entry(
 			if (x+lister->text_area.rast.TxWidth-1<=lister->text_area.rect.MaxX)
 			{
 				// Show cursor
+#ifdef __AROS__
+				struct BitMap *bm;
+				struct RastPort rp;
+
+				// Blitting overlapping regions doesn't always work, so we use a dummy RastPort
+				if ((bm=AllocBitMap(w,lister->text_area.rast.TxHeight,1,0,lister->text_area.rast.BitMap)))
+				{
+					InitRastPort(&rp);
+					rp.BitMap=bm;
+					ClipBlit(
+						&rp,0,0,
+						&lister->text_area.rast,x,y,
+						w,lister->text_area.rast.TxHeight,
+						0x50);
+					FreeBitMap(bm);
+				} 
+#else
 				ClipBlit(
 					&lister->text_area.rast,x,y,
 					&lister->text_area.rast,x,y,
 					w,lister->text_area.rast.TxHeight,
 					0x50);
+#endif
 			}
 		}
 	}
