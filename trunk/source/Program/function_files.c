@@ -661,13 +661,6 @@ FunctionEntry *function_new_entry(
 	if (icon) strcat(entry->name,".info");
 
 	// Add to entry list
-#ifdef __AROS__
-	// this is here to make sure that icons are deleted first, because orphaned .info files
-	// can't be removed via DeleteDiskObject, which silently fails on them
-	if (icon)
-		AddHead(&handle->entry_list,(struct Node *)entry);
-	else
-#endif
 	AddTail(&handle->entry_list,(struct Node *)entry);
 
 	// Return entry pointer
