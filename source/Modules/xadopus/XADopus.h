@@ -84,7 +84,7 @@ struct xoData
 	struct MinList Temp;
 	struct path_node listp;
 	BOOL All;
-	char *password[512];
+	char password[512];
 };
 
 struct TempFile

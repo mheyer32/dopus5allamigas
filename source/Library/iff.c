@@ -144,7 +144,7 @@ IFFHandle *LIBFUNC L_IFFOpen(
 #ifdef __AROS__
 						if (((struct Library *)DOSBase)->lib_Version<50)
 						{
-							char *buffer[2048];
+							char buffer[2048];
 							NameFromLock(parent, buffer, sizeof(buffer));
 
 							// Build name
@@ -394,7 +394,7 @@ void LIBFUNC L_IFFClose(REG(a0, IFFHandle *handle))
 #ifdef __AROS__
 						if (((struct Library *)DOSBase)->lib_Version<50)
 						{
-							char *buffer[2048];
+							char buffer[2048];
 							NameFromLock(parent, buffer, sizeof(buffer));
 							AddPart(buffer, handle->iff_TempName, sizeof(buffer));
 							DeleteFile(buffer);
@@ -425,7 +425,7 @@ void LIBFUNC L_IFFClose(REG(a0, IFFHandle *handle))
 #ifdef __AROS__
 						if (((struct Library *)DOSBase)->lib_Version<50)
 						{
-							char *buffer[2048];
+							char buffer[2048];
 							NameFromLock(parent, buffer, sizeof(buffer));
 							AddPart(buffer, handle->iff_TempName, sizeof(buffer));
 							Rename(buffer, handle->iff_Name);
