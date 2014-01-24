@@ -195,6 +195,7 @@ void filetype_default_list(
 			}
 		}
 
+#ifndef __AROS__
 		// Create default 68k executable filetype
 		if ((type=filetype_default_new(memory,list,"Program","EXEC",11,"run",0)))
 		{
@@ -202,6 +203,7 @@ void filetype_default_list(
 			type->recognition[0]=FTOP_MATCH;
 			strcpy(type->recognition+1,"$000003f3");
 		}
+#endif
 
 		// Create default ELF executable filetype
 		if ((type=filetype_default_new(memory,list,"ELF_Program","EXEC",11,"run",0)))
@@ -269,12 +271,14 @@ void filetype_default_list(
 			command_filetype=type;
 		}
 
+#ifndef __AROS__
 		// Create default module filetype (no function, recognition only)
 		if ((type=filetype_default_new(memory,list,"Opus 5 Module 68k","MODULE",21,0,"dopus5:icons/module.info")))
 		{
 			// Recognition string for modules
 			lsprintf(type->recognition,"%lc*.module%lc%lc$000003f3",FTOP_MATCHNAME,FTOP_AND,FTOP_MATCH);
 		}
+#endif
 
 		if ((type=filetype_default_new(memory,list,"Opus 5 Module ELF","MODULE",21,0,"dopus5:icons/module.info")))
 		{
