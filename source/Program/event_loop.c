@@ -939,14 +939,25 @@ void event_loop()
 			{
 				BPTR file;
 				char buf[20];
+				struct Process *proc;
+				APTR wsave;
 
 				// Save seed value
 				lsprintf(buf,"%ld",seed);
+
+				// Get this process, turn off requesters
+				proc=(struct Process *)FindTask(NULL);
+				wsave=proc->pr_WindowPtr;
+				proc->pr_WindowPtr=(APTR)-1;
+
 				if ((file=Open("dopus5:system/seed",MODE_NEWFILE)))
 				{
 					Write(file,buf,strlen(buf));
 					Close(file);
 				}
+
+				// Restore requesters
+				proc->pr_WindowPtr=wsave;
 
 				// Free timer
 				FreeTimer(seed_timer);
