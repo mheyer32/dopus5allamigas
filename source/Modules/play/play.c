@@ -44,17 +44,14 @@ int LIBFUNC L_Module_Entry(
 	if (!(data=AllocVec(sizeof(play_data),MEMF_CLEAR)))
 		return 0;
 
-	// Try to open datatypes
-	/*if ((DataTypesBase=OpenLibrary("datatypes.library",0)))
-	{
-		#ifdef __amigaos4__
-		IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
-		#endif*/
+	// Save datatypes library base
+	data->dt_base = DataTypesBase;
 
-		// Allocate signal for dt to talk to us with
-		data->dt_signal=AllocSignal(-1);
-	/*}
-	else data->dt_signal=-1;*/
+	// Allocate signal number for dt to talk to us with
+	data->dt_signal = AllocSignal(-1);
+	// Use Ctrl-E signal if no user signals available
+	if (data->dt_signal == -1)
+		data->dt_signal = SIGBREAKB_CTRL_E;
 
 	// Allocate message port
 	data->app_port=CreateMsgPort();
@@ -154,17 +151,12 @@ void play_free(play_data *data)
 		// Free message port
 		DeleteMsgPort(data->app_port);
 
-		// Close datatypes
-		/*#ifdef __amigaos4__
-		DropInterface((struct Interface *)IDataTypes);
-		#endif 
-		if (DataTypesBase) CloseLibrary(DataTypesBase);*/
-
 		// Close music library
 		if (MUSICBase) CloseLibrary(MUSICBase);
 
 		// Free signal
-		if (data->dt_signal!=-1) FreeSignal(data->dt_signal);
+		if (data->dt_signal != SIGBREAKB_CTRL_E)
+			FreeSignal(data->dt_signal);
 
 		// Free data
 		FreeVec(data);
