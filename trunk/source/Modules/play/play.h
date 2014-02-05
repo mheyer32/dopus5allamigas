@@ -81,7 +81,7 @@ typedef struct
 #define PLAYF_QUIET	(1<<0)
 #define PLAYF_ICON	(1<<1)
 
-#define DataTypesBase   (data->dt_base)
+//#define DataTypesBase   (data->dt_base) Don't redefine-opened in libinit.c
 #define MUSICBase   (data->music_base)
 
 #define PLAY_DOS_ERROR      0
