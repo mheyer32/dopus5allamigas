@@ -85,7 +85,7 @@ typedef struct
 #endif 
 
 
-#define DataTypesBase	(data->dt_base)
+//#define DataTypesBase (data->dt_base) Don't redefine-opened in libinit.c
 
 /*struct Screen *STDARGS my_OpenScreenTags(Tag tag,...);
 struct Window *STDARGS my_OpenWindowTags(Tag tag,...);*/
