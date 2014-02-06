@@ -45,7 +45,10 @@ int LIBFUNC L_Module_Entry(
 	if (!(data=AllocVec(sizeof(show_data),MEMF_CLEAR)))
 		return 0;
 
-	// Open datatypes library
+	// Save datatypes library base
+	data->dt_base = DataTypesBase;
+
+	// Open datatypes library - Already opened in libinit.c
 	/*DataTypesBase=OpenLibrary("datatypes.library",0);
 	#ifdef __amigaos4__
 	IDataTypes=(struct DataTypesIFace *)GetInterface(DataTypesBase,"main",1,NULL); 
