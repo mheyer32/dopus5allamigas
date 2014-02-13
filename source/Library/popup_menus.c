@@ -1521,6 +1521,11 @@ BOOL popup_init_list(PopUpData *data,short which)
 	if (data->menu_list[which].item_count<1)
 		return 0;
 
+	// Increase item width to compensate for incorrect char length
+	// returned by OS4 TextFit() function in menu layout.
+
+	data->menu_list[which].item_width++;
+
 	// Calculate menu width
 	data->menu_list[which].pos.Width=
 		data->menu_list[which].item_width+
