@@ -38,7 +38,8 @@ typedef struct
 	unsigned short		mode_max_colours;	// Screen mode max colours
 	short 			pad;
 
-	struct Library		*GfxBase;
+	//struct Library		*GfxBase;
+	ULONG			pad2;
 
 	short			palette_colours;	// Number of colours in the palette
 	short			palette_count;		// Total number of colours

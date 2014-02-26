@@ -89,10 +89,11 @@ typedef struct
 
 	Cfg_Filetype		*type;		// Copy of recognition string
 
-	struct Library		*dopus_base;	// Library pointers
-	struct Library		*dos_base;
-	struct Library		*int_base;
-	struct Library		*gfx_base;
+	//struct Library		*dopus_base;	// Library pointers
+	//struct Library		*dos_base;
+	//struct Library		*int_base;
+	//struct Library		*gfx_base;
+	ULONG			pad1[4];
 
 	NewConfigWindow		new_win;	// New window data
 	struct Window		*window;	// Window pointer
@@ -110,10 +111,12 @@ typedef struct
 
 	IPCData			*main_owner;	// Main program
 
-	struct Library		*rexx_base;	// Rexx library
+	//struct Library		*rexx_base;	// Rexx library
+	ULONG				pad2;
 	struct MsgPort		*reply_port;	// ReplyPort
 
-	struct Library		*asl_base;
+	//struct Library		*asl_base;
+	ULONG				pad3;
 
 	struct MinList		readers;	// Text readers
 } fileclass_ed_data;

@@ -1,12 +1,12 @@
 #include "config_lib.h"
 #include "config_filetypes.h"
 
-#define DOpusBase		(data->dopus_base)
+/*#define DOpusBase		(data->dopus_base)
 #define DOSBase			(data->dos_base)
 #define IntuitionBase	(data->int_base)
 #define GfxBase			(data->gfx_base)
 #define RexxSysBase		(data->rexx_base)
-#define AslBase			(data->asl_base)
+#define AslBase			(data->asl_base)*/
 
 void SAVEDS FileclassEditor(void)
 {
@@ -20,7 +20,7 @@ void SAVEDS FileclassEditor(void)
 		return;
 
 	// Open REXX library
-	if ((data->rexx_base=OpenLibrary("rexxsyslib.library",0)) &&
+	/*if ((data->rexx_base=OpenLibrary("rexxsyslib.library",0)) &&
 		!(data->reply_port=CreateMsgPort()))
 	{
 		CloseLibrary(data->rexx_base);
@@ -28,7 +28,9 @@ void SAVEDS FileclassEditor(void)
 	}
 
 	// Can't view files if no ARexx
-	if (!RexxSysBase) DisableObject(data->objlist,GAD_FILECLASSED_VIEW_FILE,TRUE);
+	if (!RexxSysBase) DisableObject(data->objlist,GAD_FILECLASSED_VIEW_FILE,TRUE);*/
+	if (!(data->reply_port=CreateMsgPort()))
+		DisableObject(data->objlist,GAD_FILECLASSED_VIEW_FILE,TRUE);
 
 	// Message loop
 	FOREVER
@@ -351,7 +353,7 @@ void SAVEDS FileclassEditor(void)
 	IPC_Goodbye(ipc,data->owner_ipc,(ULONG)-1);
 
 	// Close REXX library
-	CloseLibrary(data->rexx_base);
+	//CloseLibrary(data->rexx_base);
 	DeleteMsgPort(data->reply_port);
 
 	// Free data

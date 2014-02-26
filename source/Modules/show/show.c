@@ -46,7 +46,7 @@ int LIBFUNC L_Module_Entry(
 		return 0;
 
 	// Save datatypes library base
-	data->dt_base = DataTypesBase;
+	//data->dt_base = DataTypesBase;
 
 	// Open datatypes library - Already opened in libinit.c
 	/*DataTypesBase=OpenLibrary("datatypes.library",0);

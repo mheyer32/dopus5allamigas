@@ -154,10 +154,11 @@ typedef struct
 
 	short			icon_mode;
 
-	struct Library		*newicon_base;
+	/*struct Library		*newicon_base;
 #ifdef __amigaos4__
 	struct NewIconIFace 	*newicon_iface;
-#endif
+#endif*/
+	ULONG 			pad1;
 
 	struct DiskObject	*new_oldicon;
 	struct DiskObject	*new_newicon;

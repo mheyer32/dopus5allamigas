@@ -9,14 +9,15 @@ typedef struct
 	IPCData			*owner_ipc;
 	struct _FuncEdData	*data;
 
-	struct Library		*dopus_base;
+	/*struct Library		*dopus_base;
 	struct Library		*dos_base;
 	struct Library		*int_base;
 	struct Library		*util_base;
 	struct Library		*cx_base;
 	struct Library		*wb_base;
 	struct Library		*gfx_base;
-	struct Library		*asl_base;
+	struct Library		*asl_base;*/
+	ULONG			pad1[8];
 
 	struct DOpusLocale	*locale;
 
@@ -40,7 +41,8 @@ typedef struct
 
 	IPCData			*main_owner;
 
-	struct Library		*layers_base;
+	//struct Library		*layers_base;
+	ULONG				pad2;
 
 	ULONG			a4;
 

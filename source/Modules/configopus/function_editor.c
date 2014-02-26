@@ -4,7 +4,7 @@
 
 #define FUNCF_PRIVATE			(1<<26) // Function is private
 
-#define DOpusBase		(data->startup->dopus_base)
+/*#define DOpusBase		(data->startup->dopus_base)*/
 
 void FunctionEditor(void)
 {

@@ -578,7 +578,7 @@ void filetype_edit(
 	eddata->action_lookup=filetype_action_lookup;
 
 	// Supply libraries
-	eddata->func_startup.dopus_base=DOpusBase;
+	/*eddata->func_startup.dopus_base=DOpusBase;
 	eddata->func_startup.dos_base=(struct Library *)DOSBase;
 	eddata->func_startup.int_base=(struct Library *)IntuitionBase;
 	eddata->func_startup.util_base=(struct Library *)UtilityBase;
@@ -586,7 +586,7 @@ void filetype_edit(
 	eddata->func_startup.wb_base=WorkbenchBase;
 	eddata->func_startup.gfx_base=(struct Library *)GfxBase;
 	eddata->func_startup.asl_base=AslBase;
-	eddata->func_startup.layers_base=LayersBase;
+	eddata->func_startup.layers_base=LayersBase;*/
 
 	// Supply locale
 	eddata->func_startup.locale=locale;

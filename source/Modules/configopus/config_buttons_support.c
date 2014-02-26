@@ -1,7 +1,7 @@
 #include "config_lib.h"
 #include "config_buttons.h"
 
-struct Library *CxBase;
+//struct Library *CxBase;
 
 
 // Create some new buttons
@@ -1072,8 +1072,8 @@ void palette_editor_init(PaletteBoxData *data)
 	data->stuff.stuff1.object_def[2].taglist=data->stuff.stuff1.palette_tags;
 
 	// Libraries
-	data->DOpusBase=DOpusBase;
-	data->IntuitionBase=(struct Library *)IntuitionBase;
+	/*data->DOpusBase=DOpusBase;
+	data->IntuitionBase=(struct Library *)IntuitionBase;*/
 	data->flags=0;
 }
 
@@ -1082,7 +1082,7 @@ void palette_editor_init(PaletteBoxData *data)
 void function_editor_init(FunctionStartup *startup,ULONG command_list)
 {
 	// Supply libraries
-	startup->dopus_base=DOpusBase;
+	/*startup->dopus_base=DOpusBase;
 	startup->dos_base=(struct Library *)DOSBase;
 	startup->int_base=(struct Library *)IntuitionBase;
 	startup->util_base=UtilityBase;
@@ -1090,7 +1090,7 @@ void function_editor_init(FunctionStartup *startup,ULONG command_list)
 	startup->wb_base=WorkbenchBase;
 	startup->gfx_base=(struct Library *)GfxBase;
 	startup->asl_base=AslBase;
-	startup->layers_base=LayersBase;
+	startup->layers_base=LayersBase;*/
 
 	// Supply locale
 	startup->locale=locale;

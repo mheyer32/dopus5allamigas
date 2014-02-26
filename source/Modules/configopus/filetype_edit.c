@@ -32,7 +32,7 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 	data->action_lookup=filetype_action_lookup;
 
 	// Supply libraries
-	data->func_startup.dopus_base=DOpusBase;
+	/*data->func_startup.dopus_base=DOpusBase;
 	data->func_startup.dos_base=(struct Library *)DOSBase;
 	data->func_startup.int_base=(struct Library *)IntuitionBase;
 	data->func_startup.util_base=(struct Library *)UtilityBase;
@@ -40,7 +40,7 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 	data->func_startup.wb_base=WorkbenchBase;
 	data->func_startup.gfx_base=(struct Library *)GfxBase;
 	data->func_startup.asl_base=AslBase;
-	data->func_startup.layers_base=LayersBase;
+	data->func_startup.layers_base=LayersBase;*/
 
 	// Supply locale
 	data->func_startup.locale=locale;

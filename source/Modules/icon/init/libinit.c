@@ -118,7 +118,7 @@ struct IconIFace 		*IIcon = NULL;
 struct WorkbenchIFace 	*IWorkbench = NULL;
 struct DataTypesIFace 	*IDataTypes = NULL;
 struct RexxSysIFace 	*IRexxSys = NULL;
-//struct NewIconIFace 	*INewIcon = NULL;
+struct NewIconIFace 	*INewIcon = NULL;
 
 struct DOpusIFace 		*IDOpus = NULL;
 //struct ConfigOpusIFace	*IConfigOpus = NULL;
@@ -152,7 +152,7 @@ struct Library 			*DiskFontBase = NULL;
 struct Library 			*IconBase = NULL;
 struct Library 			*WorkbenchBase = NULL;
 struct Library 			*DataTypesBase = NULL;
-//struct Library 			*NewIconBase = NULL;
+struct Library 			*NewIconBase = NULL;
 
 /*#if defined(__MORPHOS__)
 struct Library  			*ConsoleDevice = NULL;
@@ -845,12 +845,12 @@ ULONG freeBase(struct LibraryHeader *lib)
   }
 
   // close newicon.library
-  /*if(NewIconBase != NULL)
+  if(NewIconBase != NULL)
   {
     DROPINTERFACE(INewIcon);
     CloseLibrary((struct Library *)NewIconBase);
     NewIconBase = NULL;
-  }*/
+  }
   
   
   // close locale.library
@@ -977,7 +977,7 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((IconBase = (APTR)OpenLibrary("icon.library", 37)) != NULL && GETINTERFACE(IIcon, IconBase))
   if ((WorkbenchBase = (APTR)OpenLibrary("workbench.library", 37)) != NULL && GETINTERFACE(IWorkbench, WorkbenchBase))
   if ((DataTypesBase = (APTR)OpenLibrary("datatypes.library", 37)) != NULL && GETINTERFACE(IDataTypes, DataTypesBase))
-  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 37)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
+  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
   {
   
@@ -1021,7 +1021,14 @@ int UserLibInit()
 		CloseLibrary(DOpusBase);
 		return(10);
 	}
-#endif	
+#endif
+
+	if	(IconBase->lib_Version<44) {
+		NewIconBase=(struct Library *)OpenLibrary("newicon.library",0);
+		#ifdef __amigaos4__
+		GETINTERFACE(INewIcon, NewIconBase);
+		#endif
+	}
 	
 	// Allocate and open locale data
 	if (!(locale=AllocVec(sizeof(struct DOpusLocale),MEMF_CLEAR)))

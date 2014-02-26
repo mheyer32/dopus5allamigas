@@ -2,7 +2,7 @@
 #include "config_filetypes.h"
 #include "config_buttons.h"
 
-#define DOpusBase		(data->func_startup.dopus_base)
+/*#define DOpusBase		(data->func_startup.dopus_base)*/
 #define Locale			(data->func_startup.locale)
 
 /*
@@ -831,11 +831,11 @@ void filetypeed_edit_definition(filetype_ed_data *data)
 	startup->main_owner=data->func_startup.main_owner;
 
 	// Supply some library pointers
-	startup->dopus_base=DOpusBase;
+	/*startup->dopus_base=DOpusBase;
 	startup->dos_base=(struct Library *)DOSBase;
 	startup->int_base=(struct Library *)IntuitionBase;
 	startup->gfx_base=(struct Library *)GfxBase;
-	startup->asl_base=AslBase;
+	startup->asl_base=AslBase;*/
 
 	// Fill out new window
 	startup->new_win.parent=data->window;

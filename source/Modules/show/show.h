@@ -57,7 +57,8 @@ typedef struct
 
 	struct Preferences	prefs;
 
-	struct Library		*dt_base;
+	//struct Library		*dt_base;
+	ULONG			pad1;
 
 	short			width;
 	short			height;

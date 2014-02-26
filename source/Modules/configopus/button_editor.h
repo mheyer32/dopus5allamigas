@@ -62,14 +62,15 @@ typedef struct _ButtonEdData
 
 	struct ListLock		proc_list;
 
-	struct Library		*DOpusBase;
+	/*struct Library		*DOpusBase;
 	struct Library		*DOSBase;
 	struct Library		*IntuitionBase;
 	struct Library		*UtilityBase;
 	struct Library		*CxBase;
 	struct Library		*WorkbenchBase;
 	struct Library		*GfxBase;
-	struct Library		*LayersBase;
+	struct Library		*LayersBase;*/
+	ULONG			pad1[8];
 
 	struct AppWindow	*appwindow;
 	struct MsgPort		*app_port;

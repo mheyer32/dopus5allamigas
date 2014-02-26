@@ -818,8 +818,6 @@ BOOL ExtractD(struct xoData *data)
 			}
 			UnLockDosList(LDF_DEVICES|LDF_READ);
 			
-			#warning! right fix ? was too few args for SelectionList.
-			//sel=SelectionList(list,data->listw,NULL,DOpusGetString(locale,MSG_SELECT_DEST),-1,NULL,NULL,DOpusGetString(locale,MSG_OK),DOpusGetString(locale,MSG_ABORT));
 			sel=SelectionList(list,data->listw,NULL,DOpusGetString(locale,MSG_SELECT_DEST),-1,0,NULL,DOpusGetString(locale,MSG_OK),DOpusGetString(locale,MSG_ABORT), NULL,NULL);
 			
 			if((sel>=0) && (dev=xadAllocObject(XADOBJ_DEVICEINFO,(IPTR)NULL))) {
@@ -963,9 +961,9 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 	data.listw = NULL;
 	data.cur = NULL;
 	data.locale = locale;
-	data.DOpusBase = DOpusBase;
+	/*data.DOpusBase = DOpusBase;
 	data.DOSBase = (APTR)DOSBase;
-	data.UtilityBase = UtilityBase;
+	data.UtilityBase = UtilityBase;*/
 	data.password[0] = 0;
 
 	NewList((struct List *)&data.Temp);
@@ -1108,7 +1106,7 @@ int LIBFUNC SAVEDS ASM L_Module_Entry(
 					AddPart(arcname,Entry->name,512);
 				}
 			}
-			sprintf(buf,"command source %ld ScanDir %s",(ULONG)data.destp->lister,data.destp->path);
+			sprintf(buf,"command source %lu ScanDir %s",(ULONG)data.destp->lister,data.destp->path);
 			DC_CALL4(infoptr, dc_SendCommand,
 				DC_REGA0, IPCDATA(ipc),
 				DC_REGA1, buf,

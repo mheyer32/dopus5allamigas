@@ -977,7 +977,7 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((IconBase = (APTR)OpenLibrary("icon.library", 37)) != NULL && GETINTERFACE(IIcon, IconBase))
   if ((WorkbenchBase = (APTR)OpenLibrary("workbench.library", 37)) != NULL && GETINTERFACE(IWorkbench, WorkbenchBase))
   if ((DataTypesBase = (APTR)OpenLibrary("datatypes.library", 37)) != NULL && GETINTERFACE(IDataTypes, DataTypesBase))
-  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 37)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
+  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
   {
   
