@@ -103,7 +103,7 @@ unsigned long LIBFUNC L_Config_Environment(
 	_config_env_fix_font_pens(data);
 
 	// Store graphics library
-	data->GfxBase=(struct Library *)GfxBase;
+	//data->GfxBase=(struct Library *)GfxBase;
 
 	// Build sub-option list, open display
 	if (!(data->options=build_sub_options(_environment_options)) ||

@@ -75,9 +75,10 @@ struct xoData
 	char *arcname, *buf;
 	struct Window *listw;
 	struct DOpusLocale *locale;
-	struct Library *DOpusBase;
+	/*struct Library *DOpusBase;
 	struct DosLibrary *DOSBase;
-	struct Library *UtilityBase;
+	struct Library *UtilityBase;*/
+	ULONG pad1[3];
 	struct path_node *listp2, *destp;
 	APTR ptr;
 	DOpusCallbackInfo hook;

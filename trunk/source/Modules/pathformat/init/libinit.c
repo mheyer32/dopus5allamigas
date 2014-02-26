@@ -104,6 +104,7 @@ struct DOSIFace      	*IDOS = NULL;
 struct UtilityIFace  	*IUtility = NULL;
 struct LocaleIFace   	*ILocale = NULL;
 //struct ConsoleIFace 	*IConsole = NULL;
+struct CommoditiesIFace	*ICommodities = NULL;
 struct GraphicsIFace 	*IGraphics = NULL;
 struct CyberGfxIFace 	*ICyberGfx = NULL;
 struct IntuitionIFace 	*IIntuition = NULL;
@@ -141,6 +142,7 @@ struct LocaleBase 		*LocaleBase = NULL;
 struct RxsLib			*RexxSysBase = NULL;
 #endif
 
+struct Library			*CxBase = NULL;
 struct Library 			*CyberGfxBase = NULL;
 struct Library 			*GadToolsBase = NULL;
 struct Library 			*AslBase = NULL;
@@ -848,8 +850,15 @@ ULONG freeBase(struct LibraryHeader *lib)
     CloseLibrary((struct Library *)NewIconBase);
     NewIconBase = NULL;
   }*/
-  
-  
+
+  // close commodities.library
+  if(CxBase != NULL)
+  {
+    DROPINTERFACE(ICommodities);
+    CloseLibrary((struct Library *)CxBase);
+    CxBase = NULL;
+  }
+
   // close locale.library
   if(LocaleBase != NULL)
   {
@@ -965,6 +974,7 @@ ULONG initBase(struct LibraryHeader *lib)
 
   if ((DOSBase = (APTR)OpenLibrary("dos.library", 37)) != NULL && GETINTERFACE(IDOS, DOSBase))
   if ((UtilityBase = (APTR)OpenLibrary("utility.library", 37)) != NULL && GETINTERFACE(IUtility, UtilityBase))
+  if ((CxBase = (APTR)OpenLibrary("commodities.library", 37)) != NULL && GETINTERFACE(ICommodities, CxBase))
   if ((GfxBase = (APTR)OpenLibrary("graphics.library", 37)) != NULL && GETINTERFACE(IGraphics, GfxBase))
   if ((IntuitionBase = (APTR)OpenLibrary("intuition.library", 37)) != NULL && GETINTERFACE(IIntuition, IntuitionBase))
   if ((GadToolsBase = (APTR)OpenLibrary("gadtools.library", 37)) != NULL && GETINTERFACE(IGadTools, GadToolsBase))
@@ -974,7 +984,7 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((IconBase = (APTR)OpenLibrary("icon.library", 37)) != NULL && GETINTERFACE(IIcon, IconBase))
   if ((WorkbenchBase = (APTR)OpenLibrary("workbench.library", 37)) != NULL && GETINTERFACE(IWorkbench, WorkbenchBase))
   if ((DataTypesBase = (APTR)OpenLibrary("datatypes.library", 37)) != NULL && GETINTERFACE(IDataTypes, DataTypesBase))
-  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 37)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
+  if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
   {
   

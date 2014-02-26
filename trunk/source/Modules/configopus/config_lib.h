@@ -27,24 +27,6 @@ extern struct DOpusLocale	*locale;
 #ifndef __amigaos3__
 #pragma pack(2)
 #endif
-typedef struct
-{
-	struct Library		*DOSBase;
-	struct Library		*DOpusBase;
-	struct Library		*IntuitionBase;
-	struct Library		*GfxBase;
-	struct Library		*LayersBase;
-	struct Library		*DiskfontBase;
-	struct Library		*GadToolsBase;
-	struct Library		*WorkbenchBase;
-	struct Library		*IconBase;
-	struct Library		*AslBase;
-	struct Library		*CxBase;
-	struct Library		*UtilityBase;
-	struct Library		*LocaleBase;
-	struct DOpusLocale	locale;
-} libdata;
-
 // Config sub-option handles
 typedef struct _SubOptionHandle {
 	int num;		// Option number

@@ -48,7 +48,8 @@ typedef struct
 
 	APTR            dt_object;
 	BYTE            dt_signal;
-	struct Library      *dt_base;
+	//struct Library      *dt_base;
+	ULONG			pad1;
 
 	struct Library      *music_base;
 	short           module_type;

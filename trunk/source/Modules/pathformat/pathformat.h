@@ -25,12 +25,12 @@ For more information on Directory Opus for Windows please see:
 #include "pathformat.strings"
 #include "module_deps.h"
 
-struct Library *CxBase;
+//struct Library *CxBase;
 
 extern ConfigWindow pathformat_window;
 extern ObjectDef pathformat_objects[];
 
-#define CxBase (data->cxbase)
+//#define CxBase (data->cxbase)
 
 enum
 {
@@ -68,7 +68,8 @@ typedef struct
 	Att_List		*path_list;
 	Att_Node		*path_sel;
 
-	struct Library		*cxbase;
+	//struct Library		*cxbase;
+	ULONG 			pad1;
 
 	IPCData			*ipc;
 	IPCData			*main_ipc;

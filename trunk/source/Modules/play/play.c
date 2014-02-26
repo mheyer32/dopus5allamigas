@@ -45,7 +45,7 @@ int LIBFUNC L_Module_Entry(
 		return 0;
 
 	// Save datatypes library base
-	data->dt_base = DataTypesBase;
+	//data->dt_base = DataTypesBase;
 
 	// Allocate signal number for dt to talk to us with
 	data->dt_signal = AllocSignal(-1);

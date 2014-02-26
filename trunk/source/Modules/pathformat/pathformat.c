@@ -24,9 +24,9 @@ For more information on Directory Opus for Windows please see:
 #include "pathformat.h"
 #include <Program/position.h>
 
-#ifdef __amigaos4__
+/*#ifdef __amigaos4__
 struct CommoditiesIFace *ICommodities;
-#endif
+#endif*/
 
 
 int LIBFUNC L_Module_Entry(
@@ -59,10 +59,10 @@ int LIBFUNC L_Module_Entry(
 	data->appport=CreateMsgPort();
 
 	// Open commodities library
-	data->cxbase=OpenLibrary("commodities.library",0);
+	/*data->cxbase=OpenLibrary("commodities.library",0);
 	#ifdef __amigaos4__
 	ICommodities=(struct CommoditiesIFace *)GetInterface(data->cxbase,"main",1,NULL); 
-	#endif	
+	#endif	*/
 	
 	// Build path list
 	config_paths_build_list(data);
@@ -398,10 +398,10 @@ void config_paths_cleanup(config_path_data *data)
 		Att_RemList(data->path_list,0);
 
 		// Close cx library
-		#ifdef __amigaos4__
+		/*#ifdef __amigaos4__
 		DropInterface((struct Interface *)ICommodities); 
 		#endif
-		CloseLibrary(data->cxbase);
+		CloseLibrary(data->cxbase);*/
 
 		// Free port
 		if (data->appport)

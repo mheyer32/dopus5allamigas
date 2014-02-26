@@ -3,14 +3,14 @@
 
 void buttoned_copy_string(ButtonEdData *data,char *from,char **to);
 
-#define DOpusBase		(data->DOpusBase)
+/*#define DOpusBase		(data->DOpusBase)
 #define DOSBase			(data->DOSBase)
 #define IntuitionBase	(data->IntuitionBase)
 #define CxBase			(data->CxBase)
 #define WorkbenchBase	(data->WorkbenchBase)
 #define GfxBase			(data->GfxBase)
 #define UtilityBase		(data->UtilityBase)
-#define LayersBase		(data->LayersBase)
+#define LayersBase		(data->LayersBase)*/
 
 void ButtonEditor(void)
 {
@@ -187,7 +187,7 @@ void ButtonEditor(void)
 
 				// Fill out tags
 				tags[0].ti_Tag=GTPA_NumColors;
-				tags[0].ti_Data=data->startup->palette_data.screen_data.pen_count+((GfxBase->lib_Version>=39)?8:4);
+				tags[0].ti_Data=data->startup->palette_data.screen_data.pen_count+((((struct Library*)GfxBase)->lib_Version>=39)?8:4);
 				tags[1].ti_Tag=GTPA_ColorTable;
 				tags[1].ti_Data=(ULONG)data->startup->palette_data.pen_array;
 				tags[2].ti_Tag=TAG_END;
@@ -200,7 +200,7 @@ void ButtonEditor(void)
 				pen=(a==GAD_PALETTE_FOREGROUND)?data->button->button.fpen:data->button->button.bpen;
 
 				// Map top colours
-				if (GfxBase->lib_Version>=39)
+				if (((struct Library*)GfxBase)->lib_Version>=39)
 				{
 					if (pen>=252) pen-=248;
 					else
@@ -443,7 +443,7 @@ void ButtonEditor(void)
 								bg=GetGadgetValue(data->objlist,GAD_PALETTE_BACKGROUND);
 
 								// Map colours under 39
-								if (GfxBase->lib_Version>=39)
+								if (((struct Library*)GfxBase)->lib_Version>=39)
 								{
 									if (fg>=4 && fg<8) fg+=248;
 									else
@@ -756,14 +756,14 @@ ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a1, ButtonEdStartup *startup
 	data->locale=startup->func_startup.locale;
 
 	// Initialise library bases
-	DOpusBase=startup->func_startup.dopus_base;
+	/*DOpusBase=startup->func_startup.dopus_base;
 	DOSBase=startup->func_startup.dos_base;
 	IntuitionBase=startup->func_startup.int_base;
 	CxBase=startup->func_startup.cx_base;
 	WorkbenchBase=startup->func_startup.wb_base;
 	GfxBase=startup->func_startup.gfx_base;
 	UtilityBase=startup->func_startup.util_base;
-	LayersBase=startup->func_startup.layers_base;
+	LayersBase=startup->func_startup.layers_base;*/
 
 	// Initialise process list
 	InitListLock(&data->proc_list,0);

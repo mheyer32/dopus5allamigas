@@ -23,8 +23,9 @@ typedef struct
 
 	IPCData				*owner_ipc;
 
-	struct Library			*DOpusBase;
-	struct Library			*IntuitionBase;
+	/*struct Library			*DOpusBase;
+	struct Library			*IntuitionBase;*/
+	ULONG			pad2[2];
 
 	unsigned long			flags;
 

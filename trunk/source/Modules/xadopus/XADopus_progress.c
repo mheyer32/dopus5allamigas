@@ -26,9 +26,9 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 #endif
 {
 	struct xoData *data = hook->h_Data;
-	struct Library *DOpusBase;
+	/*struct Library *DOpusBase;
 	struct DosLibrary *DOSBase;
-	struct Library *UtilityBase;
+	struct Library *UtilityBase;*/
 //	struct TagItem tags[] = {{PW_FileDone, 0, TAG_DONE}};
 	struct TagItem tags[] = {{PW_FileDone, 0}, {TAG_DONE}};
 /*	struct TagItem reqtags[]={AR_Window,0,AR_Message,0, AR_Button,0,
@@ -41,9 +41,9 @@ LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a1, stru
 
 	tags[0].ti_Data = xpi->xpi_CurrentSize;
 
-	if(!(DOpusBase=data->DOpusBase)) return(0);
+	/*if(!(DOpusBase=data->DOpusBase)) return(0);
 	if(!(DOSBase=data->DOSBase)) return(0);
-	if(!(UtilityBase=data->UtilityBase)) return(0);
+	if(!(UtilityBase=data->UtilityBase)) return(0);*/
 
 	SetProgressWindow(data->ptr, tags);
 

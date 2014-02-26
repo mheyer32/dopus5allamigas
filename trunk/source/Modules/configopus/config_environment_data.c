@@ -14,11 +14,11 @@ static void ASM _palette_slider_callback(
 	REG(a2, struct Window *window))
 {
 	config_env_data *data;
-	struct Library *GfxBase;
+	//struct Library *GfxBase;
 
 	// Get data pointer
 	data=(config_env_data *)CFGDATA(window);
-	GfxBase=data->GfxBase;
+	//GfxBase=data->GfxBase;
 
 	// Change tag to max pixel length
 	tag->ti_Tag=GTSL_MaxPixelLen;

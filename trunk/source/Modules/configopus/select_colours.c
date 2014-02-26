@@ -1,7 +1,7 @@
 #include "config_lib.h"
 
-#define DOpusBase		(data->DOpusBase)
-#define IntuitionBase	(data->IntuitionBase)
+/*#define DOpusBase		(data->DOpusBase)
+#define IntuitionBase	(data->IntuitionBase)*/
 
 struct Window *palette_box_open(PaletteBoxData *data,ObjectDef *,short *,short *);
 void palette_box_colour(PaletteBoxData *,GL_Object *,short,ULONG *,short,ULONG);
@@ -92,7 +92,7 @@ void SAVEDS PaletteBox(void)
 						bg=GetGadgetValue(OBJLIST(window),GAD_PALETTE_BACKGROUND);
 
 						// Fix pens
-						if (IntuitionBase->lib_Version>=39)
+						if (((struct Library*)IntuitionBase)->lib_Version>=39)
 						{
 							if (fg>=4 && fg<8) fg=248+fg;
 							else
@@ -175,7 +175,7 @@ struct Window *palette_box_open(
 
 			// Fill out tags
 			tags[0].ti_Tag=GTPA_NumColors;
-			tags[0].ti_Data=data->pen_count+((IntuitionBase->lib_Version>=39)?8:4);
+			tags[0].ti_Data=data->pen_count+((((struct Library *)IntuitionBase)->lib_Version>=39)?8:4);
 			tags[1].ti_Tag=GTPA_ColorTable;
 			tags[1].ti_Data=(ULONG)((a==0)?pen_array1:pen_array2);
 			tags[2].ti_Tag=TAG_END;
@@ -193,7 +193,7 @@ struct Window *palette_box_open(
 		bpen=data->bgpen;
 
 		// Map top colours
-		if (IntuitionBase->lib_Version>=39)
+		if (((struct Library *)IntuitionBase)->lib_Version>=39)
 		{
 			if (fpen>=252) fpen-=248;
 			else
@@ -219,8 +219,8 @@ struct Window *palette_box_open(
 }
 
 
-#undef DOpusBase
-#undef IntuitionBase
+/*#undef DOpusBase
+#undef IntuitionBase*/
 
 
 // Show palette box
@@ -318,8 +318,8 @@ long LIBFUNC L_ShowPaletteBox(
 	}
 
 	// Libraries
-	data->DOpusBase=DOpusBase;
-	data->IntuitionBase=(struct Library *)IntuitionBase;
+	/*data->DOpusBase=DOpusBase;
+	data->IntuitionBase=(struct Library *)IntuitionBase;*/
 
 	// Bits per gun defaults to 4
 	data->stuff.stuff2.gun_bits[0]=4;
