@@ -466,7 +466,7 @@ int LIBFUNC L_Module_Entry(
 	REG(d0, ULONG          mod_id),
 	REG(d1, EXT_FUNC(func_callback)))
 {
-struct Library             *DOpusBase, *DOSBase;	// Avoid stomping on the global bases!
+//struct Library             *DOpusBase, *DOSBase;	// Avoid stomping on the global bases!
 struct MsgPort             *ftpport;			// If we find this OpusFTP is already running
 struct module_command_info *mci;
 int	                    arglen;			// length of args (including null terminator)
@@ -476,16 +476,16 @@ char                       *oldtaskname;
 oldtaskname = FindTask(0)->tc_Node.ln_Name;
 FindTask(0)->tc_Node.ln_Name = "dopus_ftp_function";
 
-{
+/*{
 void *m = AllocMem( 101, MEMF_ANY );
 FreeMem( m, 101 );
-}
+}*/
 
 // Screen may be different because of mode change or hide/show
 // Screen pointer should not be global to support multiple Opuses
 og.og_screen = screen;
 
-if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
+/*if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 	{
 	#ifdef __amigaos4__
 	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
@@ -495,7 +495,7 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 		{
 		#ifdef __amigaos4__
 		IDOS = (struct DOSIFace *)GetInterface(DOSBase, "main", 1, NULL);
-		#endif
+		#endif*/
 
 		// Create a ReadArgs() compatible copy of the arguments
 		if	(!args || !*args)
@@ -569,7 +569,7 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 				D(bug( "unknown mod_id:%ld\n", mod_id ));
 
 			}
-		#ifdef __amigaos4__
+		/*#ifdef __amigaos4__
 		DropInterface((struct Interface *)IDOS);
 		#endif
 		CloseLibrary( DOSBase );
@@ -579,7 +579,7 @@ if	((DOpusBase = OpenLibrary( "dopus5:libs/dopus5.library", VERSION_DOPUSLIB )))
 	DropInterface((struct Interface *)IDOpus);
 	#endif
 	CloseLibrary(DOpusBase);		
-	}
+	}*/
 
 FindTask(0)->tc_Node.ln_Name = oldtaskname;
 

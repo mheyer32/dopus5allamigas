@@ -4582,17 +4582,17 @@ free_address_book(ogp);
 
 void addressbook( void )
 {
-struct Library	*DOpusBase;
+//struct Library	*DOpusBase;
 struct subproc_data *data = 0;
 IPCMessage	*loop_quitmsg=0;
 struct display_globals *dg;
 
 
-if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+/*if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 	{
 	#ifdef __amigaos4__
 	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
-	#endif
+	#endif*/
 		
 	/* returns true if 'data' is filled in correctly */
 	if	(IPC_ProcStartup( (ULONG *)&data, addressbook_init ))
@@ -4618,11 +4618,11 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		FreeVec( data );
 		}
 		
-	#ifdef __amigaos4__
+	/*#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDOpus);
 	#endif
 	CloseLibrary(DOpusBase);
-	}
+	}*/
 }
 
 

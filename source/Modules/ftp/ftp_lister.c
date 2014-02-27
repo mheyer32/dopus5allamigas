@@ -3417,16 +3417,16 @@ if	(timer)
 void lister( void )
 {
 struct opusftp_globals *og;
-struct Library         *DOpusBase;
+//struct Library         *DOpusBase;
 int                     zero = 0;
 struct subproc_data    *data;		// This is passed from the creator process
 struct msg_loop_data    mld;
 
-if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+/*if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 	{
 	#ifdef __amigaos4__
 	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
-	#endif
+	#endif*/
 
 	// This returns true if 'data' is filled in correctly
 	if	(IPC_ProcStartup( (ULONG *)&data, ftplister_init ))
@@ -3469,12 +3469,12 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		FreeVec( data );
 		}
 
-	#ifdef __amigaos4__
+	/*#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDOpus);
 	#endif
 	CloseLibrary(DOpusBase);
 
-	}
+	}*/
 }
 
 /********************************/

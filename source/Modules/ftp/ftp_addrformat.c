@@ -125,7 +125,7 @@ return(ok);
 
 static void format_code(void)
 {
-struct Library	*DOpusBase;
+//struct Library	*DOpusBase;
 struct format_data *data = 0;
 struct Library *ModuleBase;
 #ifdef __amigaos4__
@@ -134,11 +134,11 @@ struct ModuleIFace *IModule;
 BOOL result=0;
 int function_no=2;
 
-if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+/*if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 	{
 	#ifdef __amigaos4__
 	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
-	#endif
+	#endif*/
 
 	if	(IPC_ProcStartup( (ULONG *)&data, format_init ))
 		{
@@ -213,12 +213,12 @@ if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		IPC_Free( data->fd_ipc );
 		FreeVec( data );
 		}
-	#ifdef __amigaos4__
+	/*#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDOpus);
 	#endif
 	CloseLibrary(DOpusBase);
 
-	}
+	}*/
 }
 
 
