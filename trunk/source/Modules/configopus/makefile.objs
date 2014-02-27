@@ -16,7 +16,7 @@ COMMON_OBJS := 	init/libinit.o config.o config_drag.o config_settings.o \
 		lister_menu.o lister_menu_data.o config_menus.o \
 		config_menus_data.o config_menus_edit.o config_menus_io.o \
 		config_menus_drag.o function_export.o edit.o \
-		string_data.o ipc.o 
+		string_data.o
 
 OS4_OBJS    :=	init/amiga.o init/aos4_ppc_libstub.o \
 				init/aos4_68k_to_ppc_vectors.o

@@ -23,10 +23,14 @@ For more information on Directory Opus for Windows please see:
 
 #include "join.h"
 
-#ifdef __amigaos3__
-// dummy TimerBase to get amiga.lib to link
-// timer.device calls are inlined, so it's not actually used
+#if defined(__amigaos3__) || defined(__AROS__)
 struct Device *TimerBase = NULL;
+#else
+struct Library *TimerBase = NULL;
+#endif
+
+#ifdef __amigaos4__
+struct TimerIFace *ITimer;
 #endif
 
 
@@ -65,9 +69,9 @@ int LIBFUNC L_Module_Entry(
 	// Get timer.device base
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&data->timer_req,0))
 	{
-		data->TimerBase=(struct Library *)data->timer_req.tr_node.io_Device;
+		/*data->*/TimerBase=(struct Library *)data->timer_req.tr_node.io_Device;
 		#ifdef __amigaos4__
-		data->ITimer = (struct TimerIFace *)GetInterface((struct Library *)data->TimerBase,"main",1,NULL); 
+		/*data->*/ITimer = (struct TimerIFace *)GetInterface(/*(struct Library *)data->*/TimerBase,"main",1,NULL); 
 		#endif
 	}
 
@@ -580,11 +584,11 @@ void join_free(join_data *data)
 		Att_RemList(data->join_list,0);
 
 		// Close timer device
-		if (data->TimerBase) {
+		if (/*data->*/TimerBase) {
 		#ifdef __amigaos4__
-		if (data->ITimer) DropInterface((struct Interface *)data->ITimer); 
+			if (/*data->*/ITimer) DropInterface((struct Interface *)/*data->*/ITimer); 
 		#endif
-		CloseDevice((struct IORequest *)&data->timer_req);
+			CloseDevice((struct IORequest *)&data->timer_req);
 		}
 
 		// Free arguments
@@ -855,19 +859,19 @@ BOOL join_join_files(join_data *data)
 	short count,retcode=0;
 	Att_Node *node;
 	char *initial_buffer,*ptr;
-	struct Library *TimerBase;
+	/*struct Library *TimerBase;
 	#ifdef __amigaos4__
 	struct TimerIFace *ITimer;
-	#endif
+	#endif*/
 
 	// Get file count
 	count=Att_NodeCount(data->join_list);
 
 	// Get timer pointer
-	TimerBase=data->TimerBase;
+	/*TimerBase=data->TimerBase;
 	#ifdef __amigaos4__
 	ITimer = data->ITimer;
-	#endif
+	#endif*/
 	
 	// Allocate buffer
 	if (!(initial_buffer=AllocVec(COPY_INITIAL_BUFFER,0)))

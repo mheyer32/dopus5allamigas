@@ -26,6 +26,7 @@ For more information on Directory Opus for Windows please see:
 #include <dopus/common.h>
 #if defined(__amigaos3__) || defined(__MORPHOS__)
 static char *modtypes[]={"SoundTracker","MED","Octalyzer","SoundTracker 15"};
+struct Library *MUSICBase = NULL;
 #endif
 
 int LIBFUNC L_Module_Entry(
@@ -70,7 +71,9 @@ int LIBFUNC L_Module_Entry(
 	data->icon_x=NO_ICON_POSITION;
 	data->icon_y=NO_ICON_POSITION;
 
+#if defined(__amigaos3__) || defined(__MORPHOS__)
 	MUSICBase = NULL;
+#endif
 
 	// Environment variable set?
 	if (GetVar(ENV_PLAY,data->buf,sizeof(data->buf),GVF_GLOBAL_ONLY)>0)
@@ -151,8 +154,10 @@ void play_free(play_data *data)
 		// Free message port
 		DeleteMsgPort(data->app_port);
 
+#if defined(__amigaos3__) || defined(__MORPHOS__)
 		// Close music library
 		if (MUSICBase) CloseLibrary(MUSICBase);
+#endif
 
 		// Free signal
 		if (data->dt_signal != SIGBREAKB_CTRL_E)

@@ -64,8 +64,9 @@ typedef struct
 	char			title[128];
 	char			volume[40];
 
-	struct Library		*maths;
-	struct Library		*maths1;
+	/*struct Library		*maths;
+	struct Library		*maths1;*/
+	ULONG			pad1[2];
 
 	struct TmpRas		tmpras;
 	PLANEPTR			rasbuf;
@@ -105,5 +106,5 @@ void get_dostype_string(ULONG,char *);
 void diskinfo_show_space(diskinfo_data *,unsigned long,short,short);
 void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,ULONG,ULONG);
 
-#define MathBase		(data->maths)
-#define MathTransBase		(data->maths1)
+/*#define MathBase		(data->maths)
+#define MathTransBase		(data->maths1)*/

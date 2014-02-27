@@ -164,7 +164,8 @@ typedef struct
 	short				scroll;
 
 	struct IOStdReq			input_req;
-	struct Library			*input_base;
+	//struct Library			*input_base;
+	ULONG				pad1;
 
 	struct MinList			text_data;
 	text_chunk			*search_last_chunk;
