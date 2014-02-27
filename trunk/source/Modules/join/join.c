@@ -30,7 +30,7 @@ struct Library *TimerBase = NULL;
 #endif
 
 #ifdef __amigaos4__
-struct TimerIFace *ITimer;
+struct TimerIFace *ITimer = NULL;
 #endif
 
 

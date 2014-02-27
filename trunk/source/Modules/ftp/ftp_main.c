@@ -77,7 +77,7 @@ For more information on Directory Opus for Windows please see:
 #define MAX_REXX_ARGS  16
 #define REXX_ARGLEN   256
 
-extern struct Library *DOpusBase;
+//extern struct Library *DOpusBase;
 
 typedef int (*rxfuncptr)( struct opusftp_globals *, struct RexxMsg *, int argc, char *argv[] );
 
@@ -3147,7 +3147,7 @@ void dopus_ftp( void )
 {
 struct main_event_data  med = {0};
 struct opusftp_globals *og;
-struct Library         *L_DOpusBase, *ourbase;		/* Local copy needed before we have A4 ! */
+struct Library         /* *L_DOpusBase,*/ *ourbase;		/* Local copy needed before we have A4 ! */
 #ifdef __amigaos4__
 struct ModuleIFace *IModule;
 #endif
@@ -3170,16 +3170,16 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 	IModule = (struct ModuleIFace *)GetInterface(ourbase, "main", 1, NULL);
 	#endif
 	
-	if	((L_DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+	/*if	((L_DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		{
 		#ifdef __amigaos4__
 		IDOpus = (struct DOpusIFace *)GetInterface(L_DOpusBase, "main", 1, NULL);
 		#endif
 
-#define DOpusBase L_DOpusBase
+#define DOpusBase L_DOpusBase*/
 		// Process startup function
 		if	(IPC_ProcStartup( (ULONG *)&mldata, dopus_ftp_init ))
-#undef DOpusBase
+//#undef DOpusBase
 			{
 			// Fix pointer to global info
 			og = mldata->mld_og;
@@ -3359,13 +3359,13 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 
 		// Don't close via the global pointer
 		// because A4 might not be valid !!
-		if (L_DOpusBase) {
+		/*if (L_DOpusBase) {
 			#ifdef __amigaos4__
 			DropInterface((struct Interface *)IDOpus);
 			#endif
 			CloseLibrary( L_DOpusBase );
 			}
-		}
+		}*/
 	#ifdef __amigaos4__
 	DropInterface((struct Interface *)IModule);
 	#endif
