@@ -191,7 +191,7 @@ ObjectDef
 
 		{OD_END}};
 
-struct Library *DataTypesBase;
+//struct Library *DataTypesBase;
 APTR logo_obj[logo_frames];
 ImageRemap remap;
 

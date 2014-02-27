@@ -22,7 +22,7 @@ extern struct ExecBase *SysBase;
 
 #define min(a,b)    ((a) < (b) ? (a) : (b))
 #define max(a,b)    ((a) > (b) ? (a) : (b))
-#define GET_DOPUSLIB	(struct Library *)FindName(&((struct ExecBase *)SysBase)->LibList,"dopus5.library"); 
+//#define GET_DOPUSLIB	(struct Library *)FindName(&((struct ExecBase *)SysBase)->LibList,"dopus5.library"); 
 
 
 // replacements for the C library memory functions, which can't be used in shared libraries
@@ -32,8 +32,8 @@ char *strdup (const char *orig)
 	char *copy = AllocVec(strlen(orig)+1, MEMF_ANY);
 	if (copy)
 		CopyMem((APTR)orig, copy, strlen(orig)+1);
-	return copy;}
-
+	return copy;
+}
 
 
 #warning Should not be here - Disabled - Remove eventually.
@@ -640,7 +640,7 @@ return ok;
 void SAVEDS finder_creator_proc_code( void )
 {
 finder_data *data;
-struct Library *DOpusBase;
+//struct Library *DOpusBase;
 Att_List *list;
 char path[256 + 1];
 char *name;
@@ -649,7 +649,7 @@ Att_Node *node;
 Cfg_FiletypeList *ftl, *ftl2;
 int ok = FALSE;
 
-DOpusBase = GET_DOPUSLIB;
+//DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)finder_creator_proc_init );
 
@@ -819,14 +819,14 @@ return ok;
 void SAVEDS finder_editor_proc_code( void )
 {
 finder_data *data;
-struct Library *DOpusBase;
+//struct Library *DOpusBase;
 struct Library *ConfigOpusBase;
 #ifdef __amigaos4__
 struct ConfigOpusIFace *IConfigOpus;
 #endif
 Cfg_Filetype *edited_filetype;
 
-DOpusBase = GET_DOPUSLIB;
+//DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)finder_editor_proc_init );
 
@@ -2263,7 +2263,7 @@ return ok;
 void SAVEDS creator_editor_proc_code( void )
 {
 creator_data *data;
-struct Library *DOpusBase;
+//struct Library *DOpusBase;
 struct Library *ConfigOpusBase;
 #ifdef __amigaos4__	
 struct ConfigOpusIFace *IConfigOpus;
@@ -2271,7 +2271,7 @@ struct ConfigOpusIFace *IConfigOpus;
 Cfg_Filetype *edited_filetype;
 int ok = FALSE;
 
-DOpusBase = GET_DOPUSLIB;
+//DOpusBase = GET_DOPUSLIB;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)creator_editor_proc_init );
 

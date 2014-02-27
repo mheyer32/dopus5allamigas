@@ -87,9 +87,9 @@ int LIBFUNC L_Module_Entry(
 
 	// Get input.device base
 	if (!OpenDevice("input.device",0,(struct IORequest *)&data->input_req,0))
-		InputBase = (APTR)(data->input_base = (APTR)data->input_req.io_Device);
+		InputBase = (APTR)(/*data->input_base =*/ (APTR)data->input_req.io_Device);
 	#ifdef __amigaos4__
-	IInput = (struct InputIFace *)GetInterface(data->input_base,"main",1,NULL); 
+	IInput = (struct InputIFace *)GetInterface(/*data->input_base*/InputBase,"main",1,NULL); 
 	#endif
 	
 	// Initial search?
@@ -309,7 +309,8 @@ void read_free(read_data *data,struct read_startup *startup,IPCData *ipc)
 		}
 
 		// Close input device
-		if (data->input_base)
+		//if (data->input_base)
+		if (InputBase)
 		{
 			#ifdef __amigaos4__
 			DropInterface((struct Interface *)IInput);

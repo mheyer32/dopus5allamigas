@@ -49,9 +49,9 @@ typedef struct
 	APTR            dt_object;
 	BYTE            dt_signal;
 	//struct Library      *dt_base;
-	ULONG			pad1;
 
-	struct Library      *music_base;
+	//struct Library      *music_base;
+	ULONG			pad1[2];
 	short           module_type;
 
 	char            *type_string;
@@ -83,7 +83,7 @@ typedef struct
 #define PLAYF_ICON	(1<<1)
 
 //#define DataTypesBase   (data->dt_base) Don't redefine-opened in libinit.c
-#define MUSICBase   (data->music_base)
+//#define MUSICBase   (data->music_base)
 
 #define PLAY_DOS_ERROR      0
 #define PLAY_OK             1

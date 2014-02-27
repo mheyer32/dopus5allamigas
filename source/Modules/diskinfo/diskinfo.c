@@ -22,7 +22,7 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "diskinfo.h"
-#include "math_replace.h"
+#include <math.h>
 
 // Show disk information
 int LIBFUNC L_Module_Entry(
@@ -40,14 +40,14 @@ int LIBFUNC L_Module_Entry(
 		return 0;
 
 	// Get maths library
-	if (!(data->maths=OpenLibrary("mathffp.library",0)) ||
+	/*if (!(data->maths=OpenLibrary("mathffp.library",0)) ||
 		!(data->maths1=OpenLibrary("mathtrans.library",0)))
 	{
 		// Failed
 		CloseLibrary(data->maths);
 		FreeVec(data);
 		return 0;
-	}
+	}*/
 
 	// Path supplied?
 	if (files && !(IsListEmpty(files)))
@@ -62,8 +62,8 @@ int LIBFUNC L_Module_Entry(
 		// Get path
 		if (!(func_callback(EXTCMD_GET_SOURCE,IPCDATA(ipc),data->path)))
 		{
-			CloseLibrary(data->maths);
-			CloseLibrary(data->maths1);
+			/*CloseLibrary(data->maths);
+			CloseLibrary(data->maths1);*/
 			FreeVec(data);	
 			return 0;
 		}
@@ -88,8 +88,8 @@ int LIBFUNC L_Module_Entry(
 	{
 		// Failed
 		CloseConfigWindow(data->window);
-		CloseLibrary(data->maths);
-		CloseLibrary(data->maths1);
+		/*CloseLibrary(data->maths);
+		CloseLibrary(data->maths1);*/
 		FreeVec(data);
 		return 0;
 	}
@@ -272,8 +272,8 @@ int LIBFUNC L_Module_Entry(
 	CloseConfigWindow(data->window);
 
 	// Close maths library
-	CloseLibrary(data->maths);
-	CloseLibrary(data->maths1);
+	/*CloseLibrary(data->maths);
+	CloseLibrary(data->maths1);*/
 
 	// Free data
 	FreeVec(data);
@@ -503,7 +503,7 @@ void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,
 void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,ULONG total)
 {
 	long p,xp,yp,height,a,b,cx,cy,pc,y,chunkx=0,chunky=0;
-	FLOAT rads,sin,cos,rx,ry,pcent;
+	FLOAT rads,rsin,rcos,rx,ry,pcent;
 	struct RastPort *rp;
 	short step,stop;
 
@@ -525,17 +525,17 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	// Get center and radii
 	a=(RECTWIDTH(rect))>>1;
 	cx=rect->MinX+a;
-	rx=SPFlt(a);
+	rx=(FLOAT)a;
 	b=((RECTHEIGHT(rect)-height))>>1;
 	cy=rect->MinY+b;
-	ry=SPFlt(b);
+	ry=(FLOAT)b;
 
 	// Get size of chunk as a percentage of the total, and convert to degrees
-	pcent=(total<1)?(FLOAT)0:SPMul(SPDiv(SPFlt(total),SPFlt(size)),(FLOAT)360);
-	pcent=SPSub(pcent,(FLOAT)180);
+	pcent=(total<1)?(FLOAT)0:(((FLOAT)size/(FLOAT)total)*(FLOAT)360);
+	pcent=(FLOAT)180-pcent;
 
 	// Get as long and round to nearest 2
-	pc=SPFix(pcent);
+	pc=(long)pcent;
 	if (pc&1) ++pc;
 	if (pc>178) pc=-180;
 	else
@@ -552,14 +552,15 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	for (p=180;p>=-180;p-=2)
 	{
 		// Convert degrees to radians
-		rads=SPDiv((FLOAT)180,SPMul((FLOAT)PI,SPFlt(p)));
+		rads=((FLOAT)PI*(FLOAT)p)/(FLOAT)180;
 
 		// Get sine and cosine
-		sin=SPSincos(&cos,rads);
+		rcos=cos(rads);
+		rsin=sin(rads);
 
 		// Get coordinates
-		xp=SPFix(SPMul(rx,cos));
-		yp=SPFix(SPMul(ry,sin));
+		xp=(long)(rx*rcos);
+		yp=(long)(ry*rsin);
 
 		// Draw line
 		AreaDraw(rp,cx+xp,cy+yp);
@@ -601,14 +602,15 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	while (1)
 	{
 		// Convert degrees to radians
-		rads=SPDiv((FLOAT)180,SPMul((FLOAT)PI,SPFlt(p)));
+		rads=((FLOAT)PI*(FLOAT)p)/(FLOAT)180;
 
 		// Get sine and cosine
-		sin=SPSincos(&cos,rads);
+		rcos=cos(rads);
+		rsin=sin(rads);
 
 		// Get coordinates
-		xp=SPFix(SPMul(rx,cos));
-		yp=SPFix(SPMul(ry,sin));
+		xp=(long)(rx*rcos);
+		yp=(long)(ry*rsin);
 
 		// Draw line
 		AreaDraw(rp,cx+xp,yp+y);
