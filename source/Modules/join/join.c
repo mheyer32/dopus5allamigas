@@ -23,10 +23,10 @@ For more information on Directory Opus for Windows please see:
 
 #include "join.h"
 
-#if defined(__amigaos3__) || defined(__AROS__)
-struct Device *TimerBase = NULL;
-#else
+#ifdef __MORPHOS__
 struct Library *TimerBase = NULL;
+#else
+struct Device *TimerBase = NULL;
 #endif
 
 #ifdef __amigaos4__
