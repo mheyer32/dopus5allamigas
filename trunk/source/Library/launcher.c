@@ -250,10 +250,10 @@ void SAVEDS ASM L_MUFSLogin(
 }
 
 
-#define DOSBase			(data->dos_base)
-#define IconBase		(data->icon_base)
+/*#define DOSBase			(data->dos_base)
+#define IconBase		(data->icon_base)*/
 #define DOpusBase		(data->dopus_base)
-#define IntuitionBase	(data->int_base)
+/*#define IntuitionBase	(data->int_base)*/
 
 
 LaunchProc *launcher_launch(struct LibData *,LaunchPacket *packet,struct MinList *,struct MsgPort *);

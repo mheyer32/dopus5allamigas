@@ -1463,16 +1463,16 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 
 	// Initialise stuff
 	data->low_mem_signal=-1;
-	data->wb_data.wb_base=WorkbenchBase;
-	data->wb_data.int_base=(struct Library *)IntuitionBase;
+	/*data->wb_data.wb_base=WorkbenchBase;
+	data->wb_data.int_base=(struct Library *)IntuitionBase;*/
 	data->wb_data.dopus_base=libbase;
-	data->wb_data.utility_base=UtilityBase;
+	/*data->wb_data.utility_base=UtilityBase;
 	data->dos_base=(struct Library *)DOSBase;
 	data->icon_base=IconBase;
 	data->new_icon_base=(struct Library *)NewIconBase;
-	data->int_base=(struct Library *)IntuitionBase;
+	data->int_base=(struct Library *)IntuitionBase;*/
 	data->dopus_base=libbase;
-	data->gfx_base=(struct Library *)GfxBase;
+	/*data->gfx_base=(struct Library *)GfxBase;*/
 	NewList((struct List *)&data->wb_data.app_list);
 	NewList((struct List *)&data->wb_data.rem_app_list);
 	NewList((struct List *)&data->notify_list);

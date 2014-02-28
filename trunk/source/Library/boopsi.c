@@ -44,10 +44,10 @@ Class *init_class(
 		return 0;
 
 	// Fill out library pointers
-	libs->IntuitionBase=(struct Library *)IntuitionBase;
+	/*libs->IntuitionBase=(struct Library *)IntuitionBase;
 	libs->GfxBase=(struct GfxBase *)GfxBase;
 	libs->UtilityBase=UtilityBase;
-	libs->LayersBase=LayersBase;
+	libs->LayersBase=LayersBase;*/
 	libs->data=data;
 
 	// Create class

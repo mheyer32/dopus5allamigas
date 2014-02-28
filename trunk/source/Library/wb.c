@@ -32,8 +32,13 @@ For more information on Directory Opus for Windows please see:
 #include <proto/module.h>
 #include <proto/newicon.h>
 
-#define UtilityBase	(wb_data->utility_base)
+//#define UtilityBase	(wb_data->utility_base)
+//#define WorkbenchBase	(wb_data->wb_base)
+//#define IntuitionBase	(wb_data->int_base)
 
+//#define NewIconBase	(data->new_icon_base)
+//#define IconBase	(data->icon_base)
+//#define DOSBase	(data->dos_base)
 
 //// AddAppWindow patch
 PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULONG, userdata, a0, struct Window *, window, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
@@ -65,7 +70,7 @@ PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULON
 		// Otherwise pass to OS
 		else
 		{
-			app_entry->os_object=LIBCALL_5(struct AppWindow *,wb_data->old_function[WB_PATCH_ADDAPPWINDOWA],wb_data->wb_base, IWorkbench, d0,id,d1,userdata,a0,window,a1,port,a2,tags);
+			app_entry->os_object=LIBCALL_5(struct AppWindow *,wb_data->old_function[WB_PATCH_ADDAPPWINDOWA],WorkbenchBase, IWorkbench, d0,id,d1,userdata,a0,window,a1,port,a2,tags);
 		}
 
 		// Send notification
@@ -113,7 +118,7 @@ PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, 
 		// Otherwise pass to OS
 		else
 		{
-			object=LIBCALL_5(APTR,wb_data->old_function[WB_PATCH_ADDAPPMENUA],wb_data->wb_base,IWorkbench, d0,id,d1,userdata,a0,text,a1,port,a2,tags);
+			object=LIBCALL_5(APTR,wb_data->old_function[WB_PATCH_ADDAPPMENUA],WorkbenchBase,IWorkbench, d0,id,d1,userdata,a0,text,a1,port,a2,tags);
 
 			if (app_entry) app_entry->os_object=object;
 		}
@@ -294,11 +299,11 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 		{
 		#ifdef __amigaos3__
 			object=
-				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], wb_data->wb_base, IWorkbench,
+				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], WorkbenchBase, IWorkbench,
 					d0, id, d1, userdata, a0, text, a1, port, a2, lock, a3, icon, d7, tags);
 		#else
 			object=
-				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], wb_data->wb_base, IWorkbench,
+				LIBCALL_7(APTR, wb_data->old_function[WB_PATCH_ADDAPPICONA], WorkbenchBase, IWorkbench,
 					d0, id, d1, userdata, a0, text, a1, port, a2, lock, a3, icon, a4, tags);
 		#endif
 			if (app_entry) app_entry->os_object=object;
@@ -340,7 +345,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppWindow, a0, struct AppWindow *, window)
 	if (os_object)
 	{
 		// Remove workbench object
-		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPWINDOW], wb_data->wb_base, IWorkbench, a0, os_object);
+		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPWINDOW], WorkbenchBase, IWorkbench, a0, os_object);
 	}
 
 	// Send notification
@@ -376,7 +381,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 	if (os_object)
 	{
 		// Remove workbench object
-		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPMENU], wb_data->wb_base, IWorkbench, a0, os_object);
+		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPMENU], WorkbenchBase, IWorkbench, a0, os_object);
 	}
 
 	// Send notification
@@ -439,7 +444,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 	if ((os_object=rem_app_entry(entry,wb_data,&local)))
 	{
 		// Remove workbench object
-		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPICON], wb_data->wb_base, IWorkbench, a0, os_object);
+		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPICON], WorkbenchBase, IWorkbench, a0, os_object);
 	}
 
 	return 1;
@@ -808,7 +813,7 @@ PATCHED_0(LONG, LIBFUNC L_WB_CloseWorkBench)
 	L_SendNotifyMsg(DN_CLOSE_WORKBENCH,0,0,FALSE,0,0,libbase);
 
 	// Close workbench screen
-	result=LIBCALL_0(LONG, wb_data->old_function[WB_PATCH_CLOSEWORKBENCH], wb_data->int_base, IIntuition);
+	result=LIBCALL_0(LONG, wb_data->old_function[WB_PATCH_CLOSEWORKBENCH], IntuitionBase, IIntuition);
 
 	return result;
 }
@@ -833,7 +838,7 @@ PATCHED_0(ULONG,LIBFUNC L_WB_OpenWorkBench)
 	L_SendNotifyMsg(DN_OPEN_WORKBENCH,0,0,FALSE,0,0,libbase);
 
 	// Open workbench screen
-	result=LIBCALL_0(ULONG, wb_data->old_function[WB_PATCH_OPENWORKBENCH], wb_data->int_base, IIntuition);
+	result=LIBCALL_0(ULONG, wb_data->old_function[WB_PATCH_OPENWORKBENCH], IntuitionBase, IIntuition);
 
 	return result;
 }
@@ -936,7 +941,7 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
@@ -969,7 +974,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
@@ -1124,7 +1129,7 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 	{
 		//D(bug("Workbench available, calling original vector\n"));
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
@@ -1157,7 +1162,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, cons
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], wb_data->wb_base, IWorkbench, a0, name, a1, tags);
+		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
@@ -1312,7 +1317,7 @@ struct DiskObject *LIBFUNC L_CopyDiskObject(
 	wb_data=&data->wb_data;
 
 
-#define IconBase	(data->icon_base)
+//#define IconBase	(data->icon_base)
 
 	if	(IconBase->lib_Version>=44)
 	{	
@@ -1324,7 +1329,7 @@ struct DiskObject *LIBFUNC L_CopyDiskObject(
 
 	}
 
-#undef IconBase
+//#undef IconBase
 
 
 	// Allocate copy structure
@@ -1482,13 +1487,13 @@ void LIBFUNC L_FreeDiskObjectCopy(
 	// Valid icon?
 	if (!icon) return;
 
-#define IconBase	(data->icon_base)
+//#define IconBase	(data->icon_base)
 	if	(IconBase->lib_Version>=44)
 	{
 		FreeDiskObject(icon);
 		return;
 	}
-#undef IconBase
+//#undef IconBase
 
 
 	// Is this a copy?
@@ -1528,10 +1533,10 @@ if (((struct NewIconDiskObject *)icon)->nido_Flags&NIDOF_REMAPPED)
 	D(bug("error! icon freed while still remapped\n"));
 #endif
 
-#define NewIconBase	(data->new_icon_base)
+//#define NewIconBase	(data->new_icon_base)
 		// Free the NewDiskObject part
 		FreeNewDiskObject(((struct NewIconDiskObject *)icon)->nido_NewDiskObject);
-#undef NewIconBase
+//#undef NewIconBase
 
 		// Free our part
 		FreeVec(icon);
@@ -1540,9 +1545,9 @@ if (((struct NewIconDiskObject *)icon)->nido_Flags&NIDOF_REMAPPED)
 	// Assume it's a real icon
 	else
 	{
-#define IconBase	(data->icon_base)
+//#define IconBase	(data->icon_base)
 		FreeDiskObject(icon);
-#undef IconBase
+//#undef IconBase
 	}
 }
 
@@ -1609,7 +1614,7 @@ PATCHED_1(void, LIBFUNC L_WB_CloseWindow, a0, struct Window *, window)
 	}
 
 	// Close window
-	LIBCALL_1(void, wb_data->old_function[WB_PATCH_CLOSEWINDOW], wb_data->int_base, IIntuition, a0, window);
+	LIBCALL_1(void, wb_data->old_function[WB_PATCH_CLOSEWINDOW], IntuitionBase, IIntuition, a0, window);
 
 	// Task to signal?
 	if (sigtask) Signal(sigtask,1<<sigbit);
@@ -1721,7 +1726,7 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 	if ((sem=(struct DOpusSemaphore *)FindSemaphore("DOpus Public Semaphore")))
 		main_ipc=(IPCData *)sem->main_ipc;
 
-#define DOSBase	(data->dos_base)
+//#define DOSBase	(data->dos_base)
 	// Patch WBInfo() ?
 	if (main_ipc && GetVar("dopus/PatchWBInfo",buf,2,GVF_GLOBAL_ONLY)>0 && buf[0]=='1')
 	{
@@ -1757,10 +1762,10 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 			return res;
 		}
 	}
-#undef DOSBase
+//#undef DOSBase
 
 	// Call original function
-	return LIBCALL_3(ULONG, data->wb_data.old_function[WB_PATCH_WBINFO], data->wb_data.wb_base, IWorkbench, a0, lock, a1, name, a2, screen);
+	return LIBCALL_3(ULONG, data->wb_data.old_function[WB_PATCH_WBINFO], WorkbenchBase, IWorkbench, a0, lock, a1, name, a2, screen);
 }
 PATCH_END
 
@@ -1868,7 +1873,7 @@ PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow
 		struct TagItem *tag;
 		BOOL lock=0;
 
-#define IntuitionBase	(data->int_base)
+//#define IntuitionBase	(data->int_base)
 
 		// Get window size
 		w=GetTagData(WA_Width,(newwin)?newwin->Width:0,tags);
@@ -1897,14 +1902,14 @@ PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow
 		if ((tag=FindTagItem(WA_Left,tags))) tag->ti_Data=x;
 		if ((tag=FindTagItem(WA_Top,tags))) tag->ti_Data=y;
 
-#undef IntuitionBase
+//#undef IntuitionBase
 
 		// Kludge is only used once
 		data->open_window_kludge=0;
 	}
 
 	// Open window
-	return LIBCALL_2(struct Window *, wb_data->old_function[WB_PATCH_OPENWINDOWTAGS], data->int_base, IIntuition, a0, newwin, a1, tags);
+	return LIBCALL_2(struct Window *, wb_data->old_function[WB_PATCH_OPENWINDOWTAGS], IntuitionBase, IIntuition, a0, newwin, a1, tags);
 }
 PATCH_END
 
