@@ -86,7 +86,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 	// Write icon
 	result=L_DeleteIcon(name,libbase);
 
-#define DOSBase (data->dos_base)
+//#define DOSBase (data->dos_base)
 
 #ifdef __AROS__
 	// try DeleteFile too, in case it was an orphan icon
@@ -98,7 +98,7 @@ PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 	if ((result || IoErr()==ERROR_OBJECT_NOT_FOUND) && full_name)
 		icon_notify(data,full_name,INF_FULLNAME,1);
 
-#undef DOSBase
+//#undef DOSBase
 
 	// Free full name buffer
 	FreeVec(full_name);
@@ -143,7 +143,7 @@ char *icon_fullname(struct LibData *data,char *name)
 	ptr=full_name+strlen(full_name);
 	strcat(full_name,".info");
 
-#define DOSBase (data->dos_base)
+//#define DOSBase (data->dos_base)
 
 	// Lock icon
 	if (!(lock=Lock(full_name,ACCESS_READ)))
@@ -177,7 +177,7 @@ char *icon_fullname(struct LibData *data,char *name)
 		UnLock(lock);
 	}
 
-#undef DOSBase
+//#undef DOSBase
 
 	// Strip .info from name
 	if ((len=strlen(full_name))>5 &&
@@ -209,7 +209,7 @@ BOOL LIBFUNC L_WriteIcon(
 	// No icon?
 	if (!icon) return 0;
 
-#define NewIconBase	(data->new_icon_base)
+//#define NewIconBase	(data->new_icon_base)
 
 	// A NewIcon?
 	if (L_GetIconType(icon)==ICON_NEWICON && NewIconBase)
@@ -262,18 +262,18 @@ BOOL LIBFUNC L_WriteIcon(
 			*((ULONG *)&icon->do_Gadget.UserData)|=WB_DISKREVISION;
 
 
-#define IconBase	(data->icon_base)
+//#define IconBase	(data->icon_base)
 	
 	if	(IconBase->lib_Version>=44)
 		result=PutIconTags(name,icon,TAG_DONE);
 
 	else
 		// Write the icon
-		result=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_PUTDISKOBJECT], data->icon_base, IIcon, a0, name, a1, icon);
+		result=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_PUTDISKOBJECT], IconBase, IIcon, a0, name, a1, icon);
 	}
 
-#undef IconBase
-#undef NewIconBase
+//#undef IconBase
+//#undef NewIconBase
 
 	return result;
 }
@@ -294,7 +294,7 @@ BOOL LIBFUNC L_DeleteIcon(
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Delete it
-	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_DELETEDISKOBJECT], data->icon_base, IIcon, a0, name);
+	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_DELETEDISKOBJECT], IconBase, IIcon, a0, name);
 }
 
 

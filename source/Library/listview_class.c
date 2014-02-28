@@ -163,7 +163,7 @@ ULONG LIBFUNC listview_dispatch(
 					if ((data->list_font=OpenFont(attr)))
 						data->flags|=LVF_GOT_FONT;
 				}
-				if (!data->list_font) data->list_font=GfxBase->DefaultFont;
+				if (!data->list_font) data->list_font=((struct GfxBase *)GfxBase)->DefaultFont;
 
 				// Arrow height
 				data->arrow_height=data->list_font->tf_YSize-2;

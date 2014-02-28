@@ -75,15 +75,17 @@ typedef struct //Moved here from wb.h
 	short			patch_count;
 	struct SignalSemaphore	patch_lock;
 	struct MinList		app_list;
-	struct Library		*wb_base;
-	struct Library		*int_base;
+	//struct Library		*wb_base;
+	//struct Library		*int_base;
+	ULONG			pad2[2];
 	struct MyLibrary	*dopus_base;
 	APTR			*old_function;
 
 	UWORD			lock_count;
 	UWORD			pad;
 
-	struct Library		*utility_base;
+	//struct Library		*utility_base;
+	ULONG 			pad3;
 	struct MinList		rem_app_list;
 	ULONG			pad1[3];
 } WB_Data;
@@ -96,8 +98,9 @@ struct LibData
 	struct MinList		notify_list;
 	struct SignalSemaphore	notify_lock;
 
-	struct Library		*dos_base;
-	struct Library		*icon_base;
+	//struct Library		*dos_base;
+	//struct Library		*icon_base;
+	ULONG			pad1[2];
 
 	IPCData			*launch_proc;
 	struct MinList		launch_list;
@@ -107,7 +110,8 @@ struct LibData
 	BPTR			path_list;
 	struct SignalSemaphore	path_lock;
 
-	struct Library		*int_base;
+	//struct Library		*int_base;
+	ULONG			pad2;
 	struct MinList		error_list;
 	ULONG			error_wait;
 
@@ -122,11 +126,13 @@ struct LibData
 
 	Class			*dt_class;
 	ULONG			old_openlib;
-	struct MyLibrary	dt_lib;
+	//struct MyLibrary	dt_lib;
+	ULONG			pad3;
 
 	IPCData			*fake_wb;
 	struct MyLibrary	*dopus_base;
-	struct Library		*gfx_base;
+	//struct Library		*gfx_base;
+	ULONG			pad4;
 
 	struct ListLock		file_list;
 	BPTR			last_file;
@@ -142,7 +148,8 @@ struct LibData
 	APTR			dos_list_memory;
 	struct SignalSemaphore	dos_lock;
 
-	struct Library		*new_icon_base;
+	//struct Library		*new_icon_base;
+	ULONG			pad5;
 
 	ULONG			NewIconsFlags;
 	short			NewIconsPrecision;

@@ -41,10 +41,11 @@ For more information on Directory Opus for Windows please see:
 
 typedef struct
 {
-	struct Library		*IntuitionBase;
+	/*struct Library		*IntuitionBase;
 	struct GfxBase		*GfxBase;
 	struct Library		*UtilityBase;
-	struct Library		*LayersBase;
+	struct Library		*LayersBase;*/
+	ULONG				pad1[4];
 	struct LibData		*data;
 } BoopsiLibs;
 
@@ -261,13 +262,13 @@ void palette_render(Class *,struct Gadget *,PaletteData *,struct gpRender *);
 #define GOTBUF_WORK	(1<<2)
 #define GOTBUF_ALL	(GOTBUF_MAIN|GOTBUF_UNDO|GOTBUF_WORK)
 
-#ifdef BOOPSI_LIBS
+/*#ifdef BOOPSI_LIBS
 #define IntuitionBase	((BoopsiLibs *)cl->cl_Dispatcher.h_Data)->IntuitionBase
 #define GfxBase		((BoopsiLibs *)cl->cl_Dispatcher.h_Data)->GfxBase
 #define UtilityBase	((BoopsiLibs *)cl->cl_Dispatcher.h_Data)->UtilityBase
 #define LayersBase	((BoopsiLibs *)cl->cl_Dispatcher.h_Data)->LayersBase
 #define DOSBase		((BoopsiLibs *)cl->cl_Dispatcher.h_Data)->data->dos_base
-#endif
+#endif*/
 
 struct gpRenderExt
 {

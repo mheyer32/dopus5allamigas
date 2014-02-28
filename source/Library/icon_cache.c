@@ -35,6 +35,8 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 #include <proto/newicon.h>
 
+//#define NewIconBase (data->new_icon_base)
+
 #define TESTGP
 
 struct DiskObject *LIBFUNC L_GetCachedDefDiskObject(
@@ -641,25 +643,25 @@ void LIBFUNC L_SetNewIconsFlags(
 	data->NewIconsPrecision=precision;
 
 	// Got NewIcons?
-	if (data->new_icon_base)
+	if (NewIconBase)
 	{
 		// Set precision
-		((struct NewIconBase *)data->new_icon_base)->nib_Precision=precision;
+		((struct NewIconBase *)NewIconBase)->nib_Precision=precision;
 
 		// Set flags
-		if (data->new_icon_base->lib_Version>=38)
+		if (NewIconBase->lib_Version>=38)
 		{
 			if (flags&ENVNIF_DITHERING)
-				((struct NewIconBase *)data->new_icon_base)->nib_Flags|=NIFLG_DO_DITHER;
+				((struct NewIconBase *)NewIconBase)->nib_Flags|=NIFLG_DO_DITHER;
 			else
-				((struct NewIconBase *)data->new_icon_base)->nib_Flags&=~NIFLG_DO_DITHER;
+				((struct NewIconBase *)NewIconBase)->nib_Flags&=~NIFLG_DO_DITHER;
 		}
-		if (data->new_icon_base->lib_Version>=39)
+		if (NewIconBase->lib_Version>=39)
 		{
 			if (flags&ENVNIF_RTG)
-				((struct NewIconBase *)data->new_icon_base)->nib_Flags|=NIFLG_RTGMODE;
+				((struct NewIconBase *)NewIconBase)->nib_Flags|=NIFLG_RTGMODE;
 			else
-				((struct NewIconBase *)data->new_icon_base)->nib_Flags&=~NIFLG_RTGMODE;
+				((struct NewIconBase *)NewIconBase)->nib_Flags&=~NIFLG_RTGMODE;
 		}
 	}
 }

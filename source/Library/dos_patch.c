@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-#define DOSBase (data->dos_base)
+//#define DOSBase (data->dos_base)
 
 /********************************** CreateDir **********************************/
 
@@ -42,7 +42,7 @@ PATCHED_1(BPTR, ASM L_PatchedCreateDir, d1, char *, name)
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
-	lock=LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], data->dos_base, IDOS, d1, name);
+	lock=LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], DOSBase, IDOS, d1, name);
 
 	// Failed?
 	if (!lock) return 0;
@@ -81,7 +81,7 @@ BPTR LIBFUNC L_OriginalCreateDir(
 		return CreateDir(name);
 
 	// Create directory
-	return LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], data->dos_base, IDOS, d1, name);
+	return LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], DOSBase, IDOS, d1, name);
 }
 
 /********************************** DeleteFile **********************************/
@@ -134,7 +134,7 @@ PATCHED_1(long, ASM L_PatchedDeleteFile, d1, char *, name)
 	if (task) task->pr_WindowPtr=wsave;
 
 	// Call original function
-	res=LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], data->dos_base, IDOS, d1, name);
+	res=LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], DOSBase, IDOS, d1, name);
 
 	// Failed?
 	if (!res) return 0;
@@ -172,7 +172,7 @@ long LIBFUNC L_OriginalDeleteFile(
 		return DeleteFile(name);
 
 	// Delete file
-	return LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], data->dos_base, IDOS, d1, name);
+	return LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], DOSBase, IDOS, d1, name);
 }
 
 
@@ -195,7 +195,7 @@ PATCHED_2(BOOL, ASM L_PatchedSetFileDate, d1, char *, name, d2, struct DateStamp
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], data->dos_base, IDOS, d1, name, d2, date);
+	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], DOSBase, IDOS, d1, name, d2, date);
 
 	// Failed?
 	if (!res) return 0;
@@ -260,7 +260,7 @@ BOOL LIBFUNC L_OriginalSetFileDate(
 		return (BOOL)SetFileDate(name,date);
 
 	// Set date
-	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], data->dos_base, IDOS, d1, name, d2, date);
+	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], DOSBase, IDOS, d1, name, d2, date);
 }
 
 
@@ -283,7 +283,7 @@ PATCHED_2(BOOL, ASM L_PatchedSetComment, d1, char *, name, d2, char *, comment)
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], data->dos_base, IDOS, d1, name, d2, comment);
+	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], DOSBase, IDOS, d1, name, d2, comment);
 
 	// Failed?
 	if (!res) return 0;
@@ -348,7 +348,7 @@ BOOL LIBFUNC L_OriginalSetComment(
 		return (BOOL)SetComment(name,comment);
 
 	// Set comment
-	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], data->dos_base, IDOS, d1, name, d2, comment);
+	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], DOSBase, IDOS, d1, name, d2, comment);
 }
 
 
@@ -371,7 +371,7 @@ PATCHED_2(BOOL, ASM L_PatchedSetProtection, d1, char *, name, d2, ULONG, mask)
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], data->dos_base, IDOS, d1, name, d2, mask);
+	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], DOSBase, IDOS, d1, name, d2, mask);
 
 	// Failed?
 	if (!res) return 0;
@@ -435,7 +435,7 @@ BOOL LIBFUNC L_OriginalSetProtection(
 		return (BOOL)SetProtection(name,mask);
 
 	// Set protection
-	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], data->dos_base, IDOS, d1, name, d2, mask);
+	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], DOSBase, IDOS, d1, name, d2, mask);
 }
 
 
@@ -488,7 +488,7 @@ PATCHED_2(BOOL, ASM L_PatchedRename, d1, char *, oldname, d2, char *, newname)
 	if (task) task->pr_WindowPtr=wsave;
 
 	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], data->dos_base, IDOS, d1, oldname, d2, newname);
+	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], DOSBase, IDOS, d1, oldname, d2, newname);
 
 	// Failure?
 	if (!res)
@@ -552,7 +552,7 @@ BOOL LIBFUNC L_OriginalRename(
 		return (BOOL)Rename(oldname,newname);
 
 	// Rename file
-	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], data->dos_base, IDOS, d1, oldname, d2, newname);
+	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], DOSBase, IDOS, d1, oldname, d2, newname);
 }
 
 
@@ -573,7 +573,7 @@ PATCHED_2(BOOL, ASM L_PatchedRelabel, d1, char *, volumename, d2, char *, name)
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], data->dos_base, IDOS, d1, volumename, d2, name);
+	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], DOSBase, IDOS, d1, volumename, d2, name);
 
 	// Failure?
 	if (!res) return res;
@@ -604,7 +604,7 @@ BOOL LIBFUNC L_OriginalRelabel(
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Relabel disk
-	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], data->dos_base, IDOS, d1, volumename, d2, name);
+	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], DOSBase, IDOS, d1, volumename, d2, name);
 }
 
 
@@ -662,7 +662,7 @@ PATCHED_2(BPTR, ASM L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
 	if (task) task->pr_WindowPtr=wsave;
 
 	// Call original function
-	file=LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], data->dos_base, IDOS, d1, name, d2, accessMode);
+	file=LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], DOSBase, IDOS, d1, name, d2, accessMode);
 
 	// Failure?
 	if (!file) return file;
@@ -754,7 +754,7 @@ BPTR LIBFUNC L_OriginalOpen(
 		return Open(name,accessMode);
 
 	// Open file
-	return LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], data->dos_base, IDOS, d1, name, d2, accessMode);
+	return LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], DOSBase, IDOS, d1, name, d2, accessMode);
 }
 
 
@@ -847,7 +847,7 @@ PATCHED_1(BOOL, ASM L_PatchedClose, d1, BPTR, file)
 	}
 
 	// Close file
-	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], data->dos_base, IDOS, d1, file);
+	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], DOSBase, IDOS, d1, file);
 }
 PATCH_END
 
@@ -871,7 +871,7 @@ BOOL LIBFUNC L_OriginalClose(
 		return (BOOL)Close(file);
 
 	// Close file
-	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], data->dos_base, IDOS, d1, file);
+	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], DOSBase, IDOS, d1, file);
 }
 
 
@@ -908,7 +908,7 @@ PATCHED_3(LONG, ASM L_PatchedWrite, d1, BPTR, file, d2, void *, wdata, d3, LONG,
 	}
 
 	// Write data
-	return LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], data->dos_base, IDOS, d1, file, d2, wdata, d3, length);
+	return LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], DOSBase, IDOS, d1, file, d2, wdata, d3, length);
 }
 PATCH_END
 
@@ -934,7 +934,7 @@ LONG LIBFUNC L_OriginalWrite(
 		return Write(file,wdata,length);
 
 	// Write data
-	return LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], data->dos_base, IDOS, d1, file, d2, wdata, d3, length);
+	return LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], DOSBase, IDOS, d1, file, d2, wdata, d3, length);
 }
 
 
