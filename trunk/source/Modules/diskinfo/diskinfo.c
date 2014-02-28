@@ -22,7 +22,11 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "diskinfo.h"
+#ifdef __amigaos3__
+#include <math-68881.h>
+#else
 #include <math.h>
+#endif
 
 // Show disk information
 int LIBFUNC L_Module_Entry(
