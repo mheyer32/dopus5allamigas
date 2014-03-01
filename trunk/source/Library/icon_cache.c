@@ -649,14 +649,14 @@ void LIBFUNC L_SetNewIconsFlags(
 		((struct NewIconBase *)NewIconBase)->nib_Precision=precision;
 
 		// Set flags
-		if ((struct Library *)NewIconBase)->lib_Version>=38)
+		if (((struct Library *)NewIconBase)->lib_Version>=38)
 		{
 			if (flags&ENVNIF_DITHERING)
 				((struct NewIconBase *)NewIconBase)->nib_Flags|=NIFLG_DO_DITHER;
 			else
 				((struct NewIconBase *)NewIconBase)->nib_Flags&=~NIFLG_DO_DITHER;
 		}
-		if ((struct Library *)NewIconBase)->lib_Version>=39)
+		if (((struct Library *)NewIconBase)->lib_Version>=39)
 		{
 			if (flags&ENVNIF_RTG)
 				((struct NewIconBase *)NewIconBase)->nib_Flags|=NIFLG_RTGMODE;
