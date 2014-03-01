@@ -33,7 +33,13 @@ For more information on Directory Opus for Windows please see:
 #ifdef __amigaos4__
 #include <proto/expansion.h>
 #include <expansion/expansion.h>
+#endif
 
+#ifdef __amigaos3__
+// prevent LibNIX from trying to auto-open v37 of rexxsyslib.library
+// as a small tradeoff the startup code will crash on Kickstart versions below 2.04
+// instead of bringing up a requester.
+ULONG __oslibversion = 36;
 #endif
 
 #define LIB_VER LIB_VERSION	// Minimum library version we need
