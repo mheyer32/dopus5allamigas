@@ -30,16 +30,45 @@ For more information on Directory Opus for Windows please see:
 
 */
 
+#ifdef __amigaos3__
+static inline void atomic_inc(ULONG *counter)
+{
+	asm volatile ("addql #1,%0" : "+m" (*counter));
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	asm volatile ("subql #1,%0" : "+m" (*counter));
+}
+#else
+static inline void atomic_inc(ULONG *counter)
+{
+	__sync_add_and_fetch(counter, 1);
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	__sync_sub_and_fetch(counter, 1);
+}
+#endif
+
+extern ULONG usecount[WB_PATCH_COUNT];
+
 // Patched PutDiskObject()
 PATCHED_2(BOOL, LIBFUNC L_WB_PutDiskObject, a0, char *, name, a1, struct DiskObject *, diskobj)
 {
+	atomic_inc(&usecount[WB_PATCH_PUTDISKOBJECT]);
+	{
 	struct LibData *data;
 	struct MyLibrary *libbase;
-	BOOL result,magic=0;
+	BOOL result,magic=FALSE;
 
 	// Get library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_PUTDISKOBJECT]);
+		return FALSE;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
@@ -51,7 +80,7 @@ PATCHED_2(BOOL, LIBFUNC L_WB_PutDiskObject, a0, char *, name, a1, struct DiskObj
 		diskobj->do_Magic=WB_DISKMAGIC;
 
 		// Set magic flag, which will stop us sending notification
-		magic=1;
+		magic=TRUE;
 	}
 
 	// Write icon
@@ -60,7 +89,9 @@ PATCHED_2(BOOL, LIBFUNC L_WB_PutDiskObject, a0, char *, name, a1, struct DiskObj
 	// Succeeded?
 	if (result && !magic) icon_notify(data,name,0,0);
 
+	atomic_dec(&usecount[WB_PATCH_PUTDISKOBJECT]);
 	return result;
+	}
 }
 PATCH_END
 
@@ -68,6 +99,8 @@ PATCH_END
 // Patched DeleteDiskObject()
 PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 {
+	atomic_inc(&usecount[WB_PATCH_DELETEDISKOBJECT]);
+	{
 	struct LibData *data;
 	struct MyLibrary *libbase;
 	BOOL result;
@@ -75,7 +108,10 @@ PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 
 	// Get library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_DELETEDISKOBJECT]);
+		return FALSE;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
@@ -102,7 +138,10 @@ PATCHED_1(BOOL, LIBFUNC L_WB_DeleteDiskObject, a0, char *, name)
 
 	// Free full name buffer
 	FreeVec(full_name);
+
+	atomic_dec(&usecount[WB_PATCH_DELETEDISKOBJECT]);
 	return result;
+	}
 }
 PATCH_END
 
