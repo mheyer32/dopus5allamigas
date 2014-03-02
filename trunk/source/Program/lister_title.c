@@ -23,11 +23,19 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
-static __chip unsigned short
+UWORD
 	command_arrow[7]={
 		0x3c00,0x3c00,0x3c00,0xff00,0x7e00,0x3c00,0x1800},
 	parent_arrow[6]={
 		0x0e00,0x3800,0xe000,0xe000,0x3800,0x0e00};
+
+#ifdef __amigaos3__
+// initialized in startup_init_icons()
+UWORD *command_arrow_chip = NULL;
+UWORD *parent_arrow_chip = NULL;
+#define command_arrow command_arrow_chip
+#define parent_arrow parent_arrow_chip
+#endif
 
 // Display disk name and size
 // Called from the LISTER PROCESS
