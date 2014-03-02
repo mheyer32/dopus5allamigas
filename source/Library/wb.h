@@ -371,10 +371,4 @@ char *icon_fullname(struct LibData *data,char *name);
 
 #define INF_FULLNAME	(1<<0)
 
-#ifdef __amigaos4__
-struct Interface *wb_get_patchbase(short type,struct LibData *data);
-#else
-struct Library *wb_get_patchbase(short type,struct LibData *data);
-#endif
-
 #endif

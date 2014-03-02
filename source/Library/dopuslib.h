@@ -57,7 +57,7 @@ For more information on Directory Opus for Windows please see:
 #pragma pack(2)
 #endif
 
-
+#if 0
 struct MyLibrary
 {
         struct             Library ml_Lib;
@@ -66,6 +66,17 @@ struct MyLibrary
         APTR               ml_ExecBase; /* pointer to exec base  */
         ULONG              ml_UserData;
 };
+#else
+struct MyLibrary
+{
+  struct Library          libBase;
+  UWORD                   initialized;
+  struct Library          *sysBase;
+  BPTR                    segList;
+  struct SignalSemaphore  libSem;
+  ULONG                   ml_UserData;
+};
+#endif
 #ifdef __amigaos4__
 APTR dopuslibbase_global;
 #endif
