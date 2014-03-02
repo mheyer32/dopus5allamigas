@@ -739,7 +739,11 @@ void startup_process_args(int argc,char **argv)
 		arg_array=argv;
 		
 		// if Workbench is not running, set the flag to do startup items
+#ifdef __AROS__
+		if (FindPort("WORKBENCH") == NULL && FindTask("WANDERER:Wanderer") == NULL)
+#else
 		if( FindPort( "WORKBENCH" ) == NULL )
+#endif
 			GUI->flags|=GUIF_DO_WBSTARTUP;
 	}
 
