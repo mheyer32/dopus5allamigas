@@ -24,6 +24,7 @@
 #ifndef _BASE_H
 #define _BASE_H
 
+#if 0
 struct LibraryHeader
 {
   struct Library          libBase;
@@ -32,6 +33,7 @@ struct LibraryHeader
   BPTR                    segList;
   struct SignalSemaphore  libSem;
 };
+#endif
 
 /***************************************************************************/
 

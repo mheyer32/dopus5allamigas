@@ -290,6 +290,7 @@ void do_mufs_logout(struct LoginPkt *);
 ENTRANCE_2(static void ASM, launch_exit_code, d0, LONG, return_code, d1, LaunchPacket *, packet)
 {
 	struct LibData *data;
+	char *name=packet->name;
 
 	// Get library data pointer
 	data=packet->data;
@@ -307,7 +308,8 @@ ENTRANCE_2(static void ASM, launch_exit_code, d0, LONG, return_code, d1, LaunchP
 	if (--data->launch_count==0)
 	{
 		// Decrement library open count
-		--DOpusBase->ml_Lib.lib_OpenCnt;
+		--DOpusBase->libBase.lib_OpenCnt;
+		D(bug("%s:%d %s lib_OpenCnt decreased to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, name));
 
 		// Signal to check for pending quit
 		Signal((struct Task *)data->launch_proc->proc,IPCSIG_QUIT);
@@ -428,7 +430,8 @@ void SAVEDS launcher_proc(void)
 					IsListEmpty((struct List *)&data->wb_data.rem_app_list))
 				{
 					// Decrement library open count so we can get expunged
-					--DOpusBase->ml_Lib.lib_OpenCnt;
+					--DOpusBase->libBase.lib_OpenCnt;
+					D(bug("%s:%d %s lib_OpenCnt decreased to %d\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt));
 				}
 
 				// Unlock AppEntry list
@@ -526,6 +529,8 @@ void SAVEDS launcher_proc(void)
 				// Does this match?
 				if (startup==&proc->startup)
 				{
+					char *procname=proc->name;
+
 					// Remove from the list
 					Remove((struct Node *)proc);
 
@@ -573,7 +578,11 @@ void SAVEDS launcher_proc(void)
 					--data->launch_count;
 
 					// Zero count? Decrement library open count
-					if (data->launch_count==0) --DOpusBase->ml_Lib.lib_OpenCnt;
+					if (data->launch_count==0)
+					{
+						--DOpusBase->libBase.lib_OpenCnt;
+						D(bug("%s:%d %s lib_OpenCnt decreased to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, procname));
+					}
 					break;
 				}
 			}
@@ -678,7 +687,10 @@ void SAVEDS launcher_proc(void)
 
 							// First program? Increment open count so we can't be flushed
 							if (data->launch_count==1)
-								++DOpusBase->ml_Lib.lib_OpenCnt;
+							{
+								++DOpusBase->libBase.lib_OpenCnt;
+								D(bug("%s:%d %s lib_OpenCnt bumped to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, packet->name));
+							}
 
 							// Unlock launch list
 							FreeSemaphore(&data->launch_lock);
@@ -714,7 +726,10 @@ void SAVEDS launcher_proc(void)
 
 						// First program? Increment open count so we can't be flushed
 						if (data->launch_count==1)
-							++DOpusBase->ml_Lib.lib_OpenCnt;
+						{
+							++DOpusBase->libBase.lib_OpenCnt;
+							D(bug("%s:%d %s lib_OpenCnt bumped to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, packet->name));
+						}
 
 						// Wait for reply?
 						if (packet->wait && !packet->notify_ipc)

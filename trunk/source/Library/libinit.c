@@ -585,17 +585,17 @@ static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STR
 
 #if defined(__amigaos4__)
 
-static struct LibraryHeader * LIBFUNC LibInit    (struct LibraryHeader *base, BPTR librarySegment, struct ExecIFace *pIExec);
+static struct MyLibrary * LIBFUNC LibInit    (struct MyLibrary *base, BPTR librarySegment, struct ExecIFace *pIExec);
 static BPTR                   LIBFUNC LibExpunge (struct LibraryManagerInterface *Self);
-static struct LibraryHeader * LIBFUNC LibOpen    (struct LibraryManagerInterface *Self, ULONG version);
+static struct MyLibrary * LIBFUNC LibOpen    (struct LibraryManagerInterface *Self, ULONG version);
 static BPTR                   LIBFUNC LibClose   (struct LibraryManagerInterface *Self);
 static LONG                   LIBFUNC LibNull    (void);
 
 #elif defined(__MORPHOS__)
 
-static struct LibraryHeader * LIBFUNC LibInit   (struct LibraryHeader *base, BPTR librarySegment, struct ExecBase *sb);
+static struct MyLibrary * LIBFUNC LibInit   (struct MyLibrary *base, BPTR librarySegment, struct ExecBase *sb);
 static BPTR                   LIBFUNC LibExpunge(void);
-static struct LibraryHeader * LIBFUNC LibOpen   (void);
+static struct MyLibrary * LIBFUNC LibOpen   (void);
 static BPTR                   LIBFUNC LibClose  (void);
 static LONG                   LIBFUNC LibNull   (void);
 
@@ -607,29 +607,29 @@ static LONG                   LIBFUNC LibNull   (void);
 #define DOpus_LibClose LibClose
 #define DOpus_LibExpunge LibExpunge
 
-static AROS_UFP3 (struct LibraryHeader *, LibInit,
-                  AROS_UFPA(struct LibraryHeader *, base, D0),
+static AROS_UFP3 (struct MyLibrary *, LibInit,
+                  AROS_UFPA(struct MyLibrary *, base, D0),
                   AROS_UFPA(BPTR, librarySegment, A0),
                   AROS_UFPA(struct ExecBase *, sb, A6)
 );
-static AROS_LD1 (struct LibraryHeader *, LibOpen,
+static AROS_LD1 (struct MyLibrary *, LibOpen,
                  AROS_LPA (UNUSED ULONG, version, D0),
-                 struct LibraryHeader *, base, 1, DOpus
+                 struct MyLibrary *, base, 1, DOpus
 );
 static AROS_LD0 (BPTR, LibClose,
-                 struct LibraryHeader *, base, 2, DOpus
+                 struct MyLibrary *, base, 2, DOpus
 );
 static AROS_LD1(BPTR, LibExpunge,
-                AROS_LPA(UNUSED struct LibraryHeader *, __extrabase, D0),
-                struct LibraryHeader *, base, 3, DOpus
+                AROS_LPA(UNUSED struct MyLibrary *, __extrabase, D0),
+                struct MyLibrary *, base, 3, DOpus
 );
 
 #else
 
-static struct LibraryHeader * LIBFUNC LibInit    (REG(d0, struct LibraryHeader *lh), REG(a0, BPTR Segment), REG(a6, struct ExecBase *sb));
-static BPTR                   LIBFUNC LibExpunge (REG(a6, struct LibraryHeader *base));
-static struct LibraryHeader * LIBFUNC LibOpen    (REG(d0, ULONG version), REG(a6, struct LibraryHeader *base));
-static BPTR                   LIBFUNC LibClose   (REG(a6, struct LibraryHeader *base));
+static struct MyLibrary * LIBFUNC LibInit    (REG(d0, struct MyLibrary *lh), REG(a0, BPTR Segment), REG(a6, struct ExecBase *sb));
+static BPTR                   LIBFUNC LibExpunge (REG(a6, struct MyLibrary *base));
+static struct MyLibrary * LIBFUNC LibOpen    (REG(d0, ULONG version), REG(a6, struct MyLibrary *base));
+static BPTR                   LIBFUNC LibClose   (REG(a6, struct MyLibrary *base));
 static LONG                   LIBFUNC LibNull    (void);
 
 #endif
@@ -742,7 +742,7 @@ extern CONST APTR VecTable68K[];
 
 STATIC CONST struct TagItem libCreateTags[] =
 {
-  { CLT_DataSize,   sizeof(struct LibraryHeader) },
+  { CLT_DataSize,   sizeof(struct MyLibrary) },
   { CLT_InitFunc,   (Tag)LibInit },
   { CLT_Interfaces, (Tag)libInterfaces },
   #ifndef NO_VECTABLE68K
@@ -780,7 +780,7 @@ STATIC CONST CONST_APTR LibVectors[] =
 
 STATIC CONST IPTR LibInitTab[] =
 {
-  sizeof(struct LibraryHeader),
+  sizeof(struct MyLibrary),
   (IPTR)LibVectors,
   (IPTR)NULL,
   (IPTR)LibInit
@@ -839,8 +839,8 @@ const USED_VAR ULONG __abox__ = 1;
 
 #if defined(__amigaos3__)
 ULONG stackswap_call(struct StackSwapStruct *stack,
-                     ULONG (*function)(struct LibraryHeader *),
-                     struct LibraryHeader *arg);
+                     ULONG (*function)(struct MyLibrary *),
+                     struct MyLibrary *arg);
 
 asm(".text                    \n\
      .even                    \n\
@@ -865,8 +865,8 @@ asm(".text                    \n\
       rts");
 #elif defined(__MORPHOS__)
 ULONG stackswap_call(struct StackSwapStruct *stack,
-                     ULONG (*function)(struct LibraryHeader *),
-                     struct LibraryHeader *arg)
+                     ULONG (*function)(struct MyLibrary *),
+                     struct MyLibrary *arg)
 {
    struct PPCStackSwapArgs swapargs;
 
@@ -876,8 +876,8 @@ ULONG stackswap_call(struct StackSwapStruct *stack,
 }
 #elif defined(__AROS__)
 ULONG stackswap_call(struct StackSwapStruct *stack,
-                             ULONG (*function)(struct LibraryHeader *),
-                             struct LibraryHeader *arg)
+                             ULONG (*function)(struct MyLibrary *),
+                             struct MyLibrary *arg)
 {
    struct StackSwapArgs swapargs;
 
@@ -889,7 +889,7 @@ ULONG stackswap_call(struct StackSwapStruct *stack,
 #error Bogus operating system
 #endif
 
-static BOOL callLibFunction(ULONG (*function)(struct LibraryHeader *), struct LibraryHeader *arg)
+static BOOL callLibFunction(ULONG (*function)(struct MyLibrary *), struct MyLibrary *arg)
 {
   BOOL success = FALSE;
   struct Task *tc;
@@ -947,27 +947,27 @@ static BOOL callLibFunction(ULONG (*function)(struct LibraryHeader *), struct Li
 /****************************************************************************/
 
 #if defined(__amigaos4__)
-static struct LibraryHeader * LibInit(struct LibraryHeader *base, BPTR librarySegment, struct ExecIFace *pIExec)
+static struct MyLibrary * LibInit(struct MyLibrary *base, BPTR librarySegment, struct ExecIFace *pIExec)
 {
   struct ExecBase *sb = (struct ExecBase *)pIExec->Data.LibBase;
   IExec = pIExec;
 #elif defined(__MORPHOS__)
-static struct LibraryHeader * LibInit(struct LibraryHeader *base, BPTR librarySegment, struct ExecBase *sb)
+static struct MyLibrary * LibInit(struct MyLibrary *base, BPTR librarySegment, struct ExecBase *sb)
 {
 #elif defined(__AROS__)
-static AROS_UFH3(struct LibraryHeader *, LibInit,
-                 AROS_UFHA(struct LibraryHeader *, base, D0),
+static AROS_UFH3(struct MyLibrary *, LibInit,
+                 AROS_UFHA(struct MyLibrary *, base, D0),
                  AROS_UFHA(BPTR, librarySegment, A0),
                  AROS_UFHA(struct ExecBase *, sb, A6)
 )
 {
   AROS_USERFUNC_INIT
 #else
-static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base), REG(a0, BPTR librarySegment), REG(a6, struct ExecBase *sb))
+static struct MyLibrary * LIBFUNC LibInit(REG(d0, struct MyLibrary *base), REG(a0, BPTR librarySegment), REG(a6, struct ExecBase *sb))
 {
 #endif
 
-	base->sysBase = (APTR)sb;
+  base->sysBase = (APTR)sb;
   SysBase = (APTR)sb;
 
   // make sure that this is really a 68020+ machine if optimized for 020+
@@ -1023,7 +1023,7 @@ static struct LibraryHeader * LIBFUNC LibInit(REG(d0, struct LibraryHeader *base
   FreeMem((STRPTR)(LIB)-(LIB)->lib_NegSize, (ULONG)((LIB)->lib_NegSize+(LIB)->lib_PosSize))
 #endif
 
-STATIC BPTR LibDelete(struct LibraryHeader *base)
+STATIC BPTR LibDelete(struct MyLibrary *base)
 {
 #if defined(__amigaos4__)
   struct ExecIFace *IExec = (struct ExecIFace *)((struct ExecBase*)SysBase)->MainInterface;
@@ -1065,20 +1065,20 @@ STATIC BPTR LibDelete(struct LibraryHeader *base)
 #if defined(__amigaos4__)
 static BPTR LibExpunge(struct LibraryManagerInterface *Self)
 {
-  struct LibraryHeader *base = (struct LibraryHeader *)Self->Data.LibBase;
+  struct MyLibrary *base = (struct MyLibrary *)Self->Data.LibBase;
 #elif defined(__MORPHOS__)
 static BPTR LibExpunge(void)
 {
-  struct LibraryHeader *base = (struct LibraryHeader*)REG_A6;
+  struct MyLibrary *base = (struct MyLibrary*)REG_A6;
 #elif defined(__AROS__)
 static AROS_LH1(BPTR, LibExpunge,
-  AROS_LHA(UNUSED struct LibraryHeader *, __extrabase, D0),
-  struct LibraryHeader *, base, 3, DOpus
+  AROS_LHA(UNUSED struct MyLibrary *, __extrabase, D0),
+  struct MyLibrary *, base, 3, DOpus
 )
 {
     AROS_LIBFUNC_INIT
 #else
-static BPTR LIBFUNC LibExpunge(REG(a6, struct LibraryHeader *base))
+static BPTR LIBFUNC LibExpunge(REG(a6, struct MyLibrary *base))
 {
 #endif
   BPTR rc;
@@ -1090,8 +1090,23 @@ static BPTR LIBFUNC LibExpunge(REG(a6, struct LibraryHeader *base))
     base->libBase.lib_Flags |= LIBF_DELEXP;
     rc = 0;
   }
+  // in case the open counter is <= 0 we can
+  // make sure that we free everything
   else
   {
+    // free all our private data and stuff.
+    ObtainSemaphore(&base->libSem);
+
+    if (base->initialized == 1)
+    {
+      base->initialized = 0;
+      // make sure we have enough stack here
+      callLibFunction(freeBase, base);
+    }
+
+    // unprotect
+    ReleaseSemaphore(&base->libSem);
+
     rc = LibDelete(base);
   }
 
@@ -1104,22 +1119,22 @@ static BPTR LIBFUNC LibExpunge(REG(a6, struct LibraryHeader *base))
 /****************************************************************************/
 
 #if defined(__amigaos4__)
-static struct LibraryHeader *LibOpen(struct LibraryManagerInterface *Self, ULONG version UNUSED)
+static struct MyLibrary *LibOpen(struct LibraryManagerInterface *Self, ULONG version UNUSED)
 {
-  struct LibraryHeader *base = (struct LibraryHeader *)Self->Data.LibBase;
+  struct MyLibrary *base = (struct MyLibrary *)Self->Data.LibBase;
 #elif defined(__MORPHOS__)
-static struct LibraryHeader *LibOpen(void)
+static struct MyLibrary *LibOpen(void)
 {
-  struct LibraryHeader *base = (struct LibraryHeader*)REG_A6;
+  struct MyLibrary *base = (struct MyLibrary*)REG_A6;
 #elif defined(__AROS__)
-static AROS_LH1(struct LibraryHeader *, LibOpen,
+static AROS_LH1(struct MyLibrary *, LibOpen,
                 AROS_LHA(UNUSED ULONG, version, D0),
-                struct LibraryHeader *, base, 1, DOpus
+                struct MyLibrary *, base, 1, DOpus
 )
 {
     AROS_LIBFUNC_INIT
 #else
-static struct LibraryHeader * LIBFUNC LibOpen(REG(d0, UNUSED ULONG version), REG(a6, struct LibraryHeader *base))
+static struct MyLibrary * LIBFUNC LibOpen(REG(d0, UNUSED ULONG version), REG(a6, struct MyLibrary *base))
 {
 #endif
   BOOL success = FALSE;
@@ -1168,19 +1183,19 @@ static struct LibraryHeader * LIBFUNC LibOpen(REG(d0, UNUSED ULONG version), REG
 #if defined(__amigaos4__)
 static BPTR LibClose(struct LibraryManagerInterface *Self)
 {
-  struct LibraryHeader *base = (struct LibraryHeader *)Self->Data.LibBase;
+  struct MyLibrary *base = (struct MyLibrary *)Self->Data.LibBase;
 #elif defined(__MORPHOS__)
 static BPTR LibClose(void)
 {
-  struct LibraryHeader *base = (struct LibraryHeader *)REG_A6;
+  struct MyLibrary *base = (struct MyLibrary *)REG_A6;
 #elif defined(__AROS__)
 static AROS_LH0(BPTR, LibClose,
-                struct LibraryHeader *, base, 2, DOpus
+                struct MyLibrary *, base, 2, DOpus
 )
 {
     AROS_LIBFUNC_INIT
 #else
-static BPTR LIBFUNC LibClose(REG(a6, struct LibraryHeader *base))
+static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
 {
 #endif
   BPTR rc = 0;
@@ -1188,14 +1203,18 @@ static BPTR LIBFUNC LibClose(REG(a6, struct LibraryHeader *base))
   // decrease the open counter
   base->libBase.lib_OpenCnt--;
 
-  // in case the opern counter is <= 0 we can
+  // in case the open counter is <= 0 we can
   // make sure that we free everything
+
+  // NOTE: in practice the code below will never be executed, because the App*
+  // patches bump the open count, and it's only decreased to 0 by the launcher
+  // after the last CloseLibrary call. The cleanup will be done by LibExpunge.
   if(base->libBase.lib_OpenCnt <= 0)
   {
     // free all our private data and stuff.
     ObtainSemaphore(&base->libSem);
 
-    if (base->initialized == 1 && base->libBase.lib_OpenCnt == 0)
+    if (base->initialized == 1)
     {
       base->initialized = 0;
       // make sure we have enough stack here
@@ -1223,7 +1242,7 @@ static BPTR LIBFUNC LibClose(REG(a6, struct LibraryHeader *base))
 /**************************************************************************/
 
 
-ULONG freeBase(struct LibraryHeader *lib)
+ULONG freeBase(struct MyLibrary *lib)
 {
 
   UserLibCleanup((struct MyLibrary *)lib);
@@ -1357,7 +1376,7 @@ ULONG freeBase(struct LibraryHeader *lib)
 
 /***********************************************************************/
 
-ULONG initBase(struct LibraryHeader *lib)
+ULONG initBase(struct MyLibrary *lib)
 {
 
   if ((DOSBase = (APTR)OpenLibrary("dos.library", 37)) != NULL && GETINTERFACE(IDOS, DOSBase))

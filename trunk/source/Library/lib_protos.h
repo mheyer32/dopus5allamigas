@@ -26,8 +26,8 @@
 #include <SDI/SDI_lib.h>
 
 /* init.c */
-ULONG freeBase(struct LibraryHeader* lib);
-ULONG initBase(struct LibraryHeader* lib);
+ULONG freeBase(struct MyLibrary* lib);
+ULONG initBase(struct MyLibrary* lib);
 
 /* utils.c */
 #if defined(__amigaos4__)

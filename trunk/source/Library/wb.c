@@ -40,19 +40,55 @@ For more information on Directory Opus for Windows please see:
 //#define IconBase	(data->icon_base)
 //#define DOSBase	(data->dos_base)
 
+#ifdef __amigaos3__
+static inline void atomic_inc(ULONG *counter)
+{
+	asm volatile ("addql #1,%0" : "+m" (*counter));
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	asm volatile ("subql #1,%0" : "+m" (*counter));
+}
+#else
+static inline void atomic_inc(ULONG *counter)
+{
+	__sync_add_and_fetch(counter, 1);
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	__sync_sub_and_fetch(counter, 1);
+}
+#endif
+
+// the use count has to be increased as soon as we enter a function,
+// so this can't be stored in wb_data, unless we introduce a global
+// pointer to it
+static ULONG usecount[WB_PATCH_COUNT];
+
 //// AddAppWindow patch
 PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULONG, userdata, a0, struct Window *, window, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_ADDAPPWINDOWA]);
+	{
 	struct MyLibrary *libbase;
 	AppEntry *app_entry;
 	WB_Data *wb_data;
 
 	// Check valid data
-	if (!window || !port) return 0;
+	if (!window || !port)
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPWINDOWA]);
+		return NULL;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPWINDOWA]);
+		return NULL;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -78,7 +114,9 @@ PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULON
 	}
 
 	// Return object
+	atomic_dec(&usecount[WB_PATCH_ADDAPPWINDOWA]);
 	return (struct AppWindow *)app_entry;
+	}
 }
 PATCH_END
 
@@ -86,24 +124,33 @@ PATCH_END
 //// AddAppMenuItem patch
 PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, ULONG, userdata, a0, char *, text, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_ADDAPPMENUA]);
+	{
 	struct MyLibrary *libbase;
-	AppEntry *app_entry=0;
+	AppEntry *app_entry=NULL;
 	WB_Data *wb_data;
-	BOOL osonly=0;
-	APTR object=0;
+	BOOL osonly=FALSE;
+	APTR object=NULL;
 
 	// Check valid data
-	if (!port) return 0;
+	if (!port)
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPMENUA]);
+		return NULL;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPMENUA]);
+		return NULL;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
 
 	// Pass straight through?
-	if (tags && !(GetTagData(DAE_Local,1,tags))) osonly=1;
+	if (tags && !(GetTagData(DAE_Local,1,tags))) osonly=TRUE;
 
 	// Get new AppEntry
 	if (osonly || (app_entry=new_app_entry(APP_MENU,id,userdata,0,text,port,wb_data)))
@@ -130,7 +177,7 @@ PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, 
 			short toolmanger=0;
 
 			// Get current task
-			thistask=FindTask(0);
+			thistask=FindTask(NULL);
 
 			// Is this from ToolManager?
 			if (thistask->tc_Node.ln_Name &&
@@ -143,7 +190,9 @@ PATCHED_5(struct AppMenuItem *, LIBFUNC L_WB_AddAppMenuItem, d0, ULONG, id, d1, 
 	}
 
 	// Return object
+	atomic_dec(&usecount[WB_PATCH_ADDAPPMENUA]);
 	return (struct AppMenuItem *)((app_entry)?(APTR)app_entry:object);
+	}
 }
 PATCH_END
 
@@ -151,32 +200,43 @@ PATCH_END
 //// AddAppIcon patch
 PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, userdata, a0, char *, text, a1, struct MsgPort *, port, a2, BPTR, lock, a3, struct DiskObject *, icon, a4, struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_ADDAPPICONA]);
+	{
 	struct MyLibrary *libbase;
-	AppEntry *app_entry=0;
+	AppEntry *app_entry=NULL;
 	struct LibData *data;
 	WB_Data *wb_data;
-	BOOL osonly=0;
-	APTR object=0;
+	BOOL osonly=FALSE;
+	APTR object=NULL;
 	short local=2;
 
 	// Check valid data
-	if (!icon || !port) return 0;
+	if (!icon || !port)
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPICONA]);
+		return NULL;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDAPPICONA]);
+		return NULL;
+	}
 
 	// Get Workbench data pointer
 	data=(struct LibData *)libbase->ml_UserData;
 	wb_data=&data->wb_data;
 
 	// Pass straight through to OS?
-	if (tags && (local=GetTagData(DAE_Local,2,tags))==0) osonly=1;
+	if (tags && (local=GetTagData(DAE_Local,2,tags))==0) osonly=TRUE;
 
 	// Otherwise, if it's not a local icon and the redirection flag is set, send to Tools menu
 	else
 	if (local==2 && data->flags&LIBDF_REDIRECT_TOOLS)
 	{
+		struct AppMenuItem *item;
+
 		// Add as menu item
 		#if defined(__MORPHOS__)
 		REG_D0 = id;
@@ -184,15 +244,18 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 		REG_A0 = (ULONG)text;
 		REG_A1 = (ULONG)port;
 		REG_A2 = (ULONG)tags;
-		return (struct AppIcon *)L_WB_AddAppMenuItem();
+		item=L_WB_AddAppMenuItem();
 		#else
-		return (struct AppIcon *)L_WB_AddAppMenuItem(
+		item=L_WB_AddAppMenuItem(
 			id,
 			userdata,
 			text,
 			port,
 			tags);
 		#endif
+
+		atomic_dec(&usecount[WB_PATCH_ADDAPPICONA]);
+		return (struct AppIcon *)item;
 	}
 
 	// Get new AppEntry
@@ -315,7 +378,9 @@ PATCHED_7(struct AppIcon *, LIBFUNC L_WB_AddAppIcon, d0, ULONG, id, d1, ULONG, u
 	}
 
 	// Return object
+	atomic_dec(&usecount[WB_PATCH_ADDAPPICONA]);
 	return (struct AppIcon *)((app_entry)?(APTR)app_entry:object);
+	}
 }
 PATCH_END
 
@@ -323,17 +388,26 @@ PATCH_END
 //// RemoveAppWindow patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppWindow, a0, struct AppWindow *, window)
 {
+	atomic_inc(&usecount[WB_PATCH_REMAPPWINDOW]);
+	{
 	AppEntry *entry;
 	struct MyLibrary *libbase;
 	WB_Data *wb_data;
 	APTR os_object;
 
 	// Valid pointer?
-	if (!(entry=(AppEntry *)window)) return 1;
+	if (!(entry=(AppEntry *)window))
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPWINDOW]);
+		return TRUE;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPWINDOW]);
+		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -350,7 +424,10 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppWindow, a0, struct AppWindow *, window)
 
 	// Send notification
 	L_SendNotifyMsg(DN_APP_WINDOW_LIST,(ULONG)window,DNF_WINDOW_REMOVED,FALSE,0,0,libbase);
-	return 1;
+
+	atomic_dec(&usecount[WB_PATCH_REMAPPWINDOW]);
+	return TRUE;
+	}
 }
 PATCH_END
 
@@ -358,6 +435,8 @@ PATCH_END
 //// RemoveAppMenuItem patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 {
+	atomic_inc(&usecount[WB_PATCH_REMAPPMENU]);
+	{
 	AppEntry *entry;
 	struct MyLibrary *libbase;
 	WB_Data *wb_data;
@@ -365,11 +444,18 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 	BOOL local;
 
 	// Valid pointer?
-	if (!(entry=(AppEntry *)item)) return 1;
+	if (!(entry=(AppEntry *)item))
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPMENU]);
+		return TRUE;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPMENU]);
+		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -388,7 +474,9 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppMenuItem, a0, struct AppMenuItem *, item)
 	if (os_object!=(APTR)entry)
 		L_SendNotifyMsg(DN_APP_MENU_LIST,(ULONG)entry,1,!local,0,0,libbase);
 
-	return 1;
+	atomic_dec(&usecount[WB_PATCH_REMAPPMENU]);
+	return TRUE;
+	}
 }
 PATCH_END
 
@@ -396,6 +484,8 @@ PATCH_END
 //// RemoveAppIcon patch
 PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 {
+	atomic_inc(&usecount[WB_PATCH_REMAPPICON]);
+	{
 	AppEntry *entry;
 	struct MyLibrary *libbase;
 	WB_Data *wb_data;
@@ -403,11 +493,18 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 	BOOL local;
 
 	// Valid pointer?
-	if (!(entry=(AppEntry *)icon)) return 1;
+	if (!(entry=(AppEntry *)icon))
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPICON]);
+		return TRUE;
+	}
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_REMAPPICON]);
+		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -418,16 +515,20 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 		// Is it a menu (must have been redirected)?
 		if (entry->type==APP_MENU)
 		{
+			BOOL result;
 			// Unlock list
 			L_FreeSemaphore(&wb_data->patch_lock);
 
 			// Remove as menu item
 			#if defined(__MORPHOS__)
 			REG_A0 = (ULONG)icon;
-			return L_WB_RemoveAppMenuItem();
+			result=L_WB_RemoveAppMenuItem();
 			#else
-			return L_WB_RemoveAppMenuItem((struct AppMenuItem *)icon);
+			result=L_WB_RemoveAppMenuItem((struct AppMenuItem *)icon);
 			#endif
+
+			atomic_dec(&usecount[WB_PATCH_REMAPPICON]);
+			return result;
 		}
 
 		// Send notification
@@ -446,8 +547,10 @@ PATCHED_1(BOOL, LIBFUNC L_WB_RemoveAppIcon, a0, struct AppIcon *, icon)
 		// Remove workbench object
 		LIBCALL_1(BOOL, wb_data->old_function[WB_PATCH_REMAPPICON], WorkbenchBase, IWorkbench, a0, os_object);
 	}
-
-	return 1;
+	
+	atomic_dec(&usecount[WB_PATCH_REMAPPICON]);
+	return TRUE;
+	}
 }
 PATCH_END
 
@@ -457,7 +560,7 @@ struct AppWindow *LIBFUNC L_WB_FindAppWindow(
 	REG(a0, struct Window *window),
 	REG(a6, struct MyLibrary *libbase))
 {
-	AppEntry *app_entry,*app_window=0;
+	AppEntry *app_entry,*app_window=NULL;
 	WB_Data *wb_data;
 
 	#ifdef __amigaos4__
@@ -509,7 +612,7 @@ struct MsgPort *LIBFUNC L_WB_AppWindowData(
 		if (userdata) *userdata=entry->userdata;
 		return entry->port;
 	}
-	return 0;
+	return NULL;
 }
 
 
@@ -551,7 +654,7 @@ AppEntry *new_app_entry(
 
 	// Allocate new entry
 	if (!(entry=AllocVec(sizeof(AppEntry),MEMF_CLEAR)))
-		return 0;
+		return NULL;
 
 	// Fill out AppEntry
 	entry->type=type;
@@ -578,7 +681,7 @@ AppEntry *new_app_entry(
 		else
 		{
 			FreeVec(entry);
-			return 0;
+			return NULL;
 		}
 	}
 
@@ -589,10 +692,12 @@ AppEntry *new_app_entry(
 	L_GetSemaphore(&wb_data->patch_lock,SEMF_EXCLUSIVE,0);
 
 	// Is this the first entry?
-	if (IsListEmpty((struct List *)&wb_data->app_list))
+	if (IsListEmpty((struct List *)&wb_data->app_list) &&
+		IsListEmpty((struct List *)&wb_data->rem_app_list))
 	{
 		// Bump library open count so we won't get expunged
-		++wb_data->dopus_base->ml_Lib.lib_OpenCnt;
+		++wb_data->dopus_base->libBase.lib_OpenCnt;
+		D(bug("%s:%d %s lib_OpenCnt bumped to %d by task '%s'\n", __FILE__, __LINE__, __FUNCTION__, wb_data->dopus_base->libBase.lib_OpenCnt, FindTask(NULL)->tc_Node.ln_Name));
 	}
 
 	// Add to list
@@ -617,7 +722,7 @@ APTR rem_app_entry(
 	retval=entry;
 
 	// Clear local flag
-	if (local) *local=0;
+	if (local) *local=FALSE;
 
 	// Lock AppEntry list
 	L_GetSemaphore(&wb_data->patch_lock,SEMF_EXCLUSIVE,0);
@@ -637,7 +742,7 @@ APTR rem_app_entry(
 		retval=entry->os_object;
 
 		// Local?
-		if (local && entry->flags&APPENTF_LOCAL) *local=1;
+		if (local && entry->flags&APPENTF_LOCAL) *local=TRUE;
 
 		// Add to removal list
 		AddTail((struct List *)&wb_data->rem_app_list,(struct Node *)entry);
@@ -704,7 +809,7 @@ AppEntry *find_app_entry(AppEntry *entry,WB_Data *wb_data)
 	L_FreeSemaphore(&wb_data->patch_lock);
 
 	// Not found
-	return 0;
+	return NULL;
 }
 
 
@@ -748,7 +853,7 @@ APTR LIBFUNC L_NextAppEntry(
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
 
 	// Invalid "last" pointer?
-	if (!last) return 0;
+	if (!last) return NULL;
 
 	// Start of list?
 	if (last==wb_data) entry=(AppEntry *)wb_data->app_list.mlh_Head;
@@ -767,7 +872,7 @@ APTR LIBFUNC L_NextAppEntry(
 	}
 
 	// Not found
-	return 0;
+	return NULL;
 }
 
 
@@ -798,13 +903,18 @@ void LIBFUNC L_UnlockAppList(REG(a6, struct MyLibrary *libbase))
 //// CloseWorkbench patch
 PATCHED_0(LONG, LIBFUNC L_WB_CloseWorkBench)
 {
+	atomic_inc(&usecount[WB_PATCH_CLOSEWORKBENCH]);
+	{
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 	LONG result;
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_CLOSEWORKBENCH]);
 		return 0;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -815,7 +925,9 @@ PATCHED_0(LONG, LIBFUNC L_WB_CloseWorkBench)
 	// Close workbench screen
 	result=LIBCALL_0(LONG, wb_data->old_function[WB_PATCH_CLOSEWORKBENCH], IntuitionBase, IIntuition);
 
+	atomic_dec(&usecount[WB_PATCH_CLOSEWORKBENCH]);
 	return result;
+	}
 }
 PATCH_END
 
@@ -823,13 +935,18 @@ PATCH_END
 //// OpenWorkbench patch
 PATCHED_0(ULONG,LIBFUNC L_WB_OpenWorkBench)
 {
+	atomic_inc(&usecount[WB_PATCH_OPENWORKBENCH]);
+	{
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 	ULONG result;
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_OPENWORKBENCH]);
 		return 0;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -840,7 +957,9 @@ PATCHED_0(ULONG,LIBFUNC L_WB_OpenWorkBench)
 	// Open workbench screen
 	result=LIBCALL_0(ULONG, wb_data->old_function[WB_PATCH_OPENWORKBENCH], IntuitionBase, IIntuition);
 
+	atomic_dec(&usecount[WB_PATCH_OPENWORKBENCH]);
 	return result;
+	}
 }
 PATCH_END
 
@@ -848,11 +967,11 @@ PATCH_END
 #ifdef __amigaos4__
 BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const struct TagItem *tags )
 {
-    BOOL result = FALSE;
+	BOOL result = FALSE;
 	struct LibData *libdata = (struct LibData *)libbase->ml_UserData;
 
 	enum {
-	    viaWB,
+		viaWB,
 		viaCLI,
 		viaREXX
 	};
@@ -905,7 +1024,7 @@ BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const s
 	}
 	else
 	{
-	    /* no object named, error */
+		/* no object named, error */
 	}
 
 	return result;
@@ -930,7 +1049,7 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+		return FALSE;
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -949,21 +1068,27 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 		return internalOpenWBObject( libbase, name, tags );
 	}
 	
-	return 0;
+	return FALSE;
 }
 
 
 //// OpenWorkbenchObjectA patch
 PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_OPENWORKBENCHOBJECTA]);
+	{
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
+	BOOL result = FALSE;
 
 	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_OPENWORKBENCHOBJECTA]);
+		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -974,15 +1099,17 @@ PATCHED_2(BOOL, LIBFUNC L_WB_OpenWorkbenchObjectA, a0, CONST_STRPTR, name, a1, c
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
+		result = LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
 		//D(bug("Workbench not found, launching %s ourselves\n", name ));
-		return internalOpenWBObject( libbase, name, tags );
+		result = internalOpenWBObject( libbase, name, tags );
 	}
-	
-	return 0;
+
+	atomic_dec(&usecount[WB_PATCH_OPENWORKBENCHOBJECTA]);
+	return result;
+	}
 }
 PATCH_END
 
@@ -1120,7 +1247,7 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+		return FALSE;
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -1137,7 +1264,7 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 		return internalWBCtrl( libbase, name, tags );
 	}
 
-	return 0;
+	return FALSE;
 }
 
 
@@ -1145,14 +1272,20 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 //// WorkbenchControlA patch
 PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, const struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_WORKBENCHCONTROLA]);
+	{
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
+	BOOL result = FALSE;
 
 	D(bug("called by %s\n", FindTask(NULL)->tc_Node.ln_Name));
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_WORKBENCHCONTROLA]);
+		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -1162,15 +1295,17 @@ PATCHED_2(BOOL, LIBFUNC L_WB_WorkbenchControlA, a0, CONST_STRPTR, name, a1, cons
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
+		result = LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
 		//D(bug("Workbench not found, handling %s ourselves\n", name ));
-		return internalWBCtrl( libbase, name, tags );
+		result = internalWBCtrl( libbase, name, tags );
 	}
 
-	return 0;
+	atomic_dec(&usecount[WB_PATCH_WORKBENCHCONTROLA]);
+	return result;
+	}
 }
 PATCH_END
 
@@ -1555,15 +1690,24 @@ if (((struct NewIconDiskObject *)icon)->nido_Flags&NIDOF_REMAPPED)
 //// AddPort patch
 PATCHED_1(void, LIBFUNC L_WB_AddPort, a1, struct MsgPort *, port)
 {
+	atomic_inc(&usecount[WB_PATCH_ADDPORT]);
+	{
 	struct MyLibrary *libbase;
 	WB_Data *wb_data;
 
 	// Invalid port?
-	if (!port) return;
+	if (!port)
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDPORT]);
+		return;
+	}
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDPORT]);
 		return;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -1578,6 +1722,9 @@ PATCHED_1(void, LIBFUNC L_WB_AddPort, a1, struct MsgPort *, port)
 
 	// Pass through
 	LIBCALL_1(void, wb_data->old_function[WB_PATCH_ADDPORT], SysBase, IExec, a1, port);
+
+	atomic_dec(&usecount[WB_PATCH_ADDPORT]);
+	}
 }
 PATCH_END
 
@@ -1585,18 +1732,27 @@ PATCH_END
 //// CloseWindow patch
 PATCHED_1(void, LIBFUNC L_WB_CloseWindow, a0, struct Window *, window)
 {
+	atomic_inc(&usecount[WB_PATCH_CLOSEWINDOW]);
+	{
 	struct PubScreenNode *node;
 	struct MyLibrary *DOpusBase;
 	WB_Data *wb_data;
-	struct Task *sigtask=0;
+	struct Task *sigtask=NULL;
 	UBYTE sigbit=0;
 
 	// Invalid window?
-	if (!window) return;
+	if (!window)
+	{
+		atomic_dec(&usecount[WB_PATCH_CLOSEWINDOW]);
+		return;
+	}
 
 	// Get library pointer
 	if (!(DOpusBase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_CLOSEWINDOW]);
 		return;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)DOpusBase->ml_UserData)->wb_data;
@@ -1618,106 +1774,112 @@ PATCHED_1(void, LIBFUNC L_WB_CloseWindow, a0, struct Window *, window)
 
 	// Task to signal?
 	if (sigtask) Signal(sigtask,1<<sigbit);
+
+	atomic_dec(&usecount[WB_PATCH_CLOSEWINDOW]);
+	}
 }
 PATCH_END
 
 
 // Get library base to patch
-#ifdef __amigaos4__
-struct Interface *wb_get_patchbase(short type,struct LibData *data)
-#else
-struct Library *wb_get_patchbase(short type,struct LibData *data)
-#endif
+static APTR wb_get_patchbase(short type,struct LibData *data)
 {
-	struct Library *lib=0;
-	#ifdef __amigaos4__
-	struct Interface *libiface=0;
-	#endif
-	
+	APTR lib=NULL;
+
 	// Look at type
 	switch (type)
 	{
 		// Workbench
 		case WB_PATCH_WORKBENCH:
-			lib=WorkbenchBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IWorkbench;
-			#endif
+#ifdef __amigaos4__
+			lib=(APTR)IWorkbench;
+#else
+			lib=(APTR)WorkbenchBase;
+#endif
 			break;
 
 		// DOS patched function
 		case WB_PATCH_DOSFUNC:
 
 			// Does flag allow these patches?
-			if (data->flags&LIBDF_DOS_PATCH) {			
-				lib=(struct Library *)DOSBase;
-				#ifdef __amigaos4__
-				libiface=(struct Interface *)IDOS;
-				#endif
+			if (data->flags&LIBDF_DOS_PATCH)
+			{
+#ifdef __amigaos4__
+				lib=(APTR)IDOS;
+#else
+				lib=(APTR)DOSBase;
+#endif
 			}	
 			break;
 
 		// DOS
 		case WB_PATCH_DOS:
-			lib=(struct Library *)DOSBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IDOS;
-			#endif
+#ifdef __amigaos4__
+			lib=(APTR)IDOS;
+#else
+			lib=(APTR)DOSBase;
+#endif
 			break;
 
 		// Intuition
 		case WB_PATCH_INTUITION:
-			lib=(struct Library *)IntuitionBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IIntuition;
-			#endif
+#ifdef __amigaos4__
+			lib=(APTR)IIntuition;
+#else
+			lib=(APTR)IntuitionBase;
+#endif
 			break;
 
 		// Graphics
 		case WB_PATCH_GFX:
-			lib=(struct Library *)GfxBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IGraphics;
-			#endif
+#ifdef __amigaos4__
+			lib=(APTR)IGraphics;
+#else
+			lib=(APTR)GfxBase;
+#endif
 			break;
 
 		// Exec
 		case WB_PATCH_EXEC:
-			lib=(struct Library *)SysBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IExec;
-			#endif
+#ifdef __amigaos4__
+			lib=(APTR)IExec;
+#else
+			lib=(APTR)SysBase;
+#endif
 			break;
 
 		// Icon
 		case WB_PATCH_ICON:
-			lib=IconBase;
-			#ifdef __amigaos4__
-			libiface=(struct Interface *)IIcon;
-			#endif			
+#ifdef __amigaos4__
+			lib=(APTR)IIcon;
+#else
+			lib=(APTR)IconBase;
+#endif			
 			break;
 	}
 
-	#ifdef __amigaos4__
-	return libiface;
-	#else
 	return lib;
-	#endif
 }
 
 
 //// WBInfo patch
 PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, struct Screen *, screen)
 {
+	atomic_inc(&usecount[WB_PATCH_WBINFO]);
+	{
 	struct MyLibrary *libbase;
 	struct DOpusSemaphore *sem;
-	IPCData *main_ipc=0;
+	IPCData *main_ipc=NULL;
 	struct LibData *data;
 	char buf[10];
+	ULONG res=0;
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_WBINFO]);
 		return 0;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
@@ -1741,7 +1903,6 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 			BPTR old;
 			struct List files;
 			struct Node node;
-			ULONG res;
 
 			// Switch to this directory
 			old=CurrentDir(lock);
@@ -1765,7 +1926,11 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 //#undef DOSBase
 
 	// Call original function
-	return LIBCALL_3(ULONG, data->wb_data.old_function[WB_PATCH_WBINFO], WorkbenchBase, IWorkbench, a0, lock, a1, name, a2, screen);
+	res=LIBCALL_3(ULONG, data->wb_data.old_function[WB_PATCH_WBINFO], WorkbenchBase, IWorkbench, a0, lock, a1, name, a2, screen);
+
+	atomic_dec(&usecount[WB_PATCH_WBINFO]);
+	return res;
+	}
 }
 PATCH_END
 
@@ -1773,12 +1938,18 @@ PATCH_END
 //// AddTask patch (for statistics)
 PATCHED_3(APTR, ASM L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initialPC, a3, APTR, finalPC)
 {
+	atomic_inc(&usecount[WB_PATCH_ADDTASK]);
+	{
 	struct MyLibrary *libbase;
 	struct LibData *data;
+	APTR ret;
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_ADDTASK]);
+		return NULL;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
@@ -1787,7 +1958,11 @@ PATCHED_3(APTR, ASM L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initial
 	++data->task_count;
 
 	// Call original function
-	return LIBCALL_3(APTR, data->wb_data.old_function[WB_PATCH_ADDTASK], SysBase, IExec, a1, task, a2, initialPC, a3, finalPC);
+	ret=LIBCALL_3(APTR, data->wb_data.old_function[WB_PATCH_ADDTASK], SysBase, IExec, a1, task, a2, initialPC, a3, finalPC);
+
+	atomic_dec(&usecount[WB_PATCH_ADDTASK]);
+	return ret;
+	}
 }
 PATCH_END
 
@@ -1795,12 +1970,23 @@ PATCH_END
 //// RemTask patch (for statistics)
 PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 {
+// on AROS no code will be executed after the original remtask function returns,
+// so we can't use reference counting here... sigh.
+#ifndef __AROS__
+	atomic_inc(&usecount[WB_PATCH_REMTASK]);
+#endif
+	{
 	struct MyLibrary *libbase;
 	struct LibData *data;
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
+	{
+#ifndef __AROS__
+		atomic_dec(&usecount[WB_PATCH_REMTASK]);
+#endif
 		return;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
@@ -1810,6 +1996,11 @@ PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 
 	// Call original function
 	LIBCALL_1(void, data->wb_data.old_function[WB_PATCH_REMTASK], SysBase, IExec, a1, task);
+
+#ifndef __AROS__
+	atomic_dec(&usecount[WB_PATCH_REMTASK]);
+#endif
+	}
 }
 PATCH_END
 
@@ -1817,34 +2008,51 @@ PATCH_END
 //// FindTask patch
 PATCHED_1(struct Task *, ASM L_PatchedFindTask, a1, char *, name)
 {
+	atomic_inc(&usecount[WB_PATCH_FINDTASK]);
+	{
 	struct MyLibrary *libbase;
 	struct LibData *data;
 	struct Task *task;
 
 	// This task?
-	if (!name) return  ((struct ExecBase *)SysBase)->ThisTask;
+	if (!name)
+	{
+		atomic_dec(&usecount[WB_PATCH_FINDTASK]);
+		return ((struct ExecBase *)SysBase)->ThisTask;
+	}
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_FINDTASK]);
+		return NULL;
+	}
 
 	// Get data pointer
 	data=(struct LibData *)libbase->ml_UserData;
 
 	// Call original function
 	if ((task=LIBCALL_1(struct Task *, data->wb_data.old_function[WB_PATCH_FINDTASK], SysBase, IExec, a1, name)))
+	{
+		atomic_dec(&usecount[WB_PATCH_FINDTASK]);
 		return task;
+	}
 
 	// Task not found, were they looking for workbench?
 	if (strcmp(name,"Workbench")==0)
 	{
 		// Return the Launcher task (hopefully all they want is the path list)
 		if (data->launcher)
+		{
+			atomic_dec(&usecount[WB_PATCH_FINDTASK]);
 			return (struct Task *)data->launcher->proc;
+		}
 	}
 
 	// Not found
-	return 0;
+	atomic_dec(&usecount[WB_PATCH_FINDTASK]);
+	return NULL;
+	}
 }
 PATCH_END
 
@@ -1852,13 +2060,19 @@ PATCH_END
 //// OpenWindowTags patch
 PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow *, newwin, a1, struct TagItem *, tags)
 {
+	atomic_inc(&usecount[WB_PATCH_OPENWINDOWTAGS]);
+	{
 	struct MyLibrary *libbase;
 	struct LibData *data;
 	WB_Data *wb_data;
+	struct Window *ret;
 
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
-		return 0;
+	{
+		atomic_dec(&usecount[WB_PATCH_OPENWINDOWTAGS]);
+		return NULL;
+	}
 
 	// Get data pointers
 	data=(struct LibData *)libbase->ml_UserData;
@@ -1871,7 +2085,7 @@ PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow
 		short x,y,w,h;
 		struct Screen *scr;
 		struct TagItem *tag;
-		BOOL lock=0;
+		BOOL lock=FALSE;
 
 //#define IntuitionBase	(data->int_base)
 
@@ -1883,7 +2097,7 @@ PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow
 		if (!(scr=(struct Screen *)GetTagData(WA_CustomScreen,(newwin)?(ULONG)newwin->Screen:0,tags)))
 		{
 			scr=LockPubScreen(0);
-			lock=1;
+			lock=TRUE;
 		}
 
 		// Calculate position from mouse pointer		
@@ -1909,7 +2123,11 @@ PATCHED_2(struct Window *, LIBFUNC L_PatchedOpenWindowTags, a0, struct NewWindow
 	}
 
 	// Open window
-	return LIBCALL_2(struct Window *, wb_data->old_function[WB_PATCH_OPENWINDOWTAGS], IntuitionBase, IIntuition, a0, newwin, a1, tags);
+	ret=LIBCALL_2(struct Window *, wb_data->old_function[WB_PATCH_OPENWINDOWTAGS], IntuitionBase, IIntuition, a0, newwin, a1, tags);
+
+	atomic_dec(&usecount[WB_PATCH_OPENWINDOWTAGS]);
+	return ret;
+	}
 }
 PATCH_END
 
@@ -2071,7 +2289,7 @@ static PatchList
 	// 1. offsets in jump table (for os3 and morphos builds, when SetFunction for patching is used)
 	// 2. offsets in interface vectors (for os4 build only, when SetMethod for patching is used)
 	// reasons is to have one single pathlist for all builds and to avoid alot of ifdefs
-    // 3. our patch-function
+	// 3. our patch-function
 	// 4. type of function (to make scan by wb_get_patchbase easy). 
 	
 	// name of functions to patch for os4 interfaces taken from os4 SDK, in pragmas directory, i.e: 
@@ -2152,6 +2370,7 @@ void LIBFUNC L_WB_Install_Patch(REG(a6, struct MyLibrary *libbase))
 		// Allocate patch table
 		if ((wb_data->old_function=AllocVec(sizeof(APTR)*WB_PATCH_COUNT,MEMF_CLEAR)))
 		{
+			memset(usecount,0,sizeof(usecount));
 			
 			// Forbid while we install the patches
 			Forbid();
@@ -2198,7 +2417,7 @@ void LIBFUNC L_WB_Install_Patch(REG(a6, struct MyLibrary *libbase))
 BOOL LIBFUNC L_WB_Remove_Patch(REG(a6, struct MyLibrary *libbase))
 {
 	short patch;
-	BOOL fail=0;
+	BOOL fail=FALSE;
 	APTR old_patch_val[WB_PATCH_COUNT];
 	WB_Data *wb_data;
 
@@ -2215,6 +2434,50 @@ BOOL LIBFUNC L_WB_Remove_Patch(REG(a6, struct MyLibrary *libbase))
 	// Really remove patches?
 	if (wb_data->patch_count==1)
 	{
+#if 1
+		// Try to remove patches
+		for (patch=0;patch<WB_PATCH_COUNT;patch++)
+		{
+			// Patch installed for this function?
+			if (wb_data->old_function[patch])
+			{
+				APTR libptr;
+
+				// Get library
+				if ((libptr=wb_get_patchbase(wb_patches[patch].type,(struct LibData *)libbase->ml_UserData)))
+				{
+					D(bug("waiting for the usecount (%d) to be zero (patch type %d at LVO %d)\n", usecount[patch], wb_patches[patch].type, wb_patches[patch].offset));
+					while (usecount[patch] != 0) Delay(1);
+					Forbid();
+					D(bug("ok, trying to remove the patch\n"));
+					
+					// Restore old value
+					old_patch_val[patch]=
+						#ifdef __amigaos4__
+						SetMethod(libptr,wb_patches[patch].offset,wb_data->old_function[patch]);
+						#else
+						SetFunction(libptr,wb_patches[patch].offset,wb_data->old_function[patch]);
+						#endif
+
+					// The value returned should have been our patch
+					#if defined(__MORPHOS__)
+					if ((ULONG)old_patch_val[patch]!=(ULONG)&wb_patches[patch].trap)
+					#else
+					if (old_patch_val[patch]!=wb_patches[patch].function)
+					#endif
+					{
+						// There's no good way to handle this without waiting for an indefinite amount of time
+						D(bug("something went wrong, the function have been repatched by someone else\n"));
+					}
+					
+					CacheClearU();
+					Permit();
+				}
+			}
+		}
+		FreeVec(wb_data->old_function);
+		wb_data->old_function=0;
+#else
 		// Try to remove patches
 		Forbid();
 		for (patch=0;patch<WB_PATCH_COUNT;patch++)
@@ -2235,17 +2498,17 @@ BOOL LIBFUNC L_WB_Remove_Patch(REG(a6, struct MyLibrary *libbase))
 						SetFunction(libptr,wb_patches[patch].offset,wb_data->old_function[patch]);
 						#endif
 
-						// The value returned should have been our patch
-						#if defined(__MORPHOS__)
-						if ((ULONG)old_patch_val[patch]!=(ULONG)&wb_patches[patch].trap)
-						#else
-						if (old_patch_val[patch]!=wb_patches[patch].function)
-						#endif
-						{
-							// Something's in there
-							fail=1;
-							break;
-						}
+					// The value returned should have been our patch
+					#if defined(__MORPHOS__)
+					if ((ULONG)old_patch_val[patch]!=(ULONG)&wb_patches[patch].trap)
+					#else
+					if (old_patch_val[patch]!=wb_patches[patch].function)
+					#endif
+					{
+						// Something's in there
+						fail=TRUE;
+						break;
+					}
 				}
 			}
 		}
@@ -2284,6 +2547,7 @@ BOOL LIBFUNC L_WB_Remove_Patch(REG(a6, struct MyLibrary *libbase))
 
 		CacheClearU();
 		Permit();
+#endif
 	}
 
 	// If we didn't fail, decrement patch count
