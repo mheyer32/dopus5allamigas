@@ -1262,20 +1262,59 @@ void startup_init_notification()
 }
 
 
+// TODO: put these into a header
+extern UWORD command_arrow[7];
+extern UWORD parent_arrow[6];
+
+#ifdef __amigaos3__
+extern UWORD *command_arrow_chip;
+extern UWORD *parent_arrow_chip;
+#endif
+
 // Initialise icons, etc
 void startup_init_icons()
 {
 #ifdef __AROS__
-	WORD WordWidth, NumImageWords;
+	WORD NumImageWords;
 	int i,j;
 
 	for (i=0; i<2; i++)
 	{
-		WordWidth = ((arrow_image[i].Width + 16) / 16);
-		NumImageWords = WordWidth * arrow_image[i].Height * arrow_image[i].Depth;
+		NumImageWords = ((arrow_image[i].Width + 16) / 16) * arrow_image[i].Height * arrow_image[i].Depth;
 
 		for (j=0; j<NumImageWords; j++)
 			arrow_image[i].ImageData[j]=AROS_BE2WORD(arrow_image[i].ImageData[j]);
+	}
+	
+	for (i=0; i<sizeof(command_arrow)/2; i++)
+		command_arrow[i]=AROS_BE2WORD(command_arrow[i]);
+
+	for (i=0; i<sizeof(parent_arrow)/2; i++)
+		parent_arrow[i]=AROS_BE2WORD(parent_arrow[i]);
+#endif
+
+#ifdef __amigaos3__
+	WORD NumImageWords;
+	int i;
+	UWORD *tmp;
+
+	if ((command_arrow_chip = AllocVec(sizeof(command_arrow),MEMF_CHIP)))
+		CopyMem(command_arrow, command_arrow_chip, sizeof(command_arrow));
+
+	if ((parent_arrow_chip = AllocVec(sizeof(parent_arrow),MEMF_CHIP)))
+		CopyMem(parent_arrow, parent_arrow_chip, sizeof(parent_arrow));
+
+	for (i=0; i<2; i++)
+	{
+		NumImageWords = ((arrow_image[i].Width + 16) / 16) * arrow_image[i].Height * arrow_image[i].Depth;
+
+		arrow_image[i].ImageData = NULL;
+		
+		if ((tmp = AllocVec(NumImageWords*sizeof(UWORD),MEMF_CHIP)))
+		{
+			CopyMem(arrow_image[i].ImageData, tmp, NumImageWords*sizeof(UWORD));
+			arrow_image[i].ImageData=tmp;
+		}
 	}
 #endif
 

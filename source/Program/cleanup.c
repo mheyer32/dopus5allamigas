@@ -141,6 +141,18 @@ void quit(BOOL script)
 
 		// Free arrow image
 		CloseImage(GUI->toolbar_arrow_image);
+		
+#ifdef __amigaos3__
+		{
+			extern UWORD *command_arrow_chip;
+			extern UWORD *parent_arrow_chip;
+
+			FreeVec(command_arrow_chip);
+			FreeVec(parent_arrow_chip);
+			FreeVec(arrow_image[0].ImageData);
+			FreeVec(arrow_image[1].ImageData);
+		}
+#endif
 
 		// Free screen signal
 		if (GUI->screen_signal!=-1) FreeSignal(GUI->screen_signal);
