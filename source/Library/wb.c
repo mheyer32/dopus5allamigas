@@ -65,7 +65,7 @@ static inline void atomic_dec(ULONG *counter)
 // the use count has to be increased as soon as we enter a function,
 // so this can't be stored in wb_data, unless we introduce a global
 // pointer to it
-static ULONG usecount[WB_PATCH_COUNT];
+ULONG usecount[WB_PATCH_COUNT];
 
 //// AddAppWindow patch
 PATCHED_5(struct AppWindow *, LIBFUNC L_WB_AddAppWindow, d0, ULONG, id, d1, ULONG, userdata, a0, struct Window *, window, a1, struct MsgPort *, port, a2, struct TagItem *, tags)
