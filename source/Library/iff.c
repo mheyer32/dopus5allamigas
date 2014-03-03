@@ -141,36 +141,15 @@ IFFHandle *LIBFUNC L_IFFOpen(
 					// Try a maximum of 3 times
 					for (a=0;a<3;a++)
 					{
-#ifdef __AROS__
-						if (((struct Library *)DOSBase)->lib_Version<50)
-						{
-							char buffer[2048];
-							NameFromLock(parent, buffer, sizeof(buffer));
+						char buffer[2048];
+						NameFromLock(parent, buffer, sizeof(buffer));
 
-							// Build name
-							lsprintf(handle->iff_TempName,"safe%lx",key);
-							AddPart(buffer, handle->iff_TempName, sizeof(buffer));
+						// Build name
+						lsprintf(handle->iff_TempName,"safe%lx",key);
+						AddPart(buffer, handle->iff_TempName, sizeof(buffer));
 
-							// Try to rename file
-							res=Rename(name, buffer);
-						}
-						else
-#endif
-						{
-							// Build name
-							lsprintf(handle->iff_TempName+1,"safe%lx",key);
-							handle->iff_TempName[0]=strlen(handle->iff_TempName+1);
-
-							// Try to rename file
-							res=DoPkt(
-								((struct FileLock *)BADDR(parent))->fl_Task,
-								ACTION_RENAME_OBJECT,
-								parent,
-								MKBADDR(oldname),
-								parent,
-								MKBADDR(handle->iff_TempName),0);
-						}
-
+						// Try to rename file
+						res=Rename(name, buffer);
 						if (res) break;
 
 						// If this failed other than because object exists, abort
@@ -391,27 +370,15 @@ void LIBFUNC L_IFFClose(REG(a0, IFFHandle *handle))
 					if (handle->iff_Success)
 					{
 						// Delete safe file
-#ifdef __AROS__
-						if (((struct Library *)DOSBase)->lib_Version<50)
-						{
-							char buffer[2048];
-							NameFromLock(parent, buffer, sizeof(buffer));
-							AddPart(buffer, handle->iff_TempName, sizeof(buffer));
-							DeleteFile(buffer);
-						}
-						else
-#endif
-						DoPkt(
-							((struct FileLock *)BADDR(parent))->fl_Task,
-							ACTION_DELETE_OBJECT,
-							parent,
-							MKBADDR(handle->iff_TempName),
-							0,0,0);
+						char buffer[2048];
+						NameFromLock(parent, buffer, sizeof(buffer));
+						AddPart(buffer, handle->iff_TempName, sizeof(buffer));
+						DeleteFile(buffer);
 					}
-
 					// Need to rename back
 					else
 					{
+						char buffer[2048];
 						D_S(char, oldname)
 
 						// Delete new file
@@ -422,23 +389,9 @@ void LIBFUNC L_IFFClose(REG(a0, IFFHandle *handle))
 						oldname[0]=strlen(oldname+1);
 
 						// Rename file
-#ifdef __AROS__
-						if (((struct Library *)DOSBase)->lib_Version<50)
-						{
-							char buffer[2048];
-							NameFromLock(parent, buffer, sizeof(buffer));
-							AddPart(buffer, handle->iff_TempName, sizeof(buffer));
-							Rename(buffer, handle->iff_Name);
-						}
-						else
-#endif
-						DoPkt(
-							((struct FileLock *)BADDR(parent))->fl_Task,
-							ACTION_RENAME_OBJECT,
-							parent,
-							MKBADDR(handle->iff_TempName),
-							parent,
-							MKBADDR(oldname),0);
+						NameFromLock(parent, buffer, sizeof(buffer));
+						AddPart(buffer, handle->iff_TempName, sizeof(buffer));
+						Rename(buffer, handle->iff_Name);
 					}
 
 					// Unlock parent
