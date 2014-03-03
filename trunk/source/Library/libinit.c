@@ -1363,10 +1363,7 @@ ULONG freeBase(struct MyLibrary *lib)
   // close dos.library
   if(DOSBase != NULL)
   {
-#warning ! to avoid crash on exit of os4 library when use it from native binaryes. todo: invistigate, understand and do normally.
-#if 0
     DROPINTERFACE(IDOS);
-#endif
     CloseLibrary((struct Library *)DOSBase);
     DOSBase = NULL;
   }
