@@ -507,7 +507,7 @@ void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,
 void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,ULONG total)
 {
 	long p,xp,yp,height,a,b,cx,cy,pc,y,chunkx=0,chunky=0;
-	FLOAT rads,rsin,rcos,rx,ry,pcent;
+	FLOAT rads,rsin,rcos,rx,ry,pcent=0;
 	struct RastPort *rp;
 	short step,stop;
 
@@ -535,8 +535,8 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	ry=(FLOAT)b;
 
 	// Get size of chunk as a percentage of the total, and convert to degrees
-	pcent=(total<1)?(FLOAT)0:(((FLOAT)size/(FLOAT)total)*(FLOAT)360);
-	pcent=(FLOAT)180-pcent;
+	if (total>=1)
+		pcent=180.0-(((FLOAT)size/(FLOAT)total)*360.0);
 
 	// Get as long and round to nearest 2
 	pc=(long)pcent;
@@ -556,7 +556,7 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	for (p=180;p>=-180;p-=2)
 	{
 		// Convert degrees to radians
-		rads=((FLOAT)PI*(FLOAT)p)/(FLOAT)180;
+		rads=(PI*(FLOAT)p)/180.0;
 
 		// Get sine and cosine
 		rcos=cos(rads);
@@ -606,7 +606,7 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	while (1)
 	{
 		// Convert degrees to radians
-		rads=((FLOAT)PI*(FLOAT)p)/(FLOAT)180;
+		rads=(PI*(FLOAT)p)/180.0;
 
 		// Get sine and cosine
 		rcos=cos(rads);
