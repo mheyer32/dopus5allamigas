@@ -50,6 +50,17 @@ static inline void atomic_dec(ULONG *counter)
 {
 	asm volatile ("subql #1,%0" : "+m" (*counter));
 }
+#elif defined(__AROS__) && defined(__arm__)
+#include <aros/atomic.h>
+static inline void atomic_inc(ULONG *counter)
+{
+	__AROS_ATOMIC_INC_L(*counter);
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	__AROS_ATOMIC_DEC_L(*counter);
+}
 #else
 static inline void atomic_inc(ULONG *counter)
 {
@@ -1034,12 +1045,13 @@ BOOL internalOpenWBObject( struct MyLibrary *libbase, CONST_STRPTR name, const s
 //// OpenWorkbenchObject patch
 VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbench, CONST_STRPTR name, ... )
 {
+	atomic_inc(&usecount[WB_PATCH_OPENWORKBENCHOBJECT]);
+	{
 	WB_Data *wb_data;
-	
 	struct MyLibrary *libbase;
-
 	va_list ap;
 	struct TagItem *tags;
+	BOOL result = FALSE;
 
 	va_startlinear(ap, name);
 
@@ -1049,7 +1061,10 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 	
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_OPENWORKBENCHOBJECT]);
 		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -1060,15 +1075,17 @@ VARARGS68K BOOL L_WB_OpenWorkbenchObject_stubs( struct WorkbenchIFace *IWorkbenc
 		//D(bug("Workbench available, calling original vector\n"));
 
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
+		result = LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_OPENWORKBENCHOBJECTA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
 		//D(bug("Workbench not found, launching %s ourselves\n", name));
-		return internalOpenWBObject( libbase, name, tags );
+		result = internalOpenWBObject( libbase, name, tags );
 	}
-	
+
+	atomic_dec(&usecount[WB_PATCH_OPENWORKBENCHOBJECT]);
 	return FALSE;
+	}
 }
 
 
@@ -1234,10 +1251,13 @@ BOOL internalWBCtrl( struct MyLibrary *libbase, CONST_STRPTR name, const struct 
 //// WorkbenchControl patch
 VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, CONST_STRPTR name, ... )
 {
+	atomic_inc(&usecount[WB_PATCH_WORKBENCHCONTROL]);
+	{
 	WB_Data *wb_data;
 	struct MyLibrary *libbase;
 	va_list ap;
 	struct TagItem *tags;
+	BOOL result = FALSE;
 
 	va_startlinear(ap, name);
 
@@ -1247,7 +1267,10 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 
 	// Open library
 	if (!(libbase=GET_DOPUSLIB))
+	{
+		atomic_dec(&usecount[WB_PATCH_WORKBENCHCONTROL]);
 		return FALSE;
+	}
 
 	// Get Workbench data pointer
 	wb_data=&((struct LibData *)libbase->ml_UserData)->wb_data;
@@ -1256,15 +1279,17 @@ VARARGS68K BOOL L_WB_WorkbenchControl_stubs( struct WorkbenchIFace *IWorkbench, 
 	{
 		//D(bug("Workbench available, calling original vector\n"));
 		// call original, but check examples of how all of this can be handled in another PATCHED functions there.
-		return LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
+		result = LIBCALL_2(BOOL, wb_data->old_function[WB_PATCH_WORKBENCHCONTROLA], WorkbenchBase, IWorkbench, a0, name, a1, tags);
 	}
 	else
 	{
 		//D(bug("Workbench not found, handling call ourselves\n" ));
-		return internalWBCtrl( libbase, name, tags );
+		result = internalWBCtrl( libbase, name, tags );
 	}
 
-	return FALSE;
+	atomic_dec(&usecount[WB_PATCH_WORKBENCHCONTROL]);
+	return result;
+	}
 }
 
 
@@ -1970,11 +1995,7 @@ PATCH_END
 //// RemTask patch (for statistics)
 PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 {
-// on AROS no code will be executed after the original remtask function returns,
-// so we can't use reference counting here... sigh.
-#ifndef __AROS__
 	atomic_inc(&usecount[WB_PATCH_REMTASK]);
-#endif
 	{
 	struct MyLibrary *libbase;
 	struct LibData *data;
@@ -1982,9 +2003,7 @@ PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 	// Get library pointer
 	if (!(libbase=GET_DOPUSLIB))
 	{
-#ifndef __AROS__
 		atomic_dec(&usecount[WB_PATCH_REMTASK]);
-#endif
 		return;
 	}
 
@@ -1994,12 +2013,11 @@ PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
 	// Decrement task count
 	--data->task_count;
 
+	// the usage count has to be decreased before the task kicks the bucket
+	atomic_dec(&usecount[WB_PATCH_REMTASK]);
+
 	// Call original function
 	LIBCALL_1(void, data->wb_data.old_function[WB_PATCH_REMTASK], SysBase, IExec, a1, task);
-
-#ifndef __AROS__
-	atomic_dec(&usecount[WB_PATCH_REMTASK]);
-#endif
 	}
 }
 PATCH_END

@@ -40,6 +40,17 @@ static inline void atomic_dec(ULONG *counter)
 {
 	asm volatile ("subql #1,%0" : "+m" (*counter));
 }
+#elif defined(__AROS__) && defined(__arm__)
+#include <aros/atomic.h>
+static inline void atomic_inc(ULONG *counter)
+{
+	__AROS_ATOMIC_INC_L(*counter);
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	__AROS_ATOMIC_DEC_L(*counter);
+}
 #else
 static inline void atomic_inc(ULONG *counter)
 {
