@@ -321,6 +321,45 @@ ENTRANCE_2(static void ASM, launch_exit_code, d0, LONG, return_code, d1, LaunchP
 ENTRANCE_END
 
 
+void check_app_list(struct LibData *data, BOOL purge)
+{
+	AppEntry *entry,*next;
+	short count=0;
+
+	// Lock AppEntry list
+	GetSemaphore(&data->wb_data.patch_lock,SEMF_EXCLUSIVE,0);
+
+	// Go through free list
+	for (entry=(AppEntry *)data->wb_data.rem_app_list.mlh_Head;
+		entry->node.mln_Succ;
+		entry=next)
+	{
+		// Get next entry
+		next=(AppEntry *)entry->node.mln_Succ;
+
+		// Has this entry's time expired?
+		if (++entry->menu_id_base==5 || purge)
+		{
+			free_app_entry(entry,&data->wb_data);
+			++count;
+		}
+	}
+
+	// Is the list empty now?
+	if (count>0 &&
+		IsListEmpty((struct List *)&data->wb_data.app_list) &&
+		IsListEmpty((struct List *)&data->wb_data.rem_app_list))
+	{
+		// Decrement library open count so we can get expunged
+		--DOpusBase->libBase.lib_OpenCnt;
+		D(bug("%s:%d %s lib_OpenCnt decreased to %d\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt));
+	}
+
+	// Unlock AppEntry list
+	FreeSemaphore(&data->wb_data.patch_lock);
+}
+
+
 void SAVEDS launcher_proc(void)
 {
 	IPCData *ipc;
@@ -402,40 +441,7 @@ void SAVEDS launcher_proc(void)
 			// Second timer
 			if (CheckTimer(secondtimer))
 			{
-				AppEntry *entry,*next;
-				short count=0;
-
-				// Lock AppEntry list
-				GetSemaphore(&data->wb_data.patch_lock,SEMF_EXCLUSIVE,0);
-
-				// Go through free list
-				for (entry=(AppEntry *)data->wb_data.rem_app_list.mlh_Head;
-					entry->node.mln_Succ;
-					entry=next)
-				{
-					// Get next entry
-					next=(AppEntry *)entry->node.mln_Succ;
-
-					// Has this entry's time expired?
-					if (++entry->menu_id_base==5)
-					{
-						free_app_entry(entry,&data->wb_data);
-						++count;
-					}
-				}
-
-				// Is the list empty now?
-				if (count>0 &&
-					IsListEmpty((struct List *)&data->wb_data.app_list) &&
-					IsListEmpty((struct List *)&data->wb_data.rem_app_list))
-				{
-					// Decrement library open count so we can get expunged
-					--DOpusBase->libBase.lib_OpenCnt;
-					D(bug("%s:%d %s lib_OpenCnt decreased to %d\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt));
-				}
-
-				// Unlock AppEntry list
-				FreeSemaphore(&data->wb_data.patch_lock);
+				check_app_list(data,FALSE);
 
 				// Restart timer
 				StartTimer(secondtimer,1,0);

@@ -1203,12 +1203,16 @@ static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
   // decrease the open counter
   base->libBase.lib_OpenCnt--;
 
+  // check if all the AppIcons/AppWindows/AppMenus have been removed
+  // and purge them immediately to reduce the open count
+  if (base->initialized == 1)
+  {
+    extern void check_app_list(struct LibData *data, BOOL purge);
+    check_app_list((struct LibData *)base->ml_UserData, TRUE);
+  }
+
   // in case the open counter is <= 0 we can
   // make sure that we free everything
-
-  // NOTE: in practice the code below will never be executed, because the App*
-  // patches bump the open count, and it's only decreased to 0 by the launcher
-  // after the last CloseLibrary call. The cleanup will be done by LibExpunge.
   if(base->libBase.lib_OpenCnt <= 0)
   {
     // free all our private data and stuff.
