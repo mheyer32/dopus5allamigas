@@ -708,7 +708,7 @@ AppEntry *new_app_entry(
 	{
 		// Bump library open count so we won't get expunged
 		++wb_data->dopus_base->libBase.lib_OpenCnt;
-		D(bug("%s:%d %s lib_OpenCnt bumped to %d by task '%s'\n", __FILE__, __LINE__, __FUNCTION__, wb_data->dopus_base->libBase.lib_OpenCnt, FindTask(NULL)->tc_Node.ln_Name));
+		D(bug("lib_OpenCnt bumped to %d by task '%s'\n", wb_data->dopus_base->libBase.lib_OpenCnt, FindTask(NULL)->tc_Node.ln_Name));
 	}
 
 	// Add to list

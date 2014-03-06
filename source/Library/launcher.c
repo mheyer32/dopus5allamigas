@@ -309,7 +309,7 @@ ENTRANCE_2(static void ASM, launch_exit_code, d0, LONG, return_code, d1, LaunchP
 	{
 		// Decrement library open count
 		--DOpusBase->libBase.lib_OpenCnt;
-		D(bug("%s:%d %s lib_OpenCnt decreased to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, name));
+		D(bug("lib_OpenCnt decreased to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, name));
 
 		// Signal to check for pending quit
 		Signal((struct Task *)data->launch_proc->proc,IPCSIG_QUIT);
@@ -352,7 +352,7 @@ void check_app_list(struct LibData *data, BOOL purge)
 	{
 		// Decrement library open count so we can get expunged
 		--DOpusBase->libBase.lib_OpenCnt;
-		D(bug("%s:%d %s lib_OpenCnt decreased to %d\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt));
+		D(bug("lib_OpenCnt decreased to %d\n", DOpusBase->libBase.lib_OpenCnt));
 	}
 
 	// Unlock AppEntry list
@@ -587,7 +587,7 @@ void SAVEDS launcher_proc(void)
 					if (data->launch_count==0)
 					{
 						--DOpusBase->libBase.lib_OpenCnt;
-						D(bug("%s:%d %s lib_OpenCnt decreased to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, procname));
+						D(bug("lib_OpenCnt decreased to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, procname));
 					}
 					break;
 				}
@@ -695,7 +695,7 @@ void SAVEDS launcher_proc(void)
 							if (data->launch_count==1)
 							{
 								++DOpusBase->libBase.lib_OpenCnt;
-								D(bug("%s:%d %s lib_OpenCnt bumped to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, packet->name));
+								D(bug("lib_OpenCnt bumped to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, packet->name));
 							}
 
 							// Unlock launch list
@@ -734,7 +734,7 @@ void SAVEDS launcher_proc(void)
 						if (data->launch_count==1)
 						{
 							++DOpusBase->libBase.lib_OpenCnt;
-							D(bug("%s:%d %s lib_OpenCnt bumped to %d by '%s'\n", __FILE__, __LINE__, __FUNCTION__, DOpusBase->libBase.lib_OpenCnt, packet->name));
+							D(bug("lib_OpenCnt bumped to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, packet->name));
 						}
 
 						// Wait for reply?
