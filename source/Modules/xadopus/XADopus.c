@@ -21,11 +21,7 @@
 
 char *viewcmds="Read Play Show HexRead AnsiRead IconInfo";
 
-#ifdef __amigaos4__ 
 LIBFUNC ULONG ASM SAVEDS L_ProgressHook(REG(a0, struct Hook *), REG(a2, int skip), REG(a1, struct xadProgressInfo *));
-#else
-LIBFUNC ULONG ASM SAVEDS L_ProgressHook(REG(a0, struct Hook *), REG(a1, struct xadProgressInfo *));
-#endif
 
 /// Error Requester
 void ErrorReq(struct xoData *data, char *Mess)
