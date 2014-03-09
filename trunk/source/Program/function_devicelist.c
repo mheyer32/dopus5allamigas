@@ -31,8 +31,8 @@ struct device_data
 {
 	char				name[80];	// Disk name
 	char				full[8];	// Percent full string
-	char				free[16];	// Free space string
-	char				used[16];	// Used space string
+	char				free[27];	// Free space string
+	char				used[27];	// Used space string
 	struct DosList		*dos;		// DOS list pointer
 	struct DateStamp	date;		// Date
 	short				valid;		// Validating?
@@ -658,7 +658,7 @@ DOPUS_FUNC(function_devicelist)
 	}
 
 	// Get icons
-	if (lister->flags&LISTERF_VIEW_ICONS)
+	if (lister->flags&LISTERF_VIEW_ICONS || lister->flags&LISTERF_ICON_ACTION)
 		lister_get_icons(handle,lister,0,GETICONSF_CLEAN|GETICONSF_NO_REFRESH);
 
 	return 1;
