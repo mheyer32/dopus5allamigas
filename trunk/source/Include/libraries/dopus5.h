@@ -3021,4 +3021,13 @@ typedef struct
 
 /*********************************************************************/
 
+// 64-bit types QUAD and UQUAD
+#ifdef __amigaos4__
+typedef uint64 UQUAD;
+typedef int64 QUAD;
+#elif defined(__amigaos3__)
+typedef unsigned long long UQUAD;
+typedef signed long long QUAD;
+#endif
+
 #endif

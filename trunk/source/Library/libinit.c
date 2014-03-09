@@ -1431,7 +1431,7 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	NewList(&image_list);
 	InitSemaphore(&image_lock);
 	image_memory=0;
-	chip_memory=0;
+	//chip_memory=0;
 	listview_class=0;
 	image_class=0;
 	button_class=0;
@@ -1565,7 +1565,7 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 
 
 	// Memory handle for a bit of chip memory
-	chip_memory=L_NewMemHandle(4096,2048,MEMF_CLEAR|MEMF_CHIP|MEMF_PUBLIC);
+	//chip_memory=L_NewMemHandle(4096,2048,MEMF_CLEAR|MEMF_CHIP|MEMF_PUBLIC);
 
 
 	// Initialise boopsi classes
