@@ -297,7 +297,7 @@ void backdrop_fix_count(BackdropInfo *info,BOOL update)
 		else
 		{
 			++buffer->buf_TotalFiles[1];
-//			buffer->buf_TotalBytes[1]+=0;
+			buffer->buf_TotalBytes[1]+=object->size;
 		}
 
 		// Is object selected?
@@ -313,7 +313,7 @@ void backdrop_fix_count(BackdropInfo *info,BOOL update)
 			else
 			{
 				++buffer->buf_SelectedFiles[1];
-//				buffer->buf_SelectedBytes[1]+=0;
+				buffer->buf_SelectedBytes[1]+=object->size;
 			}
 		}
 	}
