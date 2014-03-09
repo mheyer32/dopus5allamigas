@@ -138,6 +138,10 @@ struct GfxBase 			*GfxBase = NULL;
 struct DosLibrary 		*DOSBase = NULL;
 struct LocaleBase 		*LocaleBase = NULL;
 struct RxsLib			*RexxSysBase = NULL;
+#ifdef __amigaos3__
+struct Library			*MathBase = NULL;
+struct Library			*MathTransBase = NULL;
+#endif
 #endif
 
 struct Library 			*CyberGfxBase = NULL;
@@ -832,6 +836,20 @@ ULONG freeBase(struct LibraryHeader *lib)
 
   UserLibCleanup();
 
+#ifdef __amigaos3__
+  if(MathBase != NULL)
+  {
+    CloseLibrary(MathBase);
+    MathBase = NULL;
+  }
+
+  if(MathTransBase != NULL)
+  {
+    CloseLibrary(MathTransBase);
+    MathBase = NULL;
+  }
+#endif
+  
   // close cybergarphics.library
   if(CyberGfxBase != NULL)
   {
@@ -975,6 +993,10 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((DataTypesBase = (APTR)OpenLibrary("datatypes.library", 37)) != NULL && GETINTERFACE(IDataTypes, DataTypesBase))
   if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
+#ifdef __amigaos3__
+  if ((MathBase=OpenLibrary("mathffp.library",0))
+  if ((MathTransBase=OpenLibrary("mathtrans.library",0))
+#endif
   {
   
     // we have to please the internal utilitybase

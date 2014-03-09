@@ -25,11 +25,6 @@ For more information on Directory Opus for Windows please see:
 #include "diskinfo.strings"
 #include "module_deps.h"
 
-#ifndef PI
-#define PI       ((float) 3.141592653589793)
-#endif
-
-
 extern ConfigWindow diskinfo_win;
 extern ObjectDef diskinfo_objects[];
 
