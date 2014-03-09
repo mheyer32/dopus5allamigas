@@ -28,7 +28,7 @@ struct TextFont *topaz_font;
 struct List				image_list;
 struct SignalSemaphore	image_lock;
 APTR					image_memory;
-APTR					chip_memory;
+//APTR					chip_memory;
 
 Class
 	*listview_class,*image_class,*button_class,*palette_class,*string_class,

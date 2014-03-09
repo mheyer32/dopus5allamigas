@@ -239,7 +239,7 @@ extern struct TextFont *topaz_font;
 extern struct List 		image_list;
 extern struct SignalSemaphore	image_lock;
 extern APTR			image_memory;
-extern APTR			chip_memory;
+//extern APTR			chip_memory;
 
 extern Class
 	*listview_class,*image_class,*button_class,*palette_class,*string_class,
