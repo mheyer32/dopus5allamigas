@@ -22,10 +22,8 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "diskinfo.h"
-#ifdef __amigaos3__
-#include <math-68881.h>
-#else
-#include <math.h>
+#ifndef __amigaos3__
+#include "math_replace.h"
 #endif
 
 // Show disk information
@@ -507,7 +505,7 @@ void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,
 void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,ULONG total)
 {
 	long p,xp,yp,height,a,b,cx,cy,pc,y,chunkx=0,chunky=0;
-	FLOAT rads,rsin,rcos,rx,ry,pcent=0;
+	FLOAT rads,sin,cos,rx,ry,pcent;
 	struct RastPort *rp;
 	short step,stop;
 
@@ -529,17 +527,17 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	// Get center and radii
 	a=(RECTWIDTH(rect))>>1;
 	cx=rect->MinX+a;
-	rx=(FLOAT)a;
+	rx=SPFlt(a);
 	b=((RECTHEIGHT(rect)-height))>>1;
 	cy=rect->MinY+b;
-	ry=(FLOAT)b;
+	ry=SPFlt(b);
 
 	// Get size of chunk as a percentage of the total, and convert to degrees
-	if (total>=1)
-		pcent=180.0-(((FLOAT)size/(FLOAT)total)*360.0);
+	pcent=(total<1)?(FLOAT)0:SPMul(SPDiv(SPFlt(total),SPFlt(size)),(FLOAT)360);
+	pcent=SPSub(pcent,(FLOAT)180);
 
 	// Get as long and round to nearest 2
-	pc=(long)pcent;
+	pc=SPFix(pcent);
 	if (pc&1) ++pc;
 	if (pc>178) pc=-180;
 	else
@@ -556,15 +554,14 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	for (p=180;p>=-180;p-=2)
 	{
 		// Convert degrees to radians
-		rads=(PI*(FLOAT)p)/180.0;
+		rads=SPDiv((FLOAT)180,SPMul((FLOAT)PI,SPFlt(p)));
 
 		// Get sine and cosine
-		rcos=cos(rads);
-		rsin=sin(rads);
+		sin=SPSincos(&cos,rads);
 
 		// Get coordinates
-		xp=(long)(rx*rcos);
-		yp=(long)(ry*rsin);
+		xp=SPFix(SPMul(rx,cos));
+		yp=SPFix(SPMul(ry,sin));
 
 		// Draw line
 		AreaDraw(rp,cx+xp,cy+yp);
@@ -606,15 +603,14 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	while (1)
 	{
 		// Convert degrees to radians
-		rads=(PI*(FLOAT)p)/180.0;
+		rads=SPDiv((FLOAT)180,SPMul((FLOAT)PI,SPFlt(p)));
 
 		// Get sine and cosine
-		rcos=cos(rads);
-		rsin=sin(rads);
+		sin=SPSincos(&cos,rads);
 
 		// Get coordinates
-		xp=(long)(rx*rcos);
-		yp=(long)(ry*rsin);
+		xp=SPFix(SPMul(rx,cos));
+		yp=SPFix(SPMul(ry,sin));
 
 		// Draw line
 		AreaDraw(rp,cx+xp,yp+y);
