@@ -117,6 +117,10 @@ BOOL buffer_freedir(DirBuffer *buffer,BOOL clear_handler)
 	buffer->buf_FreeDiskSpace=0;
 	buffer->buf_TotalDiskSpace=0;
 	buffer->buf_VolumeLabel[0]=0;
+#ifdef USE_64BIT
+	buffer->buf_FreeDiskSpace64=0;
+	buffer->buf_TotalDiskSpace64=0;
+#endif
 	buffer->flags=0;
 	buffer->name_length=0;
 	buffer->date_length=0;
@@ -180,7 +184,11 @@ DirEntry *create_file_entry(
 	DirBuffer			*buffer,
 	BPTR				lock,
 	char				*entry_name,
+#ifdef USE_64BIT
+	UQUAD				entry_size,
+#else
 	unsigned long		entry_size,
+#endif
 	short				entry_type,
 	struct DateStamp	*entry_date,
 	char				*entry_comment,

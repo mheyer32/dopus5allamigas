@@ -571,7 +571,12 @@ BOOL rexx_lister_cmd(struct RexxMsg *msg,short command,char *args)
 
 					// Byte count
 					case RXCMD_NUMBYTES:
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+						lsprintf(result,"%ld",(LONG)(lister->cur_buffer->buf_TotalBytes[0]&0xffffffff));
+#else
 						lsprintf(result,"%ld",lister->cur_buffer->buf_TotalBytes[0]);
+#endif
 						break;
 
 					// Selected file count
@@ -591,7 +596,12 @@ BOOL rexx_lister_cmd(struct RexxMsg *msg,short command,char *args)
 
 					// Selected byte count
 					case RXCMD_NUMSELBYTES:
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+						lsprintf(result,"%ld",(LONG)(lister->cur_buffer->buf_SelectedBytes[0]&0xffffffff));
+#else
 						lsprintf(result,"%ld",lister->cur_buffer->buf_SelectedBytes[0]);
+#endif
 						break;
 
 					// Entry information
@@ -1866,7 +1876,12 @@ void rexx_lister_entry_info(
 
 		// Return information
 		rexx_set_var(msg,varname,"NAME",(ULONG)entry->de_Node.dn_Name,RX_STRING);
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+		rexx_set_var(msg,varname,"SIZE",(LONG)(entry->de_Size&0xffffffff),RX_LONG);
+#else
 		rexx_set_var(msg,varname,"SIZE",entry->de_Size,RX_LONG);
+#endif
 		rexx_set_var(msg,varname,"TYPE",type,RX_LONG);
 		rexx_set_var(msg,varname,"SELECTED",(entry->de_Flags&ENTF_SELECTED)?1:0,RX_LONG);
 		rexx_set_var(msg,varname,"DATE",date,RX_LONG);
@@ -1919,6 +1934,16 @@ void rexx_lister_entry_info(
 	else sep=' ';
 
 	// Build entry information
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+	lsprintf(name,"%s%lc%lu%lc%ld%lc%ld%lc%ld%lc%s%lc",
+		entry->de_Node.dn_Name,sep,
+		(LONG)(entry->de_Size&0xffffffff),sep,
+		type,sep,
+		(entry->de_Flags&ENTF_SELECTED)?1:0,sep,
+		(entry->de_Date.ds_Days*86400)+(entry->de_Date.ds_Minute*60)+(entry->de_Date.ds_Tick/50),sep,
+		entry->de_ProtBuf,sep);
+#else
 	lsprintf(name,"%s%lc%lu%lc%ld%lc%ld%lc%ld%lc%s%lc",
 		entry->de_Node.dn_Name,sep,
 		entry->de_Size,sep,
@@ -1926,6 +1951,7 @@ void rexx_lister_entry_info(
 		(entry->de_Flags&ENTF_SELECTED)?1:0,sep,
 		(entry->de_Date.ds_Days*86400)+(entry->de_Date.ds_Minute*60)+(entry->de_Date.ds_Tick/50),sep,
 		entry->de_ProtBuf,sep);
+#endif
 
 	// Get comment pointer
 	ptr=(char *)GetTagData(DE_Comment,0,entry->de_Tags);

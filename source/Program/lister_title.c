@@ -115,11 +115,20 @@ void lister_show_name(Lister *lister)
 			else ptr=space_buf;
 
 			// Convert to kilobytes
+#ifdef USE_64BIT
+			BytesToString64(
+				&buffer->buf_FreeDiskSpace64,
+				ptr,
+				sizeof(space_buf)-1,
+				1,
+				(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#else
 			BytesToString(
 				buffer->buf_FreeDiskSpace,
 				ptr,
 				1,
 				(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 
 			// Add free string
 			strcat(space_buf," ");
@@ -129,11 +138,23 @@ void lister_show_name(Lister *lister)
 			strcat(space_buf,", ");
 
 			// Convert in-use to kilobytes
+#ifdef USE_64BIT
+			{
+				UQUAD tmp=buffer->buf_TotalDiskSpace64-buffer->buf_FreeDiskSpace64;
+				BytesToString64(
+					&tmp,
+					space_buf+strlen(space_buf),
+					sizeof(space_buf)-strlen(space_buf)-1,
+					1,
+					(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+			}
+#else
 			BytesToString(
 				buffer->buf_TotalDiskSpace-buffer->buf_FreeDiskSpace,
 				space_buf+strlen(space_buf),
 				1,
 				(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 
 			// Add free string
 			strcat(space_buf," ");
@@ -143,11 +164,13 @@ void lister_show_name(Lister *lister)
 			strcat(space_buf,", ");
 
 			// Full?
+#ifndef USE_64BIT
 			if (buffer->buf_FreeDiskSpace<10 || buffer->buf_TotalDiskSpace<1000)
 				strcat(space_buf,"100");
 
 			// Calculate percentage
 			else
+#endif
 			DivideToString(
 				space_buf+strlen(space_buf),
 				(buffer->buf_TotalDiskSpace/10)-(buffer->buf_FreeDiskSpace/10),
@@ -487,7 +510,11 @@ void select_show_info(Lister *lister,BOOL dodef)
 							// Selected?
 							if (*(ptr+2)=='s')
 							{
+#ifdef USE_64BIT
+								ItoaU64(&buffer->buf_SelectedBytes[which], buf, sizeof(buf), 0);
+#else
 								lsprintf(buf,format,buffer->buf_SelectedBytes[which]);
+#endif
 								esc=2;
 							}
 
@@ -495,7 +522,11 @@ void select_show_info(Lister *lister,BOOL dodef)
 							else
 							if (*(ptr+2)=='t')
 							{
+#ifdef USE_64BIT
+								ItoaU64(&buffer->buf_TotalBytes[which], buf, sizeof(buf), 0);
+#else
 								lsprintf(buf,format,buffer->buf_TotalBytes[which]);
+#endif
 								esc=2;
 							}
 						}

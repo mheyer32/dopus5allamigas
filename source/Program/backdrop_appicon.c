@@ -195,7 +195,11 @@ BackdropObject *backdrop_add_appicon(AppEntry *appicon,BackdropInfo *info,short 
 		if (((AppEntry *)appicon)->flags&APPENTF_BACKGROUND)
 		{
 			// Store background colour
+#ifdef USE_64BIT
+			object->pen=((AppEntry *)appicon)->data;
+#else
 			object->size=((AppEntry *)appicon)->data;
+#endif
 			object->flags|=BDOF_BACKGROUND;
 		}
 

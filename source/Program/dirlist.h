@@ -64,7 +64,11 @@ typedef struct _DirNode {
 typedef struct DirectoryEntry {
 	DirNode			de_Node;
 	short			de_SubType;		// Entry subtype
+#ifdef USE_64BIT
+	ULONG			pad1;
+#else
 	unsigned long		de_Size;		// Entry size
+#endif
 	unsigned short		de_Protection;		// Protection
 	unsigned short		de_Flags;		// Entry flags
 	struct DateStamp	de_Date;		// Date
@@ -74,6 +78,9 @@ typedef struct DirectoryEntry {
 	unsigned char		de_Colour;		// Display pens
 	unsigned long		de_UserData;		// User data
 	struct TagItem		*de_Tags;		// Extension tags
+#ifdef USE_64BIT
+	UQUAD				de_Size; 		// Entry size
+#endif
 } DirEntry;
 
 #ifndef __amigaos3__
@@ -159,10 +166,18 @@ typedef struct DirectoryBuffer
 	long			buf_TotalEntries[2];	// Total number of entries
 	long			buf_TotalFiles[2];	// Total number of files
 	long			buf_TotalDirs[2];	// Total number of directories
+#ifdef USE_64BIT
+	ULONG			pad5[2];
+#else
 	unsigned long		buf_TotalBytes[2];	// Total number of bytes
+#endif
 	long			buf_SelectedFiles[2];	// Selected files
 	long			buf_SelectedDirs[2];	// Selected directories
+#ifdef USE_64BIT
+	ULONG			pad6[2];
+#else
 	unsigned long		buf_SelectedBytes[2];	// Selected bytes
+#endif
 
 	unsigned long		buf_TotalDiskSpace;	// Total disk space
 	unsigned long		buf_FreeDiskSpace;	// Free disk space
@@ -181,7 +196,13 @@ typedef struct DirectoryBuffer
 
 	char			buf_VolumeLabel[32];	// Volume name
 	char			*buf_ObjectName;	// Object filename
+#ifdef USE_64BIT
+	UQUAD		buf_TotalDiskSpace64;	// Total disk space in bytes
+	UQUAD		buf_FreeDiskSpace64;	// Free disk space in bytes
+	char			pad1[12];
+#else
 	char			pad1[28];
+#endif
 	char			buf_ExpandedPath[512];	// Expanded pathname
 
 	unsigned short		last_owner;		// Owner ID of last entry we read
@@ -218,7 +239,12 @@ typedef struct DirectoryBuffer
 
 	ULONG			buf_DiskType;		// Current disk type
 
+#ifdef USE_64BIT
+	UQUAD		buf_TotalBytes[2];	// Total number of bytes
+	UQUAD		buf_SelectedBytes[2];	// Selected bytes
+#else
 	ULONG			pad3[8];
+#endif
 
 	char			buf_CustomHeader[80];	// Custom header
 

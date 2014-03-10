@@ -453,7 +453,11 @@ int read_dir(
 					buffer,
 					lock,
 					fileinfo->fib_FileName,
+#ifdef USE_64BIT
+					(UQUAD)fileinfo->fib_Size,
+#else
 					fileinfo->fib_Size,
+#endif
 					fileinfo->fib_DirEntryType,
 					&fileinfo->fib_Date,
 					fileinfo->fib_Comment,

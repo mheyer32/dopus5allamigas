@@ -425,6 +425,25 @@ DOPUS_FUNC(function_devicelist)
 							}
 
 							// Get space free and used
+#ifdef USE_64BIT
+							{
+								UQUAD tmp;
+								tmp=((UQUAD)info->id_NumBlocks-(UQUAD)info->id_NumBlocksUsed)*(UQUAD)info->id_BytesPerBlock;
+								BytesToString64(
+									&tmp,
+									data->free,
+									sizeof(data->free),
+									1,
+									(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+								tmp=(UQUAD)info->id_NumBlocksUsed*(UQUAD)info->id_BytesPerBlock;
+								BytesToString64(
+									&tmp,
+									data->used,
+									sizeof(data->used),
+									1,
+									(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+							}
+#else
 							BytesToString(
 								(info->id_NumBlocks-info->id_NumBlocksUsed)*info->id_BytesPerBlock,
 								data->free,1,
@@ -433,6 +452,7 @@ DOPUS_FUNC(function_devicelist)
 								info->id_NumBlocksUsed*info->id_BytesPerBlock,
 								data->used,1,
 								(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 
 							// Check widths
 							if ((len=lister_get_length(lister,data->full))>max_full_width)

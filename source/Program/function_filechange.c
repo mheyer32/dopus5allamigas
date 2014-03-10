@@ -102,12 +102,47 @@ FileChangeList *function_add_filechanges(
 
 
 // Add a file to lists
+#ifdef USE_64BIT
 FileChange *function_filechange_addfile(
 	FunctionHandle *handle,
 	char *path,
 	struct FileInfoBlock *info,
 	NetworkInfo *network,
 	Lister *lister)
+{
+	return function_filechange_addfile64(
+		handle,
+		path,
+		(short)info->fib_DirEntryType,
+		info->fib_FileName,
+		(unsigned long)info->fib_Protection,
+		(UQUAD)info->fib_Size,
+		&info->fib_Date,
+		info->fib_Comment,
+		network,
+		lister);
+}
+
+#warning TODO: split the function below
+FileChange *function_filechange_addfile64(
+	FunctionHandle *handle,
+	char *path,
+	short direntrytype,
+	char *filename,
+	unsigned long protection,
+	UQUAD size,
+	struct DateStamp *date,
+	char *comment,
+	NetworkInfo *network,
+	Lister *lister)
+#else
+FileChange *function_filechange_addfile(
+	FunctionHandle *handle,
+	char *path,
+	struct FileInfoBlock *info,
+	NetworkInfo *network,
+	Lister *lister)
+#endif
 {
 	FileChangeList *list;
 	FileChange *change;
@@ -117,10 +152,17 @@ FileChange *function_filechange_addfile(
 		!(list=function_add_filechanges(handle,path,lister))) return 0;
 
 	// Get new change entry
+#ifdef USE_64BIT
+	if (!(change=AllocMemH(handle->memory,
+		sizeof(FileChange)+
+		strlen(filename)+
+		((comment!=NULL)?strlen(comment):0)+1))) return 0;
+#else
 	if (!(change=AllocMemH(handle->memory,
 		sizeof(FileChange)+
 		strlen(info->fib_FileName)+
 		strlen(info->fib_Comment)+1))) return 0;
+#endif
 
 	// Network information?
 	if (network &&
@@ -134,21 +176,41 @@ FileChange *function_filechange_addfile(
 	change->node.ln_Type=FCTYPE_ADD;
 
 	// Fill out entry
+#ifdef USE_64BIT
+	change->fib_Size=size;
+	change->fib_DirEntryType=direntrytype;
+	/*change->fib_Date={0};
+	if (date)*/ change->fib_Date=*date;
+	change->fib_Protection=protection;
+#else
 	change->fib_Size=info->fib_Size;
 	change->fib_DirEntryType=info->fib_DirEntryType;
 	change->fib_Date=info->fib_Date;
 	change->fib_Protection=info->fib_Protection;
+#endif
 
 	// Copy name
+#ifdef USE_64BIT
+	strcpy(change->fib_FileName,filename);
+#else
 	strcpy(change->fib_FileName,info->fib_FileName);
+#endif
 	change->node.ln_Name=change->fib_FileName;
 
 	// Got a comment?
+#ifdef USE_64BIT
+	if (comment!=NULL && comment[0])
+#else
 	if (info->fib_Comment[0])
+#endif
 	{
 		// Copy comment
 		change->fib_Comment=change->node.ln_Name+strlen(change->fib_FileName)+1;
+#ifdef USE_64BIT
+		strcpy(change->fib_Comment,comment);
+#else
 		strcpy(change->fib_Comment,info->fib_Comment);
+#endif
 	}
 
 	// Add to end of list
@@ -333,7 +395,12 @@ FileChange *function_filechange_modify(
 			// Size
 			case FM_Size:
 				change->flags|=FMF_SIZE;
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+				change->fib_Size = (UQUAD)tagdata;
+#else
 				change->fib_Size = tagdata;
+#endif
 				break;
 
 			// Date
@@ -537,7 +604,11 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							UnLock(lock);
 
 							// Copy real file data
+#ifdef USE_64BIT
+							change->fib_Size=(UQUAD)fib->fib_Size;
+#else
 							change->fib_Size=fib->fib_Size;
+#endif
 							change->fib_DirEntryType=fib->fib_DirEntryType;
 							change->fib_Date=fib->fib_Date;
 							change->fib_Protection=fib->fib_Protection;

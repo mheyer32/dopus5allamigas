@@ -599,7 +599,7 @@ void getdispcol(DirEntry *entry,Lister *lister,short *fpen,short *bpen)
 void builddisplaystring(DirEntry *entry,char *display_buf,Lister *lister)
 {
 	NetworkInfo *network=0;
-	char size_buf[20];
+	char size_buf[27];
 	register char *buf_ptr,*src_ptr;
 	char *end_ptr;
 	register short len;
@@ -676,10 +676,16 @@ void builddisplaystring(DirEntry *entry,char *display_buf,Lister *lister)
 		// Build size string
 		else
 		{
+#ifdef USE_64BIT
+			ItoaU64(&entry->de_Size, size_buf, sizeof(size_buf),
+				(environment->env->settings.date_flags&DATE_1000SEP)?
+				((entry->de_Flags&ENTF_FAKE)?',':GUI->decimal_sep):0);
+#else
 			ItoaU(entry->de_Size,
 				size_buf,
 				(environment->env->settings.date_flags&DATE_1000SEP)?
 					((entry->de_Flags&ENTF_FAKE)?',':GUI->decimal_sep):0);
+#endif
 		}
 	}
 
@@ -1004,12 +1010,22 @@ void lister_update_name(Lister *lister)
 		GetDiskInfo(buffer->buf_Path,info);
 
 		// Get total size
+#ifdef USE_64BIT
+		buffer->buf_TotalDiskSpace=info->id_NumBlocks;
+		buffer->buf_TotalDiskSpace64=(UQUAD)info->id_BytesPerBlock*(UQUAD)info->id_NumBlocks;
+#else
 		buffer->buf_TotalDiskSpace=
 			UMult32(info->id_BytesPerBlock,info->id_NumBlocks);
+#endif
 
 		// Get free space
+#ifdef USE_64BIT
+		buffer->buf_FreeDiskSpace=info->id_NumBlocks-info->id_NumBlocksUsed;
+		buffer->buf_FreeDiskSpace64=buffer->buf_TotalDiskSpace64-((UQUAD)info->id_BytesPerBlock*(UQUAD)info->id_NumBlocksUsed);
+#else
 		buffer->buf_FreeDiskSpace=
 			buffer->buf_TotalDiskSpace-UMult32(info->id_BytesPerBlock,info->id_NumBlocksUsed);
+#endif
 
 		// Is this the RAM disk?
 		if (buffer->buf_FreeDiskSpace==0 && strncmp(buffer->buf_Path,"RAM:",4)==0)
@@ -1017,6 +1033,11 @@ void lister_update_name(Lister *lister)
 			// Free space equals available memory
 			buffer->buf_FreeDiskSpace=AvailMem(MEMF_ANY);
 			buffer->buf_TotalDiskSpace+=buffer->buf_FreeDiskSpace;
+#ifdef USE_64BIT
+#warning this is probably not necessary anymore
+			buffer->buf_FreeDiskSpace64=(UQUAD)buffer->buf_FreeDiskSpace;
+			buffer->buf_TotalDiskSpace64+=buffer->buf_FreeDiskSpace64;
+#endif
 		}
 
 		// If disk is write protected, set READONLY flag in directory
@@ -1285,9 +1306,14 @@ struct BitMap *builddisplaystring_prop(DirEntry *entry,char *display_buf,Lister 
 		// Build size string
 		else
 		{
+#ifdef USE_64BIT
+			ItoaU64(&entry->de_Size, size_buf, sizeof(size_buf),
+				(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#else
 			ItoaU(entry->de_Size,
 				size_buf,
 				(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 		}
 	}
 
