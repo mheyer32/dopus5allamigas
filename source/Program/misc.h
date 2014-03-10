@@ -56,16 +56,7 @@ IPC_EntryProto(misc_proc, extern);
 long misc_check_quit(struct Screen *screen,IPCData *ipc);
 void kill_pirates(void);
 
-/*
-// Simple copy routine, like CopyMem but inline. Should be faster on small copies
-void __inline copy_mem(char *source,char *dest,int size)
-{
-	while (size-->0) *dest++=*source++;
-}
-*/
-
 // Prototypes
-void copy_mem(char *,char *,int);
 void getsizestring(char *,ULONG);
 BOOL copy_string(char *,char **,struct DOpusRemember **);
 void do_title_string(char *,char *,char *);

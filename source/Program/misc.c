@@ -23,11 +23,6 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
-// Simple copy routine, like CopyMem
-void copy_mem(char *source,char *dest,int size)
-{
-	while (size-->0) *dest++=*source++;
-}
 
 // Get the name of the screen we are currently on
 char *get_our_pubscreen()

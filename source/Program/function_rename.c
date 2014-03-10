@@ -387,7 +387,7 @@ BOOL rename_get_wild(char *src_pattern,char *dst_pattern,char *old_name,char *ne
 		len-=prefix_len+suffix_len;
 
 		// Copy bit we are keeping
-		copy_mem(old_name+prefix_len,keep_bit,len);
+		CopyMem(old_name+prefix_len,keep_bit,len);
 		keep_bit[len]=0;
 
 		// Build new name
