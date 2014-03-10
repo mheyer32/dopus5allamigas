@@ -22,7 +22,11 @@ For more information on Directory Opus for Windows please see:
 */
 
 #include "diskinfo.h"
-#ifndef __amigaos3__
+#ifdef __amigaos3__
+#include <proto/mathffp.h>
+#include <proto/mathtrans.h>
+#include <libraries/mathffp.h>
+#else
 #include "math_replace.h"
 #endif
 
