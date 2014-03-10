@@ -192,8 +192,10 @@ if	(comment)
 else
 	*fib->fib_Comment = 0;
 
-
-fib->fib_Size = size;
+if (type>0)
+	fib->fib_Size = 0; // we don't need the size of directories
+else
+	fib->fib_Size = size;
 
 seconds_to_datestamp( &fib->fib_Date, seconds );
 
