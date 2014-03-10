@@ -994,8 +994,8 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
 #ifdef __amigaos3__
-  if ((MathBase=OpenLibrary("mathffp.library",0))
-  if ((MathTransBase=OpenLibrary("mathtrans.library",0))
+  if ((MathBase=OpenLibrary("mathffp.library",0)))
+  if ((MathTransBase=OpenLibrary("mathtrans.library",0)))
 #endif
   {
   
