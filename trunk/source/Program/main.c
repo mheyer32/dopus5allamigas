@@ -195,11 +195,6 @@ void startup_misc_init()
 	// Get pointer to our Process structure, and hide requesters
 	main_proc=(struct Process *)FindTask(0);
 	main_proc->pr_WindowPtr=(APTR)-1;
-
-#if 0
-	// Complement some strings
-	eliza_decrypt();
-#endif
 }
 
 

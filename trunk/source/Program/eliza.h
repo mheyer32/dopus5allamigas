@@ -55,4 +55,3 @@ short eliza_line(struct eliza_data *data,char *line);
 BOOL init_eliza(struct eliza_data *);
 void free_eliza(struct eliza_data *);
 void print_string(char *);
-void eliza_decrypt(void);
