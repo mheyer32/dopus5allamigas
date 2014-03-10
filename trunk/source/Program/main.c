@@ -198,7 +198,6 @@ void startup_misc_init()
 
 #if 0
 	// Complement some strings
-	compstr(register_name);
 	eliza_decrypt();
 #endif
 }
@@ -1262,38 +1261,30 @@ void startup_init_notification()
 }
 
 
-// comented out because of crash comes from rev900 (fix for array images)
-// TODO: put these into a header
-/*
-extern UWORD command_arrow[7];
-extern UWORD parent_arrow[6];
-
-#ifdef __amigaos3__
-extern UWORD *command_arrow_chip;
-extern UWORD *parent_arrow_chip;
-#endif
-*/
-
-
 // Initialise icons, etc
 void startup_init_icons()
 {
 #ifdef __AROS__
-	WORD NumImageWords;
-	int i,j;
+	int i;
 
-	for (i=0; i<2; i++)
+	for (i=0; i<11; i++)
 	{
-		NumImageWords = ((arrow_image[i].Width + 16) / 16) * arrow_image[i].Height * arrow_image[i].Depth;
-
-		for (j=0; j<NumImageWords; j++)
-			arrow_image[i].ImageData[j]=AROS_BE2WORD(arrow_image[i].ImageData[j]);
+		arrow_hi_data[i][0]=AROS_BE2WORD(arrow_hi_data[i][0]);
+		arrow_hi_data[i][1]=AROS_BE2WORD(arrow_hi_data[i][1]);
+		arrow_lo_data[i][0]=AROS_BE2WORD(arrow_lo_data[i][0]);
+		arrow_lo_data[i][1]=AROS_BE2WORD(arrow_lo_data[i][1]);
 	}
 	
-	for (i=0; i<sizeof(command_arrow)/2; i++)
+	for (i=0; i<sizeof(small_arrow)/sizeof(UWORD); i++)
+		small_arrow[i]=AROS_BE2WORD(small_arrow[i]);
+
+	for (i=0; i<sizeof(big_arrow)/sizeof(UWORD); i++)
+		big_arrow[i]=AROS_BE2WORD(big_arrow[i]);
+
+	for (i=0; i<sizeof(command_arrow)/sizeof(UWORD); i++)
 		command_arrow[i]=AROS_BE2WORD(command_arrow[i]);
 
-	for (i=0; i<sizeof(parent_arrow)/2; i++)
+	for (i=0; i<sizeof(parent_arrow)/sizeof(UWORD); i++)
 		parent_arrow[i]=AROS_BE2WORD(parent_arrow[i]);
 #endif
 

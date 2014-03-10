@@ -102,8 +102,6 @@ typedef struct
 	APTR	function;
 } PatchList;
 
-extern char register_name[];
-
 typedef struct
 {
 	short	type;

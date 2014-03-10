@@ -2,7 +2,6 @@ COMMON_OBJS =	data.o \
 	string_data.o \
 	function_data.o \
 	menu_data.o \
-	moon_data.o \
 	palette_routines.o \
 	pattern.o \
 	key_press.o key_finder_data.o \

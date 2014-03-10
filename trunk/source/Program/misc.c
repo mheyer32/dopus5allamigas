@@ -29,16 +29,6 @@ void copy_mem(char *source,char *dest,int size)
 	while (size-->0) *dest++=*source++;
 }
 
-// Complement a string in place
-void compstr(char *str)
-{
-	while (*str)
-	{
-		*str=~*str;
-		++str;
-	}
-}
-
 // Get the name of the screen we are currently on
 char *get_our_pubscreen()
 {
