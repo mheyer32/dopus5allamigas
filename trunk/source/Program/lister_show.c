@@ -609,7 +609,7 @@ void builddisplaystring(DirEntry *entry,char *display_buf,Lister *lister)
 	// If entry is invalid, fill string with spaces
 	if (!entry->de_Node.dn_Succ)
 	{
-		copy_mem(
+		CopyMem(
 			str_space_string,
 			display_buf,
 			MAXDISPLAYLENGTH);
@@ -623,7 +623,7 @@ void builddisplaystring(DirEntry *entry,char *display_buf,Lister *lister)
 		short pos=0;
 
 		// Fill with spaces
-		copy_mem(str_space_string,display_buf,MAXDISPLAYLENGTH);
+		CopyMem(str_space_string,display_buf,MAXDISPLAYLENGTH);
 
 		// Copy display string
 		for (ptr=buf_ptr;*ptr;ptr++)

@@ -28,8 +28,6 @@ For more information on Directory Opus for Windows please see:
 #define STACK_DEFAULT	6144
 #define STACK_LARGE	8192
 
-// INLINE copy_mem!!!!!!!!!!
-
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 
