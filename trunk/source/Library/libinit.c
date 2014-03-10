@@ -1754,7 +1754,7 @@ void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
 		FreeVec(data);
 	}
 
-	L_FreeMemHandle(chip_memory);
+	//L_FreeMemHandle(chip_memory);
 	class_free(listview_class);
 	class_free(button_class);
 	class_free(string_class);

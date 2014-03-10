@@ -7,6 +7,7 @@
 #if defined(__AROS__)
 #include <aros/debug.h>
 #undef bug
+#undef D
 #endif /* __AROS__ */
 
 #ifdef DEBUG
