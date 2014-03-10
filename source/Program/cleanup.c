@@ -141,7 +141,9 @@ void quit(BOOL script)
 
 		// Free arrow image
 		CloseImage(GUI->toolbar_arrow_image);
-		
+
+// comented out because of crash comes from rev900 (fix for array images)
+/*		
 #ifdef __amigaos3__
 		{
 			extern UWORD *command_arrow_chip;
@@ -153,7 +155,7 @@ void quit(BOOL script)
 			FreeVec(arrow_image[1].ImageData);
 		}
 #endif
-
+*/
 		// Free screen signal
 		if (GUI->screen_signal!=-1) FreeSignal(GUI->screen_signal);
 

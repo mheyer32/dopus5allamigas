@@ -1262,7 +1262,9 @@ void startup_init_notification()
 }
 
 
+// comented out because of crash comes from rev900 (fix for array images)
 // TODO: put these into a header
+/*
 extern UWORD command_arrow[7];
 extern UWORD parent_arrow[6];
 
@@ -1270,6 +1272,8 @@ extern UWORD parent_arrow[6];
 extern UWORD *command_arrow_chip;
 extern UWORD *parent_arrow_chip;
 #endif
+*/
+
 
 // Initialise icons, etc
 void startup_init_icons()
@@ -1293,6 +1297,8 @@ void startup_init_icons()
 		parent_arrow[i]=AROS_BE2WORD(parent_arrow[i]);
 #endif
 
+// comented out because of crash comes from rev900 (fix for array images)
+/*
 #ifdef __amigaos3__
 	WORD NumImageWords;
 	int i;
@@ -1317,7 +1323,7 @@ void startup_init_icons()
 		}
 	}
 #endif
-
+*/
 	// Get arrow image for toolbars
 	GUI->toolbar_arrow_image=OpenImage("dopus5:images/ToolbarArrow.image",0);
 
