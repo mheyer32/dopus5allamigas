@@ -608,13 +608,18 @@ BOOL lister_fix_horiz_len(Lister *lister)
 				if (entry->de_Node.dn_Type<=ENTRY_FILE ||
 					(entry->de_Node.dn_Type>=ENTRY_DIRECTORY && !(entry->de_Flags&ENTF_NO_SIZE)))
 				{
-					char buf[20];
+					char buf[27];
 
 					// Convert to string
 					if (entry->de_Node.dn_Type<=ENTRY_FILE && entry->de_Size==0)
 						strcpy(buf,string_empty);
 					else
+#ifdef USE_64BIT
+						ItoaU64(&entry->de_Size, buf, sizeof(buf),
+							(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#else
 						Itoa(entry->de_Size,buf,(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 
 					// Check length
 					lister_check_max_length(lister,buf,&buffer->size_length,DISPLAY_SIZE);

@@ -68,7 +68,6 @@ void __inline copy_mem(char *source,char *dest,int size)
 void copy_mem(char *,char *,int);
 void compstr(char *str);
 void getsizestring(char *,ULONG);
-void getfloatstr(double,char *);
 BOOL copy_string(char *,char **,struct DOpusRemember **);
 void do_title_string(char *,char *,char *);
 char *get_our_pubscreen(void);

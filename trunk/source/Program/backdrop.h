@@ -59,7 +59,12 @@ typedef struct _BackdropObject
 	unsigned long		value;		// Value for position-sorting
 	Cfg_Filetype		*filetype;	// Filetype
 
+#ifdef USE_64BIT
+	ULONG 				pen;		// custom pen for AppIcons
+	UQUAD				size;		// File size
+#else
 	unsigned long		size;		// File size
+#endif
 } BackdropObject;
 
 

@@ -29,7 +29,11 @@ DOPUS_FUNC(function_getsizes)
 	FunctionEntry *entry;
 	PathNode *path;
 	short ret=1,count=1;
+#ifdef USE_64BIT
+	UQUAD total_blocks,dest_blocks;
+#else
 	long total_blocks,dest_blocks;
+#endif
 	char *req_text=0;
 	short clear=0;
 	Lister *lister;
@@ -218,9 +222,15 @@ DOPUS_FUNC(function_getsizes)
 					if (entry->type<0 && !(entry->flags&FUNCENTF_ICON_ACTION))
 					{
 						long fileListEntries;
+#ifdef USE_64BIT
+						UQUAD dataBlocks;
+						UQUAD fileLists;
+						UQUAD totalBlocks;
+#else
 						long dataBlocks;
 						long fileLists;
 						long totalBlocks;
+#endif
 
 						// Calculate block size of file
 						fileListEntries=(handle->dest_block_size>>2)-56;
@@ -248,10 +258,11 @@ DOPUS_FUNC(function_getsizes)
 		if (req_text)
 		{
 			// Got available blocks?
-			if (dest_blocks>-1)
+			if (dest_blocks!=-1)
 			{
-				short percent;
-				double pct;
+#ifdef USE_64BIT
+				int percent;
+				float pct;
 
 				// Fit completely?
 				if (dest_blocks>=total_blocks) percent=100;
@@ -260,15 +271,40 @@ DOPUS_FUNC(function_getsizes)
 				{
 					// Get percent that will fit
 					pct=dest_blocks*100;
-					percent=(short)(pct/(double)total_blocks);
+					percent=(int)(pct/(float)total_blocks);
 				}
-
+				
 				// Build string
 				lsprintf(handle->work_buffer,
-					"\n%s %s %ld%%",
+					"\n%s %s %d%%",
 					path->path,
 					GetString(&locale,MSG_FIT),
 					percent);
+#else
+				// without 64-bit support, there's no need to use the FPU
+				char percent[27];
+
+				// Fit completely?
+				if (dest_blocks>=total_blocks) strncpy(percent,"100",sizeof(percent));
+				else if (dest_blocks==0) strncpy(percent,"0",sizeof(percent));
+				else
+				{
+					// Get percent that will fit
+					DivideToString(
+						percent,
+						dest_blocks*100,
+						total_blocks,
+						0,
+						0);
+				}
+				
+				// Build string
+				lsprintf(handle->work_buffer,
+					"\n%s %s %s%%",
+					path->path,
+					GetString(&locale,MSG_FIT),
+					percent);
+#endif
 			}
 
 			// No

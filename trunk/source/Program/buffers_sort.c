@@ -382,7 +382,11 @@ int ASM buffer_sort_entries_size(
 		return namesort(entry1->de_Node.dn_Name,entry2->de_Node.dn_Name);
 
 	// Otherwise, return difference in sizes
+#ifdef USE_64BIT
+	return (entry1->de_Size<entry2->de_Size) ? -1 : 1;
+#else
 	return (long)((long)entry1->de_Size-(long)entry2->de_Size);
+#endif
 }
 
 

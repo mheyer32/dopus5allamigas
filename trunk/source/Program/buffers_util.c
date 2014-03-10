@@ -254,6 +254,10 @@ void buffer_show_special(Lister *lister,char *title)
 	buffer_freedir(lister->special_buffer,1);
 	lister->special_buffer->buf_FreeDiskSpace=0;
 	lister->special_buffer->buf_TotalDiskSpace=0;
+#ifdef USE_64BIT
+	lister->special_buffer->buf_FreeDiskSpace64=0;
+	lister->special_buffer->buf_TotalDiskSpace64=0;
+#endif
 
 	// If not already on the special window, save current window and move to it
 	if (lister->cur_buffer!=lister->special_buffer)

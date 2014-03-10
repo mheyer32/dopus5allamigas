@@ -535,11 +535,19 @@ void backdrop_draw_object(
 					DrawBox(rp,&rect,GUI->draw_info,object->state);
 
 					// Get background colour
+#ifdef USE_64BIT
+					SetAPen(
+						rp,
+						(object->flags&BDOF_BACKGROUND)?
+							object->pen:
+							GUI->draw_info->dri_Pens[BACKGROUNDPEN]);
+#else
 					SetAPen(
 						rp,
 						(object->flags&BDOF_BACKGROUND)?
 							object->size:
 							GUI->draw_info->dri_Pens[BACKGROUNDPEN]);
+#endif
 
 					// Clear boundary around image
 #ifdef USE_DRAWICONSTATE

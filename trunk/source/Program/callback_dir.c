@@ -33,7 +33,11 @@ DirEntry *ASM SAVEDS HookCreateFileEntry(
 				lister->cur_buffer,
 				lock,
 				fib->fib_FileName,
+#ifdef USE_64BIT
+				(UQUAD)fib->fib_Size,
+#else
 				fib->fib_Size,
+#endif
 				fib->fib_DirEntryType,
 				&fib->fib_Date,
 				fib->fib_Comment,
@@ -89,7 +93,12 @@ void ASM SAVEDS HookFileSet(
 
 			// Size
 			case HFFS_SIZE:
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+				entry->de_Size=(UQUAD)tag->ti_Data;
+#else
 				entry->de_Size=tag->ti_Data;
+#endif
 				lister->more_flags|=LISTERF_NEED_RECALC;
 				break;
 
@@ -258,7 +267,12 @@ BOOL ASM SAVEDS HookFileQuery(
 			// Size
 			case HFFS_SIZE:
 				if (tag->ti_Data)
+#ifdef USE_64BIT
+#warning What about the high 32-bits?
+					*((ULONG *)tag->ti_Data)=(ULONG)(entry->de_Size&0xffffffff);
+#else
 					*((ULONG *)tag->ti_Data)=entry->de_Size;
+#endif
 				break;
 
 			// Protection

@@ -41,7 +41,11 @@ extern struct Interrupt buffer_mem_interrupt;
 DirBuffer *buffer_new(void);
 void buffer_free(DirBuffer *);
 BOOL buffer_freedir(DirBuffer *,BOOL);
+#ifdef USE_64BIT
+DirEntry *create_file_entry(DirBuffer *,BPTR,char *,UQUAD,short,struct DateStamp *,char *,ULONG,short,char *,char *,NetworkInfo *);
+#else
 DirEntry *create_file_entry(DirBuffer *,BPTR,char *,unsigned long,short,struct DateStamp *,char *,ULONG,short,char *,char *,NetworkInfo *);
+#endif
 DirEntry *copy_file_entry(DirBuffer *,DirEntry *);
 DirEntry *add_file_entry(DirBuffer *,DirEntry *,DirEntry *);
 void remove_file_entry(DirBuffer *,DirEntry *);

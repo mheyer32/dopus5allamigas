@@ -445,6 +445,19 @@ DOPUS_FUNC(function_change)
 				// Need to change entry?
 				if (change && path->lister)
 				{
+#ifdef USE_64BIT
+					if (function_filechange_addfile64(
+						handle,
+						path->path,
+						(short)entry->entry->de_Node.dn_Type,
+						entry->name,
+						(unsigned long)protection,
+						(UQUAD)entry->entry->de_Size,
+						&date,
+						comment,
+						(NetworkInfo *)GetTagData(DE_NetworkInfo,0,entry->entry->de_Tags),
+						0))
+#else
 					struct FileInfoBlock fib;
 
 					// Fill out dummy fileinfoblock
@@ -463,6 +476,7 @@ DOPUS_FUNC(function_change)
 							&fib,
 							(NetworkInfo *)GetTagData(DE_NetworkInfo,0,entry->entry->de_Tags),
 							0))
+#endif
 					{
 						// Mark old entry for removal
 						entry->flags|=FUNCENTF_REMOVE;
