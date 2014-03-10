@@ -66,7 +66,6 @@ void __inline copy_mem(char *source,char *dest,int size)
 
 // Prototypes
 void copy_mem(char *,char *,int);
-void compstr(char *str);
 void getsizestring(char *,ULONG);
 BOOL copy_string(char *,char **,struct DOpusRemember **);
 void do_title_string(char *,char *,char *);

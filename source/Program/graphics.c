@@ -29,11 +29,6 @@ void do3dbox(struct RastPort *rp,struct Rectangle *rect,BOOL recessed)
 	DrawBox(rp,rect,GUI->draw_info,recessed);
 }
 
-static const __chip unsigned short
-	small_arrow[]={0x8000,0xc000,0xe000,0xf000,0xe000,0xc000,0x8000},
-	big_arrow[]={0x8000,0xc000,0xe000,0xf000,0xf800,0xfc00,0xf800,0xf000,
-				0xe000,0xc000,0x8000};
-
 #define SMALL_ARROW_WIDTH	4
 #define SMALL_ARROW_HEIGHT	7
 #define BIG_ARROW_WIDTH		6

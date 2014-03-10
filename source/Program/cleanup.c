@@ -146,9 +146,6 @@ void quit(BOOL script)
 /*		
 #ifdef __amigaos3__
 		{
-			extern UWORD *command_arrow_chip;
-			extern UWORD *parent_arrow_chip;
-
 			FreeVec(command_arrow_chip);
 			FreeVec(parent_arrow_chip);
 			FreeVec(arrow_image[0].ImageData);
