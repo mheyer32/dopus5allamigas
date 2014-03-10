@@ -708,7 +708,10 @@ AppEntry *new_app_entry(
 	{
 		// Bump library open count so we won't get expunged
 		++wb_data->dopus_base->libBase.lib_OpenCnt;
+		#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+		#ifndef __amigaos3__
 		D(bug("lib_OpenCnt bumped to %d by task '%s'\n", wb_data->dopus_base->libBase.lib_OpenCnt, FindTask(NULL)->tc_Node.ln_Name));
+		#endif
 	}
 
 	// Add to list
