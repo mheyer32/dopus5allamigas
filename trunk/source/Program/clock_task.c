@@ -1113,8 +1113,13 @@ APTR clock_show_custom_title(
 		if (rp->TxHeight>=13)
 		{
 			InitBitMap(&bm,2,MOON_BIG_SIZE,MOON_BIG_SIZE);
+/*#ifdef __amigaos3__
+			bm.Planes[0]=(PLANEPTR)moon_big_data_chip[image][0];
+			bm.Planes[1]=(PLANEPTR)moon_big_data_chip[image][1];
+#else*/
 			bm.Planes[0]=(PLANEPTR)moon_big_data[image][0];
 			bm.Planes[1]=(PLANEPTR)moon_big_data[image][1];
+//#endif
 			size=MOON_BIG_SIZE;
 		}
 
@@ -1122,8 +1127,13 @@ APTR clock_show_custom_title(
 		else
 		{
 			InitBitMap(&bm,2,MOON_SMALL_SIZE,MOON_SMALL_SIZE);
+/*#ifdef __amigaos3__
+			bm.Planes[0]=(PLANEPTR)moon_small_data_chip[image][0];
+			bm.Planes[1]=(PLANEPTR)moon_small_data_chip[image][1];
+#else*/
 			bm.Planes[0]=(PLANEPTR)moon_small_data[image][0];
 			bm.Planes[1]=(PLANEPTR)moon_small_data[image][1];
+//#endif
 			size=MOON_SMALL_SIZE;
 		}
 

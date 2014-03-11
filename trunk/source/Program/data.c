@@ -193,6 +193,7 @@ UWORD
 	big_arrow[11]={0x8000,0xc000,0xe000,0xf000,0xf800,0xfc00,0xf800,0xf000,
 				0xe000,0xc000,0x8000};
 
+#ifndef USE_SCREENTITLE
 // Moon phases
 UWORD
 	moon_big_data[8][2][13]={
@@ -261,7 +262,8 @@ UWORD
 
 		{{0x0000,0x0c00,0x1e00,0x3f00,0x3f00,0x3f00,0x1e00,0x0c00,0x0000},
 		{0xe3ff,0x90ff,0xa0ff,0x407f,0x407f,0x407f,0xa0ff,0x90ff,0xe3ff}}};
-		
+#endif
+
 // Lister arrows
 UWORD
 	command_arrow[7]={
@@ -270,8 +272,15 @@ UWORD
 		0x0e00,0x3800,0xe000,0xe000,0x3800,0x0e00};
 
 #ifdef __amigaos3__
-// initialized in startup_init_icons()
+// initialized in startup_init_icons
+UWORD *arrow_hi_data_chip = NULL;
+UWORD *arrow_lo_data_chip = NULL;
+UWORD *small_arrow_chip = NULL;
+UWORD *big_arrow_chip = NULL;
+#ifndef USE_SCREENTITLE
+UWORD *moon_big_data_chip = NULL;
+UWORD *moon_small_data_chip = NULL;
+#endif
 UWORD *command_arrow_chip = NULL;
 UWORD *parent_arrow_chip = NULL;
 #endif
-

@@ -1283,33 +1283,40 @@ void startup_init_icons()
 		parent_arrow[i]=AROS_BE2WORD(parent_arrow[i]);
 #endif
 
-// comented out because of crash comes from rev900 (fix for array images)
-/*
 #ifdef __amigaos3__
-	WORD NumImageWords;
-	int i;
-	UWORD *tmp;
-
-	if ((command_arrow_chip = AllocVec(sizeof(command_arrow),MEMF_CHIP)))
-		CopyMem(command_arrow, command_arrow_chip, sizeof(command_arrow));
-
-	if ((parent_arrow_chip = AllocVec(sizeof(parent_arrow),MEMF_CHIP)))
-		CopyMem(parent_arrow, parent_arrow_chip, sizeof(parent_arrow));
-
-	for (i=0; i<2; i++)
+	if ((arrow_hi_data_chip=AllocVec(sizeof(arrow_hi_data),MEMF_CHIP)))
 	{
-		NumImageWords = ((arrow_image[i].Width + 16) / 16) * arrow_image[i].Height * arrow_image[i].Depth;
-
-		arrow_image[i].ImageData = NULL;
-		
-		if ((tmp = AllocVec(NumImageWords*sizeof(UWORD),MEMF_CHIP)))
-		{
-			CopyMem(arrow_image[i].ImageData, tmp, NumImageWords*sizeof(UWORD));
-			arrow_image[i].ImageData=tmp;
-		}
+		CopyMem(arrow_hi_data,arrow_hi_data_chip,sizeof(arrow_hi_data));
+		arrow_image[0].ImageData=arrow_hi_data_chip;
 	}
+
+	if ((arrow_lo_data_chip=AllocVec(sizeof(arrow_lo_data),MEMF_CHIP)))
+	{
+		CopyMem(arrow_lo_data,arrow_lo_data_chip,sizeof(arrow_lo_data));
+		arrow_image[1].ImageData=arrow_hi_data_chip;
+	}
+
+	if ((small_arrow_chip=AllocVec(sizeof(small_arrow),MEMF_CHIP)))
+		CopyMem(small_arrow,small_arrow_chip,sizeof(small_arrow));
+	
+	if ((big_arrow_chip=AllocVec(sizeof(big_arrow),MEMF_CHIP)))
+		CopyMem(big_arrow,big_arrow_chip,sizeof(big_arrow));
+
+#ifndef USE_SCREENTITLE
+	if ((moon_big_data_chip=AllocVec(sizeof(moon_big_data),MEMF_CHIP)))
+		CopyMem(moon_big_data,moon_big_data_chip,sizeof(moon_big_data));
+
+	if ((moon_small_data_chip=AllocVec(sizeof(moon_small_data),MEMF_CHIP)))
+		CopyMem(moon_small_data,moon_small_data_chip,sizeof(moon_small_data));
 #endif
-*/
+
+	if ((command_arrow_chip=AllocVec(sizeof(command_arrow),MEMF_CHIP)))
+		CopyMem(command_arrow,command_arrow_chip,sizeof(command_arrow));
+
+	if ((parent_arrow_chip=AllocVec(sizeof(parent_arrow),MEMF_CHIP)))
+		CopyMem(parent_arrow,parent_arrow_chip,sizeof(parent_arrow));
+#endif
+
 	// Get arrow image for toolbars
 	GUI->toolbar_arrow_image=OpenImage("dopus5:images/ToolbarArrow.image",0);
 

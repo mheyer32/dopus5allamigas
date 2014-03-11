@@ -142,17 +142,19 @@ void quit(BOOL script)
 		// Free arrow image
 		CloseImage(GUI->toolbar_arrow_image);
 
-// comented out because of crash comes from rev900 (fix for array images)
-/*		
 #ifdef __amigaos3__
-		{
-			FreeVec(command_arrow_chip);
-			FreeVec(parent_arrow_chip);
-			FreeVec(arrow_image[0].ImageData);
-			FreeVec(arrow_image[1].ImageData);
-		}
+		FreeVec(arrow_hi_data_chip);
+		FreeVec(arrow_lo_data_chip);
+		FreeVec(small_arrow_chip);
+		FreeVec(big_arrow_chip);
+#ifndef USE_SCREENTITLE
+		FreeVec(moon_big_data_chip);
+		FreeVec(moon_small_data_chip);
 #endif
-*/
+		FreeVec(command_arrow_chip);
+		FreeVec(parent_arrow_chip);
+#endif
+
 		// Free screen signal
 		if (GUI->screen_signal!=-1) FreeSignal(GUI->screen_signal);
 

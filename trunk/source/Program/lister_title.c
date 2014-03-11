@@ -214,24 +214,42 @@ void lister_show_status(Lister *lister)
 	lister_clear_title_area(&lister->command_area);
 	SetAPen(&lister->command_area.rast,lister->command_area.rast.BgPen);
 	SetDrMd(&lister->command_area.rast,JAM1);
+#ifdef __amigaos3__
+	BltTemplate(
+		(char *)command_arrow_chip,0,2,
+		&lister->command_area.rast,
+		lister->command_area.rect.MinX+(lister->command_area.box.Width-8)/2,
+		lister->command_area.rect.MinY+(lister->command_area.box.Height-7)/2,
+		8,7);
+#else
 	BltTemplate(
 		(char *)command_arrow,0,2,
 		&lister->command_area.rast,
 		lister->command_area.rect.MinX+(lister->command_area.box.Width-8)/2,
 		lister->command_area.rect.MinY+(lister->command_area.box.Height-7)/2,
 		8,7);
+#endif
 
 	// Show parent area
 	lister_title_pens(&lister->parent_area.rast,lister,1);
 	lister_clear_title_area(&lister->parent_area);
 	SetAPen(&lister->parent_area.rast,lister->parent_area.rast.BgPen);
 	SetDrMd(&lister->parent_area.rast,JAM1);
+#ifdef __amigaos3__
+	BltTemplate(
+		(char *)parent_arrow_chip,0,2,
+		&lister->parent_area.rast,
+		lister->parent_area.rect.MinX+(lister->parent_area.box.Width-7)/2,
+		lister->parent_area.rect.MinY+(lister->parent_area.box.Height-6)/2,
+		7,6);
+#else
 	BltTemplate(
 		(char *)parent_arrow,0,2,
 		&lister->parent_area.rast,
 		lister->parent_area.rect.MinX+(lister->parent_area.box.Width-7)/2,
 		lister->parent_area.rect.MinY+(lister->parent_area.box.Height-6)/2,
 		7,6);
+#endif
 
 	// Update status area
 	if (lister->status_area.rect.MinX<lister->status_area.rect.MaxX)
