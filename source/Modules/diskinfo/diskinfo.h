@@ -98,8 +98,13 @@ extern ULONG disktype_lookup[];
 
 BOOL diskinfo_info(diskinfo_data *);
 void get_dostype_string(ULONG,char *);
+#ifdef USE_64BIT
+void diskinfo_show_space(diskinfo_data *,UQUAD,short,short);
+void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,UQUAD,UQUAD);
+#else
 void diskinfo_show_space(diskinfo_data *,unsigned long,short,short);
 void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,ULONG,ULONG);
+#endif
 
 /*#define MathBase		(data->maths)
 #define MathTransBase		(data->maths1)*/
