@@ -132,6 +132,14 @@ extern UWORD moon_big_data[8][2][13],moon_small_data[8][2][9];
 extern UWORD command_arrow[7],parent_arrow[6];
 
 #ifdef __amigaos3__
+extern UWORD *arrow_hi_data_chip;
+extern UWORD *arrow_lo_data_chip;
+extern UWORD *small_arrow_chip;
+extern UWORD *big_arrow_chip;
+#ifndef USE_SCREENTITLE
+extern UWORD *moon_big_data_chip;
+extern UWORD *moon_small_data_chip;
+#endif
 extern UWORD *command_arrow_chip;
 extern UWORD *parent_arrow_chip;
 #endif

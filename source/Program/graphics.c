@@ -52,7 +52,11 @@ void show_list_selector(Lister *lister,short line,BOOL erase)
 	// Small font?
 	if (height<BIG_ARROW_HEIGHT)
 	{
+#ifdef __amigaos3__
+		image=small_arrow_chip;
+#else
 		image=small_arrow;
+#endif
 		image_width=SMALL_ARROW_WIDTH;
 		image_height=SMALL_ARROW_HEIGHT;
 	}
@@ -60,7 +64,11 @@ void show_list_selector(Lister *lister,short line,BOOL erase)
 	// Big font
 	else
 	{
+#ifdef __amigaos3__
+		image=big_arrow_chip;
+#else
 		image=big_arrow;
+#endif
 		image_width=BIG_ARROW_WIDTH;
 		image_height=BIG_ARROW_HEIGHT;
 	}
