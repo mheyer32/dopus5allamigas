@@ -1650,3 +1650,31 @@ LIBSTUB_4(L_OriginalWrite, LONG,	REG(d1, BPTR file),
 LIBSTUB_3(L_OriginalRelabel, BOOL,	REG(d1, char *volumename),
 									REG(d2, char *name),
 									REG(a6, struct MyLibrary *libbase))
+
+// 64bit.c
+LIBSTUB_4(L_DivideU64, void,
+	REG(a0, UQUAD *num),
+	REG(d0, ULONG div),
+	REG(a1, UQUAD *rem),
+	REG(a2, UQUAD *quo))
+
+LIBSTUB_4(L_ItoaU64, void,
+	REG(a0, UQUAD *num),
+	REG(a1, char *str),
+	REG(d0, int str_size),
+	REG(d1, char sep))
+	
+LIBSTUB_6(L_DivideToString64, void,
+	REG(a0, char *string),
+	REG(d0, int str_size),
+	REG(a1, UQUAD *bytes),
+	REG(d1, ULONG div),
+	REG(d2, int places),
+	REG(d3, char sep))
+
+LIBSTUB_5(L_BytesToString64, void,
+	REG(a0, UQUAD *bytes),
+	REG(a1, char *string),
+	REG(d0, int str_size),
+	REG(d1, int places),
+	REG(d2, char sep))

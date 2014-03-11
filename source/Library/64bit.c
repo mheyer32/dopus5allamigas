@@ -21,9 +21,13 @@ For more information on Directory Opus for Windows please see:
 
 */
 
-#include "dopus.h"
+#include "dopuslib.h"
 
-void DivideU64(UQUAD *num, ULONG div, UQUAD *rem, UQUAD *quo)
+void LIBFUNC L_DivideU64(
+	REG(a0, UQUAD *num),
+	REG(d0, ULONG div),
+	REG(a1, UQUAD *rem),
+	REG(a2, UQUAD *quo))
 {
 	UQUAD quotient = *num / div;
 	*rem = *num - (div * quotient);
@@ -31,11 +35,14 @@ void DivideU64(UQUAD *num, ULONG div, UQUAD *rem, UQUAD *quo)
 }
 
 // Convert unsigned integer to a string
-void ItoaU64(UQUAD *num, char *str, int str_size, char sep)
+void LIBFUNC L_ItoaU64(
+	REG(a0, UQUAD *num),
+	REG(a1, char *str),
+	REG(d0, int str_size),
+	REG(d1, char sep))
 {
 	char *result;
 	char *s;
-	//ULONG remainder;
 	int pos = 1;
 	UQUAD number = *num;
 	UQUAD remainder;
@@ -46,7 +53,7 @@ void ItoaU64(UQUAD *num, char *str, int str_size, char sep)
 	do
 	{
 		result = s;
-		DivideU64(&number, 10, &remainder, &number);
+		L_DivideU64(&number, 10, &remainder, &number);
 		(*s--) = '0' + (remainder % 10);
 		if (sep && (pos % 3) == 0)
 			(*s--) = sep;
@@ -61,9 +68,14 @@ void ItoaU64(UQUAD *num, char *str, int str_size, char sep)
 	}
 }
 
-static char decimal_point='.';
 // Do division (fake float) into a string
-void DivideToString64(char *string, LONG str_size, UQUAD *bytes, ULONG div, WORD places, char sep)
+void LIBFUNC L_DivideToString64(
+	REG(a0, char *string),
+	REG(d0, int str_size),
+	REG(a1, UQUAD *bytes),
+	REG(d1, ULONG div),
+	REG(d2, int places),
+	REG(d3, char sep))
 {
 	UQUAD whole;
 	//ULONG remainder;
@@ -78,10 +90,10 @@ void DivideToString64(char *string, LONG str_size, UQUAD *bytes, ULONG div, WORD
 	}
 
 	// Do division
-	/*whole=*/DivideU64(bytes,div,&remainder,&whole);
+	L_DivideU64(bytes,div,&remainder,&whole);
 
 	// Get whole number string
-	ItoaU64(&whole,string,str_size,sep);
+	L_ItoaU64(&whole,string,str_size,sep);
 
 	// Want remainder?
 	if (places>0)
@@ -103,7 +115,7 @@ void DivideToString64(char *string, LONG str_size, UQUAD *bytes, ULONG div, WORD
 			whole++;
 
 			// Get whole number string again
-			ItoaU64(&whole,string,str_size,sep);
+			L_ItoaU64(&whole,string,str_size,sep);
 		}	
 
 		// Build formatting string
@@ -123,11 +135,16 @@ void DivideToString64(char *string, LONG str_size, UQUAD *bytes, ULONG div, WORD
 }
 
 // Return a disk size as a string
-void BytesToString64(UQUAD *bytes, char *string, LONG str_size, WORD places, char sep)
+void LIBFUNC L_BytesToString64(
+	REG(a0, UQUAD *bytes),
+	REG(a1, char *string),
+	REG(d0, int str_size),
+	REG(d1, int places),
+	REG(d2, char sep))
 {
 	UQUAD numbytes=*bytes;
 	ULONG div=0;
-	char *size_ch="K";
+	char *size_str="K";
 
 	// Less than a kilobyte?
 	if (numbytes<1024)
@@ -136,7 +153,7 @@ void BytesToString64(UQUAD *bytes, char *string, LONG str_size, WORD places, cha
 		if (numbytes<1024) strncpy(string,"0K",str_size);
 		else
 		{
-			ItoaU64(&numbytes,string,str_size,sep);
+			L_ItoaU64(&numbytes,string,str_size,sep);
 			strncat(string,"b",str_size);
 		}
 		return;
@@ -153,20 +170,20 @@ void BytesToString64(UQUAD *bytes, char *string, LONG str_size, WORD places, cha
 	if (numbytes>1048576)
 	{
 		div=1048576;
-		size_ch="G";
+		size_str="G";
 	}
 
 	// Megabyte range?
 	else if (numbytes>4096)
 	{
 		div=1024;
-		size_ch="M";
+		size_str="M";
 	}
 
 	// Kilobytes
 	else
 	{
-		ItoaU64(&numbytes,string,str_size,sep);
+		L_ItoaU64(&numbytes,string,str_size,sep);
 		strncat(string,"K",str_size);
 	}
 
@@ -174,9 +191,9 @@ void BytesToString64(UQUAD *bytes, char *string, LONG str_size, WORD places, cha
 	if (div)
 	{
 		// Do division to string
-		DivideToString64(string,str_size,&numbytes,div,places,sep);
+		L_DivideToString64(string,str_size,&numbytes,div,places,sep);
 
 		// Tack on character
-		strncat(string,size_ch,str_size);
+		strncat(string,size_str,str_size);
 	}
 }

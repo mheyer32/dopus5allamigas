@@ -404,6 +404,10 @@
 		struct Library *, __p3, a1, \
 		, DOPUS_BASE_NAME, 0, 0, 0, 0, 0, 0)
 
+#define DivideU64(___num, ___div, ___rem, ___quo) \
+	LP4NR(0x906, DivideU64, UQUAD *, ___num, a0, ULONG, ___div, d0, UQUAD, ___rem, a1, UQUAD, ___quo, a2, \
+	, DOPUS_BASE_NAME, IF_CACHEFLUSHALL, NULL, 0, IF_CACHEFLUSHALL, NULL, 0)
+
 #define FreeEditHook(__p0) \
 	LP1NR(1416, FreeEditHook, \
 		struct Hook *, __p0, a0, \
@@ -1322,6 +1326,10 @@
 		char , __p4, d3, \
 		, DOPUS_BASE_NAME, 0, 0, 0, 0, 0, 0)
 
+#define DivideToString64(___string, ___str_size, ___bytes, ___div, ___places, ___sep) \
+	LP6NR(0x912, DivideToString64, char *, ___string, a0, int, ___str_size, d0, UQUAD *, ___bytes, a1, ULONG, ___div, d1, int, ___places, d2, char, ___sep, d3, \
+	, DOPUS_BASE_NAME, IF_CACHEFLUSHALL, NULL, 0, IF_CACHEFLUSHALL, NULL, 0)
+
 #define AddDragImage(__p0) \
 	LP1NR(228, AddDragImage, \
 		DragInfo *, __p0, a0, \
@@ -2040,6 +2048,10 @@
 		char , __p2, d1, \
 		, DOPUS_BASE_NAME, 0, 0, 0, 0, 0, 0)
 
+#define ItoaU64(___num, ___str, ___str_size, ___sep) \
+	LP4NR(0x90c, ItoaU64, UQUAD *, ___num, a0, char *, ___str, a1, int, ___str_size, d0, char, ___sep, d1, \
+	, DOPUS_BASE_NAME, IF_CACHEFLUSHALL, NULL, 0, IF_CACHEFLUSHALL, NULL, 0)
+
 #define CheckWindowDims(__p0, __p1) \
 	LP2(1434, BOOL , CheckWindowDims, \
 		struct Window *, __p0, a0, \
@@ -2151,6 +2163,10 @@
 		short , __p2, d1, \
 		char , __p3, d2, \
 		, DOPUS_BASE_NAME, 0, 0, 0, 0, 0, 0)
+
+#define BytesToString64(___bytes, ___string, ___str_size, ___places, ___sep) \
+	LP5NR(0x918, BytesToString64, UQUAD *, ___bytes, a0, char *, ___string, a1, int, ___str_size, d0, int, ___places, d1, char, ___sep, d2, \
+	, DOPUS_BASE_NAME, IF_CACHEFLUSHALL, NULL, 0, IF_CACHEFLUSHALL, NULL, 0)
 
 #define Att_NodeName(__p0, __p1) \
 	LP2(492, char *, Att_NodeName, \

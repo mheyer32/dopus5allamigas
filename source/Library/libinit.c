@@ -577,7 +577,11 @@ static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STR
                   LFUNC_FA_(L_AddAllocBitmapPatch) \
                   LFUNC_FA_(L_RemAllocBitmapPatch) \
                   LFUNC_FA_(L_LoadPos) \
-                  LFUNC_FA_(L_SavePos)
+                  LFUNC_FA_(L_SavePos) \
+                  LFUNC_FA_(L_DivideU64) \
+                  LFUNC_FA_(L_ItoaU64) \
+                  LFUNC_FA_(L_DivideToString64) \
+                  LFUNC_FA_(L_BytesToString64)
 
 
 

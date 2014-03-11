@@ -127,7 +127,6 @@ struct LocaleBase
 #include "reselect.h"
 #include "lister.h"
 #include "buttons.h"
-#include "64bit.h"
 #include "dirlist.h"
 #include "app_msg.h"
 #include "function_launch.h"

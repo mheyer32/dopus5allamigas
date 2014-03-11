@@ -263,6 +263,15 @@
 	AROS_LCA(char, (___sep), D2), \
 	struct Library *, DOPUS_BASE_NAME, 13, /* s */)
 
+#define BytesToString64(___bytes, ___string, ___str_size, ___places, ___sep) \
+	AROS_LC5(void, BytesToString64, \
+	AROS_LCA(UQUAD *, (___bytes), A0), \
+	AROS_LCA(char *, (___string), A1), \
+	AROS_LCA(int, (___str_size), D0), \
+	AROS_LCA(int, (___places), D1), \
+	AROS_LCA(char, (___sep), D2), \
+	struct Library *, DOPUS_BASE_NAME, 388, /* s */)
+
 #define CLI_Launch(___name, ___screen, ___cd, ___in, ___out, ___wait, ___stack) \
 	AROS_LC7(BOOL, CLI_Launch, \
 	AROS_LCA(char *, (___name), A0), \
@@ -608,6 +617,16 @@
 	AROS_LCA(char, (___sep), D3), \
 	struct Library *, DOPUS_BASE_NAME, 14, /* s */)
 
+#define DivideToString64(___string, ___str_size, ___bytes, ___div, ___places, ___sep) \
+	AROS_LC6(void, DivideToString64, \
+	AROS_LCA(char *, (___string), A0), \
+	AROS_LCA(int, (___str_size), D0), \
+	AROS_LCA(UQUAD *, (___bytes), A1), \
+	AROS_LCA(ULONG, (___div), D1), \
+	AROS_LCA(int, (___places), D2), \
+	AROS_LCA(char, (___sep), D3), \
+	struct Library *, DOPUS_BASE_NAME, 387, /* s */)
+
 #define DivideU(___num, ___div, ___rem, ___utility) \
 	AROS_LC4(ULONG, DivideU, \
 	AROS_LCA(ULONG, (___num), D0), \
@@ -615,6 +634,14 @@
 	AROS_LCA(ULONG *, (___rem), A0), \
 	AROS_LCA(struct Library *, (___utility), A1), \
 	struct Library *, DOPUS_BASE_NAME, 9, /* s */)
+
+#define DivideU64(___num, ___div, ___rem, ___quo) \
+	AROS_LC4(void, DivideU64, \
+	AROS_LCA(UQUAD *, (___num), A0), \
+	AROS_LCA(ULONG, (___div), D0), \
+	AROS_LCA(UQUAD, (___rem), A1), \
+	AROS_LCA(UQUAD, (___quo), A2), \
+	struct Library *, DOPUS_BASE_NAME, 385, /* s */)
 
 #define DoPopUpMenu(___window, ___menu, ___item, ___code) \
 	AROS_LC4(UWORD, DoPopUpMenu, \
@@ -1383,6 +1410,14 @@
 	AROS_LCA(char *, (___str), A0), \
 	AROS_LCA(char, (___sep), D1), \
 	struct Library *, DOPUS_BASE_NAME, 11, /* s */)
+
+#define ItoaU64(___num, ___str, ___str_size, ___sep) \
+	AROS_LC4(void, ItoaU64, \
+	AROS_LCA(UQUAD *, (___num), A0), \
+	AROS_LCA(char *, (___str), A1), \
+	AROS_LCA(int, (___str_size), D0), \
+	AROS_LCA(char, (___sep), D1), \
+	struct Library *, DOPUS_BASE_NAME, 386, /* s */)
 
 #define LayoutResize(___window) \
 	AROS_LC1(void, LayoutResize, \
