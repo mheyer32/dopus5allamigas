@@ -751,17 +751,41 @@ SetGadgetValue( data->list, GAD_ICON_LOCATION, (ULONG)data->path );
 SetGadgetValue( data->list, GAD_ICON_DEFAULT_TOOL, (ULONG)data->icon->do_DefaultTool );
 
 // Disk size
+#ifdef USE_64BIT
+{
+	UQUAD tmp=(UQUAD)data->info.id_NumBlocks*(UQUAD)data->info.id_BytesPerBlock;
+	tmp>>=10;
+	ItoaU64(&tmp,buf,sizeof(buf),data->decimal_sep);
+}
+#else
 Itoa((data->info.id_NumBlocks*data->info.id_BytesPerBlock)>>10,buf,data->decimal_sep);
+#endif
 strcat(buf,"K");
 SetGadgetValue(data->list,GAD_ICON_SIZE,(ULONG)buf);
 
 // Disk used
+#ifdef USE_64BIT
+{
+	UQUAD tmp=(UQUAD)data->info.id_NumBlocksUsed*(UQUAD)data->info.id_BytesPerBlock;
+	tmp>>=10;
+	ItoaU64(&tmp,buf,sizeof(buf),data->decimal_sep);
+}
+#else
 Itoa((data->info.id_NumBlocksUsed*data->info.id_BytesPerBlock)>>10,buf,data->decimal_sep);
+#endif
 strcat(buf,"K");
 SetGadgetValue(data->list,GAD_ICON_USED,(ULONG)buf);
 
 // Disk free
+#ifdef USE_64BIT
+{
+	UQUAD tmp=((UQUAD)data->info.id_NumBlocks-(UQUAD)data->info.id_NumBlocksUsed)*(UQUAD)data->info.id_BytesPerBlock;
+	tmp>>=10;
+	ItoaU64(&tmp,buf,sizeof(buf),data->decimal_sep);
+}
+#else
 Itoa(((data->info.id_NumBlocks-data->info.id_NumBlocksUsed)*data->info.id_BytesPerBlock)>>10,buf,data->decimal_sep);
+#endif
 strcat(buf,"K");
 SetGadgetValue(data->list,GAD_ICON_FREE,(ULONG)buf);
 

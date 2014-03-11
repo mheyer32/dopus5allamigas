@@ -23,7 +23,7 @@ endif
 DESTDIR  := ../../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+OPTIONS  := -DUSE_DRAWICONSTATE -DUSE_64BIT -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
 INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
