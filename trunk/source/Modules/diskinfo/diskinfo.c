@@ -292,7 +292,12 @@ BOOL diskinfo_info(diskinfo_data *data)
 {
 	BPTR lock;
 	struct DosList *doslist,*device;
-	ULONG disktype,capacity,used,size;
+	ULONG disktype,size;
+#ifdef USE_64BIT
+	UQUAD capacity,used;
+#else
+	ULONG capacity,used;
+#endif
 	struct Rectangle rect;
 	short id;
 
@@ -390,7 +395,11 @@ BOOL diskinfo_info(diskinfo_data *data)
 	SetGadgetValue(data->objlist,GAD_STATE,(ULONG)GetString(locale,id));
 
 	// Show used space
+#ifdef USE_64BIT
+	used=(UQUAD)data->info.id_NumBlocksUsed*(UQUAD)data->info.id_BytesPerBlock;
+#else
 	used=data->info.id_NumBlocksUsed*data->info.id_BytesPerBlock;
+#endif
 	diskinfo_show_space(data,used,GAD_USED,GAD_USED_MB);
 
 	// Get capacity; for RAM we use available memory
@@ -407,7 +416,11 @@ BOOL diskinfo_info(diskinfo_data *data)
 	else
 	{
 		// Get total size
+#ifdef USE_64BIT
+		capacity=(UQUAD)data->info.id_NumBlocks*(UQUAD)data->info.id_BytesPerBlock;
+#else
 		capacity=data->info.id_NumBlocks*data->info.id_BytesPerBlock;
+#endif
 	}
 
 	// Show free space
@@ -485,10 +498,18 @@ void get_dostype_string(ULONG disktype,char *buffer)
 
 
 // Show space
+#ifdef USE_64BIT
+void diskinfo_show_space(diskinfo_data *data,UQUAD bytes,short id_bytes,short id_mb)
+#else
 void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,short id_mb)
+#endif
 {
 	// Get bytes string
+#ifdef USE_64BIT
+	ItoaU64(&bytes,data->buffer,sizeof(data->buffer),data->decimal_sep);
+#else
 	ItoaU(bytes,data->buffer,data->decimal_sep);
+#endif
 	strcat(data->buffer,GetString(locale,MSG_BYTES));
 	SetGadgetValue(data->objlist,id_bytes,(ULONG)data->buffer);
 
@@ -496,7 +517,12 @@ void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,
 	if (bytes>1023 || bytes==0)
 	{
 		// Get mb string
+#ifdef USE_64BIT
+		if (bytes<=1023) bytes=0;
+		BytesToString64(&bytes,data->buffer,sizeof(data->buffer),1,data->decimal_sep);
+#else
 		BytesToString((bytes>1023)?bytes:0,data->buffer,1,data->decimal_sep);
+#endif
 	}
 
 	// Use default 1K string
@@ -506,7 +532,11 @@ void diskinfo_show_space(diskinfo_data *data,unsigned long bytes,short id_bytes,
 
 
 // Show graph
+#ifdef USE_64BIT
+void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,UQUAD size,UQUAD total)
+#else
 void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,ULONG total)
+#endif
 {
 	long p,xp,yp,height,a,b,cx,cy,pc,y,chunkx=0,chunky=0;
 	FLOAT rads,sin,cos,rx,ry,pcent;
@@ -514,7 +544,11 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	short step,stop;
 
 	// Reduce values if more than 2gb to fix rounding problems
+#ifdef USE_64BIT
+	while (total&(1<<31))
+#else
 	if (total&(1<<31))
+#endif
 	{
 		total>>=1;
 		size>>=1;
@@ -537,7 +571,7 @@ void diskinfo_show_graph(diskinfo_data *data,struct Rectangle *rect,ULONG size,U
 	ry=SPFlt(b);
 
 	// Get size of chunk as a percentage of the total, and convert to degrees
-	pcent=(total<1)?(FLOAT)0:SPMul(SPDiv(SPFlt(total),SPFlt(size)),(FLOAT)360);
+	pcent=(total<1)?(FLOAT)0:SPMul(SPDiv(SPFlt((ULONG)total),SPFlt((ULONG)size)),(FLOAT)360);
 	pcent=SPSub(pcent,(FLOAT)180);
 
 	// Get as long and round to nearest 2
