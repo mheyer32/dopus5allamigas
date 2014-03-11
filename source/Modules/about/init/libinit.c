@@ -1,24 +1,25 @@
-/***************************************************************************
+/*
 
- codesets.library - Amiga shared library for handling different codesets
- Copyright (C) 2001-2005 by Alfonso [alfie] Ranieri <alforan@tin.it>.
- Copyright (C) 2005-2010 by codesets.library Open Source Team
+Directory Opus 5
+Original APL release version 5.82
+Copyright 1993-2012 Jonathan Potter & GP Software
 
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 2.1 of the License, or (at your option) any later version.
+This program is free software; you can redistribute it and/or
+modify it under the terms of the AROS Public License version 1.1.
 
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+AROS Public License for more details.
 
- codesets.library project: http://sourceforge.net/projects/codesetslib/
+The release of Directory Opus 5 under the GPL in NO WAY affects
+the existing commercial status of Directory Opus for Windows.
 
- $Id: libinit.c 274 2012-04-03 18:06:48Z thboeckel $
+For more information on Directory Opus for Windows please see:
 
-***************************************************************************/
+                 http://www.gpsoft.com.au
+
+*/
 
 #include <exec/resident.h>
 #include <dopus/common.h>
