@@ -531,6 +531,10 @@ RemAllocBitmapPatch(handle)(a0)
 LoadPos(name,pos,font)(a0/a1,d0)
 SavePos(name,pos,font)(a0/a1,d0)
 *
+DivideU64(num,div,rem,quo)(a0,d0,a1/a2)
+ItoaU64(num,str,str_size,sep)(a0/a1,d0/d1)
+DivideToString64(string,str_size,bytes,div,places,sep)(a0,d0,a1,d1/d2/d3)
+BytesToString64(bytes,string,str_size,places,sep)(a0/a1,d0/d1/d2)
 *
 *
 *

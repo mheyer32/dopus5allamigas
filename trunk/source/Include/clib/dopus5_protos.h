@@ -559,6 +559,10 @@ void RemAllocBitmapPatch(APTR);
 BOOL LoadPos(char *,struct IBox *,short *);
 BOOL SavePos(char *,struct IBox *,short);
 //-----
+void DivideU64(UQUAD *,ULONG,UQUAD,UQUAD);
+void ItoaU64(UQUAD *,char *,int,char);
+void DivideToString64(char *,int,UQUAD *,ULONG,int,char);
+void BytesToString64(UQUAD *,char *,int,int,char sep);
 //-----
 //-----
 //-----

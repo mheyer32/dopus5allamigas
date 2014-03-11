@@ -32,5 +32,5 @@ COMMON_OBJS = libinit.o data.o string_data.o \
 	removed.o \
 	version.o \
 	getusage.o \
-	savepos.o
+	savepos.o 64bit.o
 

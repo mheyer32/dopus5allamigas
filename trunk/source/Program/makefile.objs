@@ -164,5 +164,5 @@ COMMON_OBJS =	data.o \
 	replace.o \
 	position.o \
 	callback_main.o callback_dir.o callback_help.o callback_lister.o \
-	about.o 64bit.o
+	about.o
 

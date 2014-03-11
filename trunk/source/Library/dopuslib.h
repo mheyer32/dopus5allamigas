@@ -45,6 +45,15 @@ For more information on Directory Opus for Windows please see:
 #include <cybergraphx/cybergraphics.h>
 #endif
 
+// 64-bit types QUAD and UQUAD, duplicated from libraries/dopus5.h
+#ifdef __amigaos4__
+typedef uint64 UQUAD;
+typedef int64 QUAD;
+#elif defined(__amigaos3__)
+typedef unsigned long long UQUAD;
+typedef signed long long QUAD;
+#endif
+
 #define STACK_DEFAULT	6144
 #define STACK_LARGE	8192
 
@@ -1695,6 +1704,34 @@ LIBPROTO(L_RemAllocBitmapPatch, void,	REG(a0, APTR handle),
 LIBPROTO(L_WB_AppWindowWindow,struct Window *,	REG(a0, struct AppWindow *window));
 
 LIBPROTO(L_WB_AppIconFlags, unsigned long,	REG(a0, struct AppIcon *icon));
+
+// 64bit.c
+LIBPROTO(L_DivideU64, void,
+	REG(a0, UQUAD *num),
+	REG(d0, ULONG div),
+	REG(a1, UQUAD *rem),
+	REG(a2, UQUAD *quo));
+	
+LIBPROTO(L_ItoaU64, void,
+	REG(a0, UQUAD *num),
+	REG(a1, char *str),
+	REG(d0, int str_size),
+	REG(d1, char sep));
+
+LIBPROTO(L_DivideToString64, void,
+	REG(a0, char *string),
+	REG(d0, int str_size),
+	REG(a1, UQUAD *bytes),
+	REG(d1, ULONG div),
+	REG(d2, int places),
+	REG(d3, char sep));
+
+LIBPROTO(L_BytesToString64, void,
+	REG(a0, UQUAD *bytes),
+	REG(a1, char *string),
+	REG(d0, int str_size),
+	REG(d1, int places),
+	REG(d2, char sep));
 
 /**********************************************************************
 	Function entrances

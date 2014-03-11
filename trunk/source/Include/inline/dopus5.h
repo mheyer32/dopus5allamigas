@@ -40,12 +40,20 @@
 	LP4(0x36, ULONG, DivideU, ULONG, num, d0, ULONG, div, d1, ULONG *, rem, a0, struct Library *, utility, a1, \
 	, DOPUS_BASE_NAME)
 
+#define DivideU64(___num, ___div, ___rem, ___quo) \
+	LP4NR(0x906, DivideU64, UQUAD *, ___num, a0, ULONG, ___div, d0, UQUAD, ___rem, a1, UQUAD, ___quo, a2, \
+	, DOPUS_BASE_NAME)
+
 #define Itoa(num, str, sep) \
 	LP3NR(0x3c, Itoa, long, num, d0, char *, str, a0, char, sep, d1, \
 	, DOPUS_BASE_NAME)
 
 #define ItoaU(num, str, sep) \
 	LP3NR(0x42, ItoaU, ULONG, num, d0, char *, str, a0, char, sep, d1, \
+	, DOPUS_BASE_NAME)
+
+#define ItoaU64(___num, ___str, ___str_size, ___sep) \
+	LP4NR(0x90c, ItoaU64, UQUAD *, ___num, a0, char *, ___str, a1, int, ___str_size, d0, char, ___sep, d1, \
 	, DOPUS_BASE_NAME)
 
 #define Ito26(num, str) \
@@ -56,8 +64,16 @@
 	LP4NR(0x4e, BytesToString, ULONG, bytes, d0, char *, string, a0, short, places, d1, char, sep, d2, \
 	, DOPUS_BASE_NAME)
 
+#define BytesToString64(___bytes, ___string, ___str_size, ___places, ___sep) \
+	LP5NR(0x918, BytesToString64, UQUAD *, ___bytes, a0, char *, ___string, a1, int, ___str_size, d0, int, ___places, d1, char, ___sep, d2, \
+	, DOPUS_BASE_NAME)
+
 #define DivideToString(string, num, div, places, sep) \
 	LP5NR(0x54, DivideToString, char *, string, a0, ULONG, num, d0, ULONG, div, d1, short, places, d2, char, sep, d3, \
+	, DOPUS_BASE_NAME)
+
+#define DivideToString64(___string, ___str_size, ___bytes, ___div, ___places, ___sep) \
+	LP6NR(0x912, DivideToString64, char *, ___string, a0, int, ___str_size, d0, UQUAD *, ___bytes, a1, ULONG, ___div, d1, int, ___places, d2, char, ___sep, d3, \
 	, DOPUS_BASE_NAME)
 
 #define SetBusyPointer(window) \

@@ -42,7 +42,12 @@ For more information on Directory Opus for Windows please see:
 ULONG __oslibversion = 36;
 #endif
 
-#define LIB_VER LIB_VERSION	// Minimum library version we need
+//#define LIB_VER LIB_VERSION	// Minimum library version we need
+#ifdef USE_64BIT
+#define LIB_VER 69
+#else
+#define LIB_VER 68
+#endif
 
 #define INIT_STEPS	15
 
