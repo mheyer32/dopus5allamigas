@@ -1012,6 +1012,7 @@ int UserLibInit()
 #else
 	if(!(DOpusBase=OpenLibrary("dopus5.library",41)))
 #endif
+	{
 		D(bug("can't open dopus5.library\n"));
 		return 1;
 	}	
