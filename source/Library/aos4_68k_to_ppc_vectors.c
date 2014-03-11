@@ -5044,6 +5044,69 @@ static BOOL stub_SavePosPPC(uint32 *regarray)
 }
 STATIC CONST struct EmuTrap stub_SavePos = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SavePosPPC };
 
+static void stub_DivideU64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	Self->DivideU64(
+		(UQUAD *)regarray[8],
+		(ULONG)regarray[0],
+		(UQUAD)regarray[9],
+		(UQUAD)regarray[10]
+	);
+}
+STATIC CONST struct EmuTrap stub_DivideU64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideU64PPC };
+
+static void stub_ItoaU64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	Self->ItoaU64(
+		(UQUAD *)regarray[8],
+		(char *)regarray[9],
+		(int)regarray[0],
+		(char)convert_int8(regarray[1])
+	);
+}
+STATIC CONST struct EmuTrap stub_ItoaU64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ItoaU64PPC };
+
+static void stub_DivideToString64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	Self->DivideToString64(
+		(char *)regarray[8],
+		(int)regarray[0],
+		(UQUAD *)regarray[9],
+		(ULONG)regarray[1],
+		(int)regarray[2],
+		(char)convert_int8(regarray[3])
+	);
+}
+STATIC CONST struct EmuTrap stub_DivideToString64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideToString64PPC };
+
+static void stub_BytesToString64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	Self->BytesToString64(
+		(UQUAD *)regarray[8],
+		(char *)regarray[9],
+		(int)regarray[0],
+		(int)regarray[1],
+		(char)convert_int8(regarray[2])
+	);
+}
+STATIC CONST struct EmuTrap stub_BytesToString64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BytesToString64PPC }; 
+
 CONST CONST_APTR VecTable68K[] =
 {
 	&stub_Open,
@@ -5430,5 +5493,9 @@ CONST CONST_APTR VecTable68K[] =
 	&stub_RemAllocBitmapPatch,
 	&stub_LoadPos,
 	&stub_SavePos,
+	&stub_DivideU64,
+	&stub_ItoaU64,
+	&stub_DivideToString64,
+	&stub_BytesToString64,	
 	(CONST_APTR)-1
 };

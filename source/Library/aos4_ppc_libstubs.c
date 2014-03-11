@@ -2640,41 +2640,37 @@ LIBSTUB(L_OriginalRelabel, BOOL,	REG(d1, char *volumename),
 }
 
 // 64bit.c
-LIBSTUB_4(L_DivideU64, void,
-	REG(a0, UQUAD *num),
-	REG(d0, ULONG div),
-	REG(a1, UQUAD *rem),
-	REG(a2, UQUAD *quo))
+LIBSTUB(L_DivideU64, void,	REG(a0, UQUAD *num),
+							REG(d0, ULONG div),
+							REG(a1, UQUAD *rem),
+							REG(a2, UQUAD *quo))
 {
-	L_DivideU64(num,div,rem,quo);
+	return L_DivideU64(num,div,rem,quo);
 }
 
-LIBSTUB_4(L_ItoaU64, void,
-	REG(a0, UQUAD *num),
-	REG(a1, char *str),
-	REG(d0, int str_size),
-	REG(d1, char sep))
+LIBSTUB(L_ItoaU64, void,	REG(a0, UQUAD *num),
+							REG(a1, char *str),
+							REG(d0, int str_size),
+							REG(d1, char sep))
 {
-	L_ItoaU64(num,str,str_size,sep);
+	return L_ItoaU64(num,str,str_size,sep);
 }
 	
-LIBSTUB_6(L_DivideToString64, void,
-	REG(a0, char *string),
-	REG(d0, int str_size),
-	REG(a1, UQUAD *bytes),
-	REG(d1, ULONG div),
-	REG(d2, int places),
-	REG(d3, char sep))
+LIBSTUB(L_DivideToString64, void,	REG(a0, char *string),
+									REG(d0, int str_size),
+									REG(a1, UQUAD *bytes),
+									REG(d1, ULONG div),
+									REG(d2, int places),
+									REG(d3, char sep))
 {
-	L_DivideToString64(string,str_size,bytes,div,places,sep);
+	return L_DivideToString64(string,str_size,bytes,div,places,sep);
 }
 
-LIBSTUB_5(L_BytesToString64, void,
-	REG(a0, UQUAD *bytes),
-	REG(a1, char *string),
-	REG(d0, int str_size),
-	REG(d1, int places),
-	REG(d2, char sep))
+LIBSTUB(L_BytesToString64, void,	REG(a0, UQUAD *bytes),
+									REG(a1, char *string),
+									REG(d0, int str_size),
+									REG(d1, int places),
+									REG(d2, char sep))
 {
-	L_BytesToString64(bytes,string,str_size,places,sep);
+	return L_BytesToString64(bytes,string,str_size,places,sep);
 }
