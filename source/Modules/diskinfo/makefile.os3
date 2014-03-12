@@ -18,13 +18,13 @@ endif
 
 OPTIMIZE := -O2
 DEBUGSYM := 
-OPTIONS  := -m68020-60 -D__amigaos3__ -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -m68020-60 -msoft-float -D__amigaos3__ -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../ $(OS3_INCLUDE)
 LDFLAGS  := -nostartfiles -noixemul
 WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
-LIBS     := -lamiga -ldebug
+LIBS     := -lamiga -ldebug -lm
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
