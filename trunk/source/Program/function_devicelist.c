@@ -416,12 +416,24 @@ DOPUS_FUNC(function_devicelist)
 							}
 							else
 							{
+#ifdef USE_64BIT
+								UQUAD usedblocks = (UQUAD)(info->id_NumBlocksUsed);
+								usedblocks = usedblocks * 100;
+								DivideToString64(
+									data->full,
+									6,
+									&usedblocks, //info->id_NumBlocksUsed*100,
+									info->id_NumBlocks,
+									0,
+									(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#else
 								DivideToString(
 									data->full,
 									info->id_NumBlocksUsed*100,
 									info->id_NumBlocks,
 									0,
 									(environment->env->settings.date_flags&DATE_1000SEP)?GUI->decimal_sep:0);
+#endif
 							}
 
 							// Get space free and used
