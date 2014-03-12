@@ -624,10 +624,17 @@ BOOL start_format(format_data *data,unsigned short type,BOOL reopen)
 	// Is disk not blank?
 	if (!blank)
 	{
-		char size_buf[20];
+		char size_buf[27];
 
 		// Get size string
+#ifdef USE_64BIT
+		{
+			UQUAD tmp=(UQUAD)data->info.id_NumBlocksUsed*(UQUAD)data->info.id_BytesPerBlock;
+			BytesToString64(&tmp,size_buf,sizeof(size_buf),1,0);
+		}
+#else
 		BytesToString(data->info.id_NumBlocksUsed*data->info.id_BytesPerBlock,size_buf,1,0);
+#endif
 
 		// Display requester
 		if (SimpleRequestTags(

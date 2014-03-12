@@ -456,7 +456,7 @@ void show_device_info(diskcopy_data *data,short list)
 {
 	Att_Node *node;
 	BPTR lock;
-	char info_buf[80],size_buf[20],*ptr;
+	char info_buf[80],size_buf[27],*ptr;
 	BOOL ok=1;
 
 	// Window not open?
@@ -471,7 +471,14 @@ void show_device_info(diskcopy_data *data,short list)
 		UnLock(lock);
 
 		// Get space used
+#ifdef USE_64BIT
+		{
+			UQUAD tmp=(UQUAD)data->info.id_BytesPerBlock*(UQUAD)data->info.id_NumBlocksUsed;
+			BytesToString64(&tmp,size_buf,sizeof(size_buf),1,0);
+		}
+#else
 		BytesToString(data->info.id_BytesPerBlock*data->info.id_NumBlocksUsed,size_buf,1,0);
+#endif
 
 		// Get disk name
 		lsprintf(data->disk_name,"%b",
