@@ -1,11 +1,6 @@
 // by Thomas and Salas00 from amigans.net
 
-#ifdef __amigaos3__
-//#include <math-68881.h>
-#error Use the original math libraries!
-#else
 #include <math.h>
-#endif
 
 #ifndef PI
 #define PI M_PI

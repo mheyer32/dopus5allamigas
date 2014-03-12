@@ -140,8 +140,10 @@ struct DosLibrary 		*DOSBase = NULL;
 struct LocaleBase 		*LocaleBase = NULL;
 struct RxsLib			*RexxSysBase = NULL;
 #ifdef __amigaos3__
-struct Library			*MathBase = NULL;
-struct Library			*MathTransBase = NULL;
+struct Library			*__MathIeeeSingBasBase = NULL;
+struct Library			*__MathIeeeSingTransBase = NULL;
+struct Library			*__MathIeeeDoubBasBase = NULL;
+struct Library			*__MathIeeeDoubTransBase = NULL;
 #endif
 #endif
 
@@ -838,16 +840,28 @@ ULONG freeBase(struct LibraryHeader *lib)
   UserLibCleanup();
 
 #ifdef __amigaos3__
-  if(MathBase != NULL)
+  if(__MathIeeeSingBasBase != NULL)
   {
-    CloseLibrary(MathBase);
-    MathBase = NULL;
+    CloseLibrary(__MathIeeeSingBasBase);
+    __MathIeeeSingBasBase = NULL;
   }
 
-  if(MathTransBase != NULL)
+  if(__MathIeeeSingTransBase != NULL)
   {
-    CloseLibrary(MathTransBase);
-    MathBase = NULL;
+    CloseLibrary(__MathIeeeSingTransBase);
+    __MathIeeeSingTransBase = NULL;
+  }
+
+  if(__MathIeeeDoubBasBase != NULL)
+  {
+    CloseLibrary(__MathIeeeDoubBasBase);
+    __MathIeeeDoubBasBase = NULL;
+  }
+
+  if(__MathIeeeDoubTransBase != NULL)
+  {
+    CloseLibrary(__MathIeeeDoubTransBase);
+    __MathIeeeDoubTransBase = NULL;
   }
 #endif
   
@@ -995,8 +1009,10 @@ ULONG initBase(struct LibraryHeader *lib)
   if ((RexxSysBase = (APTR)OpenLibrary("rexxsyslib.library", 0)) != NULL && GETINTERFACE(IRexxSys, RexxSysBase))
   if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) != NULL && GETINTERFACE(ILocale, LocaleBase))
 #ifdef __amigaos3__
-  if ((MathBase=OpenLibrary("mathffp.library",0)))
-  if ((MathTransBase=OpenLibrary("mathtrans.library",0)))
+  if ((__MathIeeeSingBasBase=OpenLibrary("mathieeesingbas.library",37)))
+  if ((__MathIeeeSingTransBase=OpenLibrary("mathieeesingtrans.library",37)))
+  if ((__MathIeeeDoubBasBase=OpenLibrary("mathieeedoubbas.library",37)))
+  if ((__MathIeeeDoubTransBase=OpenLibrary("mathieeedoubtrans.library",37)))
 #endif
   {
   

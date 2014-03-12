@@ -105,6 +105,3 @@ void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,UQUAD,UQUAD);
 void diskinfo_show_space(diskinfo_data *,unsigned long,short,short);
 void diskinfo_show_graph(diskinfo_data *,struct Rectangle *,ULONG,ULONG);
 #endif
-
-/*#define MathBase		(data->maths)
-#define MathTransBase		(data->maths1)*/
