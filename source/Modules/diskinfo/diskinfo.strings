@@ -15,15 +15,18 @@
 #endif
 
 #ifdef CATCOMP_ARRAY
-#undef CATCOMP_NUMBERS
-#undef CATCOMP_STRINGS
+#ifndef CATCOMP_NUMBERS
 #define CATCOMP_NUMBERS
+#endif
+#ifndef CATCOMP_STRINGS
 #define CATCOMP_STRINGS
+#endif
 #endif
 
 #ifdef CATCOMP_BLOCK
-#undef CATCOMP_STRINGS
+#ifndef CATCOMP_STRINGS
 #define CATCOMP_STRINGS
+#endif
 #endif
 
 
@@ -64,6 +67,12 @@
 #define MSG_DOSTYPE_11 2010
 #define MSG_DOSTYPE_12 2011
 #define MSG_DOSTYPE_13 2012
+#define MSG_DOSTYPE_14 2013
+#define MSG_DOSTYPE_15 2014
+#define MSG_DOSTYPE_16 2015
+#define MSG_DOSTYPE_17 2016
+#define MSG_DOSTYPE_18 2017
+#define MSG_DOSTYPE_19 2018
 
 #endif /* CATCOMP_NUMBERS */
 
@@ -105,6 +114,12 @@
 #define MSG_DOSTYPE_11_STR "PFS Floppy"
 #define MSG_DOSTYPE_12_STR "PFS Hard Drive"
 #define MSG_DOSTYPE_13_STR "Envoy Network Volume"
+#define MSG_DOSTYPE_14_STR "Fast File System (FFS-INTL)"
+#define MSG_DOSTYPE_15_STR "Fast File System (FFS-LNFS)"
+#define MSG_DOSTYPE_16_STR "Smart File System"
+#define MSG_DOSTYPE_17_STR "Smart File System 2"
+#define MSG_DOSTYPE_18_STR "JX File System"
+#define MSG_DOSTYPE_19_STR "Swap"
 
 #endif /* CATCOMP_STRINGS */
 
@@ -116,44 +131,50 @@
 
 struct CatCompArrayType
 {
-    LONG   cca_ID;
-    STRPTR cca_Str;
+    LONG         cca_ID;
+    CONST_STRPTR cca_Str;
 };
 
-static const struct CatCompArrayType CatCompArray[] =
+STATIC CONST struct CatCompArrayType CatCompArray[] =
 {
-    {MSG_DISKINFO_TITLE,(STRPTR)MSG_DISKINFO_TITLE_STR},
-    {MSG_DISKINFO_DESC,(STRPTR)MSG_DISKINFO_DESC_STR},
-    {MSG_OK,(STRPTR)MSG_OK_STR},
-    {MSG_CANCEL,(STRPTR)MSG_CANCEL_STR},
-    {MSG_NAME,(STRPTR)MSG_NAME_STR},
-    {MSG_HANDLER,(STRPTR)MSG_HANDLER_STR},
-    {MSG_TYPE,(STRPTR)MSG_TYPE_STR},
-    {MSG_STATE,(STRPTR)MSG_STATE_STR},
-    {MSG_USED,(STRPTR)MSG_USED_STR},
-    {MSG_FREE,(STRPTR)MSG_FREE_STR},
-    {MSG_CAPACITY,(STRPTR)MSG_CAPACITY_STR},
-    {MSG_UNIT,(STRPTR)MSG_UNIT_STR},
-    {MSG_UNKNOWN,(STRPTR)MSG_UNKNOWN_STR},
-    {MSG_READ_WRITE,(STRPTR)MSG_READ_WRITE_STR},
-    {MSG_READ_ONLY,(STRPTR)MSG_READ_ONLY_STR},
-    {MSG_VALIDATING,(STRPTR)MSG_VALIDATING_STR},
-    {MSG_BYTES,(STRPTR)MSG_BYTES_STR},
-    {MSG_ERROR,(STRPTR)MSG_ERROR_STR},
-    {MSG_ERRORS,(STRPTR)MSG_ERRORS_STR},
-    {MSG_DOSTYPE_1,(STRPTR)MSG_DOSTYPE_1_STR},
-    {MSG_DOSTYPE_2,(STRPTR)MSG_DOSTYPE_2_STR},
-    {MSG_DOSTYPE_3,(STRPTR)MSG_DOSTYPE_3_STR},
-    {MSG_DOSTYPE_4,(STRPTR)MSG_DOSTYPE_4_STR},
-    {MSG_DOSTYPE_5,(STRPTR)MSG_DOSTYPE_5_STR},
-    {MSG_DOSTYPE_6,(STRPTR)MSG_DOSTYPE_6_STR},
-    {MSG_DOSTYPE_7,(STRPTR)MSG_DOSTYPE_7_STR},
-    {MSG_DOSTYPE_8,(STRPTR)MSG_DOSTYPE_8_STR},
-    {MSG_DOSTYPE_9,(STRPTR)MSG_DOSTYPE_9_STR},
-    {MSG_DOSTYPE_10,(STRPTR)MSG_DOSTYPE_10_STR},
-    {MSG_DOSTYPE_11,(STRPTR)MSG_DOSTYPE_11_STR},
-    {MSG_DOSTYPE_12,(STRPTR)MSG_DOSTYPE_12_STR},
-    {MSG_DOSTYPE_13,(STRPTR)MSG_DOSTYPE_13_STR},
+    {MSG_DISKINFO_TITLE,(CONST_STRPTR)MSG_DISKINFO_TITLE_STR},
+    {MSG_DISKINFO_DESC,(CONST_STRPTR)MSG_DISKINFO_DESC_STR},
+    {MSG_OK,(CONST_STRPTR)MSG_OK_STR},
+    {MSG_CANCEL,(CONST_STRPTR)MSG_CANCEL_STR},
+    {MSG_NAME,(CONST_STRPTR)MSG_NAME_STR},
+    {MSG_HANDLER,(CONST_STRPTR)MSG_HANDLER_STR},
+    {MSG_TYPE,(CONST_STRPTR)MSG_TYPE_STR},
+    {MSG_STATE,(CONST_STRPTR)MSG_STATE_STR},
+    {MSG_USED,(CONST_STRPTR)MSG_USED_STR},
+    {MSG_FREE,(CONST_STRPTR)MSG_FREE_STR},
+    {MSG_CAPACITY,(CONST_STRPTR)MSG_CAPACITY_STR},
+    {MSG_UNIT,(CONST_STRPTR)MSG_UNIT_STR},
+    {MSG_UNKNOWN,(CONST_STRPTR)MSG_UNKNOWN_STR},
+    {MSG_READ_WRITE,(CONST_STRPTR)MSG_READ_WRITE_STR},
+    {MSG_READ_ONLY,(CONST_STRPTR)MSG_READ_ONLY_STR},
+    {MSG_VALIDATING,(CONST_STRPTR)MSG_VALIDATING_STR},
+    {MSG_BYTES,(CONST_STRPTR)MSG_BYTES_STR},
+    {MSG_ERROR,(CONST_STRPTR)MSG_ERROR_STR},
+    {MSG_ERRORS,(CONST_STRPTR)MSG_ERRORS_STR},
+    {MSG_DOSTYPE_1,(CONST_STRPTR)MSG_DOSTYPE_1_STR},
+    {MSG_DOSTYPE_2,(CONST_STRPTR)MSG_DOSTYPE_2_STR},
+    {MSG_DOSTYPE_3,(CONST_STRPTR)MSG_DOSTYPE_3_STR},
+    {MSG_DOSTYPE_4,(CONST_STRPTR)MSG_DOSTYPE_4_STR},
+    {MSG_DOSTYPE_5,(CONST_STRPTR)MSG_DOSTYPE_5_STR},
+    {MSG_DOSTYPE_6,(CONST_STRPTR)MSG_DOSTYPE_6_STR},
+    {MSG_DOSTYPE_7,(CONST_STRPTR)MSG_DOSTYPE_7_STR},
+    {MSG_DOSTYPE_8,(CONST_STRPTR)MSG_DOSTYPE_8_STR},
+    {MSG_DOSTYPE_9,(CONST_STRPTR)MSG_DOSTYPE_9_STR},
+    {MSG_DOSTYPE_10,(CONST_STRPTR)MSG_DOSTYPE_10_STR},
+    {MSG_DOSTYPE_11,(CONST_STRPTR)MSG_DOSTYPE_11_STR},
+    {MSG_DOSTYPE_12,(CONST_STRPTR)MSG_DOSTYPE_12_STR},
+    {MSG_DOSTYPE_13,(CONST_STRPTR)MSG_DOSTYPE_13_STR},
+    {MSG_DOSTYPE_14,(CONST_STRPTR)MSG_DOSTYPE_14_STR},
+    {MSG_DOSTYPE_15,(CONST_STRPTR)MSG_DOSTYPE_15_STR},
+    {MSG_DOSTYPE_16,(CONST_STRPTR)MSG_DOSTYPE_16_STR},
+    {MSG_DOSTYPE_17,(CONST_STRPTR)MSG_DOSTYPE_17_STR},
+    {MSG_DOSTYPE_18,(CONST_STRPTR)MSG_DOSTYPE_18_STR},
+    {MSG_DOSTYPE_19,(CONST_STRPTR)MSG_DOSTYPE_19_STR},
 };
 
 #endif /* CATCOMP_ARRAY */
@@ -164,7 +185,7 @@ static const struct CatCompArrayType CatCompArray[] =
 
 #ifdef CATCOMP_BLOCK
 
-static const char CatCompBlock[] =
+STATIC CONST UBYTE CatCompBlock[] =
 {
     "\x00\x00\x03\xE8\x00\x14"
     MSG_DISKINFO_TITLE_STR "\x00"
@@ -230,6 +251,18 @@ static const char CatCompBlock[] =
     MSG_DOSTYPE_12_STR "\x00\x00"
     "\x00\x00\x07\xDC\x00\x16"
     MSG_DOSTYPE_13_STR "\x00\x00"
+    "\x00\x00\x07\xDD\x00\x1C"
+    MSG_DOSTYPE_14_STR "\x00"
+    "\x00\x00\x07\xDE\x00\x1C"
+    MSG_DOSTYPE_15_STR "\x00"
+    "\x00\x00\x07\xDF\x00\x12"
+    MSG_DOSTYPE_16_STR "\x00"
+    "\x00\x00\x07\xE0\x00\x14"
+    MSG_DOSTYPE_17_STR "\x00"
+    "\x00\x00\x07\xE1\x00\x10"
+    MSG_DOSTYPE_18_STR "\x00\x00"
+    "\x00\x00\x07\xE2\x00\x06"
+    MSG_DOSTYPE_19_STR "\x00\x00"
 };
 
 #endif /* CATCOMP_BLOCK */
@@ -238,20 +271,37 @@ static const char CatCompBlock[] =
 /****************************************************************************/
 
 
+#ifdef CATCOMP_CODE
+
+#ifndef PROTO_LOCALE_H
+#define __NOLIBBASE__
+#define __NOGLOBALIFACE__
+#include <proto/locale.h>
+#endif
+
 struct LocaleInfo
 {
-    APTR li_LocaleBase;
-    APTR li_Catalog;
+#ifndef __amigaos4__
+    struct Library     *li_LocaleBase;
+#else
+    struct LocaleIFace *li_ILocale;
+#endif
+    struct Catalog     *li_Catalog;
 };
 
 
-#ifdef CATCOMP_CODE
+CONST_STRPTR GetString(struct LocaleInfo *li, LONG stringNum);
 
-STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
+CONST_STRPTR GetString(struct LocaleInfo *li, LONG stringNum)
 {
-LONG   *l;
-UWORD  *w;
-STRPTR  builtIn;
+#ifndef __amigaos4__
+    struct Library     *LocaleBase = li->li_LocaleBase;
+#else
+    struct LocaleIFace *ILocale    = li->li_ILocale;
+#endif
+    LONG         *l;
+    UWORD        *w;
+    CONST_STRPTR  builtIn;
 
     l = (LONG *)CatCompBlock;
 
@@ -260,17 +310,24 @@ STRPTR  builtIn;
         w = (UWORD *)((ULONG)l + 4);
         l = (LONG *)((ULONG)l + (ULONG)*w + 6);
     }
-    builtIn = (STRPTR)((ULONG)l + 6);
+    builtIn = (CONST_STRPTR)((ULONG)l + 6);
 
-#define XLocaleBase LocaleBase
-#define LocaleBase li->li_LocaleBase
-    
+#ifndef __amigaos4__
     if (LocaleBase)
-        return(GetCatalogStr(li->li_Catalog,stringNum,builtIn));
-#define LocaleBase XLocaleBase
-#undef XLocaleBase
-
-    return(builtIn);
+    {
+        return GetCatalogStr(li->li_Catalog, stringNum, builtIn);
+    }
+#else
+    if (ILocale)
+    {
+#ifdef __USE_INLINE__
+        return GetCatalogStr(li->li_Catalog, stringNum, builtIn);
+#else
+        return ILocale->GetCatalogStr(li->li_Catalog, stringNum, builtIn);
+#endif
+    }
+#endif
+    return builtIn;
 }
 
 

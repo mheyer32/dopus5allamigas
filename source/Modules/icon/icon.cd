@@ -108,6 +108,21 @@ OFS
 MSG_FFS (//)
 FFS
 ;
+MSG_FFS7 (//)
+FFS(7)
+;
+MSG_SFS0 (//)
+SFS(0)
+;
+MSG_SFS2 (//)
+SFS(2)
+;
+MSG_JXFS (//)
+JXFS
+;
+MSG_SWAP (//)
+SWAP
+;
 MSG_IOFS (//)
 OFS (I)
 ;
