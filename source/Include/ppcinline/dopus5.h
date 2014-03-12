@@ -405,7 +405,7 @@
 		, DOPUS_BASE_NAME, 0, 0, 0, 0, 0, 0)
 
 #define DivideU64(___num, ___div, ___rem, ___quo) \
-	LP4NR(0x906, DivideU64, UQUAD *, ___num, a0, ULONG, ___div, d0, UQUAD, ___rem, a1, UQUAD, ___quo, a2, \
+	LP4NR(0x906, DivideU64, UQUAD *, ___num, a0, ULONG, ___div, d0, UQUAD *, ___rem, a1, UQUAD *, ___quo, a2, \
 	, DOPUS_BASE_NAME, IF_CACHEFLUSHALL, NULL, 0, IF_CACHEFLUSHALL, NULL, 0)
 
 #define FreeEditHook(__p0) \
