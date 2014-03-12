@@ -262,7 +262,6 @@ DOPUS_FUNC(function_getsizes)
 			{
 #ifdef USE_64BIT
 				int percent;
-				float pct;
 
 				// Fit completely?
 				if (dest_blocks>=total_blocks) percent=100;
@@ -270,8 +269,7 @@ DOPUS_FUNC(function_getsizes)
 				else
 				{
 					// Get percent that will fit
-					pct=dest_blocks*100;
-					percent=(int)(pct/(float)total_blocks);
+					percent=(int)((dest_blocks*100)/total_blocks);
 				}
 				
 				// Build string
@@ -281,7 +279,6 @@ DOPUS_FUNC(function_getsizes)
 					GetString(&locale,MSG_FIT),
 					percent);
 #else
-				// without 64-bit support, there's no need to use the FPU
 				char percent[27];
 
 				// Fit completely?
