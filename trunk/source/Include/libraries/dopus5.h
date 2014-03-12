@@ -1700,25 +1700,32 @@ struct DOpusSimpleRequest {
 // Disk IO stuff
 typedef struct
 {
-	struct MsgPort			*dh_port;	// Message port
-	struct IOExtTD			*dh_io;		// IO request
+	struct MsgPort				*dh_port;	// Message port
+	struct IOExtTD				*dh_io;		// IO request
 	struct FileSysStartupMsg	*dh_startup;	// Startup message
-	struct DosEnvec			*dh_geo;	// Disk geometry
-	char				dh_name[32];	// Disk name
-	char				dh_device[32];	// Device name
-	struct InfoData			dh_info;	// Disk information
-	unsigned long			dh_result;
-	unsigned long			dh_root;	// Root block
-	unsigned long			dh_blocksize;	// Block size
-	struct DateStamp		dh_stamp;	// DateStamp
+	struct DosEnvec				*dh_geo;	// Disk geometry
+	char						dh_name[32];	// Disk name
+	char						dh_device[32];	// Device name
+	struct InfoData				dh_info;	// Disk information
+	unsigned long				dh_result;
+	unsigned long				dh_root;	// Root block
+	unsigned long				dh_blocksize;	// Block size
+	struct DateStamp			dh_stamp;	// DateStamp
 } DiskHandle;
 
 #define ID_AFS_PRO		0x41465301
 #define ID_AFS_USER		0x41465302
-#define ID_AFS_MULTI		0x6D754146
-#define ID_PFS_FLOPPY		0x50465300
+#define ID_AFS_MULTI	0x6D754146
+#define ID_PFS_FLOPPY	0x50465300
 #define ID_PFS_HARD		0x50465301
-#define ID_ENVOY_DISK		0x444F5380
+#define ID_ENVOY_DISK	0x444F5380
+
+#define ID_FFS3_HARD	0x444f5303
+#define ID_FFS7_HARD	0x444f5307
+#define ID_SFS0_HARD	0x53465300
+#define ID_SFS2_HARD	0x53465302
+#define ID_JXFS_HARD	0x4a584604
+#define ID_SWAP_HARD	0x53574150
 
 
 

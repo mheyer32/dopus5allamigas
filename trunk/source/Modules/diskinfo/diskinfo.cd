@@ -107,3 +107,21 @@ PFS Hard Drive
 MSG_DOSTYPE_13 (//)
 Envoy Network Volume
 ;
+MSG_DOSTYPE_14 (//)
+Fast File System (FFS-INTL)
+;
+MSG_DOSTYPE_15 (//)
+Fast File System (FFS-LNFS)
+;
+MSG_DOSTYPE_16 (//)
+Smart File System
+;
+MSG_DOSTYPE_17 (//)
+Smart File System 2
+;
+MSG_DOSTYPE_18 (//)
+JX File System
+;
+MSG_DOSTYPE_19 (//)
+Swap
+;
