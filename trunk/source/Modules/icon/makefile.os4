@@ -20,7 +20,7 @@ OPTIMIZE := -O2
 #C_LIB :=  -mcrt=clib2
 C_LIB :=  -mcrt=newlib
 DEBUGSYM := -gstabs 
-OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__ -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
+OPTIONS  := $(C_LIB) -D__USE_INLINE__ -D__USE_OLD_TIMEVAL__ -D__OBSOLETE_MEMHANDLER_FLAGS__ -DUSE_64BIT -DUSE_DRAWICONSTATE -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../
 LDFLAGS  := $(C_LIB) -nostartfiles
 WARNINGS := -Wall -fno-strict-aliasing
