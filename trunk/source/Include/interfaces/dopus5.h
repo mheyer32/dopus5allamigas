@@ -461,7 +461,7 @@ struct DOpusIFace
 	void APICALL (*RemAllocBitmapPatch)(struct DOpusIFace *Self, APTR handle);
 	BOOL APICALL (*LoadPos)(struct DOpusIFace *Self, char * name, struct IBox * pos, short * font);
 	BOOL APICALL (*SavePos)(struct DOpusIFace *Self, char * name, struct IBox * pos, short font);
-	void APICALL (*DivideU64)(struct DOpusIFace *Self, UQUAD * num, ULONG div, UQUAD rem, UQUAD quo);
+	void APICALL (*DivideU64)(struct DOpusIFace *Self, UQUAD * num, ULONG div, UQUAD * rem, UQUAD * quo);
 	void APICALL (*ItoaU64)(struct DOpusIFace *Self, UQUAD * num, char * str, int str_size, char sep);
 	void APICALL (*DivideToString64)(struct DOpusIFace *Self, char * string, int str_size, UQUAD * bytes, ULONG div, int places, char sep);
 	void APICALL (*BytesToString64)(struct DOpusIFace *Self, UQUAD * bytes, char * string, int str_size, int places, char sep);

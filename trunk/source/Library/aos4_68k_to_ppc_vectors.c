@@ -5053,8 +5053,8 @@ static void stub_DivideU64PPC(uint32 *regarray)
 	Self->DivideU64(
 		(UQUAD *)regarray[8],
 		(ULONG)regarray[0],
-		(UQUAD)regarray[9],
-		(UQUAD)regarray[10]
+		(UQUAD *)regarray[9],
+		(UQUAD *)regarray[10]
 	);
 }
 STATIC CONST struct EmuTrap stub_DivideU64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideU64PPC };

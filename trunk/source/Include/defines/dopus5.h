@@ -639,8 +639,8 @@
 	AROS_LC4(void, DivideU64, \
 	AROS_LCA(UQUAD *, (___num), A0), \
 	AROS_LCA(ULONG, (___div), D0), \
-	AROS_LCA(UQUAD, (___rem), A1), \
-	AROS_LCA(UQUAD, (___quo), A2), \
+	AROS_LCA(UQUAD *, (___rem), A1), \
+	AROS_LCA(UQUAD *, (___quo), A2), \
 	struct Library *, DOPUS_BASE_NAME, 385, /* s */)
 
 #define DoPopUpMenu(___window, ___menu, ___item, ___code) \
