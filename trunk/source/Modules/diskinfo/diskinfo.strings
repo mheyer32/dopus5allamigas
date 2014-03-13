@@ -79,7 +79,6 @@
 #define MSG_DOSTYPE_23 2022
 #define MSG_DOSTYPE_24 2023
 #define MSG_DOSTYPE_25 2024
-#define MSG_DOSTYPE_26 2025
 
 #endif /* CATCOMP_NUMBERS */
 
@@ -121,19 +120,18 @@
 #define MSG_DOSTYPE_11_STR "PFS Floppy"
 #define MSG_DOSTYPE_12_STR "PFS Hard Drive"
 #define MSG_DOSTYPE_13_STR "Envoy Network Volume"
-#define MSG_DOSTYPE_14_STR "Fast File System (FFS-INTL)"
-#define MSG_DOSTYPE_15_STR "Fast File System (FFS-LNFS)"
-#define MSG_DOSTYPE_16_STR "Smart File System 0"
-#define MSG_DOSTYPE_17_STR "Smart File System 1"
-#define MSG_DOSTYPE_18_STR "Smart File System 2"
-#define MSG_DOSTYPE_19_STR "JX File System"
-#define MSG_DOSTYPE_20_STR "Swap"
-#define MSG_DOSTYPE_21_STR "Box File System"
-#define MSG_DOSTYPE_22_STR "FAT32 File System"
-#define MSG_DOSTYPE_23_STR "exFat File System"
-#define MSG_DOSTYPE_24_STR "FUSE ext2 File System"
-#define MSG_DOSTYPE_25_STR "FUSE HFS"
-#define MSG_DOSTYPE_26_STR "NTFS"
+#define MSG_DOSTYPE_14_STR "Fast File System (FFS-LNFS)"
+#define MSG_DOSTYPE_15_STR "Smart File System 0"
+#define MSG_DOSTYPE_16_STR "Smart File System 1"
+#define MSG_DOSTYPE_17_STR "Smart File System 2"
+#define MSG_DOSTYPE_18_STR "JX File System"
+#define MSG_DOSTYPE_19_STR "Swap"
+#define MSG_DOSTYPE_20_STR "Box File System"
+#define MSG_DOSTYPE_21_STR "FAT32 File System"
+#define MSG_DOSTYPE_22_STR "exFat File System"
+#define MSG_DOSTYPE_23_STR "FUSE ext2 File System"
+#define MSG_DOSTYPE_24_STR "FUSE HFS"
+#define MSG_DOSTYPE_25_STR "NTFS"
 
 #endif /* CATCOMP_STRINGS */
 
@@ -195,7 +193,6 @@ STATIC CONST struct CatCompArrayType CatCompArray[] =
     {MSG_DOSTYPE_23,(CONST_STRPTR)MSG_DOSTYPE_23_STR},
     {MSG_DOSTYPE_24,(CONST_STRPTR)MSG_DOSTYPE_24_STR},
     {MSG_DOSTYPE_25,(CONST_STRPTR)MSG_DOSTYPE_25_STR},
-    {MSG_DOSTYPE_26,(CONST_STRPTR)MSG_DOSTYPE_26_STR},
 };
 
 #endif /* CATCOMP_ARRAY */
@@ -274,30 +271,28 @@ STATIC CONST UBYTE CatCompBlock[] =
     MSG_DOSTYPE_13_STR "\x00\x00"
     "\x00\x00\x07\xDD\x00\x1C"
     MSG_DOSTYPE_14_STR "\x00"
-    "\x00\x00\x07\xDE\x00\x1C"
+    "\x00\x00\x07\xDE\x00\x14"
     MSG_DOSTYPE_15_STR "\x00"
     "\x00\x00\x07\xDF\x00\x14"
     MSG_DOSTYPE_16_STR "\x00"
     "\x00\x00\x07\xE0\x00\x14"
     MSG_DOSTYPE_17_STR "\x00"
-    "\x00\x00\x07\xE1\x00\x14"
-    MSG_DOSTYPE_18_STR "\x00"
-    "\x00\x00\x07\xE2\x00\x10"
+    "\x00\x00\x07\xE1\x00\x10"
+    MSG_DOSTYPE_18_STR "\x00\x00"
+    "\x00\x00\x07\xE2\x00\x06"
     MSG_DOSTYPE_19_STR "\x00\x00"
-    "\x00\x00\x07\xE3\x00\x06"
-    MSG_DOSTYPE_20_STR "\x00\x00"
-    "\x00\x00\x07\xE4\x00\x10"
+    "\x00\x00\x07\xE3\x00\x10"
+    MSG_DOSTYPE_20_STR "\x00"
+    "\x00\x00\x07\xE4\x00\x12"
     MSG_DOSTYPE_21_STR "\x00"
     "\x00\x00\x07\xE5\x00\x12"
     MSG_DOSTYPE_22_STR "\x00"
-    "\x00\x00\x07\xE6\x00\x12"
+    "\x00\x00\x07\xE6\x00\x16"
     MSG_DOSTYPE_23_STR "\x00"
-    "\x00\x00\x07\xE7\x00\x16"
-    MSG_DOSTYPE_24_STR "\x00"
-    "\x00\x00\x07\xE8\x00\x0A"
+    "\x00\x00\x07\xE7\x00\x0A"
+    MSG_DOSTYPE_24_STR "\x00\x00"
+    "\x00\x00\x07\xE8\x00\x06"
     MSG_DOSTYPE_25_STR "\x00\x00"
-    "\x00\x00\x07\xE9\x00\x06"
-    MSG_DOSTYPE_26_STR "\x00\x00"
 };
 
 #endif /* CATCOMP_BLOCK */

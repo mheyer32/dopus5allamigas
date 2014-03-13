@@ -1720,7 +1720,6 @@ typedef struct
 #define ID_PFS_HARD		(0x50465301L)
 #define ID_ENVOY_DISK	(0x444F5380L)
 
-#define ID_FFS3_DISK	(0x444f5303L) // FFS\03 - FastFileSystem3 : International mode
 #define ID_FFS7_DISK	(0x444f5307L) // FFS\07 - FastFileSystem7 : Long filenames
 #define ID_SFS0_DISK	(0x53465300L) // SFS\00 - SmartFileSystem0
 #define ID_SFS1_DISK	(0x53465301L) // SFS\01 - SmartFileSystem1
