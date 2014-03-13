@@ -108,21 +108,6 @@ OFS
 MSG_FFS (//)
 FFS
 ;
-MSG_FFS7 (//)
-FFS(7)
-;
-MSG_SFS0 (//)
-SFS(0)
-;
-MSG_SFS2 (//)
-SFS(2)
-;
-MSG_JXFS (//)
-JXFS
-;
-MSG_SWAP (//)
-SWAP
-;
 MSG_IOFS (//)
 OFS (I)
 ;
@@ -253,4 +238,40 @@ Icon has been modified.\nDo you wish to save it first?
 ;
 MSG_SORT (//)
 S_ort
+;
+MSG_FFS7 (//)
+FFS(7)
+;
+MSG_SFS0 (//)
+SFS(0)
+;
+MSG_SFS1 (//)
+SFS(1)
+;
+MSG_SFS2 (//)
+SFS(2)
+;
+MSG_JXFS (//)
+JXFS
+;
+MSG_SWAP (//)
+SWAP
+;
+MSG_BOX (//)
+BOX(0)
+;
+MSG_FAT32 (//)
+FAT32
+;
+MSG_EXFAT (//)
+EXFAT
+;
+MSG_EXT2FS (//)
+EXT2FS
+;
+MSG_HFS (//)
+HFS
+;
+MSG_NTFS (//)
+NTFS
 ;

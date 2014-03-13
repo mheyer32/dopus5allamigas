@@ -70,51 +70,58 @@
 #define MSG_UNREADABLE 1032
 #define MSG_OFS 1033
 #define MSG_FFS 1034
-#define MSG_FFS7 1035
-#define MSG_SFS0 1036
-#define MSG_SFS2 1037
-#define MSG_JXFS 1038
-#define MSG_SWAP 1039
-#define MSG_IOFS 1040
-#define MSG_IFFS 1041
-#define MSG_COFS 1042
-#define MSG_CFFS 1043
-#define MSG_NDOS 1044
-#define MSG_MSDOS 1045
-#define MSG_UNKNOWN 1046
-#define MSG_ICONINFO_DESC 1047
-#define MSG_AFS 1050
-#define MSG_PFS 1051
-#define MSG_SPECIAL_MENU 1052
-#define MSG_AUTHOR 1055
-#define MSG_STRIP_NEWICONS 1056
-#define MSG_OK 1058
-#define MSG_STRIP_WARNING 1059
-#define MSG_OK_CANCEL 1060
-#define MSG_LOCATION 1061
-#define MSG_ICON_GARBAGE 1062
-#define MSG_ICON_DEVICE 1063
-#define MSG_ICON_KICK 1064
-#define MSG_STRIP_OLD 1065
-#define MSG_NEWICONS 1066
-#define MSG_OLDICONS 1067
-#define MSG_STRIP_WARNING_OLD 1068
-#define MSG_BORDER_MENU 1069
-#define MSG_LABEL_MENU 1070
-#define MSG_EDIT 1071
-#define MSG_PICK_EDITOR 1072
-#define MSG_COPY_OLDICON 1073
-#define MSG_COPY_NEWICON 1074
-#define MSG_COPY_BOTHICONS 1075
-#define MSG_COPY_TOOLTYPES 1076
-#define MSG_ICON_NEWICON 1077
-#define MSG_ICON_OLDICON 1078
-#define MSG_ENTER_FUNCTION 1079
-#define MSG_USE_ICONEDIT 1080
-#define MSG_USE 1081
-#define MSG_ICON_DONT_SAVE 1082
-#define MSG_ICON_MODIFIED 1083
-#define MSG_SORT 1084
+#define MSG_IOFS 1035
+#define MSG_IFFS 1036
+#define MSG_COFS 1037
+#define MSG_CFFS 1038
+#define MSG_NDOS 1039
+#define MSG_MSDOS 1040
+#define MSG_UNKNOWN 1041
+#define MSG_ICONINFO_DESC 1042
+#define MSG_AFS 1045
+#define MSG_PFS 1046
+#define MSG_SPECIAL_MENU 1047
+#define MSG_AUTHOR 1050
+#define MSG_STRIP_NEWICONS 1051
+#define MSG_OK 1053
+#define MSG_STRIP_WARNING 1054
+#define MSG_OK_CANCEL 1055
+#define MSG_LOCATION 1056
+#define MSG_ICON_GARBAGE 1057
+#define MSG_ICON_DEVICE 1058
+#define MSG_ICON_KICK 1059
+#define MSG_STRIP_OLD 1060
+#define MSG_NEWICONS 1061
+#define MSG_OLDICONS 1062
+#define MSG_STRIP_WARNING_OLD 1063
+#define MSG_BORDER_MENU 1064
+#define MSG_LABEL_MENU 1065
+#define MSG_EDIT 1066
+#define MSG_PICK_EDITOR 1067
+#define MSG_COPY_OLDICON 1068
+#define MSG_COPY_NEWICON 1069
+#define MSG_COPY_BOTHICONS 1070
+#define MSG_COPY_TOOLTYPES 1071
+#define MSG_ICON_NEWICON 1072
+#define MSG_ICON_OLDICON 1073
+#define MSG_ENTER_FUNCTION 1074
+#define MSG_USE_ICONEDIT 1075
+#define MSG_USE 1076
+#define MSG_ICON_DONT_SAVE 1077
+#define MSG_ICON_MODIFIED 1078
+#define MSG_SORT 1079
+#define MSG_FFS7 1080
+#define MSG_SFS0 1081
+#define MSG_SFS1 1082
+#define MSG_SFS2 1083
+#define MSG_JXFS 1084
+#define MSG_SWAP 1085
+#define MSG_BOX 1086
+#define MSG_FAT32 1087
+#define MSG_EXFAT 1088
+#define MSG_EXT2FS 1089
+#define MSG_HFS 1090
+#define MSG_NTFS 1091
 
 #endif /* CATCOMP_NUMBERS */
 
@@ -159,11 +166,6 @@
 #define MSG_UNREADABLE_STR "Unreadable"
 #define MSG_OFS_STR "OFS"
 #define MSG_FFS_STR "FFS"
-#define MSG_FFS7_STR "FFS(7)"
-#define MSG_SFS0_STR "SFS(0)"
-#define MSG_SFS2_STR "SFS(2)"
-#define MSG_JXFS_STR "JXFS"
-#define MSG_SWAP_STR "SWAP"
 #define MSG_IOFS_STR "OFS (I)"
 #define MSG_IFFS_STR "FFS (I)"
 #define MSG_COFS_STR "OFS (C)"
@@ -204,6 +206,18 @@
 #define MSG_ICON_DONT_SAVE_STR "Don't Save"
 #define MSG_ICON_MODIFIED_STR "Icon has been modified.\nDo you wish to save it first?"
 #define MSG_SORT_STR "S_ort"
+#define MSG_FFS7_STR "FFS(7)"
+#define MSG_SFS0_STR "SFS(0)"
+#define MSG_SFS1_STR "SFS(1)"
+#define MSG_SFS2_STR "SFS(2)"
+#define MSG_JXFS_STR "JXFS"
+#define MSG_SWAP_STR "SWAP"
+#define MSG_BOX_STR "BOX(0)"
+#define MSG_FAT32_STR "FAT32"
+#define MSG_EXFAT_STR "EXFAT"
+#define MSG_EXT2FS_STR "EXT2FS"
+#define MSG_HFS_STR "HFS"
+#define MSG_NTFS_STR "NTFS"
 
 #endif /* CATCOMP_STRINGS */
 
@@ -256,11 +270,6 @@ STATIC CONST struct CatCompArrayType CatCompArray[] =
     {MSG_UNREADABLE,(CONST_STRPTR)MSG_UNREADABLE_STR},
     {MSG_OFS,(CONST_STRPTR)MSG_OFS_STR},
     {MSG_FFS,(CONST_STRPTR)MSG_FFS_STR},
-    {MSG_FFS7,(CONST_STRPTR)MSG_FFS7_STR},
-    {MSG_SFS0,(CONST_STRPTR)MSG_SFS0_STR},
-    {MSG_SFS2,(CONST_STRPTR)MSG_SFS2_STR},
-    {MSG_JXFS,(CONST_STRPTR)MSG_JXFS_STR},
-    {MSG_SWAP,(CONST_STRPTR)MSG_SWAP_STR},
     {MSG_IOFS,(CONST_STRPTR)MSG_IOFS_STR},
     {MSG_IFFS,(CONST_STRPTR)MSG_IFFS_STR},
     {MSG_COFS,(CONST_STRPTR)MSG_COFS_STR},
@@ -301,6 +310,18 @@ STATIC CONST struct CatCompArrayType CatCompArray[] =
     {MSG_ICON_DONT_SAVE,(CONST_STRPTR)MSG_ICON_DONT_SAVE_STR},
     {MSG_ICON_MODIFIED,(CONST_STRPTR)MSG_ICON_MODIFIED_STR},
     {MSG_SORT,(CONST_STRPTR)MSG_SORT_STR},
+    {MSG_FFS7,(CONST_STRPTR)MSG_FFS7_STR},
+    {MSG_SFS0,(CONST_STRPTR)MSG_SFS0_STR},
+    {MSG_SFS1,(CONST_STRPTR)MSG_SFS1_STR},
+    {MSG_SFS2,(CONST_STRPTR)MSG_SFS2_STR},
+    {MSG_JXFS,(CONST_STRPTR)MSG_JXFS_STR},
+    {MSG_SWAP,(CONST_STRPTR)MSG_SWAP_STR},
+    {MSG_BOX,(CONST_STRPTR)MSG_BOX_STR},
+    {MSG_FAT32,(CONST_STRPTR)MSG_FAT32_STR},
+    {MSG_EXFAT,(CONST_STRPTR)MSG_EXFAT_STR},
+    {MSG_EXT2FS,(CONST_STRPTR)MSG_EXT2FS_STR},
+    {MSG_HFS,(CONST_STRPTR)MSG_HFS_STR},
+    {MSG_NTFS,(CONST_STRPTR)MSG_NTFS_STR},
 };
 
 #endif /* CATCOMP_ARRAY */
@@ -384,95 +405,109 @@ STATIC CONST UBYTE CatCompBlock[] =
     "\x00\x00\x04\x0A\x00\x04"
     MSG_FFS_STR "\x00"
     "\x00\x00\x04\x0B\x00\x08"
-    MSG_FFS7_STR "\x00\x00"
-    "\x00\x00\x04\x0C\x00\x08"
-    MSG_SFS0_STR "\x00\x00"
-    "\x00\x00\x04\x0D\x00\x08"
-    MSG_SFS2_STR "\x00\x00"
-    "\x00\x00\x04\x0E\x00\x06"
-    MSG_JXFS_STR "\x00\x00"
-    "\x00\x00\x04\x0F\x00\x06"
-    MSG_SWAP_STR "\x00\x00"
-    "\x00\x00\x04\x10\x00\x08"
     MSG_IOFS_STR "\x00"
-    "\x00\x00\x04\x11\x00\x08"
+    "\x00\x00\x04\x0C\x00\x08"
     MSG_IFFS_STR "\x00"
-    "\x00\x00\x04\x12\x00\x08"
+    "\x00\x00\x04\x0D\x00\x08"
     MSG_COFS_STR "\x00"
-    "\x00\x00\x04\x13\x00\x08"
+    "\x00\x00\x04\x0E\x00\x08"
     MSG_CFFS_STR "\x00"
-    "\x00\x00\x04\x14\x00\x08"
+    "\x00\x00\x04\x0F\x00\x08"
     MSG_NDOS_STR "\x00"
-    "\x00\x00\x04\x15\x00\x08"
+    "\x00\x00\x04\x10\x00\x08"
     MSG_MSDOS_STR "\x00\x00"
-    "\x00\x00\x04\x16\x00\x04"
+    "\x00\x00\x04\x11\x00\x04"
     MSG_UNKNOWN_STR "\x00"
-    "\x00\x00\x04\x17\x00\x1C"
+    "\x00\x00\x04\x12\x00\x1C"
     MSG_ICONINFO_DESC_STR "\x00\x00"
-    "\x00\x00\x04\x1A\x00\x04"
+    "\x00\x00\x04\x15\x00\x04"
     MSG_AFS_STR "\x00"
-    "\x00\x00\x04\x1B\x00\x04"
+    "\x00\x00\x04\x16\x00\x04"
     MSG_PFS_STR "\x00"
-    "\x00\x00\x04\x1C\x00\x08"
+    "\x00\x00\x04\x17\x00\x08"
     MSG_SPECIAL_MENU_STR "\x00"
-    "\x00\x00\x04\x1F\x00\x0E"
+    "\x00\x00\x04\x1A\x00\x0E"
     MSG_AUTHOR_STR "\x00"
-    "\x00\x00\x04\x20\x00\x16"
+    "\x00\x00\x04\x1B\x00\x16"
     MSG_STRIP_NEWICONS_STR "\x00\x00"
-    "\x00\x00\x04\x22\x00\x04"
+    "\x00\x00\x04\x1D\x00\x04"
     MSG_OK_STR "\x00\x00"
-    "\x00\x00\x04\x23\x00\x4E"
+    "\x00\x00\x04\x1E\x00\x4E"
     MSG_STRIP_WARNING_STR "\x00\x00"
-    "\x00\x00\x04\x24\x00\x0A"
+    "\x00\x00\x04\x1F\x00\x0A"
     MSG_OK_CANCEL_STR "\x00"
-    "\x00\x00\x04\x25\x00\x0A"
+    "\x00\x00\x04\x20\x00\x0A"
     MSG_LOCATION_STR "\x00"
-    "\x00\x00\x04\x26\x00\x0A"
+    "\x00\x00\x04\x21\x00\x0A"
     MSG_ICON_GARBAGE_STR "\x00\x00"
-    "\x00\x00\x04\x27\x00\x08"
+    "\x00\x00\x04\x22\x00\x08"
     MSG_ICON_DEVICE_STR "\x00\x00"
-    "\x00\x00\x04\x28\x00\x0A"
+    "\x00\x00\x04\x23\x00\x0A"
     MSG_ICON_KICK_STR "\x00"
-    "\x00\x00\x04\x29\x00\x16"
+    "\x00\x00\x04\x24\x00\x16"
     MSG_STRIP_OLD_STR "\x00\x00"
-    "\x00\x00\x04\x2A\x00\x14"
+    "\x00\x00\x04\x25\x00\x14"
     MSG_NEWICONS_STR "\x00"
-    "\x00\x00\x04\x2B\x00\x14"
+    "\x00\x00\x04\x26\x00\x14"
     MSG_OLDICONS_STR "\x00"
-    "\x00\x00\x04\x2C\x00\x4E"
+    "\x00\x00\x04\x27\x00\x4E"
     MSG_STRIP_WARNING_OLD_STR "\x00"
-    "\x00\x00\x04\x2D\x00\x0C"
+    "\x00\x00\x04\x28\x00\x0C"
     MSG_BORDER_MENU_STR "\x00"
-    "\x00\x00\x04\x2E\x00\x0C"
+    "\x00\x00\x04\x29\x00\x0C"
     MSG_LABEL_MENU_STR "\x00\x00"
-    "\x00\x00\x04\x2F\x00\x06"
+    "\x00\x00\x04\x2A\x00\x06"
     MSG_EDIT_STR "\x00\x00"
-    "\x00\x00\x04\x30\x00\x10"
+    "\x00\x00\x04\x2B\x00\x10"
     MSG_PICK_EDITOR_STR "\x00\x00"
-    "\x00\x00\x04\x31\x00\x14"
+    "\x00\x00\x04\x2C\x00\x14"
     MSG_COPY_OLDICON_STR "\x00"
-    "\x00\x00\x04\x32\x00\x14"
+    "\x00\x00\x04\x2D\x00\x14"
     MSG_COPY_NEWICON_STR "\x00"
-    "\x00\x00\x04\x33\x00\x12"
+    "\x00\x00\x04\x2E\x00\x12"
     MSG_COPY_BOTHICONS_STR "\x00\x00"
-    "\x00\x00\x04\x34\x00\x10"
+    "\x00\x00\x04\x2F\x00\x10"
     MSG_COPY_TOOLTYPES_STR "\x00\x00"
-    "\x00\x00\x04\x35\x00\x08"
+    "\x00\x00\x04\x30\x00\x08"
     MSG_ICON_NEWICON_STR "\x00"
-    "\x00\x00\x04\x36\x00\x0E"
+    "\x00\x00\x04\x31\x00\x0E"
     MSG_ICON_OLDICON_STR "\x00"
-    "\x00\x00\x04\x37\x00\x56"
+    "\x00\x00\x04\x32\x00\x56"
     MSG_ENTER_FUNCTION_STR "\x00"
-    "\x00\x00\x04\x38\x00\x10"
+    "\x00\x00\x04\x33\x00\x10"
     MSG_USE_ICONEDIT_STR "\x00"
-    "\x00\x00\x04\x39\x00\x04"
+    "\x00\x00\x04\x34\x00\x04"
     MSG_USE_STR "\x00"
-    "\x00\x00\x04\x3A\x00\x0C"
+    "\x00\x00\x04\x35\x00\x0C"
     MSG_ICON_DONT_SAVE_STR "\x00\x00"
-    "\x00\x00\x04\x3B\x00\x36"
+    "\x00\x00\x04\x36\x00\x36"
     MSG_ICON_MODIFIED_STR "\x00"
-    "\x00\x00\x04\x3C\x00\x06"
+    "\x00\x00\x04\x37\x00\x06"
     MSG_SORT_STR "\x00"
+    "\x00\x00\x04\x38\x00\x08"
+    MSG_FFS7_STR "\x00\x00"
+    "\x00\x00\x04\x39\x00\x08"
+    MSG_SFS0_STR "\x00\x00"
+    "\x00\x00\x04\x3A\x00\x08"
+    MSG_SFS1_STR "\x00\x00"
+    "\x00\x00\x04\x3B\x00\x08"
+    MSG_SFS2_STR "\x00\x00"
+    "\x00\x00\x04\x3C\x00\x06"
+    MSG_JXFS_STR "\x00\x00"
+    "\x00\x00\x04\x3D\x00\x06"
+    MSG_SWAP_STR "\x00\x00"
+    "\x00\x00\x04\x3E\x00\x08"
+    MSG_BOX_STR "\x00\x00"
+    "\x00\x00\x04\x3F\x00\x06"
+    MSG_FAT32_STR "\x00"
+    "\x00\x00\x04\x40\x00\x06"
+    MSG_EXFAT_STR "\x00"
+    "\x00\x00\x04\x41\x00\x08"
+    MSG_EXT2FS_STR "\x00\x00"
+    "\x00\x00\x04\x42\x00\x04"
+    MSG_HFS_STR "\x00"
+    "\x00\x00\x04\x43\x00\x06"
+    MSG_NTFS_STR "\x00\x00"
 };
 
 #endif /* CATCOMP_BLOCK */
