@@ -114,14 +114,35 @@ MSG_DOSTYPE_15 (//)
 Fast File System (FFS-LNFS)
 ;
 MSG_DOSTYPE_16 (//)
-Smart File System
+Smart File System 0
 ;
 MSG_DOSTYPE_17 (//)
-Smart File System 2
+Smart File System 1
 ;
 MSG_DOSTYPE_18 (//)
-JX File System
+Smart File System 2
 ;
 MSG_DOSTYPE_19 (//)
+JX File System
+;
+MSG_DOSTYPE_20 (//)
 Swap
+;
+MSG_DOSTYPE_21 (//)
+Box File System
+;
+MSG_DOSTYPE_22 (//)
+FAT32 File System
+;
+MSG_DOSTYPE_23 (//)
+exFat File System
+;
+MSG_DOSTYPE_24 (//)
+FUSE ext2 File System
+;
+MSG_DOSTYPE_25 (//)
+FUSE HFS
+;
+MSG_DOSTYPE_26 (//)
+NTFS
 ;

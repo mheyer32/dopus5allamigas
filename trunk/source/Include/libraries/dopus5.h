@@ -1713,25 +1713,32 @@ typedef struct
 	struct DateStamp			dh_stamp;	// DateStamp
 } DiskHandle;
 
-#define ID_AFS_PRO		0x41465301
-#define ID_AFS_USER		0x41465302
-#define ID_AFS_MULTI	0x6D754146
-#define ID_PFS_FLOPPY	0x50465300
-#define ID_PFS_HARD		0x50465301
-#define ID_ENVOY_DISK	0x444F5380
+#define ID_AFS_PRO		(0x41465301L)
+#define ID_AFS_USER		(0x41465302L)
+#define ID_AFS_MULTI	(0x6D754146L)
+#define ID_PFS_FLOPPY	(0x50465300L)
+#define ID_PFS_HARD		(0x50465301L)
+#define ID_ENVOY_DISK	(0x444F5380L)
 
-#define ID_FFS3_HARD	0x444f5303
-#define ID_FFS7_HARD	0x444f5307
-#define ID_SFS0_HARD	0x53465300
-#define ID_SFS2_HARD	0x53465302
-#define ID_JXFS_HARD	0x4a584604
-#define ID_SWAP_HARD	0x53574150
+#define ID_FFS3_DISK	(0x444f5303L) // FFS\03 - FastFileSystem3 : International mode
+#define ID_FFS7_DISK	(0x444f5307L) // FFS\07 - FastFileSystem7 : Long filenames
+#define ID_SFS0_DISK	(0x53465300L) // SFS\00 - SmartFileSystem0
+#define ID_SFS1_DISK	(0x53465301L) // SFS\01 - SmartFileSystem1
+#define ID_SFS2_DISK	(0x53465302L) // SFS\02 - SmartFileSystem2
+#define ID_JXFS_DISK	(0x4a584604L) // JXFS\4 - JXFilsSystem
+#define ID_SWAP_DISK	(0x53574150L) // SWAP   - SWAP
+#define ID_BOX0_DISK	(0x424F5800L) // BOX\0  - BoxFileSystem
+#define ID_FAT32_DISK	(0x46415432L) // FAT2   - Fat32
+#define ID_EXFAT_DISK	(0x46415458L) // FATX   - exFATFileSystem
+#define ID_EXT2_DISK	(0x45585402L) // EXT\2  - FuseExt2FileSystem
+#define ID_HFS_DISK		(0x48465300L) // HFS\0  - FuseHFS
+#define ID_NTFS_DISK	(0x4e544653L) // NTFS   - NTFileSystem3G
 
 
 
-#define EDITF_NO_SELECT_NEXT	(1<<0)		// Don't select next field
-#define EDITF_PATH_FILTER	(1<<1)		// Filter path characters
-#define EDITF_PASSWORD		(1<<2)		// Hidden password field
+#define EDITF_NO_SELECT_NEXT	(1<<0)	// Don't select next field
+#define EDITF_PATH_FILTER		(1<<1)	// Filter path characters
+#define EDITF_PASSWORD			(1<<2)	// Hidden password field
 
 
 
