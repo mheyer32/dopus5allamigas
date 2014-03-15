@@ -45,10 +45,6 @@ BOOL icon_save_44( icon_data *data, char *save_name ,BOOL err);
 #define AREA_TYPE_ICON_IMAGE 1
 #define AREA_TYPE_ICON_TOOLTYPES 2
 
-/*#define NewIconBase	(data->newicon_base)
-#define INewIcon	(data->newicon_iface)*/
-
-
 int LIBFUNC L_Module_Entry(
 	REG(a0, struct List *files),
 	REG(a1, struct Screen *screen),
@@ -84,12 +80,6 @@ if	((data->app_port = CreateMsgPort())
 		data->ipc      = ipc;
 		data->main_ipc = main_ipc;
 		data->screen   = screen;
-
-		// Open NewIcon library
-		/*data->newicon_base = OpenLibrary( "newicon.library", 0 );
-		#ifdef __amigaos4__
-		data->newicon_iface=(struct NewIconIFace *)GetInterface(data->newicon_base,"main",1,NULL); 
-		#endif*/
 
 		// Get decimal separator
 		if	(locale->li_Locale)
@@ -257,14 +247,6 @@ if	((data->app_port = CreateMsgPort())
 
 		// Close window
 		closewindow( data );
-
-		// Close libraries
-		/*if	(data->newicon_base) {
-			#ifdef __amigaos4__
-			DropInterface((struct Interface *)data->newicon_iface);
-			#endif 
-			CloseLibrary( data->newicon_base );
-		}*/
 
 		RemoveNotifyRequest( data->notify_req );
 		}
@@ -792,8 +774,12 @@ SetGadgetValue(data->list,GAD_ICON_FREE,(ULONG)buf);
 // Disk type
 for	(a = 0; filesystem_table[a]; a += 2)
 	{
-	if	(data->info.id_DiskType == filesystem_table[a] ||
-		data->disktype == filesystem_table[a])
+	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslist's ones first.
+	// on some OS3 setup, data->info.id_DiskType always wrong and show that partitions are OFS (while the same code fine on OS4)
+	// So we just swap original code to firstly check data->disktype which is always correct.
+	// TODO: investigate why.
+	if	(data->disktype == filesystem_table[a] ||
+		data->info.id_DiskType == filesystem_table[a] )
 		break;
 	}
 SetGadgetValue( data->list, GAD_ICON_FILE_SYSTEM, (ULONG)GetString(locale,filesystem_table[a+1]) );

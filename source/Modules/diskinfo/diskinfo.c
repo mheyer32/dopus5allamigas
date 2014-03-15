@@ -288,9 +288,14 @@ BOOL diskinfo_info(diskinfo_data *data)
 	doslist=(struct DosList *)BADDR(data->info.id_VolumeNode);
 
 	// Get disk type from DOS list if it's set, otherwise get it from Info
-	if (!(disktype=doslist->dol_misc.dol_volume.dol_DiskType))
-		disktype=data->info.id_DiskType;
 
+	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslist's ones first.
+	// on some OS3 setup, data->info.id_DiskType always wrong and show that partitions are OFS (while the same code fine on OS4)
+	// TODO: investigate why.	
+	if (!(disktype=doslist->dol_misc.dol_volume.dol_DiskType)) {
+		disktype=data->info.id_DiskType;
+	}
+	
 	// Get device name
 	device=DeviceFromLock(lock,data->path);
 
