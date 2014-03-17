@@ -289,7 +289,7 @@ BOOL diskinfo_info(diskinfo_data *data)
 
 	// Get disk type from DOS list if it's set, otherwise get it from Info
 
-	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslist's ones first.
+	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslists ones first.
 	// on some OS3 setup, data->info.id_DiskType always wrong and show that partitions are OFS (while the same code fine on OS4)
 	// TODO: investigate why.	
 	if (!(disktype=doslist->dol_misc.dol_volume.dol_DiskType)) {

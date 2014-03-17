@@ -1713,25 +1713,32 @@ typedef struct
 	struct DateStamp			dh_stamp;	// DateStamp
 } DiskHandle;
 
-#define ID_AFS_PRO		(0x41465301L)
-#define ID_AFS_USER		(0x41465302L)
-#define ID_AFS_MULTI	(0x6D754146L)
-#define ID_PFS_FLOPPY	(0x50465300L)
-#define ID_PFS_HARD		(0x50465301L)
+#define ID_AFS_PRO      (0x41465301L) // AFS\01 - Ami-FileSafe1
+#define ID_AFS_USER     (0x41465302L) // AFS\02 - Ami-FileSafe2
+#define ID_AFS_MULTI    (0x6D754146L) // muAFS  - AFS multiuser
+#define ID_PFS_FLOPPY   (0x50465300L) // PFS\00 - floppyPFS
+#define ID_PFS_HARD     (0x50465301L) // PFS\01 - PFS1
+#define ID_PFS2_DISK    (0x50465302L) // PFS\02 - PFS2
+#define ID_PFS3_DISK    (0x50465303L) // PFS\03 - PFS3
+#define ID_PFS2_SC_DISK (0x50445302L) // PDS\02 - PFS2 Direct SCSI
+#define ID_PFS3_SC_DISK (0x50445303L) // PDS\03 - PFS3 Direct SCSI
+#define ID_PFS3_MULTI   (0x6d755046L) // muPF   - PFS3 multiuser
 #define ID_ENVOY_DISK	(0x444F5380L)
+#define ID_FFS7_DISK    (0x444f5307L) // FFS\07 - FastFileSystem7 : Long filenames
+#define ID_VP255_DISK   (0x444F5309L) // DOS\09 - OS4's V53 dostype is for newer vector-port based filesystems
+#define ID_SFS0_DISK    (0x53465300L) // SFS\00 - SmartFileSystem0
+#define ID_SFS1_DISK    (0x53465301L) // SFS\01 - SmartFileSystem1
+#define ID_SFS2_DISK    (0x53465302L) // SFS\02 - SmartFileSystem2
+#define ID_SFS3_DISK    (0x53465303L) // SFS\03 - SmartFileSystem3
+#define ID_JXFS_DISK    (0x4a584604L) // JXFS\4 - JXFileSystem
+#define ID_BOX0_DISK    (0x424F5800L) // BOX\0  - BoxFileSystem
+#define ID_FAT32_DISK   (0x46415432L) // FAT2   - Fat32
+#define ID_EXFAT_DISK   (0x46415458L) // FATX   - exFATFileSystem
+#define ID_EXT2_DISK    (0x45585402L) // EXT\2  - FuseExt2FileSystem
+#define ID_HFS_DISK     (0x48465300L) // HFS\0  - FuseHFS
+#define ID_NTFS_DISK    (0x4e544653L) // NTFS   - NTFileSystem3G
+#define ID_SWAP_DISK    (0x53574150L) // SWAP   - OS4's SWAP
 
-#define ID_FFS7_DISK	(0x444f5307L) // FFS\07 - FastFileSystem7 : Long filenames
-#define ID_SFS0_DISK	(0x53465300L) // SFS\00 - SmartFileSystem0
-#define ID_SFS1_DISK	(0x53465301L) // SFS\01 - SmartFileSystem1
-#define ID_SFS2_DISK	(0x53465302L) // SFS\02 - SmartFileSystem2
-#define ID_JXFS_DISK	(0x4a584604L) // JXFS\4 - JXFilsSystem
-#define ID_SWAP_DISK	(0x53574150L) // SWAP   - SWAP
-#define ID_BOX0_DISK	(0x424F5800L) // BOX\0  - BoxFileSystem
-#define ID_FAT32_DISK	(0x46415432L) // FAT2   - Fat32
-#define ID_EXFAT_DISK	(0x46415458L) // FATX   - exFATFileSystem
-#define ID_EXT2_DISK	(0x45585402L) // EXT\2  - FuseExt2FileSystem
-#define ID_HFS_DISK		(0x48465300L) // HFS\0  - FuseHFS
-#define ID_NTFS_DISK	(0x4e544653L) // NTFS   - NTFileSystem3G
 
 
 

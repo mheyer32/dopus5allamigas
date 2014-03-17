@@ -774,7 +774,7 @@ SetGadgetValue(data->list,GAD_ICON_FREE,(ULONG)buf);
 // Disk type
 for	(a = 0; filesystem_table[a]; a += 2)
 	{
-	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslist's ones first.
+	#warning on some os3 setup info.id_DiskType show OFS always, so we use doslists ones first.
 	// on some OS3 setup, data->info.id_DiskType always wrong and show that partitions are OFS (while the same code fine on OS4)
 	// So we just swap original code to firstly check data->disktype which is always correct.
 	// TODO: investigate why.

@@ -108,38 +108,59 @@ MSG_DOSTYPE_13 (//)
 Envoy Network Volume
 ;
 MSG_DOSTYPE_14 (//)
-Fast File System (FFS-LNFS)
+Personal File System 2
 ;
 MSG_DOSTYPE_15 (//)
-Smart File System 0
+Personal File System 3
 ;
 MSG_DOSTYPE_16 (//)
-Smart File System 1
+Personal File System 2 SCSI
 ;
 MSG_DOSTYPE_17 (//)
-Smart File System 2
+Personal File System 3 SCSI
 ;
 MSG_DOSTYPE_18 (//)
-JX File System
+Personal File System Multiuser
 ;
 MSG_DOSTYPE_19 (//)
-Swap
+Fast File System (FFS-LNFS)
 ;
 MSG_DOSTYPE_20 (//)
-Box File System
+Vector Based File System
 ;
 MSG_DOSTYPE_21 (//)
-FAT32 File System
+Smart File System 0
 ;
 MSG_DOSTYPE_22 (//)
-exFat File System
+Smart File System 1
 ;
 MSG_DOSTYPE_23 (//)
-FUSE ext2 File System
+Smart File System 2
 ;
 MSG_DOSTYPE_24 (//)
-FUSE HFS
+Smart File System 3
 ;
 MSG_DOSTYPE_25 (//)
+JX File System
+;
+MSG_DOSTYPE_26 (//)
+Box File System
+;
+MSG_DOSTYPE_27 (//)
+FAT32 File System
+;
+MSG_DOSTYPE_28 (//)
+exFat File System
+;
+MSG_DOSTYPE_29 (//)
+FUSE ext2 File System
+;
+MSG_DOSTYPE_30 (//)
+FUSE HFS
+;
+MSG_DOSTYPE_31 (//)
 NTFS
+;
+MSG_DOSTYPE_32 (//)
+Swap
 ;
