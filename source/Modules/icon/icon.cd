@@ -137,8 +137,8 @@ Show/edit icon information
 MSG_AFS (+2//)
 AFS
 ;
-MSG_PFS (//)
-PFS
+MSG_PFS1 (//)
+PFS(1)
 ;
 ;
 MSG_SPECIAL_MENU (//)
@@ -239,8 +239,20 @@ Icon has been modified.\nDo you wish to save it first?
 MSG_SORT (//)
 S_ort
 ;
+MSG_PFS2 (//)
+PFS(2)
+;
+MSG_PFS3 (//)
+PFS(3)
+;
+MSG_PFS3_MULTI (//)
+muPF
+;
 MSG_FFS7 (//)
 FFS(7)
+;
+MSG_VP255 (//)
+DOS(9)
 ;
 MSG_SFS0 (//)
 SFS(0)
@@ -250,6 +262,9 @@ SFS(1)
 ;
 MSG_SFS2 (//)
 SFS(2)
+;
+MSG_SFS3 (//)
+SFS(3)
 ;
 MSG_JXFS (//)
 JXFS
