@@ -477,7 +477,7 @@ int read_dir(
 				buffer,
 				lock,
 				exdata->Name,
-				(entry_type==ST_USERDIR)?0:exdata->FileSize,
+				(entry_type!=ST_FILE)?0:exdata->FileSize,
 				entry_type,
 				&exdata->Date,
 				exdata->Comment,
