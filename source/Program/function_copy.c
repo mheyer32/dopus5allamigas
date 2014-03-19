@@ -1137,7 +1137,11 @@ int function_copy_file(
 	BPTR in_file,out_file=0;
 	char *file_buffer,*initial_buffer;
 	unsigned long buffer_size,total_size=0;
+#ifdef USE_64BIT
+	UQUAD file_size;
+#else
 	long file_size;
+#endif
 	short ret_code=COPY_FAILED;
 	char decrypt_flag=0;
 	char got_dest_info=0;
@@ -1316,6 +1320,16 @@ int function_copy_file(
 
 		// Get file size
 		file_size=s_info->fib_Size;
+#if defined(__amigaos4__) && defined(USE_64BIT)
+		{
+			struct ExamineData *exdata;
+			if ((exdata=ExamineObjectTags(EX_StringNameInput,source_file,TAG_END)))
+			{
+				file_size=exdata->FileSize;
+				FreeDosObject(DOS_EXAMINEDATA, exdata);
+			}
+		}
+#endif
 
 		// Set file size
 		function_progress_file(handle,file_size*2,0);
