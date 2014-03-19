@@ -30,7 +30,7 @@ BOOL ReadSoftLinkDopus(
 	SoftLinkInfo *info)
 {
 	BPTR lock=0;
-	BOOL ok=0;
+	BOOL ok=FALSE;
 
 	// Not got a path lock?
 	if (!parent)
@@ -46,7 +46,7 @@ BOOL ReadSoftLinkDopus(
 		parent,
 		name,
 		info->sli_Path,
-		256))
+		256)>0)
 	{
 		// Unlock path lock if we have one
 		if (lock) UnLock(lock);
@@ -63,8 +63,16 @@ BOOL ReadSoftLinkDopus(
 			if ((ptr=PathPart(info->sli_Path))) *ptr=0;
 
 			// Flag success
-			ok=1;
+			ok=TRUE;
 		}
+	}
+
+	// something went wrong
+	if (!ok)
+	{
+		char buffer[80];
+		Fault(IoErr(), NULL, buffer, sizeof(buffer));
+		D(bug("couldn't resolve link %s: %s", name, buffer));
 	}
 
 	// Unlock lock if we have one
