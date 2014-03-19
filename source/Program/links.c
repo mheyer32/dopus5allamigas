@@ -31,7 +31,7 @@ BOOL ReadSoftLinkDopus(
 {
 	BPTR lock=0;
 	BOOL ok=FALSE;
-
+#ifndef __amigaos4__
 	// Not got a path lock?
 	if (!parent)
 	{
@@ -53,6 +53,12 @@ BOOL ReadSoftLinkDopus(
 
 		// Try to lock soft-linked path
 		if ((lock=Lock(info->sli_Path,ACCESS_READ)))
+#else
+		char buffer[256];
+		strlcpy(buffer, path, 256);
+		AddPart(buffer, name, 256);
+		if ((lock=Lock(buffer,ACCESS_READ)))
+#endif
 		{
 			char *ptr;
 
@@ -65,8 +71,9 @@ BOOL ReadSoftLinkDopus(
 			// Flag success
 			ok=TRUE;
 		}
+#ifndef __amigaos4__
 	}
-
+#endif
 	// something went wrong
 	if (!ok)
 	{
