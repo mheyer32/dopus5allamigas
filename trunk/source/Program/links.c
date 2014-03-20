@@ -79,7 +79,7 @@ BOOL ReadSoftLinkDopus(
 	{
 		char buffer[80];
 		Fault(IoErr(), NULL, buffer, sizeof(buffer));
-		D(bug("couldn't resolve link %s: %s", name, buffer));
+		D(bug("couldn't resolve link %s: %s\n", name, buffer));
 	}
 
 	// Unlock lock if we have one
