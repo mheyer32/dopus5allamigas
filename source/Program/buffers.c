@@ -213,12 +213,36 @@ DirEntry *create_file_entry(
 		if (ReadSoftLinkDopus(lock,buffer->buf_Path,entry_name,sinfo))
 		{
 			// Get info from soft link
-			entry_size=sinfo->sli_Fib.fib_Size;
 			entry_type=sinfo->sli_Fib.fib_DirEntryType;
 			entry_date=&sinfo->sli_Fib.fib_Date;
 			entry_comment=&sinfo->sli_Fib.fib_Comment;
-			softlink=1;
+#if defined(USE_64BIT) && defined(__amigaos4__)
+			if (entry_type == ST_FILE)
+			{
+				BPTR fhandle = 0;
+				char buf[256];
+				strlcpy(buf, buffer->buf_Path, 256);
+				AddPart(buf, entry_name, 256);
+				if ((fhandle = Open(buf, MODE_OLDFILE)))
+				{
+					entry_size = GetFileSize(fhandle);
+					Close(fhandle);
+				}
+				else
+				{
+					entry_size = sinfo->sli_Fib.fib_Size;
+				}
+			}
+#else
+			entry_size=sinfo->sli_Fib.fib_Size;
+#endif
 		}
+		else
+		{
+			entry_size= 0;
+			entry_type= ST_LINKFILE;
+		}
+		softlink=1;
 	}
 
 	// Calculate size of entry allocation
