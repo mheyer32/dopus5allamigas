@@ -239,8 +239,9 @@ DirEntry *create_file_entry(
 		}
 		else
 		{
-			entry_size= 0;
-			entry_type= ST_LINKFILE;
+			entry_size = 0;
+			entry_type = ST_LINKFILE;
+			entry_comment = "UNRESOLVED LINK";
 		}
 		softlink=1;
 	}
