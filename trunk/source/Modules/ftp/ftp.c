@@ -646,7 +646,7 @@ if	(okay)
 	reply = vftpa( info, fmt, ap );
 	VA_END( ap );
 
-	if	(reply/100 == PRELIM)
+	if	(reply/100 == PRELIM || ((info->fi_flags & FTP_FEAT_MLST) && reply == 200)) // better check the actual command?
 		{
 		LONG len = sizeof(from);
 

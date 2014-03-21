@@ -949,6 +949,106 @@ else
 
 /********************************/
 
+int mlsd_line_to_entryinfo(struct entry_info *entry, const char *line, ULONG flags)
+{
+	const char *str = line;
+	//char pair[256];
+	char *pair;
+	struct ClockData filedate = {0};
+	int length;
+
+	if (!str || !strchr(str, ';'))
+		return 0;
+
+	length = strlen(line) + 1;
+
+	if (!(pair = AllocVec(length, MEMF_CLEAR)))
+		return 0;
+
+	D(bug("line <%s>\n", line));
+
+	// partially based on the yafc parser
+	while (str && stptok(str, pair, length, ";"))
+	{
+		char *factname;
+		char *value;
+
+		D(bug("pair '%s'\n",pair));
+
+		factname = pair;
+		value = strchr(pair, '=');
+
+		if (value)
+		{
+			*value = '\0';
+			value++;
+		}
+
+		D(bug("factname '%s' value '%s'\n", factname, value));
+
+		if (!value)
+		{
+			// skip the leading space separator
+			factname++;
+			// copy the name minus the linefeeds
+			strncpy(entry->ei_name, factname, min(strlen(factname)-2, FILENAMELEN + 1));
+			D(bug(" -> filename '%s'\n", entry->ei_name));
+		}
+		else if (!stricmp(factname, "size"))
+		{
+			entry->ei_size = atoi(value);
+			D(bug(" -> size %d\n", entry->ei_size));
+		}
+		else if (!stricmp(factname, "type"))
+		{
+			if (!stricmp(value, "file"))
+			{
+				entry->ei_type = -1;
+				D(bug(" -> file (type %d)\n", entry->ei_type));
+			}
+			else if (!stricmp(value, "dir") || !stricmp(value, "cdir") || !stricmp(value, "pdir"))
+			{
+				entry->ei_type = 1;
+				D(bug(" -> directory (type %d)\n", entry->ei_type));
+			}
+		}
+		else if (!stricmp(factname, "modify"))
+		{
+			sscanf(value, "%04hd%02hd%02hd%02hd%02hd%02hd",
+				&filedate.year, &filedate.month, &filedate.mday,
+				&filedate.hour, &filedate.min, &filedate.sec);
+			entry->ei_seconds = Date2Amiga(&filedate);
+			D(bug(" -> year %d month %d mday %d hour %d min %d sec %d -> seconds %u\n",
+				filedate.year, filedate.month, filedate.mday,
+				filedate.hour, filedate.min, filedate.sec, entry->ei_seconds));
+		}
+		else if (!stricmp(factname, "UNIX.mode"))
+		{
+			entry->ei_unixprot = atoi(value);
+			entry->ei_prot = prot_unix_to_amiga(entry->ei_unixprot);
+			//entry->ei_prot = FIBF_READ|FIBF_WRITE|FIBF_EXECUTE|FIBF_DELETE;
+			D(bug(" -> unix protection bits %d amiga protection bits %d\n", entry->ei_unixprot, entry->ei_prot));
+		}
+
+		if ((str = strchr(str, ';')))
+			str++;
+	}
+
+	FreeVec(pair);
+
+	// . and .. are not supported!
+	if (!strcmp(entry->ei_name, ".") || !strcmp(entry->ei_name, ".."))
+		return 0;
+
+	// Hidden entry?
+	if ((flags & UI_DOT_HIDDEN) && entry->ei_name[0] == '.')
+		entry->ei_prot |= FIBF_HIDDEN;
+
+	return 1;
+}
+
+/********************************/
+
 // Taken from dopussrc:Program/misc.c
 // Get final path from a pathname
 void final_path(char *path,char *buf)
@@ -1462,11 +1562,14 @@ LONG prot_unix_to_amiga( ULONG mode )
 {
 LONG bits = 0xf;
 
-if	(mode & 0400)
+// we don't need the group/other permissions
+mode /= 100;
+
+if	(mode & 4)
 	bits &= ~FIBF_READ;
-if	(mode & 0200)
+if	(mode & 2)
 	bits &= ~(FIBF_WRITE | FIBF_DELETE);
-if	(mode & 0100)
+if	(mode & 1)
 	bits &= ~FIBF_EXECUTE;
 
 return bits;

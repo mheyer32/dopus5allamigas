@@ -82,6 +82,9 @@ int nt_line_to_entryinfo( struct entry_info *entry, const char *line, ULONG flag
 // Convert an Amiga fileinfoblock to an entry_info structure
 void fileinfoblock_to_entryinfo( struct entry_info *ei, struct FileInfoBlock *fib );
 
+// Convert an MLSD line output by ls to an entry_info structure
+int mlsd_line_to_entryinfo(struct entry_info *entry, const char *line, ULONG flags);
+
 // Get final path from a pathname
 void final_path(char *path,char *buf);
 

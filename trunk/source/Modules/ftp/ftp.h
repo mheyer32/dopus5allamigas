@@ -106,6 +106,8 @@ FTP_NO_SIZE	= 1 << 29,	// Doesn't support 'SIZE' command - size of file
 FTP_NO_MDTM	= 1 << 28,	// Doesn't support 'MDTM' command - last modified time of file
 FTP_NO_CHMOD	= 1 << 27,	// Doesn't support 'SITE CHMOD' command - set protection bits
 
+FTP_FEAT_MLST = 1 << 16, // Supports 'MLSD' and 'MLST'
+
 FTP_IS_UNIX	= 1 << 15,	// Operating system is a version of Unix (DG/UX)
 FTP_IS_WUFTPD	= 1 << 14,	// FTP server is wu-ftpd
 
