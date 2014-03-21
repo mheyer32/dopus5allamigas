@@ -262,6 +262,34 @@ return reply;
 
 /********************************/
 
+int feat_update(void *data, int skip, char *line)
+{
+	struct ftp_info *info = data;
+	char *feat = stpblk(line);
+
+	if (!strncmp(feat, "MLST", 4))
+		info->fi_flags |= FTP_FEAT_MLST;
+	
+	return 0;
+}
+
+static void lister_getfeats( struct ftp_node *node )
+{
+	int reply;
+
+	_ftpa(&node->fn_ftp, FTPFLAG_ASYNCH, "FEAT\r\n");
+	reply = _getreply(&node->fn_ftp, 0, feat_update, &node->fn_ftp);
+	
+	if (node->fn_ftp.fi_flags & FTP_FEAT_MLST)
+	{
+		D(bug("MLSD listing enabled\n"));
+		strcpy(node->fn_lscmd, "MLSD");
+		node->fn_ls_to_entryinfo = mlsd_line_to_entryinfo;
+	}
+}
+
+/********************************/
+
 //
 //	Attempt to CWD to the initial path specified.
 //	If this fails, strip off the trailing part of the path and try again.
@@ -571,6 +599,8 @@ if	(logged_in)
 				reply = ftp( &node->fn_ftp, "SITE DIRSTYLE\r\n" );
 			}
 		}
+
+	lister_getfeats( node );
 
 	// Always use binary transfers
 	lister_prog_info( node, GetString(locale,MSG_BINARY_MODE) );
