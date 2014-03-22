@@ -39,6 +39,7 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 	Att_Node *icon_node=0;
 	BackdropInfo *info=lister->backdrop_info;
 	BOOL shown=0;
+	char *path;
 
 	// Initialise positions
 	info->last_x_pos=0;
@@ -53,8 +54,11 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 		return;
 	}
 
+	// use some dummy path for ftp.module
+	path=(lister->cur_buffer->buf_Path[0]=='/')?"t:":lister->cur_buffer->buf_Path;
+
 	// CD to directory
-	if (!(lock=Lock(lister->cur_buffer->buf_Path,ACCESS_READ)))
+	if (!(lock=Lock(path,ACCESS_READ)))
 		return;
 	dir=CurrentDir(lock);
 
@@ -178,6 +182,10 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 
 						// Link?
 						if (fent->de_Flags&ENTF_LINK) object->flags|=BDOF_LINK_ICON;
+
+						// Unix-style path, probably comes from ftp.module
+						if (object->path[0]=='/' && fent->de_Node.dn_Type>=ENTRY_DIRECTORY)
+							object->device_name="DIR";
 					}
 
 					// Try to lock file

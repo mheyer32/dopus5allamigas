@@ -486,6 +486,26 @@ void backdrop_get_icon(BackdropInfo *info,BackdropObject *object,short flags)
 					// Want real icon?
 					if (flags&GETICON_FAIL) object->icon=GetCachedDiskObject(object->name,0);
 
+					// Unix-style path, probably comes from ftp.module
+					else if (object->path[0]=='/')
+					{
+						struct DiskObject *deficon;
+						long type=WBPROJECT;
+
+						fake=1;
+
+						if (object->device_name)
+						{
+							// device_name functions as an extra field
+							if (!stricmp(object->device_name,"DIR"))
+								type=WBDRAWER;
+							object->device_name=NULL;
+						}
+
+						// grab a project/drawer deficon
+						object->icon=GetCachedDefDiskObject(type);
+					}
+
 					// Get default icon if fails
 					else object->icon=GetProperIcon(object->name,&fake,0);
 
