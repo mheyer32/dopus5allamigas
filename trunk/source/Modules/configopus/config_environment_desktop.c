@@ -60,6 +60,7 @@ void _config_env_build_drive_list(config_env_data *data,short which)
 	Att_List *list,*list2;
 	Att_Node *node,*next;
 	struct DosList *dos;
+	ULONG flags;
 
 	// Create lists
 	if (!(list=Att_NewList(0)) ||
@@ -69,11 +70,18 @@ void _config_env_build_drive_list(config_env_data *data,short which)
 		return;
 	}
 
+#ifdef __AROS__
+	if (((struct Library *)DOSBase)->lib_Version<50)
+		flags=LDF_VOLUMES;
+	else
+#endif
+	flags=LDF_DEVICES;
+	
 	// Lock DOS list
-	dos=LockDosList(LDF_DEVICES|LDF_READ);
+	dos=LockDosList(flags|LDF_READ);
 
 	// Go through DOS list
-	while ((dos=NextDosEntry(dos,LDF_DEVICES)))
+	while ((dos=NextDosEntry(dos,flags)))
 	{
 		char devicename[34];
 
@@ -84,31 +92,12 @@ void _config_env_build_drive_list(config_env_data *data,short which)
 		BtoCStr(dos->dol_Name,devicename,32);
 		strcat(devicename,":");
 
-#ifdef __AROS__
-		if (((struct Library *)DOSBase)->lib_Version<50)
-		{
-			D_S(struct InfoData,info)
-			BPTR lock;
-
-			if (!(lock=Lock(devicename,SHARED_LOCK)))
-				continue;
-
-			if (!Info(lock,info) || (info->id_DiskType==0))
-			{
-				UnLock(lock);
-				continue;
-			}
-
-			UnLock(lock);
-		}
-#endif
-
 		// Add to list
 		Att_NewNode(list,devicename,0,ADDNODE_SORT);
 	}
 
 	// Unlock DOS list
-	UnLockDosList(LDF_DEVICES|LDF_READ);
+	UnLockDosList(flags|LDF_READ);
 
 	// Go through list
 	for (node=(Att_Node *)list->list.lh_Head;node->node.ln_Succ;node=next)
