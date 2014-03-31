@@ -227,7 +227,7 @@ DirEntry *create_file_entry(
 				AddPart(buf, entry_name, 512);
 				if ((flock = Lock(buf, MODE_OLDFILE)))
 				{
-					if ((data = ExamineObjectTags(EX_LockInput, flock, TAG_END)))
+					if ((data = ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
 					{
 						entry_size = data->FileSize;
 						FreeDosObject(DOS_EXAMINEDATA,data);
