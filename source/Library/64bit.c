@@ -205,8 +205,12 @@ BOOL LIBFUNC L_ExamineLock64(
 {
 	BOOL retval;
 
+#ifdef __MORPHOS__
+	retval = Examine64(lock, fib);
+#else
 	retval = Examine(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = fib->fib_Size;
+#endif
 
 #ifdef __amigaos3__
 	if (retval && fib->fib_Size >= 0x7FFFFFFF)
@@ -228,8 +232,44 @@ BOOL LIBFUNC L_ExamineLock64(
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
 		}
 	}
-#elif defined(__MORPHOS__)
-	retval = Examine64(lock, fib);
+#endif
+ 
+	return retval;
+}
+
+BOOL LIBFUNC L_ExamineNext64(
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	BOOL retval;
+
+#ifdef __MORPHOS__
+	retval = ExNext64(lock, fib);
+#else
+	retval = ExNext(lock, (struct FileInfoBlock *)fib);
+	fib->fib_Size64 = fib->fib_Size;
+#endif
+
+#ifdef __amigaos3__
+	if (retval && fib->fib_Size >= 0x7FFFFFFF)
+	{
+		UQUAD *size_ptr;
+		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
+
+		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
+			fib->fib_Size64 = *size_ptr;
+	}
+#elif defined(__amigaos4__)
+	if (retval)
+	{
+		struct ExamineData *exdata;
+
+		if ((exdata=ExamineObjectTags(EX_FileLockInput, lock, TAG_END)))
+		{
+			fib->fib_Size64 = exdata->FileSize;
+			FreeDosObject(DOS_EXAMINEDATA, exdata);
+		}
+	}
 #endif
  
 	return retval;
@@ -241,8 +281,12 @@ BOOL LIBFUNC L_ExamineHandle64(
 {
 	BOOL retval;
 
+#ifdef __MORPHOS__
+	retval = ExamineFH64(fh, fib);
+#else
 	retval = ExamineFH(fh, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = fib->fib_Size;
+#endif
 
 #ifdef __amigaos3__
 #warning how to send the packet for a FileHandle?
@@ -266,8 +310,6 @@ BOOL LIBFUNC L_ExamineHandle64(
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
 		}
 	}
-#elif defined(__MORPHOS__)
-	retval = ExamineFH64(fh, fib);
 #endif
  
 	return retval;
