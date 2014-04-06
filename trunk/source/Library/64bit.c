@@ -197,3 +197,124 @@ void LIBFUNC L_BytesToString64(
 		strncat(string,size_str,str_size);
 	}
 }
+
+// just like Examine, but tries to get the 64-bit size too
+BOOL LIBFUNC L_ExamineLock64(
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	BOOL retval;
+
+	retval = Examine(lock, (struct FileInfoBlock *)fib);
+	fib->fib_Size64 = fib->fib_Size;
+
+#ifdef __amigaos3__
+	if (retval && fib->fib_Size >= 0x7FFFFFFF)
+	{
+		UQUAD *size_ptr;
+		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
+
+		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
+			fib->fib_Size64 = *size_ptr;
+	}
+#elif defined(__amigaos4__)
+	if (retval)
+	{
+		struct ExamineData *exdata;
+
+		if ((exdata=ExamineObjectTags(EX_FileLockInput, lock, TAG_END)))
+		{
+			fib->fib_Size64 = exdata->FileSize;
+			FreeDosObject(DOS_EXAMINEDATA, exdata);
+		}
+	}
+#elif defined(__MORPHOS__)
+	retval = Examine64(lock, fib);
+#endif
+ 
+	return retval;
+}
+
+BOOL LIBFUNC L_ExamineHandle64(
+	REG(d0, BPTR fh),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	BOOL retval;
+
+	retval = ExamineFH(fh, (struct FileInfoBlock *)fib);
+	fib->fib_Size64 = fib->fib_Size;
+
+#ifdef __amigaos3__
+#warning how to send the packet for a FileHandle?
+	/*if (retval && fib->fib_Size >= 0x7FFFFFFF)
+	{
+		UQUAD *size_ptr;
+
+		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, lock, 0, 0, 0, 0);
+
+		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
+			fib->fib_Size64 = *size_ptr;
+	}*/
+#elif defined(__amigaos4__)
+	if (retval)
+	{
+		struct ExamineData *exdata;
+
+		if ((exdata=ExamineObjectTags(EX_FileHandleInput, fh, TAG_END)))
+		{
+			fib->fib_Size64 = exdata->FileSize;
+			FreeDosObject(DOS_EXAMINEDATA, exdata);
+		}
+	}
+#elif defined(__MORPHOS__)
+	retval = ExamineFH64(fh, fib);
+#endif
+ 
+	return retval;
+}
+
+// Unfinished, probably not worth the trouble
+#if 0
+void LIBFUNC L_SeekHandle64(
+	REG(d0, BPTR file),
+	REG(a0, UQUAD *pos),
+	REG(d1, LONG mode),
+	REG(a1, UQUAD *oldpos))
+{
+	UQUAD retval=-1;
+#ifdef __amigaos3__
+
+	retval=(UQUAD)Seek(file, (ULONG)*pos, mode);
+#elif defined(__amigaos4__)
+	UQUAD oldpos;
+	UQUAD size;
+	UQUAD startpos=0;
+
+	oldpos=GetFilePosition(file);
+	size=GetFileSize(file);
+
+	switch (mode)
+	{
+		case OFFSET_BEGINNING:
+			startpos=0;
+			break;
+		case OFFSET_CURRENT:
+			startpos=oldpos;
+			break
+		case OFFSET_END:
+			startpos=size;
+			break;
+	}
+
+	retval=startpos;
+	if (*pos!=0 && ChangeFilePosition(file, startpos+*pos, 0)==DOSTRUE)
+		retval=GetFilePosition(file);
+#elif defined(__MORPHOS__)
+	retval=Seek64(file, *pos, mode);
+#else
+	retval=(UQUAD)Seek(file, (ULONG)*pos, mode);
+#endif
+	if (oldpos)
+		*oldpos=retval;
+}
+#endif

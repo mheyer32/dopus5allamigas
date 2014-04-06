@@ -54,6 +54,42 @@ typedef unsigned long long UQUAD;
 typedef signed long long QUAD;
 #endif
 
+// 64-bit FIB
+#ifdef __MORPHOS__
+typedef struct FileInfoBlock FileInfoBlock64;
+#else
+// based on the MorphOS FileInfoBlock
+// added a _s suffix, since AROS might use struct FileInfoBlock64 in the future
+typedef struct FileInfoBlock64_s
+{
+    LONG             fib_DiskKey;
+    LONG             fib_DirEntryType;
+    char             fib_FileName[108];
+    LONG             fib_Protection;
+    LONG             fib_EntryType;
+    LONG             fib_Size;
+    LONG             fib_NumBlocks;
+    struct DateStamp fib_Date;
+    char             fib_Comment[80];
+    UWORD            fib_OwnerUID;
+    UWORD            fib_OwnerGID;
+    union
+    {
+        char             fib_un_Reserved[32];
+        struct
+        {
+            UQUAD    fib_un_ext_Size64;
+            UQUAD    fib_un_ext_NumBlocks64;
+        } fib_un_ext;
+    } fib_un;
+} FileInfoBlock64;
+#define fib_Reserved fib_un.fib_un_Reserved
+#define fib_Size64      fib_un.fib_un_ext.fib_un_ext_Size64
+#define fib_NumBlocks64 fib_un.fib_un_ext.fib_un_ext_NumBlocks64
+#endif
+
+// ---------------------------------------------------------------
+
 #define STACK_DEFAULT	6144
 #define STACK_LARGE	8192
 
