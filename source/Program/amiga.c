@@ -45,7 +45,7 @@ LONG MatchFirst64(STRPTR pat, struct AnchorPath *panchor)
 
 		if (!(lock = Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
 			return error;
-		if (Examine64(lock, fib))
+		if (Examine64(lock, fib, TAG_DONE))
 			anchorfib->fib_Size64 = fib->fib_Size64;
 	}
 #endif
@@ -83,7 +83,7 @@ LONG MatchNext64(struct AnchorPath *panchor)
 
 		if (!(lock = Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
 			return error;
-		if (Examine64(lock, fib))
+		if (Examine64(lock, fib, TAG_DONE))
 			anchorfib->fib_Size64 = fib->fib_Size64;
 	}
 #endif
