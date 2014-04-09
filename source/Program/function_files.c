@@ -704,6 +704,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 {
 	FunctionEntry *entry=0;
 	ULONG flags=0;
+	D_S(SoftLinkInfo, sinfo)
 
 	// If there's a recursively-collected entry waiting, return it
 	if (handle->recurse_entry) return handle->recurse_entry;
@@ -722,6 +723,26 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 
 			// Copy entry info
 			handle->recurse_info=handle->anchor->ap_Info;
+
+			// Get info for file softlink
+			if (handle->anchor->ap_Info.fib_DirEntryType == ST_SOFTLINK)
+			{
+				if (ReadSoftLinkDopus(0,handle->anchor_path,
+					handle->anchor->ap_Info.fib_FileName, sinfo))
+				{
+					// Check entry type from soft link
+					if (sinfo->sli_Fib.fib_DirEntryType<0)
+					{
+						FileInfoBlock64 *anchorfib = (FileInfoBlock64 *)&(handle->anchor->ap_Info);
+						UQUAD fsize = 0;
+
+						getfibsize(&sinfo->sli_Fib, &fsize);
+						handle->anchor->ap_Info.fib_Size = sinfo->sli_Fib.fib_Size;
+						anchorfib->fib_Size64 = fsize;
+						handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
+					}
+				}
+			}
 
 			// Link?
 			if (handle->anchor->ap_Info.fib_DirEntryType==ST_LINKFILE ||
@@ -764,15 +785,19 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						// Ok to use
 						else
 						{
+							UQUAD fsize = 0;
 							// Set entry type
 							handle->recurse_entry->type=ENTRY_FILE;
+
+							// Get 64bit size
+							getfibsize(&handle->anchor->ap_Info, &fsize);
 
 							// Set entry size
 							handle->recurse_entry->size=handle->anchor->ap_Info.fib_Size;
 
 							// Increment counts
 							++handle->recurse_count;
-							handle->recurse_bytes+=handle->anchor->ap_Info.fib_Size;
+							handle->recurse_bytes+=fsize;
 
 							// Calculate block size?
 							if (handle->dest_block_size)
@@ -784,13 +809,18 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 
 								// Calculate block size of file
 								fileListEntries=(handle->dest_block_size>>2)-56;
-								dataBlocks=
+								dataBlocks=(long)
+#ifdef USE_64BIT
+									((fsize+(UQUAD)handle->dest_data_block_size-1)/
+									(UQUAD)handle->dest_data_block_size);
+#else
 									(handle->anchor->ap_Info.fib_Size+handle->dest_data_block_size-1)/
 									handle->dest_data_block_size;
+#endif
 								fileLists=
 									(dataBlocks+fileListEntries-1)/fileListEntries;
 								totalBlocks=dataBlocks+fileLists;
-
+D(bug("TotalBlocks: %ld\n", totalBlocks))
 								// Increment count
 								handle->dest_recurse_blocks+=totalBlocks;
 							}
@@ -821,6 +851,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 
 						// Set bit to enter dir, increment depth count
 						handle->anchor->ap_Flags|=APF_DODIR;
+						handle->anchor->ap_Flags|=APF_FollowHLinks;
 						++handle->recurse_depth;
 						++handle->dest_recurse_blocks;
 					}
@@ -866,7 +897,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						// Fill out path
 						strcpy(handle->recurse_path,handle->anchor_path+strlen(handle->source_path));
 						AddPart(handle->recurse_path,handle->anchor->ap_Info.fib_FileName,256);
-	
+
 						// Point to dummy entry
 						handle->recurse_entry=handle->recurse_entry_data;
 
@@ -886,7 +917,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 			}
 
 			// Get the next match
-			handle->recurse_return=MatchNext(handle->anchor);
+			handle->recurse_return=MatchNext64(handle->anchor);
 
 			// Return entry
 			if (handle->recurse_entry)
@@ -1090,7 +1121,7 @@ int function_end_entry(
 			}
 
 			// Recurse into it
-			handle->recurse_return=MatchFirst(handle->work_buffer,handle->anchor);
+			handle->recurse_return=MatchFirst64(handle->work_buffer,handle->anchor);
 			handle->recurse_depth=1;
 
 			// Initialise anchor path

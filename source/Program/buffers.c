@@ -216,26 +216,16 @@ DirEntry *create_file_entry(
 			entry_type=sinfo->sli_Fib.fib_DirEntryType;
 			entry_date=&sinfo->sli_Fib.fib_Date;
 			entry_comment=&sinfo->sli_Fib.fib_Comment;
-			entry_size=sinfo->sli_Fib.fib_Size;
-#if defined(USE_64BIT) && defined(__amigaos4__)
 			if (entry_type == ST_FILE)
 			{
-				BPTR flock = 0;
-				struct ExamineData *data;
-				char buf[512];
-				strlcpy(buf, buffer->buf_Path, 512);
-				AddPart(buf, entry_name, 512);
-				if ((flock = Lock(buf, MODE_OLDFILE)))
-				{
-					if ((data = ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
-					{
-						entry_size = data->FileSize;
-						FreeDosObject(DOS_EXAMINEDATA,data);
-					}
-					UnLock(flock);
-				}
-			}
+#ifdef USE_64BIT
+				UQUAD fsize = 0;
+				getfibsize(&sinfo->sli_Fib, &fsize);
+				entry_size = fsize;
+#else
+				entry_size=sinfo->sli_Fib.fib_Size;
 #endif
+			}
 		}
 		else
 		{
