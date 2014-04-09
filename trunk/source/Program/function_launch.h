@@ -229,7 +229,11 @@ typedef struct _FunctionHandle
 
 	char			recurse_path[512];	// Pathname of recursed entry
 	int			recurse_count;		// Count of recursed files
+#ifdef USE_64BIT
+	UQUAD			recurse_bytes;
+#else
 	ULONG			recurse_bytes;		// Size of recursed files
+#endif
 	int			recurse_depth;		// Recurse depth
 
 	char			work_buffer[1024];	// A buffer to do things in

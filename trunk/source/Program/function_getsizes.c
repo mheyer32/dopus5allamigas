@@ -274,7 +274,7 @@ DOPUS_FUNC(function_getsizes)
 				
 				// Build string
 				lsprintf(handle->work_buffer,
-					"\n%s %s %d%%",
+					"\n%s %s %ld%%",
 					path->path,
 					GetString(&locale,MSG_FIT),
 					percent);

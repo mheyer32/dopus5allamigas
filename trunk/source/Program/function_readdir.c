@@ -339,10 +339,6 @@ int read_dir(
 {
 	long file_count=0,dir_count=0;
 	struct FileInfoBlock *fileinfo;
-#if defined(__amigaos4__) && defined(USE_64BIT)
-	struct ExamineData *exdata;
-	APTR context;
-#endif
 	BPTR parent;
 	DirEntry *entry;
 	struct MinList file_list;
@@ -420,92 +416,6 @@ int read_dir(
 	// Initialise list
 	NewList((struct List *)&file_list);
 
-#if defined(__amigaos4__) && defined(USE_64BIT)
-	if (!(context=ObtainDirContextTags(
-		EX_FileLockInput,	lock,
-		//EX_DoCurrentDir,	TRUE,
-		EX_DataFields,		EXF_ALL,
-		TAG_END)))
-	{
-		FreeDosObject(DOS_FIB,fileinfo);
-		return 0;
-	}
-
-	while ((exdata=ExamineDir(context))) 
-	{
-		short entry_type=0;
-
-		// Check abort
-		if (function_check_abort(handle))
-		{
-			buffer->flags|=DWF_ABORTED;
-			break;
-		}
-
-		// convert to the legacy types
-		switch (exdata->Type&FSO_TYPE_MASK)
-		{
-			case FSO_TYPE_SOFTLINK:
-				entry_type=ST_SOFTLINK;
-				break;
-			case FSO_TYPE_FILE:
-				entry_type=ST_FILE;
-				break;
-			case FSO_TYPE_DIRECTORY:
-				entry_type=ST_USERDIR;
-				break;
-			default:
-				D(bug("entry %s has unrecognized type %d\n",exdata->Name,exdata->Type&FSO_TYPE_MASK));
-				continue;
-		}
-
-		// Get network info if needed
-		if (network_ptr)
-		{
-			network_get_info(
-				network_ptr,
-				buffer,
-				proc,
-				exdata->OwnerUID,
-				exdata->OwnerGID,
-				exdata->Protection);
-		}
-
-		// Create entry
-		if ((entry=
-			create_file_entry(
-				buffer,
-				lock,
-				exdata->Name,
-				(entry_type!=ST_FILE)?0:exdata->FileSize,
-				entry_type,
-				&exdata->Date,
-				exdata->Comment,
-				exdata->Protection,
-				0,0,0,
-				network_ptr)))
-		{
-			// Add to list
-			AddTail((struct List *)&file_list,(struct Node *)entry);
-
-			// Increment counts
-			if (ENTRYTYPE(entry->de_Node.dn_Type)==ENTRY_DIRECTORY)
-				++dir_count;
-			else
-				++file_count;
-		}
-
-		// Failed
-		else
-		{
-			function_error_text(handle,-1);
-			break;
-		}
-	}
-
-	FreeDosObject(DOS_EXAMINEDATA, exdata);
-	ReleaseDirContext(context);
-#else
 	// Loop until directory is empty
 	while (ExNext(lock,fileinfo))
 	{
@@ -521,6 +431,9 @@ int read_dir(
 		// Ok to add?
 		if (ok)
 		{
+#if defined(USE_64BIT) & defined(__amigaos4__)
+			UQUAD os4size = 0;
+#endif
 			// Get network info if needed
 			if (network_ptr)
 			{
@@ -536,7 +449,25 @@ int read_dir(
 			// Directories are meant to have no size, apparently
 			if (fileinfo->fib_DirEntryType>0)
 				fileinfo->fib_Size=0;
-
+#if defined(USE_64BIT) & defined(__amigaos4__)
+			if (fileinfo->fib_DirEntryType<0)
+			{
+				BPTR flock = 0;
+				struct ExamineData *data;
+				char buf[512];
+				if (NameFromLock(lock, buf, 400))
+					AddPart(buf, fileinfo->fib_FileName, 512);
+				if ((flock = Lock(buf, MODE_OLDFILE)))
+				{
+					if ((data = ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
+					{
+						os4size = data->FileSize;
+						FreeDosObject(DOS_EXAMINEDATA,data);
+					}
+					UnLock(flock);
+				}
+			}
+#endif
 			// Create entry
 			if ((entry=
 				create_file_entry(
@@ -544,7 +475,11 @@ int read_dir(
 					lock,
 					fileinfo->fib_FileName,
 #ifdef USE_64BIT
+#ifdef __amigaos4__
+					(UQUAD)os4size,
+#else
 					(UQUAD)fileinfo->fib_Size,
+#endif
 #else
 					fileinfo->fib_Size,
 #endif
@@ -573,7 +508,6 @@ int read_dir(
 			}
 		}
 	}
-#endif
 
 	// Free device process
 	FreeDeviceProc(proc);

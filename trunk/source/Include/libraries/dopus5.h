@@ -3056,7 +3056,7 @@ typedef struct FileInfoBlock FileInfoBlock64;
 #else
 // based on the MorphOS FileInfoBlock
 // added a _s suffix, since AROS might use struct FileInfoBlock64 in the future
-struct FileInfoBlock64_s
+typedef struct FileInfoBlock64_s
 {
     LONG             fib_DiskKey;
     LONG             fib_DirEntryType;
