@@ -23,6 +23,11 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
+#ifdef __amigaos3__
+#warning Need to confirm ACTION_GET_FILE_SIZE64 correct for OS3 SFS2
+#define ACTION_GET_FILE_SIZE64         8004
+#endif
+
 void LIBFUNC L_DivideU64(
 	REG(a0, UQUAD *num),
 	REG(d0, ULONG div),
@@ -206,7 +211,7 @@ BOOL LIBFUNC L_ExamineLock64(
 	BOOL retval;
 
 #ifdef __MORPHOS__
-	retval = Examine64(lock, fib);
+	retval = Examine64(lock, fib, TAG_DONE);
 #else
 	retval = Examine(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = fib->fib_Size;
@@ -244,7 +249,7 @@ BOOL LIBFUNC L_ExamineNext64(
 	BOOL retval;
 
 #ifdef __MORPHOS__
-	retval = ExNext64(lock, fib);
+	retval = ExNext64(lock, fib, TAG_DONE);
 #else
 	retval = ExNext(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = fib->fib_Size;
@@ -282,7 +287,7 @@ BOOL LIBFUNC L_ExamineHandle64(
 	BOOL retval;
 
 #ifdef __MORPHOS__
-	retval = ExamineFH64(fh, fib);
+	retval = ExamineFH64(fh, fib, TAG_DONE);
 #else
 	retval = ExamineFH(fh, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = fib->fib_Size;
