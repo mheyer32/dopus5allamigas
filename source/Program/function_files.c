@@ -820,7 +820,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 								fileLists=
 									(dataBlocks+fileListEntries-1)/fileListEntries;
 								totalBlocks=dataBlocks+fileLists;
-D(bug("TotalBlocks: %ld\n", totalBlocks))
+//D(bug("TotalBlocks: %ld\n", totalBlocks))
 								// Increment count
 								handle->dest_recurse_blocks+=totalBlocks;
 							}
