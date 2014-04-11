@@ -994,7 +994,7 @@ LONG MatchFirst64(STRPTR pat, struct AnchorPath *panchor)
 	}
 #elif defined(__MORPHOS__)
 	{
-		D_S(FileInfoBlock, fib)
+		D_S(struct FileInfoBlock, fib)
 
 		if (!(lock = Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
 			return error;
@@ -1032,7 +1032,7 @@ LONG MatchNext64(struct AnchorPath *panchor)
 	}
 #elif defined(__MORPHOS__)
 	{
-		D_S(FileInfoBlock, fib)
+		D_S(struct FileInfoBlock, fib)
 
 		if (!(lock = Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
 			return error;
