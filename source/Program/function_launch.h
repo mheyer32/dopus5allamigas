@@ -144,7 +144,7 @@ typedef struct
 	struct Node		node;
 	short			count;
 	ULONG			flags;
-#if 1
+#if 0
 #ifdef USE_64BIT
 	UQUAD			fib_Size;
 #else
@@ -157,7 +157,7 @@ typedef struct
 	NetworkInfo		*fib_Network;
 	char			fib_FileName[1];
 #else
-	struct FileInfoBlock fib;
+	struct FileInfoBlock *fib;
 	NetworkInfo		*network;
 #endif
 } FileChange;

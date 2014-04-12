@@ -68,7 +68,7 @@ FileChangeList *function_find_filechanges(
 		if (list->lister==lister) return list;
 	}
 
-	return 0;
+	return NULL;
 }
 
 
@@ -82,7 +82,7 @@ FileChangeList *function_add_filechanges(
 
 	// Allocate new list
 	if (!(list=AllocMemH(handle->memory,sizeof(FileChangeList)+strlen(path))))
-		return 0;
+		return NULL;
 
 	// Initialise
 	list->node.ln_Name=list->path;
@@ -101,6 +101,33 @@ FileChangeList *function_add_filechanges(
 }
 
 
+// Allocate a FileChange structure
+static FileChange *alloc_filechange(void *memhandle, BOOL network)
+{
+	FileChange *change;
+
+	if (!(change=AllocMemH(memhandle, sizeof(FileChange))) ||
+		!(change->fib=AllocDosObject(DOS_FIB,0)))
+		return NULL;
+
+	if (network)
+		change->network=AllocMemH(memhandle,sizeof(NetworkInfo));
+
+	return change;
+}
+
+// Free a FileChange structure
+static void free_filechange(FileChange *change)
+{
+	if (change)
+	{
+		FreeDosObject(DOS_FIB,change->fib);
+		FreeMemH(change->network);
+		FreeMemH(change);
+	}
+}
+
+
 // Add a file to lists
 FileChange *function_filechange_addfile(
 	FunctionHandle *handle,
@@ -114,42 +141,26 @@ FileChange *function_filechange_addfile(
 
 	// Find list for this path, add if not found
 	if (!(list=function_find_filechanges(handle,0,path,lister,0)) &&
-		!(list=function_add_filechanges(handle,path,lister))) return 0;
+		!(list=function_add_filechanges(handle,path,lister))) return NULL;
 
 	// Get new change entry
-	if (!(change=AllocMemH(handle->memory,
-		sizeof(FileChange)+
-		strlen(info->fib_FileName)+
-		strlen(info->fib_Comment)+1))) return 0;
+	if (!(change=alloc_filechange(handle->memory,network!=NULL))) return NULL;
 
 	// Network information?
-	if (network &&
-		(change->fib_Network=AllocMemH(handle->memory,sizeof(NetworkInfo))))
+	if (network && change->network)
 	{
 		// Copy it
-		CopyMem((char *)network,(char *)change->fib_Network,sizeof(NetworkInfo));
+		CopyMem((char *)network,(char *)change->network,sizeof(NetworkInfo));
 	}
 
 	// Set type
 	change->node.ln_Type=FCTYPE_ADD;
 
 	// Fill out entry
-	change->fib_Size=GETFIBSIZE(info);
-	change->fib_DirEntryType=info->fib_DirEntryType;
-	change->fib_Date=info->fib_Date;
-	change->fib_Protection=info->fib_Protection;
+	CopyMem(info,change->fib,sizeof(struct FileInfoBlock));
 
 	// Copy name
-	strcpy(change->fib_FileName,info->fib_FileName);
-	change->node.ln_Name=change->fib_FileName;
-
-	// Got a comment?
-	if (info->fib_Comment[0])
-	{
-		// Copy comment
-		change->fib_Comment=change->node.ln_Name+strlen(change->fib_FileName)+1;
-		strcpy(change->fib_Comment,info->fib_Comment);
-	}
+	change->node.ln_Name=change->fib->fib_FileName;
 
 	// Add to end of list
 	AddTail((struct List *)&list->files,&change->node);
@@ -167,12 +178,12 @@ FileChange *function_filechange_loadfile(
 	char *buffer;
 	BPTR lock;
 	D_S(struct FileInfoBlock, fib)
-	FileChange *change=0;
+	FileChange *change=NULL;
 	short len;
 
 	// Allocate buffer
 	len=strlen(path)+strlen(name)+((flags&FFLF_ICON)?7:2);
-	if (!(buffer=AllocVec(len+1,0))) return 0;
+	if (!(buffer=AllocVec(len+1,0))) return NULL;
 
 	// Build path name
 	strcpy(buffer,path);
@@ -182,14 +193,12 @@ FileChange *function_filechange_loadfile(
 	// Deferred?
 	if (flags&FFLF_DEFERRED)
 	{
-		struct FileInfoBlock fib;
-
 		// Initialise dummy fib
-		stccpy(fib.fib_FileName,name,108);
-		fib.fib_Comment[0]=0;
+		strncpy(fib->fib_FileName,name,108);
+		fib->fib_Comment[0]=0;
 
 		// Add change
-		if ((change=function_filechange_addfile(handle,path,&fib,0,0)))
+		if ((change=function_filechange_addfile(handle,path,fib,0,0)))
 		{
 			// Set type
 			change->node.ln_Type=FCTYPE_LOAD;
@@ -201,7 +210,7 @@ FileChange *function_filechange_loadfile(
 	if ((lock=Lock(buffer,ACCESS_READ)))
 	{
 		// Examine file
-		Examine(lock,fib);
+		ExamineLock64(lock,(FileInfoBlock64 *)fib);
 		UnLock(lock);
 
 		// Add to lister
@@ -255,19 +264,17 @@ FileChange *function_filechange_delfile(
 
 	// Find list for this path, add if not found
 	if (!(list=function_find_filechanges(handle,0,path,lister,0)) &&
-		!(list=function_add_filechanges(handle,path,lister))) return 0;
+		!(list=function_add_filechanges(handle,path,lister))) return NULL;
 
 	// Get new change entry
-	if (!(change=AllocMemH(handle->memory,
-		sizeof(FileChange)+
-		strlen(name)))) return 0;
+	if (!(change=alloc_filechange(handle->memory,FALSE))) return NULL;
 
 	// Set type
 	change->node.ln_Type=FCTYPE_DEL;
 
 	// Copy name
-	stccpy(change->fib_FileName,name,108);
-	change->node.ln_Name=change->fib_FileName;
+	strncpy(change->fib->fib_FileName,name,108);
+	change->node.ln_Name=change->fib->fib_FileName;
 
 	// Add to start or end of list
 	if (tail)
@@ -287,39 +294,33 @@ FileChange *function_filechange_modify(
 {
 	FileChangeList *list;
 	FileChange *change;
-	va_list va;
+	VA_LIST va;
 
 	// Find list for this path, add if not found
 	if (!(list=function_find_filechanges(handle,0,path,0,0)) &&
-		!(list=function_add_filechanges(handle,path,0))) return 0;
+		!(list=function_add_filechanges(handle,path,0))) return NULL;
 
 	// Get new change entry
-	if (!(change=AllocMemH(handle->memory,
-		sizeof(FileChange)+
-		82+
-		strlen(name)))) return 0;
+	if (!(change=alloc_filechange(handle->memory,FALSE))) return NULL;
 
 	// Copy name
-	stccpy(change->fib_FileName,name,108);
-	change->node.ln_Name=change->fib_FileName;
-
-	// Get comment pointer
-	change->fib_Comment=change->node.ln_Name+strlen(change->node.ln_Name)+1;
+	strncpy(change->fib->fib_FileName,name,108);
+	change->node.ln_Name=change->fib->fib_FileName;
 
 	// Set type
 	change->node.ln_Type=FCTYPE_MODIFY;
 
 	// Go through tags
-	va_start(va, name);
+	VA_START(va, name);
 
 	for (;;)
 	{
-		size_t tagdata, tag = va_arg(va, size_t);
+		size_t tagdata, tag = VA_ARG(va, size_t);
 
 		if (tag == TAG_END)
 			break;
 
-		tagdata = va_arg(va, size_t);
+		tagdata = VA_ARG(va, size_t);
 
 		// Ignore?
 		if (tag == TAG_IGNORE)
@@ -333,43 +334,39 @@ FileChange *function_filechange_modify(
 			// Size
 			case FM_Size:
 				change->flags|=FMF_SIZE;
-#ifdef USE_64BIT
 #warning What about the high 32-bits?
-				change->fib_Size = (UQUAD)tagdata;
-#else
-				change->fib_Size = tagdata;
-#endif
+				GETFIBSIZE(change->fib) = tagdata;
 				break;
 
 			// Date
 			case FM_Date:
 				change->flags|=FMF_DATE;
-				change->fib_Date=*((struct DateStamp *)tagdata);
+				change->fib->fib_Date=*((struct DateStamp *)tagdata);
 				break;
 
 			// Protect
 			case FM_Protect:
 				change->flags|=FMF_PROTECT;
-				change->fib_Protection = tagdata;
+				change->fib->fib_Protection = tagdata;
 				break;
 
 			// Comment
 			case FM_Comment:
 				change->flags&=~FMF_NAME;
 				change->flags|=FMF_COMMENT;
-				stccpy(change->fib_Comment,(char *)tagdata,80);
+				strncpy(change->fib->fib_Comment,(char *)tagdata,80);
 				break;
 
 			// Name
 			case FM_Name:
 				change->flags&=~FMF_COMMENT;
 				change->flags|=FMF_NAME;
-				stccpy(change->fib_Comment,(char *)tagdata,80);
+				strncpy(change->fib->fib_Comment,(char *)tagdata,80);
 				break;
 		}
 	}
 
-	va_end(va);
+	VA_END(va);
 
 	// Add to list
 	AddTail((struct List *)&list->files,&change->node);
@@ -388,14 +385,14 @@ FileChange *function_filechange_rename(
 
 	// Find list for this path, add if not found
 	if (!(list=function_find_filechanges(handle,0,path,0,0)) &&
-		!(list=function_add_filechanges(handle,path,0))) return 0;
+		!(list=function_add_filechanges(handle,path,0))) return NULL;
 
 	// Get new change entry
-	if (!(change=AllocMemH(handle->memory,sizeof(FileChange)+strlen(name))))
-		return 0;
+	if (!(change=alloc_filechange(handle->memory,FALSE))) return NULL;
+		return NULL;
 
 	// Copy name
-	stccpy(change->fib_FileName,name,108);
+	strncpy(change->fib->fib_FileName,name,108);
 
 	// Set type
 	change->node.ln_Type=FCTYPE_RENAME;
@@ -422,10 +419,10 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 	{
 		BackdropInfo *info;
 		short substr;
-		BOOL show=0;
+		BOOL show=FALSE;
 		ULONG ref_flags=REFRESHF_SLIDERS|REFRESHF_ICONS|REFRESHF_STATUS;
-		FileChangeList *list=0;
-		DirEntry *show_file=0;
+		FileChangeList *list=NULL;
+		DirEntry *show_file=NULL;
 
 		// Get lister
 		lister=IPCDATA(ipc);
@@ -461,7 +458,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 					change->node.ln_Succ;
 					change=(FileChange *)change->node.ln_Succ)
 				{
-					BOOL del_ok=0;
+					BOOL del_ok=FALSE;
 
 					// If this is a sub-string, all we can accept is a rename
 					if (substr &&
@@ -474,14 +471,14 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 					if (change->node.ln_Type==FCTYPE_RENAME)
 					{
 						// Try to rename buffer
-						if (strreplace(buffer->buf_Path,list->path,change->fib_FileName,1))
+						if (strreplace(buffer->buf_Path,list->path,change->fib->fib_FileName,1))
 						{
 							char *old_path_path,*new_path_path;
 							short len=0;
 
 							// Get pointer to after colons
 							old_path_path=strchr(list->path,':')+1;
-							new_path_path=strchr(change->fib_FileName,':')+1;
+							new_path_path=strchr(change->fib->fib_FileName,':')+1;
 
 							// Replace part in expanded path
 							strreplace(
@@ -490,19 +487,19 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 								new_path_path,1);
 
 							// Is buffer actually showing the path that changed?
-							if (stricmp(buffer->buf_Path,change->fib_FileName)==0)
+							if (stricmp(buffer->buf_Path,change->fib->fib_FileName)==0)
 							{
 								char *ptr;
 
 								// Get pointer to end of filename
-								ptr=change->fib_FileName+strlen(change->fib_FileName)-1;
+								ptr=change->fib->fib_FileName+strlen(change->fib->fib_FileName)-1;
 
 								// Strip trailing slash
 								if (*ptr=='/') *ptr=0;
-								else ptr=0;
+								else ptr=NULL;
 
 								// Copy object name
-								stccpy(buffer->buf_ObjectName,FilePart(change->fib_FileName),GUI->def_filename_length-1);
+								strncpy(buffer->buf_ObjectName,FilePart(change->fib->fib_FileName),GUI->def_filename_length-1);
 								len=-1;
 
 								// Restore slash
@@ -516,7 +513,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (len==-1) ref_flags|=REFRESHF_UPDATE_NAME;
 
 							// Set show flag
-							show=1;
+							show=TRUE;
 						}
 
 						// Can only be this for a sub-string
@@ -528,29 +525,17 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 					{
 						char buf[512];
 						BPTR lock;
-						D_S(struct FileInfoBlock, fib)
 
 						// Build path
-						strcpy(buf,buffer->buf_Path);
-						AddPart(buf,change->fib_FileName,512);
+						strncpy(buf,buffer->buf_Path,512);
+						AddPart(buf,change->fib->fib_FileName,512);
 
 						// Try to lock file
 						if ((lock=Lock(buf,ACCESS_READ)))
 						{
 							// Get info
-							ExamineLock64(lock,fib);
+							ExamineLock64(lock,(FileInfoBlock64 *)change->fib);
 							UnLock(lock);
-
-							// Copy real file data
-							change->fib_Size=GETFIBSIZE(fib);
-							change->fib_DirEntryType=fib->fib_DirEntryType;
-							change->fib_Date=fib->fib_Date;
-							change->fib_Protection=fib->fib_Protection;
-
-							// Need to allocate buffer for comment
-							if (fib->fib_Comment[0] &&
-								(change->fib_Comment=AllocMemH(handle->memory,strlen(fib->fib_Comment))))
-								strcpy(change->fib_Comment,fib->fib_Comment);
 
 							// Change type to reload
 							change->node.ln_Type=FCTYPE_RELOAD;
@@ -563,26 +548,26 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						DirEntry *entry;
 
 						// Find entry in buffer
-						if ((entry=find_entry(&buffer->entry_list,change->fib_FileName,0,buffer->more_flags&DWF_CASE)) ||
-							(entry=find_entry(&buffer->reject_list,change->fib_FileName,0,buffer->more_flags&DWF_CASE)))
+						if ((entry=find_entry(&buffer->entry_list,change->fib->fib_FileName,0,buffer->more_flags&DWF_CASE)) ||
+							(entry=find_entry(&buffer->reject_list,change->fib->fib_FileName,0,buffer->more_flags&DWF_CASE)))
 						{
 							// Modify size?
 							if (change->flags&FMF_SIZE)
 							{
 								// Has size changed?
-								if (entry->de_Size!=change->fib_Size ||
+								if (entry->de_Size!=change->fib->fib_Size ||
 									entry->de_Flags&ENTF_NO_SIZE)
 								{
 									// Clear size out
 									buffer->buf_TotalBytes[0]-=entry->de_Size;
 
 									// Set new size
-									entry->de_Size=change->fib_Size;
+									entry->de_Size=change->fib->fib_Size;
 									buffer->buf_TotalBytes[0]+=entry->de_Size;
 
 									// Clear 'no size' flag
 									entry->de_Flags&=~ENTF_NO_SIZE;
-									show=1;
+									show=TRUE;
 								}
 							}
 
@@ -590,14 +575,14 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (change->flags&FMF_DATE)
 							{
 								// Has date changed?
-								if (CompareDates(&entry->de_Date,&change->fib_Date)!=0)
+								if (CompareDates(&entry->de_Date,&change->fib->fib_Date)!=0)
 								{
 									// Store new date
-									entry->de_Date=change->fib_Date;
+									entry->de_Date=change->fib->fib_Date;
 
 									// Get new date string
 									date_build_string(&entry->de_Date,entry->de_DateBuf,1);
-									show=1;
+									show=TRUE;
 								}
 							}
 
@@ -605,14 +590,14 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (change->flags&FMF_PROTECT)
 							{
 								// Has protection changed?
-								if (entry->de_Protection!=change->fib_Protection)
+								if (entry->de_Protection!=change->fib->fib_Protection)
 								{
 									// Store new protection
-									entry->de_Protection=change->fib_Protection;
+									entry->de_Protection=change->fib->fib_Protection;
 
 									// Get new protection string
 									protect_get_string(entry->de_Protection,entry->de_ProtBuf);
-									show=1;
+									show=TRUE;
 								}
 							}
 
@@ -620,8 +605,8 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (change->flags&FMF_COMMENT)
 							{
 								// Store new comment
-								direntry_add_string(buffer,entry,DE_Comment,change->fib_Comment);
-								show=1;
+								direntry_add_string(buffer,entry,DE_Comment,change->fib->fib_Comment);
+								show=TRUE;
 							}
 
 							// Name
@@ -629,11 +614,11 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (change->flags&FMF_NAME)
 							{
 								// Has name changed?
-								if (strcmp(entry->de_Node.dn_Name,change->fib_Comment)!=0)
+								if (strcmp(entry->de_Node.dn_Name,change->fib->fib_Comment)!=0)
 								{
 									// Store new name
-									stccpy(entry->de_Node.dn_Name,change->fib_Comment,entry->de_NameLen);
-									show=1;
+									strncpy(entry->de_Node.dn_Name,change->fib->fib_Comment,entry->de_NameLen);
+									show=TRUE;
 								}
 							}
 						}
@@ -646,20 +631,20 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						DirEntry *entry;
 
 						// Find entry in buffer
-						if ((entry=find_entry(&buffer->entry_list,change->fib_FileName,0,buffer->more_flags&DWF_CASE)) ||
-							(entry=find_entry(&buffer->reject_list,change->fib_FileName,0,buffer->more_flags&DWF_CASE)))
+						if ((entry=find_entry(&buffer->entry_list,change->fib->fib_FileName,0,buffer->more_flags&DWF_CASE)) ||
+							(entry=find_entry(&buffer->reject_list,change->fib->fib_FileName,0,buffer->more_flags&DWF_CASE)))
 						{
 							BackdropObject *object;
 							char *ptr;
 
 							// Icon filename?
-							if ((ptr=isicon(change->fib_FileName))) *ptr=0;
+							if ((ptr=isicon(change->fib->fib_FileName))) *ptr=0;
 
 							// Lock icon list
 							if (GetSemaphore(&info->objects.lock,flags,0))
 							{
 								// Is there an icon for this file?
-								if ((object=(BackdropObject *)FindNameI(&info->objects.list,change->fib_FileName)))
+								if ((object=(BackdropObject *)FindNameI(&info->objects.list,change->fib->fib_FileName)))
 								{
 									// Delete if a fake icon, or if not, because we removed the .info
 									if (object->flags&BDOF_FAKE_ICON || ptr)
@@ -684,8 +669,8 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							removefile(buffer,entry);
 
 							// Flag to refresh
-							show=1;
-							del_ok=1;
+							show=TRUE;
+							del_ok=TRUE;
 						}
 					}
 
@@ -700,14 +685,14 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						// Create an entry
 						if ((entry=create_file_entry(
 							buffer,0,
-							change->fib_FileName,
-							change->fib_Size,
-							change->fib_DirEntryType,
-							&change->fib_Date,
-							change->fib_Comment,
-							change->fib_Protection,
+							change->fib->fib_FileName,
+							change->fib->fib_Size,
+							change->fib->fib_DirEntryType,
+							&change->fib->fib_Date,
+							change->fib->fib_Comment,
+							change->fib->fib_Protection,
 							0,0,0,
-							change->fib_Network)))
+							change->network)))
 						{
 							// Want to select it?
 							if (change->node.ln_Pri&FCF_SELECT)
@@ -724,7 +709,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (add_file_entry(buffer,entry,0))
 							{
 								// Flag to refresh
-								show=1;
+								show=TRUE;
 
 								// Want to show it?
 								if (change->node.ln_Pri&FCF_SHOW)
@@ -810,8 +795,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 				{
 					// Remove and free this change
 					Remove((struct Node *)change);
-					FreeMemH(change->fib_Network);
-					FreeMemH(change);
+					free_filechange(change);
 				}
 
 				// Reset change count to 0
