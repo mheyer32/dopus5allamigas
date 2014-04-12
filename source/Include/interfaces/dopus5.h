@@ -465,12 +465,17 @@ struct DOpusIFace
 	void APICALL (*ItoaU64)(struct DOpusIFace *Self, UQUAD * num, char * str, int str_size, char sep);
 	void APICALL (*DivideToString64)(struct DOpusIFace *Self, char * string, int str_size, UQUAD * bytes, ULONG div, int places, char sep);
 	void APICALL (*BytesToString64)(struct DOpusIFace *Self, UQUAD * bytes, char * string, int str_size, int places, char sep);
-	short APICALL (*RenderImageTags)(struct DOpusIFace *Self, struct RastPort * rp, APTR image, UWORD left, UWORD top, ...);
+	/*short APICALL (*RenderImageTags)(struct DOpusIFace *Self, struct RastPort * rp, APTR image, UWORD left, UWORD top, ...);
 	struct Hook * APICALL (*GetEditHookTags)(struct DOpusIFace *Self, ULONG type, ULONG flags, ...);
 	APTR APICALL (*OpenProgressWindowTags)(struct DOpusIFace *Self, ...);
 	void APICALL (*SetProgressWindowTags)(struct DOpusIFace *Self, APTR win, ...);
 	void APICALL (*GetProgressWindowTags)(struct DOpusIFace *Self, APTR win, ...);
-	struct RexxMsg * APICALL (*BuildRexxMsgExTags)(struct DOpusIFace *Self, struct MsgPort * port, UBYTE * extension, UBYTE * host, ...);
+	struct RexxMsg * APICALL (*BuildRexxMsgExTags)(struct DOpusIFace *Self, struct MsgPort * port, UBYTE * extension, UBYTE * host, ...);*/
+	BOOL APICALL (*ExamineLock64)(struct DOpusIFace *Self, BPTR lock, FileInfoBlock64 * fib);
+	BOOL APICALL (*ExamineNext64)(struct DOpusIFace *Self, BPTR lock, FileInfoBlock64 * fib);
+	BOOL APICALL (*ExamineHandle64)(struct DOpusIFace *Self, BPTR fh, FileInfoBlock64 * fib);
+	LONG APICALL (*MatchFirst64)(struct DOpusIFace *Self, STRPTR pat, struct AnchorPath * panchor);
+	LONG APICALL (*MatchNext64)(struct DOpusIFace *Self, struct AnchorPath * panchor);
 };
 
 #ifdef __cplusplus

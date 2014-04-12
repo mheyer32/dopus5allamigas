@@ -218,13 +218,7 @@ DirEntry *create_file_entry(
 			entry_comment=&sinfo->sli_Fib.fib_Comment;
 			if (entry_type == ST_FILE)
 			{
-#ifdef USE_64BIT
-				UQUAD fsize = 0;
-				getfibsize(&sinfo->sli_Fib, &fsize);
-				entry_size = fsize;
-#else
-				entry_size=sinfo->sli_Fib.fib_Size;
-#endif
+				entry_size = GETFIBSIZE(&sinfo->sli_Fib);
 			}
 		}
 		else

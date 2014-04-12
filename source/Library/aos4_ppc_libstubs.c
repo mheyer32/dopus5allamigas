@@ -2674,3 +2674,37 @@ LIBSTUB(L_BytesToString64, void,	REG(a0, UQUAD *bytes),
 {
 	return L_BytesToString64(bytes,string,str_size,places,sep);
 }
+
+LIBSTUB(L_ExamineLock64, BOOL,
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	return L_ExamineLock64(lock,fib);
+}
+
+LIBSTUB(L_ExamineNext64, BOOL,
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	return L_ExamineNext64(lock,fib);
+}
+
+LIBSTUB(L_ExamineHandle64, BOOL,
+	REG(d0, BPTR fh),
+	REG(a0, FileInfoBlock64 *fib))
+{
+	return L_ExamineHandle64(fh,fib);
+}
+
+LIBSTUB(L_MatchFirst64, LONG,
+	REG(a0, STRPTR pat),
+	REG(a1, struct AnchorPath *panchor))
+{
+	return L_MatchFirst64(pat,panchor);
+}
+
+LIBSTUB(L_MatchNext64, LONG,
+	REG(a0, struct AnchorPath *panchor))
+{
+	return L_MatchNext64(panchor);
+}

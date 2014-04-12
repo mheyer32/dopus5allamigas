@@ -535,6 +535,11 @@ DivideU64(num,div,rem,quo)(a0,d0,a1/a2)
 ItoaU64(num,str,str_size,sep)(a0/a1,d0/d1)
 DivideToString64(string,str_size,bytes,div,places,sep)(a0,d0,a1,d1/d2/d3)
 BytesToString64(bytes,string,str_size,places,sep)(a0/a1,d0/d1/d2)
+ExamineLock64(lock,fib)(d0,a0)
+ExamineNext64(lock,fib)(d0,a0)
+ExamineHandle64(fh,fib)(d0,a0)
+MatchFirst64(pat,panchor)(a0/a1)
+MatchNext64(panchor)(a0)
 *
 *
 *

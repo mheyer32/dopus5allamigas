@@ -208,6 +208,11 @@ void ASM SAVEDS HookAddFile(
 	if (fib->fib_Date.ds_Days==0 && fib->fib_Date.ds_Minute==0 && fib->fib_Date.ds_Tick==0)
 		DateStamp(&fib->fib_Date);
 
+#ifdef USE_64BIT
+#warning detect if there is a valid fib_Size64 in the FIB
+	((FileInfoBlock64 *)fib)->fib_Size64 = fib->fib_Size;
+#endif
+
 	// Add file
 	function_filechange_addfile(handle,path,fib,0,lister);
 }

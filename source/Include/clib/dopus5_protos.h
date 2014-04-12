@@ -562,7 +562,12 @@ BOOL SavePos(char *,struct IBox *,short);
 void DivideU64(UQUAD *,ULONG,UQUAD *,UQUAD *);
 void ItoaU64(UQUAD *,char *,int,char);
 void DivideToString64(char *,int,UQUAD *,ULONG,int,char);
-void BytesToString64(UQUAD *,char *,int,int,char sep);
+void BytesToString64(UQUAD *,char *,int,int,char);
+BOOL ExamineLock64(BPTR,FileInfoBlock64 *);
+BOOL ExamineNext64(BPTR,FileInfoBlock64 *);
+BOOL ExamineHandle64(BPTR,FileInfoBlock64 *);
+LONG MatchFirst64(STRPTR,struct AnchorPath *);
+LONG MatchNext64(struct AnchorPath *);
 //-----
 //-----
 //-----

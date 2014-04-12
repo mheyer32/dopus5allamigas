@@ -144,8 +144,9 @@ typedef struct
 	struct Node		node;
 	short			count;
 	ULONG			flags;
+#if 1
 #ifdef USE_64BIT
-	ULONG			pad1;
+	UQUAD			fib_Size;
 #else
 	long			fib_Size;
 #endif
@@ -154,10 +155,11 @@ typedef struct
 	unsigned long		fib_Protection;
 	char			*fib_Comment;
 	NetworkInfo		*fib_Network;
-#ifdef USE_64BIT
-	UQUAD			fib_Size;
-#endif
 	char			fib_FileName[1];
+#else
+	struct FileInfoBlock fib;
+	NetworkInfo		*network;
+#endif
 } FileChange;
 
 #ifndef __amigaos3__
@@ -516,9 +518,6 @@ short func_requester(
 FileChangeList *function_find_filechanges(FunctionHandle *,FileChangeList *,char *,Lister *,short *);
 FileChangeList *function_add_filechanges(FunctionHandle *,char *,Lister *);
 FileChange *function_filechange_addfile(FunctionHandle *,char *,struct FileInfoBlock *,NetworkInfo *,Lister *);
-#ifdef USE_64BIT
-FileChange *function_filechange_addfile64(FunctionHandle *,char *,short,char *,unsigned long,UQUAD,struct DateStamp *,char *,NetworkInfo *,Lister *);
-#endif
 FileChange *function_filechange_loadfile(FunctionHandle *,char *,char *,short);
 void function_filechange_reloadfile(FunctionHandle *,char *,char *,short);
 FileChange *function_filechange_delfile(FunctionHandle *,char *,char *,Lister *,BOOL);

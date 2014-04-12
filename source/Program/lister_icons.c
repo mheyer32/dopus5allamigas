@@ -193,22 +193,12 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 					if ((file=Lock(name,ACCESS_READ)))
 					{
 						// Get info
-						Examine(file,fib);
+						ExamineLock64(file,fib);
 						UnLock(file);
 
 						// Fill out date and size
 						object->date=fib->fib_Date;
-						object->size=fib->fib_Size;
-#if defined(__amigaos4__) && defined(USE_64BIT)
-						{
-							struct ExamineData *exdata;
-							if ((exdata=ExamineObjectTags(EX_StringNameInput,name,TAG_END)))
-							{
-								object->size=exdata->FileSize;
-								FreeDosObject(DOS_EXAMINEDATA, exdata);
-							}
-						}
-#endif
+						object->size=GETFIBSIZE(fib);
 
 						// Link?
 						if (fib->fib_DirEntryType==ST_SOFTLINK ||

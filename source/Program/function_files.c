@@ -733,12 +733,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 					// Check entry type from soft link
 					if (sinfo->sli_Fib.fib_DirEntryType<0)
 					{
-						FileInfoBlock64 *anchorfib = (FileInfoBlock64 *)&(handle->anchor->ap_Info);
-						UQUAD fsize = 0;
-
-						getfibsize(&sinfo->sli_Fib, &fsize);
-						handle->anchor->ap_Info.fib_Size = sinfo->sli_Fib.fib_Size;
-						anchorfib->fib_Size64 = fsize;
+						GETFIBSIZE(&handle->anchor->ap_Info) = GETFIBSIZE(sinfo);
 						handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
 					}
 				}
@@ -785,19 +780,15 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						// Ok to use
 						else
 						{
-							UQUAD fsize = 0;
 							// Set entry type
 							handle->recurse_entry->type=ENTRY_FILE;
-
-							// Get 64bit size
-							getfibsize(&handle->anchor->ap_Info, &fsize);
-
+#warning Is this even used?
 							// Set entry size
 							handle->recurse_entry->size=handle->anchor->ap_Info.fib_Size;
 
 							// Increment counts
 							++handle->recurse_count;
-							handle->recurse_bytes+=fsize;
+							handle->recurse_bytes+=GETFIBSIZE(&handle->anchor->ap_Info);
 
 							// Calculate block size?
 							if (handle->dest_block_size)
@@ -811,7 +802,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 								fileListEntries=(handle->dest_block_size>>2)-56;
 								dataBlocks=(long)
 #ifdef USE_64BIT
-									((fsize+(UQUAD)handle->dest_data_block_size-1)/
+									((GETFIBSIZE(&handle->anchor->ap_Info)+(UQUAD)handle->dest_data_block_size-1)/
 									(UQUAD)handle->dest_data_block_size);
 #else
 									(handle->anchor->ap_Info.fib_Size+handle->dest_data_block_size-1)/

@@ -28,6 +28,7 @@ DirEntry *ASM SAVEDS HookCreateFileEntry(
 	REG(a1, struct FileInfoBlock *fib),
 	REG(d0, BPTR lock))
 {
+#warning detect if there is a valid fib_Size64 in the FIB
 	// Create entry
 	return create_file_entry(
 				lister->cur_buffer,

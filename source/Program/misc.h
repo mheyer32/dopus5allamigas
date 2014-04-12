@@ -173,17 +173,4 @@ void key_finder(IPCData *ipc);
 
 BOOL GetFileInfo(char *name,struct FileInfoBlock *fib);
 
-/****************************************************************/
-/* Remove MatchFirst64/MatchNext64 when added to dopus5.library */
-
-LONG MatchFirst64(STRPTR pat, struct AnchorPath *panchor);
-LONG MatchNext64(struct AnchorPath *panchor);
-#ifdef USE_64BIT
-VOID getfibsize(struct FileInfoBlock *fib, UQUAD *size);
-#else
-VOID getfibsize(struct FileInfoBlock *fib, LONG *size);
-#endif
-
-/****************************************************************/
-
 #endif

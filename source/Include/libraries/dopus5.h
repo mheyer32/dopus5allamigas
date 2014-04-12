@@ -3069,19 +3069,17 @@ typedef struct FileInfoBlock64_s
     char             fib_Comment[80];
     UWORD            fib_OwnerUID;
     UWORD            fib_OwnerGID;
-    union
-    {
-        char             fib_un_Reserved[32];
-        struct
-        {
-            UQUAD    fib_un_ext_Size64;
-            UQUAD    fib_un_ext_NumBlocks64;
-        } fib_un_ext;
-    } fib_un;
+    UQUAD            fib_Size64;
+    UQUAD            fib_NumBlocks64;
+    char             pad[16];
 } FileInfoBlock64;
-#define fib_Reserved fib_un.fib_un_Reserved
-#define fib_Size64      fib_un.fib_un_ext.fib_un_ext_Size64
-#define fib_NumBlocks64 fib_un.fib_un_ext.fib_un_ext_NumBlocks64
+#endif
+
+// Returns file size from FIB pointer
+#ifdef USE_64BIT
+#define GETFIBSIZE(fib) (((FileInfoBlock64 *)(fib))->fib_Size64)
+#else
+#define GETFIBSIZE(fib) ((fib)->fib_Size)
 #endif
 
 #endif
