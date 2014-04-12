@@ -208,22 +208,11 @@ BOOL LIBFUNC L_ExamineLock64(
 	REG(a0, FileInfoBlock64 *fib))
 {
 	BOOL success;
-	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
 	success = Examine64(lock, fib, TAG_DONE);
 #else
-	if (unaligned)
-	{
-		D_S(struct FileInfoBlock, aligned_fib);
-
-		success = Examine(lock, aligned_fib);
-		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
-	}
-	else
-	{
-		success = Examine(lock, (struct FileInfoBlock *)fib);	
-	}
+	success = Examine(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
@@ -256,22 +245,11 @@ BOOL LIBFUNC L_ExamineNext64(
 	REG(a0, FileInfoBlock64 *fib))
 {
 	BOOL success;
-	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
 	success = ExNext64(lock, fib, TAG_DONE);
 #else
-	if (unaligned)
-	{
-		D_S(struct FileInfoBlock, aligned_fib);
-
-		success = Examine(lock, aligned_fib);
-		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
-	}
-	else
-	{
-		success = Examine(lock, (struct FileInfoBlock *)fib);	
-	}
+	success = Examine(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
@@ -304,22 +282,11 @@ BOOL LIBFUNC L_ExamineHandle64(
 	REG(a0, FileInfoBlock64 *fib))
 {
 	BOOL success;
-	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
 	success = ExamineFH64(fh, fib, TAG_DONE);
 #else
-	if (unaligned)
-	{
-		D_S(struct FileInfoBlock, aligned_fib);
-
-		success = ExamineFH(fh, aligned_fib);
-		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
-	}
-	else
-	{
-		success = ExamineFH(fh, (struct FileInfoBlock *)fib);	
-	}
+	success = ExamineFH(fh, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
