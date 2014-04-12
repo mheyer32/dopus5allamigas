@@ -903,13 +903,12 @@ void backdrop_read_group_objects(GroupData *group)
 {
 	short ok;
 	BPTR lock,old;
-	struct FileInfoBlock *fib;
+	D_S(struct FileInfoBlock, fib)
 	char *buffer;
 
 	// Allocate data
-	if (!(fib=AllocVec(sizeof(struct FileInfoBlock)+256,MEMF_CLEAR)))
+	if (!(buffer=AllocVec(256,MEMF_CLEAR)))
 		return;
-	buffer=(char *)(fib+1);
 
 	// Get path to search
 	lsprintf(buffer,"dopus5:groups/%s",group->name);
@@ -987,7 +986,7 @@ void backdrop_read_group_objects(GroupData *group)
 	}
 
 	// Clean up
-	FreeVec(fib);
+	FreeVec(buffer);
 
 	// Lock backdrop list
 	lock_listlock(&group->info->objects,1);
