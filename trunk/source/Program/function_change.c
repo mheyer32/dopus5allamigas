@@ -239,7 +239,7 @@ DOPUS_FUNC(function_change)
 			if (command->function==FUNC_COMMENT)
 			{
 				char *ptr;
-				struct FileInfoBlock fib;
+				D_S(struct FileInfoBlock, fib)
 
 				// Clear data buffer
 				data->comment[0]=0;
@@ -255,10 +255,10 @@ DOPUS_FUNC(function_change)
 
 				// Otherwise, try to read existing comment from disk
 				else
-				if (GetFileInfo(source_file,&fib))
+				if (GetFileInfo(source_file,fib))
 				{
 					// Get existing comment
-					strcpy(data->comment,fib.fib_Comment);
+					strcpy(data->comment,fib->fib_Comment);
 				}				
 
 				// Ask for comment
