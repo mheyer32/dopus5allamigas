@@ -651,7 +651,7 @@ short rexx_lister_reload_file(Lister *lister,char *args)
 	}
 
 	// Examine the file
-	Examine(lock,fib);
+	ExamineLock64(lock,fib);
 	UnLock(lock);
 
 	// Restore CD
@@ -668,7 +668,7 @@ short rexx_lister_reload_file(Lister *lister,char *args)
 	if (!(entry=create_file_entry(
 		buf,0,
 		&fib->fib_FileName,
-		fib->fib_Size,
+		GETFIBSIZE(fib),
 		fib->fib_DirEntryType,
 		&fib->fib_Date,
 		&fib->fib_Comment,

@@ -709,17 +709,10 @@ else
 SetGadgetValue( data->list, GAD_ICON_BLOCKS, (ULONG)buf );
 
 // Bytes
-#if defined(__amigaos4__) && defined(USE_64BIT)
-{
-	struct ExamineData *exdata;
-	if ((exdata=ExamineObjectTags(EX_StringNameInput,data->prog_name,TAG_END)))
-	{
-		ItoaU64(&exdata->FileSize,buf,sizeof(buf),data->decimal_sep);
-		FreeDosObject(DOS_EXAMINEDATA, exdata);
-	}
-}
-#else
 if	(lock)
+#ifdef USE_64BIT
+	ItoaU64(GETFIBSIZE(&data->fib), buf, sizeof(buf), data->decimal_sep);
+#else
 	Itoa( data->fib.fib_Size, buf, data->decimal_sep );
 #endif
 SetGadgetValue( data->list, GAD_ICON_BYTES, (ULONG)buf );

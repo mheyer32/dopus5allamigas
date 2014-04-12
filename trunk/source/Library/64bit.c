@@ -24,7 +24,6 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 
 #ifdef __amigaos3__
-#warning Need to confirm ACTION_GET_FILE_SIZE64 correct for OS3 SFS2
 #define ACTION_GET_FILE_SIZE64         8004
 #endif
 
@@ -208,26 +207,36 @@ BOOL LIBFUNC L_ExamineLock64(
 	REG(d0, BPTR lock),
 	REG(a0, FileInfoBlock64 *fib))
 {
-	BOOL retval;
+	BOOL success;
+	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
-	retval = Examine64(lock, fib, TAG_DONE);
+	success = Examine64(lock, fib, TAG_DONE);
 #else
-	retval = Examine(lock, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = fib->fib_Size;
+	if (unaligned)
+	{
+		D_S(struct FileInfoBlock, aligned_fib);
+
+		success = Examine(lock, aligned_fib);
+		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
+	}
+	else
+	{
+		success = Examine(lock, (struct FileInfoBlock *)fib);	
+	}
+	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
+	if (success)
 #ifdef __amigaos3__
-	if (retval && fib->fib_Size >= 0x7FFFFFFF)
 	{
-		UQUAD *size_ptr;
+		/*UQUAD *size_ptr;
 		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;
+			fib->fib_Size64 = *size_ptr;*/
 	}
 #elif defined(__amigaos4__)
-	if (retval)
 	{
 		struct ExamineData *exdata;
 
@@ -239,33 +248,43 @@ BOOL LIBFUNC L_ExamineLock64(
 	}
 #endif
  
-	return retval;
+	return success;
 }
 
 BOOL LIBFUNC L_ExamineNext64(
 	REG(d0, BPTR lock),
 	REG(a0, FileInfoBlock64 *fib))
 {
-	BOOL retval;
+	BOOL success;
+	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
-	retval = ExNext64(lock, fib, TAG_DONE);
+	success = ExNext64(lock, fib, TAG_DONE);
 #else
-	retval = ExNext(lock, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = fib->fib_Size;
+	if (unaligned)
+	{
+		D_S(struct FileInfoBlock, aligned_fib);
+
+		success = Examine(lock, aligned_fib);
+		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
+	}
+	else
+	{
+		success = Examine(lock, (struct FileInfoBlock *)fib);	
+	}
+	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
+	if (success)
 #ifdef __amigaos3__
-	if (retval && fib->fib_Size >= 0x7FFFFFFF)
 	{
-		UQUAD *size_ptr;
+		/*UQUAD *size_ptr;
 		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;
+			fib->fib_Size64 = *size_ptr;*/
 	}
 #elif defined(__amigaos4__)
-	if (retval)
 	{
 		struct ExamineData *exdata;
 
@@ -277,35 +296,44 @@ BOOL LIBFUNC L_ExamineNext64(
 	}
 #endif
  
-	return retval;
+	return success;
 }
 
 BOOL LIBFUNC L_ExamineHandle64(
 	REG(d0, BPTR fh),
 	REG(a0, FileInfoBlock64 *fib))
 {
-	BOOL retval;
+	BOOL success;
+	BOOL unaligned = ((LONG)fib & 3) != 0;
 
 #ifdef __MORPHOS__
-	retval = ExamineFH64(fh, fib, TAG_DONE);
+	success = ExamineFH64(fh, fib, TAG_DONE);
 #else
-	retval = ExamineFH(fh, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = fib->fib_Size;
+	if (unaligned)
+	{
+		D_S(struct FileInfoBlock, aligned_fib);
+
+		success = ExamineFH(fh, aligned_fib);
+		CopyMem(aligned_fib, fib, sizeof(struct FileInfoBlock));
+	}
+	else
+	{
+		success = ExamineFH(fh, (struct FileInfoBlock *)fib);	
+	}
+	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
+	if (success)
 #ifdef __amigaos3__
-#warning how to send the packet for a FileHandle?
-	/*if (retval && fib->fib_Size >= 0x7FFFFFFF)
 	{
-		UQUAD *size_ptr;
+		/*UQUAD *size_ptr;
 
 		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;
-	}*/
+			fib->fib_Size64 = *size_ptr;*/
+	}
 #elif defined(__amigaos4__)
-	if (retval)
 	{
 		struct ExamineData *exdata;
 
@@ -317,7 +345,86 @@ BOOL LIBFUNC L_ExamineHandle64(
 	}
 #endif
  
-	return retval;
+	return success;
+}
+
+LONG LIBFUNC L_MatchFirst64(
+	REG(a0, STRPTR pat),
+	REG(a1, struct AnchorPath *panchor))
+{
+	// MatchFirst() returns 0 for success, errorcode for error
+	LONG error = 0;
+
+	error = MatchFirst(pat, panchor);
+	((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)panchor->ap_Info.fib_Size;
+
+#ifdef __amigaos4__
+	if (!error)
+	{
+		struct ExamineData *exdata;
+
+		if ((exdata=ExamineObjectTags(EX_StringNameInput, panchor->ap_Info.fib_FileName, TAG_END)))
+		{
+			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+			FreeDosObject(DOS_EXAMINEDATA, exdata);
+		}
+	}
+#elif defined(__MORPHOS__)
+	if (!error)
+	{
+		BPTR lock;
+#warning test it whether this is necessary or not
+		if ((lock=Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
+		{
+			D_S(struct FileInfoBlock, fib)
+
+			if (Examine64(lock, &fib, TAG_DONE))
+				panchor->ap_Info.fib_Size64 = fib.fib_Size64;
+
+			UnLock(lock);
+		}
+	}
+#endif
+
+	return error;
+}
+
+LONG LIBFUNC L_MatchNext64(
+	REG(a0, struct AnchorPath *panchor))
+{
+	// MatchNext() returns 0 for success, errorcode for error
+	LONG error = 0;
+
+	error = MatchNext(panchor);
+	((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)panchor->ap_Info.fib_Size;
+
+#ifdef __amigaos4__
+	if (!error)
+	{
+		struct ExamineData *exdata;
+
+		if ((exdata=ExamineObjectTags(EX_StringNameInput, panchor->ap_Info.fib_FileName, TAG_END)))
+		{
+			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+			FreeDosObject(DOS_EXAMINEDATA, exdata);
+		}
+	}
+#elif defined(__MORPHOS__)
+	if (!error)
+	{
+		BPTR lock;
+#warning test it whether this is necessary or not
+		if ((lock=Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
+		{
+			D_S(struct FileInfoBlock, fib)
+
+			if (Examine64(lock, &fib, TAG_DONE))
+				((FileInfoBlock64)panchor->ap_Info).fib_Size64 = fib.fib_Size64;
+		}
+	}
+#endif
+
+	return error;
 }
 
 // Unfinished, probably not worth the trouble

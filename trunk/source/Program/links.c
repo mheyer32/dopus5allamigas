@@ -31,7 +31,11 @@ BOOL ReadSoftLinkDopus(
 {
 	BPTR lock=0;
 	BOOL ok=FALSE;
-#ifndef __amigaos4__
+
+#ifdef __amigaos4__
+	strlcpy(info->sli_Path, path, 256);
+	AddPart(info->sli_Path, name, 256);
+#else
 	// Not got a path lock?
 	if (!parent)
 	{
@@ -47,6 +51,7 @@ BOOL ReadSoftLinkDopus(
 		name,
 		info->sli_Path,
 		256)>0)
+#endif
 	{
 		// Unlock path lock if we have one
 		if (lock) UnLock(lock);
@@ -55,10 +60,9 @@ BOOL ReadSoftLinkDopus(
 		if ((lock=Lock(info->sli_Path,ACCESS_READ)))
 		{
 			char *ptr;
-			FileInfoBlock64 *fibb = (FileInfoBlock64 *)&info->sli_Fib;
+
 			// Get real file information
-			Examine(lock, &info->sli_Fib);
-			fibb->fib_Size64 = (UQUAD)info->sli_Fib.fib_Size;
+			ExamineLock64(lock, &info->sli_Fib);
 
 			// Cut filename out of path string
 			if ((ptr=PathPart(info->sli_Path))) *ptr=0;
@@ -67,35 +71,7 @@ BOOL ReadSoftLinkDopus(
 			ok=TRUE;
 		}
 	}
-#else
-	char buffer[256];
-	strlcpy(buffer, path, 256);
-	AddPart(buffer, name, 256);
-	if ((lock=Lock(buffer,ACCESS_READ)))
-	{
-		char *ptr;
-		struct ExamineData *exdata;
-		FileInfoBlock64 *fibb = (FileInfoBlock64 *)&info->sli_Fib;
 
-		// Get real file information
-		Examine(lock, &info->sli_Fib);
-		if ((exdata=ExamineObjectTags(EX_FileLockInput, lock, TAG_END)))
-		{
-			fibb->fib_Size64 = exdata->FileSize;
-			FreeDosObject(DOS_EXAMINEDATA, exdata);
-		}
-		else
-		{
-			fibb->fib_Size64 = (UQUAD)info->sli_Fib.fib_Size;
-		}
-
-		// Cut filename out of path string
-		if ((ptr=PathPart(info->sli_Path))) *ptr=0;
-
-		// Flag success
-		ok=TRUE;
-	}
-#endif
 	// something went wrong
 	if (!ok)
 	{

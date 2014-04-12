@@ -73,19 +73,10 @@ typedef struct FileInfoBlock64_s
     char             fib_Comment[80];
     UWORD            fib_OwnerUID;
     UWORD            fib_OwnerGID;
-    union
-    {
-        char             fib_un_Reserved[32];
-        struct
-        {
-            UQUAD    fib_un_ext_Size64;
-            UQUAD    fib_un_ext_NumBlocks64;
-        } fib_un_ext;
-    } fib_un;
+    UQUAD            fib_Size64;
+    UQUAD            fib_NumBlocks64;
+    char             pad[16];
 } FileInfoBlock64;
-#define fib_Reserved fib_un.fib_un_Reserved
-#define fib_Size64      fib_un.fib_un_ext.fib_un_ext_Size64
-#define fib_NumBlocks64 fib_un.fib_un_ext.fib_un_ext_NumBlocks64
 #endif
 
 // ---------------------------------------------------------------
@@ -1768,6 +1759,25 @@ LIBPROTO(L_BytesToString64, void,
 	REG(d0, int str_size),
 	REG(d1, int places),
 	REG(d2, char sep));
+
+LIBPROTO(L_ExamineLock64, BOOL,
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib));
+
+LIBPROTO(L_ExamineNext64, BOOL,
+	REG(d0, BPTR lock),
+	REG(a0, FileInfoBlock64 *fib));
+
+LIBPROTO(L_ExamineHandle64, BOOL,
+	REG(d0, BPTR fh),
+	REG(a0, FileInfoBlock64 *fib));
+
+LIBPROTO(L_MatchFirst64, LONG,
+	REG(a0, STRPTR pat),
+	REG(a1, struct AnchorPath *panchor));
+
+LIBPROTO(L_MatchNext64, LONG,
+	REG(a0, struct AnchorPath *panchor));
 
 /**********************************************************************
 	Function entrances

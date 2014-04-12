@@ -581,7 +581,12 @@ static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STR
                   LFUNC_FA_(L_DivideU64) \
                   LFUNC_FA_(L_ItoaU64) \
                   LFUNC_FA_(L_DivideToString64) \
-                  LFUNC_FA_(L_BytesToString64)
+                  LFUNC_FA_(L_BytesToString64) \
+                  LFUNC_FA_(L_ExamineLock64) \
+                  LFUNC_FA_(L_ExamineNext64) \
+                  LFUNC_FA_(L_ExamineHandle64) \
+                  LFUNC_FA_(L_MatchFirst64) \
+                  LFUNC_FA_(L_MatchNext64)
 
 
 

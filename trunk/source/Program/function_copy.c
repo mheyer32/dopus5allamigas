@@ -1153,7 +1153,7 @@ int function_copy_file(
 
 	// Lock and examine source
 	if (!(lock=Lock(source_file,ACCESS_READ)) ||
-		!(Examine(lock,s_info)))
+		!(ExamineLock64(lock,s_info)))
 	{
 		*err_code=IoErr();
 		UnLock(lock);
@@ -1319,17 +1319,7 @@ int function_copy_file(
 		}
 
 		// Get file size
-		file_size=s_info->fib_Size;
-#if defined(__amigaos4__) && defined(USE_64BIT)
-		{
-			struct ExamineData *exdata;
-			if ((exdata=ExamineObjectTags(EX_StringNameInput,source_file,TAG_END)))
-			{
-				file_size=exdata->FileSize;
-				FreeDosObject(DOS_EXAMINEDATA, exdata);
-			}
-		}
-#endif
+		file_size=GETFIBSIZE(s_info);
 
 		// Set file size
 		function_progress_file(handle,file_size*2,0);

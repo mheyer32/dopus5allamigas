@@ -1555,6 +1555,26 @@
 	LP3(0x900, BOOL, SavePos, char *, name, a0, struct IBox *, pos, a1, short, font, d0, \
 	, DOPUS_BASE_NAME)
 
+#define ExamineHandle64(___fh, ___fib) \
+	LP2(0x92a, BOOL, ExamineHandle64, BPTR, ___fh, d0, FileInfoBlock64 *, ___fib, a0, \
+	, DOPUS_BASE_NAME)
+
+#define ExamineLock64(___lock, ___fib) \
+	LP2(0x91e, BOOL, ExamineLock64, BPTR, ___lock, d0, FileInfoBlock64 *, ___fib, a0, \
+	, DOPUS_BASE_NAME)
+
+#define ExamineNext64(___lock, ___fib) \
+	LP2(0x924, BOOL, ExamineNext64, BPTR, ___lock, d0, FileInfoBlock64 *, ___fib, a0, \
+	, DOPUS_BASE_NAME)
+
+#define MatchFirst64(___pat, ___panchor) \
+	LP2(0x930, LONG, MatchFirst64, STRPTR, ___pat, a0, struct AnchorPath *, ___panchor, a1, \
+	, DOPUS_BASE_NAME)
+
+#define MatchNext64(___panchor) \
+	LP1(0x936, LONG, MatchNext64, struct AnchorPath *, ___panchor, a0, \
+	, DOPUS_BASE_NAME)
+
 #define SimpleRequestTags(window,title,buttons,message,...) \
 ({ \
 	IPTR __args[] = { __VA_ARGS__ }; \

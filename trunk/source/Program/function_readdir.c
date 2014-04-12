@@ -375,7 +375,7 @@ int read_dir(
 		return 0;
 
 	// Examine this object
-	Examine(lock,fileinfo);
+	ExamineLock64(lock,fileinfo);
 
 	// If object is a file, fail
 	if (fileinfo->fib_DirEntryType<0)
@@ -417,7 +417,7 @@ int read_dir(
 	NewList((struct List *)&file_list);
 
 	// Loop until directory is empty
-	while (ExNext(lock,fileinfo))
+	while (ExamineNext64(lock,fileinfo))
 	{
 		BOOL ok=1;
 
@@ -431,9 +431,6 @@ int read_dir(
 		// Ok to add?
 		if (ok)
 		{
-#if defined(USE_64BIT) & defined(__amigaos4__)
-			UQUAD os4size = 0;
-#endif
 			// Get network info if needed
 			if (network_ptr)
 			{
@@ -448,41 +445,15 @@ int read_dir(
 
 			// Directories are meant to have no size, apparently
 			if (fileinfo->fib_DirEntryType>0)
-				fileinfo->fib_Size=0;
-#if defined(USE_64BIT) & defined(__amigaos4__)
-			if (fileinfo->fib_DirEntryType<0)
-			{
-				BPTR flock = 0;
-				struct ExamineData *data;
-				char buf[512];
-				if (NameFromLock(lock, buf, 400))
-					AddPart(buf, fileinfo->fib_FileName, 512);
-				if ((flock = Lock(buf, MODE_OLDFILE)))
-				{
-					if ((data = ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
-					{
-						os4size = data->FileSize;
-						FreeDosObject(DOS_EXAMINEDATA,data);
-					}
-					UnLock(flock);
-				}
-			}
-#endif
+				GETFIBSIZE(fileinfo)=0;
+
 			// Create entry
 			if ((entry=
 				create_file_entry(
 					buffer,
 					lock,
 					fileinfo->fib_FileName,
-#ifdef USE_64BIT
-#ifdef __amigaos4__
-					(UQUAD)os4size,
-#else
-					(UQUAD)fileinfo->fib_Size,
-#endif
-#else
-					fileinfo->fib_Size,
-#endif
+					GETFIBSIZE(fileinfo),
 					fileinfo->fib_DirEntryType,
 					&fileinfo->fib_Date,
 					fileinfo->fib_Comment,

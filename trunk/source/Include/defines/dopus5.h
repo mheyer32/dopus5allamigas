@@ -2421,4 +2421,33 @@
 	AROS_LCA(struct DiskObject *, (___obj), A1), \
 	struct Library *, DOPUS_BASE_NAME, 28, /* s */)
 
+#define ExamineHandle64(___fh, ___fib) \
+	AROS_LC2(BOOL, ExamineHandle64, \
+	AROS_LCA(BPTR, (___fh), D0), \
+	AROS_LCA(FileInfoBlock64 *, (___fib), A0), \
+	struct Library *, DOPUS_BASE_NAME, 391, /* s */)
+
+#define ExamineLock64(___lock, ___fib) \
+	AROS_LC2(BOOL, ExamineLock64, \
+	AROS_LCA(BPTR, (___lock), D0), \
+	AROS_LCA(FileInfoBlock64 *, (___fib), A0), \
+	struct Library *, DOPUS_BASE_NAME, 389, /* s */)
+
+#define ExamineNext64(___lock, ___fib) \
+	AROS_LC2(BOOL, ExamineNext64, \
+	AROS_LCA(BPTR, (___lock), D0), \
+	AROS_LCA(FileInfoBlock64 *, (___fib), A0), \
+	struct Library *, DOPUS_BASE_NAME, 390, /* s */)
+
+#define MatchFirst64(___pat, ___panchor) \
+	AROS_LC2(LONG, MatchFirst64, \
+	AROS_LCA(STRPTR, (___pat), A0), \
+	AROS_LCA(struct AnchorPath *, (___panchor), A1), \
+	struct Library *, DOPUS_BASE_NAME, 392, /* s */)
+
+#define MatchNext64(___panchor) \
+	AROS_LC1(LONG, MatchNext64, \
+	AROS_LCA(struct AnchorPath *, (___panchor), A0), \
+	struct Library *, DOPUS_BASE_NAME, 393, /* s */)
+
 #endif /* !_INLINE_DOPUS_H */
