@@ -220,7 +220,7 @@ BOOL LIBFUNC L_ExamineLock64(
 #ifdef __amigaos3__
 	{
 		/*UQUAD *size_ptr;
-		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
+		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)BADDR(lock))->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
 			fib->fib_Size64 = *size_ptr;*/
@@ -257,7 +257,7 @@ BOOL LIBFUNC L_ExamineNext64(
 #ifdef __amigaos3__
 	{
 		/*UQUAD *size_ptr;
-		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
+		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)BADDR(lock))->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
 			fib->fib_Size64 = *size_ptr;*/
@@ -295,7 +295,7 @@ BOOL LIBFUNC L_ExamineHandle64(
 	{
 		/*UQUAD *size_ptr;
 
-		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)lock)->fl_Task, ACTION_GET_FILE_SIZE64, lock, 0, 0, 0, 0);
+		size_ptr = (UQUAD *)DoPkt(((struct FileHandle *)BADDR(fh))->fh_Type, ACTION_GET_FILE_SIZE64, fh, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
 			fib->fib_Size64 = *size_ptr;*/
@@ -323,7 +323,9 @@ LONG LIBFUNC L_MatchFirst64(
 	LONG error = 0;
 
 	error = MatchFirst(pat, panchor);
+#ifndef __MORPHOS__
 	((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)panchor->ap_Info.fib_Size;
+#endif
 
 #ifdef __amigaos4__
 	if (!error)
@@ -334,21 +336,6 @@ LONG LIBFUNC L_MatchFirst64(
 		{
 			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
-		}
-	}
-#elif defined(__MORPHOS__)
-	if (!error)
-	{
-		BPTR lock;
-#warning test it whether this is necessary or not
-		if ((lock=Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
-		{
-			D_S(struct FileInfoBlock, fib)
-
-			if (Examine64(lock, &fib, TAG_DONE))
-				panchor->ap_Info.fib_Size64 = fib.fib_Size64;
-
-			UnLock(lock);
 		}
 	}
 #endif
@@ -363,7 +350,9 @@ LONG LIBFUNC L_MatchNext64(
 	LONG error = 0;
 
 	error = MatchNext(panchor);
+#ifndef __MORPHOS__
 	((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)panchor->ap_Info.fib_Size;
+#endif
 
 #ifdef __amigaos4__
 	if (!error)
@@ -374,19 +363,6 @@ LONG LIBFUNC L_MatchNext64(
 		{
 			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
-		}
-	}
-#elif defined(__MORPHOS__)
-	if (!error)
-	{
-		BPTR lock;
-#warning test it whether this is necessary or not
-		if ((lock=Lock(panchor->ap_Info.fib_FileName, MODE_OLDFILE)))
-		{
-			D_S(struct FileInfoBlock, fib)
-
-			if (Examine64(lock, &fib, TAG_DONE))
-				((FileInfoBlock64)panchor->ap_Info).fib_Size64 = fib.fib_Size64;
 		}
 	}
 #endif
