@@ -538,7 +538,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						if ((lock=Lock(buf,ACCESS_READ)))
 						{
 							// Get info
-							Examine(lock,fib);
+							ExamineLock64(lock,fib);
 							UnLock(lock);
 
 							// Copy real file data
