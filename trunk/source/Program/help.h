@@ -24,11 +24,11 @@ For more information on Directory Opus for Windows please see:
 #ifndef _DOPUS_HELP
 #define _DOPUS_HELP
 
-#if defined(__amigaos3__)
+/*#if defined(__amigaos3__)
 #include <clib/amigaguide_protos.h>
-#else
+#else*/
 #include <proto/amigaguide.h>
-#endif
+//#endif
 
 #define GENERIC_BUTTON			"Button"
 #define GENERIC_TOOLBAR_BUTTON		"ToolbarButton"

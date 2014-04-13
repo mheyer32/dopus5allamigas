@@ -255,21 +255,6 @@ typedef struct {
 
 #define DNF_OK		(1<<0)
 
-/*#ifndef __amigaos4__
-extern struct ExecBase	*SysBase;
-#endif*/
-extern struct Library *GadToolsBase;
-extern struct Library *AslBase;
-#ifdef __AROS__
-extern struct UtilityBase *UtilityBase;
-#else
-extern struct Library *UtilityBase;
-#endif
-extern struct Library *LayersBase;
-extern struct Library *IconBase;
-extern struct Library *WorkbenchBase;
-extern struct Library *DataTypesBase;
-extern struct Library *CyberGfxBase;
 extern struct TextFont *topaz_font;
 
 extern struct List 		image_list;
