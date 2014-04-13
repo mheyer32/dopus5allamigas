@@ -343,7 +343,7 @@ LONG LIBFUNC L_MatchFirst64(
 #endif
 
 #ifdef __amigaos4__
-	if (!error)
+	if (!error && panchor->ap_Info.fib_DirEntryType<0)
 	{
 		struct ExamineData *exdata;
 
@@ -371,7 +371,7 @@ LONG LIBFUNC L_MatchNext64(
 #endif
 
 #ifdef __amigaos4__
-	if (!error)
+	if (!error && panchor->ap_Info.fib_DirEntryType<0)
 	{
 		struct ExamineData *exdata;
 
