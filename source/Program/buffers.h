@@ -46,6 +46,7 @@ DirEntry *create_file_entry(DirBuffer *,BPTR,char *,UQUAD,short,struct DateStamp
 #else
 DirEntry *create_file_entry(DirBuffer *,BPTR,char *,unsigned long,short,struct DateStamp *,char *,ULONG,short,char *,char *,NetworkInfo *);
 #endif
+DirEntry *create_file_entry_fib(DirBuffer *,BPTR,struct FileInfoBlock *,short,char *,char *,NetworkInfo *);
 DirEntry *copy_file_entry(DirBuffer *,DirEntry *);
 DirEntry *add_file_entry(DirBuffer *,DirEntry *,DirEntry *);
 void remove_file_entry(DirBuffer *,DirEntry *);

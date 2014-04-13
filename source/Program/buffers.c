@@ -305,6 +305,32 @@ DirEntry *create_file_entry(
 }
 
 
+// Create a new entry for a directory buffer from a FileInfoBlock
+DirEntry *create_file_entry_fib(
+	DirBuffer			*buffer,
+	BPTR				lock,
+	struct FileInfoBlock *fib,
+	short				entry_subtype,
+	char				*display_string,
+	char				*description,
+	NetworkInfo			*network_info)
+{
+	return create_file_entry(
+				buffer,
+				lock,
+				fib->fib_FileName,
+				GETFIBSIZE(fib),
+				fib->fib_DirEntryType,
+				&fib->fib_Date,
+				fib->fib_Comment,
+				fib->fib_Protection,
+				entry_subtype,
+				display_string,
+				description,
+				network_info);
+}
+
+
 // Copy a file entry
 DirEntry *copy_file_entry(DirBuffer *buffer,DirEntry *entry)
 {

@@ -683,16 +683,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						if (change->node.ln_Type==FCTYPE_RELOAD && !del_ok) continue;
 
 						// Create an entry
-						if ((entry=create_file_entry(
-							buffer,0,
-							change->fib->fib_FileName,
-							GETFIBSIZE(change->fib),
-							change->fib->fib_DirEntryType,
-							&change->fib->fib_Date,
-							change->fib->fib_Comment,
-							change->fib->fib_Protection,
-							0,0,0,
-							change->network)))
+						if ((entry=create_file_entry_fib(buffer,0,change->fib,0,0,0,change->network)))
 						{
 							// Want to select it?
 							if (change->node.ln_Pri&FCF_SELECT)

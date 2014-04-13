@@ -443,18 +443,7 @@ int read_dir(
 				GETFIBSIZE(fileinfo)=0;
 
 			// Create entry
-			if ((entry=
-				create_file_entry(
-					buffer,
-					lock,
-					fileinfo->fib_FileName,
-					GETFIBSIZE(fileinfo),
-					fileinfo->fib_DirEntryType,
-					&fileinfo->fib_Date,
-					fileinfo->fib_Comment,
-					fileinfo->fib_Protection,
-					0,0,0,
-					network_ptr)))
+			if ((entry=create_file_entry_fib(buffer,lock,fileinfo,0,0,0,network_ptr)))
 			{
 				// Add to list
 				AddTail((struct List *)&file_list,(struct Node *)entry);

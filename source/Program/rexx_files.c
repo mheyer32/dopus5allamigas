@@ -665,16 +665,7 @@ short rexx_lister_reload_file(Lister *lister,char *args)
 		  old=find_entry(&buf->reject_list,fib->fib_FileName,0,buf->more_flags&DWF_CASE);
 
 	// Create entry
-	if (!(entry=create_file_entry(
-		buf,0,
-		&fib->fib_FileName,
-		GETFIBSIZE(fib),
-		fib->fib_DirEntryType,
-		&fib->fib_Date,
-		&fib->fib_Comment,
-		fib->fib_Protection,
-		0,0,0,
-		0)))
+	if (!(entry=create_file_entry_fib(buf,0,fib,0,0,0,0)))
 	{
 		// Failed
 		buffer_unlock(buf);
