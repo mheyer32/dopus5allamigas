@@ -28,22 +28,13 @@ DirEntry *ASM SAVEDS HookCreateFileEntry(
 	REG(a1, struct FileInfoBlock *fib),
 	REG(d0, BPTR lock))
 {
-#warning detect if there is a valid fib_Size64 in the FIB
-	// Create entry
-	return create_file_entry(
-				lister->cur_buffer,
-				lock,
-				fib->fib_FileName,
 #ifdef USE_64BIT
-				(UQUAD)fib->fib_Size,
-#else
-				fib->fib_Size,
+#warning detect if there is a valid fib_Size64 in the FIB
+	((FileInfoBlock64 *)fib)->fib_Size64 = fib->fib_Size;
 #endif
-				fib->fib_DirEntryType,
-				&fib->fib_Date,
-				fib->fib_Comment,
-				fib->fib_Protection,
-				0,0,0,0);
+
+	// Create entry
+	return create_file_entry_fib(lister->cur_buffer,lock,fib,0,0,0,0);
 }
 
 void ASM SAVEDS HookLockFileList(
