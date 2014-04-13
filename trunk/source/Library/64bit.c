@@ -216,16 +216,17 @@ BOOL LIBFUNC L_ExamineLock64(
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
-	if (success)
 #ifdef __amigaos3__
+	/*if (success)
 	{
-		/*UQUAD *size_ptr;
+		UQUAD *size_ptr;
 		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)BADDR(lock))->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;*/
-	}
+			fib->fib_Size64 = *size_ptr;
+	}*/
 #elif defined(__amigaos4__)
+	if (success)
 	{
 		struct ExamineData *exdata;
 
@@ -253,16 +254,17 @@ BOOL LIBFUNC L_ExamineNext64(
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
-	if (success)
 #ifdef __amigaos3__
+	/*if (success)
 	{
-		/*UQUAD *size_ptr;
+		UQUAD *size_ptr;
 		size_ptr = (UQUAD *)DoPkt(((struct FileLock *)BADDR(lock))->fl_Task, ACTION_GET_FILE_SIZE64, (ULONG)lock, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;*/
-	}
+			fib->fib_Size64 = *size_ptr;
+	}*/
 #elif defined(__amigaos4__)
+	if (success)
 	{
 		struct ExamineData *exdata;
 
@@ -290,17 +292,18 @@ BOOL LIBFUNC L_ExamineHandle64(
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
-	if (success)
 #ifdef __amigaos3__
+	/*if (success)
 	{
-		/*UQUAD *size_ptr;
+		UQUAD *size_ptr;
 
 		size_ptr = (UQUAD *)DoPkt(((struct FileHandle *)BADDR(fh))->fh_Type, ACTION_GET_FILE_SIZE64, fh, 0, 0, 0, 0);
 
 		if (size_ptr && IoErr() != ERROR_ACTION_NOT_KNOWN)
-			fib->fib_Size64 = *size_ptr;*/
-	}
+			fib->fib_Size64 = *size_ptr;
+	}*/
 #elif defined(__amigaos4__)
+	if (success)
 	{
 		struct ExamineData *exdata;
 
