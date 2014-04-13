@@ -249,7 +249,7 @@ BOOL LIBFUNC L_ExamineNext64(
 #ifdef __MORPHOS__
 	success = ExNext64(lock, fib, TAG_DONE);
 #else
-	success = Examine(lock, (struct FileInfoBlock *)fib);
+	success = ExNext(lock, (struct FileInfoBlock *)fib);
 	fib->fib_Size64 = (UQUAD)fib->fib_Size;
 #endif
 
