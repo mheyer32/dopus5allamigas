@@ -555,14 +555,14 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 							if (change->flags&FMF_SIZE)
 							{
 								// Has size changed?
-								if (entry->de_Size!=change->fib->fib_Size ||
+								if (entry->de_Size!=GETFIBSIZE(change->fib) ||
 									entry->de_Flags&ENTF_NO_SIZE)
 								{
 									// Clear size out
 									buffer->buf_TotalBytes[0]-=entry->de_Size;
 
 									// Set new size
-									entry->de_Size=change->fib->fib_Size;
+									entry->de_Size=GETFIBSIZE(change->fib);
 									buffer->buf_TotalBytes[0]+=entry->de_Size;
 
 									// Clear 'no size' flag
@@ -686,7 +686,7 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						if ((entry=create_file_entry(
 							buffer,0,
 							change->fib->fib_FileName,
-							change->fib->fib_Size,
+							GETFIBSIZE(change->fib),
 							change->fib->fib_DirEntryType,
 							&change->fib->fib_Date,
 							change->fib->fib_Comment,
