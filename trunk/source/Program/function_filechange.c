@@ -294,7 +294,7 @@ FileChange *function_filechange_modify(
 {
 	FileChangeList *list;
 	FileChange *change;
-	VA_LIST va;
+	va_list va;
 
 	// Find list for this path, add if not found
 	if (!(list=function_find_filechanges(handle,0,path,0,0)) &&
@@ -311,16 +311,16 @@ FileChange *function_filechange_modify(
 	change->node.ln_Type=FCTYPE_MODIFY;
 
 	// Go through tags
-	VA_START(va, name);
+	va_start(va, name);
 
 	for (;;)
 	{
-		size_t tagdata, tag = VA_ARG(va, size_t);
+		size_t tagdata, tag = va_arg(va, size_t);
 
 		if (tag == TAG_END)
 			break;
 
-		tagdata = VA_ARG(va, size_t);
+		tagdata = va_arg(va, size_t);
 
 		// Ignore?
 		if (tag == TAG_IGNORE)
@@ -366,7 +366,7 @@ FileChange *function_filechange_modify(
 		}
 	}
 
-	VA_END(va);
+	va_end(va);
 
 	// Add to list
 	AddTail((struct List *)&list->files,&change->node);
