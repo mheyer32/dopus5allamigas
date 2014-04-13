@@ -189,8 +189,7 @@ static const char __TEXTSEGMENT__ UserLibID[] = textsegmentname;
 // first function should be FAS (without _) or, if it removed function (like RemovedFunc() from dopus5.library), then at least LibNull.
 
 #define libvector LFUNC_FAS(L_Module_Entry) \
-                  LFUNC_FA_(L_Module_Identify) \
-                  LFUNC_FA_(L_ProgressHook)
+                  LFUNC_FA_(L_Module_Identify)
 
 
 /****************************************************************************/
