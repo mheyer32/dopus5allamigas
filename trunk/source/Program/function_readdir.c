@@ -338,7 +338,7 @@ int read_dir(
 	ReselectionData *reselect)
 {
 	long file_count=0,dir_count=0;
-	struct FileInfoBlock *fileinfo;
+	D_S(struct FileInfoBlock, fileinfo)
 	BPTR parent;
 	DirEntry *entry;
 	struct MinList file_list;
@@ -370,10 +370,6 @@ int read_dir(
 			sniff|=SNIFFF_VERSION;
 	}
 
-	// Allocate fib
-	if (!(fileinfo=AllocDosObject(DOS_FIB,0)))
-		return 0;
-
 	// Examine this object
 	ExamineLock64(lock,fileinfo);
 
@@ -381,7 +377,6 @@ int read_dir(
 	if (fileinfo->fib_DirEntryType<0)
 	{
 		function_error_text(handle,ERROR_OBJECT_WRONG_TYPE);
-		FreeDosObject(DOS_FIB,fileinfo);
 		return 0;
 	}
 
@@ -503,8 +498,6 @@ int read_dir(
 	buffer->flags&=~DWF_READING;
 	buffer->flags|=DWF_VALID;
 
-	// Free up
-	FreeDosObject(DOS_FIB,fileinfo);
 	return 1;
 }
 
