@@ -12,12 +12,12 @@
 #endif
 
 #include <proto/dopus5.h>
-#include <proto/xadmodule.h>
+#include <proto/module.h>
 #include <exec/interfaces.h>
 #include <exec/libraries.h>
 #include <exec/emulation.h>
 #include <interfaces/exec.h>
-#include <interfaces/xadmodule.h>
+#include <interfaces/module.h>
 
 
 static inline int8  convert_int8 (uint32 x) { return x; }
@@ -60,7 +60,7 @@ static int stub_Module_EntryPPC(uint32 *regarray)
 {
 	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
 	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct XADModuleIFace *Self = (struct XADModuleIFace *) ExtLib->MainIFace;
+	struct ModuleIFace *Self = (struct ModuleIFace *) ExtLib->MainIFace;
 
 	return Self->Module_Entry(
 		(struct List *)regarray[8],
@@ -77,26 +77,13 @@ static ModuleInfo * stub_Module_IdentifyPPC(uint32 *regarray)
 {
 	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
 	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct XADModuleIFace *Self = (struct XADModuleIFace *) ExtLib->MainIFace;
+	struct ModuleIFace *Self = (struct ModuleIFace *) ExtLib->MainIFace;
 
 	return Self->Module_Identify(
 		(int)regarray[0]
 	);
 }
 STATIC CONST struct EmuTrap stub_Module_Identify = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Module_IdentifyPPC };
-
-static ULONG stub_ProgressHookPPC(uint32 *regarray)
-{
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct XADModuleIFace *Self = (struct XADModuleIFace *) ExtLib->MainIFace;
-
-	return Self->ProgressHook(
-		(struct Hook *)regarray[8],
-		(struct xadProgressInfo *)regarray[9]
-	);
-}
-STATIC CONST struct EmuTrap stub_ProgressHook = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ProgressHookPPC };
 
 CONST CONST_APTR VecTable68K[] =
 {
@@ -106,6 +93,5 @@ CONST CONST_APTR VecTable68K[] =
 	&stub_Reserved,
 	&stub_Module_Entry,
 	&stub_Module_Identify,
-	&stub_ProgressHook,
 	(CONST_APTR)-1
 };

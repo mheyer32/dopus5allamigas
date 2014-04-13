@@ -5,7 +5,6 @@
 #include <dopus/common.h>
 #include <proto/dopus5.h>
 #include <proto/module.h>
-#include "module_deps.h"
 
 /* init.c */
 ULONG freeBase(struct LibraryHeader* lib);
@@ -72,12 +71,10 @@ LIBPROTO(L_Module_Entry, int, 	REG(a0, char *args),
 								REG(d0, ULONG mod_id),
 								REG(d1, EXT_FUNC(func_callback)));
 	
-
-	
 LIBPROTO(L_Module_Identify, ModuleInfo *, REG(d0, int num));
 
-LIBPROTO(L_ProgressHook, ULONG,	REG(a0, struct Hook *hook), 
-								REG(a1, struct xadProgressInfo *xpi));
+
+
 
 
 #endif /* _LIB_PROTOS_H */
