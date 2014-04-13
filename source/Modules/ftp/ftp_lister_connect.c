@@ -262,7 +262,7 @@ return reply;
 
 /********************************/
 
-int feat_update(void *data, int skip, char *line)
+static int feat_update(void *data, int skip, char *line)
 {
 	struct ftp_info *info = data;
 	char *feat = stpblk(line);
@@ -600,7 +600,9 @@ if	(logged_in)
 			}
 		}
 
-	lister_getfeats( node );
+	// FIXME: Temporarily disabled. Some servers get confused after FEAT,
+	// and the responses get out of sync.
+	//lister_getfeats( node );
 
 	// Always use binary transfers
 	lister_prog_info( node, GetString(locale,MSG_BINARY_MODE) );
