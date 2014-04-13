@@ -26,17 +26,6 @@ extern ModuleInfo module_info;
                          IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
                          IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
 
-extern struct Library *IconBase;
-extern struct Library *LayersBase;
-#ifdef __AROS__
-extern struct UtilityBase *UtilityBase;
-#else
-extern struct Library *UtilityBase;
-#endif
-extern struct Library *WorkbenchBase;
-extern struct Library *GadToolsBase;
-extern struct Library *DiskfontBase;
-extern struct Library *AslBase;
 
 void init_locale_data(struct DOpusLocale *);
 

@@ -9,19 +9,6 @@
 #define CATCOMP_NUMBERS
 #include "string_data.h"
 
-extern struct Library		*DOpusBase;
-extern struct Library		*LayersBase;
-extern struct Library		*DiskfontBase;
-extern struct Library		*GadToolsBase;
-extern struct Library		*WorkbenchBase;
-extern struct Library		*IconBase;
-extern struct Library		*AslBase;
-extern struct Library		*CxBase;
-#ifdef __AROS__
-extern struct UtilityBase	*UtilityBase;
-#else
-extern struct Library		*UtilityBase;
-#endif
 extern struct DOpusLocale	*locale;
 
 #ifndef __amigaos3__

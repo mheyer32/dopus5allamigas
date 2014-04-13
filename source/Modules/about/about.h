@@ -54,7 +54,6 @@ extern ConfigWindow	about_window;
 extern ObjectDef	about_objects[];
 extern UWORD 		logo_image[logo_frames][472];
 
-extern struct Library *DataTypesBase;
 extern APTR logo_obj[logo_frames];
 extern image_data images[image_count];
 extern ImageRemap remap;

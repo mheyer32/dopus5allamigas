@@ -25,53 +25,6 @@ For more information on Directory Opus for Windows please see:
 #define DOPUS_DATA
 
 
-// Library bases
-/*#ifndef __amigaos4__
-extern struct ExecBase			*SysBase;
-#endif*/
-
-extern struct IntuitionBase		*IntuitionBase;
-extern struct GfxBase			*GfxBase;
-
-#if defined(__amigaos4__) || defined(__AROS__)
-extern struct UtilityBase		*UtilityBase;
-#else
-extern struct Library			*UtilityBase;
-#endif
-
-extern struct Library			*DOpusBase;
-extern struct Library			*IconBase;
-extern struct Library			*DiskfontBase;
-extern struct Library			*LayersBase;
-extern struct Library			*WorkbenchBase;
-extern struct Library			*CxBase;
-extern struct Library			*GadToolsBase;
-extern struct Library			*IFFParseBase;
-extern struct Library			*AslBase;
-extern struct Library			*DataTypesBase;
-#if defined(__amigaos3__) || defined(__AROS__)
-extern struct Device			*InputBase;
-#else
-extern struct Library			*InputBase;
-#endif
-
-#ifdef __MORPHOS__
-extern struct Library			*TimerBase;
-#else
-extern struct Device			*TimerBase;
-#endif
-
-#ifdef __AROS__
-extern struct RxsLib			*RexxSysBase;
-#elif !defined(__amigaos3__)
-extern struct Library			*RexxSysBase;
-#endif
-
-extern struct Library			*AmigaGuideBase;
-extern struct Library			*CyberGfxBase;
-
-// ----
-
 extern struct Process			*main_proc;			// Main process pointer
 extern struct MsgPort			*arexx_port;			// ARexx port
 extern IPCData					main_ipc;			// Main IPC data

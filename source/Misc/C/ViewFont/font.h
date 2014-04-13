@@ -92,12 +92,6 @@ enum
 	MENU_ABOUT,
 };
 
-
-extern struct Library *DOpusBase;
-#ifdef __amigaos4__
-extern struct DOpusIFace *IDOpus;
-#endif
-
 extern MenuData font_menus[];
 
 void init_locale_data(struct DOpusLocale *locale);
