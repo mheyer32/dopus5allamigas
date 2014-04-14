@@ -651,7 +651,11 @@ short rexx_lister_reload_file(Lister *lister,char *args)
 	}
 
 	// Examine the file
-	ExamineLock64(lock,fib);
+#ifdef USE_64BIT
+	ExamineLock64(lock,(FileInfoBlock64 *)fib);
+#else
+	Examine(lock,fib);
+#endif
 	UnLock(lock);
 
 	// Restore CD
