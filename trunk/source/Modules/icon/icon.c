@@ -715,7 +715,7 @@ SetGadgetValue( data->list, GAD_ICON_BLOCKS, (ULONG)buf );
 // Bytes
 if	(lock)
 #ifdef USE_64BIT
-	ItoaU64(GETFIBSIZE(&data->fib), buf, sizeof(buf), data->decimal_sep);
+	ItoaU64(&GETFIBSIZE(&data->fib), buf, sizeof(buf), data->decimal_sep);
 #else
 	Itoa( data->fib.fib_Size, buf, data->decimal_sep );
 #endif
