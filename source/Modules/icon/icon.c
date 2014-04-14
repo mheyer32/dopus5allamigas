@@ -521,7 +521,7 @@ if	(data->icon_type == WBDISK &&
 // Get file information
 if	((lock = Lock( data->prog_name, ACCESS_READ )))
 	{
-	Examine( lock,&data->fib );
+	ExamineLock64( lock, (FileInfoBlock64 *)&data->fib );
 	Info( lock, &data->info );
 	data->disktype=((struct DosList *)BADDR(data->info.id_VolumeNode))->dol_misc.dol_volume.dol_DiskType;
 
@@ -2005,7 +2005,7 @@ if	((lock = Lock( name, ACCESS_READ )))
 		}
 
 	// Examine file
-	Examine( lock, &data->fib );
+	ExamineLock64( lock, (FileInfoBlock64 *)&data->fib );
 	
 	// Get full path
 	DevNameFromLockDopus( lock, data->name, 256 );
