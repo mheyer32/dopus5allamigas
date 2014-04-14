@@ -5,7 +5,7 @@ int main(int argc,char **argv)
 	font_data *data;
 
 	// Need dopus library
-	if (!(DOpusBase=OpenLibrary("dopus5.library",55)))
+	if (!(DOpusBase=OpenLibrary("dopus5.library",LIB_VERSION)))
 		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",55)))
 			return(10);
 #ifdef __amigaos4__

@@ -88,7 +88,7 @@ int main(int argc, char **arg_string)
 		if (FindPort("Directory Opus"))
 		{
 			// Open library
-			if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",61)))
+			if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
 			{
 				#ifdef __amigaos4__
 				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
@@ -177,16 +177,16 @@ int main(int argc, char **arg_string)
 			UnLock(lock);
 
 			// Open library
-			//if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",0)))
+			if ((DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",0)))
 			{
-				/*#ifdef __amigaos4__
+				#ifdef __amigaos4__
 				IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
 				#endif
 				
 				#ifdef __amigaos4__
 				DropInterface((struct Interface *)IDOpus);
 				#endif
-				CloseLibrary(DOpusBase);*/
+				CloseLibrary(DOpusBase);
 
 				// Build command string
 				strcpy(buf,"DOpus5:DirectoryOpus ENVIRONMENT=workbench ");

@@ -52,7 +52,7 @@ For more information on Directory Opus for Windows please see:
 
 #define	BUFIOBUFSIZE	1024		// size for sgetc buffer for each socket/ftp_info
 
-#define	VERSION_DOPUSLIB	60	// min dopus library version required
+#define	VERSION_DOPUSLIB	LIB_VERSION	// min dopus library version required
 
 #define	INDEX_INDEX 	(1 << 0)
 #define	INDEX_FILES 	(1 << 1)

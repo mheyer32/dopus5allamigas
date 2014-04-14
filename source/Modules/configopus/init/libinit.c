@@ -1029,7 +1029,7 @@ ULONG initBase(struct LibraryHeader *lib)
 int UserLibInit()
 {
 	
-	if(!(DOpusBase=OpenLibrary("dopus5.library",41))) {
+	if(!(DOpusBase=OpenLibrary("dopus5.library",LIB_VERSION))) {
 		D(bug("can't open dopus5.library\n"));
 		return 1;
 	}	
