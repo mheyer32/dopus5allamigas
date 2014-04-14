@@ -5107,6 +5107,72 @@ static void stub_BytesToString64PPC(uint32 *regarray)
 }
 STATIC CONST struct EmuTrap stub_BytesToString64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BytesToString64PPC }; 
 
+static BOOL stub_ExamineLock64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	return Self->ExamineLock64(
+		(BPTR)regarray[0],
+		(FileInfoBlock64 *)regarray[8]
+	);
+}
+STATIC CONST struct EmuTrap stub_ExamineLock64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineLock64PPC };
+
+static BOOL stub_ExamineNext64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	return Self->ExamineNext64(
+		(BPTR)regarray[0],
+		(FileInfoBlock64 *)regarray[8]
+	);
+}
+STATIC CONST struct EmuTrap stub_ExamineNext64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineNext64PPC };
+
+static BOOL stub_ExamineHandle64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	return Self->ExamineHandle64(
+		(BPTR)regarray[0],
+		(FileInfoBlock64 *)regarray[8]
+	);
+}
+STATIC CONST struct EmuTrap stub_ExamineHandle64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineHandle64PPC };
+
+static LONG stub_MatchFirst64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	return Self->MatchFirst64(
+		(STRPTR)regarray[8],
+		(struct AnchorPath *)regarray[9]
+	);
+}
+STATIC CONST struct EmuTrap stub_MatchFirst64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_MatchFirst64PPC };
+
+static LONG stub_MatchNext64PPC(uint32 *regarray)
+{
+	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+
+	return Self->MatchNext64(
+		(struct AnchorPath *)regarray[8]
+	);
+}
+STATIC CONST struct EmuTrap stub_MatchNext64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_MatchNext64PPC };
+
+
+
 CONST CONST_APTR VecTable68K[] =
 {
 	&stub_Open,
@@ -5497,5 +5563,11 @@ CONST CONST_APTR VecTable68K[] =
 	&stub_ItoaU64,
 	&stub_DivideToString64,
 	&stub_BytesToString64,	
+	&stub_ExamineLock64,
+	&stub_ExamineNext64,
+	&stub_ExamineHandle64,
+	&stub_MatchFirst64,
+	&stub_MatchNext64,
 	(CONST_APTR)-1
 };
+
