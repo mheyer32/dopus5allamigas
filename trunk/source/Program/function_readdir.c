@@ -371,7 +371,11 @@ int read_dir(
 	}
 
 	// Examine this object
-	ExamineLock64(lock,fileinfo);
+#ifdef USE_64BIT
+	ExamineLock64(lock,(FileInfoBlock64 *)fileinfo);
+#else
+	Examine(lock,fileinfo);
+#endif
 
 	// If object is a file, fail
 	if (fileinfo->fib_DirEntryType<0)
@@ -412,7 +416,11 @@ int read_dir(
 	NewList((struct List *)&file_list);
 
 	// Loop until directory is empty
-	while (ExamineNext64(lock,fileinfo))
+#ifdef USE_64BIT
+	while (ExamineNext64(lock,(FileInfoBlock64 *)fileinfo))
+#else
+	while (ExNext(lock,fileinfo))
+#endif
 	{
 		BOOL ok=1;
 

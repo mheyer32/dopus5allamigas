@@ -193,7 +193,11 @@ void lister_get_icons(FunctionHandle *handle,Lister *lister,char *add_name,short
 					if ((file=Lock(name,ACCESS_READ)))
 					{
 						// Get info
-						ExamineLock64(file,fib);
+#ifdef USE_64BIT
+						ExamineLock64(file,(FileInfoBlock64 *)fib);
+#else
+						Examine(file,fib);
+#endif
 						UnLock(file);
 
 						// Fill out date and size

@@ -62,7 +62,11 @@ BOOL ReadSoftLinkDopus(
 			char *ptr;
 
 			// Get real file information
-			ExamineLock64(lock, &info->sli_Fib);
+#ifdef USE_64BIT
+			ExamineLock64(lock, (FileInfoBlock64 *)&info->sli_Fib);
+#else
+			Examine(lock, &info->sli_Fib);
+#endif
 
 			// Cut filename out of path string
 			if ((ptr=PathPart(info->sli_Path))) *ptr=0;

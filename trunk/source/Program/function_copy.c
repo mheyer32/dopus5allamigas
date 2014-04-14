@@ -1152,8 +1152,11 @@ int function_copy_file(
 	*err_code=0;
 
 	// Lock and examine source
-	if (!(lock=Lock(source_file,ACCESS_READ)) ||
-		!(ExamineLock64(lock,s_info)))
+#ifdef USE_64BIT
+	if (!(lock=Lock(source_file,ACCESS_READ)) || !(ExamineLock64(lock,(FileInfoBlock64 *)s_info)))
+#else
+	if (!(lock=Lock(source_file,ACCESS_READ)) || !(Examine(lock,s_info)))
+#endif
 	{
 		*err_code=IoErr();
 		UnLock(lock);

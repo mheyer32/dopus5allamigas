@@ -210,7 +210,11 @@ FileChange *function_filechange_loadfile(
 	if ((lock=Lock(buffer,ACCESS_READ)))
 	{
 		// Examine file
+#ifdef USE_64BIT
 		ExamineLock64(lock,(FileInfoBlock64 *)fib);
+#else
+		Examine(lock,fib);
+#endif
 		UnLock(lock);
 
 		// Add to lister
@@ -534,7 +538,11 @@ void function_filechange_do(FunctionHandle *handle,BOOL strip)
 						if ((lock=Lock(buf,ACCESS_READ)))
 						{
 							// Get info
+#ifdef USE_64BIT
 							ExamineLock64(lock,(FileInfoBlock64 *)change->fib);
+#else
+							Examine(lock,change->fib);
+#endif
 							UnLock(lock);
 
 							// Change type to reload
