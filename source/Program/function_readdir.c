@@ -372,10 +372,11 @@ int read_dir(
 
 	// Examine this object
 #ifdef USE_64BIT
-	ExamineLock64(lock,(FileInfoBlock64 *)fileinfo);
+	if (!ExamineLock64(lock,(FileInfoBlock64 *)fileinfo))
 #else
-	Examine(lock,fileinfo);
+	if (!Examine(lock,fileinfo))
 #endif
+		return 0;
 
 	// If object is a file, fail
 	if (fileinfo->fib_DirEntryType<0)
