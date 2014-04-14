@@ -733,7 +733,10 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 					// Check entry type from soft link
 					if (sinfo->sli_Fib.fib_DirEntryType<0)
 					{
-						GETFIBSIZE(&handle->anchor->ap_Info) = GETFIBSIZE(sinfo);
+#ifdef USE_64BIT
+						((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64
+							= ((FileInfoBlock64 *)&sinfo->sli_Fib)->fib_Size64;
+#endif
 						handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
 					}
 				}
