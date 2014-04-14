@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	if (*command)
 	{
 		// Open dopus library
-		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",43)))
+		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
 			return(RETURN_ERROR);
 			
 		#ifdef __amigaos4__

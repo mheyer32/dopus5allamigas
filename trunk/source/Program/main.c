@@ -42,13 +42,6 @@ For more information on Directory Opus for Windows please see:
 ULONG __oslibversion = 36;
 #endif
 
-//#define LIB_VER LIB_VERSION	// Minimum library version we need
-#ifdef USE_64BIT
-#define LIB_VER 69
-#else
-#define LIB_VER 68
-#endif
-
 #define INIT_STEPS	15
 
 static struct Library *main_open_library(char *lib,short ver);
@@ -238,7 +231,7 @@ void startup_check_assign()
 void startup_open_dopuslib()
 {
 	// Open the library
-	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VER))
+	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION))
 #ifdef __amigaos4__
 || (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
 #endif
