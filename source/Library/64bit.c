@@ -213,7 +213,7 @@ BOOL LIBFUNC L_ExamineLock64(
 	success = Examine64(lock, fib, TAG_DONE);
 #else
 	success = Examine(lock, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = (UQUAD)fib->fib_Size;
+	fib->fib_Size64 = (UQUAD)((struct FileInfoBlock *)fib)->fib_Size;
 #endif
 
 #ifdef __amigaos3__
@@ -252,7 +252,7 @@ BOOL LIBFUNC L_ExamineNext64(
 	success = ExNext64(lock, fib, TAG_DONE);
 #else
 	success = ExNext(lock, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = (UQUAD)fib->fib_Size;
+	fib->fib_Size64 = (UQUAD)((struct FileInfoBlock *)fib)->fib_Size;
 #endif
 
 #ifdef __amigaos3__
@@ -300,7 +300,7 @@ BOOL LIBFUNC L_ExamineHandle64(
 	success = ExamineFH64(fh, fib, TAG_DONE);
 #else
 	success = ExamineFH(fh, (struct FileInfoBlock *)fib);
-	fib->fib_Size64 = (UQUAD)fib->fib_Size;
+	fib->fib_Size64 = (UQUAD)((struct FileInfoBlock *)fib)->fib_Size;
 #endif
 
 #ifdef __amigaos3__
