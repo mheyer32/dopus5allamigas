@@ -277,9 +277,16 @@ static void lister_getfeats( struct ftp_node *node )
 {
 	int reply;
 
+#if 0
 	_ftpa(&node->fn_ftp, FTPFLAG_ASYNCH, "FEAT\r\n");
 	reply = _getreply(&node->fn_ftp, 0, feat_update, &node->fn_ftp);
-	
+#else
+	// test if the server supports MLSD without actually parsing FEAT
+	reply = ftp(&node->fn_ftp, "MLSD\r\n");
+	if (!(reply >= 500 && reply <= 502))
+		node->fn_ftp.fi_flags |= FTP_FEAT_MLST;
+#endif
+
 	if (node->fn_ftp.fi_flags & FTP_FEAT_MLST)
 	{
 		D(bug("MLSD listing enabled\n"));
@@ -600,9 +607,7 @@ if	(logged_in)
 			}
 		}
 
-	// FIXME: Temporarily disabled. Some servers get confused after FEAT,
-	// and the responses get out of sync.
-	//lister_getfeats( node );
+	lister_getfeats( node );
 
 	// Always use binary transfers
 	lister_prog_info( node, GetString(locale,MSG_BINARY_MODE) );
