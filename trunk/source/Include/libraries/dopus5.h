@@ -3054,7 +3054,6 @@ typedef signed long long QUAD;
 #ifdef __MORPHOS__
 typedef struct FileInfoBlock FileInfoBlock64;
 #else
-// based on the MorphOS FileInfoBlock
 // added a _s suffix, since AROS might use struct FileInfoBlock64 in the future
 typedef struct FileInfoBlock64_s
 {
@@ -3062,16 +3061,15 @@ typedef struct FileInfoBlock64_s
     LONG             fib_DirEntryType;
     char             fib_FileName[108];
     LONG             fib_Protection;
-    LONG             fib_EntryType;
-    LONG             fib_Size;
+    /*LONG             fib_EntryType;
+    LONG             fib_Size;*/
+    UQUAD            fib_Size64;
     LONG             fib_NumBlocks;
     struct DateStamp fib_Date;
     char             fib_Comment[80];
     UWORD            fib_OwnerUID;
     UWORD            fib_OwnerGID;
-    UQUAD            fib_Size64;
-    UQUAD            fib_NumBlocks64;
-    char             pad[16];
+    char             fib_Reserved[32];
 } FileInfoBlock64;
 #endif
 
