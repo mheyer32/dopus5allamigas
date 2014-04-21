@@ -360,6 +360,7 @@ LONG LIBFUNC L_MatchFirst64(
 				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
+			UnLock(flock);
 		}
 	}
 #endif
@@ -396,6 +397,7 @@ LONG LIBFUNC L_MatchNext64(
 				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
+			UnLock(flock);
 		}
 	}
 #endif
