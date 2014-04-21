@@ -345,13 +345,21 @@ LONG LIBFUNC L_MatchFirst64(
 #ifdef __amigaos4__
 	if (!error && panchor->ap_Info.fib_DirEntryType<0)
 	{
+		BPTR flock;
 		struct ExamineData *exdata;
+		char buf[512];
 
-		if ((exdata=ExamineObjectTags(EX_StringNameInput, panchor->ap_Info.fib_FileName, TAG_END)))
+		NameFromLock(panchor->ap_Current->an_Lock, buf, sizeof(buf));
+		AddPart(buf, panchor->ap_Info.fib_FileName, sizeof(buf));
+
+		if ((flock=Lock(buf, ACCESS_READ)))
 		{
-			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
-			D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
-			FreeDosObject(DOS_EXAMINEDATA, exdata);
+			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
+			{
+				((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
+				FreeDosObject(DOS_EXAMINEDATA, exdata);
+			}
 		}
 	}
 #endif
@@ -373,13 +381,21 @@ LONG LIBFUNC L_MatchNext64(
 #ifdef __amigaos4__
 	if (!error && panchor->ap_Info.fib_DirEntryType<0)
 	{
+		BPTR flock;
 		struct ExamineData *exdata;
+		char buf[512];
 
-		if ((exdata=ExamineObjectTags(EX_StringNameInput, panchor->ap_Info.fib_FileName, TAG_END)))
+		NameFromLock(panchor->ap_Current->an_Lock, buf, sizeof(buf));
+		AddPart(buf, panchor->ap_Info.fib_FileName, sizeof(buf));
+
+		if ((flock=Lock(buf, ACCESS_READ)))
 		{
-			((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
-			D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
-			FreeDosObject(DOS_EXAMINEDATA, exdata);
+			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
+			{
+				((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
+				FreeDosObject(DOS_EXAMINEDATA, exdata);
+			}
 		}
 	}
 #endif
