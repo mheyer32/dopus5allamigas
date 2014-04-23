@@ -268,6 +268,7 @@ typedef struct _FunctionHandle
 	Lister			*source_lister;		// Source lister
 	Lister			*dest_lister;		// Dest lister
 
+	unsigned short		source_block_size; // Source block size
 	unsigned short		dest_block_size;	// Destination block size
 	unsigned short		dest_data_block_size;	// Destination data block size
 	unsigned long		dest_recurse_blocks;	// Number of blocks for destination

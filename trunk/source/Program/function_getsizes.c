@@ -38,10 +38,26 @@ DOPUS_FUNC(function_getsizes)
 	short clear=0;
 	Lister *lister;
 	DirBuffer *buffer=0;
+	BPTR slock;
+	D_S(struct InfoData, sinfo)
 
 	// Get current lister
 	if ((lister=function_lister_current(&handle->source_paths)))
 		buffer=lister->cur_buffer;
+
+	//Get source lister block size
+	if ((slock=Lock(buffer->buf_Path,ACCESS_READ)))
+	{
+		// Get info
+		Info(slock,sinfo);
+		UnLock(slock);
+		// Source block size
+		handle->source_block_size=sinfo->id_BytesPerBlock;
+	}
+	else
+	{
+		handle->source_block_size=512;
+	}
 
 	// Clear sizes?
 	if (command->function==FUNC_UNBYTE)
