@@ -23,6 +23,83 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
+/*********************************************************/
+
+LONG MatchFirstPlus(
+	REG(a0, STRPTR pat),
+	REG(a1, FunctionHandle *handle))
+{
+	// MatchFirst() returns 0 for success, errorcode for error
+	LONG error = 0;
+
+	error = MatchFirst(pat, handle->anchor);
+#ifndef __MORPHOS__
+	((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)handle->anchor->ap_Info.fib_Size;
+#endif
+
+#ifdef __amigaos4__
+	if (!(handle->anchor->ap_Info.fib_NumBlocks < (4194304/(handle->source_block_size/512))))
+	{
+		BPTR flock;
+		struct ExamineData *exdata;
+		char buf[512];
+
+		NameFromLock(handle->anchor->ap_Current->an_Lock, buf, sizeof(buf));
+		AddPart(buf, handle->anchor->ap_Info.fib_FileName, sizeof(buf));
+
+		if ((flock=Lock(buf, ACCESS_READ)))
+		{
+			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
+			{
+				((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+				FreeDosObject(DOS_EXAMINEDATA, exdata);
+			}
+			UnLock(flock);
+		}
+	}
+#endif
+
+	return error;
+}
+
+LONG MatchNextPlus(
+	REG(a0, FunctionHandle *handle))
+{
+	// MatchNext() returns 0 for success, errorcode for error
+	LONG error = 0;
+
+	error = MatchNext(handle->anchor);
+#ifndef __MORPHOS__
+	((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)handle->anchor->ap_Info.fib_Size;
+#endif
+
+#ifdef __amigaos4__
+	if (!(handle->anchor->ap_Info.fib_NumBlocks < (4194304/(handle->source_block_size/512))))
+	{
+		BPTR flock;
+		struct ExamineData *exdata;
+		char buf[512];
+
+		NameFromLock(handle->anchor->ap_Current->an_Lock, buf, sizeof(buf));
+		AddPart(buf, handle->anchor->ap_Info.fib_FileName, sizeof(buf));
+
+		if ((flock=Lock(buf, ACCESS_READ)))
+		{
+			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
+			{
+				((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+				FreeDosObject(DOS_EXAMINEDATA, exdata);
+			}
+			UnLock(flock);
+		}
+	}
+#endif
+
+	return error;
+}
+
+/*********************************************************/
+
 static int function_check_filter(FunctionHandle *handle);
 
 // Build entry list for a function
@@ -737,6 +814,13 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
 					}
 				}
+				else
+				{
+					// Broken link so set sizes to 0 & mark as hard link
+					handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
+					GETFIBSIZE(&handle->anchor->ap_Info) = 0LL;
+					handle->anchor->ap_Info.fib_Size = 0L;
+				}
 			}
 
 			// Link?
@@ -908,7 +992,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 			}
 
 			// Get the next match
-			handle->recurse_return=MatchNext64(handle->anchor);
+			handle->recurse_return=MatchNextPlus(handle);
 
 			// Return entry
 			if (handle->recurse_entry)
@@ -1112,7 +1196,7 @@ int function_end_entry(
 			}
 
 			// Recurse into it
-			handle->recurse_return=MatchFirst64(handle->work_buffer,handle->anchor);
+			handle->recurse_return=MatchFirstPlus(handle->work_buffer,handle);
 			handle->recurse_depth=1;
 
 			// Initialise anchor path
