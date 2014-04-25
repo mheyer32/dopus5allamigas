@@ -38,7 +38,9 @@ LONG MatchFirstPlus(
 #endif
 
 #ifdef __amigaos4__
-	if (!(handle->anchor->ap_Info.fib_NumBlocks < (4194304/(handle->source_block_size/512))))
+	if (!error && handle->anchor->ap_Info.fib_DirEntryType<0
+	&& !(handle->anchor->ap_Info.fib_NumBlocks
+	< (4194304/(handle->source_block_size/512))))
 	{
 		BPTR flock;
 		struct ExamineData *exdata;
@@ -74,7 +76,9 @@ LONG MatchNextPlus(
 #endif
 
 #ifdef __amigaos4__
-	if (!(handle->anchor->ap_Info.fib_NumBlocks < (4194304/(handle->source_block_size/512))))
+	if (!error && handle->anchor->ap_Info.fib_DirEntryType<0
+	&& !(handle->anchor->ap_Info.fib_NumBlocks
+	< (4194304/(handle->source_block_size/512))))
 	{
 		BPTR flock;
 		struct ExamineData *exdata;
@@ -819,7 +823,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 					// Broken link so set sizes to 0 & mark as hard link
 					handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
 					GETFIBSIZE(&handle->anchor->ap_Info) = 0LL;
-					handle->anchor->ap_Info.fib_Size = 0L;
+//					handle->anchor->ap_Info.fib_Size = 0L;
 				}
 			}
 
@@ -895,7 +899,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 								fileLists=
 									(dataBlocks+fileListEntries-1)/fileListEntries;
 								totalBlocks=dataBlocks+fileLists;
-//D(bug("TotalBlocks: %ld\n", totalBlocks))
+
 								// Increment count
 								handle->dest_recurse_blocks+=totalBlocks;
 							}
