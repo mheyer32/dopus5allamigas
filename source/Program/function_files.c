@@ -818,13 +818,6 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
 					}
 				}
-				else
-				{
-					// Broken link so set sizes to 0 & mark as hard link
-					handle->anchor->ap_Info.fib_DirEntryType=ST_LINKFILE;
-					GETFIBSIZE(&handle->anchor->ap_Info) = 0LL;
-//					handle->anchor->ap_Info.fib_Size = 0L;
-				}
 			}
 
 			// Link?
