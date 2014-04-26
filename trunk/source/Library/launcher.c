@@ -309,8 +309,11 @@ ENTRANCE_2(static void ASM, launch_exit_code, d0, LONG, return_code, d1, LaunchP
 	{
 		// Decrement library open count
 		--DOpusBase->libBase.lib_OpenCnt;
+		#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+		#ifndef __amigaos3__
 		D(bug("lib_OpenCnt decreased to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, name));
-
+		#endif
+		
 		// Signal to check for pending quit
 		Signal((struct Task *)data->launch_proc->proc,IPCSIG_QUIT);
 	}
@@ -352,7 +355,10 @@ void check_app_list(struct LibData *data, BOOL purge)
 	{
 		// Decrement library open count so we can get expunged
 		--DOpusBase->libBase.lib_OpenCnt;
+		#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+		#ifndef __amigaos3__
 		D(bug("lib_OpenCnt decreased to %d\n", DOpusBase->libBase.lib_OpenCnt));
+		#endif
 	}
 
 	// Unlock AppEntry list
@@ -587,7 +593,10 @@ void SAVEDS launcher_proc(void)
 					if (data->launch_count==0)
 					{
 						--DOpusBase->libBase.lib_OpenCnt;
+						#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+						#ifndef __amigaos3__
 						D(bug("lib_OpenCnt decreased to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, procname));
+						#endif
 					}
 					break;
 				}
@@ -695,7 +704,10 @@ void SAVEDS launcher_proc(void)
 							if (data->launch_count==1)
 							{
 								++DOpusBase->libBase.lib_OpenCnt;
+								#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+								#ifndef __amigaos3__
 								D(bug("lib_OpenCnt bumped to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, packet->name));
+								#endif
 							}
 
 							// Unlock launch list
@@ -734,7 +746,10 @@ void SAVEDS launcher_proc(void)
 						if (data->launch_count==1)
 						{
 							++DOpusBase->libBase.lib_OpenCnt;
+							#warning D(bug) printf there cause crash on os3 build (and on real, and on emulation on os3/mos). TODO: invistigate and make a proper one		
+							#ifndef __amigaos3__
 							D(bug("lib_OpenCnt bumped to %d by '%s'\n", DOpusBase->libBase.lib_OpenCnt, packet->name));
+							#endif
 						}
 
 						// Wait for reply?
