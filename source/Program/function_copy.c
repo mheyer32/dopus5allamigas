@@ -1268,7 +1268,7 @@ int function_copy_file(
 				(lock=CreateDir(dest_file)))
 			{
 				// Get directory information
-				Examine(lock,d_info);
+				ExamineLock64(lock,d_info);
 				UnLock(lock);
 
 				// Is destination a directory?
@@ -1525,7 +1525,7 @@ int function_copy_file(
 			if ((lock=Lock(dest_file,ACCESS_READ)))
 			{
 				// Examine file
-				if (Examine(lock,d_info))
+				if (ExamineLock64(lock,d_info))
 					got_dest_info=1;
 				UnLock(lock);
 			}
