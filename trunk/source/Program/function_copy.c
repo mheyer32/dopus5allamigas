@@ -1125,7 +1125,7 @@ DOPUS_FUNC(function_copy)
 // Copy a file, with optional encryption
 int function_copy_file(
 	struct FileInfoBlock *s_info,
-	struct FileInfoBlock *d_info,
+	struct FileInfoBlock *d_info,	
 	FunctionHandle *handle,
 	char *source_file,
 	char *dest_file,
@@ -1269,7 +1269,7 @@ int function_copy_file(
 			{
 				// Get directory information
 #ifdef USE_64BIT
-				ExamineLock64(lock,d_info);
+				ExamineLock64(lock,(FileInfoBlock64 *)d_info);
 #else
 				Examine(lock,d_info);
 #endif				
@@ -1530,7 +1530,7 @@ int function_copy_file(
 			{
 				// Examine file
 #ifdef USE_64BIT				
-				if (ExamineLock64(lock,d_info))
+				if (ExamineLock64(lock,(FileInfoBlock64 *)d_info))
 #else
 				if (Examine(lock,d_info))
 #endif				
