@@ -258,7 +258,11 @@ ask_point:
 					if ((lock=Lock(dest_file,ACCESS_READ)))
 					{
 						// Examine it
+#ifdef USE_64BIT
+						ExamineLock64(lock,(FileInfoBlock64 *)handle->s_info);
+#else
 						Examine(lock,handle->s_info);
+#endif						
 						UnLock(lock);
 
 						// Was it a link?
