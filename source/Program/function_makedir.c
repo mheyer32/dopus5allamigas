@@ -160,8 +160,12 @@ DOPUS_FUNC(function_makedir)
 		// Create directory
 		if ((lock=OriginalCreateDir(dir_path)))
 		{
-			// Examine the new drawer
+			// Examine the new drawer			
+#ifdef USE_64BIT
+			ExamineLock64(lock,(FileInfoBlock64 *)handle->s_info);
+#else			
 			Examine(lock,handle->s_info);
+#endif			
 
 			// Unlock the new directory
 			UnLock(lock);
