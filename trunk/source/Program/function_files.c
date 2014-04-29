@@ -258,134 +258,136 @@ int function_build_list(
 
 	// Otherwise, is instruction a command?
 	else
-	if (instruction && instruction->command)
-	{
-		BOOL trapped=0;
-
-		// See if there's a current source lister, with a custom handler
-		if (*path && (*path)->lister && (*path)->lister->cur_buffer->buf_CustomHandler[0])
+	{	
+		if (instruction && instruction->command)
 		{
-			// See if there's a trap for this command
-			if (!instruction->new_arg &&
-				FindFunctionTrap(instruction->command->name,(*path)->lister->cur_buffer->buf_CustomHandler,0))
+			BOOL trapped=0;
+
+			// See if there's a current source lister, with a custom handler
+			if (*path && (*path)->lister && (*path)->lister->cur_buffer->buf_CustomHandler[0])
 			{
-				trapped=1;
-			}
-		}
-
-		// See if it has a valid template
-		if (instruction->command->template_key)
-		{
-			char *ptr;
-
-			// Can it supply files?
-			if ((ptr=strchr(instruction->command->template_key,FUNCKEY_FILE)) ||
-				(ptr=strchr(instruction->command->template_key,FUNCKEY_FILENO)))
-			{
-				short num;
-
-				// Get number of name argument
-				num=atoi(ptr+1);
-
-				// Parsed arguments?
-				if (instruction->funcargs &&
-					instruction->funcargs->FA_Arguments[num])
+				// See if there's a trap for this command
+				if (!instruction->new_arg &&
+					FindFunctionTrap(instruction->command->name,(*path)->lister->cur_buffer->buf_CustomHandler,0))
 				{
-					// Skip wildcards if needed
-					if (*ptr==FUNCKEY_FILE ||
-						!(strchr((char *)instruction->funcargs->FA_Arguments[num],'*')))
+					trapped=1;
+				}
+			}
+
+			// See if it has a valid template
+			if (instruction->command->template_key)
+			{
+				char *ptr;
+
+				// Can it supply files?
+				if ((ptr=strchr(instruction->command->template_key,FUNCKEY_FILE)) ||
+					(ptr=strchr(instruction->command->template_key,FUNCKEY_FILENO)))
+				{
+					short num;
+
+					// Get number of name argument
+					num=atoi(ptr+1);
+
+					// Parsed arguments?
+					if (instruction->funcargs &&
+						instruction->funcargs->FA_Arguments[num])
 					{
-						// Allocate new function entry
-						if ((funcentry=function_new_entry(handle,(char *)instruction->funcargs->FA_Arguments[num],0)))
+						// Skip wildcards if needed
+						if (*ptr==FUNCKEY_FILE ||
+							!(strchr((char *)instruction->funcargs->FA_Arguments[num],'*')))
 						{
-							// Got a source buffer and a filename only?
-							if (*path && (*path)->lister && !strchr(funcentry->name,'/') && !strchr(funcentry->name,':'))
+							// Allocate new function entry
+							if ((funcentry=function_new_entry(handle,(char *)instruction->funcargs->FA_Arguments[num],0)))
 							{
-								DirEntry *entry;
-
-								// Find entry in path
-								if ((entry=find_entry(
-									&(*path)->lister->cur_buffer->entry_list,
-									funcentry->name,
-									0,
-									(*path)->lister->cur_buffer->more_flags&DWF_CASE)))
+								// Got a source buffer and a filename only?
+								if (*path && (*path)->lister && !strchr(funcentry->name,'/') && !strchr(funcentry->name,':'))
 								{
-									// Fix as a lister entry
-									funcentry->entry=entry;
-									funcentry->type=entry->de_Node.dn_Type;
-									funcentry->flags=FUNCENTF_TOP_LEVEL;
+									DirEntry *entry;
 
-									// Link?
-									if (entry->de_Flags&ENTF_LINK)
-										funcentry->flags|=FUNCENTF_LINK;
-								}
-							}
-
-							// If we haven't got a lister entry, try to lock file
-							if (!funcentry->entry && !trapped)
-							{
-								BPTR lock,parent;
-
-								// Lock file
-								if ((lock=Lock(funcentry->name,ACCESS_READ)))
-								{
-									// Examine file
-									Examine(lock,handle->s_info);
-
-									// Get lock on parent
-									if ((parent=ParentDir(lock)))
+									// Find entry in path
+									if ((entry=find_entry(
+										&(*path)->lister->cur_buffer->entry_list,
+										funcentry->name,
+										0,
+										(*path)->lister->cur_buffer->more_flags&DWF_CASE)))
 									{
-										// Get name of parent
-										DevNameFromLockDopus(parent,handle->temp_buffer,256);
-										AddPart(handle->temp_buffer,"",256);
-										UnLock(parent);
+										// Fix as a lister entry
+										funcentry->entry=entry;
+										funcentry->type=entry->de_Node.dn_Type;
+										funcentry->flags=FUNCENTF_TOP_LEVEL;
 
-										// Make this the source path
-										function_replace_paths(handle,&handle->source_paths,handle->temp_buffer,1);
-										strcpy(handle->source_path,handle->temp_buffer);
-
-										// Save old source lister
-										handle->saved_source_lister=handle->source_lister;
-										handle->source_lister=0;
-
-										// Get new path pointer
-										*path=function_path_next(&handle->source_paths);
+										// Link?
+										if (entry->de_Flags&ENTF_LINK)
+											funcentry->flags|=FUNCENTF_LINK;
 									}
-
-									// Unlock file lock
-									UnLock(lock);
-
-									// Get type and filename
-									funcentry->type=
-										(handle->s_info->fib_DirEntryType<0)?-1:1;
-									strcpy(funcentry->name,handle->s_info->fib_FileName);
 								}
-							}
 
-							// Increment counts
-							++handle->entry_count;
-							if (funcentry->type>0)
-							{
-								++handle->dir_count;
-								if (funcentry->flags&FUNCENTF_LINK)
-									++handle->link_dir_count;
-							}
-							else
-							{
-								++handle->file_count;
-								if (funcentry->flags&FUNCENTF_LINK)
-									++handle->link_file_count;
-							}
+								// If we haven't got a lister entry, try to lock file
+								if (!funcentry->entry && !trapped)
+								{
+									BPTR lock,parent;
 
-							// Set success flag
-							done=1;
+									// Lock file
+									if ((lock=Lock(funcentry->name,ACCESS_READ)))
+									{
+										// Examine file
+										Examine(lock,handle->s_info);
+
+										// Get lock on parent
+										if ((parent=ParentDir(lock)))
+										{
+											// Get name of parent
+											DevNameFromLockDopus(parent,handle->temp_buffer,256);
+											AddPart(handle->temp_buffer,"",256);
+											UnLock(parent);
+
+											// Make this the source path
+											function_replace_paths(handle,&handle->source_paths,handle->temp_buffer,1);
+											strcpy(handle->source_path,handle->temp_buffer);
+
+											// Save old source lister
+											handle->saved_source_lister=handle->source_lister;
+											handle->source_lister=0;
+
+											// Get new path pointer
+											*path=function_path_next(&handle->source_paths);
+										}
+
+										// Unlock file lock
+										UnLock(lock);
+
+										// Get type and filename
+										funcentry->type=
+											(handle->s_info->fib_DirEntryType<0)?-1:1;
+										strcpy(funcentry->name,handle->s_info->fib_FileName);
+									}
+								}
+
+								// Increment counts
+								++handle->entry_count;
+								if (funcentry->type>0)
+								{
+									++handle->dir_count;
+									if (funcentry->flags&FUNCENTF_LINK)
+										++handle->link_dir_count;
+								}
+								else
+								{
+									++handle->file_count;
+									if (funcentry->flags&FUNCENTF_LINK)
+										++handle->link_file_count;
+								}
+
+								// Set success flag
+								done=1;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
-
+	
 	// If we don't have anything yet, check for a valid source buffer?
 	if (!done && *path && (*path)->lister && (buffer=(*path)->lister->cur_buffer))
 	{
