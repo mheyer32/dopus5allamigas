@@ -357,8 +357,12 @@ DOPUS_FUNC(function_copy)
 				struct DiskObject *icon;
 
 				// Examine
+#ifdef USE_64BIT
+				ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
+#else
 				Examine(lock,handle->d_info);
-
+#endif				
+				
 				// Get device name
 				DevNameFromLockDopus(lock,handle->work_buffer+512,256);
 				UnLock(lock);
@@ -392,8 +396,12 @@ DOPUS_FUNC(function_copy)
 					if ((lock=OriginalCreateDir(handle->work_buffer)))
 					{
 						// Examine this directory
-						Examine(lock,handle->s_info);
-
+#ifdef USE_64BIT
+						ExamineLock64(lock,(FileInfoBlock64 *)handle->s_info);
+#else
+						Examine(lock,handle->s_info);						
+#endif				
+						
 						// Unlock directory
 						UnLock(lock);
 
@@ -774,7 +782,11 @@ DOPUS_FUNC(function_copy)
 									BPTR lock;
 									if ((lock=Lock(dest_file,ACCESS_READ)))
 									{
+#ifdef USE_64BIT
+										ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
+#else
 										Examine(lock,handle->d_info);
+#endif				
 										UnLock(lock);
 									}
 								}
@@ -819,7 +831,11 @@ DOPUS_FUNC(function_copy)
 									if ((dest=Lock(dest_file,ACCESS_READ)))
 									{
 										// Examine it
-										Examine(dest,handle->d_info);
+#ifdef USE_64BIT
+										ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
+#else
+										Examine(lock,handle->d_info);
+#endif				
 										UnLock(dest);
 
 										// Fix type to indicate link
@@ -1246,7 +1262,11 @@ int function_copy_file(
 				if ((lock=Lock(dest_file,ACCESS_READ)))
 				{
 					// Examine file
+#ifdef USE_64BIT
+					if (ExamineLock64(lock,(FileInfoBlock64 *)d_info))
+#else
 					if (Examine(lock,d_info))
+#endif				
 						got_dest_info=1;
 					UnLock(lock);
 				}
