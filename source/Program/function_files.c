@@ -258,7 +258,7 @@ int function_build_list(
 
 	// Otherwise, is instruction a command?
 	else
-	{	
+	{
 		if (instruction && instruction->command)
 		{
 			BOOL trapped=0;
@@ -387,7 +387,7 @@ int function_build_list(
 			}
 		}
 	}
-	
+
 	// If we don't have anything yet, check for a valid source buffer?
 	if (!done && *path && (*path)->lister && (buffer=(*path)->lister->cur_buffer))
 	{
@@ -445,7 +445,7 @@ int function_build_list(
 						(instruction->flags&FUNCF_NEED_FILES && type<ENTRY_DEVICE) ||
 						(instruction->flags&FUNCF_NEED_DIRS && type>=ENTRY_DEVICE) ||
 						(instruction->flags&FUNCF_WANT_ENTRIES &&
-							!(instruction->flags&(FUNCF_NEED_FILES|FUNCF_NEED_DIRS))))
+						!(instruction->flags&(FUNCF_NEED_FILES|FUNCF_NEED_DIRS))))
 					{
 						// Not only an icon?
 						if (!icon_only)
@@ -534,7 +534,7 @@ int function_build_list(
 						(instruction->flags&FUNCF_NEED_FILES && entry->de_Node.dn_Type<=ENTRY_FILE) ||
 						(instruction->flags&FUNCF_NEED_DIRS && entry->de_Node.dn_Type>=ENTRY_DEVICE) ||
 						(instruction->flags&FUNCF_WANT_ENTRIES &&
-							!(instruction->flags&(FUNCF_NEED_FILES|FUNCF_NEED_DIRS))))
+						!(instruction->flags&(FUNCF_NEED_FILES|FUNCF_NEED_DIRS))))
 					{
 						// If this is a directory, check filters
 						if (entry->de_Node.dn_Type>=ENTRY_DIRECTORY &&
@@ -937,7 +937,12 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 
 						// Strip new filename
 						ptr=FilePart(handle->anchor_path);
-						if (ptr) *ptr=0;
+						if (ptr)
+						{
+							if (ptr > handle->anchor_path)
+								ptr--;
+							*ptr=0;
+						}
 
 						// Don't enter
 						handle->anchor->ap_Flags&=~APF_DODIR;
@@ -1444,3 +1449,4 @@ ExternalEntry *new_external_entry(FunctionHandle *handle,char *path)
 
 	return entry;
 }
+
