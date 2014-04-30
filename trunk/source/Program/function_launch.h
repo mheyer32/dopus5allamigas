@@ -44,12 +44,16 @@ enum
 
 typedef struct _FunctionEntry
 {
-	struct MinNode		node;
+	struct MinNode	node;
 	char			*name;
 	DirEntry		*entry;
 	short			type;
 	short			flags;
+#ifdef USE_64BIT
+	UQUAD			size;
+#else
 	long			size;
+#endif
 } FunctionEntry;
 
 typedef struct
@@ -532,6 +536,7 @@ FileChange *function_filechange_rename(FunctionHandle *,char *,char *);
 #define FM_Protect	( TAG_USER + 0x3 )
 #define FM_Comment	( TAG_USER + 0x4 )
 #define FM_Name		( TAG_USER + 0x5 )
+#define FM_Size64	( TAG_USER + 0x6 )
 
 #define FMF_SIZE	(1<<0)
 #define FMF_DATE	(1<<1)

@@ -335,11 +335,17 @@ FileChange *function_filechange_modify(
 		// Look at change
 		switch (tag)
 		{
-			// Size
+			// 32 Bit Size
 			case FM_Size:
 				change->flags|=FMF_SIZE;
-#warning What about the high 32-bits?
+//#warning What about the high 32-bits? Using FM_Size64 for 64 bit sizes
 				GETFIBSIZE(change->fib) = tagdata;
+				break;
+
+			// 64 Bit Size
+			case FM_Size64:
+				change->flags|=FMF_SIZE;
+				GETFIBSIZE(change->fib) = *(UQUAD *)tagdata;
 				break;
 
 			// Date
