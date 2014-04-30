@@ -118,7 +118,12 @@ DOPUS_FUNC(function_copy)
 	char *password=0,*password_buf;
 	BOOL move_flag=0,rename_flag=0,link_flag=0,no_move_rename=0,source_same=0,dragdrop=0;
 	BOOL change_info=0;
-	ULONG copy_flags,rec_size=0;
+	ULONG copy_flags;
+#ifdef USE_64BIT
+	UQUAD rec_size = 0;
+#else
+	ULONG rec_size=0;
+#endif
 	CopyData *data;
 
 	// Get function
@@ -641,7 +646,11 @@ DOPUS_FUNC(function_copy)
 					handle,
 					source->path,
 					entry->name,
+#ifdef USE_64BIT
+					FM_Size64, &rec_size,
+#else
 					FM_Size,rec_size,
+#endif
 					TAG_END);
 				rec_size=0;
 			}

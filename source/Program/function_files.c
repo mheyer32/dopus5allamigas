@@ -865,10 +865,10 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 						{
 							// Set entry type
 							handle->recurse_entry->type=ENTRY_FILE;
-#warning Is this even used?
+//#warning Is this even used? Used by function_copy to get filesize
 							// Set entry size
-							handle->recurse_entry->size=handle->anchor->ap_Info.fib_Size;
-
+//							handle->recurse_entry->size=handle->anchor->ap_Info.fib_Size;
+							handle->recurse_entry->size=(UQUAD)GETFIBSIZE(&handle->anchor->ap_Info);
 							// Increment counts
 							++handle->recurse_count;
 							handle->recurse_bytes+=GETFIBSIZE(&handle->anchor->ap_Info);
