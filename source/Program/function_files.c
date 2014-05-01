@@ -25,73 +25,36 @@ For more information on Directory Opus for Windows please see:
 
 /*********************************************************/
 
-LONG MatchFirstPlus(
-	REG(a0, STRPTR pat),
-	REG(a1, FunctionHandle *handle))
-{
-	// MatchFirst() returns 0 for success, errorcode for error
-	LONG error = 0;
-
-	error = MatchFirst(pat, handle->anchor);
-#ifndef __MORPHOS__
-	((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)handle->anchor->ap_Info.fib_Size;
-#endif
-
-#ifdef __amigaos4__
-	if (!error && handle->anchor->ap_Info.fib_DirEntryType<0
-	&& !(handle->anchor->ap_Info.fib_NumBlocks
-	< (4194304/(handle->source_block_size/512))))
-	{
-		BPTR flock;
-		struct ExamineData *exdata;
-		char buf[512];
-
-		NameFromLock(handle->anchor->ap_Current->an_Lock, buf, sizeof(buf));
-		AddPart(buf, handle->anchor->ap_Info.fib_FileName, sizeof(buf));
-
-		if ((flock=Lock(buf, ACCESS_READ)))
-		{
-			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
-			{
-				((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
-				FreeDosObject(DOS_EXAMINEDATA, exdata);
-			}
-			UnLock(flock);
-		}
-	}
-#endif
-
-	return error;
-}
-
-LONG MatchNextPlus(
-	REG(a0, FunctionHandle *handle))
+LONG MatchNext64Plus(
+	REG(a0, struct AnchorPath *panchor),
+	REG(do, ULONG blocksize))
 {
 	// MatchNext() returns 0 for success, errorcode for error
 	LONG error = 0;
 
-	error = MatchNext(handle->anchor);
+	error = MatchNext(panchor);
 #ifndef __MORPHOS__
-	((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)handle->anchor->ap_Info.fib_Size;
+	((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)panchor->ap_Info.fib_Size;
 #endif
 
 #ifdef __amigaos4__
-	if (!error && handle->anchor->ap_Info.fib_DirEntryType<0
-	&& !(handle->anchor->ap_Info.fib_NumBlocks
-	< (4194304/(handle->source_block_size/512))))
+	if (blocksize == 0) blocksize = 512;
+	if (!error && panchor->ap_Info.fib_DirEntryType<0
+	&& !(panchor->ap_Info.fib_NumBlocks
+	< (4194304/(blocksize/512))))
 	{
 		BPTR flock;
 		struct ExamineData *exdata;
 		char buf[512];
 
-		NameFromLock(handle->anchor->ap_Current->an_Lock, buf, sizeof(buf));
-		AddPart(buf, handle->anchor->ap_Info.fib_FileName, sizeof(buf));
+		NameFromLock(panchor->ap_Current->an_Lock, buf, sizeof(buf));
+		AddPart(buf, panchor->ap_Info.fib_FileName, sizeof(buf));
 
 		if ((flock=Lock(buf, ACCESS_READ)))
 		{
 			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
 			{
-				((FileInfoBlock64 *)&handle->anchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
+				((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
 			UnLock(flock);
@@ -996,7 +959,7 @@ FunctionEntry *function_get_entry(FunctionHandle *handle)
 			}
 
 			// Get the next match
-			handle->recurse_return=MatchNextPlus(handle);
+			handle->recurse_return=MatchNext64Plus(handle->anchor, handle->source_block_size);
 
 			// Return entry
 			if (handle->recurse_entry)
@@ -1200,7 +1163,7 @@ int function_end_entry(
 			}
 
 			// Recurse into it
-			handle->recurse_return=MatchFirstPlus(handle->work_buffer,handle);
+			handle->recurse_return=MatchFirst64(handle->work_buffer,handle->anchor);
 			handle->recurse_depth=1;
 
 			// Initialise anchor path
