@@ -26,8 +26,8 @@ For more information on Directory Opus for Windows please see:
 /*********************************************************/
 
 LONG MatchNext64Plus(
-	REG(a0, struct AnchorPath *panchor),
-	REG(do, ULONG blocksize))
+	struct AnchorPath *panchor,
+	ULONG blocksize)
 {
 	// MatchNext() returns 0 for success, errorcode for error
 	LONG error = 0;
