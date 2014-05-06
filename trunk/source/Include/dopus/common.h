@@ -95,6 +95,7 @@
 
 #include <dopus/debug.h>
 #include <dopus/version.h>
+#include <dopus/stack.h>
 
 #ifdef __amigaos4__
 #include <exec/emulation.h>		// necessary 68k emul-based parts

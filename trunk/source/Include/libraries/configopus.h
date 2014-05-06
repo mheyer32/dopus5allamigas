@@ -6,8 +6,8 @@
 #pragma pack(2)
 #endif 
 
-
-#define STACK_DEFAULT	6144
+// Moved to Include/dopus/stack.h
+//#define STACK_DEFAULT	6144
 
 #define EFTF_EDIT_CLASS		(1<<0)
 
