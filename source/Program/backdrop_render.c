@@ -1239,6 +1239,9 @@ void backdrop_bad_disk_name(BackdropObject *object,char *namebuf)
 	pad[0]=object->misc_data;
 	pad[1]=0;
 	ptr=(char *)pad;
+#ifdef __AROS__
+	pad[0]=AROS_BE2LONG(pad[0]);
+#endif
 
 	// Check for printable characters
 	for (num=0;num<4;num++,ptr++)
