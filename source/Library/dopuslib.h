@@ -78,9 +78,9 @@ typedef struct FileInfoBlock64_s
 #endif
 
 // ---------------------------------------------------------------
-
-#define STACK_DEFAULT	6144
-#define STACK_LARGE	8192
+// Moved to Include/dopus/stack.h
+//#define STACK_DEFAULT	6144
+//#define STACK_LARGE	8192
 
 // Locale
 #define CATCOMP_NUMBERS

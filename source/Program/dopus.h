@@ -24,9 +24,9 @@ For more information on Directory Opus for Windows please see:
 #ifndef DOPUS_INCLUDE
 #define DOPUS_INCLUDE
 
-
-#define STACK_DEFAULT	6144
-#define STACK_LARGE	8192
+// Moved to Include/dopus/stack.h
+//#define STACK_DEFAULT	6144
+//#define STACK_LARGE	8192
 
 #include <proto/dopus5.h>
 #include <proto/configopus.h>

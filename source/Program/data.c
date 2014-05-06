@@ -23,9 +23,17 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
+// Stack settings
+#if defined(__amigaos4__)
+// Stack cookie for OS4
+STATIC CONST_STRPTR USED stack = "\0$STACK:"STACK_STRING"\0";
+#else
+// Stack size for libnix
+USED_VAR unsigned long __stack = STACK_LARGE;
+#endif
+
 // SAS Detach information
 #if defined(__amigaos3__)
-long __stack=STACK_LARGE;
 long __priority=0;
 long __BackGroundIO=0;
 char *__procname="dopus";
