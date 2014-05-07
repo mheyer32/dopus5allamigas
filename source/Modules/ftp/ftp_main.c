@@ -216,11 +216,11 @@ IPCData             *ipcd = NULL;
 
 if	((data = AllocVec( sizeof(struct subproc_data), MEMF_CLEAR )))
 	{
-	int stack =4096*2;
+	int stack = STACK_DEFAULT;
 	data->spd_ogp = og;
 	data->spd_owner_ipc = ipc;
 
-	// Listers now have 8k stack * stack_multiplier for recursive safety
+	// Listers now use STACK_DEFAULT stack size for recursive safety
 	if	(!IPC_Launch( tasklist, &ipcd, name, (ULONG)proc_code, stack, (ULONG)data, (struct Library *)DOSBase ))
 		ipcd = NULL;
 	}
