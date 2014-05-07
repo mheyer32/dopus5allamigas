@@ -251,7 +251,7 @@ if	((data = AllocVec( sizeof(struct format_data), MEMF_CLEAR )))
 		&format_ipc,			// IPCData ** to store task IPC pointer in (optional)
 		"dopus_ftp_format",		// Name
 		(ULONG)format_code,		// Code
-		4096,				// Stack size
+		STACK_DEFAULT,				// Stack size
 		(ULONG)data,			// Data passed to task
 		(struct Library *)DOSBase );	// Needs pointer to dos.library
 	

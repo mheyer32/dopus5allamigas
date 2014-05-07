@@ -107,7 +107,7 @@ if	((mldata = AllocVec( sizeof(struct modlaunch_data), MEMF_CLEAR )))
 		&og.og_main_ipc, 		// IPCData ** to store task IPC pointer in (optional)
 		"dopus_ftp",			// Name
 		(ULONG)dopus_ftp,		// Code
-		4096 * 2,			// Stack size
+		STACK_DEFAULT,			// Stack size
 		(ULONG)mldata,			// Data passed to task
 		(struct Library *)DOSBase ))	// Needs pointer to dos.library
 		{

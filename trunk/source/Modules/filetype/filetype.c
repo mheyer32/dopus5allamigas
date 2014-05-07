@@ -724,7 +724,7 @@ IPC_Launch(
 	&data->creator_ipc,			// IPCData ** to store task IPC pointer in (optional)
 	"filetype_creator",			// Name
 	(ULONG)finder_creator_proc_code,	// Code
-	4000,					// Stack size
+	STACK_DEFAULT,					// Stack size
 	(ULONG)data,				// Data passed to task
 	(struct Library *)DOSBase );				// Needs pointer to dos.library
 
@@ -882,7 +882,7 @@ IPC_Launch(
 	&data->editor_ipc,		// IPCData ** to store task IPC pointer in (optional)
 	"filetype_editor",		// Name
 	(ULONG)finder_editor_proc_code,	// Code
-	4000,				// Stack size
+	STACK_DEFAULT,				// Stack size
 	(ULONG)data,			// Data passed to task
 	(struct Library *)DOSBase );			// Needs pointer to dos.library
 
@@ -2370,7 +2370,7 @@ else
 		&data->editor_ipc,			// IPCData ** to store task IPC pointer in (optional)
 		"filetype_editor",			// Name
 		(ULONG)creator_editor_proc_code,	// Code
-		4000,					// Stack size
+		STACK_DEFAULT,					// Stack size
 		(ULONG)data,				// Data passed to task
 		(struct Library *)DOSBase );				// Needs pointer to dos.library
 	}

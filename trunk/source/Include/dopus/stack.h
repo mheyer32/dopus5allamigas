@@ -12,7 +12,7 @@
 // STACK_DEFAULT used for starting processes
 #ifndef __amigaos3__
 	#define STACK_DEFAULT	16384
-	#define STACK_LARGE		32764
+	#define STACK_LARGE		32768
 #else
 	#define STACK_DEFAULT	8192
 	#define STACK_LARGE		16384
