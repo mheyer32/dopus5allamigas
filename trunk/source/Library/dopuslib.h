@@ -40,7 +40,6 @@ For more information on Directory Opus for Windows please see:
 #include <cybergraphx/cybergraphics.h>
 #include <exec/execbase.h>
 #include <proto/alib.h>
-#include <proto/dopus5.h>
 #else
 #include <cybergraphx/cybergraphics.h>
 #endif
@@ -77,6 +76,10 @@ typedef struct FileInfoBlock64_s
 } FileInfoBlock64;
 #endif
 
+#if defined(__MORPHOS__) || defined(__AROS__)
+#include <proto/dopus5.h>
+#endif
+
 // ---------------------------------------------------------------
 // Moved to Include/dopus/stack.h
 //#define STACK_DEFAULT	6144
@@ -91,16 +94,6 @@ typedef struct FileInfoBlock64_s
 #pragma pack(2)
 #endif
 
-#if 0
-struct MyLibrary
-{
-        struct             Library ml_Lib;
-        ULONG              ml_SegList;
-        ULONG              ml_Flags;
-        APTR               ml_ExecBase; /* pointer to exec base  */
-        ULONG              ml_UserData;
-};
-#else
 struct MyLibrary
 {
   struct Library          libBase;
@@ -110,7 +103,7 @@ struct MyLibrary
   struct SignalSemaphore  libSem;
   ULONG                   ml_UserData;
 };
-#endif
+
 #ifdef __amigaos4__
 APTR dopuslibbase_global;
 #endif
