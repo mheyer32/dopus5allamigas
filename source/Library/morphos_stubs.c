@@ -1,3 +1,4 @@
+
 #include <ppcinline/macros.h>
 
 int errno;	// just temporarily defined here
@@ -1683,17 +1684,17 @@ LIBSTUB_2(L_ExamineLock64, BOOL,
 	REG(d0, BPTR lock),
 	REG(a0, FileInfoBlock64 *fib))
 
-LIBSTUB_2(L_ExamineNext64, BOOL
+LIBSTUB_2(L_ExamineNext64, BOOL,
 	REG(d0, BPTR lock),
 	REG(a0, FileInfoBlock64 *fib))
 
-LIBSTUB_2(L_ExamineHandle64, BOOL
+LIBSTUB_2(L_ExamineHandle64, BOOL,
 	REG(d0, BPTR fh),
 	REG(a0, FileInfoBlock64 *fib))
 
-LIBSTUB_2(L_MatchFirst64, LONG
+LIBSTUB_2(L_MatchFirst64, LONG,
 	REG(a0, STRPTR pat),
 	REG(a1, struct AnchorPath *panchor))
 
-LIBSTUB_1(L_MatchNext64, LONG
+LIBSTUB_1(L_MatchNext64, LONG,
 	REG(a0, struct AnchorPath *panchor))
