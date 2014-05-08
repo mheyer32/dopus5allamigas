@@ -233,7 +233,7 @@ BOOL LIBFUNC L_ExamineLock64(
 		if ((exdata=ExamineObjectTags(EX_FileLockInput, lock, TAG_END)))
 		{
 			fib->fib_Size64 = exdata->FileSize;
-			D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
+			//D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
 		}
 	}
@@ -279,7 +279,7 @@ BOOL LIBFUNC L_ExamineNext64(
 			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
 			{
 				fib->fib_Size64 = exdata->FileSize;
-				D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
+				//D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
 			UnLock(flock);
@@ -321,7 +321,7 @@ BOOL LIBFUNC L_ExamineHandle64(
 		if ((exdata=ExamineObjectTags(EX_FileHandleInput, fh, TAG_END)))
 		{
 			fib->fib_Size64 = exdata->FileSize;
-			D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
+			//D(bug("Got 64-bit size for %s: %lld\n", fib->fib_FileName, fib->fib_Size64));
 			FreeDosObject(DOS_EXAMINEDATA, exdata);
 		}
 	}
@@ -357,7 +357,7 @@ LONG LIBFUNC L_MatchFirst64(
 			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
 			{
 				((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
-				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
+				//D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
 			UnLock(flock);
@@ -394,7 +394,7 @@ LONG LIBFUNC L_MatchNext64(
 			if ((exdata=ExamineObjectTags(EX_FileLockInput, flock, TAG_END)))
 			{
 				((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64 = (UQUAD)exdata->FileSize;
-				D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
+				//D(bug("Got 64-bit size for %s: %lld\n", panchor->ap_Info.fib_FileName, ((FileInfoBlock64 *)&panchor->ap_Info)->fib_Size64));
 				FreeDosObject(DOS_EXAMINEDATA, exdata);
 			}
 			UnLock(flock);
