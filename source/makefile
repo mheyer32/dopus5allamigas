@@ -67,12 +67,13 @@ $(NAME) : all
 endif
 ###########################################################
 # Sets archive type & version.
+REVISION := 90
 ifeq ($(debug), no)
 TYPE :=
-VERSION := _90_
+VERSION := _$(REVISION)_
 else
 TYPE := _debug
-VERSION := _90_dev_
+VERSION := _$(REVISION)_dev_
 endif
 ###########################################################
 # Sets compile system.
@@ -193,6 +194,9 @@ endif
 	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
 	@$(COPY) bin.$(NAME)/LoadDB Dopus5/C
 	@$(COPY) bin.$(NAME)/viewfont Dopus5/C
+ifeq ($(log), yes)
+	@$(COPY) ../ChangeLog Dopus5
+endif
 	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
 	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
 	@$(REMOVE) Dopus5
