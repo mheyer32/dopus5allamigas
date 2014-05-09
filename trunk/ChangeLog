@@ -1,76 +1,4456 @@
-----------------------------
-Directory Opus 5 - ChangeLog
-----------------------------
+[r1020] by paraxenic
+Updated ChangeLog
+Added log=yes arg to main makefile for copying ChangeLog to release archives
+2014-05-09 15:09:09	 Tree
 
-$Id: ChangeLog 23 2013-02-06 14:38:59Z paraxenic $
-$URL: svn+ssh://kas1e@svn.code.sf.net/p/dopus5allamigas/code/trunk/ChangeLog $
+[r1019] (HEAD) by  kas1e
+morphos: added -DUSE_64BIT, so morphos build have now 64bit suport for disks/files too
+2014-05-08 08:07:57	 Tree
 
-2013-02-06 xenic
+[r1018] by  kas1e
+morphos: added -DUSE_SCREENTITLE, so no more ugly screen title and for morphos too
+2014-05-08 07:52:31	 Tree
 
-* Documents/Dopus55.pdf & Documents/Dopus582.pdf: Replaced PDF 1.4 docs
-  with PDF 1.3 docs so documentation will be readable by OS3 users.
+[r1017] by  kas1e
+fixed morphos build by doing include of proto/dopus5.h after 64bit structure defination, +little cleanup
+2014-05-08 07:07:49	 Tree
 
-2013-01-17 xenic
+[r1016] by  kas1e
+library/morphos_stubs.c : fixed some typos
+2014-05-08 06:41:28	 Tree
 
-  * Documents/Dopus582.pdf: Added Dopus 5.82 PDF documentation based on
-    original PageStream files and with references to registration and copyright
-    removed.
+[r1015] by  kas1e
+remove debug from 64bit functions, as it no more need it, and just slow operations with files for testers
+2014-05-08 05:33:17	 Tree
 
-2013-01-13 xenic
+[r1014] by  paraxenic
+Updated stack specifications to use stack size definitions
+in Include/dopus/stack.h
+2014-05-07 15:07:36	 Tree
 
-  * Documents/Dopus55.pdf: Added Dopus 5.5 PDF documentation based on
-    original PageStream files and with references to registration and copyright
-    removed.
+[r1013] by  paraxenic
+Moved stack size specification to Include/dopus/stack.h and adjusted
+code to use stack specifications in stack.h. Added libnix stackswap
+linkage to OS3 makefile so the "__stack" variable will work and adjust
+the stack for OS3 Dopus5 program.
+2014-05-06 17:32:09	 Tree
 
-2013-01-07 Jens Langner <Jens.Langner@light-speed.de>
+[r1012] by  paraxenic
+Added specs file for OS3 stackswap to enable setting stack size.
+2014-05-06 17:24:31	 Tree
 
-  * makefile: renamed all "makefile" files to "smakefile" to make it more clear
-    that these are SAS/C makefiles and no GCC makefiles and make room for the
-    upcoming GCC makefiles.
+[r1011] by  bszili
+Byteswap the DOS type on AROS, before converting it to string.
+2014-05-06 05:24:13	 Tree
 
-2012-12-12 Roman Kargin <kas1e@yandex.ru>
+[r1010] by  kas1e
+delete modules/notes.txt file, which needs was only to make initial modules ports
+2014-05-02 07:13:02	 Tree
 
-  * Dopus5 code uses MsgPort->mp_Flags for some private flag (PF_ASYNC) for IPC
-    communications and which is defined as "#define PF_ASYNC    (1<<7)". While
-    on OS3 and MorphOS it wasn't a problem, its still was hardcode/hardcore and
-    bring conflicts in AmigaOS4 (which causes heavy crashes), because on AmigaOS4
-    such a define are taken for private messaging needs and defined as PF_SIGALLOC 
-    (check exec/ports.h in OS4's SDK).
-    
-    So we get rid of the hardcoding, and do changes to not mess with MsgPort->mp_Flags,
-    but instead make it put (and check) some magic value in MsgPort->mp_Node.ln_Pri
-    (may be possible with MsgPort->mp_Node.ln_Type as well).
-    
-    The changes are quite small:
-    
-    initial dopus5 code:
-    
-    # find -type f | xargs grep -i PF_ASYNC
-    
-     ./Program/function_launch.c:    handle->reply_port->mp_Flags|=PF_ASYNC;
-     ./Library/ipc.c:                if (reply->mp_Flags&PF_ASYNC)
-     ./Library/ipc.c:                port->mp_Flags|=PF_ASYNC;
-     ./Library/dopusbase.h:#define PF_ASYNC  (1<<7)
-     ./NewRegModules/dopusbase.h:#define PF_ASYNC    (1<<7)
+[r1009] by  paraxenic
+Fixed typing errors.
+2014-05-01 21:32:50	 Tree
 
-    our new changes:
+[r1008] by  paraxenic
+Eliminated local MatchFirstPlus() function and changed the MatchFirstPlus
+function call to library MatchFirst64() and removed MatchFirstPlus. Changed
+local MatchNextPlus() function to use AnchorPath and block_size arguments
+instead of FunctionHandle argument and renamed it MatchNext64Plus. The
+changed arguments will make moving it to the library to replace
+MatchNext64() simpler.
+2014-05-01 18:42:42	 Tree
 
-    ./Program/function_launch.c:    handle->reply_port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC;
-    ./Library/ipc.c:                if (reply->mp_Node.ln_Pri == PORT_ASYNC_MAGIC)
-    ./Library/ipc.c:                port->mp_Node.ln_Pri = PORT_ASYNC_MAGIC;
-    ./Library/dopusbase.h:#define PORT_ASYNC_MAGIC  0x5A
-    ./NewRegModules/dopusbase.h:#define PORT_ASYNC_MAGIC 0x5A
-      
-     By this way we didn't have any conflicts with any private parts of any OS and avoid
-     hardcoding to make whole code more portable in end. 
+[r1007] by  paraxenic
+Fixed the copied size display in source listers when a directory
+containing 2GB+ files is copied.
+2014-04-30 21:01:37	 Tree
 
-     Thanks to the AROS core coder "Georg Steger", who help to find out the roots.
+[r1006] by  paraxenic
+Fixed GetSizes bug that got wrong sizes when broken links exist.
+2014-04-30 15:32:25	 Tree
 
-2012-12-22 Jens Langner <Jens.Langner@light-speed.de>
+[r1005] by  kas1e
+added remain 64bit support to program/function_copy.c, so move and moveas will show correct numbers now too, and not random size
+2014-04-30 12:39:43	 Tree
 
-  * ChangeLog, README, etc.: added ChangeLog file to synchronize individual
-    developer changes more easily.
+[r1004] by  kas1e
+added 64bit support to program/function_rename.c, so rename give right size of created dir/icon files, and not random size
+2014-04-29 12:08:35	 Tree
 
-2012-12-18 Roman Kargin <kas1e@yandex.ru>
+[r1003] by  kas1e
+added 64bit support to program/function_makedir.c, so makedir give right size of created dir, and not random size
+2014-04-29 09:22:39	 Tree
 
-  * initial checkin of open sourced sources.
+[r1002] by  kas1e
+fixed warnings related to 64bit support in program/function_copy.c
+2014-04-29 09:20:44	 Tree
+
+[r1001] by  kas1e
+fix copyright dates
+2014-04-29 06:51:46	 Tree
+
+[r1000] by  kas1e
+USE_64BIT ifdefs for 64bit funcs
+2014-04-29 05:51:32	 Tree
+
+[r999] by  kas1e
+some cosmetic
+2014-04-29 05:45:39	 Tree
+
+[r998] by  paraxenic
+Changed 2 Examine() function calls to ExamineLock64() function calls
+which eliminates bad sizes appearing in destination lister when copying
+files and/or directories.
+2014-04-28 15:15:31	 Tree
+
+[r997] by  paraxenic
+Reverted fix for broken links bug in function_files.c because the fix
+broke recursion for good links.
+2014-04-26 21:31:14	 Tree
+
+[r996] by  kas1e
+fixed os3 crashes when do debugprinfs (currently just commented out with warning, till will no get what wrong)
+2014-04-26 12:47:33	 Tree
+
+[r995] by  paraxenic
+Added error & directory checks to MatchFirst... & MatchNext... functions.
+2014-04-25 01:48:53	 Tree
+
+[r994] by  paraxenic
+Added new "match" functions to replace MatchFirst64/MatchNext64
+functions in dopus5.library.
+Added source_block_size element to FunctionHandle structure.
+Added code to obtain source lister (device) block size for calculations
+in new match functions.
+2014-04-23 14:08:51	 Tree
+
+[r993] by  bszili
+Added missing UnLocks to MatchFirst64/MatchNext64.
+2014-04-21 07:43:43	 Tree
+
+[r992] by  bszili
+Make sure MatchFirst64/MatchNext64 gets the 64-bit size of the correct file on OS4. Now it uses the full path instead of just the filename.
+2014-04-21 07:12:32	 Tree
+
+[r991] by  bszili
+ftp.module: added a more compatible method of detecting MLSD support.
+2014-04-17 20:03:26	 Tree
+
+[r990] by  bszili
+Use fib_EntryType and fib_Size to store the 64-bit size instead of fib_Reserved. Will break big endian platforms without 64-bit DOS support, the aforementioned fields have to be swapped there.
+2014-04-17 13:05:06	 Tree
+
+[r989] by  bszili
+Re-applied r987.
+2014-04-14 20:09:40	 Tree
+
+[r988] by  paraxenic
+Changed all Dopus5 components to check for the minimum library
+version defined in Include/dopus/version.h ((LIB_VERSION) when
+opening dopus5.library. Bumped the library version to 70 because
+new functions have been added to the library.
+2014-04-14 19:32:55	 Tree
+
+[r987] by  bszili
+LoadDB: disabled the unnecessary opening and closing of dopus5.library before launching the main program.
+2014-04-14 19:11:23	 Tree
+
+[r986] by  bszili
+function_readdir: Make sure Examine has succeeded.
+2014-04-14 17:43:05	 Tree
+
+[r985] by  bszili
+icon.module: fixed the bogus argument to ItoaU64 (UQUAD to UQUAD*)
+2014-04-14 17:21:26	 Tree
+
+[r984] by  bszili
+Re-added GETFIBSIZE to function_files.c with the proper arguments.
+2014-04-14 17:18:55	 Tree
+
+[r983] by  paraxenic
+Replaced GETFIBSIZE() = GETFIBSIZE() with a direct 64 bit copy inside
+ifdefs (#ifdef USE_64BIT). The GETFIBSIZE() method wasn't working in
+OS3 or OS4 compiled binaries.
+2014-04-14 14:24:29	 Tree
+
+[r982] by  kas1e
+update aos4_68k_to_ppc_vectors to be in sync with lately added 64dos based functions
+2014-04-14 11:48:29	 Tree
+
+[r981] by  bszili
+Surrounded the new Examine*64 functions, so we won't crash with older versions of the library.
+2014-04-14 07:40:34	 Tree
+
+[r980] by  bszili
+icon.module: added missing ExamineLock64
+2014-04-14 07:14:56	 Tree
+
+[r979] by  bszili
+ftp.module: Temporarily disabled the MSDL listing, as sending the FEAT command to some servers breaks further responses.
+2014-04-13 19:33:44	 Tree
+
+[r978] by  bszili
+Fixed MatchFirst64 and MatchNext64.
+2014-04-13 19:30:00	 Tree
+
+[r977] by  bszili
+Fixed ExamineLock64 and ExamineNext64 on OS4.
+2014-04-13 19:07:20	 Tree
+
+[r976] by  bszili
+Fixed function_filechange_modify. The VA_* SDI macros are meant for VARARGS68K functions.
+2014-04-13 18:12:16	 Tree
+
+[r975] by  bszili
+Removed unused codesets.library-specific declarations from lib_protos.h.
+2014-04-13 13:00:59	 Tree
+
+[r974] by  bszili
+xadopus.module: Removed ProgressHook from the jumptable. It's for internal use only, so it makes no sense to "export" it.
+2014-04-13 12:00:55	 Tree
+
+[r973] by  bszili
+Removed the libbase externs, since they are already included from the proto headers.
+2014-04-13 11:45:08	 Tree
+
+[r972] by  bszili
+Added create_file_entry_fib for simpler parameter passing.
+2014-04-13 09:22:38	 Tree
+
+[r971] by  bszili
+Changed a few fib_Size accesses to GETFIBSIZE in function_filechange.c.
+2014-04-13 08:07:57	 Tree
+
+[r970] by  bszili
+function_readdir: allocate FIB on the stack.
+2014-04-13 07:34:22	 Tree
+
+[r969] by  bszili
+Moved the ifs inside the #ifdef blocks in Match*64.
+2014-04-13 07:19:04	 Tree
+
+[r968] by  bszili
+Fixed a silly typo in the library. ExamineNext64 should work now.
+2014-04-13 07:13:41	 Tree
+
+[r967] by  bszili
+function_change: Fixed an unaligned FIB.
+2014-04-12 19:44:01	 Tree
+
+[r966] by  bszili
+MorphOS MatchFirst/MatchNext already uses Examine64 and ExNext64 internally.
+2014-04-12 17:20:55	 Tree
+
+[r965] by  bszili
+Small backdrop_read_group_objects cleanup: allocate FIB on the stack.
+2014-04-12 16:33:09	 Tree
+
+[r964] by  bszili
+Removed the superfluous support for unaligned FIBs from Examine*64() functions.
+2014-04-12 16:18:34	 Tree
+
+[r963] by  bszili
+Changed the FileChange structure to include an aligned FIB copy instead of a subset of fields.
+2014-04-12 16:09:14	 Tree
+
+[r962] by  bszili
+Added a missing ExamineLock64 to function_filechange.c.
+2014-04-12 13:55:46	 Tree
+
+[r961] by  bszili
+Moved the new Match*64() functions into the library. Fixed the main program to use the Examine*64() functions instead of manually getting the 64-bit size.
+2014-04-12 13:36:18	 Tree
+
+[r960] by  paraxenic
+Added missing "struct" in MOS FileInfoBlock decalrations.
+2014-04-11 01:52:43	 Tree
+
+[r959] by  paraxenic
+library/64bit.c - Added TAG_DONE arg to MOS Examine... function calls.
+amiga.c - Removed MatchFirst64()/MatchNext64()/getfibsize() functions.
+misc.c - Added MatchFirst64()/MatchNext64()/getfibsize() functions.
+misc.h - Added protos for MatchFirst64()/MatchNext64()/getfibsize().
+function_files.c - Commented out D(bug statement.
+2014-04-10 17:47:45	 Tree
+
+[r958] by  paraxenic
+Fixed MOS Examine64() with a TAG_DONE argument.
+2014-04-09 19:43:38	 Tree
+
+[r957] by  paraxenic
+function_getsizes.c - Changed %d to %ld because RawDoFmt() assumes
+16 bit integers unless long is specified.
+function_readdir.c - Fixed link identification and added 64bit sizes.
+function_launch.h - Added 64 bit recurse byte totals to
+struct FunctionHandle.
+links.c - Added 64bit sizes for links and rearranged code
+to be more readable.
+buffers.c - Replaced OS4 ExamineObject code with getfibsize() to get 64bit
+link sizes from the temporary sinfo FIB returned by ReadSoftLinkDopus().
+function_files.c - Added 64 bit filelink sizes.
+amiga.c - Added MatchFirst64() & MatchNext64() functions to obtain 64bit
+sizes. Added getfibsize() function to extract 64bit sizes from the new
+FileInfoBlock64 structure. These additions are temporary and will be
+removed when dopus5.library is updated with equivalent functions.
+Include/libraries/dopus5.h - Added "typedef" to FileInfoBlock structure
+to get new MatchFirst64()/MatchNext64() functions working.
+2014-04-09 17:21:59	 Tree
+
+[r956] by  bszili
+Added L_ExamineNext64 to the library.
+2014-04-06 17:47:49	 Tree
+
+[r955] by  bszili
+Added the L_ExamineLock64 and L_ExamineHandle64 functions and FileInfoBlock64 type to the library. No glue yet, and more functions need 64-bit versions: MatchFirst(), MatchNext(), ExNext().
+2014-04-06 09:32:08	 Tree
+
+[r954] by  paraxenic
+Changed EX_LockInput definition to old EX_FileLockInput definition
+to work with outdated overnight server OS4 SDK includes.
+2014-03-31 13:26:49	 Tree
+
+[r953] by  paraxenic
+Changed OS4 link size retrieval to use ExamineObject instead of
+opening a filelink to obtain size.
+2014-03-28 12:25:36	 Tree
+
+[r952] by  bszili
+configopus.module: Added a more robust fix when no DOS packets are available on AROS. This should get rid of illegal memory accesses with non-volume devices.
+2014-03-23 12:56:49	 Tree
+
+[r951] by  bszili
+Added a workaround for getting the correct deficons for ftp.module entries. Icon mode ftp listers are still not fully functional.
+2014-03-22 21:15:24	 Tree
+
+[r950] by  paraxenic
+Added visual identification of broken links in lister entries by
+adding the comment "UNRESOLVED LINK".
+2014-03-21 17:34:52	 Tree
+
+[r949] by  bszili
+ftp.module: Added MLSD support for better directory listings.
+2014-03-21 12:32:27	 Tree
+
+[r948] by  paraxenic
+Added code to get correct size for 4GB+ file links.
+2014-03-20 20:14:47	 Tree
+
+[r947] by  paraxenic
+Added a LF to debug output so it shows up immediately in Sashimi.
+2014-03-20 14:06:59	 Tree
+
+[r946] by  paraxenic
+Fixed retrieval of OS4 link type info.
+2014-03-19 22:51:30	 Tree
+
+[r945] by  bszili
+icon.module: OS4 64-bit fix for the file size
+2014-03-19 18:58:55	 Tree
+
+[r944] by  bszili
+OS4 64-bit fixes for function copy and icon mode listers.
+2014-03-19 16:34:26	 Tree
+
+[r943] by  bszili
+Added some debug output to ReadSoftLinkDopus()
+2014-03-19 15:06:00	 Tree
+
+[r942] by  bszili
+function_readdir: soft links has to be treated as directories
+2014-03-18 10:50:57	 Tree
+
+[r941] by  bszili
+The readdir function is now 64-bit aware on OS4.
+2014-03-17 19:28:21	 Tree
+
+[r940] by  kas1e
+diskinfo and icon modules: fixed os3 builds, added more filesystems
+2014-03-17 08:53:43	 Tree
+
+[r939] by  kas1e
+diskinfo and icon modules: small workaround for os3 disktype detections, some comments and little cleanup
+2014-03-15 14:16:17	 Tree
+
+[r938] by  kas1e
+small cleanup in FS detection
+2014-03-13 11:24:42	 Tree
+
+[r937] by  kas1e
+add more filesystems to icon and diskinfo modules
+2014-03-13 11:09:03	 Tree
+
+[r936] by  kas1e
+format and diskcopy modules: enabled 64bit support for os3/os4 as well
+2014-03-13 06:03:59	 Tree
+
+[r935] by  paraxenic
+Fixed %full calculations for devices in a lister.
+2014-03-12 23:42:50	 Tree
+
+[r934] by  bszili
+Removed the unnecessary FPU dependency of the getsizes function.
+2014-03-12 20:01:15	 Tree
+
+[r933] by  bszili
+64-bit fixes for discopy.module and format.module for completeness sake.
+2014-03-12 18:07:57	 Tree
+
+[r932] by  bszili
+Fixed diskinfo.module on OS3.
+2014-03-12 18:01:48	 Tree
+
+[r931] by  kas1e
+added recognize of ffs7,sfs0,sfs7,jxfs and swap to diskinfo and icon modules
+2014-03-12 13:04:07	 Tree
+
+[r930] by  bszili
+Fixed the bogus clib proto for DivideU64. The type of quo and rem should have been 'UQUAD *' instead of 'UQUAD'.
+2014-03-12 11:12:29	 Tree
+
+[r929] by  kas1e
+enabled 64bit support in diskinfo/icon modules for os3 and os4 as well
+2014-03-12 05:48:36	 Tree
+
+[r928] by  bszili
+icon.module: added a missing brace.
+2014-03-11 18:07:36	 Tree
+
+[r927] by  bszili
+icon.module: added 64-bit support.
+2014-03-11 14:17:41	 Tree
+
+[r926] by  bszili
+diskinfo.module: Added 64-bit support.
+2014-03-11 13:53:26	 Tree
+
+[r925] by  kas1e
+added necessary changes in os4 includes/files to have 64bit support in library
+2014-03-11 13:37:10	 Tree
+
+[r924] by  bszili
+Migrated the 64-bit functions into the library.
+2014-03-11 12:42:10	 Tree
+
+[r923] (HEAD) by  bszili
+Move images into the chip memory on OS3.
+2014-03-11 07:09:57	 Tree
+
+[r922] by  kas1e
+replaced remaining codesets.library copyright notices by Dopus5 copyright notices
+2014-03-11 05:50:00	 Tree
+
+[r921] by  kas1e
+program: enable 64bit support for os3 and os4
+2014-03-11 05:29:54	 Tree
+
+[r920] by  bszili
+Removed copy_mem. It used to be an inline version of CopyMem, but it has no purpose anymore.
+2014-03-10 19:08:15	 Tree
+
+[r919] by  bszili
+Removed the encrypted strings from Eliza.
+2014-03-10 19:05:41	 Tree
+
+[r918] by  bszili
+Moved the hard-coded image data into data.c.
+2014-03-10 18:32:29	 Tree
+
+[r917] by  bszili
+Experimental 64-bit support for large drives, only in the main executable. Enable by defining USE_64BIT.
+2014-03-10 15:34:16	 Tree
+
+[r916] by  bszili
+ftp.module: Always treat directories as zero size. Unix servers usually return 4096 for directories.
+2014-03-10 14:08:27	 Tree
+
+[r915] by  kas1e
+program: commented out some parts of the rev900 (os3 lister's arrow images fix) for future reference, which cause crashes of os3 binary on os4/mos
+2014-03-10 14:05:33	 Tree
+
+[r914] by  kas1e
+fixed os3 crash by commenting out d(bug) call in os3 build. todo: invistigate why it crashes and fix normally
+2014-03-10 13:03:45	 Tree
+
+[r913] by  kas1e
+diskinfo module: fixed os3 build
+2014-03-10 13:00:40	 Tree
+
+[r912] by  bszili
+Fixed the stupid typos in diskinfo.module.
+2014-03-10 08:53:01	 Tree
+
+[r911] by  bszili
+Removed the last reference of chip_memory from the library. Removed the redefinition of the D() macro on AROS.
+2014-03-10 07:28:56	 Tree
+
+[r910] by  bszili
+Fixed total/selected bytes in icon and icon action lister's status bars.
+2014-03-09 19:38:15	 Tree
+
+[r909] by  bszili
+Fixed the icon action mode for the device list.
+2014-03-09 15:20:19	 Tree
+
+[r908] by  bszili
+diskinfo.module: Use mathffp.library and mathtrans.library, but only on OS3.
+2014-03-09 07:59:21	 Tree
+
+[r907] by  bszili
+dopus5.library: Removed the unused chip_memory pool. Added QUAD/UQUAD types for OS3 and OS4.
+2014-03-09 07:44:56	 Tree
+
+[r906] by  bszili
+xadopus.module: L_PrograssHook() is a standard Hook called using CallHookPkt() by xadmaster.library, so it has to follow the A0, A2, A1 parameter signature everywhere. This fixes the broken xadopus progress bar on AROS, where the parameters are passed on the stack.
+2014-03-07 09:50:08	 Tree
+
+[r905] by  bszili
+Replaces AROS' bug macro with a custom one.
+2014-03-06 19:29:35	 Tree
+
+[r904] by  bszili
+Try to purge the removed App Entries before closing the library.
+2014-03-05 13:28:41	 Tree
+
+[r903] by  bszili
+Fixed the reference counting for the RemTask, OpenWorkbenchObject and WorkbenchControl functions. Added atomics for aros-arm. Removed a few superfluous casts in diskinfo.module.
+2014-03-04 16:58:37	 Tree
+
+[r902] by  paraxenic
+Fixed FTP site (addressbook) saving failure by replacing DOS packet
+file renaming in IFF open/close functions (library/iff.c) with code
+using DOS Rename() function.
+2014-03-03 16:11:38	 Tree
+
+[r901] by  kas1e
+os4: proper drop of IDOS interface in a library
+2014-03-03 09:42:20	 Tree
+
+[r900] by  bszili
+Fixed the command_arrow and parent_arrow lister icons on AROS. These icons and the left-out arrows are now put into the chip memory, so they will show up correctly in native chipset modes on OS3.
+2014-03-02 16:29:46	 Tree
+
+[r899] by  bszili
+LoadWB is now called LoadDB, so the original command isn't renamed to LoadWB_Old.
+2014-03-02 15:22:45	 Tree
+
+
+[r898] by  bszili
+Added usage counts to Icon and DOS patches too.
+2014-03-02 14:50:16	 Tree
+
+[r897] by  bszili
+Added a fallback method for detecting Wanderer's presence on AROS.
+2014-03-02 12:11:25	 Tree
+
+[r896] by  bszili
+Removed conflicting library base structures for dopus5.library (LibraryHeader vs MyLibrary). LibExpunge can now do the library cleanup too, which is necessary most of the time. Added reference counting for patched functions for safe removal.
+2014-03-02 11:38:59	 Tree
+
+[r895] by  bszili
+Prevent LibNIX from trying to auto-open v37 of rexxsyslib.library
+2014-03-01 09:48:13	 Tree
+
+[r894] by  bszili
+Fixed a stupid typo.
+2014-03-01 08:45:11	 Tree
+
+[r893] by  bszili
+Fixed the MOS build too, where NewIconBase is not a struct Library pointer.
+2014-03-01 08:00:13	 Tree
+
+[r892] by  bszili
+Removed libbase redefinitions from dopus5.library.
+2014-02-28 15:56:49	 Tree
+
+[r891] by  bszili
+Fixed the OS3 and OS4 build broken by the previous commit.
+2014-02-28 08:12:42	 Tree
+
+[r890] by  bszili
+Removed some unnecessary local libbases from ftp.module.
+2014-02-27 21:26:51	 Tree
+
+[r889] by  bszili
+More libbase redefinitions removed. Integrated math_replace.h into diskinfo.c, diskinfo.module no longer uses math*.library directly.
+2014-02-27 20:07:38	 Tree
+
+[r888] by  bszili
+Removed most of the libbase redefinitions in the modules. The structures which were used to store the libbases are private, so there shouldn't be any incompatibility with existing SAS/C modules, but I left them there commented out, just in case. Please test if there are any regressions.
+The modules no longer require v37 of rexxsys.library. This was an unnecessary OS 3.5+ dependency, v36 from OS 3.1 works just fine.
+2014-02-26 20:36:13	 Tree
+
+[r887] by  paraxenic
+Increased menu item width to compensate for incorrect character
+length returned by OS4 TextFit() function in menu layout.
+(data->menu_list[which].item_width++;)
+2014-02-13 15:15:13	 Tree
+
+[r886] by  paraxenic
+Eliminated DataTypesBase redefinition in show.h header file &
+assigned data->dt_base to DataTypesBase in L_Module_Entry() instead.
+2014-02-06 16:06:36	 Tree
+
+[r885] by  paraxenic
+Eliminated DataTypesBase redefinition in play.h header file &
+assigned data->dt_base to DataTypesBase in L_Module_Entry() instead.
+Removed datatypes library opening/closing from play.c
+since it is already opened/closed in libinit.c.
+Added fallback signal if signal allocation fails (unlikely).
+2014-02-05 16:30:54	 Tree
+
+[r884] by  bszili
+Don't try to execute Amiga Hunk executables on AROS.
+2014-01-24 17:35:25	 Tree
+
+[r883] by  bszili
+Don't display a requester if the random seed can't be saved.
+2014-01-24 15:37:46	 Tree
+
+[r882] by  bszili
+Fixed a few incorrect buffer sizes.
+2014-01-24 14:02:36	 Tree
+
+[r881] by  bszili
+Removed a hack which broke the popup menu's Rename... in name mode listers on AROS.
+2014-01-23 10:44:26	 Tree
+
+[r880] by  bszili
+Fixed inline editing cursor on AROS.
+2014-01-21 19:15:36	 Tree
+
+[r879] by  bszili
+GUI->def_filename_length is now initialized before the saved listers are opened, so they are no longer limited to 30 character file names. The file name matching now handled arbitrary path length, not just up to 256 characters.
+2014-01-21 18:10:29	 Tree
+
+[r878] by  bszili
+Fixed the AROS-ARM build. Initializers called by set_call_funcs (__ctype_init) require a valid aroscbase.
+2014-01-18 11:46:42	 Tree
+
+[r877] by  bszili
+Fixed async module startup. Only the libbase is passed in the startup data, the interface has to be obtained again.
+2014-01-18 09:58:00	 Tree
+
+[r876] by  bszili
+Library base cleanup, second batch. Removed global libbases and interfaces which are never initialized/used (Music, Console, NewIcon). Removed double initialization of global libbases (Datatypes).
+2014-01-16 18:44:27	 Tree
+
+[r875] by  bszili
+Big library base cleanup. Got rid of global Module and ConfigOpus bases and interfaces (except for OS3 where it's used by the ASM stubs).
+2014-01-15 17:21:25	 Tree
+
+[r874] by  bszili
+Filter out Disk.info on AROS too.
+2014-01-14 16:12:47	 Tree
+
+[r873] by  bszili
+Check the left out icons from .backdrop against duplicates.
+2014-01-12 18:13:37	 Tree
+
+[r872] by  bszili
+Fixed a small typo which broke GetDiskInfo on AROS.
+2014-01-10 18:53:18	 Tree
+
+[r871] by  bszili
+Fixed L_SetEnv on AROS.
+2014-01-10 14:09:46	 Tree
+
+[r870] by  paraxenic
+Fixed OS3 compile and iconification to Workbench (AddAppIcon patch).
+2013-12-10 22:20:55	 Tree
+
+[r869] by  paraxenic
+Added a missing comma to fix compile error.
+2013-12-10 15:44:15	 Tree
+
+[r868] by  bszili
+Show iconified windows in Workbench too.
+2013-12-09 18:31:47	 Tree
+
+[r867] by  paraxenic
+Added an environmental variable "dopus/NoSysPatch" and a library flag
+to skip the system patching functions. Entering "SetEnv dopus/NoSysPatch"
+in a shell before running Dopus5 should cause Dopus5 to skip system
+library patching.
+2013-12-04 17:52:59	 Tree
+
+[r866] by  bszili
+Fixed show.module on AROS.
+2013-12-03 10:01:16	 Tree
+
+[r865] by  bszili
+small ViewFont cleanup
+2013-12-02 18:46:53	 Tree
+
+[r864] by  bszili
+Don't try to strcpy the result of canceled file requesters.
+2013-12-02 17:38:57	 Tree
+
+[r863] by  bszili
+Added missing USE_DRAWICONSTATE to OS4 and AROS makefiles of configopus.module and icon.module
+2013-12-01 20:57:30	 Tree
+
+[r862] by  paraxenic
+Eliminated unnecessary compiler warnings (-fno-strict-aliasing)
+2013-11-25 15:19:45	 Tree
+
+[r861] by  paraxenic
+Fixed some compiler warnings.
+2013-11-24 15:30:58	 Tree
+
+[r860] by  paraxenic
+Fixed some compiler warnings.
+2013-11-23 16:08:40	 Tree
+
+[r859] by  paraxenic
+Fixed some compiler warnings.
+2013-11-21 17:37:57	 Tree
+
+[r858] by  paraxenic
+Fixed some compiler warnings.
+2013-11-20 17:01:39	 Tree
+
+[r857] by  paraxenic
+Fixed OS4 release date.
+2013-11-19 01:59:29	 Tree
+
+[r856] by  paraxenic
+Fixed some compiler warnings in xadopus module.
+Fixed an OS3 compile failure due to differences in xadmaster
+include files for various Amiga platforms.
+2013-11-17 23:25:51	 Tree
+
+[r855] by  paraxenic
+Fixed some compiler warnings in xadopus module.
+Added conditional include to xadmodule proto file to eliminate warning.
+Added release date to release creation.
+2013-11-17 14:26:11	 Tree
+
+[r854] by  bszili
+xadopus.module: added support for password-protected archives
+2013-11-16 19:49:44	 Tree
+
+[r853] by  bszili
+format.module, read.module: removed some unnecessary __amigaos4__ ifdefs, the type casting takes care of the different DOSBase and GfxBase declarations.
+2013-11-16 09:13:34	 Tree
+
+[r852] by  bszili
+Opening a message port isn't necessary for input.device, but the message port size have to be correctly set on AROS, otherwise the device will refuse to open.
+2013-11-15 08:26:04	 Tree
+
+[r851] by  paraxenic
+Eliminated some compiler warinings.
+Fixed OS4 timer.device GetInterface and DropInterface problems arising
+from global and local ITimer declarations.
+Started changing Codesets license notification in to Dopus5 license
+notification in libinit.c files.
+2013-11-14 22:15:03	 Tree
+
+[r850] by  bszili
+library: DeleteFile needs the full name of the icon, including the .info extension
+2013-11-14 16:03:02	 Tree
+
+[r849] by  paraxenic
+Eliminated some compiler warnings.
+2013-11-13 15:03:47	 Tree
+
+[r848] by  paraxenic
+Eliminated some compiler warnings.
+2013-11-12 18:19:00	 Tree
+
+[r847] by  paraxenic
+Added type casting to get rid of some compiler warnings.
+2013-11-10 19:35:50	 Tree
+
+[r846] by  paraxenic
+Reenabled picture compile and display in about window.
+Fixed OS3 crash resulting from bad lsprintf definition.
+2013-11-09 22:48:27	 Tree
+
+[r845] by  paraxenic
+Fixed some compiler warnings.
+Reduced the number of picture files compiled to one since the
+pictures are no longer displayed in the about window.
+2013-11-08 20:42:25	 Tree
+
+[r844] by  paraxenic
+Added an include variable to OS3 makefiles to fix ftp.module.
+Added special network include in ftp.module.
+2013-11-07 20:32:29	 Tree
+
+[r843] by  paraxenic
+Added external SysBase declaration for OS3.
+2013-11-06 17:50:39	 Tree
+
+[r842] by  paraxenic
+Removed temporary includes from Include/dopus.
+Restored include statements that reference files in Program directory.
+Added a declaration in ipc.c that should fix the server compile failure.
+2013-11-05 23:19:44	 Tree
+
+[r841] by  paraxenic
+Removed unused inlcudes.
+2013-11-05 23:16:17	 Tree
+
+[r840] by  paraxenic
+Moved module base structure to Include/libraries/module.h.
+Removed Include/dopus/mod_base.h.
+2013-11-05 01:42:28	 Tree
+
+[r839] by  paraxenic
+Removed amiga.c from modules where it's not used.
+Removed base.h from modules.
+Added new common makefiles to modules.
+Updated include statements in changed modules.
+Removed unneeded include files.
+2013-11-04 03:11:25	 Tree
+
+[r838] by  paraxenic
+Added mod_base.h to Include/dopus and removed some modules base.h.
+Moved some includes back to Program directory.
+Reverted Program/dopus.h.
+Removed amiga.c from modules where it's not used.
+Added new common makefiles to some modules.
+Updated include statements in changed modules.
+Removed unneeded include files.
+2013-11-03 22:07:54	 Tree
+
+[r837] by  paraxenic
+Moved include that is also used by modules from Program to Include/dopus.
+Updated Program/dopus.h with new location of moved includes.
+Added mod_base.h to Include/dopus and removed some modules base.h.
+Added new common makefiles to some modules.
+Updated include statements in changed modules.
+Removed unneeded include files.
+2013-11-03 00:49:27	 Tree
+
+[r836] by  paraxenic
+Update include statements to match changed include files.
+2013-11-02 20:28:06	 Tree
+
+[r835] by  paraxenic
+Removed unneeded include files.
+2013-11-02 18:38:37	 Tree
+
+[r834] by  paraxenic
+Moved includes that are also used by modules from Program to Include/dopus.
+Updated Program/dopus.h with new location of moved includes.
+Added mod_base.h to Include/dopus and removed some modules base.h.
+Added new common makefiles to some modules.
+Updated include statements in changed moduels.
+2013-11-02 18:31:20	 Tree
+
+[r833] by  paraxenic
+Added a missing include.
+2013-11-02 13:44:56	 Tree
+
+[r832] by  paraxenic
+Changed library base include.
+2013-11-02 00:44:27	 Tree
+
+[r831] by  paraxenic
+Changed TimerBase to global (external) variable for OS3 compile
+to get it to link properly.
+2013-11-01 21:05:21	 Tree
+
+[r830] by  paraxenic
+Added prototypes for custom string functions.
+Changed include order to fix OS3 compile issues.
+2013-11-01 15:28:03	 Tree
+
+[r829] by  paraxenic
+Commented out a prototye that conflicts with an amigalib prototype.
+Rearranged some include statements to fix undefined structure elements.
+Renamed args variable in lsprintf definition to avoid conflicts.
+2013-11-01 06:22:25	 Tree
+
+[r828] by  paraxenic
+Switched include statements from amiga.h to dopus/common.h.
+Removed unused files that resulted from switching to global includes.
+Removed unnecessary includes for some files.
+2013-11-01 03:17:04	 Tree
+
+[r827] by  paraxenic
+Switched include statements from amiga.h to dopus/common.h.
+Removed unused files that resulted from switching to global includes.
+Removed unnecessary includes for some files.
+2013-10-31 21:18:40	 Tree
+
+[r826] by  paraxenic
+Deleted unused files resulting from previous changes.
+2013-10-31 19:21:56	 Tree
+
+[r825] by  paraxenic
+Consolitated amiga.h files & macros.h files into dopus/common.h &
+dopus/lib_macros.h files.
+Changed include statements to match new include file location.
+Changed lsprintf define in dopus/common.h to avoid variable name conflicts.
+2013-10-31 19:12:37	 Tree
+
+[r824] by  bszili
+Added missing AROS-arm fixes to discopy, diskinfo and filetype.module.
+2013-10-31 16:42:48	 Tree
+
+[r823] by  paraxenic
+Moved file from previous commit.
+2013-10-31 15:21:06	 Tree
+
+[r822] by  paraxenic
+Consolitated amiga.h files & macros.h files into dopus/common.h &
+dopus/lib_macros.h files.
+Changed include statements to match new include file location.
+Added LSprintf definition to dopus/common.h.
+Removed unused files resulting from include changes.
+2013-10-31 15:09:04	 Tree
+
+[r821] by  paraxenic
+Correct spelling error.
+2013-10-31 00:38:24	 Tree
+
+[r820] by  paraxenic
+Corrected spelling error.
+2013-10-31 00:08:26	 Tree
+
+[r819] by  paraxenic
+Removed unused files resulting from previous changes.
+2013-10-30 22:00:13	 Tree
+
+[r818] by  paraxenic
+Consolitated amiga.h files & macros.h files into dopus/common.h &
+dopus/lib_macros.h files.
+Changed include statements to match new include file location.
+Removed unused amiga.h and macros.h files.
+2013-10-30 21:53:30	 Tree
+
+[r817] by  bszili
+More fixes, now everything builds without errors on AROS-arm. Got rid of lsprintf.c from Misc/C/ViewFont, included dopus/common.h instead.
+2013-10-30 20:47:42	 Tree
+
+[r816] by  bszili
+The AROS_SLIB_ENTRY macro has changed in the new AROS SDK used by the armhf port, added fixes.
+2013-10-30 20:08:35	 Tree
+
+[r815] by  bszili
+Fixed the libraries for AROS-arm.
+2013-10-30 20:03:13	 Tree
+
+[r814] by  paraxenic
+Added Include/dopus directory.
+Consolitated amiga.h files & macros.h files into dopus/common.h &
+dopus/lib_macros.h files.
+Changed include statements to match new include file location.
+Removed unused amiga.h and macros.h files.
+2013-10-30 19:38:14	 Tree
+
+[r813] by  kas1e
+remove getreg()/putreg() and related completely
+2013-10-29 07:46:53	 Tree
+
+[r812] by  paraxenic
+Changed dopusrt5 command to include complete path (Dopus5:C/dopusrt5).
+Added compiled DOpusRT5 to release archives.
+2013-10-28 19:35:38	 Tree
+
+[r811] by  bszili
+Small improvement to the clock.
+2013-10-28 19:07:13	 Tree
+
+[r810] by  bszili
+__amigaos3__ and __AROS__ are never defined at the same time
+2013-10-28 16:30:28	 Tree
+
+[r809] by  paraxenic
+Rewrote and simplified dopusrt5 to compile with GCC and work the same as SASC version.
+2013-10-28 15:27:47	 Tree
+
+[r808] by  kas1e
+remove some warnings
+2013-10-28 13:28:58	 Tree
+
+[r807] by  kas1e
+unnoticed redefination/declarations when merge hooks.h with librares/dopus5.h: fixed
+2013-10-28 10:16:01	 Tree
+
+[r806] by  kas1e
+small typo fix with pragma packing of hook's structs
+2013-10-28 07:52:19	 Tree
+
+[r805] by  kas1e
+move Include/dopus/ .h files to the Misc/Unused as well as remove references to them from whole dopus5 sources. All necessary stuff from them will be in the Include/libraries/dopus5.h from now
+2013-10-28 07:44:05	 Tree
+
+[r804] by  kas1e
+replaced all mc68000 on amigaos3
+2013-10-28 06:50:48	 Tree
+
+[r803] by  paraxenic
+Removed a line that was added for debugging.
+2013-10-26 20:54:14	 Tree
+
+[r802] by  paraxenic
+Removed os4 base archive.
+Added WBStartup files for adding to os4 release archive.
+Changed source/makefile to add WBStartup files to os4 release archive.
+2013-10-26 16:32:17	 Tree
+
+[r801] by  bszili
+Partially reverted r796, packing is now active for every non-68k architecture.
+2013-10-26 09:32:57	 Tree
+
+[r800] by  paraxenic
+Fixed a minor error in the last commit.
+2013-10-25 17:53:45	 Tree
+
+[r799] by  paraxenic
+Added seperate base archive for OS4.
+Updated makefiles for compiling 2 AROS archetectures.
+2013-10-25 16:21:13	 Tree
+
+[r798] by  bszili
+Fixed release archive creation for AROS.
+2013-10-24 15:34:23	 Tree
+
+[r797] by  bszili
+read.module: fixed AROS build, Misc/C added ARCH to the makefiles
+2013-10-23 17:45:35	 Tree
+
+[r796] by  bszili
+Removed superfluous checks before #pragma pack().
+2013-10-23 17:34:13	 Tree
+
+[r795] by  bszili
+AROS makefile overhaul, added support for different architectures.
+2013-10-23 17:10:58	 Tree
+
+[r794] by  paraxenic
+Added platform ID to the version in the about window.
+2013-10-23 17:02:54	 Tree
+
+[r793] by  paraxenic
+Fixed OS3 read.module crash that occurred when right mouse button
+was pressed inside read window borders.
+2013-10-23 00:33:02	 Tree
+
+[r792] by  paraxenic
+Fixed accidently overwritten changes to previous revision.
+2013-10-22 02:50:18	 Tree
+
+[r791] by  paraxenic
+Fixed Key finder crash in OS4.
+Added some comments in dopus_debug.h
+2013-10-22 00:11:35	 Tree
+
+[r790] by  bszili
+Fixed some warnings, removed the excessive debug output by the pattern backfill hook on AROS.
+2013-10-21 15:40:30	 Tree
+
+[r789] by  kas1e
+Get rid of putreg/getreg() in all the code together with removing related fields in some structs. Currrently just commented out in case 
+anything will go wrong (like for example somewhere some struct can be used with hadcore shifting which wasn't noticed).
+2013-10-21 10:07:00	 Tree
+
+[r788] by  paraxenic
+Fixed crash that occurred when selecting Add in Settings->Filetypes.
+Fixed obtaining filetype image with a filerequester instead of drag'n'drop.
+Added previously removed -DUSE_DRAWICONSTATE back into makefile.os4 options.
+2013-10-20 20:31:43	 Tree
+
+[r787] by  paraxenic
+Fixed crash that occurred when attempting to open a new font.
+2013-10-19 19:56:47	 Tree
+
+[r786] by  paraxenic
+Added missing OS4 "DropInterface((struct Interface *)IDOpus)" to all modules libinit.c files.
+2013-10-17 01:57:07	 Tree
+
+[r785] by  paraxenic
+Added removal of object files in all module/init directories for all
+makefile clean operations.
+2013-10-14 14:36:34	 Tree
+
+[r784] by  kas1e
+update basedata archive with new changes to make it better by default
+2013-10-14 08:39:18	 Tree
+
+[r783] by  kas1e
+configopus.module: don't use native icons in for os4, as there is null-pointer bug which need to catch before, and which lead to DSIs on os4
+2013-10-14 05:27:39	 Tree
+
+[r782] by  paraxenic
+Temporarily added old DOpusRT5 binary to trunk/archive directory.
+Temporarily changed source/makefile to add old DOpusRT5 to
+release archives until compiled DOpus5RT is working.
+2013-10-13 15:38:06	 Tree
+
+[r781] by  paraxenic
+Changed clean and cleanall targets in the makefiles to remove
+all object files instead of platform specific object files.
+2013-10-12 03:35:39	 Tree
+
+[r780] by  paraxenic
+Changed copy command to cp -p to preserve protection bits.
+2013-10-11 21:44:02	 Tree
+
+[r779] by  paraxenic
+Cleaned up the "echo" output in source/makefile Modules/makefile
+and Misc/C/makefile and added -s to the "clean" commands to
+eliminate make's enter & exit messages.
+Added some checks (uname) in source/makefile to determine which
+operating system is being used to create release archives so that
+the correct lha command is used.
+2013-10-11 19:38:19	 Tree
+
+[r778] by  paraxenic
+Removed 68k commands from C directory in base archive.
+2013-10-10 13:46:44	 Tree
+
+[r777] by  paraxenic
+Removed unused makefile.
+2013-10-10 13:02:10	 Tree
+
+[r776] by  paraxenic
+Removed release directory.
+Added archive direstory.
+Added archive/basedata.lha.
+Updated trunk/source/makefile with release and clean-release targets.
+2013-10-10 03:54:37	 Tree
+
+[r775] by  bszili
+Add the clock to the end of the screen title.
+2013-10-09 20:37:16	 Tree
+
+[r774] by  bszili
+ftp.module: fixed the PORT command for big endian targets, fixed stretched backgrounds on AROS
+2013-10-09 15:30:20	 Tree
+
+[r773] by  kas1e
+os4: use -DUSE_SCREENTITLE for os4 build too, so we have nice title bar
+2013-10-09 08:22:37	 Tree
+
+[r772] by  kas1e
+mos: no need for SysBase define anymore as we remove --nostartfiles
+2013-10-09 08:18:34	 Tree
+
+[r771] by  kas1e
+mos: remove --nostartfile option from all mos makefiles in the Misc/C/ which keeps there by some copy+paste typo from module makefiles, as well as make loadwb compiles for morphos too
+2013-10-09 08:12:01	 Tree
+
+[r770] by  kas1e
+mos: make misc/c/dopusrt compiles for morphos as well
+2013-10-09 07:50:19	 Tree
+
+[r769] by  kas1e
+mos: small fix in makefile of dopus5.library to make nightly builds works
+2013-10-09 07:38:27	 Tree
+
+[r768] by  kas1e
+mos: small fix in makefile of format.module to make nightly builds works
+2013-10-09 07:35:43	 Tree
+
+[r767] by  kas1e
+mos: small fix in makefile of cleanup.module to make nightly builds works
+2013-10-09 07:14:36	 Tree
+
+[r766] by  paraxenic
+Fixed strip command in all makefiles.
+2013-10-09 00:09:14	 Tree
+
+[r765] by  paraxenic
+Removed "-" from Linux lha args.
+2013-10-08 15:25:38	 Tree
+
+[r764] by  bszili
+Experimental fix to the double screen title issue, currently breaks the clock. Enable with the USE_SCREENTITLE macro.
+2013-10-08 14:27:46	 Tree
+
+[r763] by  paraxenic
+Changed lha arguments for Linux.
+2013-10-08 13:34:53	 Tree
+
+[r762] by  paraxenic
+Changed spelling of loadDB to LoadDB.
+2013-10-08 13:20:01	 Tree
+
+[r761] by  bszili
+xadopus.module: Avoid forbid/permit by using the memory address of the message port to make a unique port name.
+2013-10-08 05:46:51	 Tree
+
+[r760] by  paraxenic
+Changed commands in trunk/makefile and Program makefiles.
+2013-10-07 22:10:06	 Tree
+
+[r759] by  bszili
+ftp.module: ftp_port() is now little-endian compatible, active transfers fixed.
+2013-10-07 17:01:17	 Tree
+
+[r758] by  bszili
+ftp.module: Little endian fixes, passive transfers now work.
+2013-10-07 10:30:07	 Tree
+
+[r757] by  kas1e
+changed all makefiles where stripping is used to works on unixes as well
+2013-10-07 07:20:29	 Tree
+
+[r756] by  paraxenic
+Added compiled commands to distribution archive creation.
+2013-10-06 15:10:34	 Tree
+
+[r755] by  paraxenic
+Updated base archive for new compiled commands.
+Moved base archive to archive directory.
+2013-10-06 15:07:33	 Tree
+
+[r754] by  bszili
+ViewFont: AROS has no topaz font, use the system default there. Use TRUE/FALSE for BOOL types.
+2013-10-06 10:15:12	 Tree
+
+[r753] by  bszili
+ViewFont is not a library, so let the auto-opener do its deed.
+2013-10-06 07:49:52	 Tree
+
+[r752] by  paraxenic
+Removed touch command from makefiles because it resets protection bits.
+Added commands compile to source/makefile.
+2013-10-06 01:29:26	 Tree
+
+[r751] by  paraxenic
+Updated makefiles for new versioning & debug output.
+Added new version strings to source files.
+FIxed conflicting definition of LocaleBase in font_data.c & font.h.
+Added include of dopus_version.h and dopus_debug.h.
+2013-10-05 21:38:42	 Tree
+
+[r750] by  bszili
+Various AROS icon.module fixes, small ViewFont cleanup (currently corrupts the stack on AROS).
+2013-10-05 16:56:55	 Tree
+
+[r749] by  paraxenic
+Fixed typing error in archive makefile.
+2013-10-04 19:25:46	 Tree
+
+[r748] by  paraxenic
+Updated all makefiles to make debug and non-debug binarys based
+on the command line argument " debug= ".
+Added conditional inclusion of "dev" to the version strings in
+debug binaries to version/dopus_version.h .
+Added top level archive makefile.
+Added default archive used to produce complete distribution archives.
+2013-10-04 19:22:25	 Tree
+
+[r747] by  bszili
+Fixed the compilation of loadwb and viewfont on AROS.
+2013-10-04 14:55:04	 Tree
+
+[r746] by  kas1e
+misc/c: all makefiles for all platforms, little cleanup
+2013-10-04 07:17:26	 Tree
+
+[r745] by  kas1e
+ported dopusrt to os3,os4
+2013-10-04 06:50:29	 Tree
+
+[r744] by  paraxenic
+Removed unused file and removed it from makefile.objs.
+2013-10-04 01:33:08	 Tree
+
+[r743] by  kas1e
+ftp.module now uses D(bug()) really everywhere, without custom kprinf redefines, so all reads better and the same everywhere
+2013-10-03 07:02:01	 Tree
+
+[r742] by  kas1e
+replaced all remaining KPrintf and kprinf in all the parts of dopus5 with D(bug()) macro, so since now we should use only D(bug()), and not kprinfs/KPrintF anymore
+2013-10-02 10:26:47	 Tree
+
+[r741] by  kas1e
+replaced remain KPrintF() on D(bug()) in ftp and icon modules, now all modules use D(bug()) everywhere
+2013-10-02 10:11:59	 Tree
+
+[r740] by  kas1e
+replaced bunch of KPrintF() on D(bug()) in modules, as that what we use now for debug messages on all platforms
+2013-10-02 09:45:56	 Tree
+
+[r739] by  kas1e
+netincludes necessary for build 68k version of ftp.module
+2013-10-01 06:52:21	 Tree
+
+[r738] by  kas1e
+removed back tries to fix title-bar drawing for os4 which was done in rev710 and cause troubles because of change of src_title[188] on scr_title[512] in CFG_ENV structure, values of which seems to use later as some hardcore shifting, so we can't just change it like this. Code still can be found in rev710 and can be very good reference to make an fix for title bar (which we still need to do), as code should be kind of the same for all other oses. Through there is also another error in that code was found, like making listers resizing or pressing on RMB freezes, so code in rev710 can be used only as reference for proper fix. Also deleted all KPrintF defines from all module_deps.h and some other include files, as they can cause redefination errors when compile os3 versions.
+2013-10-01 06:41:03	 Tree
+
+[r737] by  paraxenic
+Removed debug definition & added including of Include/debug/dopus_debug.h
+2013-10-01 02:29:21	 Tree
+
+[r736] by  paraxenic
+Removed debug definition & added including of Include/debug/dopus_debug.h
+2013-10-01 02:21:09	 Tree
+
+[r735] by  paraxenic
+Removed debug definition & added including of Include/debug/dopus_debug.h in all amiga.h
+2013-10-01 02:14:55	 Tree
+
+[r734] by  paraxenic
+Added -lamiga to LIBS variable (accidently removed).
+2013-10-01 01:01:34	 Tree
+
+[r733] by  paraxenic
+Added conditional statements to disable debug output.
+2013-10-01 00:54:19	 Tree
+
+[r732] by  paraxenic
+Removed debug definition & added including of Include/debug/dopus_debug.h
+2013-10-01 00:41:11	 Tree
+
+[r731] by  rigorigo
+Oops, missed a file
+2013-09-30 12:38:18	 Tree
+
+[r730] by  rigorigo
+Due to some twat creating multiple definitions of the same structure, we had a conflict between the library and the program on the size of the environment structure. Thanks to kas1e, this is now fixed.
+2013-09-30 12:07:15	 Tree
+
+[r729] by  rigorigo
+Due to some twat creating multiple definitions of the same structure, we had a conflict between the library and the program on the size of the environment structure. Thanks to kas1e, this is now fixed.
+Removed some useless debug.
+2013-09-30 12:06:09	 Tree
+
+[r728] by  kas1e
+cleanup.module: fixed os3 build by commenting old KPrinF defination, as new debug file was added
+2013-09-30 11:11:51	 Tree
+
+[r727] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:47:36	 Tree
+
+[r726] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:47:08	 Tree
+
+[r725] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:46:41	 Tree
+
+[r724] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:45:54	 Tree
+
+[r723] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:45:25	 Tree
+
+[r722] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:44:58	 Tree
+
+[r721] by  rigorigo
+Removed linker libs -lamiga and 0ldebug
+2013-09-30 09:44:17	 Tree
+
+[r720] by  rigorigo
+Removed the linker libs -lamiga and -ldebug
+2013-09-30 09:43:16	 Tree
+
+[r719] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:41:27	 Tree
+
+[r718] by  rigorigo
+Removed linker libs -lamigs and -ldebug
+2013-09-30 09:40:19	 Tree
+
+[r717] by  rigorigo
+Removed linker libs -lamiga and -ldebug
+2013-09-30 09:38:51	 Tree
+
+[r716] by  rigorigo
+Removed the linker libs -ldebug and -lamiga
+2013-09-30 09:37:04	 Tree
+
+[r715] by  bszili
+AROS has its own D() and bug() macros.
+2013-09-30 09:27:52	 Tree
+
+[r714] by  rigorigo
+removed the need for -ldebug and included the dopus/dopus_debug.h file
+instead.
+2013-09-30 09:19:42	 Tree
+
+[r713] by  kas1e
+fixed morphos build: ftp.module fails because of non LSprintF, now done it right
+2013-09-30 08:14:05	 Tree
+
+[r712] by  kas1e
+make compiles os3 build; fix1 : redefine of KPrintF in program/protos.h with our new ones. fix2 : because of old gcc for os3, declaration should be done at top of functions (pretty sucky, but that it)
+2013-09-30 07:55:21	 Tree
+
+[r711] by  paraxenic
+amiga.c - removed version include and moved it to dopus.h
+amiga.h - removed debug definitions & added #include <debug/dopus_debug.h>
+backdrop_leftout.c - Changed KPrintF() to D(bug())
+display.c - Changed KPrintF() to D(bug())
+main.c - Changed hard coded minimum library version to use LIB_VERSION.
+main makefile - added export off debug variable
+program makefiles - Added conditional statements for turning off
+debug output.
+Added file Include/debug/dopus_debug.h
+2013-09-30 03:53:00	 Tree
+
+[r710] by  rigorigo
+Rejigged entirely the way the custom screen titlebar is rendered under AmigaOS4.x to get rid of the unsightly RectFill.
+Also tweaked some of the environment results so that the titlebar parameters return something more suitable, and similar to Workbench's results. Namely CPU name and graphics chip set, which now returns the name of the graphics card rather than the chip set.
+Fixed a good few compiler warnings.
+2013-09-30 01:54:59	 Tree
+
+[r709] by  rigorigo
+Fixed some compiler warnings.
+Added a TBGADGETOFFSET define, which, under AmigaOS4, spaces the iconify and padlock gadgets out so that the zoom gadget is not obstructed. While this appears to work with the standard GUI theme, it needs testing with other themes to verify the spacing. All other platforms specify the offset as ZERO, as before.
+2013-09-29 11:52:08	 Tree
+
+[r708] by  rigorigo
+Fixed some compiler warnings.
+Added PGA_NewLook to the scroller gadget in the custom listview gadget. This gives a more consistent visual look to the listview appearance.
+2013-09-29 11:47:15	 Tree
+
+[r707] by  paraxenic
+Added missing include (version/dopus_version.h)
+2013-09-28 19:30:31	 Tree
+
+[r706] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 18:49:43	 Tree
+
+[r705] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+about.c - Commented out unused variable "ctrl_down".
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 18:09:52	 Tree
+
+[r704] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+XADopus.c - Fixed format size in sprintf function call (%d to %ld).
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 16:24:27	 Tree
+
+[r703] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+themes.c - Added "old" variable initialization to avoid uninitialized use.
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 15:20:56	 Tree
+
+[r702] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 01:54:59	 Tree
+
+[r701] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 01:36:07	 Tree
+
+[r700] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-28 00:29:08	 Tree
+
+[r699] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 21:30:27	 Tree
+
+[r698] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 21:08:39	 Tree
+
+[r697] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 20:45:46	 Tree
+
+[r696] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 18:38:14	 Tree
+
+[r695] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 18:02:03	 Tree
+
+[r694] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 17:28:02	 Tree
+
+[r693] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 17:04:43	 Tree
+
+[r692] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+removed unused files lsprinf.c & version.h
+2013-09-27 16:13:32	 Tree
+
+[r691] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+libinit.c - Changed version strings and numbers to use definitions in
+version/dopus_version.h.
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+added newlines at end of files to eliminate compile warnings.
+removed unused files lsprinf.c & version.h
+2013-09-27 15:45:29	 Tree
+
+[r690] by  rigorigo
+Fixed compilation warnings on OS4
+2013-09-27 11:17:43	 Tree
+
+[r689] by  kas1e
+ported c:loadwb to os3/os4, currently have small bug on running (but error can be ignored), so to be fixed
+2013-09-27 11:08:33	 Tree
+
+[r688] by  kas1e
+library: fixed aros build as well and a bit change makefiles (amiga.o in makefile.obj, so LSprinF for every os will builds)
+2013-09-27 08:21:19	 Tree
+
+[r687] by  kas1e
+library: fixed latest dummy kprintf define
+2013-09-27 08:00:21	 Tree
+
+[r686] by  kas1e
+configopus.module: fixed dummy kprintf define
+2013-09-27 07:56:11	 Tree
+
+[r685] by  kas1e
+morphos: fixed build of library because of previous LSprintf/amiga.c changes
+2013-09-27 07:40:50	 Tree
+
+[r684] by  kas1e
+fixed dummy kprintf define
+2013-09-27 07:16:24	 Tree
+
+[r683] by  kas1e
+os4: add include of amiga_compiler.h to library/amiga.h, as we now use VARARGS68K for some os4 specific patched functions, so to avoid compiler's errors and warnings we should include that right before any SDI includes, to avoid empty/dummy define of VARARGS68K
+2013-09-27 05:48:22	 Tree
+
+[r682] by  kas1e
+update forgotten include/libraries/dopus5.h with new internal flag defination for making new wbleftout feature in configopus.module and program itself works and compiles as before
+2013-09-27 05:24:02	 Tree
+
+[r681] by  paraxenic
+diskinfo/diskinfo_data.c - Added missing brace.
+module_deps.h - Added missing include (include <version/dopus_version.h>
+2013-09-27 05:15:01	 Tree
+
+[r680] by  paraxenic
+Removed debug_lib.h include.
+2013-09-27 04:43:18	 Tree
+
+[r679] by  paraxenic
+Removed version.h again.
+2013-09-27 04:19:26	 Tree
+
+[r678] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+libinit.c - Changed version strings and numbers to use definitions in
+version/dopus_version.h.
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+removed unused files lsprinf.c & version.h
+2013-09-27 04:17:30	 Tree
+
+[r677] by  paraxenic
+Removed unused laprintf.c file.
+2013-09-27 03:53:33	 Tree
+
+[r676] by  paraxenic
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - moved DOPUS_RAWFMTFUNC definition from from dopuslib.h to amiga.h
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+libinit.c - Changed version strings and numbers to use definitions in
+version/dopus_version.h.
+makefiles - added date defines for use in program version strings.
+removed unused files version.h debug_lib.h
+2013-09-27 03:50:37	 Tree
+
+[r675] by  paraxenic
+module_deps.h - Changed version string definitions to use definitions in
+version/dopus_version.h
+makefiles - added date defines for use in program version strings.
+2013-09-27 03:22:47	 Tree
+
+[r674] by  paraxenic
+Removed unused version.h and lsprintf.c
+amiga.c - moved GlobalStuffChar declaration from lsprintf.c to amiga.c
+moved LSprintf() function from lsprintf.c to amiga.c
+amiga.h - added KPrintF definition for OS4.
+libinit.c - Added copyright string (defined in version/dopus_version.h)
+libinit.c - Changed version strings and numbers to use definitions in
+version/dopus_version.h.
+2013-09-27 03:16:52	 Tree
+
+[r673] by  paraxenic
+makefile.os4 - removed forgotten debug command.
+2013-09-27 03:07:42	 Tree
+
+[r672] by  rigorigo
+Changes to support the new feature of showing the Workbench leftout icons on the desktop. This is still a WIP, as it needs a bit of work with positioning, and checking for duplicates, but it's working.
+2013-09-27 02:30:08	 Tree
+
+[r671] by  rigorigo
+Added a new option in the WB Emulation to show Workbench's leftout icons on the DOpus desktop. Prior to this, the user had to jump through hoops with the update.module and delete config files to achieve this. Now it is just a setting away.
+Added a "locale" rule to the makefile as I couldn't find any way to recreate the string_data.h file.
+2013-09-27 02:28:18	 Tree
+
+[r670] by  rigorigo
+Replaced accidentally deleted file - oops!
+2013-09-27 02:05:10	 Tree
+
+[r669] by  rigorigo
+Gone for belt and braces on the patch functions conditional compiling of vector names.
+2013-09-26 23:35:46	 Tree
+
+[r668] by  rigorigo
+Deleted broken debug source and header files.
+Corrected conditional compiling for patch functions so that it builds with
+the latest public SDK now.
+Removed reference of debug_lib from makefile.deps
+2013-09-26 22:57:53	 Tree
+
+[r667] by  rigorigo
+Improved the detection in internalOpenWBObject to check whether the object is to be run from CLI, WB or ARexx.
+Added some more supported tags in internalWBCtrl.
+Some debug removed, some added. The debug is now controled by the DEBUG define in the makefile. This saves having to manually delete all the KPrintFs in the code.
+2013-09-26 19:10:39	 Tree
+
+[r666] by  rigorigo
+Now patches WorkbenchConttrol and WorkbenchControlA in order to support duplicating the Workbench path.
+This is required by various parts of the OS and also external user programs. We now call internalWBCtrl() and decide which tags to support. Currently only WBCTRLA_DuplicateSearchPath is supported, but this can be expanded to give more compatibility with Workbench when in WB replacement mode.
+2013-09-26 15:52:08	 Tree
+
+[r665] by  kas1e
+os4: small typo fixed in previous commit
+2013-09-26 12:23:27	 Tree
+
+[r664] by  kas1e
+os4: update comment-text to say why and what we patch on os4 additionaly
+2013-09-26 12:20:21	 Tree
+
+[r663] by  kas1e
+os4: we not only path OWO/OWOA workbench calls, but allso WorkbenchControlA call, as it uses everywhere by the system, for duplicate of search patches and co. For now just a usual dummy. We also trying to deal with differences beetwen old/new DOS-SDKs, should be ok for all builds of os4 as well as for aros, aos3 and morphos
+2013-09-26 11:46:54	 Tree
+
+[r662] by  kas1e
+cleanup: created Misc/C directory, and move there all additional bins, so all to be clean and understandable
+2013-09-26 08:57:55	 Tree
+
+[r661] by  paraxenic
+Added CR to end of file.
+2013-09-25 19:19:42	 Tree
+
+[r660] by  paraxenic
+FIxed.
+2013-09-25 19:09:13	 Tree
+
+[r659] by  paraxenic
+Deleted unused files.
+2013-09-25 18:51:38	 Tree
+
+[r658] by  paraxenic
+Updated versioning.
+2013-09-25 18:49:06	 Tree
+
+[r657] by  paraxenic
+Changed DOS patsh names back to old names.
+2013-09-25 18:42:44	 Tree
+
+[r656] by  rigorigo
+Added launching capability for when Workbench is not available. For now it just blasts the request at WB_Launch.
+The debug is still active right now during testing...
+2013-09-25 14:14:08	 Tree
+
+[r655] by  paraxenic
+Moved version strings to about.c and removed version.c
+2013-09-25 13:18:16	 Tree
+
+[r654] by  paraxenic
+Changed version strings to use Include/dopus_version.h as version number/date source.
+2013-09-25 13:15:21	 Tree
+
+[r653] by  rigorigo
+Thanks to Roman for adding the OpenWorkbenchObject(A) patching code.
+Following on from this, the patches now check to see if Workbench is available (by searching for its public port), and passing the call onto the original vectors.
+Currently, there is only debug to prove it works, but we will launch the requested objects ourselves if Workbench is not available (running in replacement mode).
+2013-09-25 13:04:21	 Tree
+
+[r652] by  kas1e
+os4: we patch not only OWO, but also OWOA, it should be done different, because even if OWO call OWOA it still after setmethod() vector looses in the middle somewhere, and call to OWO didn't lead to call patched OWOA, so we patch them both
+2013-09-25 12:21:17	 Tree
+
+[r651] by  rigorigo
+Minor change in two places to stop compiler errors under OS4.
+2013-09-25 09:55:13	 Tree
+
+[r650] by  kas1e
+os4: define kprintf in library to be DebugPrintF, so no needs for additional -ldebug in makefiles when do testing
+2013-09-25 07:50:18	 Tree
+
+[r649] by  kas1e
+os4: add one more patched function (all via ifdefs of course, other builds not affected) OpenWorkbenchObject() as it uses a lot now in os4 to run programs. Currently all the skeleton and necessary bits done. For now patched function have only KPrintF to show that we inside of function when we use it, as well as do call to original function at end. Everything tested, so only need to put necessary code now. Maybe it will worth to add later that for another OSes which have such function, but to be seen
+2013-09-25 07:38:47	 Tree
+
+[r648] by  paraxenic
+Revert
+2013-09-24 19:01:19	 Tree
+
+[r647] by  paraxenic
+None.
+2013-09-24 19:00:15	 Tree
+
+[r646] by  rigorigo
+AmigaOS4.1 does not have a WBStartup drawer, so the WBSTARTUP parameter did nothing. Now uses DOpus5:WBStartup if SYS:WBStartup is not found. This allows users to start programs when the WBStartup drawer has been removed.
+Added some feedback from the Install rule in makefile.os4
+2013-09-24 17:29:05	 Tree
+
+[r645] by  rigorigo
+Added install rule for ease of testing
+2013-09-24 17:12:44	 Tree
+
+[r644] by  paraxenic
+Added documentation.
+2013-09-24 17:04:28	 Tree
+
+[r643] by  paraxenic
+Added documents.
+2013-09-24 17:02:28	 Tree
+
+[r642] by  paraxenic
+Added source directory to trunk.
+2013-09-24 16:59:30	 Tree
+
+[r641] by  paraxenic
+Added files.
+2013-09-24 16:51:37	 Tree
+
+[r640] by  paraxenic
+Add docs.
+2013-09-24 16:48:54	 Tree
+
+[r639] by  paraxenic
+added
+2013-09-24 16:43:14	 Tree
+
+[r638] by  paraxenic
+added
+2013-09-24 16:41:18	 Tree
+
+[r637] by  paraxenic
+added
+2013-09-24 16:38:47	 Tree
+
+[r636] by  paraxenic
+Adding documentation directory
+2013-09-24 16:35:28	 Tree
+
+[r635] by  paraxenic
+Removing branch.
+2013-09-24 15:49:13	 Tree
+
+[r634] by  paraxenic
+Added empty trunk dir after moving old trunk to branches.
+2013-09-24 15:41:43	 Tree
+
+[r633] by  paraxenic
+Done
+2013-09-24 15:38:51	 Tree
+
+[r632] by  kas1e
+join.module: os4 fixes to make it works (ifaces for timer.device)
+2013-09-24 13:31:07	 Tree
+
+[r631] by  kas1e
+read.module: native os4 mouse-wheel support
+2013-09-24 08:20:12	 Tree
+
+[r630] by  kas1e
+play.module: forgotten ifdef for mos build
+2013-09-24 07:09:19	 Tree
+
+[r629] by  paraxenic
+Added MOS to platforms that use inovamusic.library.
+2013-09-23 21:01:49	 Tree
+
+[r628] by  paraxenic
+Changed version method and strings.
+Changed to use compile date calculated by makefile.
+Added date definition to makefiles.
+2013-09-23 19:35:23	 Tree
+
+[r627] by  paraxenic
+Removed version files and replaced with single version file.
+2013-09-23 19:28:31	 Tree
+
+[r626] by  kas1e
+update authors to be in sync with realms
+2013-09-23 12:42:39	 Tree
+
+[r625] by  kas1e
+keep inovamusic.library for os3 and morphos only till we not have replacement or sources of original library
+2013-09-23 10:07:42	 Tree
+
+[r624] by  bszili
+Don't clear the background of native icons with a solid color.
+2013-09-22 20:05:27	 Tree
+
+[r623] by  bszili
+Native icons in the filetype editor, fallback for loading the RAM Disk icon on AROS.
+2013-09-22 13:04:11	 Tree
+
+[r622] by  bszili
+xadopus.module: the lister handle is an unsigned long.
+2013-09-22 07:12:18	 Tree
+
+[r621] by  paraxenic
+Removed audio.device sound play 
+#ifdefed out inovamusic.library MOD play for all platforms except OS3.
+Fixed datatype sound play completion notification.
+Added code to calculate play time for datatypes sound play.
+Changed GUI to only show "Next" button if multiple files selected for playing.
+2013-09-21 23:24:31	 Tree
+
+[r620] by  paraxenic
+Removed unused files.
+Added copyright notice in library.
+Fixed some compiler warnings.
+2013-09-21 23:16:17	 Tree
+
+[r619] by  paraxenic
+Added version files for easier version updating.
+2013-09-21 23:08:24	 Tree
+
+[r618] by  bszili
+Removed an unnecessary endian-swap, fixes instruction types.
+2013-09-21 17:46:38	 Tree
+
+[r617] by  bszili
+Handle parent directory consistently.
+2013-09-21 09:53:09	 Tree
+
+[r616] by  bszili
+Recognize ELFs everywhere, and don't try to run 68k executables on AROS. The 68k version of AROS is binary compatible with os3, so it's not necessary to handle it separately.
+2013-09-21 09:16:25	 Tree
+
+[r615] by  bszili
+Fixed the devices list as the roots parent. It makes no sense to save the pathlist variable to envarc, because it's either deleted or overwritten at startup.
+2013-09-21 06:59:49	 Tree
+
+[r614] by  bszili
+A lame attempt at making parent directory to open the device list. Currently disabled.
+2013-09-20 10:37:26	 Tree
+
+[r613] by  bszili
+xadopus.module: Don't copy anything if there are no more entries.
+2013-09-20 08:20:49	 Tree
+
+[r612] by  kas1e
+xadopus.module: pragma packs just in case
+2013-09-19 12:53:35	 Tree
+
+[r611] by  kas1e
+os4: same name target (without .exe) of main dopus binary as on all other platforms
+2013-09-19 07:12:45	 Tree
+
+[r610] by  kas1e
+xadopus.module: os4 abi fix
+2013-09-19 06:55:54	 Tree
+
+[r609] by  bszili
+General cleanup to fix some warnings.
+2013-09-18 19:57:47	 Tree
+
+[r608] by  bszili
+An attempt to fix the orphan icon problem on AROS after deleting a drawer.
+2013-09-18 14:55:33	 Tree
+
+[r607] by  kas1e
+filetype.module: do malloc/free/stdup replacement for all oses and not only for morphos: that fix new NULL pointer crash on os4 and it good just to not mix things for all other oses too
+2013-09-18 13:34:49	 Tree
+
+[r606] by  kas1e
+os4: native mouse-wheel support in main listers
+2013-09-18 05:46:16	 Tree
+
+[r605] by  bszili
+Removed old SAS/C varargs wrappers which were commented out.
+2013-09-17 14:03:21	 Tree
+
+[r604] by  kas1e
+version.c is need it where it was after all
+2013-09-17 13:33:40	 Tree
+
+[r603] by  bszili
+ftp.module: removed the remnants of AS225/INet support.
+2013-09-17 13:29:57	 Tree
+
+[r602] by  kas1e
+final cleanup of Program dir
+2013-09-17 13:16:02	 Tree
+
+[r601] by  kas1e
+and more cleanup, pheww
+2013-09-17 12:58:44	 Tree
+
+[r600] by  kas1e
+more cleanup
+2013-09-17 12:48:45	 Tree
+
+[r599] by  bszili
+Fixed Project icons which have the absolute patch of their tool.
+2013-09-17 12:36:20	 Tree
+
+[r598] by  kas1e
+cleanup again
+2013-09-17 12:29:51	 Tree
+
+[r597] by  bszili
+Fixed ELIZA.
+2013-09-17 11:47:10	 Tree
+
+[r596] by  kas1e
+cleanup: delete some more unused junk
+2013-09-17 11:40:38	 Tree
+
+[r595] by  bszili
+icon.module: make sure we have the correct size, even for newicons with small dummy planar bitmaps
+2013-09-17 10:23:23	 Tree
+
+[r594] by  kas1e
+cleanup: 3 dopus5 tools are in misc now, so Program dir should be clean now and have only related stuff
+2013-09-17 10:19:17	 Tree
+
+[r593] by  kas1e
+cleanup: previous commit was some typo
+2013-09-17 10:11:33	 Tree
+
+[r592] by  kas1e
+cleanup: eliza.c and makeserial.c no longer need it
+2013-09-17 09:52:46	 Tree
+
+[r591] by  kas1e
+cleanup: diag.c are test one as well, so going to Misc/test/ too
+2013-09-17 09:34:45	 Tree
+
+[r590] by  kas1e
+cleanup: all test related scripts/codes in the Misc/test/ now
+2013-09-17 09:23:34	 Tree
+
+[r589] by  kas1e
+cleanup: delete some more unused junk
+2013-09-17 09:17:49	 Tree
+
+[r588] by  kas1e
+cleanup: delete V44_Changes directory, as it have nothing with dopus5 itself, just some release notes to the api changes in amigaos 3.5, which as we can assume was used by initial authors as quick reference when they works on dopus5 code, and it was placed there because of that. So, its have no needs to be there anymore, but if anyone want to refer to it by any of the reassons, then grab it from original sources
+2013-09-17 09:12:33	 Tree
+
+[r587] by  kas1e
+xadopus.module: delete original code as now its ported to gcc for all platforms, if one want to refer to original code, it will be uploaded in the files section
+2013-09-17 09:08:49	 Tree
+
+[r586] by  kas1e
+xadopus.module: morphos port
+2013-09-17 06:43:49	 Tree
+
+[r585] by  kas1e
+morphos: don't use native icons code for now, as seems it should be done different for morphos
+2013-09-17 06:30:47	 Tree
+
+[r584] by  kas1e
+filetype.module: deal with malloc/free on morphos builds (as malloc on morphos want libnix_mempool(), which are from libnix, and we can't use libnix together with --nostartup option which need it for libraries (which our plugins are)
+2013-09-17 06:19:39	 Tree
+
+[r583] by  bszili
+Fix newicons with small planar bitmaps.
+2013-09-16 18:51:39	 Tree
+
+[r582] by  kas1e
+ftp.module: typo in os3 fixes
+2013-09-16 15:54:26	 Tree
+
+[r581] by  bszili
+ftp.module more os3 fixes.
+2013-09-16 15:40:22	 Tree
+
+[r580] by  bszili
+An attempt at fixing ftp.module for os3. Added __DOSBase and InputBase as globals.
+2013-09-16 15:32:37	 Tree
+
+[r579] by  kas1e
+ftp.module: no need to comment out anymore
+2013-09-16 15:09:55	 Tree
+
+[r578] by  kas1e
+ftp.module: previous version of stptok was too advanced, and didn't works as sasc one, replaced on right one fix bugs in ftp.module when copy more than one file at one time.. phew
+2013-09-16 14:44:24	 Tree
+
+[r577] by  kas1e
+ftp.module: enable KPrintF everywhere, later will use some macro which will redefine it to avoid debug output
+2013-09-16 12:01:41	 Tree
+
+[r576] by  kas1e
+cleanup: get rid of iffp/ilbm.h, necessary structures from in the Library/read_ilbm.h for now
+2013-09-16 11:37:44	 Tree
+
+[r575] by  bszili
+xadopus.module: fib_NumBlocks and fib_DiskKey should probably still be zeroed on os4.
+2013-09-16 11:21:40	 Tree
+
+[r574] by  bszili
+xadopus.module: The cast should be outside the DC_CALL macro.
+2013-09-16 11:11:34	 Tree
+
+[r573] by  kas1e
+update makefile to build xadopus.module togehter with all others, as well as change Modules/notes.txt to be in sync with current state
+2013-09-16 11:06:41	 Tree
+
+[r572] by  kas1e
+xadopus.module: os4 port
+2013-09-16 10:35:46	 Tree
+
+[r571] by  kas1e
+xadopus.module: we can't replace EntryType on DirEntryType without sideeffects there, as DirEntryType uses a lot in all the other places of xadopus.module. So, currently we comment it out just for os4, where EntryType didn't defined anymore
+2013-09-16 10:20:31	 Tree
+
+[r570] by  kas1e
+xadopus.module: missed DC_CALL wrap
+2013-09-16 09:54:06	 Tree
+
+[r569] by  kas1e
+xadopus.module: fixed typo in terms of DC_CALLs
+2013-09-16 08:47:58	 Tree
+
+[r568] by  bszili
+Removed some SAS/C cruft.
+2013-09-15 21:10:37	 Tree
+
+[r567] by  bszili
+ftp.module: fixed a silly typo
+2013-09-15 18:51:40	 Tree
+
+[r566] by  bszili
+Fixed safe IFF writing and left-out icons on AROS.
+2013-09-15 17:06:22	 Tree
+
+[r565] by  bszili
+ftp.module, read.module: Open a message port for input.device on AROS
+2013-09-15 06:36:21	 Tree
+
+[r564] by  bszili
+Open a message port for input.device so PeekQualifier works on AROS.
+2013-09-14 21:56:15	 Tree
+
+[r563] by  bszili
+Make sure the icons with alpha transparency won't get constantly overdrawn when the state isn't changed.
+2013-09-14 19:22:07	 Tree
+
+[r562] by  bszili
+Fixed the size of the background rectangle when the native icons and icon borders are enabled.
+2013-09-14 18:45:11	 Tree
+
+[r561] by  bszili
+The skip A2 argument in the middle causes crashes on systems, which doesn't use emulated 68k registers to pass the arguments. It's currently defined to be os4 only, but it might be necessary on mos too.
+2013-09-14 17:52:28	 Tree
+
+[r560] by  kas1e
+xadopus.module: replace fib_EntryType on fib_DirEntryType, as fib_EntryType is the legacy name of fib_DirEntryType. fib_EntryType used before just to be source code compatible with anctient software, so to be ok on all oses we make it all good
+2013-09-14 14:22:35	 Tree
+
+[r559] by  bszili
+xadopus.module: added the DC_CALL macros, AROS fixes
+2013-09-13 13:50:22	 Tree
+
+[r558] by  kas1e
+xadopus.module: fix all 'suggest parentheses around assignment used as truth value' warnings.
+2013-09-11 09:02:29	 Tree
+
+[r557] by  kas1e
+xadopus.module: fix 'dereferencing pointer to incomplete type' , by adding necessary struct from include/dopus/modules.h, which can't be included as it, but can be good idea to move all the stuff from to the include/libraries/module.h
+2013-09-11 08:43:58	 Tree
+
+[r556] by  kas1e
+small change in notes about modules to be in sync
+2013-09-10 12:28:16	 Tree
+
+[r555] by  kas1e
+xadopus.module: gcc port (currently 68k only, need better testing and few fixes)
+2013-09-10 11:52:15	 Tree
+
+[r554] by  kas1e
+native icons also for morphos and os4
+2013-09-07 13:50:08	 Tree
+
+[r553] by  bszili
+ftp.module: use SDI VA_* macros, added missing VA_ENDs.
+2013-09-05 09:41:33	 Tree
+
+[r552] by  bszili
+show.module: fixed a silly typo
+2013-09-04 15:44:13	 Tree
+
+[r551] by  bszili
+discopy.module: got rid of SimpleRequestScreenTags for good
+2013-09-04 12:42:08	 Tree
+
+[r550] by  bszili
+Added the missing GetProgressWindowTags variadic macro to the os3/os4/mos headers.
+2013-09-03 16:41:05	 Tree
+
+[r549] by  bszili
+icon.module: use DrawIconState on AROS, ftp.module: reverted to using timer.device
+2013-09-03 13:29:26	 Tree
+
+[r548] by  paraxenic
+Changed filetype name for ELF executables.
+2013-09-02 13:50:37	 Tree
+
+[r547] by  bszili
+Replaced the remaining kprintfs with KPrintF, some general cleanup.
+2013-09-02 13:02:52	 Tree
+
+[r546] by  bszili
+function_runprog endianness fix
+2013-09-02 11:40:35	 Tree
+
+[r545] by  bszili
+ftp.module: don't assume that va_list is an array
+2013-09-02 09:19:37	 Tree
+
+[r544] by  paraxenic
+Added default filetype recognition of ELF executable files.
+2013-09-02 00:40:20	 Tree
+
+[r543] by  paraxenic
+Added default filetype recognition of ELF executable files.
+2013-09-02 00:38:13	 Tree
+
+[r542] by  bszili
+ftp.module variadic fixes
+2013-09-01 20:38:06	 Tree
+
+[r541] by  paraxenic
+Removed unused files.
+2013-09-01 18:15:06	 Tree
+
+[r540] by  paraxenic
+Removed definitions that are no linger needed because of changes to Include/iffp/ilbm.h.
+2013-09-01 17:56:04	 Tree
+
+[r539] by  paraxenic
+Removed includes and declarations that don't need to be included in Dopus5.
+2013-09-01 17:50:06	 Tree
+
+[r538] by  paraxenic
+Remove unused include files and directory
+2013-09-01 17:30:13	 Tree
+
+[r537] by  bszili
+Cleaned up variadic macros in dopus5.library.
+2013-09-01 14:09:58	 Tree
+
+[r536] by  bszili
+More variadic function cleanup in the modules.
+2013-09-01 13:17:57	 Tree
+
+[r535] by  bszili
+Removed non-portable variadic functions from configopus.module.
+2013-09-01 11:53:40	 Tree
+
+[r534] by  bszili
+Left out arrow endian fix.
+2013-09-01 09:30:42	 Tree
+
+[r533] by  bszili
+about.module endianness fix
+2013-09-01 09:08:01	 Tree
+
+[r532] by  paraxenic
+Commented out audio.device audio play for IFF and RAW files. Datatypes will be used instead.
+2013-08-31 19:48:04	 Tree
+
+[r531] by  bszili
+amiga.c is only needed on os3 and os4.
+2013-08-31 19:05:07	 Tree
+
+[r530] by  bszili
+Don't use the obsolete BitMap field of struct Screen.
+2013-08-31 17:38:43	 Tree
+
+[r529] by  bszili
+The DOS packet workarounds for AROS are now forward compatible.
+2013-08-31 12:11:30	 Tree
+
+[r528] by  bszili
+Endianness fixes for AROS.
+2013-08-31 09:58:56	 Tree
+
+[r527] by  bszili
+Added AROS support to the modules.
+2013-08-30 11:30:18	 Tree
+
+[r526] by  paraxenic
+Fixed AROS change that broke OS3 compile.
+2013-08-29 18:08:04	 Tree
+
+[r525] by  bszili
+Initial AROS support in the program and the library. Define the USE_DRAWICONSTATE macro to use the native icon drawing function.
+2013-08-29 10:12:23	 Tree
+
+[r524] by  paraxenic
+Added dopus5.library closing to UserLibCleanup() function in all modules.
+2013-08-28 19:28:23	 Tree
+
+[r523] by  bszili
+Small cleanup in amiga.c and amiga.h.
+2013-08-28 14:17:47	 Tree
+
+[r522] by  bszili
+Reverted the changes of r519, strncpy isn't a suitable replacement for stccpy.
+2013-08-26 15:31:19	 Tree
+
+[r521] by  bszili
+Renamed serial.c to about.c, removed the remaining register.module callbacks.
+2013-08-26 12:59:46	 Tree
+
+[r520] by  bszili
+Replaced SASC strcmpi with stricmp.
+2013-08-26 12:02:17	 Tree
+
+[r519] by  bszili
+Replaced SASC stccpy function with strncpy.
+2013-08-26 11:22:03	 Tree
+
+[r518] by  bszili
+Don't use stcul_d in ftp.module.
+2013-08-26 10:54:09	 Tree
+
+[r517] by  kas1e
+cleanup, necessary casting everywhere, get rid of unnecessary ifdefs and one more cleanup
+2013-08-26 10:31:59	 Tree
+
+[r516] by  bszili
+Fixed Module_Expunge on os4 and aros, added a CPU string for ppc and i386.
+2013-08-25 10:37:55	 Tree
+
+[r515] by  bszili
+Use SysBase instead of the hard-coded address 4.
+2013-08-24 20:39:28	 Tree
+
+[r514] by  bszili
+Use the GET_DOPUSLIB macro everywhere.
+2013-08-24 19:43:21	 Tree
+
+[r513] by  kas1e
+get rid of all callbacks related to registration, delete obsolete code, do some cleanup
+2013-08-24 14:56:07	 Tree
+
+[r512] by  kas1e
+no more register.module in use, no more registrations need it, so we get rid of it in whole step by step. Next will be full remove of related code
+2013-08-24 14:40:51	 Tree
+
+[r511] by  kas1e
+small forgotten fix
+2013-08-24 14:31:05	 Tree
+
+[r510] by  bszili
+Don't display "This copy is unregistered!" in the about box. This should preferably replaced with some notion of the open source release.
+2013-08-24 07:21:21	 Tree
+
+[r509] by  bszili
+Added AROS makefiles, removed the unused C_LIB macro from MorphOS makefiles.
+2013-08-23 19:03:06	 Tree
+
+[r508] by  bszili
+Removed redundant library initialization boilerplate (init.c was a unused duplicate of libinit.c).
+2013-08-23 15:44:26	 Tree
+
+[r507] by  bszili
+Added some missing return values.
+2013-08-23 14:10:02	 Tree
+
+[r506] by  bszili
+Registration removed completely from the main program, register.module isn't used anymore.
+2013-08-23 13:34:46	 Tree
+
+[r505] by  kas1e
+register: revert back some previous changes, will do it now right : getting rid of whole registration procedure from main program, so that module will be obsolete
+2013-08-23 10:55:38	 Tree
+
+[r504] by  bszili
+Be always registered.
+2013-08-23 07:39:46	 Tree
+
+[r503] by  bszili
+Replaced obsolete pre-v36 intuition names.
+2013-08-23 06:58:53	 Tree
+
+[r502] by  bszili
+Structs have to be 2-byte aligned on x86 too.
+2013-08-22 15:32:26	 Tree
+
+[r501] by  kas1e
+mos makefiles fix: upper/lower case make difference, so we make it works and be able to build symbolic .map files as intendent
+2013-08-22 14:21:22	 Tree
+
+[r500] by  kas1e
+os4 fix: obtain of necessary IFACEs in all the other modules where it was missed
+2013-08-22 11:46:00	 Tree
+
+[r499] by  kas1e
+os4 fix: obtain of necessary IFACE for listerformat and play modules, so now sounds and listerformats options in configopus.module works on os4
+2013-08-22 11:21:18	 Tree
+
+[r498] by  paraxenic
+Added assembler workaround for faulty argument passing in OS3 version
+which eliminates the possibility of a crash.
+2013-08-21 18:40:19	 Tree
+
+[r497] by  kas1e
+delete unnecesary LICENSE file from xadopus.module, author is ok if it will be the same as whole project
+2013-08-21 09:54:54	 Tree
+
+[r496] by  kas1e
+delete unnecesary for now .asm file. keep an eye on original sources in case you will need that
+2013-08-21 09:52:51	 Tree
+
+[r495] by  kas1e
+delete non-related to xadopus.module autodocs/guides
+2013-08-20 14:34:21	 Tree
+
+[r494] by  kas1e
+added xadopus.module original sources (to be ported to gcc), as well as fix Modules/notes.txt to fit latest changes
+2013-08-20 14:32:33	 Tree
+
+[r493] by  kas1e
+all the modules inside of Module directory do not have anymore silly _modules extension , as well as all necessary changes in makefiles done to fit new names
+2013-08-20 13:55:41	 Tree
+
+[r492] by  kas1e
+Now all our ported modules in the Module directory together with necessary fixes in root-Makefile
+2013-08-20 11:17:33	 Tree
+
+[r491] by  kas1e
+last delete of original source code of Modules (for original keep refering to main trunk, or to original sources). Now its whole Modules directory which is also in no use from our code anymore
+2013-08-20 11:00:22	 Tree
+
+[r490] by  kas1e
+continue delete of old module-source (for original keep refering to main trunk, or to original sources). third delete is original code of FileTypeModule, also none of our current code use it
+2013-08-20 10:16:08	 Tree
+
+[r489] by  kas1e
+continue delete of old module-source (for original keep refering to main trunk, or to original sources). second delete of old Config Module code, as none of the files include anything from for now
+2013-08-20 10:13:46	 Tree
+
+[r488] by  kas1e
+start deleting old sources of modules (for originals keep refering to main trunk, or to original sources). first delete of NewRegModules , as none of the files include anything from
+2013-08-20 09:58:44	 Tree
+
+[r487] by  kas1e
+delete some false junk
+2013-08-20 09:53:31	 Tree
+
+[r486] by  kas1e
+show.module: added necessary for os4 iface-based stuff
+2013-08-20 09:51:49	 Tree
+
+[r485] by  paraxenic
+Fixed problem with garbled text in requester called by "open with" in lister file popup menu.
+2013-08-20 01:42:57	 Tree
+
+[r484] by  bszili
+Include libraries/configopus.h instead of Config/configopus.h, minor header cleanup.
+2013-08-19 17:59:55	 Tree
+
+[r483] by  sba
+Fixed case when refering to SysInfo includes.
+2013-08-18 20:55:50	 Tree
+
+[r482] by  paraxenic
+Added assembler workaround for faulty argument passing in OS3 version
+which fixes crashes that sometimes occur when opening environment window.
+2013-08-18 14:28:09	 Tree
+
+[r481] by  bszili
+Reverted previous commit, I didn't notice the more_functions array.
+2013-08-18 08:23:17	 Tree
+
+[r480] by  bszili
+themes.module advertised 4 functions, but it has only one (SaveTheme).
+2013-08-18 07:57:21	 Tree
+
+[r479] by  paraxenic
+Added assembler workaround for faulty argument passing in OS3 version
+which fixes garbled text in several windows.
+2013-08-17 16:12:08	 Tree
+
+[r478] by  sba
+Renamed MyReadSoftLink() to ReadSoftLinkDopus().
+This seems to be the convetion for names of function that clash with names of function of the operating system.
+2013-08-17 14:10:12	 Tree
+
+[r477] by  sba
+Removed this file again.
+The traps for the 68k emu are already present in callback_main.h, so there is no need to generate them from this file. If somebody want's to add the function into the dopus.library (or a new one), the file may be still useful. But it has to be recovered from the attic then.
+2013-08-17 14:04:28	 Tree
+
+[r476] by  sba
+Added a sfd file for a dopushook.library.
+This should match the hook interface. The contents will be mainly used to generate 68k->ppc cross calls. They are needed as the hook interface is 68k only. It probably would make sense to move these function into the dopus.library or into a dedicated library for modules, so this is likely a temporary solution for now.
+2013-08-17 07:24:46	 Tree
+
+[r475] by  bszili
+ftp.module now builds on all three platforms, partially works on os4
+2013-08-16 11:17:18	 Tree
+
+[r474] by  bszili
+themes.module adapted to use the new dopus/hooks.h macros
+2013-08-16 07:52:52	 Tree
+
+[r473] by  bszili
+New general-purpose macros for calling 68k hooks from modules.
+2013-08-16 07:44:34	 Tree
+
+[r472] by  sba
+Renamed ReadSoftLink() to MyReadSoftLink().
+2013-08-15 21:42:51	 Tree
+
+[r471] by  sba
+Removed executable properties.
+2013-08-15 21:11:04	 Tree
+
+[r470] by  bszili
+Replaced USHORT with UWORD, and SHORT with WORD everywhere.
+2013-08-14 16:00:05	 Tree
+
+[r469] by  bszili
+Reverted previous commit, the line endings got messed up.
+2013-08-14 15:38:58	 Tree
+
+[r468] by  bszili
+Replaced USHORT with UWORD everywhere
+2013-08-14 15:23:33	 Tree
+
+[r467] by  bszili
+Added AROS-compatible headers
+2013-08-14 11:19:37	 Tree
+
+[r466] by  kas1e
+update notes.txt in the ported_modules to be in sync with current state
+2013-08-14 05:52:23	 Tree
+
+[r465] by  kas1e
+few cosmetic changes in AUTHORS to reflect realms
+2013-08-14 05:29:54	 Tree
+
+[r464] by  bszili
+Second batch of the makefile cleanup
+2013-08-13 16:09:49	 Tree
+
+[r463] by  bszili
+os4 makefile cleanup, fixed a minor typo in the previous commit
+2013-08-13 12:53:52	 Tree
+
+[r462] by  bszili
+Fixed the declaration of popup_run_func
+2013-08-13 10:15:24	 Tree
+
+[r461] by  bszili
+Removed all references to the non-existent check_call debug function
+2013-08-13 07:46:41	 Tree
+
+[r460] by  bszili
+LVOs are now stored in an AROS-compatible way
+2013-08-12 13:38:40	 Tree
+
+[r459] by  kas1e
+fixed all objdump to ppc-morphos-objdump in morphos makefiles, so it possible to works not only on native, but also on cross-compile
+2013-08-12 08:58:26	 Tree
+
+[r458] by  paraxenic
+Added workaround for faulty argument passing which fixes button window
+crash when dragging the window when the popup is active.
+2013-07-02 14:45:14	 Tree
+
+[r457] by  paraxenic
+Fixed empty "load themes" lister.
+2013-06-25 18:14:24	 Tree
+
+[r456] by  paraxenic
+Fixed conditional statements for obtaining pens that were always true.
+2013-06-23 18:42:45	 Tree
+
+[r455] by  paraxenic
+Eliminated crashes in commodities.library function calls by changing
+incorrect library base name from "CommoditiesBase" to "CxBase".
+2013-06-20 16:58:13	 Tree
+
+[r454] by  kas1e
+add necessary for os4 build open/drop of ifaces in ftp.module
+2013-06-18 07:36:13	 Tree
+
+[r453] by  kas1e
+fixes in ftp.module because of ABI (a0,a2,a1 order). added temporare define for alignment, so module will compiles with that wrong define which will make other tests of module happens, until D_S macro will not used everywhere. now, os4 build start to shown windowses (for example address_book one)
+2013-06-18 07:16:30	 Tree
+
+[r452] by  kas1e
+fixed some 'suggest explicit braces to avoid ambiguous else' warnings in ftp.module
+2013-06-18 06:40:38	 Tree
+
+[r451] by  kas1e
+delete unnecessary and unused file in ftp.module
+2013-06-18 06:34:04	 Tree
+
+[r450] by  kas1e
+rewrite WB_LaunchNotify to 68k asm for 68k build (the same old problems with a4/a5 args used as arguments and old 68k inline macroses). That allow to build icon.module for 68k as well
+2013-06-17 04:30:09	 Tree
+
+[r449] by  kas1e
+small typo-fix in register.module to make it compiles for os3
+2013-06-13 07:19:12	 Tree
+
+[r448] by  kas1e
+themes.module use include/dopus/hooks.h, which are plain 68k pointers provided in a structure. So we must provide 68k crosscall macros for every call and use them. Because of that added necessary macroses for os3/os4 to that include/dopus/hooks.h which used by themes.c from themes.module, as well as fix themes.c file in that terms too
+2013-06-13 07:10:36	 Tree
+
+[r447] by  itix
+Use DC_UnlockSource(), more work needed...
+2013-06-11 19:21:40	 Tree
+
+[r446] by  itix
+Added DC_UnlockSource()
+2013-06-11 19:21:10	 Tree
+
+[r445] by  itix
+#ifdef block fixed (broken in previous commit)
+2013-06-11 19:20:11	 Tree
+
+[r444] by  itix
+Added 68k callback support
+2013-06-11 19:06:03	 Tree
+
+[r443] by  kas1e
+some fixes in configopus.module because of ABI
+2013-06-10 04:39:47	 Tree
+
+[r442] by  paraxenic
+Fixed some compiler warnings.
+2013-06-10 01:30:17	 Tree
+
+[r441] by  paraxenic
+Fixed NULL pointer crash and requester text corruption.
+Switched to clib2 C library because of newlib bugs in freeing strdup() mem.
+Removed unnecessary -lamiga from compile in makefile.
+Fixed some compiler warnings.
+2013-06-10 01:28:36	 Tree
+
+[r440] by  kas1e
+latest fixes of 'suggest parentheses around assignment used as truth value' warnings in the main Program binary. So far all parts of dopus5 clear from that warning
+2013-06-04 07:50:43	 Tree
+
+[r439] by  kas1e
+more fixes of 'suggest parentheses around assignment used as truth value' warnings in the main Program binary. Not so many left, but still
+2013-05-31 15:06:07	 Tree
+
+[r438] by  kas1e
+more fixes of 'suggest parentheses around assignment used as truth value' warnings in the main Program binary. Still some left
+2013-05-31 14:05:25	 Tree
+
+[r437] by  kas1e
+fix a good bunch of 'suggest parentheses around assignment used as truth value' warnings in the main Program binary. Still quite a lot to fix left
+2013-05-31 09:45:11	 Tree
+
+[r436] by  kas1e
+fix a 'suggest parentheses around assignment used as truth value' warnings in all the modules
+2013-05-31 08:26:12	 Tree
+
+[r435] by  kas1e
+fixed almost all latest __alignment issues in modules. only ftp.module left
+2013-05-28 11:03:44	 Tree
+
+[r434] by  kas1e
+small fix in library/iff.c done by typo/mistake
+2013-05-28 10:29:58	 Tree
+
+[r433] by  kas1e
+configopus.module: fixed asm-startup based funcs for ppc builds by adding dummy for a2, so to follow ABI :a0/a2/a1
+2013-05-28 09:57:33	 Tree
+
+[r432] by  kas1e
+fix all latest __alignments in the library
+2013-05-28 04:55:56	 Tree
+
+[r431] by  kas1e
+fix __alignments in join.module
+2013-05-28 04:41:09	 Tree
+
+[r430] by  kas1e
+fix __alignments in the filetype.module by Salas00: auto dos variables via ikka's D_S macro, for chars bufs __alignment just removed and only id_to_str() changed just in case if we want to remain 68000 compatible to
+2013-05-28 04:32:19	 Tree
+
+[r429] by  itix
+Fixed __aligned
+2013-05-27 16:47:00	 Tree
+
+[r428] by  kas1e
+fixed __alignment in the icon.module by salas00: we just remove __aligned here because the only alignment needed for the imagedata should be 16-bit alignment and the defaul USHORT type should ensure this. We also replace USHORT on UWORD as they are the same except that USHORT is an obsolete typedef kept only for compatibility with old code
+2013-05-27 13:59:54	 Tree
+
+[r427] by  kas1e
+there is no use of __alignment in some modules, remove defines. with __aligned in another modules need to deal properly
+2013-05-27 05:20:53	 Tree
+
+[r426] by  kas1e
+fixed makefiles of ported_modules, to delete all objects
+2013-05-25 11:58:36	 Tree
+
+[r425] by  kas1e
+deal with __alignment in configopus.module
+2013-05-24 15:41:31	 Tree
+
+[r424] by  kas1e
+deal with __alignment in register.module
+2013-05-24 15:35:58	 Tree
+
+[r423] by  kas1e
+deal with __alignment in themes.module
+2013-05-24 15:27:40	 Tree
+
+[r422] by  kas1e
+morphos fixes for configopus.module in terms of list execs and stubs, now module compiles and for morphos as well
+2013-05-24 08:46:03	 Tree
+
+[r421] by  kas1e
+refactoring of ported modules, bunch of fixes and updates, almost all modules builds for all platforms
+2013-05-24 08:14:14	 Tree
+
+[r420] by  kas1e
+pathformat.module builds for os3/os4/mos now (deal with includes)
+2013-05-24 04:37:49	 Tree
+
+[r419] by  kas1e
+play.module builds for os3/os4/mos now (deal with includes)
+2013-05-24 04:29:55	 Tree
+
+[r418] by  kas1e
+configopus.module now builds fine for os3
+2013-05-23 16:54:00	 Tree
+
+[r417] by  kas1e
+more fixes to configopus.module: os3 version now almost links, just one single undef to CxBase left
+2013-05-23 16:44:48	 Tree
+
+[r416] by  kas1e
+fixed union/structs in the configopus.module (before it was as C extension in SASC or so)
+2013-05-23 16:23:31	 Tree
+
+[r415] by  kas1e
+fix of themes.module: now builds for os3/os4 fine
+2013-05-23 15:58:31	 Tree
+
+[r414] by  kas1e
+initall attempts to port configopus.module (latest one) to gcc
+2013-05-23 10:08:44	 Tree
+
+[r413] by  kas1e
+ported: register.module, show.module and themes.module. have some issues there and there, read notes.txt in root of ported_modules dir
+2013-05-23 09:09:39	 Tree
+
+[r412] by  kas1e
+port of include/dopus/hooks.h (need it for themes.module)
+2013-05-23 08:48:18	 Tree
+
+[r411] by  kas1e
+read.module ported
+2013-05-23 08:12:38	 Tree
+
+[r410] by  kas1e
+print.module ported
+2013-05-23 07:45:37	 Tree
+
+[r409] by  kas1e
+play.module ported, still need some love
+2013-05-23 07:30:34	 Tree
+
+[r408] by  kas1e
+misc.module and pathformat.module ported. some fixes in ftp.module as well which allow now to build os4 native version (need fixing)
+2013-05-23 06:50:52	 Tree
+
+[r407] by  kas1e
+listerformat.module ported
+2013-05-22 14:23:08	 Tree
+
+[r406] by  kas1e
+final fix of diskinfo.module. os3/os4 version works correctly now, for morphos need to deal with __alignment
+2013-05-22 13:31:48	 Tree
+
+[r405] by  kas1e
+more fixes in diskinfo.module, all works for os3/os4 now, just colors of used/unused swapped (can be signed/unsigned default issues or so)
+2013-05-22 13:13:24	 Tree
+
+[r404] by  kas1e
+join.module ported
+2013-05-22 12:27:12	 Tree
+
+[r403] by  kas1e
+icon.module ported
+2013-05-22 12:13:29	 Tree
+
+[r402] by  kas1e
+format.module ported
+2013-05-22 11:47:24	 Tree
+
+[r401] by  kas1e
+fixicons.module ported
+2013-05-22 11:10:56	 Tree
+
+[r400] by  kas1e
+diskcopy.module ported
+2013-05-22 10:53:38	 Tree
+
+[r399] by  kas1e
+diskinfo_module buids now for os3/os4, still some fix need it, check notes.txt in root of ported_modules directory
+2013-05-22 09:46:38	 Tree
+
+[r398] by  kas1e
+initial diskinfo_module port
+2013-05-21 08:31:04	 Tree
+
+[r397] by  kas1e
+small fix in generic_files/libinit.c and related module changes
+2013-05-21 07:40:04	 Tree
+
+[r396] by  kas1e
+restructure of ported modules: generic files in generic_files directory
+2013-05-21 06:05:08	 Tree
+
+[r395] by  paraxenic
+Fixed linefeed issues that caused problems with GG OS3 compile.
+2013-05-20 17:42:33	 Tree
+
+[r394] by  paraxenic
+Added makefile to compile all Dopus5 components with a single "make" command.
+2013-05-20 17:32:46	 Tree
+
+[r393] by  paraxenic
+Added makefile to compile all modulues with a single "make" command.
+2013-05-20 17:30:05	 Tree
+
+[r392] by  kas1e
+new directory for ported modules and first 3 working (aboit,cleanup, filetype) and one in progress (ftp) modules uploaded. also in root file called 'notes.s' with all description related to porting of modules
+2013-05-17 15:16:55	 Tree
+
+[r391] by  kas1e
+better explain in comment related to how construct libvector/jumptable
+2013-05-16 13:51:55	 Tree
+
+[r390] by  paraxenic
+Added UserLibCleanup() function call to FreeBase() function.
+Eliminated SysBase & ExecLib defines because global SysBase is assigned
+a value in LibInit and ExecLib is now a variable where needed.
+Replaced GET_DOPUSLIB in UserLibInit() function call with appropriate
+library base argument.
+2013-05-12 18:42:52	 Tree
+
+[r389] by  paraxenic
+Fixed ExecLib definition for OS4.
+2013-05-11 16:35:05	 Tree
+
+[r388] by  kas1e
+fix name of functions to patch: 3 of them should have A at end. Because code of library and dopus binary use those with A. They patched before by just offsets in jump-table and works on os3/mos because for them for example AddAppWindow its just varargs stub for AddAppWindowA, while on os4 its 2 different functions as vectors. So, we replace code by adding to patchlist A at end, so it will works on all builds
+2013-05-11 14:32:50	 Tree
+
+[r387] by  paraxenic
+Combined libinit.c & init.c. as libinit.c.
+Fixed crash it OS3 library accidently executed.
+Fixed OS3 library crash upon restarting dopus5.
+Removed debug_lib references.
+2013-05-10 22:54:46	 Tree
+
+[r386] by  paraxenic
+Removed unnecessary alternative assignment for ptr variable in
+memory string length check.
+2013-05-10 22:51:19	 Tree
+
+[r385] by  itix
+Cleared from warnings
+2013-05-08 18:07:53	 Tree
+
+[r384] by  paraxenic
+Commented out debug_lib.c from library compile & marked comments with /***.
+2013-05-08 15:23:08	 Tree
+
+[r383] by  kas1e
+fix crashes on os4 causes by putting exec/emulation include in the middle of dopusbase.h which in end do pragmapack(), and all the upcoming strucutres in dopusbase.h wasn't pragma packed. now do it normally: pragmapack(2) when list of strucutres starts, and pragmapack() when they ends
+2013-05-08 06:43:13	 Tree
+
+[r382] by  kas1e
+fix pragma warnings for os3 builds
+2013-05-07 04:35:48	 Tree
+
+[r381] by  itix
+Due to InitSempaphore() calling conventions do it only once
+2013-05-06 16:03:51	 Tree
+
+[r380] by  itix
+Pack just in case
+2013-05-06 15:52:17	 Tree
+
+[r379] by  itix
+Removed warnings
+2013-05-06 15:51:28	 Tree
+
+[r378] by  kas1e
+revisited libinit.c/init.c : now everthing in one libinit.c file, so to be logical and understable. added to LibClose calling of dopus's UserLibCleanup, what fix 2 bugs: 1. remove patches 2. because of right closing of all dopus resources there is no more crashes in do_launcher on exit when use os4 binary with os4 library
+2013-05-06 11:00:16	 Tree
+
+[r377] by  kas1e
+PATCHING: for os4 fixed removing of dopus5 patched and set originals back. TODO: revisit libinit.c/init.c to call UserLibCleanup (from which removing of patching happen). Currently its just not happen for all builds, and for os3/mos builds it was luck that we didn't meet with problems on exit
+2013-05-06 10:05:03	 Tree
+
+[r376] by  kas1e
+fix typo in comment
+2013-05-06 07:54:51	 Tree
+
+[r375] by  kas1e
+including of exec/emulation.h still need it for os4, as REFCALLBACK reles on ET_registers and co. Just add it this time where is need it
+2013-05-06 07:23:16	 Tree
+
+[r374] by  kas1e
+PATCHING: replace PATCHING/LIBCALL macroses to have dummy for os3/mos in some arguments, but get Iface for os4 one (and modify all LIBCALLs in patched functions). Fix PathList structure to not have EmulTrap for os4 anymore. Add APTR libptr to be void pointer, so to get when need it library pointer, and when need it iface pointer. Changed wb_get_patchbase() to get ifaces for os4, but libbases for os3/mos.
+2013-05-06 06:57:19	 Tree
+
+[r373] by  paraxenic
+Added contingent inclusion of pragma pack statements to
+eliminate errors in OS3 compile.
+2013-05-06 00:40:04	 Tree
+
+[r372] by  paraxenic
+Added contingent inclusion of pragma pack statements to eliminate errors in OS3 compile.
+2013-05-06 00:35:23	 Tree
+
+[r371] by  paraxenic
+Added Module_Expunge() inline to Includes/inline/module.h and activated Module_Expunge() in OS3 program.
+2013-05-04 17:38:43	 Tree
+
+[r370] by  kas1e
+patching: change PATCH macro for os4 (no more warnings, no more TRAPINST/TRAPTYPE need it)
+2013-05-04 09:45:41	 Tree
+
+[r369] by  paraxenic
+Fixed OS3 clock_task crash.
+2013-05-04 01:25:57	 Tree
+
+[r368] by  kas1e
+patching: change PATCH macro to get 2 offsets: 1st in jump table for os3/mos builds when SetFunction is used, 2st offset is interface vectors one for os4 build when SetMethod will be used. Done like this to avoid bunch of 'ifdefs' in code.
+2013-05-03 09:52:55	 Tree
+
+[r367] by  kas1e
+ifdefs for pragmapacks to avoid warnings for non-ppc builds (i.e.for 68k)
+2013-05-03 09:36:28	 Tree
+
+[r366] by  kas1e
+typos
+2013-05-03 08:52:12	 Tree
+
+[r365] by  kas1e
+put necessary 68k asm function (which we do because of problems with a5/a6 registers used for arguments at one time) to another source file with proper comment
+2013-05-03 08:48:37	 Tree
+
+[r364] by  paraxenic
+Bad inlines using a5/a4 68k registers removed.
+2013-05-03 01:52:40	 Tree
+
+[r363] by  paraxenic
+Added gcc assembler functions to amiga.c and updated ConfigOpus module opening.
+2013-05-03 01:47:32	 Tree
+
+[r362] by  itix
+Added va_end(va) to finish stdarg
+2013-05-01 18:47:30	 Tree
+
+[r361] by  kas1e
+no needs for RootNode struct on os4 anymore, as we use USE_BASETYPE now
+2013-05-01 18:37:52	 Tree
+
+[r360] by  kas1e
+pragmapacks(2)/() in all .h program's files
+2013-05-01 17:32:26	 Tree
+
+[r359] by  itix
+Packed more structures
+2013-05-01 16:21:06	 Tree
+
+[r358] by  kas1e
+fix of new macroses for os4/mos to make it works on new gccs
+2013-05-01 16:03:08	 Tree
+
+[r357] by  kas1e
+os4 ifaces : open/close for all librares and modules
+2013-05-01 15:21:02	 Tree
+
+[r356] by  kas1e
+open/close of os4 ifaces for all other system libraries
+2013-05-01 14:15:24	 Tree
+
+[r355] by  kas1e
+Module_Expunge() for morphos only for now
+2013-05-01 13:54:48	 Tree
+
+[r354] by  kas1e
+open/close of os4 ifaces for dopus5.library
+2013-05-01 13:50:46	 Tree
+
+[r353] by  kas1e
+typo
+2013-05-01 13:37:36	 Tree
+
+[r352] by  kas1e
+meanwhile fix for os4 library to avoid crashes on exit when used together with native os4 bins (any of them). todo: invistigate and fix normally
+2013-05-01 13:31:25	 Tree
+
+[r351] by  kas1e
+os4 locale ifaces + fix warning
+2013-05-01 13:25:44	 Tree
+
+[r350] by  kas1e
+one more typo fix in os4 callback's macroses
+2013-05-01 12:52:12	 Tree
+
+[r349] by  kas1e
+some fixes in new callback macroses for os4
+2013-05-01 12:46:05	 Tree
+
+[r348] by  itix
+Packed structures
+2013-05-01 11:21:12	 Tree
+
+[r347] by  itix
+Decrypting about strings not needed
+2013-05-01 09:57:48	 Tree
+
+[r346] by  itix
+Decrypted about strings and moved strings to about dialog routine
+2013-05-01 09:57:14	 Tree
+
+[r345] by  itix
+Fixed warnings
+2013-05-01 09:55:42	 Tree
+
+[r344] by  paraxenic
+Fixed spelling and eliminated unnecessary include.
+2013-05-01 00:35:27	 Tree
+
+[r343] by  paraxenic
+Changed array pointers to arrays and modified initialization code.
+2013-04-30 20:46:47	 Tree
+
+[r342] by  paraxenic
+Changed register_name, about_1, about_2 pointer declarations to
+array declararions.
+2013-04-30 20:44:56	 Tree
+
+[r341] by  paraxenic
+Changed register_name, about_1, about_2 pointer declarations to
+array declararions for changes in data.c.
+2013-04-30 20:42:53	 Tree
+
+[r340] by  itix
+pragma packs fixed
+2013-04-30 20:25:15	 Tree
+
+[r339] by  itix
+Fixed callback exports
+2013-04-30 20:22:11	 Tree
+
+[r338] by  kas1e
+Program/makeserial.c to os3/os4 + some fixes
+2013-04-30 09:47:04	 Tree
+
+[r337] by  kas1e
+less warnings, no more VARARGS68K
+2013-04-30 09:14:08	 Tree
+
+[r336] by  kas1e
+less warnings
+2013-04-30 09:12:33	 Tree
+
+[r335] by  kas1e
+delete one more old include
+2013-04-30 08:12:56	 Tree
+
+[r334] by  kas1e
+delete old include
+2013-04-30 08:10:34	 Tree
+
+[r333] by  kas1e
+case sens for all sysinfo includes
+2013-04-30 08:06:35	 Tree
+
+[r332] by  itix
+Filenames are case sensitive
+2013-04-29 18:26:29	 Tree
+
+[r331] by  itix
+Set base->sysBase so we are not going to crash when expunged
+2013-04-28 18:28:34	 Tree
+
+[r330] by  itix
+Changed strstri() to const char * to remove few warnings
+2013-04-28 16:43:42	 Tree
+
+[r329] by  kas1e
+program/makefile.os3 fix
+2013-04-28 06:31:54	 Tree
+
+[r328] by  kas1e
+cybergraphics protos
+2013-04-27 14:50:19	 Tree
+
+[r327] by  paraxenic
+Removed invalid option.
+2013-04-27 14:07:12	 Tree
+
+[r326] by  paraxenic
+Added missing TAG_END to DosControlTags() function.
+2013-04-27 14:04:41	 Tree
+
+[r325] by  kas1e
+some more protos, make macroses works on os4, few changes in makefiles
+2013-04-27 09:25:11	 Tree
+
+[r324] by  paraxenic
+Removed unnecessary #define added in earlier commit. Fixed () warnings.
+2013-04-26 17:49:26	 Tree
+
+[r323] by  itix
+Macro based inlines cant have ifdefs in parameter list
+2013-04-26 17:03:30	 Tree
+
+[r322] by  itix
+Fixed typo
+2013-04-26 16:45:05	 Tree
+
+[r321] by  itix
+Fixed typo in refcall proto macro
+2013-04-26 16:41:43	 Tree
+
+[r320] by  kas1e
+add proto/diskfont.h to main includes
+2013-04-26 15:55:26	 Tree
+
+[r319] by  paraxenic
+Added LF to end of file to eliminate unnecessary warnings.
+2013-04-26 15:12:34	 Tree
+
+[r318] by  paraxenic
+Added LF to end of files to eliminate unnecessary warnings.
+2013-04-26 15:08:57	 Tree
+
+[r317] by  paraxenic
+Added some TimeVal changes for OS4 compile.
+2013-04-26 15:07:02	 Tree
+
+[r316] by  kas1e
+refactor Program/data.c and Program/dopusdata.h: now all bases for os3/os4/mos is correct as well as os4 ifaces where they should be
+2013-04-26 14:26:23	 Tree
+
+[r315] by  kas1e
+proto/multiuser for all builds
+2013-04-26 13:16:29	 Tree
+
+[r314] by  kas1e
+now 3 builds ok with timerbase
+2013-04-26 13:15:57	 Tree
+
+[r313] by  kas1e
+multiuser and sysinfo includes/inlines/interfaces for os4 too
+2013-04-26 12:50:09	 Tree
+
+[r312] by  kas1e
+timerbase again
+2013-04-26 12:48:35	 Tree
+
+[r311] by  kas1e
+typo
+2013-04-26 11:06:03	 Tree
+
+[r310] by  kas1e
+all necessary IFaces to Program/dopusdata.h
+2013-04-26 11:03:27	 Tree
+
+[r309] by  kas1e
+some more timerbase crap
+2013-04-26 10:50:14	 Tree
+
+[r308] by  kas1e
+added proto/timer.h normally
+2013-04-26 10:45:12	 Tree
+
+[r307] by  kas1e
+add amiga.o to os4 build (strcpy/etc)
+2013-04-26 10:39:36	 Tree
+
+[r306] by  kas1e
+deal with timer stuff as we use USE_BASETYPE now
+2013-04-26 10:35:20	 Tree
+
+[r305] by  kas1e
+copy+paste fix in includes
+2013-04-26 10:18:54	 Tree
+
+[r304] by  kas1e
+-DUSE_OLD_ANCHORPATH for os4 build, to avoid 'struct AnchorPath' has no member named 'ap_Buf'
+2013-04-26 10:10:55	 Tree
+
+[r303] by  kas1e
+-D__USE_BASETYPE__ for os4 build as well as necessary changes in data.c/dopusdata.h in that terms
+2013-04-26 10:06:33	 Tree
+
+[r302] by  kas1e
+new Program/dopus.h, some os4 specific changes
+2013-04-26 09:59:36	 Tree
+
+[r301] by  kas1e
+no more special includes for VARARGS68K (we do not use them at all anymore), add include of exec/emulation.h for os4 and deal with WILDSTAR for os4 as well
+2013-04-26 09:49:33	 Tree
+
+[r300] by  kas1e
+some more tweaks with os4 includes
+2013-04-26 09:42:45	 Tree
+
+[r299] by  kas1e
+for os4 include amigaguide protos, instead of clib
+2013-04-26 09:31:41	 Tree
+
+[r298] by  kas1e
+more deals with library bases
+2013-04-26 09:30:34	 Tree
+
+[r297] by  kas1e
+use dopus's GetDiskInfo currently, not os4 one
+2013-04-26 09:28:49	 Tree
+
+[r296] by  kas1e
+a little refactoring in includes to make them looks clean and more crossplatform
+2013-04-26 09:26:47	 Tree
+
+[r295] by  kas1e
+os4 makefile for Program
+2013-04-26 09:21:28	 Tree
+
+[r294] by  kas1e
+deal with some more library bases
+2013-04-26 09:18:29	 Tree
+
+[r293] by  kas1e
+add casting for LibNode to make it crossplatform
+2013-04-26 09:06:07	 Tree
+
+[r292] by  kas1e
+deal with TimerBase
+2013-04-26 08:50:54	 Tree
+
+[r291] by  itix
+Fixed another breakage in function_request_args()
+2013-04-25 19:46:33	 Tree
+
+[r290] by  itix
+Fixed broken function_request() macro, removed few warnings again
+2013-04-25 19:38:01	 Tree
+
+[r289] by  itix
+Fixed copypaste bug
+2013-04-25 18:31:35	 Tree
+
+[r288] by  paraxenic
+Added type casting to eliminate more warnings.
+2013-04-25 16:16:26	 Tree
+
+[r287] by  kas1e
+right multiuser and sysinfo protos
+2013-04-25 13:25:06	 Tree
+
+[r286] by  kas1e
+new iconify/lock gadgets for os4 as well
+2013-04-25 12:51:55	 Tree
+
+[r285] by  kas1e
+double pragma_packs() cause problems for ppc builds: already was at top/bottom of file, so make double pragmas + unpragma for all follow structs which should be packed
+2013-04-25 12:40:53	 Tree
+
+[r284] by  paraxenic
+Added type casting to eliminate more warnings.
+2013-04-25 00:05:45	 Tree
+
+[r283] by  paraxenic
+Added OS3 amigalib prototype includes to eliminate implicit
+declaration warnings.
+2013-04-24 23:59:16	 Tree
+
+[r282] by  itix
+Give native toolbar images in MorphOS
+2013-04-24 20:58:45	 Tree
+
+[r281] by  itix
+Fixed PPC alignment
+2013-04-24 16:55:50	 Tree
+
+[r280] by  itix
+Last alignment fixes
+2013-04-24 16:12:06	 Tree
+
+[r279] by  kas1e
+deal with InputBase and no more __aligned attribute in code of Program/ (TODO: rework __aligned for library as well)
+2013-04-24 08:27:34	 Tree
+
+[r278] by  itix
+Removed few warnings
+2013-04-24 05:33:18	 Tree
+
+[r277] by  itix
+Removed register requester
+2013-04-24 05:32:47	 Tree
+
+[r276] by  itix
+Fixed commodities in MorphOS build
+2013-04-24 05:31:18	 Tree
+
+[r275] by  itix
+Fixed lsprintf/RawDoFmt() for OS3
+2013-04-23 20:09:46	 Tree
+
+[r274] by  itix
+Fixed lsprintf/RawDoFmt() for OS3
+2013-04-23 20:07:04	 Tree
+
+[r273] by  itix
+Build fixes
+2013-04-23 19:44:21	 Tree
+
+[r272] by  itix
+Fixed macros to be compatible with GCC 4
+2013-04-23 19:40:51	 Tree
+
+[r271] by  kas1e
+correct includes even in other dopus5 bins
+2013-04-23 12:03:12	 Tree
+
+[r270] by  kas1e
+no more #pragma libcall : old sasc way
+2013-04-23 11:58:22	 Tree
+
+[r269] by  kas1e
+correct place for Tags-based funcs would be inline/dopus.h for os3, ppcinline/dopus.h for mos and inline4/dopus.h for os4. Proto file definitely is not correct place and clib is not exactly correct place either, because it should have only prototypes
+2013-04-23 11:43:08	 Tree
+
+[r268] by  itix
+Fixed IPC calls
+2013-04-22 19:39:10	 Tree
+
+[r267] by  itix
+IPC macros
+2013-04-22 19:36:02	 Tree
+
+[r266] by  itix
+Alignment fixes
+2013-04-22 17:15:43	 Tree
+
+[r265] by  itix
+D_S macro to align DOS structures
+2013-04-22 16:43:13	 Tree
+
+[r264] by  kas1e
+multiuser protos with inlines and co, for os3 build
+2013-04-22 16:32:19	 Tree
+
+[r263] by  kas1e
+sysinfo protos with inlines and co
+2013-04-22 16:27:50	 Tree
+
+[r262] by  kas1e
+use Itix's FuncXXTags replacements for all builds
+2013-04-22 16:16:40	 Tree
+
+[r261] by  kas1e
+no needs for file_op.h. Just some dated-unused file
+2013-04-22 15:36:23	 Tree
+
+[r260] by  kas1e
+no needs for bad proto
+2013-04-22 15:26:07	 Tree
+
+[r259] by  kas1e
+no more VARARGS68K for any platform
+2013-04-22 15:23:44	 Tree
+
+[r258] by  kas1e
+small typo-fix
+2013-04-22 14:14:11	 Tree
+
+[r257] by  kas1e
+deal with newiconbase/protos: no more externs, just including of proto
+2013-04-22 09:53:57	 Tree
+
+[r256] by  kas1e
+no DEBUG var in os3 makefile currently, as it want check_call() debug func
+2013-04-22 09:43:06	 Tree
+
+[r255] by  kas1e
+deal with ConsoleDevice
+2013-04-22 09:33:11	 Tree
+
+[r254] by  kas1e
+program/key_press.c want configopus (for get need it inlines on linking stage), so add proto
+2013-04-22 09:18:43	 Tree
+
+[r253] by  kas1e
+all makefiles should looks the same, no mess/differences need it
+2013-04-22 09:05:11	 Tree
+
+[r252] by  kas1e
+no needs to have music/module inlines in library now, they all in include directory, and so no more special ifdefs: all the same for all oses
+2013-04-22 09:03:41	 Tree
+
+[r251] by  kas1e
+no needs to have dopus_lib.fd in Library directory now, as everything in Inlude/FD/ dir now
+2013-04-22 08:58:29	 Tree
+
+[r250] by  kas1e
+os3 dopus5 inlines done with SPECIAL 47 now by fd2pragma (the same as configopus inlines), to avoid problems with a4/a5 regs used as aruments at one time
+2013-04-22 08:55:15	 Tree
+
+[r249] by  kas1e
+never ever include library/dopusbase.h in any of program files/includes. everything in dopus.h already, include amiga.h and everything
+2013-04-22 08:14:55	 Tree
+
+[r248] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-21 23:04:28	 Tree
+
+[r247] by  paraxenic
+Added missing C library includes.
+2013-04-21 21:34:03	 Tree
+
+[r246] by  itix
+Converted 68k varargs to real stdarg varargs call
+2013-04-21 20:31:25	 Tree
+
+[r245] by  itix
+Fixed error_request() varargs
+2013-04-21 20:30:25	 Tree
+
+[r244] by  itix
+Fixed couple of warnings and bugs where code would not run properly
+2013-04-21 19:24:11	 Tree
+
+[r243] by  itix
+Use WORD instead of UWORD (<0 comparisons)
+2013-04-21 19:21:57	 Tree
+
+[r242] by  itix
+REG stuff not required
+2013-04-21 19:03:09	 Tree
+
+[r241] by  itix
+REFCALL macros reworked again
+2013-04-21 18:49:41	 Tree
+
+[r240] by  itix
+REFCALL macros reworked again
+2013-04-21 18:47:28	 Tree
+
+[r239] by  itix
+MorphOS makefiles
+2013-04-21 16:46:38	 Tree
+
+[r238] by  itix
+Fixed IPC startup code pointers
+2013-04-21 16:39:08	 Tree
+
+[r237] by  itix
+Yet another PPC/68K crosscall macro
+2013-04-21 16:36:32	 Tree
+
+[r236] by  itix
+Serial number check callback need to be trapped
+2013-04-21 15:43:06	 Tree
+
+[r235] by  itix
+Some warnings removed
+2013-04-21 15:08:19	 Tree
+
+[r234] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-21 14:51:38	 Tree
+
+[r233] by  itix
+Fixed to build
+2013-04-21 12:46:49	 Tree
+
+[r232] by  kas1e
+configdopus protos, inlines, interfaces and stuff
+2013-04-21 12:26:39	 Tree
+
+[r231] by  kas1e
+some more fixes in includes
+2013-04-21 11:53:30	 Tree
+
+[r230] by  kas1e
+top/end ifdef/ifndefs for script.h to avoid conflicts when include the same file twice
+2013-04-21 11:49:30	 Tree
+
+[r229] by  kas1e
+some more modules fixes
+2013-04-21 11:43:22	 Tree
+
+[r228] by  kas1e
+fixed module proto/libraries in main includes and in program's files
+2013-04-21 11:15:11	 Tree
+
+[r227] by  itix
+Fixed refcall
+2013-04-21 10:02:08	 Tree
+
+[r226] by  itix
+Use vararg inlines only in MorphOS build
+2013-04-21 10:00:51	 Tree
+
+[r225] by  itix
+Fixed function return type
+2013-04-21 09:57:51	 Tree
+
+[r224] by  itix
+Fixed varargs call
+2013-04-21 09:15:54	 Tree
+
+[r223] by  itix
+Palette count must be signed WORD
+2013-04-21 08:48:03	 Tree
+
+[r222] by  itix
+Fixed varargs call
+2013-04-21 07:07:56	 Tree
+
+[r221] by  itix
+Fixed hooks
+2013-04-20 21:38:49	 Tree
+
+[r220] by  itix
+No need to define NewIconBase here
+2013-04-20 21:14:17	 Tree
+
+[r219] by  itix
+Headers which are required to build Magellan
+2013-04-20 21:00:48	 Tree
+
+[r218] by  itix
+return int
+2013-04-20 19:04:57	 Tree
+
+[r217] by  itix
+return int
+2013-04-20 19:00:03	 Tree
+
+[r216] by  itix
+return int
+2013-04-20 18:56:58	 Tree
+
+[r215] by  itix
+return int
+2013-04-20 18:54:19	 Tree
+
+[r214] by  itix
+return int
+2013-04-20 18:52:10	 Tree
+
+[r213] by  itix
+return int
+2013-04-20 18:49:53	 Tree
+
+[r212] by  itix
+Removed warnings
+2013-04-20 18:37:31	 Tree
+
+[r211] by  itix
+doactive() is nowhere
+2013-04-20 18:35:05	 Tree
+
+[r210] by  itix
+checkwindowquit() is nowhere
+2013-04-20 18:33:29	 Tree
+
+[r209] by  itix
+Fixing broken inlines
+2013-04-20 18:29:58	 Tree
+
+[r208] by  itix
+New inlines
+2013-04-20 18:21:26	 Tree
+
+[r207] by  itix
+Fixed ifdef (seems we must use --root option when building inlines
+2013-04-20 18:19:23	 Tree
+
+[r206] by  itix
+Include module proto and define LibExpunge() vector in MorphOS build
+2013-04-20 18:09:38	 Tree
+
+[r205] by  itix
+Cast to ULONG or it wont work on GCC
+2013-04-20 17:12:28	 Tree
+
+[r204] by  itix
+Added forward reference to supress warning
+2013-04-20 17:02:58	 Tree
+
+[r203] by  itix
+Fixed to build
+2013-04-20 17:02:39	 Tree
+
+[r202] by  itix
+Return int
+2013-04-20 16:54:33	 Tree
+
+[r201] by  itix
+Added forward reference to supress warning
+2013-04-20 16:53:49	 Tree
+
+[r200] by  itix
+Uses diskfont
+2013-04-20 16:53:25	 Tree
+
+[r199] by  itix
+Return int
+2013-04-20 16:52:51	 Tree
+
+[r198] by  kas1e
+fixed os3 inline, make right includes of modules.h and dopuslib.h: now all start to builds
+2013-04-20 15:26:37	 Tree
+
+[r197] by  kas1e
+add amigaguide include, to make help.c/.h happy
+2013-04-20 15:13:03	 Tree
+
+[r196] by  kas1e
+no needs for some externs in os3 (and pretty possible others) builds
+2013-04-20 15:11:11	 Tree
+
+[r195] by  kas1e
+undef FindNameI() for os3 build too
+2013-04-20 15:07:29	 Tree
+
+[r194] by  itix
+Build fixes
+2013-04-20 10:47:15	 Tree
+
+[r193] by  kas1e
+replace all __asm , __saveds and __stdargs on ASM SAVEDS STDARGS in all .c /. h files. Reorganize register to REG way. Change some asm values on asma to avoid confusing.
+2013-04-20 08:34:14	 Tree
+
+[r192] by  itix
+Removed VARARGS68K
+2013-04-20 08:27:31	 Tree
+
+[r191] by  itix
+Fixed to build
+2013-04-20 08:25:51	 Tree
+
+[r190] by  kas1e
+fixed program/amiga.h (remove include of debug_lib.h), and program/app_msg.h: initially there wasn't #endif at end of file
+2013-04-20 07:42:17	 Tree
+
+[r189] by  kas1e
+fixed version.c (was some broken way of doing comments inside of comments)
+2013-04-20 07:32:00	 Tree
+
+[r188] by  kas1e
+added proto for lsprinfs. currently varargs68k based version, later will change them all on non-varargs ones
+2013-04-20 07:30:39	 Tree
+
+[r187] by  kas1e
+added makefile_os3
+2013-04-20 07:28:54	 Tree
+
+[r186] by  kas1e
+added amiga.c: stccpy()/strcmpi(), and lsprintf.c
+2013-04-20 07:28:10	 Tree
+
+[r185] by  kas1e
+there is no reassons to put includes in all the files, so we use one single amiga.h file (the same as we do with library), and just include it to program/dopus.h , which included everythere all the time
+2013-04-20 07:25:32	 Tree
+
+[r184] by  itix
+Need intuitionbase.h
+2013-04-19 19:31:53	 Tree
+
+[r183] by  itix
+Return int
+2013-04-19 19:25:34	 Tree
+
+[r182] by  itix
+Signed char assumed so use BYTE
+2013-04-19 19:24:06	 Tree
+
+[r181] by  itix
+Need intuitionbase.h
+2013-04-19 19:09:07	 Tree
+
+[r180] by  itix
+Return int
+2013-04-19 18:53:50	 Tree
+
+[r179] by  itix
+Removed varargs68k dependency from MorphOS build
+2013-04-19 18:08:03	 Tree
+
+[r178] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-19 01:34:34	 Tree
+
+[r177] by  itix
+Stub changed for GetWindowMsg()
+2013-04-18 16:22:44	 Tree
+
+[r176] by  itix
+Fixed a bug where opening a requester crashed on OS3 and MorphOS
+2013-04-18 16:01:45	 Tree
+
+[r175] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-18 15:26:28	 Tree
+
+[r174] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-17 22:30:28	 Tree
+
+[r173] by  paraxenic
+Added parentheses to eliminate compiler warnings.
+2013-04-17 22:06:44	 Tree
+
+[r172] by  paraxenic
+Added minimal GeekGadgets compiler for OS3/OS4.
+2013-04-17 15:17:14	 Tree
+
+[r171] by  paraxenic
+Added directory for minimal GeekGadgets compiler for OS3/OS4
+2013-04-17 15:11:12	 Tree
+
+[r170] by  paraxenic
+Changed REF_CALLBACK typedef for OS3 to fix error in compile.
+2013-04-16 14:55:23	 Tree
+
+[r169] by  paraxenic
+Added missing code and switched to unsigned math so random number
+output is the same as the original assembler code.
+2013-04-16 14:50:43	 Tree
+
+[r168] by  paraxenic
+Changed __TEXTSEGMENT__ definition to only apply to MorphOS.
+2013-04-15 14:38:45	 Tree
+
+[r167] by  paraxenic
+Corrected argument register for Seed() and DopusRandom() functions to d0.
+Replaced erroneous ERANGE overflow check with working check.
+2013-04-15 14:29:29	 Tree
+
+[r166] by  paraxenic
+Corrected argument register for Seed() and DopusRandom() functions to d0.
+2013-04-15 14:19:27	 Tree
+
+[r165] by  paraxenic
+Corrected argument register for Seed() and DopusRandom() functions to d0.
+2013-04-15 14:13:58	 Tree
+
+[r164] by  itix
+Just cosmetics to MorphOS build
+2013-04-14 16:45:21	 Tree
+
+[r163] by  itix
+Copy input path to temp buffer before manipulating it
+2013-04-14 14:26:02	 Tree
+
+[r162] by  itix
+I should learn to code
+2013-04-14 14:23:48	 Tree
+
+[r161] by  paraxenic
+Removed -fsigned-char option from compile. Added line to state which file is
+being compiled instead of echoing long compile command.
+2013-04-14 14:14:04	 Tree
+
+[r160] by  paraxenic
+Fixed problem with char signedness in function L_DecodeILBM by adding signed char variable.
+2013-04-14 14:06:51	 Tree
+
+[r159] by  itix
+GCC 4 removed some features so we must workaround its shortcomings
+2013-04-14 13:50:49	 Tree
+
+[r158] by  kas1e
+copy+paste typo fix
+2013-04-14 08:18:49	 Tree
+
+[r157] by  itix
+Same _start() can be used in os3 and os4 builds
+2013-04-13 19:01:15	 Tree
+
+[r156] by  itix
+Fixed wrong register argument and defined VARARGS68K
+2013-04-13 18:40:15	 Tree
+
+[r155] by  kas1e
+icon.c: not latest version of file was used when overwrite patches, put amigaos4 globalbase ifdefs back
+2013-04-13 14:25:44	 Tree
+
+[r154] by  kas1e
+dos_patch.c: not latest version of file was used when overwrite patches, put amigaos4 globalbase ifdefs back
+2013-04-13 14:23:18	 Tree
+
+[r153] by  itix
+Fixed missing ';" libraries/dopus5.h
+2013-04-13 12:04:26	 Tree
+
+[r152] by  itix
+In MorphOS we watermark PPC native functions passed to IPC_Launch()
+2013-04-13 12:02:48	 Tree
+
+[r151] by  itix
+MorphOS build requires HookEntry in dispatcher
+2013-04-13 11:11:02	 Tree
+
+[r150] by  itix
+MorphOS build requires HookEntry in dispatcher
+2013-04-13 11:02:40	 Tree
+
+[r149] by  itix
+Changed REF_CALLBACK to typedef and fixed calls to this reference to work correctly
+2013-04-13 10:50:32	 Tree
+
+[r148] by  itix
+MorphOS build fixes
+2013-04-13 10:49:36	 Tree
+
+[r147] by  itix
+Fixed some build problems and changed REF_CALLBACK to use typedef
+2013-04-13 10:48:17	 Tree
+
+[r146] by  itix
+Changed function names to match prototypes in clib
+2013-04-13 10:47:22	 Tree
+
+[r145] by  itix
+Removed some (harmless) warnings
+2013-04-13 10:46:50	 Tree
+
+[r144] by  itix
+Do not include classact stuff to avoid deprecation warnings
+2013-04-13 10:28:51	 Tree
+
+[r143] by  itix
+MorphOS inlines
+2013-04-13 10:28:07	 Tree
+
+[r142] by  itix
+MorphOS stubs and strip debug data from the library
+2013-04-13 09:54:43	 Tree
+
+[r141] by  itix
+Forward reference to fix build
+2013-04-13 09:02:41	 Tree
+
+[r140] by  kas1e
+add missed globaldopus_base for os4 build in wb.c/L_FreeDiskObjectCopy
+2013-04-12 17:06:38	 Tree
+
+[r139] by  kas1e
+replaced 3 names of functions which can be confused with diferent SDK ones: Random, DevNameFromLock and StripIntuiMessages on RandomDopus, DevNameFromLockDopus and StripIntuiMessagesDopus. Changed all .h, .c and .fd files in all the source codes (i.e. programm, modiles, library, misc and everything)
+2013-04-12 10:12:49	 Tree
+
+[r138] by  kas1e
+misc/viewfont fixes: include of SDI/SDIxx and dropinterface before closelibrary()
+2013-04-12 09:37:11	 Tree
+
+[r137] by  kas1e
+fixed lsprintf for morphos
+2013-04-12 09:30:06	 Tree
+
+[r136] by  paraxenic
+Added makefiles for OS3 & OS4.
+Added lsprintf.c from Library to complete sources.
+2013-04-12 00:09:57	 Tree
+
+[r135] by  paraxenic
+Updated viewfont sources to compile with GCC for OS3/OS4.
+2013-04-11 23:59:15	 Tree
+
+[r134] by  paraxenic
+Fixed "clean" target that had Amiga wildcard instead of *nix wildcard.
+Added -f argument to rm command to avoid error if file already removed.
+Changed OS4 makefile includes to matched moved include files.
+2013-04-11 23:51:59	 Tree
+
+[r133] by  paraxenic
+Fixed argument error in LSprintf().
+2013-04-11 23:47:59	 Tree
+
+[r132] by  paraxenic
+Changed 3 duplicate arguments that caused fd2pragma errors
+when creating OS3 includes.
+2013-04-11 23:46:18	 Tree
+
+[r131] by  paraxenic
+Fixed "clean" target that had Amiga wildcard instead of *nix wildcard.
+Added -f argument to rm command to avoid error if file already removed.
+Changed OS4 makefile includes to matched moved include files.
+2013-04-11 23:32:16	 Tree
+
+[r130] by  paraxenic
+Deleted amigaos4 directory after moving files to main Include/ directory.
+2013-04-11 23:25:39	 Tree
+
+[r129] by  paraxenic
+Moved OS4 includes to main Include/ directory.
+2013-04-11 23:22:08	 Tree
+
+[r128] by  paraxenic
+Added OS3 includes to main Include/ directory.
+2013-04-11 23:16:59	 Tree
+
+[r127] by  itix
+Include right modules.h file from dopus5, not that other one...
+2013-04-11 20:20:21	 Tree
+
+[r126] by  itix
+More build fixes and removed few warnings again
+2013-04-11 20:12:28	 Tree
+
+[r125] by  itix
+Some common header files and some MorphOS inlines
+2013-04-11 20:11:42	 Tree
+
+[r124] by  itix
+Build fixes and removed some warnings again
+2013-04-11 19:53:16	 Tree
+
+[r123] by  itix
+Removed superfluous doublequote at include directive
+2013-04-11 19:52:07	 Tree
+
+[r122] by  itix
+Fixed to build
+2013-04-11 19:47:53	 Tree
+
+[r121] by  itix
+Fixed to build MorphOS target
+2013-04-11 19:21:22	 Tree
+
+[r120] by  itix
+include intuitionbase.h and removed few warnings
+2013-04-11 19:20:49	 Tree
+
+[r119] by  itix
+Reworked code to build on all (?) platforms
+2013-04-11 19:19:12	 Tree
+
+[r118] by  itix
+Reworked code to build on all (?) platforms
+2013-04-11 19:17:44	 Tree
+
+[r117] by  itix
+Fixed MorphOS build
+2013-04-11 19:17:08	 Tree
+
+[r116] by  itix
+Fixed MorphOS build
+2013-04-11 19:16:44	 Tree
+
+[r115] by  itix
+Fixed MorphOS build and removed warnings
+2013-04-11 19:08:45	 Tree
+
+[r114] by  itix
+Fixed MorphOS build and removed warnings
+2013-04-11 19:07:14	 Tree
+
+[r113] by  itix
+include proto/alib.h
+2013-04-11 19:02:37	 Tree
+
+[r112] by  itix
+Native function entrances
+2013-04-11 19:01:00	 Tree
+
+[r111] by  itix
+Fixed MorphOS macros
+2013-04-11 18:48:15	 Tree
+
+[r110] by  kas1e
+put SDI headers to programs includes, and change necessary files to get them from right place => to avoid problems with SDI on any SDK
+2013-04-11 09:52:54	 Tree
+
+[r109] by  kas1e
+amiga.h: no need to include amiga_compiler.h for morphos
+2013-04-11 09:41:59	 Tree
+
+[r108] by  itix
+Fixed low mem handler to MorphOS build
+2013-04-10 19:15:33	 Tree
+
+[r107] by  itix
+Use built-in putcharfunc
+2013-04-10 18:49:38	 Tree
+
+[r106] by  itix
+Mark library as non-executable
+2013-04-10 18:47:15	 Tree
+
+[r105] by  itix
+Fixed MorphOS build
+2013-04-10 18:41:08	 Tree
+
+[r104] by  itix
+List macros
+2013-04-10 18:27:52	 Tree
+
+[r103] by  itix
+Use common makefile.objs
+2013-04-10 17:51:02	 Tree
+
+[r102] by  itix
+MorphOS makefile
+2013-04-10 17:48:09	 Tree
+
+[r101] by  itix
+Fixed to build MorphOS target
+2013-04-10 17:42:16	 Tree
+
+[r100] by  kas1e
+init.c: firstly free dopus resources, and only then close libs. also add closing of 2 more libs just in case
+2013-04-10 11:19:24	 Tree
+
+[r99] by  kas1e
+pragma pack() typos/fixes
+2013-04-10 10:44:57	 Tree
+
+[r98] by  kas1e
+and enable patching back for all platforms as well
+2013-04-09 09:32:42	 Tree
+
+[r97] by  kas1e
+rewrite patching of wb.library: 2 in icons.c, 10 in dos_patch.c and wb.c/wb.h itself, so they works as before on os3, and now on os4/mos because we added traps/stubs the same as we do for library calls before. Through, the way as we do it now are wrong for os4, and need a bit of rewriting later (i.e. we use now SetFunction, but should use SetMethod or so. Now it make no harm, but when main program binary will be in native form, those traps will be not seenat all
+2013-04-09 09:20:35	 Tree
+
+[r96] by  paraxenic
+Added missing "newlines" to avoid unnecessary warnings.
+2013-04-06 17:24:56	 Tree
+
+[r95] by  kas1e
+add 'pragma packs' (crossplatform reassons) for all the structs in library/.h and .c, in include/dopus, include/amigaos4, include/iif, in config/configopus.h, program/dopus_config.h and program/pattern.h : i.e. all the files which in use when we build a library
+2013-04-06 13:09:33	 Tree
+
+[r94] by  kas1e
+heavy part: for all the functions which on 68k expect libbase of dopus in a6 (because of m68k abi), add os4 parts to take libbases from globallibbase_dopus. Through its not proper rewrite of functions to os4, because it will works only from 68k programms. For make it works from 68k/ppc bins, need to add self,etc stuff as first argument, as Joerg suggest in os4-invite list
+2013-04-06 12:33:48	 Tree
+
+[r93] by  kas1e
+launcher.c: currently comment out WB_Install_Patch() for os4, just because it needs trap/stubs rewrite
+2013-04-06 11:41:38	 Tree
+
+[r92] by  kas1e
+currently just for os4 replace all external (non L_) calls on internal (L_) via undefs/redefines in the amiga.h. Also add globaldopusbase , which is needs and for redefine, and for usage of globaldopusbase for functions which want libbase in a6 register initially
+2013-04-06 11:34:51	 Tree
+
+[r91] by  kas1e
+os4 IFACE to misc.c when do open of console.device (to avoid crashes when L_ConvertRawKey is called)
+2013-04-06 11:09:21	 Tree
+
+[r90] by  kas1e
+ipc.c: trap instruction in front of ppc code and call code entry like it was 68k code (i.e. need to run 68k tasks via ppc library)
+2013-04-06 11:04:30	 Tree
+
+[r89] by  kas1e
+add neccessary files to build os4 native build: os4_ppc_libstubs, os4_68_to_ppc_vectors stubs and makefile. It is possible to build it and for CLIB2 and for NEWLIB (check makefile for C_LIB: ) - NOW ! :) previous was just small typos
+2013-04-06 10:59:57	 Tree
+
+[r88] by  kas1e
+add neccessary files to build os4 native build: os4_ppc_libstubs, os4_68_to_ppc_vectors stubs and makefile. It is possible to build it and for CLIB2 and for NEWLIB (check makefile for C_LIB: )
+2013-04-06 10:58:25	 Tree
+
+[r87] by  kas1e
+get rid of unnecessary multiuser's code, which wasn't even used originally
+2013-04-06 10:38:39	 Tree
+
+[r86] by  kas1e
+small typos in includes, get rid off multiuser includes as there is no needs for them at all even for os3 build
+2013-04-06 10:36:51	 Tree
+
+[r85] by  kas1e
+add __aligned __attribute__ to be the same for all gcc, as well as some newer gcc just do not have it anymore, but to have the same code
+2013-04-06 10:27:15	 Tree
+
+[r84] by  kas1e
+gcc-inlines for os3 only, for all others generated protos
+2013-04-06 10:22:01	 Tree
+
+[r83] by  kas1e
+add amigaos4 includes generated by fd2pragma, fdtrans, idltool and manual creation of libraries/dopus5.h
+2013-04-06 10:13:18	 Tree
+
+[r82] by  kas1e
+typo
+2013-04-06 10:10:20	 Tree
+
+[r81] by  kas1e
+replace all stdargs functions on varargs/sdi for crossplatform reassons, also add one file which forget to add after rename/delete
+2013-04-06 10:00:45	 Tree
+
+[r80] by  kas1e
+will use all the time our custom Random(), StripIntuiMessages() and DevNameFromLock(), as they can conflicts with some SDKs (like OS4 one for example). But will use undefs of them for all builds, just to prevent any problems with any other os/sdk.
+2013-04-06 09:45:23	 Tree
+
+[r79] by  kas1e
+will use our custom stccpy() and strcmpi() all the time, for all builds
+2013-04-06 09:40:54	 Tree
+
+[r78] by  kas1e
+replace old sasc's getreg/putreg on dummy, as even on os3 our previous asm-replacement make only problems (for example when user press amiga+e and requester spawns - everything crashes heavy. with dummy ones there is no problems on os3, as well as there is no needs for reimplementations on any other oses : gcc take care about it
+2013-04-06 09:39:03	 Tree
+
+[r77] by  kas1e
+laucnher.c: add to launch_exit_code() necessary first arg, as it can be problem for NP_ExitCode on other that 68k builds because of the same ABI reassons
+2013-04-06 09:06:26	 Tree
+
+[r76] by  kas1e
+added necessary protos in amiga.h for crossplatform builds, reorganize struct of libs in dopuslib.h and init.c for the same crossplatform builds. comment out few more varargs function from varargs.c as they present in os3.x
+2013-04-06 09:02:47	 Tree
+
+[r75] by  kas1e
+delete of old smakefiles, scoptions, .asm and .i files, test files, unused files. if there any needs refer to original sources
+2013-04-06 08:48:27	 Tree
+
+[r74] by  kas1e
+get rid of pragma includes of 'pragma libbase' calls, and pragma files. they have no needs for gcc, and if there will be needs to check them out then refers to original source
+2013-04-06 08:12:58	 Tree
+
+[r73] by  kas1e
+get rid of ASM-memory-pools related functions from all builds, but not for os3 (there is need it because of some old memory bug on os3)
+2013-04-06 08:02:49	 Tree
+
+[r72] by  kas1e
+delete old makefile
+2013-04-06 07:54:48	 Tree
+
+[r71] by  kas1e
+makefile to makefile_os3, and -D__amigaos3__ so all the code will understand __amigaos3__ switch
+2013-04-06 07:45:58	 Tree
+
+[r70] by  kas1e
+get away of UDivMod32(), SDivMod32() and UMult32() via replacement, but later will need to get rid of them from code. Gcc will optimise it even better, and even for os3
+2013-04-06 07:36:40	 Tree
+
+[r69] by  kas1e
+fix sting_hook.c/string_edit_hook(): reorginze way os passing arguments for crossplatform reassons (need it because of ABI)
+2013-04-06 07:28:23	 Tree
+
+[r68] by  kas1e
+refactoring of dopusbase.h for better and easy read
+2013-04-05 13:34:55	 Tree
+
+[r67] by  kas1e
+little cleanup of top's include ifndefs
+2013-04-05 12:36:31	 Tree
+
+[r66] by  kas1e
+cleanup of data.c/init.c: all declaration in one place, fix locale crash-bug
+2013-03-26 09:36:34	 Tree
+
+[r65] by  kas1e
+some more cleanup of dopuslib.h
+2013-03-24 11:07:59	 Tree
+
+[r64] by  kas1e
+cleanup LIBPROTOs: all of them in dopuslib.h now, as well as all of them have right params (prepare for crossplatform)
+2013-03-24 09:22:43	 Tree
+
+[r63] by  kas1e
+Add casting for ->DefaultFont, to make code crossplatform for all oses
+2013-03-22 12:24:23	 Tree
+
+[r62] by  kas1e
+Add casting for version check (->LibNode), to make code crossplatform for all oses
+2013-03-22 12:21:34	 Tree
+
+[r61] by  kas1e
+avoid unnecessary voids, as there is no parameters
+2013-03-22 09:57:54	 Tree
+
+[r60] by  kas1e
+add to init.c all the necessary code from original libinit.c (opening of libs, initialise of data structures, etc). Now library fully builds for 68k-gcc and works list sasc-68k original with original programm binary and modules
+2013-03-21 08:25:09	 Tree
+
+[r59] by  kas1e
+added necessary LIBPROTOs for all L_ functions in the dos_path.h, string_hook.h and wb.h
+2013-03-21 08:18:24	 Tree
+
+[r58] by  kas1e
+added -O2 to makefile, to take care about alignment issues and co
+2013-03-21 08:12:53	 Tree
+
+[r57] by  paraxenic
+Add macros and global variable to replace SASC putreg() & getreg() functions.
+2013-03-18 17:27:01	 Tree
+
+[r56] by  paraxenic
+Updated include statements to match include paths in makefile.
+Added include statements for inline functions.
+2013-03-13 14:19:44	 Tree
+
+[r55] by  paraxenic
+Added inlines for function calls to inovamusic.library.
+2013-03-13 14:14:32	 Tree
+
+[r54] by  paraxenic
+Added inlines for function calls in dopus5 modules.
+2013-03-13 14:11:40	 Tree
+
+[r53] by  paraxenic
+Added inlines for external library function calls from within the library.
+2013-03-13 14:09:21	 Tree
+
+[r52] by  paraxenic
+Added debug_lib.c source file based on codesets library source.
+Temporarily replaced vsnprintf() with sprintf() for libnix compile.
+2013-03-10 15:03:32	 Tree
+
+[r51] by  paraxenic
+Added debug symbols (stabs) and linking with libdebug.
+Added debug definition (-DDEBUG) to activate debug output.
+2013-03-10 14:47:17	 Tree
+
+[r50] by  paraxenic
+Replaced codesets license comments with dopus5 license comments.
+2013-03-10 14:42:44	 Tree
+
+[r49] by  paraxenic
+Added debug header include.
+2013-03-10 14:36:51	 Tree
+
+[r48] by  kas1e
+in function.c replace Seed/Random on L_Seed/L_Random, check warnings
+2013-03-06 13:21:52	 Tree
+
+[r47] by  kas1e
+ifndef/define/endif at top/bottom of all the header files
+2013-03-06 13:17:07	 Tree
+
+[r46] by  kas1e
+total restruct of dopsulib.h: bunch of new LIBPROTOs, getting rid of __asm, etc. For original check dopuslib.h from trunk
+2013-03-06 12:47:13	 Tree
+
+[r45] by  kas1e
+commit version.h
+2013-03-06 12:40:00	 Tree
+
+[r44] by  paraxenic
+Moved 68k execution prevention function (_start) to the beginning
+of the libinit.c sourcefile.
+2013-03-05 23:16:49	 Tree
+
+[r43] by  paraxenic
+Changed the object linking order to fix problem with 68k library
+crashing if accidently executed as a program.
+2013-03-05 23:13:15	 Tree
+
+[r42] by  kas1e
+more fixes in libinit.c and dopuslib.h by Thore
+2013-02-28 13:49:10	 Tree
+
+[r41] by  kas1e
+delete old sdi_headers
+2013-02-28 11:15:41	 Tree
+
+[r40] by  kas1e
+upload latest SDI headers from offical CVS (aminet one are old)
+2013-02-28 10:55:12	 Tree
+
+[r39] by  kas1e
+68k-gcc libpools.a to avoid bugs with memory
+2013-02-27 13:16:11	 Tree
+
+[r38] by  kas1e
+small comment in libinit (first function should be FAS or at least LibNull)
+2013-02-27 12:50:16	 Tree
+
+[r37] by  kas1e
+initial commit of new libinit code, more new files
+2013-02-27 12:35:03	 Tree
+
+[r36] by  kas1e
+initial commit of new libinit code (few new files, new libinit.c, some small change in makefile)
+2013-02-27 12:29:38	 Tree
+
+[r35] by  paraxenic
+Added __UtilityBase declaration & assignment
+2013-02-22 17:36:00	 Tree
+
+[r34] by  paraxenic
+Added more includes: proto/console.h & proto/utility.h
+2013-02-22 01:56:43	 Tree
+
+[r33] by  paraxenic
+Added libpools lib to makefile (-lpools)
+2013-02-21 16:20:25	 Tree
+
+[r32] by  kas1e
+pure rename of one directory to better understanding
+2013-02-20 18:28:22	 Tree
+
+[r31] by  kas1e
+add new, gcc based icon.h: inline and proto
+2013-02-20 18:24:22	 Tree
+
+[r30] by  paraxenic
+Changed icon.h proto location.
+2013-02-20 17:56:05	 Tree
+
+[r29] by  paraxenic
+Added -noixemul to the compile.
+2013-02-19 19:02:49	 Tree
+
+[r28] by  paraxenic
+Add added icon.h proto include.
+2013-02-19 18:24:28	 Tree
+
+[r27] by  kas1e
+our changed inlines for gcc
+2013-02-18 06:21:33	 Tree
+
+[r26] by  kas1e
+dopus5 code, library conversion to gcc starts, all xenic's changes
+2013-02-18 06:14:30	 Tree
+
+[r25] by  kas1e
+additional libs need it to build dopus5
+2013-02-18 05:52:06	 Tree
+
+[r24] by  kas1e
+68k gcc, sditools for first branch
+2013-02-18 05:47:57	 Tree
+
+[r23] by  paraxenic
+Updated changelog with latest update.
+2013-02-06 14:38:59	 Tree
+
+[r22] by  paraxenic
+Replaced PDF 1.4 docs with PDF 1.3 docs so documentation will be readable by OS3 users.
+2013-02-06 14:36:11	 Tree
+
+[r21] by  paraxenic
+Replaced PDF 1.4 docs with PDF 1.3 docs so documentation will be readable by OS3 users.
+2013-02-06 14:32:10	 Tree
+
+[r20] by  paraxenic
+Updated with latest changes.
+2013-01-17 19:03:12	 Tree
+
+[r19] by  paraxenic
+Added Dopus 5.82 PDF documentation based on original PageStream files
+and with references to registration and copyright removed.
+2013-01-17 19:00:12	 Tree
+
+[r18] by  paraxenic
+Updated changelog with DOpus55.pdf addition.
+2013-01-13 21:59:20	 Tree
+
+[r17] by  paraxenic
+Added Dopus 5.5 PDF documentation based on original PageStream files and with references
+to registration and copyright removed.
+2013-01-13 21:55:16	 Tree
+
+[r16] by  damato
+* makefile: renamed all "makefile" files to "smakefile" to make it more clear
+that these are SAS/C makefiles and no GCC makefiles and make room for the
+upcoming GCC makefiles.
+2013-01-07 19:13:42	 Tree
+
+[r15] by  kas1e
+PF_ASYNC fix
+2012-12-24 14:12:26	 Tree
+
+[r14] by  damato
+* ChangeLog, README, etc.: added ChangeLog file to synchronize individual
+developer changes more easily.
+2012-12-22 20:28:57	 Tree
+
+[r13] by  kas1e
+Delete some crap
+2012-12-18 16:33:02	 Tree
+
+[r12] by  kas1e
+Delete some crap
+2012-12-18 16:32:48	 Tree
+
+[r11] by  kas1e
+Delete some crap
+2012-12-18 16:32:38	 Tree
+
+[r10] by  kas1e
+Delete some crap
+2012-12-18 16:32:26	 Tree
+
+[r9] by  kas1e
+Delete some crap
+2012-12-18 16:32:16	 Tree
+
+[r8] by  kas1e
+Delete some crap
+2012-12-18 16:32:06	 Tree
+
+[r7] by  kas1e
+Delete some crap
+2012-12-18 16:31:56	 Tree
+
+[r6] by  kas1e
+Delete some crap
+2012-12-18 16:31:44	 Tree
+
+[r5] by  kas1e
+Delete some crap
+2012-12-18 16:31:25	 Tree
+
+[r4] by  kas1e
+Delete some crap
+2012-12-18 16:30:58	 Tree
+
+[r3] by  kas1e
+Initial commit
+2012-12-18 16:27:03	 Tree
+
+[r2] by  kas1e
+Initial commit
+2012-12-18 16:11:40	 Tree
+
+[r1] by  allura
+Initial commit
+2012-12-18 15:58:48	 Tree
