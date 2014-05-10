@@ -950,7 +950,7 @@ unsigned long LIBFUNC L_Config_Environment(
 
 							// Stack size changed
 							case GAD_ENVIRONMENT_STACK:
-								BoundsCheckGadget(data->option_list,GAD_ENVIRONMENT_STACK,4000,999999);
+								BoundsCheckGadget(data->option_list,GAD_ENVIRONMENT_STACK,4000,0x7FFFFFFF);
 								break;
 
 
