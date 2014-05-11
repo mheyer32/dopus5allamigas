@@ -441,13 +441,13 @@ int     mci_need_port;
 
 struct module_command_info module_command_table[] =
 {
-ID_ADDRESSBOOK,	mod_addrbook,	0,
-ID_CONNECT,	mod_connect,	0,
-ID_SETVAR,	mod_setvar,	0,
-ID_COMMAND,	mod_ftpcommand,	0,
-ID_QUIT,	mod_quit,	1,
-ID_ADD,		mod_ftpadd,	0,
-ID_OPTIONS,	mod_options,	0,
+MID_ADDRESSBOOK,	mod_addrbook,	0,
+MID_CONNECT,	mod_connect,	0,
+MID_SETVAR,	mod_setvar,	0,
+MID_COMMAND,	mod_ftpcommand,	0,
+MID_QUIT,	mod_quit,	1,
+MID_ADD,		mod_ftpadd,	0,
+MID_OPTIONS,	mod_options,	0,
 0xffffffff
 };
 
@@ -522,12 +522,12 @@ og.og_screen = screen;
 		// Get Opus's ARexx port name
 		func_callback( EXTCMD_GET_PORT, IPCDATA(function_ipc), og.og_opusname );
 
-		if	(mod_id == ID_QUIT || ftpport )
+		if	(mod_id == MID_QUIT || ftpport )
 			{
 			D(bug( "not launching dopus_ftp\n" ));
 			if	(ftpport)
 				D(bug( "\tbecause it's already running\n" ));
-			if	(mod_id == ID_QUIT)
+			if	(mod_id == MID_QUIT)
 				D(bug( "\tbecause function is quit\n" ));
 
 			okay = TRUE;
@@ -553,7 +553,7 @@ og.og_screen = screen;
 		// If OpusFTP process already existed or launched successfully, send a command to it
 		if	(okay)
 			{
-			 D(bug( "  sending message for running process\n" ));
+			 D(bug( "  sending message for running process: %d\n", mod_id ));
 
 			// Send a message to the main FTP process
 			for	(mci = module_command_table; mci->mci_id != 0xffffffff; ++mci)
