@@ -485,7 +485,22 @@ if	((conf=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 		IFFClose(iff);
 
 		if	(ok)
+			{
+#ifdef __AROS__
+			conf->bitfield1 = AROS_LONG2BE(conf->bitfield1);
+
+			conf->oc_env.e_retry_count = AROS_BE2LONG(conf->oc_env.e_retry_count);
+			conf->oc_env.e_retry_delay = AROS_BE2LONG(conf->oc_env.e_retry_delay);
+			conf->oc_env.e_list_update = AROS_BE2LONG(conf->oc_env.e_list_update);
+			conf->oc_env.e_timeout = AROS_BE2LONG(conf->oc_env.e_timeout);
+			conf->oc_env.e_script_time = AROS_BE2LONG(conf->oc_env.e_script_time);
+			conf->oc_env.e_indexsize = AROS_BE2LONG(conf->oc_env.e_indexsize);
+
+			conf->oc_env.bitfield1 = AROS_BE2LONG(conf->oc_env.bitfield1);
+			conf->oc_env.bitfield2 = AROS_BE2LONG(conf->oc_env.bitfield2);
+#endif
 			return(conf);
+			}
 		}
 
 	FreeVec(conf);
@@ -512,9 +527,13 @@ APTR iff;
 void * data;
 int size;
 BOOL ok=FALSE;
+#ifdef __AROS__
+struct ftp_environment *env_be;
+#endif
 
 #ifdef __AROS__
-if (!(data=AllocVec((type==ID_OPTIONS)?size=sizeof(struct ftp_config):sizeof(struct ftp_environment),MEMF_CLEAR)))
+// struct ftp_config has a struct ftp_environment at the end, so this buffer is large enough to hold both
+if (!(data=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 {
 	*diskerr=IoErr();
 	return(FALSE);
@@ -532,6 +551,12 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 			size=sizeof(struct ftp_config);
 #ifdef __AROS__
 			CopyMem(&dg->dg_oc,data,size);
+			{
+				struct ftp_config *conf_be = (struct ftp_config *)data;
+
+				conf_be->bitfield1 = AROS_LONG2BE(conf_be->bitfield1);
+				env_be = &conf_be->oc_env;
+			}
 #else
 			data=&dg->dg_oc;
 #endif
@@ -541,6 +566,7 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 			size=sizeof(struct ftp_environment);
 #ifdef __AROS__
 			CopyMem(wp->wp_se_copy->se_env,data,size);
+			env_be = (struct ftp_environment *)data;
 #else
 			data=wp->wp_se_copy->se_env;
 #endif
@@ -548,6 +574,18 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 			// sould be ? data=&wp->wp_se_copy.se_env_private;;
 	
 			}
+
+#ifdef __AROS__
+	env_be->e_retry_count = AROS_LONG2BE(env_be->e_retry_count);
+	env_be->e_retry_delay = AROS_LONG2BE(env_be->e_retry_delay);
+	env_be->e_list_update = AROS_LONG2BE(env_be->e_list_update);
+	env_be->e_timeout = AROS_LONG2BE(env_be->e_timeout);
+	env_be->e_script_time = AROS_LONG2BE(env_be->e_script_time);
+	env_be->e_indexsize = AROS_LONG2BE(env_be->e_indexsize);
+
+	env_be->bitfield1 = AROS_LONG2BE(env_be->bitfield1);
+	env_be->bitfield2 = AROS_LONG2BE(env_be->bitfield2);
+#endif
 
 	ok=IFFWriteChunk(iff,data,type,size);
 
@@ -619,7 +657,9 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 #ifdef __AROS__
 			CopyMem(e,entry_be,size);
 
+			entry_be->se_anon = AROS_WORD2BE(entry_be->se_anon);
 			entry_be->se_port = AROS_LONG2BE(entry_be->se_port);
+			entry_be->se_has_custom_env = AROS_WORD2BE(entry_be->se_has_custom_env);
 			if (size == LARGE_SIZE)
 			{
 				entry_be->se_env_private.e_retry_count = AROS_LONG2BE(entry_be->se_env_private.e_retry_count);
@@ -628,38 +668,9 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 				entry_be->se_env_private.e_timeout = AROS_LONG2BE(entry_be->se_env_private.e_timeout);
 				entry_be->se_env_private.e_script_time = AROS_LONG2BE(entry_be->se_env_private.e_script_time);
 				entry_be->se_env_private.e_indexsize = AROS_LONG2BE(entry_be->se_env_private.e_indexsize);
-				entry_be->se_env_private.e_custom_options = AROS_LONG2BE(entry_be->se_env_private.e_custom_options);
-				entry_be->se_env_private.e_retry = AROS_LONG2BE(entry_be->se_env_private.e_retry);
-				entry_be->se_env_private.e_retry_lost = AROS_LONG2BE(entry_be->se_env_private.e_retry_lost);
-				entry_be->se_env_private.e_noops = AROS_LONG2BE(entry_be->se_env_private.e_noops);
-				entry_be->se_env_private.e_passive = AROS_LONG2BE(entry_be->se_env_private.e_passive);
-				entry_be->se_env_private.e_keep_last_dir = AROS_LONG2BE(entry_be->se_env_private.e_keep_last_dir);
-				entry_be->se_env_private.e_safe_links = AROS_LONG2BE(entry_be->se_env_private.e_safe_links);
-				entry_be->se_env_private.e_unk_links_file = AROS_LONG2BE(entry_be->se_env_private.e_unk_links_file);
-				entry_be->se_env_private.e_show_startup = AROS_LONG2BE(entry_be->se_env_private.e_show_startup);
-				entry_be->se_env_private.e_show_dir = AROS_LONG2BE(entry_be->se_env_private.e_show_dir);
-				entry_be->se_env_private.e_progress_window = AROS_LONG2BE(entry_be->se_env_private.e_progress_window);
-				entry_be->se_env_private.e_script_connect_ok = AROS_LONG2BE(entry_be->se_env_private.e_script_connect_ok);
-				entry_be->se_env_private.e_script_connect_fail = AROS_LONG2BE(entry_be->se_env_private.e_script_connect_fail);
-				entry_be->se_env_private.e_script_copy_ok = AROS_LONG2BE(entry_be->se_env_private.e_script_copy_ok);
-				entry_be->se_env_private.e_script_copy_fail = AROS_LONG2BE(entry_be->se_env_private.e_script_copy_fail);
-				entry_be->se_env_private.e_script_error = AROS_LONG2BE(entry_be->se_env_private.e_script_error);
-				entry_be->se_env_private.e_script_close = AROS_LONG2BE(entry_be->se_env_private.e_script_close);
-				entry_be->se_env_private.e_index_enable = AROS_LONG2BE(entry_be->se_env_private.e_index_enable);
-				entry_be->se_env_private.e_index_auto = AROS_LONG2BE(entry_be->se_env_private.e_index_auto);
-				entry_be->se_env_private.e_custom_format = AROS_LONG2BE(entry_be->se_env_private.e_custom_format);
-				entry_be->se_env_private.e_copy_type = AROS_LONG2BE(entry_be->se_env_private.e_copy_type);
-				entry_be->se_env_private.e_copy_set_archive = AROS_LONG2BE(entry_be->se_env_private.e_copy_set_archive);
-				entry_be->se_env_private.e_copy_replace = AROS_LONG2BE(entry_be->se_env_private.e_copy_replace);
-				entry_be->se_env_private.e_copy_opus_default = AROS_LONG2BE(entry_be->se_env_private.e_copy_opus_default);
-				entry_be->se_env_private.e_copy_datestamp = AROS_LONG2BE(entry_be->se_env_private.e_copy_datestamp);
-				entry_be->se_env_private.e_copy_protection = AROS_LONG2BE(entry_be->se_env_private.e_copy_protection);
-				entry_be->se_env_private.e_copy_comment = AROS_LONG2BE(entry_be->se_env_private.e_copy_comment);
-				entry_be->se_env_private.e_url_comment = AROS_LONG2BE(entry_be->se_env_private.e_url_comment);
-				entry_be->se_env_private.e_transfer_details = AROS_LONG2BE(entry_be->se_env_private.e_transfer_details);
-				entry_be->se_env_private.e_rescan = AROS_LONG2BE(entry_be->se_env_private.e_rescan);
-				entry_be->se_env_private.e_recursive_special = AROS_LONG2BE(entry_be->se_env_private.e_recursive_special);
-				entry_be->se_env_private.e_special_dir = AROS_LONG2BE(entry_be->se_env_private.e_special_dir);
+
+				entry_be->se_env_private.bitfield1 = AROS_LONG2BE(entry_be->se_env_private.bitfield1);
+				entry_be->se_env_private.bitfield2 = AROS_LONG2BE(entry_be->se_env_private.bitfield2);
 			}
 		if	(!(ok=IFFWriteChunkBytes(iff,(char *)entry_be,size)))
 #else
@@ -732,7 +743,9 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 			if	(!err)
 				{
 #ifdef __AROS__
+				e->se_anon = AROS_BE2WORD(e->se_anon);
 				e->se_port = AROS_BE2LONG(e->se_port);
+				e->se_has_custom_env = AROS_BE2WORD(e->se_has_custom_env);
 				if (size == LARGE_SIZE)
 				{
 					e->se_env_private.e_retry_count = AROS_BE2LONG(e->se_env_private.e_retry_count);
@@ -741,38 +754,9 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 					e->se_env_private.e_timeout = AROS_BE2LONG(e->se_env_private.e_timeout);
 					e->se_env_private.e_script_time = AROS_BE2LONG(e->se_env_private.e_script_time);
 					e->se_env_private.e_indexsize = AROS_BE2LONG(e->se_env_private.e_indexsize);
-					e->se_env_private.e_custom_options = AROS_BE2LONG(e->se_env_private.e_custom_options);
-					e->se_env_private.e_retry = AROS_BE2LONG(e->se_env_private.e_retry);
-					e->se_env_private.e_retry_lost = AROS_BE2LONG(e->se_env_private.e_retry_lost);
-					e->se_env_private.e_noops = AROS_BE2LONG(e->se_env_private.e_noops);
-					e->se_env_private.e_passive = AROS_BE2LONG(e->se_env_private.e_passive);
-					e->se_env_private.e_keep_last_dir = AROS_BE2LONG(e->se_env_private.e_keep_last_dir);
-					e->se_env_private.e_safe_links = AROS_BE2LONG(e->se_env_private.e_safe_links);
-					e->se_env_private.e_unk_links_file = AROS_BE2LONG(e->se_env_private.e_unk_links_file);
-					e->se_env_private.e_show_startup = AROS_BE2LONG(e->se_env_private.e_show_startup);
-					e->se_env_private.e_show_dir = AROS_BE2LONG(e->se_env_private.e_show_dir);
-					e->se_env_private.e_progress_window = AROS_BE2LONG(e->se_env_private.e_progress_window);
-					e->se_env_private.e_script_connect_ok = AROS_BE2LONG(e->se_env_private.e_script_connect_ok);
-					e->se_env_private.e_script_connect_fail = AROS_BE2LONG(e->se_env_private.e_script_connect_fail);
-					e->se_env_private.e_script_copy_ok = AROS_BE2LONG(e->se_env_private.e_script_copy_ok);
-					e->se_env_private.e_script_copy_fail = AROS_BE2LONG(e->se_env_private.e_script_copy_fail);
-					e->se_env_private.e_script_error = AROS_BE2LONG(e->se_env_private.e_script_error);
-					e->se_env_private.e_script_close = AROS_BE2LONG(e->se_env_private.e_script_close);
-					e->se_env_private.e_index_enable = AROS_BE2LONG(e->se_env_private.e_index_enable);
-					e->se_env_private.e_index_auto = AROS_BE2LONG(e->se_env_private.e_index_auto);
-					e->se_env_private.e_custom_format = AROS_BE2LONG(e->se_env_private.e_custom_format);
-					e->se_env_private.e_copy_type = AROS_BE2LONG(e->se_env_private.e_copy_type);
-					e->se_env_private.e_copy_set_archive = AROS_BE2LONG(e->se_env_private.e_copy_set_archive);
-					e->se_env_private.e_copy_replace = AROS_BE2LONG(e->se_env_private.e_copy_replace);
-					e->se_env_private.e_copy_opus_default = AROS_BE2LONG(e->se_env_private.e_copy_opus_default);
-					e->se_env_private.e_copy_datestamp = AROS_BE2LONG(e->se_env_private.e_copy_datestamp);
-					e->se_env_private.e_copy_protection = AROS_BE2LONG(e->se_env_private.e_copy_protection);
-					e->se_env_private.e_copy_comment = AROS_BE2LONG(e->se_env_private.e_copy_comment);
-					e->se_env_private.e_url_comment = AROS_BE2LONG(e->se_env_private.e_url_comment);
-					e->se_env_private.e_transfer_details = AROS_BE2LONG(e->se_env_private.e_transfer_details);
-					e->se_env_private.e_rescan = AROS_BE2LONG(e->se_env_private.e_rescan);
-					e->se_env_private.e_recursive_special = AROS_BE2LONG(e->se_env_private.e_recursive_special);
-					e->se_env_private.e_special_dir = AROS_BE2LONG(e->se_env_private.e_special_dir);
+
+					e->se_env_private.bitfield1 = AROS_BE2LONG(e->se_env_private.bitfield1);
+					e->se_env_private.bitfield2 = AROS_BE2LONG(e->se_env_private.bitfield2);
 				}
 #endif
 

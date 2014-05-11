@@ -177,6 +177,12 @@ int	e_indexsize;
 
 char e_toolbar[256];
 
+#ifdef __AROS__
+union
+{
+	struct
+	{
+#endif
 unsigned int e_custom_options	:	1;
 
 unsigned int e_retry		:	1; // Retry failed attempt to connect?
@@ -226,6 +232,15 @@ unsigned int e_recursive_special :	1; //(recursive copy names with space)
 unsigned int e_special_dir	:	1; // old fred hack env var
 unsigned int pad7		:	1;
 unsigned int pad8		:	1;
+#ifdef __AROS__
+	};
+	struct
+	{
+		unsigned int bitfield1;
+		unsigned int bitfield2;
+	};
+};
+#endif
 
 // IMPORTANT for memcmp comparisions of different structures 
 // the ListFormat MUST BE LAST IN STRUCTURE
@@ -238,6 +253,12 @@ struct	ftp_config
 char oc_logname[LOGNAMELEN+1];	/* Buffer for name of log file */
 char oc_anonpass[PASSWORDLEN+1];
 
+#ifdef __AROS__
+union 
+{
+	struct
+	{
+#endif
 unsigned int pad1	 	:	1; // 
 unsigned int oc_enable_log 	:	1; // user wants log open on start
 unsigned int oc_log_debug	:	1; // User level debugging (print FTP commands)
@@ -246,6 +267,11 @@ unsigned int oc_user_password	:	1; // user has defined user password
 unsigned int oc_addr_auto	:	1; // auto close addressbook on connect
 unsigned int oc_addr_dc		:	2; // what to do on double click
 unsigned int pad8		:	1;
+#ifdef __AROS__
+	};
+	unsigned int bitfield1;
+};
+#endif
 
 // IMPORTANT for memcmp comparisions of different structures 
 // the environment MUST BE LAST IN STRUCTURE
