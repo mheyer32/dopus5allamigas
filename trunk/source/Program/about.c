@@ -84,6 +84,14 @@ void show_about(struct Screen *screen,IPCData *ipc)
 		Att_NewNode(list,"",0,0);
 	}
 #endif
+	
+	// Build date
+#warning Put this into the catalog!
+	strcpy(buf,"Build date: ");
+	strcat(buf,DOPUSDATE);
+	Att_NewNode(list,"",1,0);
+	Att_NewNode(list,buf,1,0);
+	Att_NewNode(list,"",0,0);
 
 	// Try for external about library
 	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",0)))
