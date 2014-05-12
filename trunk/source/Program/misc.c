@@ -23,6 +23,30 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
+// List of builtin modules for OpenModule() function
+static const char * const dopus_modules[] = {
+"about.module",
+"cleanup.module",
+"configopus.module",
+"diskcopy.module",
+"diskinfo.module",
+"filetype.module",
+"fixicons.module",
+"format.module",
+"ftp.module",
+"icon.module",
+"join.module",
+"listerformat.module",
+"misc.module",
+"pathformat.module",
+"play.module",
+"print.module",
+"read.module",
+"show.module",
+"themes.module",
+"xadopus.module",
+0};
+
 
 // Get the name of the screen we are currently on
 char *get_our_pubscreen()
@@ -413,16 +437,16 @@ short error_saving(short err,struct Window *window,long txt,long retry)
 	// Build requester text
 	Fault(err,"",buf,80);
 	lsprintf(error_text,"%s\n%s %ld%s",
-		GetString(&locale,txt),
-		GetString(&locale,MSG_DOS_ERROR),
+		(IPTR)GetString(&locale,txt),
+		(IPTR)GetString(&locale,MSG_DOS_ERROR),
 		err,
-		buf);
+		(IPTR)buf);
 
 	// Display requester
 	return super_request_args(
 		window,
 		error_text,
-		0,
+		NULL,
 		(retry)?GetString(&locale,MSG_RETRY):GetString(&locale,MSG_OKAY),
 		(retry)?GetString(&locale,MSG_CANCEL):0,0);
 }
@@ -766,28 +790,26 @@ char *sufcmp(char *name,char *suffix)
 }
 
 
-extern const char * const module_exclusions[];
-
 // Open a module
 struct Library *OpenModule(char *name)
 {
-	struct Library *lib;
-	char buf[120];
+	struct Library *lib = NULL;
+	char buf[256];
 	short a,ver=0;
 
 	// See if this is one of our modules
-	for (a=0;module_exclusions[a];a++)
-		if (stricmp(name,module_exclusions[a])==0)
+	for (a=0;dopus_modules[a];a++)
+		if (stricmp(name,dopus_modules[a])==0)
 		{
 			// Need newest version
-			ver=60;
+			ver=LIB_VERSION;
 			break;
 		}
-
+/* We can't check for valid modules in a LIBS: multiassign etc.
 	// See if it's in RAM
 	if ((lib=OpenLibrary(name,ver)))
 		return lib;
-
+*/
 	// Build name in modules directory
 	strcpy(buf,"dopus5:modules/");
 	strcat(buf,name);

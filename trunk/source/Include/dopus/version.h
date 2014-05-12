@@ -19,11 +19,11 @@
 #define PROG_REVISION   91
 
 // set the library & modules version/revision
-#define LIB_VERSION    70
+#define LIB_VERSION    71
 #define LIB_REVISION   0
 
 // set the commands version/revision (viewfont, dopusrt5, loadwb)
-#define CMD_VERSION    63
+#define CMD_VERSION    64
 #define CMD_REVISION   0
 
 // set platform identification

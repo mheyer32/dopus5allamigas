@@ -94,13 +94,13 @@ void show_about(struct Screen *screen,IPCData *ipc)
 	Att_NewNode(list,"",0,0);
 
 	// Try for external about library
-	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",0)))
+	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",LIB_VERSION)))
 	{
 		#ifdef __amigaos4__
 		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 		{
 			CloseLibrary(ModuleBase);
-			exit(0);
+			goto fallback;
 		}
 		#endif
 
@@ -121,6 +121,7 @@ void show_about(struct Screen *screen,IPCData *ipc)
 		}
 	}
 
+	fallback:
 	// Allocate buffer
 	if ((buffer=AllocVec(512,0)))
 	{
