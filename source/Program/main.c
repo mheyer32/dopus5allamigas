@@ -201,7 +201,7 @@ void startup_check_assign()
 {
 	BPTR lock;
 
-#ifndef __amigaos3__
+#if !defined(__amigaos3__) && !defined(__amigaos4__)
 	// See if we have a DOPUS5: lock
 	if ((lock=Lock("DOPUS5:",ACCESS_READ)))
 		UnLock(lock);
