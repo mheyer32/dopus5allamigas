@@ -201,12 +201,14 @@ void startup_check_assign()
 {
 	BPTR lock;
 
+#ifndef __amigaos3__
 	// See if we have a DOPUS5: lock
 	if ((lock=Lock("DOPUS5:",ACCESS_READ)))
 		UnLock(lock);
 
 	// We don't; assign it to PROGDIR:
 	else
+#endif
 	if ((lock=DupLock(GetProgramDir())))
 	{
 		if (!(AssignLock("DOPUS5",lock)))
