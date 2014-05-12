@@ -2246,9 +2246,11 @@ return ok;
 /********************************/
 
 // Init code for process
-ULONG SAVEDS ASM creator_editor_proc_init(
-	REG(a0, IPCData *ipc),
-	REG(a1, creator_data *data ))
+#ifdef __amigaos4__
+ULONG SAVEDS ASM creator_editor_proc_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, creator_data *data ))
+#else
+ULONG SAVEDS ASM creator_editor_proc_init(REG(a0, IPCData *ipc), REG(a1, creator_data *data ))
+#endif
 {
 ULONG ok = TRUE;
 
