@@ -182,6 +182,8 @@ release: cleanall all
 	@$(MAKEDIR) Dopus5/Libs
 	@$(MAKEDIR) Dopus5/Modules
 	@$(MAKEDIR) Dopus5/C
+	@$(MAKEDIR) Dopus5/Help
+	@$(MAKEDIR) Dopus5/Documents
 	@$(MAKEDIR) $(DEST)
 ifeq ($(PLATFORM), os4)
 	@$(MAKEDIR) Dopus5/WBStartup
@@ -194,6 +196,8 @@ endif
 	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
 	@$(COPY) bin.$(NAME)/LoadDB Dopus5/C
 	@$(COPY) bin.$(NAME)/viewfont Dopus5/C
+	@$(COPY) ../Documents/*.guide Dopus5/Help
+	@$(COPY) ../Documents/*.pdf Dopus5/Documents
 ifeq ($(log), yes)
 	@$(COPY) ../ChangeLog Dopus5
 endif
