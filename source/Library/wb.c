@@ -1920,13 +1920,16 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 	// Patch WBInfo() ?
 	if (main_ipc && GetVar("dopus/PatchWBInfo",buf,2,GVF_GLOBAL_ONLY)>0 && buf[0]=='1')
 	{
-		struct Library *ModuleBase;
+		struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-		struct ModuleIFace *IModule;
-#endif
+		struct ModuleIFace *IModule = NULL;
 
 		// Open the icon.module
-		if ((ModuleBase=OpenLibrary("dopus5:modules/icon.module",0)))
+		if ((ModuleBase=OpenLibrary("dopus5:modules/icon.module",LIB_VERSION)) &&
+		   ((IModule = (APTR)GetInterface((struct Library *)ModuleBase, "main", 1L, NULL))))
+#else
+		if ((ModuleBase=OpenLibrary("dopus5:modules/icon.module",LIB_VERSION)))
+#endif
 		{
 			BPTR old;
 			struct List files;
@@ -1948,8 +1951,13 @@ PATCHED_3(ULONG, LIBFUNC L_PatchedWBInfo, a0, BPTR, lock, a1, char *, name, a2, 
 
 			// Close the module
 			CloseLibrary(ModuleBase);
+#ifdef __amigaos4__
+			DropInterface(IModule);
+#endif
+			atomic_dec(&usecount[WB_PATCH_WBINFO]);
 			return res;
 		}
+		if (ModuleBase) CloseLibrary(ModuleBase);
 	}
 //#undef DOSBase
 
