@@ -802,16 +802,18 @@ int environment_save(Cfg_Environment *env,char *name,short snapshot,CFG_ENVR *da
 			desk=(Cfg_Desktop *)desk->node.mln_Succ)
 		{
 #ifdef __AROS__
-			CFG_DESK desk_be;
+			char buffer[64]; // 12 bytes CFG_DESK + 34 bytes device name + 18 bytes extra
+			CFG_DESK *desk_be = (CFG_DESK *)buffer;
 
-			CopyMem(&desk->data,&desk_be,sizeof(CFG_DESK));
+			CopyMem(&desk->data,desk_be,desk->data.dt_Size);
 
-			desk_be.dt_Type = AROS_WORD2BE(desk_be.dt_Type);
-			desk_be.dt_Size = AROS_WORD2BE(desk_be.dt_Size);
-			desk_be.dt_Flags = AROS_LONG2BE(desk_be.dt_Flags);
-			desk_be.dt_Data = AROS_LONG2BE(desk_be.dt_Data);
+			desk_be->dt_Type = AROS_WORD2BE(desk_be->dt_Type);
+			desk_be->dt_Size = AROS_WORD2BE(desk_be->dt_Size);
+			desk_be->dt_Flags = AROS_LONG2BE(desk_be->dt_Flags);
+			if (desk->data.dt_Type != DESKTOP_HIDE_BAD && desk->data.dt_Type != DESKTOP_HIDE)
+				desk_be->dt_Data = AROS_LONG2BE(desk_be->dt_Data);
 
-			if (!(IFFWriteChunk(iff,&desk_be,ID_DESK,desk->data.dt_Size)))
+			if (!(IFFWriteChunk(iff,desk_be,ID_DESK,desk->data.dt_Size)))
 #else
 			// Write chunk
 			if (!(IFFWriteChunk(iff,&desk->data,ID_DESK,desk->data.dt_Size)))
@@ -837,7 +839,7 @@ int environment_save(Cfg_Environment *env,char *name,short snapshot,CFG_ENVR *da
 		for (sound=(Cfg_SoundEntry *)env->sound_list.mlh_Head;sound->dse_Node.ln_Succ;sound=(Cfg_SoundEntry *)sound->dse_Node.ln_Succ)
 		{
 #ifdef __AROS__
-			Cfg_SoundEntry sound_be; // could be moved outside the loop, but speed gain is probably negligible
+			Cfg_SoundEntry sound_be;
 
 			CopyMem(&sound,&sound_be,sizeof(Cfg_SoundEntry));
 

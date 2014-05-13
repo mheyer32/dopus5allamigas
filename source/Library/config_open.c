@@ -1092,8 +1092,9 @@ BOOL LIBFUNC L_OpenEnvironment(
 #ifdef __AROS__
 						desk->data.dt_Type = AROS_BE2WORD(desk->data.dt_Type);
 						desk->data.dt_Size = AROS_BE2WORD(desk->data.dt_Size);
-						desk->data.dt_Flags = AROS_BE2LONG(desk->data.dt_Flags);					
-						desk->data.dt_Data = AROS_BE2LONG(desk->data.dt_Data);
+						desk->data.dt_Flags = AROS_BE2LONG(desk->data.dt_Flags);
+						if (desk->data.dt_Type != DESKTOP_HIDE_BAD && desk->data.dt_Type != DESKTOP_HIDE)
+							desk->data.dt_Data = AROS_BE2LONG(desk->data.dt_Data);
 #endif
 
 						AddTail((struct List *)&data->desktop,(struct Node *)desk);
@@ -1134,7 +1135,7 @@ BOOL LIBFUNC L_OpenEnvironment(
 #ifdef __AROS__
 						sound->dse_Volume = AROS_BE2WORD(sound->dse_Volume);
 						sound->dse_Flags = AROS_BE2WORD(sound->dse_Flags);
-						sound->dse_RandomVolume = AROS_BE2WORD(sound->dse_RandomVolume);
+						//sound->dse_RandomVolume = AROS_BE2WORD(sound->dse_RandomVolume);
 #endif	
 
 						sound->dse_Node.ln_Name=sound->dse_Name;
