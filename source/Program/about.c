@@ -92,7 +92,13 @@ void show_about(struct Screen *screen,IPCData *ipc)
 	Att_NewNode(list,"",1,0);
 	Att_NewNode(list,buf,1,0);
 	Att_NewNode(list,"",0,0);
-
+	
+	// Link on site
+	strcpy(buf,"www.dopus5.org");
+	Att_NewNode(list,buf,1,0);
+	Att_NewNode(list,"",0,0);
+	
+	
 	// Try for external about library
 	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",LIB_VERSION)))
 	{
