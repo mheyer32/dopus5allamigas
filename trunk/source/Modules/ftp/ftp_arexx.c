@@ -780,15 +780,15 @@ else
 
 LONG STDARGS send_rexxa( const char *dest_portname, int reply_type, const char *fmt, ... )
 {
-VA_LIST	 ap;
+va_list	 ap;
 int	 retval = NULL;
 char    *buf;
 
 if	((buf = AllocVec( 1024, MEMF_ANY )))
 	{
-	VA_START( ap, fmt );
+	va_start( ap, fmt );
 	vsprintf(buf, fmt, ap);
-	VA_END( ap );
+	va_end( ap );
 
 	retval = send_rexx( dest_portname, reply_type, buf );
 	FreeVec( buf );

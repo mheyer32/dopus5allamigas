@@ -1411,7 +1411,7 @@ else //if	((taglist = CloneTagItems( (struct TagItem *)&tag )))
 					else
 						array[i++] = (char *)tagptr->ti_Data;
 					}
-				//vsprintf( buffer, (char *)fmttag->ti_Data, (VA_LIST)array );
+				//vsprintf( buffer, (char *)fmttag->ti_Data, (va_list)array );
 				LSprintf( buffer, (char *)fmttag->ti_Data, array );
 				tags[2].ti_Tag = AR_Message;
 				tags[2].ti_Data = (ULONG)buffer;

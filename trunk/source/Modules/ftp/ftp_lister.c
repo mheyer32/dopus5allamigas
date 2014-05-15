@@ -117,7 +117,7 @@ For more information on Directory Opus for Windows please see:
 //
 void STDARGS logprintf( char *fmt, ... )
 {
-VA_LIST  ap;
+va_list  ap;
 char    *buf;
 IPCData *master_ipc = GETGLOBAL(FindTask(NULL),g_master_ipc);
 int      ok = 0;
@@ -126,9 +126,9 @@ if	(master_ipc && strlen( fmt ) < 256)
 	{
 	if	((buf = AllocVec( 256, MEMF_CLEAR )))
 		{
-		VA_START( ap, fmt );
+		va_start( ap, fmt );
 		vsprintf( buf, fmt, ap );
-		VA_END( ap );
+		va_end( ap );
 
 		IPC_Command( master_ipc, IPC_PRINT, 0, 0, buf, 0 );
 		ok = 1;
