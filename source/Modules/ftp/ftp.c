@@ -389,7 +389,7 @@ return _ftp( info, 0, cmd );
 //	Return error 600 for out of memory
 //	It is technically possible for the buffer to be overwritten
 //
-static int _vftpa( struct ftp_info *info, unsigned long flags, const char *fmt, VA_LIST ap )
+static int _vftpa( struct ftp_info *info, unsigned long flags, const char *fmt, va_list ap )
 {
 char *buf;
 int   reply;
@@ -416,7 +416,7 @@ return reply;
 
 // Calls internal vftpa
 
-static int vftpa( struct ftp_info *info, const char *fmt, VA_LIST ap )
+static int vftpa( struct ftp_info *info, const char *fmt, va_list ap )
 {
 return _vftpa( info, 0, fmt, ap );
 }
@@ -425,24 +425,24 @@ return _vftpa( info, 0, fmt, ap );
 
 int _ftpa( struct ftp_info *info, unsigned long flags, const char *fmt, ... )
 {
-VA_LIST ap;
+va_list ap;
 int     reply;
 
-VA_START( ap, fmt );
+va_start( ap, fmt );
 reply = _vftpa( info, flags, fmt, ap );
-VA_END( ap );
+va_end( ap );
 
 return reply;
 }
 
 int ftpa( struct ftp_info *info, const char *fmt, ... )
 {
-VA_LIST ap;
+va_list ap;
 int     reply;
 
-VA_START( ap, fmt );
+va_start( ap, fmt );
 reply = vftpa( info, fmt, ap );
-VA_END( ap );
+va_end( ap );
 
 return reply;
 }
@@ -602,7 +602,7 @@ return (-1) ;
 static int dataconna( struct ftp_info *info, int restart, const char *fmt, ... )
 {
 struct opusftp_globals *ogp = info->fi_og;
-VA_LIST                 ap;			// For varargs
+va_list                 ap;			// For varargs
 int                     ts, ds = -1;		// Temporary socket, Data socket
 struct linger           linger = { 1, 120 };	// Socket option
 int                     tos = IPTOS_THROUGHPUT;	// Another socket option
@@ -640,11 +640,11 @@ if	((ts = opendataconn( ogp, info )) >= 0)
 
 if	(okay)
 	{
-	VA_START( ap, fmt );
+	va_start( ap, fmt );
 
 	// Send main command - Can TIMEOUT
 	reply = vftpa( info, fmt, ap );
-	VA_END( ap );
+	va_end( ap );
 
 	if	(reply/100 == PRELIM || ((info->fi_flags & FTP_FEAT_MLST) && reply == 200)) // better check the actual command?
 		{
