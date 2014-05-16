@@ -91,11 +91,10 @@ void show_about(struct Screen *screen,IPCData *ipc)
 	strcat(buf,DOPUSDATE);
 	Att_NewNode(list,"",1,0);
 	Att_NewNode(list,buf,1,0);
-	Att_NewNode(list,"",0,0);
-	
+	Att_NewNode(list,"",1,0);
+
 	// Link on site
-	strcpy(buf,"www.dopus5.org");
-	Att_NewNode(list,buf,1,0);
+	Att_NewNode(list,"www.dopus5.org",1,0);
 	Att_NewNode(list,"",0,0);
 	
 	
