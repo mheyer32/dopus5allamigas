@@ -57,58 +57,21 @@ void show_about(struct Screen *screen,IPCData *ipc)
 	// Name of the translator
 	Att_NewNode(list,GetString(&locale,MSG_TRANSLATION_BY_YOUR_NAME),3,0);
 
-#if 0
-	// Registered?
-	if (GUI->rego.name[0] &&
-		GUI->rego.serial_number[0] &&
-		atoi(GUI->rego.serial_number)!=(ULONG)GUI->backdrop)
-	{
-		Att_NewNode(list,GetString(&locale,MSG_REGISTERED_TO),1,0);
-		Att_NewNode(list,"",1,0);
-		Att_NewNode(list,GUI->rego.name,1,0);
-		if (GUI->rego.company[0]) Att_NewNode(list,GUI->rego.company,1,0);
-		if (GUI->rego.address1[0]) Att_NewNode(list,GUI->rego.address1,1,0);
-		if (GUI->rego.address2[0]) Att_NewNode(list,GUI->rego.address2,1,0);
-		if (GUI->rego.address3[0]) Att_NewNode(list,GUI->rego.address3,1,0);
-		Att_NewNode(list,"",1,0);
-		strcpy(buf,GetString(&locale,MSG_SERIAL_NUMBER));
-		strcat(buf,GUI->rego.serial_number);
-		Att_NewNode(list,buf,0,0);
-	}
-
-	// Unregistered
-	else
-	{
-		Att_NewNode(list,"",1,0);
-		Att_NewNode(list,GetString(&locale,MSG_UNREGISTERED),1,0);
-		Att_NewNode(list,"",0,0);
-	}
-#endif
-	
 	// Build date
 #warning Put this into the catalog!
 	strcpy(buf,"Build date: ");
 	strcat(buf,DOPUSDATE);
 	Att_NewNode(list,"",1,0);
 	Att_NewNode(list,buf,1,0);
-	Att_NewNode(list,"",1,0);
-
-	// Link on site
-	Att_NewNode(list,"www.dopus5.org",1,0);
 	Att_NewNode(list,"",0,0);
-	
-	
-	// Try for external about library
-	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",LIB_VERSION)))
-	{
-		#ifdef __amigaos4__
-		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-		{
-			CloseLibrary(ModuleBase);
-			goto fallback;
-		}
-		#endif
 
+	// Try for external about library
+#ifdef __amigaos4__
+	if (OpenLibIFace("dopus5:modules/about.module",(APTR)&ModuleBase,(APTR)&IModule,LIB_VERSION))
+#else
+	if ((ModuleBase=OpenLibrary("dopus5:modules/about.module",LIB_VERSION)))
+#endif
+	{
 		short ret;
 
 		// Show about
@@ -126,7 +89,6 @@ void show_about(struct Screen *screen,IPCData *ipc)
 		}
 	}
 
-	fallback:
 	// Allocate buffer
 	if ((buffer=AllocVec(512,0)))
 	{

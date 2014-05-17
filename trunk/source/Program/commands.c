@@ -26,6 +26,7 @@ For more information on Directory Opus for Windows please see:
 #include <proto/configopus.h>
 #include <proto/module.h>
 
+extern const char * const dopus_modules[];
 const char * const module_exclusions[]={
 		"configopus.module",
 		"read.module",
@@ -223,22 +224,27 @@ void init_commands_scan(short type)
 		// Otherwise
 		else
 		{
-			struct Library *ModuleBase;
+			struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-			struct ModuleIFace *IModule;
+			struct ModuleIFace *IModule = NULL;
 #endif
+			short ver = 0;
+			// See if this is one of our modules
+			for (a=0;dopus_modules[a];a++)
+				if (stricmp(anchor->ap_Info.fib_FileName, dopus_modules[a])==0)
+				{
+					// Need newest version
+					ver = LIB_VERSION;
+					break;
+				}
 
 			// Try to open library
-			if ((ModuleBase=OpenLibrary(anchor->ap_Buf,0)))
+#ifdef __amigaos4__
+			if (OpenLibIFace(anchor->ap_Buf, (APTR)&ModuleBase, (APTR)&IModule, ver))
+#else
+			if ((ModuleBase = OpenLibrary(anchor->ap_Buf,ver)))
+#endif
 			{
-				#ifdef __amigaos4__
-				if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-				{
-					CloseLibrary(ModuleBase);
-					exit(0);
-				}
-				#endif
-				
 				ModuleInfo *info;
 
 				// Ask module to identify itself
@@ -411,20 +417,16 @@ void command_expunge(char *name)
 
 	// Try to open module
 	if (sufcmp(name,".module") &&
-		(ModuleBase=OpenLibrary(name,0)))
+#ifdef __amigaos4__
+		(OpenLibIFace(name, (APTR)&ModuleBase, (APTR)&IModule, LIB_VERSION)))
+#else
+		(ModuleBase=OpenLibrary(name,LIB_VERSION)))
+#endif
 	{
-		#ifdef __amigaos4__
-		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-		{
-			CloseLibrary(ModuleBase);
-			exit(0);
-		}
-		#endif
 
-	
 		// Expunge it
 		Module_Expunge();
-	
+
 		#ifdef __amigaos4__
 		DropInterface((struct Interface *)IModule);
 		#endif

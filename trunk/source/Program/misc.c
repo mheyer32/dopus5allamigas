@@ -1,6 +1,6 @@
 /*
 
-Directory Opus 5 
+Directory Opus 5
 Original APL release version 5.82
 Copyright 1993-2012 Jonathan Potter & GP Software
 
@@ -24,7 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopus.h"
 
 // List of builtin modules for OpenModule() function
-static const char * const dopus_modules[] = {
+const char * const dopus_modules[] = {
 "about.module",
 "cleanup.module",
 "configopus.module",
@@ -986,4 +986,22 @@ BOOL GetFileInfo(char *name,struct FileInfoBlock *fib)
 	UnLock(lock);
 	return 1;
 }
+
+#ifdef __amigaos4__
+// Open library and get interface for OS4
+BOOL OpenLibIFace(char *name, APTR *libBase, APTR *iface, short version)
+{
+	if ((*libBase = OpenLibrary(name, version)))
+	{
+		if (!(*iface = GetInterface(*libBase, "main", 1, NULL)))
+		{
+			CloseLibrary(*libBase);
+			*libBase = NULL;
+			return FALSE;
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+#endif
 

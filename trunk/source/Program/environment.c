@@ -1220,19 +1220,14 @@ void env_fix_mufs()
 {
 	if (environment->env->settings.general_flags&GENERALF_ENABLE_MUFS)
 	{
-		if (!muBase) {
-		
-			muBase=OpenLibrary("multiuser.library",39);
-			
-			#ifdef __amigaos4__
-			if (!(Imu = (struct muIFace *)GetInterface(muBase, "main", 1, NULL)))
-			{
-				CloseLibrary(muBase);
-				exit(0);
-			}
-			#endif
-
-		}	
+		if (!muBase)
+		{
+#ifdef __amigaos4__
+			OpenLibIFace("multiuser.library", (APTR)&muBase, (APTR)&Imu, 39);
+#else
+			muBase = OpenLibrary("multiuser.library",39);
+#endif
+		}
 	}
 	else
 	if (muBase)
