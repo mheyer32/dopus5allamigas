@@ -657,7 +657,9 @@ void _copy(struct xoData *data,char *name, char *Dest, BOOL CopyAs)
 						PW_FileNum,		++count,
 						TAG_DONE);
 					while(xfi && (!over)) {
-						if(!strncmp(Drawer,xfi->xfi_FileName,total)) {
+						if((!strncmp(Drawer,xfi->xfi_FileName,total)) &&
+						   (xfi->xfi_FileName[total] == '/'))
+						{
 							strcpy(TreeName,FileName);
 							AddPart(TreeName,&xfi->xfi_FileName[total+1],1024);
 							SetProgressWindowTags(data->ptr,
