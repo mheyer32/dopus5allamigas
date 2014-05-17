@@ -488,13 +488,11 @@ void backdrop_draw_object(
 		// Ok to draw?
 		if (draw)
 		{
-#ifndef USE_DRAWICONSTATE
 			// Clear whole icon?
 			if (!(flags&BRENDERF_LABEL))
 			{
 				EraseRect(rp,rect.MinX,rect.MinY,rect.MaxX,rect.MaxY);
 			}
-#endif
 		}
 
 		// Can't draw
