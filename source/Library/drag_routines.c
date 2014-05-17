@@ -24,6 +24,9 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 
 #include <proto/cybergraphics.h>
+#ifdef __AROS__
+#include <proto/commodities.h>
+#endif
 
 void lock_layers(DragInfo *drag,BOOL lock);
 
@@ -651,6 +654,30 @@ BOOL LIBFUNC L_CheckDragDeadlock(
 	return 0;
 }
 
+#ifdef __AROS__
+// The commodity broker of AmiStart boldly tries to lock the layers without
+// checking the lock count. This leads to a deadlock with the dragging code,
+// because the input.device task gets blocked on the AmiStart broker.
+static void message_amistart(ULONG command)
+{
+	struct BrokerCopy *bc;
+	struct List brokerlist;
+	struct Library *CxBase;
+
+	if ((CxBase = OpenLibrary("commodities.library", 50)))
+	{
+		NewList(&brokerlist);
+		CopyBrokerList(&brokerlist);
+
+		if ((bc = (struct BrokerCopy *)FindName(&brokerlist, "AmiStart")))
+			BrokerCommand(bc->bc_Node.ln_Name, command);
+
+		FreeBrokerList(&brokerlist);
+		CloseLibrary(CxBase);
+	}
+}
+#endif
+
 void lock_layers(DragInfo *drag,BOOL lock)
 {
 	struct Layer_Info *info;
@@ -659,8 +686,20 @@ void lock_layers(DragInfo *drag,BOOL lock)
 	info=&drag->window->WScreen->LayerInfo;
 
 	// Lock layer info
-	if (lock) LockLayers(info);
-	else UnlockLayers(info);
+	if (lock)
+	{
+#ifdef __AROS__
+		message_amistart(CXCMD_DISABLE);
+#endif
+		LockLayers(info);
+	}
+	else
+	{
+		UnlockLayers(info);
+#ifdef __AROS__
+		message_amistart(CXCMD_ENABLE);
+#endif
+	}
 }
 
 
