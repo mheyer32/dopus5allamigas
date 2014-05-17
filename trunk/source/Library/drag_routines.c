@@ -409,7 +409,11 @@ void LIBFUNC L_GetDragMask(REG(a0, DragInfo *drag))
 					if (bit_pos==0)
 					{
 						// Set word in mask
+#ifdef __AROS__
+						((UWORD *)drag->bob.ImageShadow)[word_pos++]=AROS_BE2WORD(word_data);
+#else
 						((UWORD *)drag->bob.ImageShadow)[word_pos++]=word_data;
+#endif
 
 						// Reset word
 						word_data=0;
