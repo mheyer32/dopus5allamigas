@@ -74,14 +74,12 @@ IPC_EntryCode(clock_proc)
 	if ((ipc=IPC_ProcStartup(0,0)))
 	{
 		// Try to open SysInfo library
-		if ((SysInfoBase=OpenLibrary(SYSINFONAME,SYSINFOVERSION))) {
-			#ifdef __amigaos4__
-			if (!(ISysInfo = (struct SysInfoIFace *)GetInterface(SysInfoBase, "main", 1, NULL)))
-			{
-				CloseLibrary(SysInfoBase);
-				exit(0);
-			}			
-			#endif
+#ifdef __amigaos4__
+		if (OpenLibIFace(SYSINFONAME, (APTR)&SysInfoBase, (APTR)&ISysInfo, SYSINFOVERSION))
+#else
+		if ((SysInfoBase=OpenLibrary(SYSINFONAME,SYSINFOVERSION)))
+#endif
+		{
 			si=InitSysInfo();
 		}
 

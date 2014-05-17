@@ -233,27 +233,24 @@ void startup_check_assign()
 void startup_open_dopuslib()
 {
 	// Open the library
-	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION))
 #ifdef __amigaos4__
-|| (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
+	if (!OpenLibIFace("dopus5:libs/dopus5.library", (APTR)&DOpusBase, (APTR)&IDOpus, LIB_VERSION))
+#else
+	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
 #endif
-	)
 	{
-		struct Library *IntuitionBase;
-
+#ifndef __amigaos3__
+		struct Library *IntuitionBase; //Crashes OS3 binary
+#endif
 		// Get Intuition
-		if ((IntuitionBase=OpenLibrary("intuition.library",0)))
+#ifdef __amigaos4__
+		if (OpenLibIFace("intuition.library", (APTR)&IntuitionBase, (APTR)&IIntuition, 0))
+#else
+		if ((IntuitionBase=(struct IntuitionBase *)OpenLibrary("intuition.library",0)))
+#endif
 		{
-			#ifdef __amigaos4__
-			if (!(IIntuition = (struct IntuitionIFace *)GetInterface(IntuitionBase, "main", 1, NULL)))
-			{
-				CloseLibrary(IntuitionBase);
-				exit(0);
-			}
-			#endif	
-		
 			struct EasyStruct easy;
-						
+
 			// Fill out EasyStruct
 			easy.es_StructSize=sizeof(easy);
 			easy.es_Flags=0;
@@ -268,7 +265,7 @@ void startup_open_dopuslib()
 			#ifdef __amigaos4__
 			DropInterface((struct Interface *)IIntuition);
 			#endif
-			CloseLibrary(IntuitionBase);
+			CloseLibrary((struct Library *)IntuitionBase);
 		}
 		exit(0);
 	}
@@ -316,16 +313,12 @@ void startup_run_update()
 #endif
 
 	// Try and get update.module
+#ifdef __amigaos4__
+	if (OpenLibIFace("dopus5:modules/update.module", (APTR)&ModuleBase, (APTR)&IModule, LIB_VERSION))
+#else
 	if ((ModuleBase=OpenLibrary("dopus5:modules/update.module",0)))
+#endif
 	{
-		#ifdef __amigaos4__
-		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-		{
-			CloseLibrary(ModuleBase);
-			exit(0);
-		}
-		#endif
-	
 		// Launch update function
 		Module_Entry(0,0,0,0,0,0);
 
@@ -390,9 +383,9 @@ void startup_open_libraries()
 	// Is CyberGfx library already in system? If so, open it for ourselves
 	if (FindName(&SysBase->LibList,"cybergraphics.library")) {
 		CyberGfxBase=OpenLibrary("cybergraphics.library",0);
-		#ifdef __amigaos4__		
+		#ifdef __amigaos4__
 		ICyberGfx=(struct CyberGfxIFace *)GetInterface(CyberGfxBase,"main",1,NULL);
-		#endif		
+		#endif
 	}	
 
 	// Get input.device base
@@ -404,7 +397,7 @@ void startup_open_libraries()
 		#ifdef __amigaos4__
 		IInput = (struct InputIFace *)GetInterface(InputBase,"main",1,NULL); 
 		#endif
-	}	
+	}
 
 	// Get timer.device base
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&timer_req,0)) {

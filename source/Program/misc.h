@@ -173,4 +173,9 @@ void key_finder(IPCData *ipc);
 
 BOOL GetFileInfo(char *name,struct FileInfoBlock *fib);
 
+#ifdef __amigaos4__
+// Open library and get interface for OS4
+BOOL OpenLibIFace(char *name, APTR *libBase, APTR *iface, short version);
+#endif
+
 #endif
