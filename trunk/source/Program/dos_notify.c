@@ -88,6 +88,9 @@ void handle_dos_notify(DOpusNotify *notify,FunctionHandle *handle)
 		if (notify->dn_Fib)
 		{
 			struct TagItem tag;
+#ifdef USE_64BIT
+			UQUAD tmp;
+#endif
 
 			// Initialise tag
 			tag.ti_Tag=TAG_END;
@@ -165,8 +168,14 @@ void handle_dos_notify(DOpusNotify *notify,FunctionHandle *handle)
 			if (notify->dn_Flags&DNF_DOS_CLOSE)
 			{
 				// Fill out tag
+#ifdef USE_64BIT
+				tag.ti_Tag=FM_Size64;
+				tmp=GETFIBSIZE(notify->dn_Fib);
+				tag.ti_Data=(IPTR)&tmp;
+#else
 				tag.ti_Tag=FM_Size;
 				tag.ti_Data=(ULONG)notify->dn_Fib->fib_Size;
+#endif
 			}
 
 			// Valid tag?

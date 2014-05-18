@@ -23,7 +23,7 @@ NAME     := dopus5.library
 DESTDIR  := ../bin.$(ARCH)-aros
 TARGET   := $(DESTDIR)/$(NAME)
 OPTIMIZE := -O2
-OPTIONS  := -DLIBRARIES_DOPUS5_H -DCLIB_DOPUS5_PROTOS_H -DCOMPDATE=$(NEWDATE) -DARCH=$(ARCH)
+OPTIONS  := -DLIBRARIES_DOPUS5_H -DCLIB_DOPUS5_PROTOS_H -DCOMPDATE=$(NEWDATE) -DUSE_64BIT -DARCH=$(ARCH)
 INCLUDES := -I../ -I../Include
 LDFLAGS  := -nostartfiles -Wl,-Map=$(TARGET).map
 WARNINGS := -Wall -Wno-pointer-sign -fno-strict-aliasing -Werror-implicit-function-declaration
