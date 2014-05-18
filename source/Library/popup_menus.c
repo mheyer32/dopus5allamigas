@@ -276,6 +276,40 @@ UWORD LIBFUNC L_DoPopUpMenu(
 			break;
 	}
 
+#ifdef __AROS__
+	{
+		int i, numwords;
+
+		for (i=0; i<3; i++)
+		{
+			data->scroll_image[0][i]=AROS_BE2WORD(data->scroll_image[0][i]);
+			data->scroll_image[1][i]=AROS_BE2WORD(data->scroll_image[1][i]);
+		}
+
+		if (bullet==BULLET_SMALL_LO || bullet==BULLET_SMALL_HI)
+			numwords=4;
+		else
+			numwords=5;
+
+		for (i=0; i<numwords; i++)
+		{
+			data->bullet_data[i]=AROS_BE2WORD(data->bullet_data[i]);
+		}
+
+		if (sub==SUB_SMALL_LO || bullet==SUB_SMALL_LO)
+			numwords=5;
+		else if (sub==SUB_BIG_LO)
+			numwords=7;
+		else
+			numwords=10;
+
+		for (i=0; i<numwords; i++)
+		{
+			data->sub_data[i]=AROS_BE2WORD(data->sub_data[i]);
+		}
+	}
+#endif
+
 	// Get drawinfo and pens to use
 	data->drawinfo=GetScreenDrawInfo(window->WScreen);
 	data->fpen=(menu->flags&POPUPMF_USE_PEN)?POPUPMF_GET_PEN(menu->flags):data->drawinfo->dri_Pens[TEXTPEN];
