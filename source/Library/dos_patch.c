@@ -617,7 +617,11 @@ PATCHED_2(BOOL, ASM L_PatchedRename, d1, char *, oldname, d2, char *, newname)
 	if (task) task->pr_WindowPtr=(APTR)-1;
 
 	// Get new information
+#ifdef USE_64BIT
+	if (L_ExamineLock64(lock,(FileInfoBlock64 *)fib))
+#else
 	if (Examine(lock,fib))
+#endif
 	{
 		// Copy new name to comment
 		stccpy(fib->fib_Comment,fib->fib_FileName,79);
@@ -853,7 +857,11 @@ PATCHED_2(BPTR, ASM L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
 			if (*path)
 			{
 				// Examine the new file
+#ifdef USE_64BIT
+				if (L_ExamineHandle64(lock,(FileInfoBlock64 *)fib))
+#else
 				if (ExamineFH(file,fib))
+#endif
 				{
 					// Send notification
 					L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_CREATE,0,path,fib,libbase);
@@ -974,7 +982,11 @@ PATCHED_1(BOOL, ASM L_PatchedClose, d1, BPTR, file)
 					if (*path)
 					{
 						// Examine the file
+#ifdef USE_64BIT
+						if (L_ExamineHandle64(file,(FileInfoBlock64 *)fib))
+#else
 						if (ExamineFH(file,fib))
+#endif
 						{
 							// Send notification
 							L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_CLOSE,0,path,fib,libbase);
@@ -1151,7 +1163,12 @@ struct FileInfoBlock *dospatch_fib(BPTR lock,struct MyLibrary *libbase,BOOL req)
 			if (*buf)
 			{
 				// Examine the lock
-				if (Examine(lock,fib)) ok=TRUE;
+#ifdef USE_64BIT
+				if (L_ExamineLock64(lock,(FileInfoBlock64 *)fib))
+#else
+				if (Examine(lock,fib))
+#endif
+					ok=TRUE;
 			}
 		}
 
