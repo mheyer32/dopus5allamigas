@@ -664,19 +664,11 @@ BOOL LIBFUNC L_CheckDragDeadlock(
 // because the input.device task gets blocked on the AmiStart broker.
 static void message_amistart(ULONG command)
 {
-	struct BrokerCopy *bc;
-	struct List brokerlist;
 	struct Library *CxBase;
 
 	if ((CxBase = OpenLibrary("commodities.library", 50)))
 	{
-		NewList(&brokerlist);
-		CopyBrokerList(&brokerlist);
-
-		if ((bc = (struct BrokerCopy *)FindName(&brokerlist, "AmiStart")))
-			BrokerCommand(bc->bc_Node.ln_Name, command);
-
-		FreeBrokerList(&brokerlist);
+		BrokerCommand("AmiStart", command);
 		CloseLibrary(CxBase);
 	}
 }
