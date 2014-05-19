@@ -266,11 +266,12 @@ IPC_EntryCode(misc_proc)
 			case MENU_FILETYPES:
 
 				// Open configuration library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase = OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
+				)
+				{
 					if (Config_Filetypes(
 						startup->window->WScreen,
 						ipc,
@@ -282,7 +283,11 @@ IPC_EntryCode(misc_proc)
 					#endif	
 					CloseLibrary(ConfigOpusBase);
 				}
-				else FreeVec(startup->data);
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case module opens & interface doesn't
+					FreeVec(startup->data);
+				}
 				break;
 
 
@@ -290,12 +295,12 @@ IPC_EntryCode(misc_proc)
 			case MENU_LISTER_MENU:
 
 				// Open configuration library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase=OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
-					
+				)
+				{
 					long ret;
 
 					if ((ret=Config_Menus(
@@ -314,6 +319,10 @@ IPC_EntryCode(misc_proc)
 					DropInterface((struct Interface *)IConfigOpus);
 					#endif
 					CloseLibrary(ConfigOpusBase);
+				}
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case module opens & interface doesn't
 				}
 				break;
 
@@ -336,12 +345,12 @@ IPC_EntryCode(misc_proc)
 			case MENU_MENU:
 
 				// Open configuration library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase=OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
-				
+				)
+				{
 					long ret;
 
 					// Configure menus
@@ -362,6 +371,10 @@ IPC_EntryCode(misc_proc)
 					#endif
 					CloseLibrary(ConfigOpusBase);
 				}
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
+				}
 				break;
 
 
@@ -369,12 +382,12 @@ IPC_EntryCode(misc_proc)
 			case MENU_SCRIPTS:
 
 				// Open configuration library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase = OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
-				
+				)
+				{
 					long ret;
 
 					// Edit scripts
@@ -397,6 +410,10 @@ IPC_EntryCode(misc_proc)
 					#endif
 					CloseLibrary(ConfigOpusBase);
 				}
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
+				}
 				break;
 
 
@@ -404,12 +421,12 @@ IPC_EntryCode(misc_proc)
 			case MENU_HOTKEYS:
 
 				// Open configuration library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase=OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
-				
+				)
+				{
 					long ret;
 
 					if ((ret=Config_Menu(
@@ -428,6 +445,10 @@ IPC_EntryCode(misc_proc)
 					DropInterface((struct Interface *)IConfigOpus);
 					#endif
 					CloseLibrary(ConfigOpusBase);
+				}
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
 				}
 				break;
 
@@ -549,12 +570,12 @@ IPC_EntryCode(misc_proc)
 					// Get icon module
 					if ((ModuleBase=OpenModule(
 						(startup->command==MENU_ICON_DISKINFO)?
-							"diskinfo.module":"icon.module")))
-					{
+							"diskinfo.module":"icon.module"))
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 						#endif
-					
+					)
+					{
 						long flags=0;
 
 						// Initialise list
@@ -573,6 +594,8 @@ IPC_EntryCode(misc_proc)
 						#endif
 						CloseLibrary(ModuleBase);
 					}
+					else
+						CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
 				}
 				break;
 
@@ -722,12 +745,12 @@ IPC_EntryCode(misc_proc)
 					read=(struct read_startup *)startup->data;
 
 					// Get read module
-					if ((ModuleBase=OpenModule("read.module")))
-					{
+					if ((ModuleBase=OpenModule("read.module"))
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 						#endif
-					
+					)
+					{
 						// Read files
 						Module_Entry(
 							read->files,
@@ -746,6 +769,7 @@ IPC_EntryCode(misc_proc)
 					// Failed, need to free
 					else
 					{
+						CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
 						Att_RemList((Att_List *)read->files,0);
 						FreeVec(read);
 					}
@@ -765,15 +789,16 @@ IPC_EntryCode(misc_proc)
 					if ((ModuleBase=OpenModule("print.module")))
 					{
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						if ((IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 						#endif
-					
-						// Print files
-						Module_Entry(
-							(struct List *)startup->data,
-							GUI->screen_pointer,
-							ipc,&main_ipc,
-							0,0);
+						{
+							// Print files
+							Module_Entry(
+								(struct List *)startup->data,
+								GUI->screen_pointer,
+								ipc,&main_ipc,
+								0,0);
+						}
 
 						// Close module
 						#ifdef __amigaos4__
@@ -950,10 +975,11 @@ IPC_EntryCode(misc_proc)
 					if ((ModuleBase=OpenModule("show.module")))
 					{
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						if ((IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 						#endif					
-						// Show picture
-						Module_Entry(&list,0,ipc,&main_ipc,666,0);
+							// Show picture
+							Module_Entry(&list,0,ipc,&main_ipc,666,0);
+
 						#ifdef __amigaos4__
 						DropInterface((struct Interface *)IModule);
 						#endif
@@ -979,12 +1005,12 @@ IPC_EntryCode(misc_proc)
 					if ((ModuleBase=OpenModule(
 						(startup->command==FUNC_SHOW)?"show.module":
 							((startup->command==FUNC_ICONINFO)?	"icon.module":
-																"play.module"))))
-					{
+																"play.module")))
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 						#endif
-					
+					)
+					{
 						ULONG flags=0;
 
 						// Get flags for play module
@@ -1026,6 +1052,10 @@ IPC_EntryCode(misc_proc)
 						#endif
 						CloseLibrary(ModuleBase);
 					}
+					else
+					{
+						CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
+					}
 
 					// Free list
 					Att_RemList((Att_List *)startup->data,0);
@@ -1045,16 +1075,16 @@ IPC_EntryCode(misc_proc)
 					if ((ModuleBase=(struct Library *)startup->data))
 					{
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+						if ((IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 						#endif
-						// Call function
-						Module_Entry(
-							0,
-							GUI->screen_pointer,
-							ipc,
-							&main_ipc,
-							FUNCID_STARTUP,
-							(ULONG)GET_CALLBACK(function_external_hook));
+							// Call function
+							Module_Entry(
+								0,
+								GUI->screen_pointer,
+								ipc,
+								&main_ipc,
+								FUNCID_STARTUP,
+								(ULONG)GET_CALLBACK(function_external_hook));
 
 						// Close library
 						#ifdef __amigaos4__
@@ -1062,6 +1092,8 @@ IPC_EntryCode(misc_proc)
 						#endif						
 						CloseLibrary(ModuleBase);
 					}
+					else
+						CloseLibrary(ConfigOpusBase); // In case library opens & interface doesn't
 				}
 				break;
 

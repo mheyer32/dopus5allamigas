@@ -506,6 +506,7 @@ void buttons_edit(
 #endif
 	)
 	{
+		if (ConfigOpusBase)	CloseLibrary(ConfigOpusBase);
 		return;
 	}
 	

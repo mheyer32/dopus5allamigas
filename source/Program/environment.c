@@ -962,10 +962,10 @@ IPC_EntryCode(environment_proc)
 					if ((ConfigOpusBase=OpenModule(config_name)))
 					{
 						#ifdef __amigaos4__	
-						IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+						if (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 						#endif	
-
 						ok=ConvertConfig(path,GUI->screen_pointer,&main_ipc);
+
 						#ifdef __amigaos4__
 						DropInterface((struct Interface *)IConfigOpus);
 						#endif
@@ -996,12 +996,12 @@ IPC_EntryCode(environment_proc)
 			case MENU_EDIT_ENVIRONMENT:
 
 				// Open config library
-				if ((ConfigOpusBase=OpenModule(config_name)))
+				if ((ConfigOpusBase=OpenModule(config_name))
+#ifdef __amigaos4__
+				&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
+#endif
+				)
 				{
-					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
-					#endif	
-					
 					char path[256];
 
 					// Configure environment
@@ -1044,7 +1044,11 @@ IPC_EntryCode(environment_proc)
 					// Don't save layout
 					save_layout=ENVSAVE_WINDOW;
 				}
-				else break;
+				else
+				{
+					CloseLibrary(ConfigOpusBase); // In case module opens but interface doesn't
+					break;
+				}
 
 
 			// Fall through to...

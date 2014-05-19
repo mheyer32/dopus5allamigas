@@ -417,12 +417,12 @@ void key_finder(IPCData *ipc)
 #endif
 #endif
 				// Get config library
-				if ((ConfigOpusBase=OpenModule(config_name)))
-				{
+				if ((ConfigOpusBase=OpenModule(config_name))
 					#ifdef __amigaos4__	
-					IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
+					&& (IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 					#endif
-				
+				)
+				{
 					// Export function as ASCII to temporary file
 					if (FunctionExportASCII("t:keyfinder.tmp",0,function,0))
 					{
@@ -454,6 +454,8 @@ void key_finder(IPCData *ipc)
 					#endif
 					CloseLibrary(ConfigOpusBase);
 				}
+				else
+					CloseLibrary(ConfigOpusBase); // In case module opens & interface doesn't
 			}
 
 			// Add function list to gadget
