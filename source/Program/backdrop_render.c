@@ -93,7 +93,11 @@ void backdrop_scroll_objects(BackdropInfo *info,short off_x,short off_y)
 				info->window->WLayer->Flags&LAYERREFRESH)
 			{
 				// Forbid
+#ifdef LOCKLAYER_OK
+				LockScreenLayer(info->window->WScreen);
+#else
 				Forbid();
+#endif
 
 				// Begin refreshing
 				BeginRefresh(info->window);
@@ -178,7 +182,11 @@ void backdrop_scroll_objects(BackdropInfo *info,short off_x,short off_y)
 			}
 
 			// Enable multi-tasking
+#ifdef LOCKLAYER_OK
+			UnlockScreenLayer(info->window->WScreen);
+#else
 			Permit();
+#endif
 		}
 	}
 
@@ -230,7 +238,11 @@ void backdrop_show_objects(BackdropInfo *info,UWORD flags)
 			if ((flags&BDSF_REFRESH_DONE)==BDSF_REFRESH_DONE)
 			{
 				// Lock layers
+#ifdef LOCKLAYER_OK
+				LockScreenLayer(info->window->WScreen);
+#else
 				Forbid();
+#endif
 			}
 
 			// And our region with damagelist
@@ -300,7 +312,11 @@ void backdrop_show_objects(BackdropInfo *info,UWORD flags)
 			if ((flags&BDSF_REFRESH_DONE)==BDSF_REFRESH_DONE)
 			{
 				// Unlock layers
+#ifdef LOCKLAYER_OK
+				UnlockScreenLayer(info->window->WScreen);
+#else
 				Permit();
+#endif
 			}
 		}
 

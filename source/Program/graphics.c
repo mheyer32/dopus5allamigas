@@ -83,7 +83,11 @@ void show_list_selector(Lister *lister,short line,BOOL erase)
 		struct Rectangle rect;
 	
 		// Forbid for this
+#ifdef LOCKLAYER_OK
+		LockLayer(0,lister->window->WLayer);
+#else
 		Forbid();
+#endif
 
 		// End refresh temporarily
 		EndRefresh(lister->window,FALSE);
@@ -101,7 +105,11 @@ void show_list_selector(Lister *lister,short line,BOOL erase)
 		BeginRefresh(lister->window);
 
 		// Enable now we've done our dirty work
+#ifdef LOCKLAYER_OK
+		UnlockLayer(lister->window->WLayer);
+#else
 		Permit();
+#endif
 	}
 
 	// Get selector line entry, and set correct colours

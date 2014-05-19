@@ -734,7 +734,11 @@ REF_CALLBACK_BEGIN(void, lister_refresh_callback, d0, ULONG, type, a0, struct Wi
 			else
 			{
 				// Lock layers
+#ifdef LOCKLAYER_OK
+				LockScreenLayer(lister->window->WScreen);
+#else
 				Forbid();
+#endif
 
 				// Resized?
 				if (lister->flags&LISTERF_RESIZED)
@@ -774,7 +778,11 @@ REF_CALLBACK_BEGIN(void, lister_refresh_callback, d0, ULONG, type, a0, struct Wi
 				EndRefresh(lister->window,TRUE);
 
 				// Unlock layers
+#ifdef LOCKLAYER_OK
+				UnlockScreenLayer(lister->window->WScreen);
+#else
 				Permit();
+#endif
 
 				// Resized?
 				if (lister->flags&LISTERF_RESIZED)

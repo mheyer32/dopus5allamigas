@@ -210,9 +210,17 @@ void lister_display_dir(Lister *lister)
 					rect.MinY=lister->text_area.rect.MaxY-(scroll_y_amount-1);
 
 				// Modify damage list
+#ifdef LOCKLAYER_OK
+				LockLayer(0,lister->window->WLayer);
+#else
 				Forbid();
+#endif
 				OrRectRegion(lister->window->WLayer->DamageList,&rect);
+#ifdef LOCKLAYER_OK
+				UnlockLayer(lister->window->WLayer);
+#else
 				Permit();
+#endif
 
 				// Do system refresh
 				BeginRefresh(lister->window);
