@@ -51,6 +51,7 @@ DOPUS_FUNC(function_configure)
 #endif
 	)
 	{
+		CloseLibrary(ModuleBase); // In case module opens but interface doesn't
 		return 0;
 	}
 	

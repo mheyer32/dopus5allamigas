@@ -181,12 +181,12 @@ int function_internal_command(
 
 		// Open module
 		else
-		if ((ModuleBase=OpenModule(command->stuff.module_name)))
+		if ((ModuleBase=OpenModule(command->stuff.module_name))
+#ifdef __amigaos4__
+		&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
+#endif
+		)
 		{
-			#ifdef __amigaos4__	
-			IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
-			#endif
-
 			// Copy arguments
 			strcpy(buffer,args);
 
@@ -206,8 +206,9 @@ int function_internal_command(
 			#ifdef __amigaos4__
 			DropInterface((struct Interface *)IModule);
 			#endif
-			CloseLibrary(ModuleBase);
 		}
+		else
+			CloseLibrary(ModuleBase); // In case module opens but interface doesn't
 
 		// Free buffer
 		FreeVec(work_buf);

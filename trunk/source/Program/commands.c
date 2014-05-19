@@ -675,10 +675,11 @@ void command_new(BackdropInfo *info,IPCData *ipc,char *filename)
 	// Open config library
 	if (!(ConfigOpusBase=OpenModule(config_name))
 #ifdef __amigaos4__	
-	|| !(IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL)) 
+	|| !(IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL))
 #endif	
 	)
 	{
+		if (ConfigOpusBase)	CloseLibrary(ConfigOpusBase);
 		FreeFunction(edit_func);
 		return;
 	}

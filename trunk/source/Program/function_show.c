@@ -79,11 +79,12 @@ DOPUS_FUNC(function_show)
 					GetString(&locale,MSG_CANCEL),0))==1)
 				{
 					// Open filetype module
-					if ((ModuleBase=OpenModule("filetype.module")))
-					{
+					if ((ModuleBase=OpenModule("filetype.module"))
 						#ifdef __amigaos4__	
-						IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+					    && (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 						#endif
+					)
+					{
 						// Call module
 						ret=Module_Entry(
 							0,
@@ -102,7 +103,11 @@ DOPUS_FUNC(function_show)
 					}
 
 					// Fail
-					else DisplayBeep(0);
+					else
+					{
+						CloseLibrary(ModuleBase); // In case module opens but interface doesn't
+						DisplayBeep(0);
+					}
 				}
 
 				// Cancel?
@@ -158,12 +163,12 @@ DOPUS_FUNC(function_show)
 #endif
 
 				// Get read module
-				if ((ModuleBase=OpenModule("read.module")))
-				{
+				if ((ModuleBase=OpenModule("read.module"))
 					#ifdef __amigaos4__	
-					IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+					&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 					#endif
-
+				)
+				{
 					// Read files
 					Module_Entry(
 						startup->files,
@@ -180,6 +185,8 @@ DOPUS_FUNC(function_show)
 					CloseLibrary(ModuleBase);
 					return 1;
 				}
+				else
+					CloseLibrary(ModuleBase); // In case module opens but interface doesn't
 			}
 
 			// Otherwise, start async
@@ -230,11 +237,12 @@ DOPUS_FUNC(function_show)
 		if (sync_flag)
 		{
 			// Open module
-			if ((ModuleBase=OpenModule("play.module")))
-			{
+			if ((ModuleBase=OpenModule("play.module"))
 				#ifdef __amigaos4__	
-				IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+				&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 				#endif
+			)
+			{
 				// Play files
 				if (Module_Entry(
 					(struct List *)list,
@@ -250,6 +258,8 @@ DOPUS_FUNC(function_show)
 				#endif
 				CloseLibrary(ModuleBase);
 			}
+			else
+				CloseLibrary(ModuleBase); // In case module opens & interface doesn't
 		}
 					
 		// Detach
@@ -280,11 +290,12 @@ DOPUS_FUNC(function_show)
 		if (sync_flag)
 		{
 			// Open module
-			if ((ModuleBase=OpenModule("icon.module")))
-			{
+			if ((ModuleBase=OpenModule("icon.module"))
 				#ifdef __amigaos4__	
-				IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+				&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 				#endif
+			)
+			{
 				// Show IconInfo
 				if (Module_Entry(
 					(struct List *)list,
@@ -303,6 +314,8 @@ DOPUS_FUNC(function_show)
 				// Do update
 				function_iconinfo_update(handle,list);
 			}
+			else
+				CloseLibrary(ModuleBase); // In case module opens & interface doesn't
 		}
 					
 		// Detach
@@ -326,12 +339,12 @@ DOPUS_FUNC(function_show)
 		
 		// Open module
 		else
-		if ((ModuleBase=OpenModule("show.module")))
-		{
+		if ((ModuleBase=OpenModule("show.module"))
 			#ifdef __amigaos4__	
-			IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
+			&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
 			#endif
-			
+		)
+		{
 			Att_Node *node;
 
 			// Show files
@@ -384,6 +397,8 @@ DOPUS_FUNC(function_show)
 				function_user_run(handle,def_function_delete);
 			}
 		}
+		else
+			CloseLibrary(ModuleBase); // In case module opens & interface doesn't
 	}
 
 	// Free file list

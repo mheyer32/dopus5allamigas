@@ -47,6 +47,7 @@ DOPUS_FUNC(function_iconinfo)
 #endif
 	)
 	{
+		CloseLibrary(ModuleBase); // In case module opens but interface doesn't
 		Att_RemList(list,0);
 		return 0;
 	}

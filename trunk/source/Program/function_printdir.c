@@ -137,12 +137,12 @@ DOPUS_FUNC(function_printdir)
 	CloseBuf(outfile);
 
 	// Open print module
-	if ((ModuleBase=OpenModule("print.module")))
+	if ((ModuleBase=OpenModule("print.module"))
+	#ifdef __amigaos4__	
+	&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
+	#endif
+	)
 	{
-		#ifdef __amigaos4__	
-		IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
-		#endif
-	
 		struct List list;
 		struct Node node;
 
@@ -160,6 +160,8 @@ DOPUS_FUNC(function_printdir)
 		#endif
 		CloseLibrary(ModuleBase);
 	}
+	else
+		CloseLibrary(ModuleBase); // In case libray opens and interface doesn't
 
 	// Delete temporary file
 	DeleteFile(handle->work_buffer+800);

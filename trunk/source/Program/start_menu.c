@@ -1216,6 +1216,7 @@ BOOL start_edit(StartMenu *menu)
 #endif
 	)
 	{
+		CloseLibrary(ConfigOpusBase); // In case module opens but interface doesn't
 		return 0;
 	}	
 
