@@ -215,7 +215,7 @@ void LIBFUNC L_DefaultEnvironment(REG(a0, CFG_ENVR *env))
 	env->env_ColourFlag=0;
 
 	// Default stack
-	env->default_stack=4000;
+	env->default_stack=STACK_DEFAULT;
 
 	// Desktop folder location
 	strcpy(env->desktop_location,"DOpus5:Desktop/");
@@ -361,7 +361,7 @@ void LIBFUNC L_UpdateEnvironment(REG(a0, CFG_ENVR *env))
 	if (env->version<CONFIG_VERSION_6)
 	{
 		// Default stack
-		env->default_stack=4000;
+		env->default_stack=STACK_DEFAULT;
 	}
 
 	// Pre-version 7

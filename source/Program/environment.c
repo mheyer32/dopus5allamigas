@@ -115,6 +115,9 @@ BOOL environment_open(Cfg_Environment *env,char *name,BOOL first,APTR prog)
 	// Read environment
 	if ((success=OpenEnvironment((name)?name:env->path,opendata)))
 	{
+		// Check stack setting and increase if too low
+		if (opendata->env.default_stack < STACK_DEFAULT)
+			opendata->env.default_stack = STACK_DEFAULT;
 
 		// Copy things back to the environment
 		CopyMem((char *)&opendata->env,(char *)env->env,sizeof(CFG_ENVR));
