@@ -1286,9 +1286,9 @@ void convert_function_data(APTR memory,struct MinList *list,ULONG stack,char pri
 	}
 
 	// Need stack instruction?
-	if (stack!=4000 && stack>2000)
+	if (stack < STACK_DEFAULT)
 	{
-		lsprintf(buf,"stack %ld",stack);
+		lsprintf(buf,"stack %ld",STACK_DEFAULT);
 		if ((ins=NewInstruction(memory,FT_EXECUTABLE,buf)))
 			AddHead((struct List *)list,(struct Node *)ins);
 	}

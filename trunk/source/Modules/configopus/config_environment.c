@@ -950,7 +950,7 @@ unsigned long LIBFUNC L_Config_Environment(
 
 							// Stack size changed
 							case GAD_ENVIRONMENT_STACK:
-								BoundsCheckGadget(data->option_list,GAD_ENVIRONMENT_STACK,4000,0x7FFFFFFF);
+								BoundsCheckGadget(data->option_list,GAD_ENVIRONMENT_STACK,STACK_DEFAULT,0x7FFFFFFF);
 								break;
 
 
@@ -2529,8 +2529,8 @@ void _config_env_store(config_env_data *data,short option)
 
 			// Get default stack
 			data->config->default_stack=GetGadgetValue(data->option_list,GAD_ENVIRONMENT_STACK);
-			if (data->config->default_stack<4000)
-				data->config->default_stack=4000;
+			if (data->config->default_stack<STACK_DEFAULT)
+				data->config->default_stack=STACK_DEFAULT;
 
 			// Command line length
 			data->config->settings.command_line_length=GetGadgetValue(data->option_list,GAD_ENVIRONMENT_CLL);

@@ -106,7 +106,7 @@ BOOL SAVEDS ASM L_WB_Launch(
 	REG(a1, struct Screen *errors),
 	REG(d0, short wait))
 {
-	return L_WB_LaunchNotify(name,errors,wait,4000,0,0,0,0);
+	return L_WB_LaunchNotify(name,errors,wait,STACK_DEFAULT,0,0,0,0);
 }
 
 BOOL SAVEDS ASM L_WB_LaunchNew(
@@ -185,7 +185,7 @@ BOOL SAVEDS ASM L_CLI_Launch(
 	}
 
 	// Use default stack
-	else stack=4000;
+	else stack=STACK_DEFAULT;
 
 	// Allocate launch packet
 	if (!(packet=AllocVec(sizeof(LaunchPacket)+strlen(name)+1,MEMF_CLEAR)))
@@ -1113,7 +1113,7 @@ LaunchProc *launcher_launch(
 		// Default stack size
 		stack=(icon)?((icon->do_StackSize+3)&(~3)):packet->stack;
 		if (stack<packet->stack) stack=packet->stack;
-		if (stack<4000) stack=4000;
+		if (stack<STACK_DEFAULT) stack=STACK_DEFAULT;
 
 		// Get home directory
 		homedir=DupLock((cur_dir)?cur_dir:launch->startup.sm_ArgList[0].wa_Lock);
@@ -1413,7 +1413,7 @@ BOOL install_fake_workbench(struct LibData *data)
 		0,&data->fake_wb,
 		"Workbench",
 		IPC_NATIVE(fake_workbench),
-		4000|IPCF_GETPATH,
+		STACK_DEFAULT|IPCF_GETPATH,
 		(ULONG)data,
 		DOSBase);
 

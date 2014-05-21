@@ -722,7 +722,7 @@ if	(lock)
 SetGadgetValue( data->list, GAD_ICON_BYTES, (ULONG)buf );
 
 // Stack
-SetGadgetValue( data->list, GAD_ICON_STACK, (data->icon->do_StackSize == 0) ? 4000 : data->icon->do_StackSize );
+SetGadgetValue( data->list, GAD_ICON_STACK, (data->icon->do_StackSize == 0) ? STACK_DEFAULT : data->icon->do_StackSize );
 
 // Date
 lsprintf( buf, "%s %s", (IPTR)data->datebuf, (IPTR)data->timebuf );
@@ -1740,7 +1740,7 @@ if	(*data->tempname)
 			icon_build_protlist( data );
 
 			// Stack
-			SetGadgetValue( data->list, GAD_ICON_STACK, (data->icon->do_StackSize == 0) ? 4000 : data->icon->do_StackSize );
+			SetGadgetValue( data->list, GAD_ICON_STACK, (data->icon->do_StackSize == 0) ? STACK_DEFAULT : data->icon->do_StackSize );
 
 			// Default tool
 			SetGadgetValue( data->list, GAD_ICON_DEFAULT_TOOL, (ULONG)data->icon->do_DefaultTool );
