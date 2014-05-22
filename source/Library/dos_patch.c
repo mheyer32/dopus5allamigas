@@ -858,7 +858,7 @@ PATCHED_2(BPTR, ASM L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
 			{
 				// Examine the new file
 #ifdef USE_64BIT
-				if (L_ExamineHandle64(lock,(FileInfoBlock64 *)fib))
+				if (L_ExamineHandle64(file,(FileInfoBlock64 *)fib))
 #else
 				if (ExamineFH(file,fib))
 #endif
