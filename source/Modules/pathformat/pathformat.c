@@ -23,6 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "pathformat.h"
 #include <Program/position.h>
+#include <dopus/lib_macros.h>
 
 /*#ifdef __amigaos4__
 struct CommoditiesIFace *ICommodities;
@@ -760,9 +761,9 @@ void config_paths_edit(config_path_data *data)
 	if (data->path_sel)
 	{
 		position_rec *pos=(position_rec *)data->path_sel->data;
-		struct Library *ModuleBase;
+		struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-		struct ModuleIFace *IModule;
+		struct ModuleIFace *IModule = NULL;
 #endif
 		ListFormat format;
 		short ret=0;
@@ -771,15 +772,9 @@ void config_paths_edit(config_path_data *data)
 		SetWindowBusy(data->window);
 
 		// Get lister format module
-		if ((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",0)))
+		if ((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",LIB_VERSION))
+			&& GETINTERFACE(IModule, ModuleBase))
 		{
-			#ifdef __amigaos4__
-			if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))) {
-				CloseLibrary(ModuleBase);
-				exit(0);
-			}
-			#endif			
-			
 			// Convert ListFormatStorage to ListFormat
 			CopyMem((char *)&pos->format,(char *)&format,sizeof(ListFormatStorage));
 
@@ -796,7 +791,9 @@ void config_paths_edit(config_path_data *data)
 			#endif
 			CloseLibrary(ModuleBase);
 		}
-		else DisplayBeep(data->window->WScreen);
+		else
+			CloseLibrary(ModuleBase);
+			DisplayBeep(data->window->WScreen);
 
 		// Convert back if successful
 		if (ret)

@@ -127,9 +127,9 @@ static void format_code(void)
 {
 //struct Library	*DOpusBase;
 struct format_data *data = 0;
-struct Library *ModuleBase;
+struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-struct ModuleIFace *IModule;
+struct ModuleIFace *IModule = NULL;
 #endif
 BOOL result=0;
 int function_no=2;
@@ -157,11 +157,9 @@ int function_no=2;
 				function_no=3;
 
 		// Get lister format module
-		if	((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",63)))
+		if	((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",LIB_VERSION))
+			&& GETINTERFACE(IModule, ModuleBase))
 			{
-			#ifdef __amigaos4__	
-			IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL);
-			#endif
 			
 			// Edit format
 			result=Module_Entry(
@@ -175,7 +173,8 @@ int function_no=2;
 				#endif
 				CloseLibrary(ModuleBase);
 			}
-
+			else
+				CloseLibrary(ModuleBase);
 
 		if	(result==1) // convert no change into cancel
 			result=0;

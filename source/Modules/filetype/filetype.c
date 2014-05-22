@@ -12,6 +12,7 @@
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 #include <proto/module.h>
+#include <dopus/lib_macros.h>
 
 
 #include <math.h>
@@ -820,9 +821,9 @@ void SAVEDS finder_editor_proc_code( void )
 {
 finder_data *data;
 //struct Library *DOpusBase;
-struct Library *ConfigOpusBase;
+struct Library *ConfigOpusBase = NULL;
 #ifdef __amigaos4__
-struct ConfigOpusIFace *IConfigOpus;
+struct ConfigOpusIFace *IConfigOpus = NULL;
 #endif
 Cfg_Filetype *edited_filetype;
 
@@ -830,32 +831,31 @@ Cfg_Filetype *edited_filetype;
 
 IPC_ProcStartup( (ULONG *)&data, (APTR)finder_editor_proc_init );
 
-if	(data->best_installed_ft && (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", 47 )))
+if	(data->best_installed_ft
+	&& (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", LIB_VERSION))
+	&& GETINTERFACE(IConfigOpus, ConfigOpusBase))
 	{
-	#ifdef __amigaos4__	
-	IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
-	#endif		
-	
-	if	((edited_filetype = EditFiletype(
-		data->best_installed_ft,
-		data->window,
-		data->editor_ipc,
-		data->main_ipc,
-		0 )))
+		if	((edited_filetype = EditFiletype(
+			data->best_installed_ft,
+			data->window,
+			data->editor_ipc,
+			data->main_ipc,
+			0 )))
 		{
-		data->edited_filetype = edited_filetype;
+			data->edited_filetype = edited_filetype;
 
-		if	(data->edited_filetype)
-			finder_save_edited_filetype( data );
+			if	(data->edited_filetype)
+				finder_save_edited_filetype( data );
 
 		}
-	#ifdef __amigaos4__
-	DropInterface((struct Interface *)IConfigOpus);
-	#endif		
-	CloseLibrary( ConfigOpusBase );
+		#ifdef __amigaos4__
+		DropInterface((struct Interface *)IConfigOpus);
+		#endif		
+		CloseLibrary( ConfigOpusBase );
 	}
-else
-	DisplayBeep( data->window->WScreen );
+	else
+		CloseLibrary( ConfigOpusBase );
+		DisplayBeep( data->window->WScreen );
 
 // Flush IPC port
 IPC_Flush( data->editor_ipc );
@@ -2266,9 +2266,9 @@ void SAVEDS creator_editor_proc_code( void )
 {
 creator_data *data;
 //struct Library *DOpusBase;
-struct Library *ConfigOpusBase;
+struct Library *ConfigOpusBase = NULL;
 #ifdef __amigaos4__	
-struct ConfigOpusIFace *IConfigOpus;
+struct ConfigOpusIFace *IConfigOpus = NULL;
 #endif
 Cfg_Filetype *edited_filetype;
 int ok = FALSE;
@@ -2281,12 +2281,10 @@ IPC_ProcStartup( (ULONG *)&data, (APTR)creator_editor_proc_init );
 if	(!data->filetype || !data->edited)
 	creator_create_filetype( data );
 
-if	(data->filetype && (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", 47 )))
-	{	
-	#ifdef __amigaos4__	
-	IConfigOpus = (struct ConfigOpusIFace *)GetInterface(ConfigOpusBase, "main", 1, NULL);
-	#endif	
-	
+if	(data->filetype
+	&& (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", LIB_VERSION ))
+	&& GETINTERFACE(IConfigOpus, ConfigOpusBase))
+	{
 	DisableObject( data->list, GAD_CREATE_LISTVIEW, TRUE );
 	DisableObject( data->list, GAD_CREATE_ADD,      TRUE );
 	DisableObject( data->list, GAD_CREATE_DELETE,   TRUE );
@@ -2341,6 +2339,7 @@ if	(data->filetype && (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.
 	CloseLibrary( ConfigOpusBase );
 	}
 else
+	CloseLibrary( ConfigOpusBase );
 	DisplayBeep( data->window->WScreen );
 
 // Flush IPC port

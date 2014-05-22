@@ -3,6 +3,7 @@
 #include <proto/dopus5.h>
 #include <proto/configopus.h>
 #include <proto/module.h>
+#include <dopus/lib_macros.h>
 
 #include "module_deps.h"
 
