@@ -2,7 +2,7 @@
 #include "config_environment.h"
 #include <proto/module.h>
 
-//#define FUCKOFF
+//#define FUNKOFF
 
 #define NUM_CHANGE_FLAGS	2
 
@@ -113,7 +113,7 @@ unsigned long LIBFUNC L_Config_Environment(
 		return 0;
 	}
 
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 	// Allocate font requesters
 	data->font_req=AllocAslRequestTags(ASL_FontRequest,
 		ASLFO_TitleText,GetString(locale,MSG_LISTER_SELECT_FONT),
@@ -498,7 +498,7 @@ unsigned long LIBFUNC L_Config_Environment(
 								// See if we have an option already
 								if (data->option_list)
 								{
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 									// Store gadget values
 									_config_env_store(data,data->option);
 #endif
@@ -514,13 +514,13 @@ unsigned long LIBFUNC L_Config_Environment(
 								data->option=_environment_options[data->option_node->data].num;
 								data->option_list=AddObjectList(data->window,_environment_options[data->option_node->data].objects);
 
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 								// Initialise gadgets
 								_config_env_set(data,data->option);
 #endif
 								break;
 
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 							// New screen mode selected
 							case GAD_ENVIRONMENT_SCREENMODE_MODE:
 								{
@@ -744,24 +744,18 @@ unsigned long LIBFUNC L_Config_Environment(
 							// Edit list format
 							case GAD_ENVIRONMENT_LISTER_EDIT_FORMAT:
 							{
-								struct Library *ModuleBase;
+								struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-								struct ModuleIFace *IModule;
+								struct ModuleIFace *IModule = NULL;
 #endif
 
 								// Make window busy
 								SetWindowBusy(data->window);
 
 								// Get lister format module
-								if ((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",0)))
+								if ((ModuleBase=OpenLibrary("dopus5:modules/listerformat.module",LIB_VERSION))
+									&& GETINTERFACE(IModule, ModuleBase))
 								{
-									#ifdef __amigaos4__
-									if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-									{
-										CloseLibrary(ModuleBase);
-										exit(0);
-									}
-									#endif								
 									
 									// Edit format
 									Module_Entry(
@@ -776,6 +770,8 @@ unsigned long LIBFUNC L_Config_Environment(
 									#endif			
 									CloseLibrary(ModuleBase);
 								}
+								else
+									CloseLibrary(ModuleBase);
 
 								// Make window unbusy
 								ClearWindowBusy(data->window);
@@ -1130,7 +1126,7 @@ unsigned long LIBFUNC L_Config_Environment(
 						break;
 
 
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 					// Mouse move
 					case IDCMP_MOUSEMOVE:
 
@@ -1263,7 +1259,7 @@ unsigned long LIBFUNC L_Config_Environment(
 				1<<ipc->command_port->mp_SigBit);
 	}
 
-#ifndef FUCKOFF
+#ifndef FUNKOFF
 	// Close.. see if we have an option open
 	if (data->option_list) _config_env_store(data,data->option);
 
@@ -1760,7 +1756,7 @@ BOOL _config_env_open(config_env_data *data,struct Screen *screen)
 		// Create option list
 		data->option_list=AddObjectList(data->window,_environment_options[data->option_node->data].objects);
 
-#ifdef FUCKOFF
+#ifdef FUNKOFF
 		// Initialise gadgets
 		_config_env_set(data,data->option);
 #endif
@@ -1774,7 +1770,7 @@ BOOL _config_env_open(config_env_data *data,struct Screen *screen)
 void _config_env_close(config_env_data *data)
 {
 	// Close.. see if we have an option open
-#ifdef FUCKOFF
+#ifdef FUNKOFF
 	if (data->option_list)
 	{
 		_config_env_store(data,data->option);

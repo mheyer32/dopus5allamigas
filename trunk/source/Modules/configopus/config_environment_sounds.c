@@ -84,16 +84,9 @@ void config_env_test_sound(config_env_data *data)
 	SetWindowBusy(data->window);
 
 	// Open play.module
-	if ((ModuleBase=OpenLibrary("dopus5:modules/play.module",0)))
+	if ((ModuleBase=OpenLibrary("dopus5:modules/play.module",LIB_VERSION))
+		&& GETINTERFACE(IModule, ModuleBase))
 	{
-		#ifdef __amigaos4__
-		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-		{
-			CloseLibrary(ModuleBase);
-			exit(0);
-		}
-		#endif
-	
 		short num;
 		Cfg_SoundEntry *sound;
 
@@ -127,6 +120,8 @@ void config_env_test_sound(config_env_data *data)
 		#endif
 		CloseLibrary(ModuleBase);
 	}
+	else
+		CloseLibrary(ModuleBase);
 
 	// Unbusy the window
 	ClearWindowBusy(data->window);

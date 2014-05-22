@@ -3147,9 +3147,9 @@ void dopus_ftp( void )
 {
 struct main_event_data  med = {0};
 struct opusftp_globals *og;
-struct Library         /* *L_DOpusBase,*/ *ourbase;		/* Local copy needed before we have A4 ! */
+struct Library /* *L_DOpusBase,*/ *ourbase = NULL; /* Local copy needed before we have A4 ! */
 #ifdef __amigaos4__
-struct ModuleIFace *IModule;
+struct ModuleIFace *IModule = NULL;
 #endif
 struct modlaunch_data  *mldata;				/* Data from the module when we are launched */
 struct MsgPort         *rexport, *nfyport = 0;		/* Our ARexx and Opus Notify  message ports */
@@ -3164,19 +3164,16 @@ D(bug( "dopus_ftp()\n" ));
 med.med_status = STATE_RUNNING;
 
 // Open our module so we can't be expunged
-if	((ourbase = OpenLibrary( "ftp.module", 0 )))
+if	((ourbase = OpenLibrary( "ftp.module", 0 ))
+	&& GETINTERFACE(IModule, ourbase))
 	{
-	#ifdef __amigaos4__	
-	IModule = (struct ModuleIFace *)GetInterface(ourbase, "main", 1, NULL);
-	#endif
-	
-	/*if	((L_DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+/*	if	((L_DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
 		{
 		#ifdef __amigaos4__
 		IDOpus = (struct DOpusIFace *)GetInterface(L_DOpusBase, "main", 1, NULL);
 		#endif
-
-#define DOpusBase L_DOpusBase*/
+#define DOpusBase L_DOpusBase
+*/
 		// Process startup function
 		if	(IPC_ProcStartup( (ULONG *)&mldata, dopus_ftp_init ))
 //#undef DOpusBase
@@ -3371,6 +3368,8 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 )))
 	#endif
 	CloseLibrary( ourbase );
 	}
+	else
+		CloseLibrary( ourbase );
 
 D(bug( "dopus_ftp() returning\n" ));
 }

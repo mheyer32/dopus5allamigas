@@ -28,6 +28,7 @@ For more information on Directory Opus for Windows please see:
 #define CATCOMP_NUMBERS
 #include "ftp.strings"
 #include "module_deps.h"
+#include <dopus/lib_macros.h>
 
 #define __NOLIBBASE__
 #define __NOGLOBALIFACE__

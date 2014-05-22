@@ -26,6 +26,7 @@ For more information on Directory Opus for Windows please see:
 #include <proto/diskfont.h>
 #include <proto/input.h>
 #include <dopus/common.h>
+#include <dopus/lib_macros.h>
 
 #if defined(__amigaos3__) || defined(__AROS__)
 struct Device *InputBase = NULL;
@@ -3941,24 +3942,18 @@ read_line ASM *read_alloc_node(REG(a0, read_data *data))
 // Print
 void read_print(read_data *data)
 {
-	struct Library *ModuleBase;
+	struct Library *ModuleBase = NULL;
 #ifdef __amigaos4__
-	struct ModuleIFace *IModule;
+	struct ModuleIFace *IModule = NULL;
 #endif
 
 	// Set busy pointer
 	SetBusyPointer(data->window);
 
 	// Get print module
-	if ((ModuleBase=OpenLibrary("dopus5:modules/print.module",0)))
+	if ((ModuleBase=OpenLibrary("dopus5:modules/print.module",LIB_VERSION))
+		&& GETINTERFACE(IModule, ModuleBase))
 	{
-		#ifdef __amigaos4__
-		if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
-		{
-			CloseLibrary(ModuleBase);
-			exit(0);
-		} 
-		#endif
 		struct List list;
 		struct Node node;
 
@@ -3976,6 +3971,8 @@ void read_print(read_data *data)
 		#endif		
 		CloseLibrary(ModuleBase);
 	}
+	else
+		CloseLibrary(ModuleBase);
 
 	// Clear busy pointer
 	ClearPointer(data->window);
