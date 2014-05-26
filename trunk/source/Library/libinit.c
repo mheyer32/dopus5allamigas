@@ -1417,7 +1417,7 @@ ULONG initBase(struct MyLibrary *lib)
   }
 
   D(bug("dopus5.library failed to open a required system library\n"))
-  Printf("dopus5.library failed to open a required system library\n\n");
+  Printf("dopus5.library failed to open a required system library\n");
 
   freeBase(NULL);
 
