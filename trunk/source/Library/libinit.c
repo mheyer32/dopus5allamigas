@@ -67,8 +67,11 @@ static const char USED_VAR copyright[] = COPYRIGHT;
 
 /****************************************************************************/
 
-int  UserLibInit(REG(a6, struct MyLibrary *libbase));
-void UserLibCleanup(REG(a6, struct MyLibrary *libbase));
+//int  UserLibInit(REG(a6, struct MyLibrary *libbase));
+//void UserLibCleanup(REG(a6, struct MyLibrary *libbase));
+ULONG UserLibInit(struct MyLibrary *libbase);
+ULONG UserLibCleanup(struct MyLibrary *libbase);
+
 int low_mem_handler(REG(a0, struct MemHandlerData *), REG(a1,struct LibData *));
 
 #if defined(__MORPHOS__)
@@ -1110,7 +1113,9 @@ static BPTR LIBFUNC LibExpunge(REG(a6, struct MyLibrary *base))
     {
       base->initialized = 0;
       // make sure we have enough stack here
+	  callLibFunction(UserLibCleanup,base);
       callLibFunction(freeBase, base);
+	  
     }
 
     // unprotect
@@ -1231,6 +1236,7 @@ static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
     {
       base->initialized = 0;
       // make sure we have enough stack here
+	  callLibFunction(UserLibCleanup,base);
       callLibFunction(freeBase, base);
     }
 
@@ -1258,7 +1264,7 @@ static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
 ULONG freeBase(struct MyLibrary *lib)
 {
 
-  UserLibCleanup((struct MyLibrary *)lib);
+  //UserLibCleanup((struct MyLibrary *)lib);
 
   // close cybergarphics.library
   if(CyberGfxBase != NULL)
@@ -1294,12 +1300,14 @@ ULONG freeBase(struct MyLibrary *lib)
   }  
 
   // close datatypes.library
+  
   if(DataTypesBase != NULL)
   {
     DROPINTERFACE(IDataTypes);
     CloseLibrary((struct Library *)DataTypesBase);
     DataTypesBase = NULL;
   }  
+  
   
   // close workbench.library
   if(WorkbenchBase != NULL)
@@ -1413,14 +1421,15 @@ ULONG initBase(struct MyLibrary *lib)
       #endif
     #endif
 
-	UserLibInit((struct MyLibrary *)lib);
+	UserLibInit(lib);
 
     return TRUE;
   }
 
+  Printf("libinit of dopus5.library can't open one of libraries\n");
   
-  UserLibCleanup((struct MyLibrary *)lib);
-
+  //UserLibCleanup((struct MyLibrary *)lib);
+    
   freeBase(lib);
 
   return FALSE;
@@ -1430,7 +1439,7 @@ ULONG initBase(struct MyLibrary *lib)
 
 
 // Initialise some other libraries we need together with dopus5 datas and structures
-int UserLibInit(REG(a6, struct MyLibrary *libbase))
+ULONG UserLibInit(struct MyLibrary *libbase)
 {
 	struct LibData *data;
 	char buf[16];
@@ -1713,19 +1722,19 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 
 
 // Clean up
-void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
+ULONG UserLibCleanup(struct MyLibrary *libbase)
 {
 	WB_Data *wb_data;
 	struct LibData *data;
-
+		
 	L_FlushImages();
-
+		
 	// Launcher?
 	if (launcher_ipc)
 	{
 		L_IPC_Command(launcher_ipc,IPC_QUIT,0,0,0,REPLY_NO_PORT_IPC);
 	}
-
+		
 	// Library data?
 	if ((data=(struct LibData *)libbase->ml_UserData))
 	{
@@ -1762,7 +1771,7 @@ void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
 		// Free library data
 		FreeVec(data);
 	}
-
+		
 	//L_FreeMemHandle(chip_memory);
 	class_free(listview_class);
 	class_free(button_class);
@@ -1774,6 +1783,8 @@ void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
 	class_free(gauge_class);
 	class_free(image_class);
 	if (topaz_font) CloseFont(topaz_font);
+	
+	return 0;	
 }
 
 
