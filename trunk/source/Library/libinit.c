@@ -67,11 +67,8 @@ static const char USED_VAR copyright[] = COPYRIGHT;
 
 /****************************************************************************/
 
-//int  UserLibInit(REG(a6, struct MyLibrary *libbase));
-//void UserLibCleanup(REG(a6, struct MyLibrary *libbase));
-ULONG UserLibInit(struct MyLibrary *libbase);
-ULONG UserLibCleanup(struct MyLibrary *libbase);
-
+int  UserLibInit(REG(a6, struct MyLibrary *libbase));
+void UserLibCleanup(REG(a6, struct MyLibrary *libbase));
 int low_mem_handler(REG(a0, struct MemHandlerData *), REG(a1,struct LibData *));
 
 #if defined(__MORPHOS__)
@@ -202,46 +199,46 @@ static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STR
 // first function should be FAS (without _), or at least LibNull if it removed function (like in our case it is RemovedFunc() ).
 
 #define libvector LibNull  \
-                  LFUNC_FA_(L_RandomDopus)  \
-                  LFUNC_FA_(L_Atoh)   \
-                  LFUNC_FA_(L_BtoCStr)          \
-                  LFUNC_FA_(L_DivideU)  \
-                  LFUNC_FA_(L_Itoa)   \
-                  LFUNC_FA_(L_ItoaU)   \
-                  LFUNC_FA_(L_Ito26)   \
-                  LFUNC_FA_(L_BytesToString)          \
-                  LFUNC_FA_(L_DivideToString)           \
-                  LFUNC_FA_(L_SetBusyPointer)                \
-                  LFUNC_FA_(L_BuildKeyString)                 \
-                  LFUNC_FA_(L_ActivateStrGad)           \
-                  LFUNC_FA_(L_AllocTimer)            \
-                  LFUNC_FA_(L_FreeTimer)                \
-                  LFUNC_FA_(L_StartTimer)                 \
-                  LFUNC_FA_(L_CheckTimer)            \
-                  LFUNC_FA_(L_StopTimer)             \
-                  LFUNC_FA_(L_GetDosPathList)              \
-                  LFUNC_FA_(L_FreeDosPathList)           \
-                  LFUNC_FA_(L_DoSimpleRequest)            \
-                  LFUNC_FA_(L_SimpleRequest)          \
-                  LFUNC_FA_(L_SelectionList)           \
-                  LFUNC_FA_(L_WriteIcon)           \
-                  LFUNC_FA_(L_WriteFileIcon)            \
-                  LFUNC_FA_(L_GetDragInfo)           \
-                  LFUNC_FA_(L_FreeDragInfo)            \
-                  LFUNC_FA_(L_GetDragImage)              \
-                  LFUNC_FA_(L_ShowDragImage)               \
-                  LFUNC_FA_(L_HideDragImage)          \
-                  LFUNC_FA_(L_StampDragImage)       \
-                  LFUNC_FA_(L_GetDragMask)        \
-                  LFUNC_FA_(L_CheckDragDeadlock)          \
-                  LFUNC_FA_(L_AddDragImage)           \
-                  LFUNC_FA_(L_RemDragImage)          \
-                  LFUNC_FA_(L_OpenConfigWindow)           \
-                  LFUNC_FA_(L_CloseConfigWindow)          \
-                  LFUNC_FA_(L_GetWindowMsg)           \
-                  LFUNC_FA_(L_ReplyWindowMsg)             \
-                  LFUNC_FA_(L_StripIntuiMessagesDopus)              \
-                  LFUNC_FA_(L_CloseWindowSafely)          \
+                  LFUNC_FA_(L_RandomDopus) \
+                  LFUNC_FA_(L_Atoh) \
+                  LFUNC_FA_(L_BtoCStr) \
+                  LFUNC_FA_(L_DivideU) \
+                  LFUNC_FA_(L_Itoa) \
+                  LFUNC_FA_(L_ItoaU) \
+                  LFUNC_FA_(L_Ito26) \
+                  LFUNC_FA_(L_BytesToString) \
+                  LFUNC_FA_(L_DivideToString) \
+                  LFUNC_FA_(L_SetBusyPointer) \
+                  LFUNC_FA_(L_BuildKeyString) \
+                  LFUNC_FA_(L_ActivateStrGad) \
+                  LFUNC_FA_(L_AllocTimer) \
+                  LFUNC_FA_(L_FreeTimer) \
+                  LFUNC_FA_(L_StartTimer) \
+                  LFUNC_FA_(L_CheckTimer) \
+                  LFUNC_FA_(L_StopTimer) \
+                  LFUNC_FA_(L_GetDosPathList) \
+                  LFUNC_FA_(L_FreeDosPathList) \
+                  LFUNC_FA_(L_DoSimpleRequest) \
+                  LFUNC_FA_(L_SimpleRequest) \
+                  LFUNC_FA_(L_SelectionList) \
+                  LFUNC_FA_(L_WriteIcon) \
+                  LFUNC_FA_(L_WriteFileIcon) \
+                  LFUNC_FA_(L_GetDragInfo) \
+                  LFUNC_FA_(L_FreeDragInfo) \
+                  LFUNC_FA_(L_GetDragImage) \
+                  LFUNC_FA_(L_ShowDragImage) \
+                  LFUNC_FA_(L_HideDragImage) \
+                  LFUNC_FA_(L_StampDragImage) \
+                  LFUNC_FA_(L_GetDragMask) \
+                  LFUNC_FA_(L_CheckDragDeadlock) \
+                  LFUNC_FA_(L_AddDragImage) \
+                  LFUNC_FA_(L_RemDragImage) \
+                  LFUNC_FA_(L_OpenConfigWindow) \
+                  LFUNC_FA_(L_CloseConfigWindow) \
+                  LFUNC_FA_(L_GetWindowMsg) \
+                  LFUNC_FA_(L_ReplyWindowMsg) \
+                  LFUNC_FA_(L_StripIntuiMessagesDopus) \
+                  LFUNC_FA_(L_CloseWindowSafely) \
                   LFUNC_FA_(L_CalcObjectDims) \
                   LFUNC_FA_(L_CalcWindowDims) \
                   LFUNC_FA_(L_AddObjectList) \
@@ -590,7 +587,6 @@ static const char __TEXTSEGMENT__ UserLibID[] = "\0$VER: dopus5.library "LIB_STR
                   LFUNC_FA_(L_ExamineHandle64) \
                   LFUNC_FA_(L_MatchFirst64) \
                   LFUNC_FA_(L_MatchNext64)
-
 
 
 /****************************************************************************/
@@ -1113,9 +1109,7 @@ static BPTR LIBFUNC LibExpunge(REG(a6, struct MyLibrary *base))
     {
       base->initialized = 0;
       // make sure we have enough stack here
-	  callLibFunction(UserLibCleanup,base);
       callLibFunction(freeBase, base);
-	  
     }
 
     // unprotect
@@ -1236,7 +1230,6 @@ static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
     {
       base->initialized = 0;
       // make sure we have enough stack here
-	  callLibFunction(UserLibCleanup,base);
       callLibFunction(freeBase, base);
     }
 
@@ -1264,7 +1257,7 @@ static BPTR LIBFUNC LibClose(REG(a6, struct MyLibrary *base))
 ULONG freeBase(struct MyLibrary *lib)
 {
 
-  //UserLibCleanup((struct MyLibrary *)lib);
+  if (lib) UserLibCleanup((struct MyLibrary *)lib);
 
   // close cybergarphics.library
   if(CyberGfxBase != NULL)
@@ -1281,8 +1274,7 @@ ULONG freeBase(struct MyLibrary *lib)
     CloseLibrary((struct Library *)NewIconBase);
     NewIconBase = NULL;
   }
-  
-  
+
   // close locale.library
   if(LocaleBase != NULL)
   {
@@ -1300,23 +1292,21 @@ ULONG freeBase(struct MyLibrary *lib)
   }  
 
   // close datatypes.library
-  
   if(DataTypesBase != NULL)
   {
     DROPINTERFACE(IDataTypes);
     CloseLibrary((struct Library *)DataTypesBase);
     DataTypesBase = NULL;
-  }  
-  
-  
+  }
+
   // close workbench.library
   if(WorkbenchBase != NULL)
   {
     DROPINTERFACE(IWorkbench);
     CloseLibrary((struct Library *)WorkbenchBase);
     WorkbenchBase = NULL;
-  }  
-  
+  }
+
   // close icon.library
   if(IconBase != NULL)
   {
@@ -1421,16 +1411,15 @@ ULONG initBase(struct MyLibrary *lib)
       #endif
     #endif
 
-	UserLibInit(lib);
+	UserLibInit((struct MyLibrary *)lib);
 
     return TRUE;
   }
 
-  Printf("libinit of dopus5.library can't open one of libraries\n");
-  
-  //UserLibCleanup((struct MyLibrary *)lib);
-    
-  freeBase(lib);
+  D(bug("dopus5.library failed to open a required system library\n"))
+  Printf("dopus5.library failed to open a required system library\n\n");
+
+  freeBase(NULL);
 
   return FALSE;
 }
@@ -1439,7 +1428,7 @@ ULONG initBase(struct MyLibrary *lib)
 
 
 // Initialise some other libraries we need together with dopus5 datas and structures
-ULONG UserLibInit(struct MyLibrary *libbase)
+int UserLibInit(REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 	char buf[16];
@@ -1722,19 +1711,19 @@ ULONG UserLibInit(struct MyLibrary *libbase)
 
 
 // Clean up
-ULONG UserLibCleanup(struct MyLibrary *libbase)
+void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
 {
 	WB_Data *wb_data;
 	struct LibData *data;
-		
+
 	L_FlushImages();
-		
+
 	// Launcher?
 	if (launcher_ipc)
 	{
 		L_IPC_Command(launcher_ipc,IPC_QUIT,0,0,0,REPLY_NO_PORT_IPC);
 	}
-		
+
 	// Library data?
 	if ((data=(struct LibData *)libbase->ml_UserData))
 	{
@@ -1771,7 +1760,7 @@ ULONG UserLibCleanup(struct MyLibrary *libbase)
 		// Free library data
 		FreeVec(data);
 	}
-		
+
 	//L_FreeMemHandle(chip_memory);
 	class_free(listview_class);
 	class_free(button_class);
@@ -1783,8 +1772,6 @@ ULONG UserLibCleanup(struct MyLibrary *libbase)
 	class_free(gauge_class);
 	class_free(image_class);
 	if (topaz_font) CloseFont(topaz_font);
-	
-	return 0;	
 }
 
 
