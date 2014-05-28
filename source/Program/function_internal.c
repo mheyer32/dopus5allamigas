@@ -206,6 +206,7 @@ int function_internal_command(
 			#ifdef __amigaos4__
 			DropInterface((struct Interface *)IModule);
 			#endif
+			CloseLibrary(ModuleBase);
 		}
 		else
 			CloseLibrary(ModuleBase); // In case module opens but interface doesn't
