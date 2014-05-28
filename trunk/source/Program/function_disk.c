@@ -79,7 +79,7 @@ DOPUS_FUNC(function_disk)
 		case FUNC_DISKCOPY:
 			ModuleBase=OpenModule("diskcopy.module");
 			#ifdef __amigaos4__	
-			if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)));
+			if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 			{
 				CloseLibrary(ModuleBase);
 				ModuleBase = NULL;
@@ -91,7 +91,7 @@ DOPUS_FUNC(function_disk)
 		case FUNC_FORMAT:
 			ModuleBase=OpenModule("format.module");
 			#ifdef __amigaos4__	
-			if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)));
+			if (!(IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL)))
 			{
 				CloseLibrary(ModuleBase);
 				ModuleBase = NULL;
