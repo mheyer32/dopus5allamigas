@@ -996,7 +996,7 @@ BOOL join_join_files(join_data *data)
 		long total_size = 0;
 		long scale_size = 0;
 		short scale_factor = 1;
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 		QUAD filesize = 0;
 		QUAD remove_pos = 0;
 #else
@@ -1026,7 +1026,7 @@ BOOL join_join_files(join_data *data)
 		if (!in) continue;
 
 		// Examine file
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 		ExamineHandle64(in,(FileInfoBlock64 *)fib);
 		filesize = GETFIBSIZE(fib);
 		if (filesize > 0x7FFFFFFF)
@@ -1062,8 +1062,10 @@ BOOL join_join_files(join_data *data)
 		copytime=750000;
 
 		// Get current position in output file
-#if defined(__amigaos4__) && defined(USE_64BIT)
+#if defined(__amigaos4__) && defined(DO_64BIT)
 		remove_pos = GetFilePosition(out);
+#elif defined(__MORPHOS__) && defined(DO_64BIT)
+		remove_pos = Seek64(out,0,OFFSET_CURRENT);
 #else
 		remove_pos = Seek(out,0,OFFSET_CURRENT);
 #endif
@@ -1127,7 +1129,7 @@ BOOL join_join_files(join_data *data)
 
 			// Get size to read
 //			read_size=(fib->fib_Size>buffer_size)?buffer_size:fib->fib_Size;
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 			read_size=(filesize > (QUAD)buffer_size) ? buffer_size : (long)filesize;
 #else
 			read_size=(filesize > buffer_size) ? buffer_size : filesize;
@@ -1230,15 +1232,19 @@ BOOL join_join_files(join_data *data)
 		if (remove)
 		{
 			// Seek back to remove position
-#if defined(__amigaos4__) && defined(USE_64BIT)
+#if defined(__amigaos4__) && defined(DO_64BIT)
 			ChangeFilePosition(out, remove_pos, OFFSET_BEGINNING);
+#elif defined(__MORPHOS__) && defined(DO_64BIT)
+			Seek64(out,remove_pos,OFFSET_BEGINNING);
 #else
 			Seek(out,remove_pos,OFFSET_BEGINNING);
 #endif
 
 			// Truncate file
-#if defined(__amigaos4__) && defined(USE_64BIT)
+#if defined(__amigaos4__) && defined(DO_64BIT)
 			ChangeFileSize(out,0,OFFSET_CURRENT);
+#elif defined(__MORPHOS__) && defined(DO_64BIT)
+			SetFileSize64(out,0,OFFSET_CURRENT);
 #else
 			SetFileSize(out,0,OFFSET_CURRENT);
 #endif
@@ -1345,7 +1351,7 @@ short split_split_file(join_data *data)
 {
 	D_S(struct FileInfoBlock,fib)
 	char *path,*name,*stem,*buffer=0;
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 	QUAD filesize = 0;
 #else
 	long filesize = 0;
@@ -1417,7 +1423,7 @@ short split_split_file(join_data *data)
 	// Examine file
 //	ExamineFH(file,fib);
 //	filesize=fib->fib_Size;
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 	ExamineHandle64(file,(FileInfoBlock64 *)fib);
 	filesize = GETFIBSIZE(fib);
 	if (filesize > 0x7FFFFFFF)
@@ -1443,7 +1449,7 @@ short split_split_file(join_data *data)
 		chunksize=(long)filesize;
 
 	// Check chunksize isn't bigger than file
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 	if ((filesize - (QUAD)chunksize) < 0)
 #else
 	if (chunksize>filesize)
@@ -1484,7 +1490,7 @@ short split_split_file(join_data *data)
 	}
 
 	// Calculate number of files
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 	if (buffersize>0 && filesize>0)
 	{
 		QUAD chunksize64 = (QUAD)chunksize;
@@ -1540,7 +1546,7 @@ short split_split_file(join_data *data)
 			Info(lock,info);
 
 			// Size of this chunk
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 			read = ((QUAD)chunksize > filesize ? (long)filesize : chunksize);
 #else
 			read=(chunksize>filesize)?filesize:chunksize;
@@ -1680,7 +1686,7 @@ short split_split_file(join_data *data)
 		Close(out);
 
 		// Decrement remaining size
-#ifdef USE_64BIT
+#ifdef DO_64BIT
 		filesize -= (QUAD)read;
 #else
 		filesize-=read;
