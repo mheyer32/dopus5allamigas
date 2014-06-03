@@ -49,6 +49,8 @@ int LIBFUNC L_Module_Entry(
 	Att_Node *current=0;
 	short ret=1,start=0;
 	BOOL quit_flag=0;
+	struct loadfile_packet loadpacket;
+	BPTR lock = 0;
 
 	// Allocate data
 	if (!(data=AllocVec(sizeof(join_data),MEMF_CLEAR)))
@@ -69,12 +71,11 @@ int LIBFUNC L_Module_Entry(
 	// Get timer.device base
 	if (!OpenDevice("timer.device",0,(struct IORequest *)&data->timer_req,0))
 	{
-		/*data->*/TimerBase=(struct Library *)data->timer_req.tr_node.io_Device;
+		TimerBase = (APTR)data->timer_req.tr_node.io_Device;
 		#ifdef __amigaos4__
-		/*data->*/ITimer = (struct TimerIFace *)GetInterface(/*(struct Library *)data->*/TimerBase,"main",1,NULL); 
+		ITimer = (struct TimerIFace *)GetInterface((struct Library *)TimerBase,"main",1,NULL); 
 		#endif
 	}
-
 
 	// Create list, open window
 	if (!(data->join_list=Att_NewList(LISTF_POOL)) ||
@@ -514,6 +515,88 @@ int LIBFUNC L_Module_Entry(
 			((data->ipc)?(1<<data->ipc->command_port->mp_SigBit):0));
 	}
 
+	if (data->function==JOIN)
+	{	// Add the joined file to a lister
+
+		// Get destination directory
+		char *destname = (char *)GetGadgetValue(data->list,GAD_JOIN_TO_FIELD);
+
+		// Check for valid destination
+		if (!destname || !*destname)
+		{
+			join_free(data);
+			return ret;
+		}
+
+		// Lock the joined file
+		if ((lock = Lock(destname, ACCESS_READ)))
+		{
+			BPTR parent = 0;
+			char pathbuf[256];
+
+			// Get path & add file to lister
+			if ((parent = ParentDir(lock))
+				&& (DevNameFromLockDopus(parent,pathbuf,256)))
+			{
+				// Terminate path
+				AddPart(pathbuf,"",256);
+
+				// Fill in LOAD_FILE packet
+				loadpacket.name = FilePart(destname);
+				loadpacket.path =  pathbuf;
+				loadpacket.flags = 0;
+				loadpacket.reload = FALSE;
+
+				// Add the joined file to the dest lister
+				func_callback(EXTCMD_LOAD_FILE,IPCDATA(ipc),&loadpacket);
+			}
+			if (parent) UnLock(parent);
+			UnLock(lock);
+		}
+	}
+	else if (data->function==SPLIT)
+	{	// Add split files to a lister
+
+		short count = 0;
+		char file[256] = {0};
+		char dest[256] = {0};
+		char *path= (char *)GetGadgetValue(data->list,GAD_SPLIT_TO);
+		char *stem= (char *)GetGadgetValue(data->list,GAD_SPLIT_STEM);
+
+		// Check for valid destination directory and filename stem
+		if (!path || !*path || !stem || !*stem
+		   || !(lock = Lock(path, ACCESS_READ))
+		   || !DevNameFromLockDopus(lock, dest, 256))
+		{
+			if (lock) UnLock(lock);
+			join_free(data);
+			return ret;
+		}
+		UnLock(lock);
+
+		// Terminate path
+		AddPart(dest,"",256);
+
+		// Add the split files
+		FOREVER
+		{
+			// Built complete file path
+			lsprintf(file,"%s%s.%03ld", (IPTR)dest, (IPTR)stem, count++);
+			if (!(lock = Lock(file, ACCESS_READ)))
+				break;
+
+			// Fill in LOAD_FILE packet
+			loadpacket.name = FilePart(file);
+			loadpacket.path =  dest;
+			loadpacket.flags = 0;
+			loadpacket.reload = FALSE;
+
+			// Add a split file to the dest lister
+			func_callback(EXTCMD_LOAD_FILE,IPCDATA(ipc),&loadpacket);
+			UnLock(lock);
+		}
+	}
+
 	// Free stuff
 	join_free(data);
 	return ret;
@@ -851,6 +934,7 @@ BOOL join_do_join(join_data *data)
 	return ret;
 }
 
+
 // Join files
 BOOL join_join_files(join_data *data)
 {
@@ -908,13 +992,22 @@ BOOL join_join_files(join_data *data)
 		node=(Att_Node *)node->node.ln_Succ,count++)
 	{
 		D_S(struct FileInfoBlock,fib)
-		long buffer_size,total_size=0;
+		long buffer_size;
+		long total_size = 0;
+		long scale_size = 0;
+		short scale_factor = 1;
+#ifdef USE_64BIT
+		QUAD filesize = 0;
+		QUAD remove_pos = 0;
+#else
+		long filesize = 0;
+		long remove_pos = 0;
+#endif
 		char *file_buffer;
 		ULONG copytime;
 		BOOL abort=0;
 		short ret;
 		BOOL remove=0;
-		long remove_pos;
 
 		// Open file
 		while (!(in=Open(node->node.ln_Name,MODE_OLDFILE)))
@@ -933,14 +1026,32 @@ BOOL join_join_files(join_data *data)
 		if (!in) continue;
 
 		// Examine file
+#ifdef USE_64BIT
+		ExamineHandle64(in,(FileInfoBlock64 *)fib);
+		filesize = GETFIBSIZE(fib);
+		if (filesize > 0x7FFFFFFF)
+		{
+			scale_factor = 9;
+			scale_size = (long)(filesize >> (scale_factor - 1));
+		}
+		else
+		{
+			scale_factor = 1;
+			scale_size = (long)filesize;
+		}
+#else
 		ExamineFH(in,fib);
+		scale_factor = 1;
+		scale_size = filesize = fib->fib_Size;
+#endif
 
 		// Set filename and size in progress indicator
 		SetProgressWindowTags(
 			progress,
 			PW_FileName,(IPTR)fib->fib_FileName,
 			PW_FileNum,count,
-			PW_FileSize,fib->fib_Size<<1,
+//			PW_FileSize,fib->fib_Size<<1,
+			PW_FileSize,scale_size,
 			TAG_END);
 
 		// Get initial buffer
@@ -951,10 +1062,15 @@ BOOL join_join_files(join_data *data)
 		copytime=750000;
 
 		// Get current position in output file
-		remove_pos=Seek(out,0,OFFSET_CURRENT);
+#if defined(__amigaos4__) && defined(USE_64BIT)
+		remove_pos = GetFilePosition(out);
+#else
+		remove_pos = Seek(out,0,OFFSET_CURRENT);
+#endif
 
 		// Loop while data remains
-		while (fib->fib_Size>0)
+//		while (fib->fib_Size>0)
+		while (filesize > 0)
 		{
 			long read_size,write_size,old_buffersize,size;
 			struct timeval start,end;
@@ -1010,7 +1126,12 @@ BOOL join_join_files(join_data *data)
 			}
 
 			// Get size to read
-			read_size=(fib->fib_Size>buffer_size)?buffer_size:fib->fib_Size;
+//			read_size=(fib->fib_Size>buffer_size)?buffer_size:fib->fib_Size;
+#ifdef USE_64BIT
+			read_size=(filesize > (QUAD)buffer_size) ? buffer_size : (long)filesize;
+#else
+			read_size=(filesize > buffer_size) ? buffer_size : filesize;
+#endif
 
 			// Get current time
 			if (TimerBase) GetSysTime((APTR)&start);
@@ -1046,14 +1167,16 @@ BOOL join_join_files(join_data *data)
 			if (size<read_size)
 			{
 				// Reduce file size by the difference
-				fib->fib_Size-=read_size-size;
+//				fib->fib_Size-=read_size-size;
+				filesize -= read_size - size;
 			}
 
 			// Save read size
 			read_size=size;
 
 			// Add to total
-			total_size+=size;
+//			total_size+=size;
+			total_size += (size >> scale_factor);
 
 			// Update file progress
 			SetProgressWindowTags(
@@ -1084,7 +1207,8 @@ BOOL join_join_files(join_data *data)
 			}
 
 			// Add to total
-			total_size+=write_size;
+//			total_size+=write_size;
+			total_size += (write_size >> scale_factor);
 
 			// Update progress
 			SetProgressWindowTags(
@@ -1106,10 +1230,18 @@ BOOL join_join_files(join_data *data)
 		if (remove)
 		{
 			// Seek back to remove position
+#if defined(__amigaos4__) && defined(USE_64BIT)
+			ChangeFilePosition(out, remove_pos, OFFSET_BEGINNING);
+#else
 			Seek(out,remove_pos,OFFSET_BEGINNING);
+#endif
 
 			// Truncate file
+#if defined(__amigaos4__) && defined(USE_64BIT)
+			ChangeFileSize(out,0,OFFSET_CURRENT);
+#else
 			SetFileSize(out,0,OFFSET_CURRENT);
+#endif
 		}
 	}
 
@@ -1124,7 +1256,7 @@ BOOL join_join_files(join_data *data)
 
 	// Close progress
 	CloseProgressWindow(progress);
-	
+
 	return retcode;
 }
 
@@ -1208,11 +1340,19 @@ short split_do_split(join_data *data)
 	return ret;
 }
 
+
 short split_split_file(join_data *data)
 {
-	char *path,*name,*stem,*buffer=0;
-	long filesize,chunksize,buffersize,count=0,num,progtotal=0;
 	D_S(struct FileInfoBlock,fib)
+	char *path,*name,*stem,*buffer=0;
+#ifdef USE_64BIT
+	QUAD filesize = 0;
+#else
+	long filesize = 0;
+#endif
+	long chunksize,buffersize,count=0,num,progtotal=0;
+	long scale_size = 0;
+	short scale_factor = 1;
 	BPTR file,out,old,lock;
 	char outname[60],device[40];
 	APTR progress;
@@ -1275,15 +1415,39 @@ short split_split_file(join_data *data)
 	}
 
 	// Examine file
+//	ExamineFH(file,fib);
+//	filesize=fib->fib_Size;
+#ifdef USE_64BIT
+	ExamineHandle64(file,(FileInfoBlock64 *)fib);
+	filesize = GETFIBSIZE(fib);
+	if (filesize > 0x7FFFFFFF)
+	{
+		scale_factor = 9;
+		scale_size = (long)(filesize >> (scale_factor - 1));
+	}
+	else
+	{
+		scale_factor = 1;
+		scale_size = (long)filesize;
+	}
+
+#else
 	ExamineFH(file,fib);
-	filesize=fib->fib_Size;
+	scale_factor = 1;
+	scale_size = filesize = fib->fib_Size;
+#endif
 
 	// Get chunk size
+
 	if ((chunksize=GetGadgetValue(data->list,GAD_SPLIT_INTO)<<10)<1)
-		chunksize=filesize;
+		chunksize=(long)filesize;
 
 	// Check chunksize isn't bigger than file
+#ifdef USE_64BIT
+	if ((filesize - (QUAD)chunksize) < 0)
+#else
 	if (chunksize>filesize)
+#endif
 		chunksize=filesize;
 
 	// Get buffersize
@@ -1320,11 +1484,24 @@ short split_split_file(join_data *data)
 	}
 
 	// Calculate number of files
+#ifdef USE_64BIT
+	if (buffersize>0 && filesize>0)
+	{
+		QUAD chunksize64 = (QUAD)chunksize;
+		QUAD rem64 = 0;
+		QUAD num64 = 0;
+
+		DivideU64((UQUAD *)&filesize, chunksize, (UQUAD *)&rem64, (UQUAD *)&num64);
+		num = (long)num64;
+		if ((num64 * chunksize64) < filesize) ++num;
+	}
+#else
 	if (buffersize>0 && filesize>0)
 	{
 		num=UDivMod32(filesize,chunksize);
 		if (num*chunksize<filesize) ++num;
 	}
+#endif
 	else
 		num=1;
 
@@ -1335,7 +1512,8 @@ short split_split_file(join_data *data)
 		PW_Flags,PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT,
 		PW_FileCount,num,
 		PW_FileName,(IPTR)fib->fib_FileName,
-		PW_FileSize,filesize<<1,
+//		PW_FileSize,filesize<<1,
+		PW_FileSize,scale_size,
 		TAG_END);
 
 	// Loop until file is fully split
@@ -1362,7 +1540,11 @@ short split_split_file(join_data *data)
 			Info(lock,info);
 
 			// Size of this chunk
+#ifdef USE_64BIT
+			read = ((QUAD)chunksize > filesize ? (long)filesize : chunksize);
+#else
 			read=(chunksize>filesize)?filesize:chunksize;
+#endif
 
 			// Calculate block size of file
 			fileListEntries=(info->id_BytesPerBlock>>2)-56;
@@ -1477,7 +1659,9 @@ short split_split_file(join_data *data)
 			if (size<1) break;
 
 			// Update progress
-			progtotal+=size;
+//			progtotal+=size;
+			progtotal += (size >> scale_factor);
+
 			SetProgressWindowTags(progress,PW_FileDone,progtotal,TAG_END);
 
 			// Write some data
@@ -1487,7 +1671,8 @@ short split_split_file(join_data *data)
 			read+=size;
 
 			// Update progress
-			progtotal+=size;
+//			progtotal+=size;
+			progtotal += (size >> scale_factor);
 			SetProgressWindowTags(progress,PW_FileDone,progtotal,TAG_END);
 		}
 
@@ -1495,8 +1680,11 @@ short split_split_file(join_data *data)
 		Close(out);
 
 		// Decrement remaining size
+#ifdef USE_64BIT
+		filesize -= (QUAD)read;
+#else
 		filesize-=read;
-
+#endif
 		// Did we abort or fail?
 		if (abort || (filesize>0 && read<chunksize))
 			break;
@@ -1528,3 +1716,4 @@ void get_trunc_filename(char *source,char *dest)
 			strcpy(dest+27,"...");
 	}
 }
+
