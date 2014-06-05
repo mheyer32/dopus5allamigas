@@ -31,6 +31,7 @@ For more information on Directory Opus for Windows please see:
 #define COPY_HIGH_THRESH	1000000
 
 // Using QUAD args with OS3/AROS Seek() & SetFileSize() can corrupt files.
+// Do not change these defintions unless AROS becomes 64bit aware.
 #undef DO_64BIT
 #ifdef USE_64BIT
 #if defined(__amigaos4__) || defined(__MORPHOS__)
