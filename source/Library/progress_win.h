@@ -83,6 +83,7 @@ typedef struct _ProgressWindow
 	char			pw_Information3[80];	// Current information line
 
 	struct IBox		pw_Coords[PROG_LAST+1];	// Coordinates
+	BOOL			pw_Scale;		// Scale 64bit size?
 } ProgressWindow;
 
 #ifndef __amigaos3__
