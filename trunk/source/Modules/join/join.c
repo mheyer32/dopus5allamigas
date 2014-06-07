@@ -33,6 +33,17 @@ struct Device *TimerBase = NULL;
 struct TimerIFace *ITimer = NULL;
 #endif
 
+#ifdef DO_64BIT
+#define PW_FILESIZE PW_FileSize64
+#define PW_FILEDONE PW_FileDone64
+#define FSIZE (ULONG)&filesize
+#define PDONE (ULONG)&progtotal
+#else
+#define PW_FILESIZE PW_FileSize
+#define PW_FILEDONE PW_FileDone
+#define FSIZE filesize
+#define PDONE progtotal
+#endif
 
 void get_trunc_filename(char *source,char *dest);
 
@@ -993,13 +1004,12 @@ BOOL join_join_files(join_data *data)
 	{
 		D_S(struct FileInfoBlock,fib)
 		long buffer_size;
-		long total_size = 0;
-		long scale_size = 0;
-		short scale_factor = 1;
 #ifdef DO_64BIT
-		QUAD filesize = 0;
-		QUAD remove_pos = 0;
+		QUAD progtotal = 0LL;
+		QUAD filesize = 0LL;
+		QUAD remove_pos = 0LL;
 #else
+		long progtotal = 0;
 		long filesize = 0;
 		long remove_pos = 0;
 #endif
@@ -1029,20 +1039,9 @@ BOOL join_join_files(join_data *data)
 #ifdef DO_64BIT
 		ExamineHandle64(in,(FileInfoBlock64 *)fib);
 		filesize = GETFIBSIZE(fib);
-		if (filesize > 0x7FFFFFFF)
-		{
-			scale_factor = 9;
-			scale_size = (long)(filesize >> (scale_factor - 1));
-		}
-		else
-		{
-			scale_factor = 1;
-			scale_size = (long)filesize;
-		}
 #else
 		ExamineFH(in,fib);
-		scale_factor = 1;
-		scale_size = filesize = fib->fib_Size;
+		filesize = fib->fib_Size;
 #endif
 
 		// Set filename and size in progress indicator
@@ -1050,8 +1049,7 @@ BOOL join_join_files(join_data *data)
 			progress,
 			PW_FileName,(IPTR)fib->fib_FileName,
 			PW_FileNum,count,
-//			PW_FileSize,fib->fib_Size<<1,
-			PW_FileSize,scale_size,
+			PW_FILESIZE, FSIZE,
 			TAG_END);
 
 		// Get initial buffer
@@ -1071,7 +1069,6 @@ BOOL join_join_files(join_data *data)
 #endif
 
 		// Loop while data remains
-//		while (fib->fib_Size>0)
 		while (filesize > 0)
 		{
 			long read_size,write_size,old_buffersize,size;
@@ -1128,7 +1125,6 @@ BOOL join_join_files(join_data *data)
 			}
 
 			// Get size to read
-//			read_size=(fib->fib_Size>buffer_size)?buffer_size:fib->fib_Size;
 #ifdef DO_64BIT
 			read_size=(filesize > (QUAD)buffer_size) ? buffer_size : (long)filesize;
 #else
@@ -1169,7 +1165,6 @@ BOOL join_join_files(join_data *data)
 			if (size<read_size)
 			{
 				// Reduce file size by the difference
-//				fib->fib_Size-=read_size-size;
 				filesize -= read_size - size;
 			}
 
@@ -1177,14 +1172,10 @@ BOOL join_join_files(join_data *data)
 			read_size=size;
 
 			// Add to total
-//			total_size+=size;
-			total_size += (size >> scale_factor);
+			progtotal += (size >> 1);
 
 			// Update file progress
-			SetProgressWindowTags(
-				progress,
-				PW_FileDone,total_size,
-				TAG_END);
+			SetProgressWindowTags(progress, PW_FILEDONE, PDONE,	TAG_END);
 
 			// Check abort
 			if (CheckProgressAbort(progress))
@@ -1209,14 +1200,10 @@ BOOL join_join_files(join_data *data)
 			}
 
 			// Add to total
-//			total_size+=write_size;
-			total_size += (write_size >> scale_factor);
+			progtotal += (write_size >> 1);
 
 			// Update progress
-			SetProgressWindowTags(
-				progress,
-				PW_FileDone,total_size,
-				TAG_END);
+			SetProgressWindowTags(progress, PW_FILEDONE, PDONE, TAG_END);
 		}
 
 		// Free buffer
@@ -1352,13 +1339,13 @@ short split_split_file(join_data *data)
 	D_S(struct FileInfoBlock,fib)
 	char *path,*name,*stem,*buffer=0;
 #ifdef DO_64BIT
-	QUAD filesize = 0;
+	QUAD filesize = 0LL;
+	QUAD progtotal = 0LL;
 #else
 	long filesize = 0;
+	long progtotal = 0;
 #endif
-	long chunksize,buffersize,count=0,num,progtotal=0;
-	long scale_size = 0;
-	short scale_factor = 1;
+	long chunksize,buffersize,count=0,num;
 	BPTR file,out,old,lock;
 	char outname[60],device[40];
 	APTR progress;
@@ -1421,26 +1408,12 @@ short split_split_file(join_data *data)
 	}
 
 	// Examine file
-//	ExamineFH(file,fib);
-//	filesize=fib->fib_Size;
 #ifdef DO_64BIT
 	ExamineHandle64(file,(FileInfoBlock64 *)fib);
 	filesize = GETFIBSIZE(fib);
-	if (filesize > 0x7FFFFFFF)
-	{
-		scale_factor = 9;
-		scale_size = (long)(filesize >> (scale_factor - 1));
-	}
-	else
-	{
-		scale_factor = 1;
-		scale_size = (long)filesize;
-	}
-
 #else
 	ExamineFH(file,fib);
-	scale_factor = 1;
-	scale_size = filesize = fib->fib_Size;
+	filesize = fib->fib_Size;
 #endif
 
 	// Get chunk size
@@ -1518,8 +1491,7 @@ short split_split_file(join_data *data)
 		PW_Flags,PWF_FILENAME|PWF_FILESIZE|PWF_GRAPH|PWF_ABORT,
 		PW_FileCount,num,
 		PW_FileName,(IPTR)fib->fib_FileName,
-//		PW_FileSize,filesize<<1,
-		PW_FileSize,scale_size,
+		PW_FILESIZE, FSIZE,
 		TAG_END);
 
 	// Loop until file is fully split
@@ -1665,21 +1637,18 @@ short split_split_file(join_data *data)
 			if (size<1) break;
 
 			// Update progress
-//			progtotal+=size;
-			progtotal += (size >> scale_factor);
-
-			SetProgressWindowTags(progress,PW_FileDone,progtotal,TAG_END);
+			progtotal += (size >> 1);
+			SetProgressWindowTags(progress, PW_FILEDONE, PDONE, TAG_END);
 
 			// Write some data
 			Write(out,buffer,size);
 
 			// Increment read count
-			read+=size;
+			read += size;
 
 			// Update progress
-//			progtotal+=size;
-			progtotal += (size >> scale_factor);
-			SetProgressWindowTags(progress,PW_FileDone,progtotal,TAG_END);
+			progtotal += (size >> 1);
+			SetProgressWindowTags(progress, PW_FILEDONE, PDONE, TAG_END);
 		}
 
 		// Close file

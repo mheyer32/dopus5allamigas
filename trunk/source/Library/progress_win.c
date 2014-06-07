@@ -41,6 +41,7 @@ ProgressWindow *LIBFUNC L_OpenProgressWindow(
 {
 	ProgressWindow *prog;
 	char *ptr;
+	struct TagItem *tag = NULL;
 
 	#ifdef __amigaos4__
 	lib = dopuslibbase_global;
@@ -63,6 +64,20 @@ ProgressWindow *LIBFUNC L_OpenProgressWindow(
 	prog->pw_FileCount=GetTagData(PW_FileCount,0,tags);
 	prog->pw_FileSize=GetTagData(PW_FileSize,0,tags);
 	if ((ptr=(char *)GetTagData(PW_FileName,0,tags))) stccpy(prog->pw_FileName,ptr,79);
+	prog->pw_Scale = FALSE; // Identifies 32bit size for update functions
+
+	// Check for 64bit file size
+	if ((tag = FindTagItem(PW_FileSize64,tags)))
+	{
+		UQUAD filesize = *(UQUAD *)tag->ti_Data;
+		if (filesize > 0x7FFFFFFF)
+		{
+			prog->pw_FileSize = (long)(filesize >> 8);
+			prog->pw_Scale = TRUE; //Identifies 64bit size for updates
+		}
+		else
+			prog->pw_FileSize = (long)(filesize);
+	}
 
 	// If we have both size and the bar set, we swap them around
 	if (prog->pw_Flags&PWF_FILESIZE && prog->pw_Flags&PWF_GRAPH)
@@ -870,6 +885,7 @@ void progress_set(ProgressWindow *prog,struct TagItem *tags)
 	unsigned long change=0;
 	struct TagItem *tag;
 	char *ptr;
+	UQUAD temp = 0LL;
 
 	// Title change?
 	if ((ptr=(char *)GetTagData(PW_Title,0,tags)))
@@ -892,6 +908,23 @@ void progress_set(ProgressWindow *prog,struct TagItem *tags)
 		change|=PWF_FILESIZE;
 	}
 
+	// 64bit file size?
+	if ((tag=FindTagItem(PW_FileSize64,tags)))
+	{
+		temp = *(UQUAD *)tag->ti_Data;
+		if (temp > 0x7FFFFFFF)
+		{
+			prog->pw_FileSize = (long)(temp >> 8);
+			prog->pw_Scale = TRUE;
+		}
+		else
+		{
+			prog->pw_FileSize = (long)temp;
+			prog->pw_Scale = FALSE;
+		}
+		change|=PWF_FILESIZE;
+	}
+
 	// File done?
 	if ((tag=FindTagItem(PW_FileDone,tags)))
 	{
@@ -899,6 +932,22 @@ void progress_set(ProgressWindow *prog,struct TagItem *tags)
 		change|=PWF_FILESIZE;
 		if (prog->pw_Flags&PWF_DEBUG)
 			lsprintf(prog->pw_TaskName,"dopus_progressbar - %ld",prog->pw_FileDone);
+	}
+
+	if ((tag=FindTagItem(PW_FileDone64,tags)))
+	{
+		temp = *(UQUAD *)tag->ti_Data;
+		if (prog->pw_Scale)
+		{
+			prog->pw_FileDone = (long)(temp >> 8);
+		}
+		else
+		{
+			prog->pw_FileDone = (long)temp;
+		}
+		change|=PWF_FILESIZE;
+		if (prog->pw_Flags&PWF_DEBUG)
+			lsprintf(prog->pw_TaskName,"dopus_progressbar - %lld", temp); //prog->pw_FileDone);
 	}
 
 	// Information?
