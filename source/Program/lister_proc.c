@@ -155,7 +155,12 @@ IPC_EntryCode(lister_code)
 		BOOL wait_flag=1;
 		short quit_flag=0;
 		char *progress_filename=0;
-		unsigned long progress_count=0,file_progress_count=0;
+		unsigned long progress_count=0;
+#ifdef USE_64BIT
+		UQUAD file_progress_count = 0LL;
+#else
+		unsigned long file_progress_count = 0;
+#endif
 		short progress_flag=0;
 		DOpusNotify *notify;
 
@@ -1189,7 +1194,11 @@ IPC_EntryCode(lister_code)
 					case LISTER_FILE_PROGRESS_UPDATE:
 
 						// Remember count
+#ifdef USE_64BIT
+						file_progress_count = *(UQUAD *)data;
+#else
 						file_progress_count=(unsigned long)data;
+#endif
 						progress_flag|=PWF_FILESIZE;
 						break;
 
@@ -1589,12 +1598,19 @@ IPC_EntryCode(lister_code)
 		if (progress_flag)
 		{
 			// Update things
+#ifdef USE_64BIT
+			SetProgressWindowTags(lister->progress_window,
+				(progress_flag&PWF_FILENAME)?PW_FileName:TAG_IGNORE,(ULONG)progress_filename,
+				(progress_flag&PWF_GRAPH)?PW_FileNum:TAG_IGNORE,progress_count,
+				(progress_flag&PWF_FILESIZE)?PW_FileDone64:TAG_IGNORE,(ULONG)&file_progress_count,
+				TAG_END);
+#else
 			SetProgressWindowTags(lister->progress_window,
 				(progress_flag&PWF_FILENAME)?PW_FileName:TAG_IGNORE,progress_filename,
 				(progress_flag&PWF_GRAPH)?PW_FileNum:TAG_IGNORE,progress_count,
 				(progress_flag&PWF_FILESIZE)?PW_FileDone:TAG_IGNORE,file_progress_count,
 				TAG_END);
-
+#endif
 			// Free filename
 			FreeMemH(progress_filename);
 		}
