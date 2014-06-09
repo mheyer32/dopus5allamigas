@@ -1161,11 +1161,13 @@ int function_copy_file(
 	BPTR lock;
 	BPTR in_file,out_file=0;
 	char *file_buffer,*initial_buffer;
-	unsigned long buffer_size,total_size=0;
+	unsigned long buffer_size;
 #ifdef USE_64BIT
-	UQUAD file_size;
+	UQUAD file_size = 0LL;
+	UQUAD total_size = 0LL;
 #else
-	long file_size;
+	long file_size = 0;
+	total_size = 0;
 #endif
 	short ret_code=COPY_FAILED;
 	char decrypt_flag=0;
@@ -1358,7 +1360,12 @@ int function_copy_file(
 		file_size=GETFIBSIZE(s_info);
 
 		// Set file size
-		function_progress_file(handle,file_size*2,0);
+//		function_progress_file(handle,file_size*2,0);
+#ifdef USE_64BIT
+		function_progress_file(handle,&file_size,0);
+#else
+		function_progress_file(handle,file_size,0);
+#endif
 
 		// Start with an 8K buffer
 		buffer_size=COPY_INITIAL_BUFFER;
@@ -1465,11 +1472,15 @@ int function_copy_file(
 					read_size=size;
 
 					// Add to total
-					total_size+=size;
+//					total_size+=size;
+					total_size += (size >> 1);
 
 					// Update file progress
+#ifdef USE_64BIT
+					function_progress_file(handle,0,(ULONG)&total_size);
+#else
 					function_progress_file(handle,0,total_size);
-
+#endif
 					// Check abort
 					if (function_check_abort(handle))
 					{
@@ -1526,10 +1537,15 @@ int function_copy_file(
 					file_size-=write_size;
 
 					// Add to total
-					total_size+=write_size;
+//					total_size+=write_size;
+					total_size += (write_size >> 1);
 
 					// Update file progress
+#ifdef USE_64BIT
+					function_progress_file(handle,0,(ULONG)&total_size);
+#else
 					function_progress_file(handle,0,total_size);
+#endif
 				}
 
 				// Successful?
