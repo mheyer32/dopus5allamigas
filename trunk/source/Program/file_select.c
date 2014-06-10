@@ -36,7 +36,7 @@ short select_select_files(Lister *lister,UWORD qual,short mouse_x,short mouse_y)
 	short drag_offset_x=0,drag_offset_y=0;
 	char state=0;
 	char break_flag=0;
-	char scroll_dir=SCROLL_NO;
+	signed char scroll_dir=SCROLL_NO;
 	char multi_drag=0,drag_type=0;
 	struct IntuiMessage *msg;
 	DirBuffer *buffer;
