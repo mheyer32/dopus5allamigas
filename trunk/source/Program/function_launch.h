@@ -510,6 +510,11 @@ void function_progress_file(
 	long size,
 	long count);
 
+void function_progress_file64(
+	FunctionHandle *handle,
+	QUAD *size,
+	QUAD *count);
+
 void function_progress_info(FunctionHandle *handle,char *info);
 
 short func_requester(

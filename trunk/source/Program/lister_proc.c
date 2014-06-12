@@ -1185,6 +1185,10 @@ IPC_EntryCode(lister_code)
 						lister_progress_filetotal(lister,(long)data);
 						break;
 
+					case LISTER_FILE_PROGRESS_TOTAL64:
+						lister_progress_filetotal64(lister,(QUAD *)data);
+						break;
+
 					// Set file progress
 					case LISTER_FILE_PROGRESS_SET:
 						lister_progress_file(lister,flags,(long)data);
@@ -1194,11 +1198,15 @@ IPC_EntryCode(lister_code)
 					case LISTER_FILE_PROGRESS_UPDATE:
 
 						// Remember count
-#ifdef USE_64BIT
+						file_progress_count = (unsigned long)data;
+						progress_flag|=PWF_FILESIZE;
+						break;
+
+					// Update 64bit file progress
+					case LISTER_FILE_PROGRESS_UPDATE64:
+
+						// Remember count
 						file_progress_count = *(UQUAD *)data;
-#else
-						file_progress_count=(unsigned long)data;
-#endif
 						progress_flag|=PWF_FILESIZE;
 						break;
 

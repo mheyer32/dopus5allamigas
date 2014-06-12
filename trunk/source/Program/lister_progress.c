@@ -67,19 +67,24 @@ void lister_progress_total(Lister *lister,long total,long count)
 		TAG_END);
 }
 
+
 // Set file total
 void lister_progress_filetotal(Lister *lister,long total)
 {
-#ifdef USE_64BIT
-	SetProgressWindowTags(lister->progress_window,
-		PW_FileSize64,total,
-		TAG_END);
-#else
 	SetProgressWindowTags(lister->progress_window,
 		PW_FileSize,total,
 		TAG_END);
-#endif
 }
+
+
+// Set 64bit file total
+void lister_progress_filetotal64(Lister *lister,QUAD *total)
+{
+	SetProgressWindowTags(lister->progress_window,
+		PW_FileSize64,(ULONG)total,
+		TAG_END);
+}
+
 
 // Update file progress
 void lister_progress_fileprogress(Lister *lister,long count)

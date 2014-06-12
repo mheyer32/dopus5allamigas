@@ -1167,7 +1167,7 @@ int function_copy_file(
 	UQUAD total_size = 0LL;
 #else
 	long file_size = 0;
-	total_size = 0;
+	long total_size = 0;
 #endif
 	short ret_code=COPY_FAILED;
 	char decrypt_flag=0;
@@ -1362,7 +1362,7 @@ int function_copy_file(
 		// Set file size
 //		function_progress_file(handle,file_size*2,0);
 #ifdef USE_64BIT
-		function_progress_file(handle,&file_size,0);
+		function_progress_file64(handle,&file_size,0);
 #else
 		function_progress_file(handle,file_size,0);
 #endif
@@ -1477,7 +1477,7 @@ int function_copy_file(
 
 					// Update file progress
 #ifdef USE_64BIT
-					function_progress_file(handle,0,(ULONG)&total_size);
+					function_progress_file64(handle,0,(ULONG)&total_size);
 #else
 					function_progress_file(handle,0,total_size);
 #endif
@@ -1542,7 +1542,7 @@ int function_copy_file(
 
 					// Update file progress
 #ifdef USE_64BIT
-					function_progress_file(handle,0,(ULONG)&total_size);
+					function_progress_file64(handle,0,(ULONG)&total_size);
 #else
 					function_progress_file(handle,0,total_size);
 #endif

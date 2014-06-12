@@ -843,6 +843,23 @@ void function_progress_file(
 }
 
 
+// File progress
+void function_progress_file64(
+	FunctionHandle *handle,
+	QUAD *size,
+	QUAD *count)
+{
+	// Got a lister with the progress requester?
+	if (!handle || !handle->progress_lister) return;
+
+	// Setting size?
+	if (size) IPC_Command(handle->progress_lister->ipc,LISTER_FILE_PROGRESS_TOTAL64,0,(APTR)size,0,0);
+
+	// Setting count
+	else IPC_Command(handle->progress_lister->ipc,LISTER_FILE_PROGRESS_UPDATE64,0,(APTR)count,0,0);
+}
+
+
 // Progress information
 void function_progress_info(FunctionHandle *handle,char *info)
 {
