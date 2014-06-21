@@ -225,38 +225,6 @@ struct Window *palette_box_open(
 
 // Show palette box
 #warning Rewrite Config_Environment() function to use Tags or structure for A4/A5 arguments
-#ifdef __amigaos3__
-struct TextAttr *global_font = NULL; //A4
-ColourSpec32 *global_spec = NULL; //A5
-asm(".text                   \n\
-     .even                   \n\
-.globl _L_ShowPaletteBox     \n\
-_L_ShowPaletteBox:           \n\
-      jsr _Forbid            \n\
-      movel a4,_global_font  \n\
-      movel a5,_global_spec  \n\
-      jsr _ShowPalBox        \n\
-      rts                    \n\
-      ");
-
-long ShowPalBox(
-	REG(a0, struct Window *parent),
-	REG(a1, DOpusScreenData *screen_data),
-	REG(a2, short *fgpen),
-	REG(a3, short *bgpen),
-	REG(d0, short *spec_pen))
-{
-	struct TextAttr *font = global_font;
-	ColourSpec32 *spec = global_spec;
-	PaletteBoxData *data;
-	short a,extra=0;
-	struct Window *window;
-	ConfigWindow dims;
-	short pen_array2[18],slide_gun=-1,ret=-1;
-	short quit_flag=0;
-	ColourSpec32 spec_backup[2];
-	Permit();
-#else
 long LIBFUNC L_ShowPaletteBox(
 	REG(a0, struct Window *parent),
 	REG(a1, DOpusScreenData *screen_data),
@@ -265,6 +233,18 @@ long LIBFUNC L_ShowPaletteBox(
 	REG(a4, struct TextAttr *font),
 	REG(a5, ColourSpec32 *spec),
 	REG(d0, short *spec_pen))
+#ifdef __amigaos3__
+	{ return 0; }
+
+long ShowPalBox(
+	struct Window *parent,
+	DOpusScreenData *screen_data,
+	short *fgpen,
+	short *bgpen,
+	struct TextAttr *font,
+	ColourSpec32 *spec,
+	short *spec_pen)
+#endif
 {
 	PaletteBoxData *data;
 	short a,extra=0;
@@ -273,7 +253,7 @@ long LIBFUNC L_ShowPaletteBox(
 	short pen_array2[18],slide_gun=-1,ret=-1;
 	short quit_flag=0;
 	ColourSpec32 spec_backup[2];
-#endif
+
 	// Allocate data
 	if (!(data=AllocVec(sizeof(PaletteBoxData),MEMF_CLEAR)))
 		return -1;

@@ -691,7 +691,11 @@ unsigned long LIBFUNC L_Config_Environment(
 										bgpen=data->palette_count-4;
 
 									// Bring up palette box
+#ifdef __amigaos3__
+									if ((flags=ShowPalBox(
+#else
 									if ((flags=L_ShowPaletteBox(
+#endif
 										data->window,
 										&scrdata,
 										&fgpen,

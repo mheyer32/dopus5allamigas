@@ -82,6 +82,17 @@ Cfg_Instruction *instruction_from_wbarg(struct WBArg *,APTR);
 void parse_number(char **,unsigned short *);
 void store_window_pos(struct Window *window,struct IBox *pos);
 
+#ifdef __amigaos3__
+long ShowPalBox(
+	struct Window *parent,
+	DOpusScreenData *screen_data,
+	short *fgpen,
+	short *bgpen,
+	struct TextAttr *font,
+	ColourSpec32 *spec,
+	short *spec_pen);
+#endif
+
 long LIBFUNC L_ShowPaletteBox(
 	REG(a0, struct Window *),
 	REG(a1, DOpusScreenData *),
