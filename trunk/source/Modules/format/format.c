@@ -23,6 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "format.h"
 
+int sys_format(struct Screen *screen, char *name);
 
 int LIBFUNC L_Module_Entry(
 	REG(a0, struct List *disks),
@@ -35,7 +36,22 @@ int LIBFUNC L_Module_Entry(
 	format_data *data;
 	short ret=1;
 	BOOL one_flag=0;
+#ifdef __amigaos4__
+	char *name = NULL;
+	IPCMessage *imsg;
+	int result = 0;
 
+	// Get disk name if one is supplied
+	if (disks && !(IsListEmpty(disks)))
+		name = disks->lh_Head->ln_Name;
+	// Launch system format command
+	result = sys_format(screen, name);
+	// IPC messages?
+	if (ipc)
+		while ((imsg=(IPCMessage *)GetMsg(ipc->command_port)))
+			IPC_Reply(imsg);
+	return result;
+#endif
 	// Allocate data
 	if (!(data=AllocVec(sizeof(format_data),MEMF_CLEAR)))
 		return 0;
@@ -1055,3 +1071,57 @@ void do_install(format_data *data,DiskHandle *disk,APTR status)
 	// Free bootblock buffer
 	FreeVec(boot_buffer);
 }
+
+int sys_format(struct Screen *screen, char *name)
+{
+	char scrname[MAXPUBSCREENNAME + 2] = {0};
+	char oldname[MAXPUBSCREENNAME + 2] = {0};
+	char *command = "SYS:System/Format";
+	char *commandline = NULL;
+	char devname[108] = {0};
+	uint16 modes = 0;
+	int32 result = 0;
+	BPTR lock = 0;
+
+	if (!(lock = Lock(command, ACCESS_READ))) return 0;
+	UnLock(lock);
+	if (name && (lock = Lock(name, ACCESS_READ)))
+	{
+		result = DevNameFromLock(lock, devname, sizeof(devname), DN_DEVICEONLY);
+		if (result)
+			commandline = ASPrintf("%s DRIVE %s REQ", command, devname);
+		UnLock(lock);
+	}
+
+	if (!commandline)
+		if (!(commandline = ASPrintf("%s REQ", command, devname))) return 0;
+
+	result = GetScreenAttr(screen, SA_PubName, &scrname, sizeof(scrname));
+	if (result)
+	{
+		GetDefaultPubScreen(oldname);
+		SetDefaultPubScreen(scrname);
+		modes = SetPubScreenModes(SHANGHAI | POPPUBSCREEN);
+	}
+
+	result = SystemTags(commandline,
+		SYS_Input, 0,
+		SYS_Output, 0,
+		SYS_Error, 0,
+		SYS_Asynch, TRUE,
+		NP_StackSize, 16384,
+		NP_Priority, 0,
+		NP_Cli, TRUE,
+		TAG_DONE, NULL);
+
+	Delay(5);
+	if (modes) SetPubScreenModes(modes);
+	if (Strlen(oldname) > 1)
+		SetDefaultPubScreen(oldname);
+	else
+		SetDefaultPubScreen(NULL);
+
+	FreeVec(commandline);
+	return 1;
+}
+
