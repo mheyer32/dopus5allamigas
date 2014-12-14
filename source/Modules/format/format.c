@@ -1072,6 +1072,7 @@ void do_install(format_data *data,DiskHandle *disk,APTR status)
 	FreeVec(boot_buffer);
 }
 
+#ifdef __amigaos4__
 int sys_format(struct Screen *screen, char *name)
 {
 	char scrname[MAXPUBSCREENNAME + 2] = {0};
@@ -1079,8 +1080,8 @@ int sys_format(struct Screen *screen, char *name)
 	char *command = "SYS:System/Format";
 	char *commandline = NULL;
 	char devname[108] = {0};
-	uint16 modes = 0;
-	int32 result = 0;
+	UWORD modes = 0;
+	LONG result = 0;
 	BPTR lock = 0;
 
 	if (!(lock = Lock(command, ACCESS_READ))) return 0;
@@ -1116,7 +1117,7 @@ int sys_format(struct Screen *screen, char *name)
 
 	Delay(5);
 	if (modes) SetPubScreenModes(modes);
-	if (Strlen(oldname) > 1)
+	if (strlen(oldname) > 1)
 		SetDefaultPubScreen(oldname);
 	else
 		SetDefaultPubScreen(NULL);
@@ -1124,4 +1125,4 @@ int sys_format(struct Screen *screen, char *name)
 	FreeVec(commandline);
 	return 1;
 }
-
+#endif
