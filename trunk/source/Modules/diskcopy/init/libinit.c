@@ -358,15 +358,9 @@ STATIC CONST CONST_APTR LibVectors[] =
   (CONST_APTR)FUNCARRAY_32BIT_NATIVE,
   #endif
   #if defined(__AROS__)
-#ifdef __arm__
   (CONST_APTR)AROS_SLIB_ENTRY(LibOpen, DOpus, 1),
   (CONST_APTR)AROS_SLIB_ENTRY(LibClose, DOpus, 2),
   (CONST_APTR)AROS_SLIB_ENTRY(LibExpunge, DOpus, 3),
-#else
-  (CONST_APTR)AROS_SLIB_ENTRY(LibOpen, DOpus),
-  (CONST_APTR)AROS_SLIB_ENTRY(LibClose, DOpus),
-  (CONST_APTR)AROS_SLIB_ENTRY(LibExpunge, DOpus),
-#endif
   #else
   (CONST_APTR)LibOpen,
   (CONST_APTR)LibClose,
