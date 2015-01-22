@@ -1,3 +1,246 @@
+r[1072] by paraxenic
+Added library/config_open.h header file for conversion of old config to new.
+2015-01-22 13:06:47 Tree
+
+[r1071] by paraxenic
+Corrected show_pattern_p & hide_pattern_p ParsePatternNoCase() buffersize.
+Increased embedded font filename sizes.
+configopus.module: Changed IFF Environment FORM ID to match new Environment settings format.
+configopus.module: Eliminated resolution of device,volume,assign paths entered in "Environment/Path list" window.
+library: Added functions to load previous prefs files & convert to new Environment format.
+library: Added config_open.h file containing old Environment structures for loading and converting Environment settings.
+Include/dopus5: Bumped library/module versions to prevent compatibility issues with old Dopus5 components.
+Include/libraries:  Updated Environment structures and added new IFF FORM ID for new Environment format.
+program: Changed IFF Environment FORM ID to match new Environment settings format.
+program: Updated Environment structures and added new IFF FORM ID for new Environment format.
+program: Fixed show_pattern_p & hide_pattern_p ParsePatternNoCase() buffers.
+listerformat.module: Fixed bugs in default lister format (ListFormat) saving from "List Format" window opened with Listers/Edit menu ("Set As Defaults" button).
+dopusrt5: Fixed broken WorkBench program launching.
+2015-01-22 12:42:59 Tree
+
+[r1070] by kas1e
+more aros fixes for newer i386 cross-compiler: arm code and i386 code paths are now the same
+2015-01-21 15:02:53 Tree
+
+[r1069] by kas1e
+aros fixes for newer i386 cross-compiler
+2015-01-20 15:40:45 Tree
+
+[r1068] by paraxenic
+Fixed some errors in the previous commit.
+2014-12-13 21:13:28 Tree
+
+[r1067] by paraxenic
+Changed OS4 Dopus5 Format command to use OS4 system Format command.
+OS4 bootblock is not compatable with OS2 bootblock used by Dopus Format.
+2014-12-13 12:41:45  Tree
+
+[r1066] by paraxenic
+Updated GeekGadgets 68k compiler with libnix 2.
+2014-12-10 18:47:55  Tree
+
+[r1065] by paraxenic
+Fixed crash when OS3 environment palette window (configopus) closed.
+2014-06-21 16:55:07  Tree
+
+[r1064] by paraxenic
+program: Fixed crash in 64bit progress display for "Move" command.
+2014-06-12 14:55:31 Tree
+
+[r1063] by paraxenic
+program: Fixed OS4 lister up-scrolling problem.
+2014-06-10 13:50:38  Tree
+
+[r1062] by paraxenic
+program: Fixed progress display for copying 64 bit files (2GB+ size).
+2014-06-09 08:24:49  Tree
+
+[r1061] by paraxenic
+library: Added 64bit Tags for progress window.
+library: Added 64bit scaling code to progress window functions.
+join.module: Removed 64bit scaling.
+join.module: Changed functions to use 64bit tags for progress window.
+join.module: Fixed "split" progress window graph.
+join.module: Added definitions to get OS3 compile working.
+2014-06-07 10:59:28  Tree
+
+[r1060] by paraxenic
+join.module: Added some warnings in the comments.
+2014-06-05 10:05:02  Tree
+
+[r1059] by paraxenic
+Replaced previously commited join.c file with correct one.
+2014-06-03 11:33:36  Tree
+
+[r1058] by paraxenic
+join.module: Added display of joined/splitted files in destination lister.
+join.module: Updated to work with 64 bit filesizes for OS4 & MOS.
+join.module: Fixed the progress display.
+2014-06-03 11:22:53  Tree
+
+[r1057] by paraxenic
+program: Fixed more typing errors from r1048 commit.
+2014-05-28 12:27:40  Tree
+
+[r1056] by paraxenic
+library: Fixed an extra linefeed typing error.
+2014-05-26 12:18:43  Tree
+
+[r1055] by paraxenic
+library: Fixed skipping of UserLibCleanup() when opening of any system libraries fails.
+library: Added debug output for failures.
+2014-05-26 12:05:28  Tree
+
+[r1054] by kas1e
+library: make proper exit if we fail to open libraries, as well as split cleanup functions to match their needs. same should be done for all modules probably
+2014-05-26 04:22:42 Tree
+
+[r1053] by kas1e
+64bit: fixed typo in dos_patch.c, 64bit notification still don't work properly, but it works now at least
+2014-05-22 10:45:57  Tree
+
+[r1052] by paraxenic
+Added current minimum version for library openings (LIB_VERSION).
+Changed OS4 interface opening to avoid crashes and eliminated more "exit(0)".
+2014-05-22 08:34:22  Tree
+
+[r1051] by paraxenic
+Replaced all cases where the stack is set to 4000 with STACK_DEFAULT.
+Changed the minimum configuration stack to STACK_DEFAULT.
+2014-05-21 06:19:55  Tree
+
+[r1050] by bszili
+Initial attempt to replace Forbid/Permit with proper layer locking. Not enabled by default, can be tested by defining LOCKLAYER_OK.
+2014-05-19 15:35:14  Tree
+
+[r1049] by kas1e
+commit back www.dopus5.org link to about window, which was somehow deleted by previous commits
+2014-05-19 03:35:42  Tree
+
+[r1048] by paraxenic
+Program: Added OS4 interface opening checks to prevent crashes if user installs 68k modules or module opening fails.
+2014-05-18 19:26:05  Tree
+
+[r1047] by bszili
+dopus5.library: Fixed the popup menu icons on AROS.
+2014-05-18 03:06:15  Tree
+
+[r1046] by bszili
+64-bit fix for the DOS patches.
+2014-05-18 02:34:45 Tree
+
+[r1045] by bszili
+Simplify message_amistart. No need to parse the broker list twice.
+2014-05-18 00:19:31  Tree
+
+[r1044] by paraxenic
+Fixed xadopus copy corruption that ocurred when directories have similar names.
+2014-05-17 18:19:39  Tree
+
+[r1043] by bszili
+No more leftover images of deleted icons when USE_DRAWICONSTATE is defined.
+2014-05-17 15:01:38 Tree
+
+[r1042] by bszili
+dopus5.library: Fixed the drag mask for screens with high color depth on AROS.
+2014-05-17 13:06:33 Tree
+
+[r1041] by bszili
+dopus5.library: Fix the deadlock caused by the AmiStart commodity broker on AROS.
+2014-05-17 12:14:20  Tree
+
+[r1040] by paraxenic
+program: Added function for opening library and interface for OS4.
+program: Fixed fallback requester call for OS4 with new function call.
+program: Fixed dopus5.library missing or outdated requester for OS4.
+program: Fixed OS3 crash if dopus5.library missing or outdated.
+program: Added current minimum version for library and module openings.
+program: Eliminated some exit(0) calls when interface opening fails.
+2014-05-17 06:16:15 Tree
+
+[r1039] by bszili
+Fix the lister background images and tiled backgrounds on AROS.
+2014-05-17 03:11:14  Tree
+
+[r1038] by bszili
+Put a newline between the build date, and the website URL.
+2014-05-15 14:15:41 Tree
+
+[r1037] by bszili
+ftp.module: Don't use SDI_stdarg.h macros, they are meant for VARARGS68K functions.
+2014-05-15 14:15:41  Tree
+
+[r1036] by kas1e
+add www.dopus5.org in about window.
+2014-05-15 08:46:02  Tree
+
+[r1035] by paraxenic
+Corrected incorrect upper case filename spellings in main makefile.
+2014-05-14 08:12:42  Tree
+
+[r1034] by paraxenic
+Removed typing errors.
+2014-05-13 14:35:56 Tree
+
+[r1033] by paraxenic
+library: Fixed OS4 crash if the WBInfo patch is used.
+library:  Added OS4 interface opening and missing missing atomic_dec if hook used and icon.module called.
+2014-05-13 12:11:06 Tree
+
+[r1032] by paraxenic
+Removed guides and pdf docs from base archive
+Added new amigaguides to repository Documents directory
+Added copying of guides and pdf docs to main makefile
+2014-05-13 11:13:44 Tree
+
+[r1031] by bszili
+Disks can now be hidden on AROS.
+2014-05-13 02:27:34  Tree
+
+[r1030] by paraxenic
+bumped all versions because of changed library and modules.
+program: Added minimum version for opening about.module.
+program: Now defaults to simple requester if opening OS4 module interface fails.
+program: Replaced incomplete modules array.
+program: Replaced hard-coded oudated minimum module version with LIB_VERSION.
+2014-05-12 11:42:42  Tree
+
+[r1029] by bszili
+program: Always replace the DOPUS5: assign with PROGDIR: to avoid using libs/modules from existing 5.82 installations. 
+2014-05-12 04:50:39  Tree
+
+[r1028] by kas1e
+bump version to 5.91 in program
+2014-05-12 01:03:35  Tree
+
+[r1027] by kas1e
+bump revision to 5.91
+2014-05-12 00:22:39  Tree
+
+[r1026] by kas1e
+filetype.module on os4: fixed ABI
+2014-05-12 00:20:12  Tree
+
+[r1025] by bszili
+ftp.module: Saving the FTP options now works on AROS.
+2014-05-11 15:41:01  Tree
+
+[r1024] by bszili
+ftp.module: Changed to module ID prefix from ID to MID to prevent ID_OPTIONS from redefined to the FOPT chunk type. 
+2014-05-11 08:56:11  Tree
+
+[r1023] by bszili
+Added the build date to the about window.
+2014-05-11 06:26:30  Tree
+
+[r1022] by bszili
+configopus.module: Removed the ~1MB upper limit for the stack of launched programs.
+2014-05-10 10:12:03  Tree
+
+[r1021] by paraxenic
+Tagged revision 1020 for release 5.90
+2014-05-09 13:24:21  Tree
+
 [r1020] by paraxenic
 Updated ChangeLog
 Added log=yes arg to main makefile for copying ChangeLog to release archives
