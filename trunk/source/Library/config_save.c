@@ -28,6 +28,7 @@ For more information on Directory Opus for Windows please see:
 long write_string(struct _IFFHandle *iff,char *string);
 long write_button_list(struct _IFFHandle *iff,struct List *list,long flags);
 short write_function_list(struct _IFFHandle *iff,struct List *list);
+extern void do_backup(char *name);
 
 int LIBFUNC L_SaveSettings(
 	REG(a0, CFG_SETS *settings),
@@ -174,6 +175,7 @@ int LIBFUNC L_SaveButtonBank(
 	REG(a6, struct MyLibrary *libbase))
 {
 	struct _IFFHandle *iff;
+	BPTR lock = 0;
 	short success=0;
 #ifdef __AROS__
 	CFG_BTNW *window_be;
@@ -198,8 +200,14 @@ int LIBFUNC L_SaveButtonBank(
 	}
 #endif
 
+	if ((lock = Lock(name, SHARED_LOCK)))
+	{
+		UnLock(lock);
+		do_backup(name);
+	}
+
 	// Try to open file to write
-	while ((iff=L_IFFOpen(name,MODE_NEWFILE,ID_OPUS)))
+	while ((iff=L_IFFOpen(name,MODE_NEWFILE,ID_EPUS)))
 	{
 		char buf[40];
 

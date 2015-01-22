@@ -68,10 +68,10 @@ typedef struct {
 	short			drag_from;
 	Att_Node		*drag_node;
 	GL_Object		*sel_lister;
-	ListFormatStorage	*def_format;
+	ListFormat		*def_format;
 	ListFormatStorage	*def_ftp_format;
 	ULONG			mod_id;
-	ListFormatStorage	def_format_copy;
+	ListFormat		def_format_copy;
 } config_lister_data;
 #ifndef __amigaos3__
 #pragma pack()

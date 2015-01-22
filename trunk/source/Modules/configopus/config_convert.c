@@ -442,7 +442,7 @@ short convert_config(
 			lsprintf(buffer,"dopus5:environment/%s",basename);
 
 			// Try to open file to write
-			while ((iff=IFFOpen(buffer,MODE_NEWFILE,ID_OPUS)))
+			while ((iff=IFFOpen(buffer,MODE_NEWFILE,ID_EPUS)))
 			{
 				Cfg_Lister *lister;
 				short len;

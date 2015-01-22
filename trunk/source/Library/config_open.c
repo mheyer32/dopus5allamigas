@@ -24,6 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 #include "config.h"
 #include <Program/dopus_config.h>
+#include "config_open.h"
 
 #ifndef __amigaos3__
 #pragma pack(2)
@@ -40,6 +41,7 @@ typedef struct {
 #pragma pack()
 #endif
 
+static ULONG iff_file_id = 0;
 
 void init_config_string(struct _IFFHandle *iff,string_handle *handle);
 char *read_config_string(APTR memory,string_handle *handle);
@@ -49,6 +51,10 @@ char *copy_string(APTR,char *);
 void dump_button_info(Cfg_ButtonBank *);
 void env_read_open_bank(APTR,struct OpenEnvironmentData *,ULONG);
 void env_read_open_lister(APTR,struct OpenEnvironmentData *,ULONG);
+int convert_env(struct _IFFHandle *iff, CFG_ENVR *env);
+int convert_open_lister(struct _IFFHandle *iff, CFG_LSTR *lister);
+int convert_button_window(struct _IFFHandle *iff, CFG_BTNW *butwin);
+void do_backup(char *name);
 
 short LIBFUNC L_ReadSettings(
 	REG(a0, CFG_SETS *settings),
@@ -140,7 +146,7 @@ Cfg_Lister *LIBFUNC L_ReadListerDef(
 	REG(a0, struct _IFFHandle *iff),
 	REG(d0, ULONG id))
 {
-	Cfg_Lister *lister;
+	Cfg_Lister *lister = NULL;
 
 	// Allocate lister structure
 	if ((lister=L_NewLister(0)))
@@ -166,7 +172,13 @@ Cfg_Lister *LIBFUNC L_ReadListerDef(
 		// Read lister data
 		else
 		{
-			L_IFFReadChunkBytes(iff,&lister->lister,sizeof(CFG_LSTR));
+			if (iff_file_id == ID_OPUS)
+			{
+				if (!convert_open_lister(iff, &lister->lister)) return NULL;
+			}
+			else
+				L_IFFReadChunkBytes(iff,&lister->lister,sizeof(CFG_LSTR));
+
 #ifdef __AROS__
 			lister->lister.icon_x = AROS_BE2LONG(lister->lister.icon_x);
 			lister->lister.icon_y = AROS_BE2LONG(lister->lister.icon_y);
@@ -184,7 +196,6 @@ Cfg_Lister *LIBFUNC L_ReadListerDef(
 		lister->lister.pos[1].Height = AROS_BE2WORD(lister->lister.pos[1].Height);
 		lister->lister.flags = AROS_BE2LONG(lister->lister.flags);
 #endif
-
 		// Read lister path
 		init_config_string(iff,&handle);
 		lister->path=read_config_string(0,&handle);
@@ -200,10 +211,11 @@ Cfg_ButtonBank *LIBFUNC L_OpenButtonBank(
 	REG(a0, char *name))
 {
 	Cfg_ButtonBank *current_bank=0;
-	struct _IFFHandle *iff;
+	struct _IFFHandle *iff = NULL;
 	BPTR lock,old=0;
 	char *name_ptr=0;
 	BOOL ok=0;
+	ULONG iff_button_id = 0;
 
 	// See if file exists as is
 	if ((lock=Lock(name,ACCESS_READ)))
@@ -259,7 +271,15 @@ Cfg_ButtonBank *LIBFUNC L_OpenButtonBank(
 	}
 
 	// Try to open file to read
-	if (name_ptr && (iff=L_IFFOpen(name_ptr,IFF_READ,ID_OPUS)))
+	if (name_ptr)
+	{
+		if ((iff=L_IFFOpen(name_ptr,IFF_READ,ID_OPUS)))
+			iff_button_id = ID_OPUS;
+		else
+			iff=L_IFFOpen(name_ptr,IFF_READ,ID_EPUS);
+	}
+
+	if (iff)
 	{
 		APTR file;
 		Cfg_Button *current_button;
@@ -286,8 +306,12 @@ Cfg_ButtonBank *LIBFUNC L_OpenButtonBank(
 							strcpy(current_bank->path,name);
 
 						// Read bank data
-						L_IFFReadChunkBytes(iff,&current_bank->window,sizeof(CFG_BTNW));
-
+						if (iff_button_id == ID_OPUS)
+						{
+							if (!convert_button_window(iff, &current_bank->window)) return NULL;
+						}
+						else
+							L_IFFReadChunkBytes(iff,&current_bank->window,sizeof(CFG_BTNW));
 #ifdef __AROS__
 						current_bank->window.pos.Left = AROS_BE2WORD(current_bank->window.pos.Left);
 						current_bank->window.pos.Top = AROS_BE2WORD(current_bank->window.pos.Top);
@@ -493,7 +517,6 @@ Cfg_Button *LIBFUNC L_ReadButton(
 
 	return button;
 }
-
 
 
 // Read some filetype definitions
@@ -746,6 +769,7 @@ char *read_config_string(APTR memory,string_handle *handle)
 	return string;
 }
 
+
 short read_config_short(string_handle *handle)
 {
 	short value;
@@ -764,45 +788,11 @@ short read_config_short(string_handle *handle)
 	return value;
 }
 
+
 void free_config_string(string_handle *handle)
 {
 	FreeVec(handle->buffer);
 }
-
-
-/*
-				// Path format
-				case ID_PFMT:
-					{
-						Cfg_PathFormat *node;
-
-						// Allocate new entry
-						if (node=L_AllocMemH(environment->settings_memory,sizeof(Cfg_PathFormat)))
-						{
-							// Read flags
-							ReadChunkBytes(iff,&node->flags,sizeof(ULONG));
-
-							// Read format
-							ReadChunkBytes(iff,&node->format,sizeof(ListFormatStorage));
-							ParsePatternNoCase(node->format.show_pattern,node->format.show_pattern_p,40);
-							ParsePatternNoCase(node->format.hide_pattern,node->format.hide_pattern_p,40);
-
-							// Key code?
-							if (node->flags&PATHFMTF_HOTKEY)
-							{
-								// Read key
-								ReadChunkBytes(iff,&node->code,sizeof(unsigned short)*2);
-							}
-
-							// Read path
-							ReadChunkBytes(iff,node->path,256);
-
-							// Add to path format list
-							AddTail((struct List *)&environment->path_formats,(struct Node *)node);
-						}
-					}
-					break;
-*/
 
 
 // Convert start menu to version 2
@@ -885,6 +875,7 @@ void ASM L_ConvertStartMenu(REG(a0, Cfg_ButtonBank *bank))
 	if (bank->startmenu) bank->startmenu->flags|=STRTF_VERSION2;
 }
 
+
 /*
 void dump_button_info(Cfg_ButtonBank *bank)
 {
@@ -906,6 +897,7 @@ void dump_button_info(Cfg_ButtonBank *bank)
 	}
 }
 */
+
 
 BOOL LIBFUNC L_OpenEnvironment(
 	REG(a0, char *name),
@@ -930,7 +922,9 @@ BOOL LIBFUNC L_OpenEnvironment(
 	data->hotkeys_path[0]=0;
 
 	// Try to open file to read
-	if (!(iff=L_IFFOpen(name,IFF_READ,ID_OPUS)))
+	if ((iff=L_IFFOpen(name,IFF_READ,ID_OPUS)))
+		iff_file_id = ID_OPUS;
+	else if (!(iff=L_IFFOpen(name,IFF_READ,ID_EPUS)))
 		return 0;
 
 	// Parse file
@@ -942,11 +936,16 @@ BOOL LIBFUNC L_OpenEnvironment(
 			// Environment settings
 			case ID_ENVR:
 				if (!(data->flags&OEDF_ENVR)) break;
-				L_IFFReadChunkBytes(iff,&data->env,sizeof(CFG_ENVR));
+				if (iff_file_id == ID_OPUS)
+				{
+					if (!convert_env(iff, &data->env)) return 0;
+				}
+				else
+					L_IFFReadChunkBytes(iff,&data->env,sizeof(CFG_ENVR));
 #ifdef __AROS__
 				{
 					int i;
-				
+
 					data->env.screen_mode = AROS_BE2LONG(data->env.screen_mode);
 					data->env.screen_flags = AROS_BE2WORD(data->env.screen_flags);
 					data->env.screen_depth = AROS_BE2WORD(data->env.screen_depth);
@@ -955,14 +954,14 @@ BOOL LIBFUNC L_OpenEnvironment(
 
 					for (i=0; i<50; i++)
 						data->env.palette[i] = AROS_BE2LONG(data->env.palette[i]);
-					
+
 					data->env.window_pos.Left = AROS_BE2WORD(data->env.window_pos.Left);
 					data->env.window_pos.Top = AROS_BE2WORD(data->env.window_pos.Top);
 					data->env.window_pos.Width = AROS_BE2WORD(data->env.window_pos.Width);
 					data->env.window_pos.Height = AROS_BE2WORD(data->env.window_pos.Height);
 					data->env.general_screen_flags = AROS_BE2LONG(data->env.general_screen_flags);
 					data->env.palette_count = AROS_BE2WORD(data->env.palette_count);
-					
+
 					for (i=0; i<CUST_PENS; i++)
 					{
 						data->env.env_Colours[i][0][0] = AROS_BE2LONG(data->env.env_Colours[i][0][0]);
@@ -972,7 +971,7 @@ BOOL LIBFUNC L_OpenEnvironment(
 						data->env.env_Colours[i][1][1] = AROS_BE2LONG(data->env.env_Colours[i][1][1]);
 						data->env.env_Colours[i][1][2] = AROS_BE2LONG(data->env.env_Colours[i][1][2]);
 					}
-					
+
 					data->env.env_ColourFlag = AROS_BE2LONG(data->env.env_ColourFlag);
 					data->env.env_NewIconsFlags = AROS_BE2LONG(data->env.env_NewIconsFlags);
 					data->env.display_options = AROS_BE2WORD(data->env.display_options);
@@ -992,10 +991,10 @@ BOOL LIBFUNC L_OpenEnvironment(
 					data->env.lister_height = AROS_BE2WORD(data->env.lister_height);
 					data->env.version = AROS_BE2WORD(data->env.version);
 					data->env.desktop_flags = AROS_BE2LONG(data->env.desktop_flags);
-					
+
 					for (i=0; i<4; i++)
 						data->env.env_BackgroundFlags[i] = AROS_BE2WORD(data->env.env_BackgroundFlags[i]);
-				
+
 					data->env.settings.copy_flags = AROS_BE2LONG(data->env.settings.copy_flags);
 					data->env.settings.delete_flags = AROS_BE2LONG(data->env.settings.delete_flags);
 					data->env.settings.error_flags = AROS_BE2LONG(data->env.settings.error_flags);
@@ -1018,7 +1017,7 @@ BOOL LIBFUNC L_OpenEnvironment(
 					data->env.settings.command_line_length = AROS_BE2WORD(data->env.settings.command_line_length);
 					data->env.settings.max_filename = AROS_BE2WORD(data->env.settings.max_filename);
 					data->env.settings.flags = AROS_BE2LONG(data->env.settings.flags);
-					
+
 					for (i=0; i<4; i++)
 						data->env.env_BackgroundBorderColour[i] = AROS_BE2LONG(data->env.env_BackgroundBorderColour[i]);
 				}
@@ -1102,7 +1101,6 @@ BOOL LIBFUNC L_OpenEnvironment(
 				}
 				break;
 
-
 			// Path list entry
 			case ID_PATH:
 				if (data->flags&OEDF_PATH)
@@ -1118,7 +1116,6 @@ BOOL LIBFUNC L_OpenEnvironment(
 					}
 				}
 				break;
-
 
 			// Sound list entry
 			case ID_SNDX:
@@ -1149,6 +1146,9 @@ BOOL LIBFUNC L_OpenEnvironment(
 
 	// Close file
 	L_IFFClose(iff);
+	if (iff_file_id == ID_OPUS)
+		do_backup(name);
+	iff_file_id = 0;
 
 	// Bring environment file up to date
 	if ((data->flags&OEDF_ENVR) && (data->flags&OEDF_SETS))
@@ -1224,3 +1224,278 @@ void env_read_open_lister(APTR iff,struct OpenEnvironmentData *data,ULONG id)
 		AddTail((struct List *)&data->listers,(struct Node *)node);
 	}
 }
+
+
+// Adjust old CFG_ENVR to new CFG_ENVR
+int convert_env(struct _IFFHandle *iff, CFG_ENVR *env)
+{
+	OLD_CFG_ENVR *oldenv = NULL;
+	int i = 0;
+
+	oldenv=AllocVec(sizeof(OLD_CFG_ENVR),MEMF_CLEAR);
+	if (!oldenv) return 0;
+	L_IFFReadChunkBytes(iff, oldenv, (sizeof(OLD_CFG_ENVR)));
+
+	env->screen_mode = oldenv->screen_mode;
+	env->screen_flags = oldenv->screen_flags;
+	env->screen_depth = oldenv->screen_depth;
+	env->screen_width = oldenv->screen_width;
+	env->screen_height = oldenv->screen_height;
+	for (i=0; i<50; i++)
+		env->palette[i] = oldenv->palette[i];
+	for (i=0; i<80; i++)
+		env->pubscreen_name[i] = oldenv->pubscreen_name[i];
+	env->window_pos.Left = oldenv->window_pos.Left;
+	env->window_pos.Top = oldenv->window_pos.Top;
+	env->window_pos.Width = oldenv->window_pos.Width;
+	env->window_pos.Height = oldenv->window_pos.Height;
+	env->general_screen_flags = oldenv->general_screen_flags;
+	env->source_col[0] = oldenv->source_col[0];
+	env->source_col[1] = oldenv->source_col[1];
+	env->dest_col[0] = oldenv->dest_col[0];
+	env->dest_col[1] = oldenv->dest_col[1];
+	env->palette_count = oldenv->palette_count;
+	for (i=0; i<40; i++)
+	{
+		env->font_name[0][i] = oldenv->font_name[0][i];
+		env->font_name[1][i] = oldenv->font_name[1][i];
+		env->font_name[2][i] = oldenv->font_name[2][i];
+		env->font_name[3][i] = oldenv->font_name[3][i];
+	}
+	for (i=0; i<CUST_PENS; i++)
+	{
+		env->env_Colours[i][0][0] = oldenv->env_Colours[i][0][0];
+		env->env_Colours[i][0][1] = oldenv->env_Colours[i][0][1];
+		env->env_Colours[i][0][2] = oldenv->env_Colours[i][0][2];
+		env->env_Colours[i][1][0] = oldenv->env_Colours[i][1][0];
+		env->env_Colours[i][1][1] = oldenv->env_Colours[i][1][1];
+		env->env_Colours[i][1][2] = oldenv->env_Colours[i][1][2];
+	}
+	env->env_ColourFlag = oldenv->env_ColourFlag;
+	env->env_NewIconsFlags = oldenv->env_NewIconsFlags;
+	for (i=0; i<80; i++)
+		env->status_text[i] = oldenv->status_text[i];
+	env->font_size[0] = oldenv->font_size[0];
+	env->font_size[1] = oldenv->font_size[1];
+	env->font_size[2] = oldenv->font_size[2];
+	env->font_size[3] = oldenv->font_size[3];
+	env->display_options = oldenv->display_options;
+	env->main_window_type = oldenv->main_window_type;
+	env->hotkey_flags = oldenv->hotkey_flags;
+	env->hotkey_code = oldenv->hotkey_code;
+	env->hotkey_qual = oldenv->hotkey_qual;
+// ***** ListFormat
+	env->list_format.files_unsel[0] = oldenv->list_format.files_unsel[0];
+	env->list_format.files_unsel[1] = oldenv->list_format.files_unsel[1];
+	env->list_format.files_sel[0] = oldenv->list_format.files_sel[0];
+	env->list_format.files_sel[1] = oldenv->list_format.files_sel[1];
+	env->list_format.dirs_unsel[0]= oldenv->list_format.dirs_unsel[0];
+	env->list_format.dirs_unsel[1]= oldenv->list_format.dirs_unsel[1];
+	env->list_format.dirs_sel[0]= oldenv->list_format.dirs_sel[0];
+	env->list_format.dirs_sel[1]= oldenv->list_format.dirs_sel[1];
+// ***** SortFormat
+	env->list_format.sort.sort = oldenv->list_format.sort.sort;
+	env->list_format.sort.sort_flags = oldenv->list_format.sort.sort_flags;
+	env->list_format.sort.separation = oldenv->list_format.sort.separation;
+// ***** SortFormat end
+	for (i=0; i<16; i++)
+		env->list_format.display_pos[i] = oldenv->list_format.display_pos[i];
+	for (i=0; i<15; i++)
+		env->list_format.display_len[i] = oldenv->list_format.display_len[i];
+	env->list_format.flags = oldenv->list_format.flags;
+	env->list_format.show_free = oldenv->list_format.show_free;
+	for (i=0; i<40; i++)
+		env->list_format.show_pattern[i] = oldenv->list_format.show_pattern[i];
+	for (i=0; i<40; i++)
+		env->list_format.hide_pattern[i] = oldenv->list_format.hide_pattern[i];
+	for (i=0; i<40; i++)
+		env->list_format.show_pattern_p[i] = oldenv->list_format.show_pattern_p[i];
+	for (i=0; i<40; i++)
+		env->list_format.hide_pattern_p[i] = oldenv->list_format.hide_pattern_p[i];
+// ***** ListFormat end
+	for (i=0; i<80; i++)
+		env->backdrop_prefs[i] = oldenv->backdrop_prefs[i];
+	for (i=0; i<240; i++)
+		env->desktop_location[i] = oldenv->desktop_location[i];
+	for (i=0; i<80; i++)
+		env->output_window[i] = oldenv->output_window[i];
+	for (i=0; i<80; i++)
+		env->output_device[i] = oldenv->output_device[i];
+	env->default_stack = oldenv->default_stack;
+	for (i=0; i<188; i++)
+		env->scr_title_text[i] = oldenv->scr_title_text[i];
+	env->lister_options = oldenv->lister_options;
+	env->flags = oldenv->flags;
+	env->lister_popup_code = oldenv->lister_popup_code;
+	env->lister_popup_qual = oldenv->lister_popup_qual;
+	env->env_flags = oldenv->env_flags;
+	env->clock_left = oldenv->clock_left;
+	env->clock_top = oldenv->clock_top;
+	env->devices_col[0] = oldenv->devices_col[0];
+	env->devices_col[1] = oldenv->devices_col[1];
+	env->volumes_col[0] = oldenv->volumes_col[0];
+	env->volumes_col[1] = oldenv->volumes_col[1];
+	env->lister_width = oldenv->lister_width;
+	env->lister_height = oldenv->lister_height;
+	env->version = oldenv->version;
+	env->gauge_col[0] = oldenv->gauge_col[0];
+	env->gauge_col[1] = oldenv->gauge_col[1];
+	env->icon_fpen = oldenv->icon_fpen;
+	env->icon_bpen = oldenv->icon_bpen;
+	env->icon_style = oldenv->icon_style;
+	env->env_NewIconsPrecision = oldenv->env_NewIconsPrecision;
+	env->desktop_flags = oldenv->desktop_flags;
+	env->iconw_fpen = oldenv->iconw_fpen;
+	env->iconw_bpen = oldenv->iconw_bpen;
+	env->iconw_style = oldenv->iconw_style;
+	env->desktop_popup_default = oldenv->desktop_popup_default;
+	for (i=0; i<256; i++)
+	{
+		env->env_BackgroundPic[0][i] = oldenv->env_BackgroundPic[0][i];
+		env->env_BackgroundPic[1][i] = oldenv->env_BackgroundPic[1][i];
+		env->env_BackgroundPic[2][i] = oldenv->env_BackgroundPic[2][i];
+		env->env_BackgroundPic[3][i] = oldenv->env_BackgroundPic[3][i];
+	}
+	for (i=0; i<4; i++)
+		env->env_BackgroundFlags[i] = oldenv->env_BackgroundFlags[i];
+// ***** CFG_SETS
+	env->settings.copy_flags = oldenv->settings.copy_flags;
+	env->settings.delete_flags = oldenv->settings.delete_flags;
+	env->settings.error_flags = oldenv->settings.error_flags;
+	env->settings.general_flags = oldenv->settings.general_flags;
+	env->settings.icon_flags = oldenv->settings.icon_flags;
+	env->settings.replace_method = oldenv->settings.replace_method;
+	env->settings.replace_flags = oldenv->settings.replace_flags;
+	env->settings.update_flags = oldenv->settings.update_flags;
+	env->settings.dir_flags = oldenv->settings.dir_flags;
+	env->settings.view_flags = oldenv->settings.view_flags;
+	env->settings.hide_method = oldenv->settings.hide_method;
+	env->settings.max_buffer_count = oldenv->settings.max_buffer_count;
+	env->settings.date_format = oldenv->settings.date_format;
+	env->settings.date_flags = oldenv->settings.date_flags;
+	env->settings.pri_main[0] = oldenv->settings.pri_main[0];
+	env->settings.pri_main[1] = oldenv->settings.pri_main[1];
+	env->settings.pri_lister[0] = oldenv->settings.pri_lister[0];
+	env->settings.pri_lister[0] = oldenv->settings.pri_lister[0];
+	env->settings.flags = oldenv->settings.flags;
+	env->settings.pop_code = oldenv->settings.pop_code;
+	env->settings.pop_qual = oldenv->settings.pop_qual;
+	env->settings.pop_qual_mask = oldenv->settings.pop_qual_mask;
+	env->settings.pop_qual_same = oldenv->settings.pop_qual_same;
+	env->settings.popup_delay = oldenv->settings.popup_delay;
+	env->settings.max_openwith = oldenv->settings.max_openwith;
+	env->settings.command_line_length = oldenv->settings.command_line_length;
+	env->settings.max_filename = oldenv->settings.max_filename;
+// ***** CFG_SETS end
+	for (i=0; i<4; i++)
+		env->env_BackgroundBorderColour[i] = oldenv->env_BackgroundBorderColour[i];
+	for (i=0; i<256; i++)
+		env->themes_location[i] = oldenv->themes_location[i];
+	FreeVec(oldenv);
+	return 1;
+}
+
+
+int convert_open_lister(struct _IFFHandle *iff, CFG_LSTR *lister)
+{
+	OLD_CFG_LSTR *oldlister = NULL;
+
+	oldlister=AllocVec(sizeof(OLD_CFG_LSTR), MEMF_CLEAR);
+	if (!oldlister) return 0;
+
+	L_IFFReadChunkBytes(iff, oldlister ,sizeof(OLD_CFG_LSTR));
+	CopyMem(oldlister, lister, sizeof(OLD_CFG_LSTR));
+
+	if (lister->format.show_pattern[0] != '\0')
+		ParsePatternNoCase(lister->format.show_pattern,lister->format.show_pattern_p,80);
+	else
+		lister->format.show_pattern_p[0] = '\0';
+
+	if (lister->format.hide_pattern[0] != '\0')
+		ParsePatternNoCase(lister->format.hide_pattern,lister->format.hide_pattern_p,80);
+	else
+		lister->format.hide_pattern_p[0] = '\0';
+
+	lister->flags = oldlister->flags;
+
+	FreeVec(oldlister);
+	return 1;
+}
+
+
+int convert_button_window(struct _IFFHandle *iff, CFG_BTNW *butwin)
+{
+	OLD_CFG_BTNW *oldbutwin = NULL;
+	int i = 0;
+
+	oldbutwin=AllocVec(sizeof(OLD_CFG_BTNW), MEMF_CLEAR);
+	if (!oldbutwin) return 0;
+
+	L_IFFReadChunkBytes(iff, oldbutwin ,sizeof(OLD_CFG_BTNW));
+
+	for (i=0; i<32; i++)
+		butwin->name[i] = oldbutwin->name[i];
+
+	butwin->font_size = oldbutwin->font_size;
+	butwin->pos.Left = oldbutwin->pos.Left;
+	butwin->pos.Top = oldbutwin->pos.Top;
+	butwin->pos.Width = oldbutwin->pos.Width;
+	butwin->pos.Height = oldbutwin->pos.Height;
+
+	for (i=0; i<31; i++)
+		butwin->font_name[i] = oldbutwin->font_name[i];
+
+	butwin->columns = oldbutwin->columns;
+	butwin->rows = oldbutwin->rows;
+	butwin->flags = oldbutwin->flags;
+
+	FreeVec(oldbutwin);
+	return 1;
+}
+
+
+void do_backup(char *name)
+{
+	BPTR in = 0;
+	BPTR out = 0;
+	BPTR lock = 0;
+	char *extension = ".bac_5_90_cfg";
+	char outname[256] = {'\0'};
+	char buffer[4096] = {'\0'};
+	int buflen = 4094;
+	int insize = 0, outsize = 0;
+
+	if (!name) return;
+	if (strlen(name) > 238)
+		return;
+	strcpy(outname, name);
+	strcat(outname, extension);
+	if ((lock = Lock(outname, SHARED_LOCK)))
+	{
+		UnLock(lock);
+		return;
+	}
+
+	if (!(in = Open(name, MODE_OLDFILE)))
+		return;
+	if (!(out = Open(outname, MODE_NEWFILE)))
+	{
+		Close(in);
+		return;
+	}
+
+	do
+	{
+		insize = Read(in, buffer, buflen);
+		if (insize < 1) break;
+		outsize = Write(out, buffer, insize);
+	} while (outsize == insize);
+
+	Close(in);
+	Close(out);
+	if ((insize < 0) || (outsize < insize))
+		DeleteFile(outname);
+
+	return;
+}
+

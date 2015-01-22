@@ -50,7 +50,7 @@ struct TagItem
 		{TAG_MORE,(ULONG)_buttons_bank_layout}},
 
 	_buttons_fontname_tags[]={
-		{GTST_MaxChars,30},
+		{GTST_MaxChars,50},
 		{TAG_MORE,(ULONG)_buttons_bank_layout}},
 
 	_buttons_fontsize_tags[]={

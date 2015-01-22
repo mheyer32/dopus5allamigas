@@ -407,7 +407,7 @@ int environment_save(Cfg_Environment *env,char *name,short snapshot,CFG_ENVR *da
 	}
 
 	// Try to open file to write
-	while ((iff=IFFOpen(name,MODE_NEWFILE,ID_OPUS)))
+	while ((iff=IFFOpen(name,MODE_NEWFILE,ID_EPUS)))
 	{
 		IPCData *ipc;
 		Lister *lister;

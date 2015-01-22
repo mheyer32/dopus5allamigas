@@ -79,8 +79,8 @@ ULONG LIBFUNC L_Module_Entry(
 	CopyMem((char *)format,(char *)&data->format,sizeof(ListFormat));
 
 	// Store default pointer
-	if ((data->def_format=(ListFormatStorage *)mod_data))
-		CopyMem((char *)data->def_format,(char *)&data->def_format_copy,sizeof(ListFormatStorage));
+	if ((data->def_format=(ListFormat *)mod_data))
+		CopyMem((char *)data->def_format,(char *)&data->def_format_copy,sizeof(ListFormat));
 
 	// save call type
 	data->mod_id=mod_id;
@@ -106,7 +106,7 @@ ULONG LIBFUNC L_Module_Entry(
 		ftp_formats=(struct formats *)mod_data;
 
 		// Store default pointers
-		if ((data->def_format=(ListFormatStorage *)ftp_formats->format_opus))
+		if ((data->def_format=(ListFormat *)ftp_formats->format_opus))
 			CopyMem((char *)data->def_format,(char *)&data->def_format_copy,sizeof(ListFormatStorage));
 		data->def_ftp_format=(ListFormatStorage *)ftp_formats->format_ftp;
 		}
@@ -119,7 +119,7 @@ ULONG LIBFUNC L_Module_Entry(
 		ftp_formats=(struct formats *)mod_data;
 
 		// Store default pointers
-		if ((data->def_format=(ListFormatStorage *)ftp_formats->format_opus))
+		if ((data->def_format=(ListFormat *)ftp_formats->format_opus))
 			CopyMem((char *)data->def_format,(char *)&data->def_format_copy,sizeof(ListFormatStorage));
 		data->def_ftp_format=(ListFormatStorage *)ftp_formats->format_ftp;
 		}
@@ -484,7 +484,7 @@ ULONG LIBFUNC L_Module_Entry(
 
 		// Copy default format back
 		if (data->def_format)
-			CopyMem((char *)&data->def_format_copy,(char *)data->def_format,sizeof(ListFormatStorage));	
+			CopyMem((char *)&data->def_format_copy,(char *)data->def_format,sizeof(ListFormat));	
 	}
 
 	// Free stuff
@@ -662,8 +662,8 @@ void listformat_get_values(config_lister_data *data,ListFormat *format)
 	// Show/hide
 	strcpy(format->show_pattern,(char *)GetGadgetValue(data->objlist,GAD_LISTER_SHOW));
 	strcpy(format->hide_pattern,(char *)GetGadgetValue(data->objlist,GAD_LISTER_HIDE));
-	ParsePatternNoCase(format->show_pattern,format->show_pattern_p,40);
-	ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,40);
+	ParsePatternNoCase(format->show_pattern,format->show_pattern_p,80);
+	ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,80);
 }
 
 
@@ -816,7 +816,7 @@ void listerformat_defaults(config_lister_data *data)
 if	(data->def_format)
 	{
 	// Copy into settings
-	CopyMem((char *)&data->def_format_copy,(char *)&data->format,sizeof(ListFormatStorage));
+	CopyMem((char *)&data->def_format_copy,(char *)&data->format,sizeof(ListFormat));
 
 	// Clear lists
 	SetGadgetChoices(data->objlist,GAD_LISTER_FORMAT_ITEMS,(APTR)~0);
@@ -864,15 +864,25 @@ if	(data->def_format)
 	{
 		ListFormat format;
 
-	// Get format
-	listformat_get_values(data,&format);
+		// listerformat_get_values() doesn't set file/dir colors
+		// Copy file/dir colors into format so we don't lose them
+		format.files_unsel[0] = data->def_format_copy.files_unsel[0];
+		format.files_unsel[1] = data->def_format_copy.files_unsel[1];
+		format.files_sel[0] = data->def_format_copy.files_sel[0];
+		format.files_sel[1] = data->def_format_copy.files_sel[1];
+		format.dirs_unsel[0] = data->def_format_copy.dirs_unsel[0];
+		format.dirs_unsel[1] = data->def_format_copy.dirs_unsel[1];
+		format.dirs_sel[0] = data->def_format_copy.dirs_sel[0];
+		format.dirs_sel[1] = data->def_format_copy.dirs_sel[1];
 
-	// Copy settings into default format
-	CopyMem((char *)&format,(char *)&data->def_format_copy,sizeof(ListFormatStorage));
+		// Get format
+		listformat_get_values(data,&format);
 
-	// Check 'defaults' gadget
-	listerformat_check_default(data);
+		// Copy settings into default format
+		CopyMem((char *)&format,(char *)&data->def_format_copy,sizeof(ListFormat));
 
+		// Check 'defaults' gadget
+		listerformat_check_default(data);
 	}
 }
 

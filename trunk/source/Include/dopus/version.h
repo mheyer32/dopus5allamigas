@@ -19,7 +19,7 @@
 #define PROG_REVISION   91
 
 // set the library & modules version/revision
-#define LIB_VERSION    71
+#define LIB_VERSION    72
 #define LIB_REVISION   0
 
 // set the commands version/revision (viewfont, dopusrt5, loadwb)

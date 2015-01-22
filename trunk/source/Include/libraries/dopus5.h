@@ -125,6 +125,7 @@ enum
                           IFF Configuration Storage
  ****************************************************************************/
 
+#define ID_EPUS		MAKE_ID('E','P','U','S')	// Opus Environment FORM
 #define ID_OPUS		MAKE_ID('O','P','U','S')	// Opus FORM
 #define ID_BTBK		MAKE_ID('B','T','B','K')	// Button bank to open
 #define ID_BANK		MAKE_ID('B','A','N','K')	// Button bank to open
@@ -211,10 +212,11 @@ typedef struct {
 // BTNW - Button window
 typedef struct {
 	char				name[32];	// Button window name
-	struct IBox			pos;		// Window position
-	char				font_name[31];	// Font to use
+	struct IBox			pos;		// Window position 8
+	char				font_name[80];	// Font to use
+	char				pad[3];
 	UBYTE				font_size;	// Font size
-	UWORD				columns;	// Number of columns
+	UWORD				columns;	// Number of columns 8
 	UWORD				rows;		// Number of rows
 	ULONG				flags;		// Flags
 } CFG_BTNW;
@@ -274,7 +276,7 @@ typedef struct {
 	short			sel_fpen;		// Selected pen
 	short			pad1;
 	ULONG			pad[8];
-	char			label_fontname[40];	// Label font
+	char			label_fontname[80];	// Label font
 	short			label_fontsize;		// Label font size
 } CFG_STRT;
 
@@ -2209,8 +2211,8 @@ typedef struct {
 	char		show_pattern[40];	// Show pattern
 	char		hide_pattern[40];	// Hide pattern
 
-	char		show_pattern_p[40];	// Show pattern parsed
-	char		hide_pattern_p[40];	// Hide pattern parsed
+	char		show_pattern_p[82];	// Show pattern parsed
+	char		hide_pattern_p[82];	// Hide pattern parsed
 } ListFormat;
 
 
@@ -2282,7 +2284,7 @@ typedef struct
 	WORD     palette_count;    // Number of user colours
 	UWORD		pad1;
 
-	char		font_name[4][40];	// Fonts to use
+	char		font_name[4][80];	// Fonts to use
 
 	ULONG		env_Colours[CUST_PENS][2][3];	// Custom colours
 	ULONG		env_ColourFlag;		// Which custom colours are in use
@@ -2526,8 +2528,8 @@ struct ListFormat {
 	// You must call ParsePattern() yourself
 	char			lf_ShowPattern[40];	// Show pattern
 	char			lf_HidePattern[40];	// Hide pattern
-	char			lf_ShowPatternP[40];	// Show pattern parsed
-	char			lf_HidePatternP[40];	// Hide pattern parsed
+	char			lf_ShowPatternP[82];	// Show pattern parsed
+	char			lf_HidePatternP[82];	// Hide pattern parsed
 };
 
 #define LFORMATF_REJECT_ICONS		(1<<0)	// Reject icons
