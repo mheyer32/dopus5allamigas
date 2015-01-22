@@ -2308,13 +2308,13 @@ long rexx_set_format(short command,short id,ListFormat *format,char *args)
 		// Show pattern
 		case RXCMD_SHOW:
 			stccpy(format->show_pattern,args,39);
-			ParsePatternNoCase(format->show_pattern,format->show_pattern_p,40);
+			ParsePatternNoCase(format->show_pattern,format->show_pattern_p,80);
 			break;
 
 		// Hide pattern
 		case RXCMD_HIDE:
 			stccpy(format->hide_pattern,args,39);
-			ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,40);
+			ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,80);
 			break;
 	}
 

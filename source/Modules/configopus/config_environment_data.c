@@ -192,7 +192,7 @@ static struct TagItem
 		{TAG_MORE,(ULONG)_environment_relative_taglist}},
 
 	_environment_fontname_taglist[]={
-		{GTST_MaxChars,39},
+		{GTST_MaxChars,50},
 		{TAG_MORE,(ULONG)_environment_relative_taglist}},
 
 	_environment_fontsize_taglist[]={

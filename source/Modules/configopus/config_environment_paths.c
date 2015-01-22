@@ -67,13 +67,15 @@ void config_env_path_add(config_env_data *data)
 			char buf[256];
 			Att_Node *node;
 
-			// Get full path
-			if ((lock=Lock(ptr,ACCESS_READ)))
-			{
-				NameFromLock(lock,buf,256);
-				UnLock(lock);
-				ptr=buf;
-			}
+			// if path contains device, volume or assign don't resolve
+			if (!strchr(ptr, ':'))
+				// Get full path
+				if ((lock=Lock(ptr,ACCESS_READ)))
+				{
+					NameFromLock(lock,buf,256);
+					UnLock(lock);
+					ptr=buf;
+				}
 
 			// Add to list
 			SetGadgetChoices(data->option_list,GAD_SETTINGS_PATHLIST,(APTR)~0);
@@ -162,13 +164,15 @@ void config_env_path_edit(config_env_data *data)
 		BPTR lock;
 		char buf[256];
 
-		// Get full path
-		if ((lock=Lock(ptr,ACCESS_READ)))
-		{
-			NameFromLock(lock,buf,256);
-			UnLock(lock);
-			ptr=buf;
-		}
+		// if path contains device, volume or assign don't resolve
+		if (!strchr(ptr, ':'))
+			// Get full path
+			if ((lock=Lock(ptr,ACCESS_READ)))
+			{
+				NameFromLock(lock,buf,256);
+				UnLock(lock);
+				ptr=buf;
+			}
 
 		// Change node name
 		SetGadgetChoices(data->option_list,GAD_SETTINGS_PATHLIST,(APTR)~0);

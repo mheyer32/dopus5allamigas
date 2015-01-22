@@ -32,13 +32,6 @@ For more information on Directory Opus for Windows please see:
 
 #include <SDI/SDI_compiler.h>
 
-#define TEMPLATE "ARGS/F"
-
-enum
-{
-	RT_ARGS, RT_MAX
-};
-
 const char USED_VAR version[] = "\0$VER: DOpusRT "CMD_STRING;
 
 int main(int argc, char **argv)
@@ -47,49 +40,39 @@ int main(int argc, char **argv)
 	#ifdef __amigaos4__
 	struct DOpusIFace *IDOpus = NULL;
 	#endif
-	LONG args[RT_MAX] = {0};
-	struct RDArgs *argsdata;
 	char buffer[1024] = {0};
 	char *command = buffer;
 
 	signal(SIGINT, SIG_IGN);
 
-	argsdata = ReadArgs(TEMPLATE, args, NULL);
-	if (!argsdata)
-		return(RETURN_ERROR);
-	if (!args[RT_ARGS])
-	{
-		FreeArgs(argsdata);
-		return(RETURN_ERROR);
-	}
-
-	sprintf(buffer, "\"%s\"", (const char *)args[RT_ARGS]);
-	FreeArgs(argsdata);
-
 	// Valid arguments?
-	if (*command)
-	{
-		// Open dopus library
-		if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
-			return(RETURN_ERROR);
-			
-		#ifdef __amigaos4__
-		if (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
-		{
-			CloseLibrary(DOpusBase);
-			return(RETURN_ERROR);
-		}
-		#endif
-	
-		// Launch program
-		WB_Launch(command,NULL,LAUNCH_WAIT);
+	if (argc < 2) return(RETURN_ERROR);
 
-		// Close library
-		#ifdef __amigaos4__
-		DropInterface((struct Interface *)IDOpus);
-		#endif
+	if (argc < 3)
+		sprintf(buffer, "\"%s\"", argv[1]);
+	else
+		sprintf(buffer, "\"%s\" \"%s\"", argv[1], argv[2]);
+
+	// Open dopus library
+	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
+		return(RETURN_ERROR);
+		
+	#ifdef __amigaos4__
+	if (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
+	{
 		CloseLibrary(DOpusBase);
+		return(RETURN_ERROR);
 	}
+	#endif
+
+	// Launch program
+	WB_Launch(command,NULL,LAUNCH_WAIT);
+
+	// Close library
+	#ifdef __amigaos4__
+	DropInterface((struct Interface *)IDOpus);
+	#endif
+	CloseLibrary(DOpusBase);
 
 	return(RETURN_OK);
 }

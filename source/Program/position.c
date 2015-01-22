@@ -342,8 +342,8 @@ position_rec *GetListerPosition(
 				sizeof(ListFormatStorage));
 
 			// Parse wildcard stuff
-			ParsePatternNoCase(format->show_pattern,format->show_pattern_p,40);
-			ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,40);
+			ParsePatternNoCase(format->show_pattern,format->show_pattern_p,80);
+			ParsePatternNoCase(format->hide_pattern,format->hide_pattern_p,80);
 		}
 
 		// Want position?
