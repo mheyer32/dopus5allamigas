@@ -39,7 +39,7 @@ char *CONFIGFILE	="DOpus5:System/ftp.config";
 char *FTP_OPTIONS_NAME	="DOpus5:System/ftp_options";
 char *FTP_ADDR_NAME	="DOpus5:System/ftp_sites";
 
-enum	{ 
+enum	{
 	ERROR_READ,
 	ERROR_WRITE,
 	};
@@ -91,7 +91,7 @@ if	((cfp = Open( CONFIGFILE, MODE_OLDFILE )))
 
 			if	(fa->FA_Arguments[C_OPT_LOGOFF])
 				oc->oc_enable_log=FALSE;
-				
+
 
 			if	(fa->FA_Arguments[C_OPT_TIME])
 				{
@@ -194,7 +194,7 @@ if	(cfp)
  *	Write the config plus site details
  *	Remember to make sure that the buf len does not exceed 512 bytes
  *
- * these two fns return TRUE if write OK, FALSE if failure 
+ * these two fns return TRUE if write OK, FALSE if failure
  */
 
 static BOOL write_entry(BPTR cf,struct site_entry *e)
@@ -258,7 +258,7 @@ if	(*e->se_path)
 
 	if	((p=strchr(e->se_path,' ')))
 		strcat(buf,"\"");
-	
+
 	strcat(buf,e->se_path);
 
 	if	(p)
@@ -474,10 +474,10 @@ if	((conf=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 
 			if	(chunk==ID_OPTIONS)
 				ok=((sizeof(struct ftp_config))==IFFReadChunkBytes(iff,(char *)conf,sizeof(struct ftp_config)));
-					
+
 			else if (chunk==ID_ENV)
 				ok=((sizeof(struct ftp_environment))==IFFReadChunkBytes(iff,(char *)&conf->oc_env,sizeof(struct ftp_environment)));
-			
+
 			else
 				*diskerr=212;
 			}
@@ -572,7 +572,7 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 #endif
 
 			// sould be ? data=&wp->wp_se_copy.se_env_private;;
-	
+
 			}
 
 #ifdef __AROS__
@@ -682,7 +682,7 @@ if	((iff=IFFOpen(filename,IFF_WRITE|IFF_SAFE,ID_OPUS)))
 			break;
 
 		node = next;
-		
+
 		}
 
 	// Close file
@@ -723,10 +723,11 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 		if	((e=AllocVec(sizeof(struct site_entry),MEMF_CLEAR)))
 			{
 			int size;
+			int chunksize = 0;
 
 			if	(chunk==ID_FTPSITE_SHORT)
 				size=SMALL_SIZE;
-				
+
 			else if (chunk==ID_FTPSITE_LONG)
 				size=LARGE_SIZE;
 			else
@@ -737,8 +738,18 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 				break;
 				}
 
-
-			err=(size!=IFFReadChunkBytes(iff,(char *)e,size));
+			// Adjustment for changed ListFormat size
+			chunksize = (int)IFFChunkSize(iff);
+			// D(bug("Size: %ld  ChunkSize: %ld\n", size, chunksize))
+			if ((chunksize < size) && (size - chunksize == 84))
+			{
+				if (!(err=(chunksize!=IFFReadChunkBytes(iff,(char *)e,chunksize))));
+				{
+					memset(e->se_listformat.show_pattern_p,'\0', 164);
+				}
+			}
+			else
+				err=(size!=IFFReadChunkBytes(iff,(char *)e,size));
 
 			if	(!err)
 				{
@@ -778,7 +789,7 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 		else
 			err=TRUE;
 		}
-	
+
 	// Close file
 	IFFClose(iff);
 
@@ -934,7 +945,7 @@ return(ret);
 *
 *	Read new addressbook from disk
 *	Called from menu_open
-*	
+*
 */
 
 Att_List *read_sites(struct window_params *wp,short gadgetid)
@@ -1128,7 +1139,7 @@ env->e_copy_replace=COPY_REPLACE_ASK;
 
 /****************************************************
 *
-*	Called by startup routines for main ftp module 
+*	Called by startup routines for main ftp module
 *
 */
 
@@ -1202,32 +1213,32 @@ if	((list = Att_NewList(LISTF_POOL)))
 			{
 			if	(*buf=='#' || *buf=='\n')
 				continue;
-	
+
 			/* skip config entries */
-		
+
 			if	((fa = ParseArgs( CONFIG_TEMPLATE, buf )))
 				{
 				DisposeArgs( fa );
 				continue;
 				}
-	
+
 			/* handle addressbook stuff*/
 			if	((fa = ParseArgs( ADDR_TEMPLATE, buf )))
 				{
-	
+
 				anon = fa->FA_Arguments[A_OPT_ANON];
 				acct = fa->FA_Arguments[A_OPT_ACCT];
-	
-	
+
+
 				// skip any lines starting with '---'
-	
+
 				if	(fa->FA_Arguments[A_OPT_HOST] &&
 					strncmp((char*)fa->FA_Arguments[A_OPT_HOST],"---",3)==0)
 					{
 					DisposeArgs( fa );
 					continue;
 					}
-	
+
 				if	(((anon == 0) != (acct == 0))	/* Can't be both or neither */
 					&& (anon || fa->FA_Arguments[A_OPT_USER])	/* User Account must have user name */
 					&& (fa->FA_Arguments[A_OPT_HOST] || fa->FA_Arguments[A_OPT_ADDR])/* Must have Hostname or Address */
@@ -1236,32 +1247,32 @@ if	((list = Att_NewList(LISTF_POOL)))
 					if	((e = AllocVec( sizeof(struct site_entry), MEMF_CLEAR )))
 						{
 						e->se_anon = anon;
-	
-	
+
+
 						if	(!anon)
 							{
 							if	(fa->FA_Arguments[A_OPT_USER])
 								stccpy( e->se_user, (char*)fa->FA_Arguments[A_OPT_USER], USERNAMELEN );
-	
+
 							if	(fa->FA_Arguments[A_OPT_PASS])
 								stccpy( e->se_pass, (char*)fa->FA_Arguments[A_OPT_PASS], PASSWORDLEN );
 							}
-	
+
 						/* Use Hostname or Address for the socket */
 						if	(fa->FA_Arguments[A_OPT_HOST])
 							stccpy( e->se_host, (char*)fa->FA_Arguments[A_OPT_HOST], HOSTNAMELEN );
 						else
 							stccpy( e->se_host, (char*)fa->FA_Arguments[A_OPT_ADDR], HOSTNAMELEN );
-		
+
 						// special port specified ?
-	
+
 						if	(fa->FA_Arguments[A_OPT_PORT])
 							e->se_port=*(int*)fa->FA_Arguments[A_OPT_PORT];
-	
+
 						if	(e->se_port<=0 || e->se_port >9999)
 							e->se_port=21;
-	
-	
+
+
 						/* Use Alias, Hostname, or Address in requester */
 						if	(fa->FA_Arguments[A_OPT_ALIS])
 							stccpy( e->se_name, (char*)fa->FA_Arguments[A_OPT_ALIS], HOSTNAMELEN );
@@ -1269,17 +1280,17 @@ if	((list = Att_NewList(LISTF_POOL)))
 							stccpy( e->se_name, (char*)fa->FA_Arguments[A_OPT_HOST], HOSTNAMELEN );
 						else if	(fa->FA_Arguments[A_OPT_ADDR])
 							stccpy( e->se_name, (char*)fa->FA_Arguments[A_OPT_ADDR], HOSTNAMELEN );
-	
+
 						if	(fa->FA_Arguments[A_OPT_PATH])
 							stccpy( e->se_path, (char*)fa->FA_Arguments[A_OPT_PATH], PATHLEN );
 
 						// set env to point to global default
-	
+
 						e->se_env=&og->og_oc.oc_env;
 						e->se_has_custom_env=FALSE;
 
-	
-	
+
+
 						Att_NewNode(list, e->se_name ,(ULONG)e ,ADDNODE_SORT);
 						}
 					}
@@ -1367,7 +1378,7 @@ if	(AslRequestTags(DATA(wp->wp_win)->request,
 		sitelist=do_import_amftp(dg,path);
 
 	}
-	
+
 
 // Make window unbusy
 ClearWindowBusy(wp->wp_win);
@@ -1386,7 +1397,7 @@ list=&input_list->list;
 if	(list && !IsListEmpty(list))
 	{
 	NewList(&sorted);
-	
+
 	while	((node=(struct Node*)(list->lh_Head)) && list->lh_Head->ln_Succ!=NULL) /* list not empty!*/
 		{
 		tmpnode=node;
@@ -1394,7 +1405,7 @@ if	(list && !IsListEmpty(list))
 			{
 			if	(stricmp(tmpnode->ln_Name,node->ln_Name)>0)
 				tmpnode=node;
-	
+
 			node=next_node;
 			}
 		Remove(tmpnode);
@@ -1427,7 +1438,7 @@ if	(e->se_env->e_custom_format)
 else
 	format=get_opus_format(og);
 
-// copy correct format to site entry 
+// copy correct format to site entry
 *(&e->se_listformat)=*format;
 
 }
@@ -1541,7 +1552,7 @@ if	(list && !IsListEmpty(list))
 			int found;
 
 			count++;
-		
+
 			site=(struct site_entry *)((Att_Node *)node)->data;
 
 			if	(type==MATCH_NAME)
@@ -1595,7 +1606,7 @@ else
 
 
 // fill in the site entry format as appropriate from either default or custom env;
-// fills out &e->se_listformat 
+// fills out &e->se_listformat
 // UNLESS we are editing an existing one in a lister then just preserve it
 
 if	(!to->se_preserve_format)
@@ -1627,7 +1638,7 @@ static ULONG encrypt(ULONG *magic)
 {
 ULONG d0, d1;
 
-d0 = *magic; 
+d0 = *magic;
 
 d1 = ((((((((d0 << 3 - d0) << 3) + d0) << 1) + d0) << 4) - d0) << 1) - d0;
 d1 = (d1 + 0xe60) & 0x7fffffff;
@@ -1705,10 +1716,10 @@ if	((buf=AllocVec(AMFTP_LEN,MEMF_CLEAR)))
 				ULONG magic=-1;
 				int i;
 				struct site_entry *e;
-			
+
 				for	(i = 0; i < AMFTP_LEN; ++i)
 					buf[i] ^= encrypt(&magic);
-		
+
 				if	((e = AllocVec( sizeof(struct site_entry), MEMF_CLEAR )))
 					{
 					// get main settings from amftp config
@@ -1730,7 +1741,7 @@ if	((buf=AllocVec(AMFTP_LEN,MEMF_CLEAR)))
 						if	(p->amftp_pass)
 							stccpy( e->se_pass, p->amftp_pass, PASSWORDLEN );
 						}
-					
+
 					e->se_port=atoi(p->amftp_port);
 
 					if	(e->se_port<=0 || e->se_port >16384)
@@ -1764,7 +1775,7 @@ if	((buf=AllocVec(AMFTP_LEN,MEMF_CLEAR)))
 		}
 	FreeVec(buf);
 	}
-		
+
 return list;
 }
 
