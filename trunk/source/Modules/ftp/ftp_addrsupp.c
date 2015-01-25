@@ -470,17 +470,39 @@ if	((conf=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 		if	(opt_type==WT_OPT  && chunk!=ID_ENV)
 			*diskerr=212;
 		else
-			{
+		{
+			// Adjustment for changed ListFormat size
+			int chunksize = (int)IFFChunkSize(iff);
+			int size = sizeof(struct ftp_config);
 
 			if	(chunk==ID_OPTIONS)
-				ok=((sizeof(struct ftp_config))==IFFReadChunkBytes(iff,(char *)conf,sizeof(struct ftp_config)));
+			{
+				if ((chunksize < size) && (size - chunksize == 84))
+				{
+					if ((ok = (chunksize==IFFReadChunkBytes(iff,(char *)conf,chunksize))));
+					{
+						char patterns[82] = {'\0'};
+						int i = 0;
 
+						CopyMem(conf->oc_env.e_listformat.show_pattern_p, patterns, 80);
+						ClearMem(conf->oc_env.e_listformat.show_pattern_p, 160);
+						for (i = 0; i < 40; i++)
+						{
+							conf->oc_env.e_listformat.show_pattern_p[i] = patterns[i];
+							conf->oc_env.e_listformat.hide_pattern_p[i] = patterns[i+40];
+						}
+					}
+				}
+				else
+					ok = ((sizeof(struct ftp_config))==IFFReadChunkBytes(iff,(char *)conf,sizeof(struct ftp_config)));
+			}
 			else if (chunk==ID_ENV)
+			{
 				ok=((sizeof(struct ftp_environment))==IFFReadChunkBytes(iff,(char *)&conf->oc_env,sizeof(struct ftp_environment)));
-
+			}
 			else
 				*diskerr=212;
-			}
+		}
 		// Close file
 		IFFClose(iff);
 
@@ -740,12 +762,20 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 
 			// Adjustment for changed ListFormat size
 			chunksize = (int)IFFChunkSize(iff);
-			// D(bug("Size: %ld  ChunkSize: %ld\n", size, chunksize))
 			if ((chunksize < size) && (size - chunksize == 84))
 			{
 				if (!(err=(chunksize!=IFFReadChunkBytes(iff,(char *)e,chunksize))));
 				{
-					memset(e->se_listformat.show_pattern_p,'\0', 164);
+					char patterns[82] = {'\0'};
+					int i = 0;
+
+					CopyMem(e->se_listformat.show_pattern_p, patterns, 80);
+					ClearMem(e->se_listformat.show_pattern_p, 160);
+					for (i = 0; i < 40; i++)
+					{
+						e->se_listformat.show_pattern_p[i] = patterns[i];
+						e->se_listformat.hide_pattern_p[i] = patterns[i+40];
+					}
 				}
 			}
 			else
