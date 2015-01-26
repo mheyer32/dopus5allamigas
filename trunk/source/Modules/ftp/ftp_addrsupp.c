@@ -485,7 +485,7 @@ if	((conf=AllocVec(sizeof(struct ftp_config),MEMF_CLEAR)))
 						int i = 0;
 
 						CopyMem(conf->oc_env.e_listformat.show_pattern_p, patterns, 80);
-						ClearMem(conf->oc_env.e_listformat.show_pattern_p, 160);
+						memset(conf->oc_env.e_listformat.show_pattern_p, 0, 160);
 						for (i = 0; i < 40; i++)
 						{
 							conf->oc_env.e_listformat.show_pattern_p[i] = patterns[i];
@@ -770,7 +770,7 @@ if	((iff=IFFOpen(filename,IFF_READ,ID_OPUS)))
 					int i = 0;
 
 					CopyMem(e->se_listformat.show_pattern_p, patterns, 80);
-					ClearMem(e->se_listformat.show_pattern_p, 160);
+					memset(e->se_listformat.show_pattern_p, 0, 160);
 					for (i = 0; i < 40; i++)
 					{
 						e->se_listformat.show_pattern_p[i] = patterns[i];
