@@ -197,6 +197,7 @@ struct Window *lister_open_window(Lister *lister,struct Screen *screen)
 		WA_SizeBBottom,TRUE,
 		WA_CustomScreen,screen,
 		WA_ScreenTitle,GUI->screen_title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_Gadgets,gadget,
 		mode,TRUE,
 		(lister->flags&LISTERF_LOCK_POS)?WA_Title:TAG_IGNORE,"",

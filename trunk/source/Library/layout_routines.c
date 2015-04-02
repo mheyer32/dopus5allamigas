@@ -210,6 +210,7 @@ struct Window *LIBFUNC L_OpenConfigWindow(
 		WA_SizeBRight,flags&WINDOW_SIZE_RIGHT,
 		WA_SizeBBottom,flags&WINDOW_SIZE_BOTTOM,
 		WA_Title,newwindow->title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_AutoAdjust,TRUE,
 		(gadget)?WA_Gadgets:TAG_IGNORE,gadget,
 		(data->backfill)?WA_BackFill:TAG_IGNORE,data->backfill,

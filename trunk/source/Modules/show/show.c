@@ -275,6 +275,7 @@ int LIBFUNC L_Module_Entry(
 						WA_Height,data->display_screen->Height,
 						WA_IDCMP,IDCMP_RAWKEY|IDCMP_VANILLAKEY|IDCMP_MOUSEBUTTONS|IDCMP_INACTIVEWINDOW,
 						WA_CustomScreen,data->display_screen,
+						WA_WindowName, DOPUS_WIN_NAME,
 						WA_Borderless,TRUE,
 						WA_Activate,TRUE,
 						WA_RMBTrap,TRUE,

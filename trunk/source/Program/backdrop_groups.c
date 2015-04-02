@@ -783,6 +783,7 @@ BOOL backdrop_show_group(GroupData *group)
 		WA_PubScreen,group->screen,
 		WA_PubScreenFallBack,TRUE,
 		WA_ScreenTitle,GUI->screen_title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_BackFill,&group->pattern,
 		TAG_END))) return 0;
 

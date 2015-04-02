@@ -612,6 +612,7 @@ void progress_open(ProgressWindow *prog)
 		WA_SimpleRefresh,TRUE,
 		WA_PubScreen,screen,
 		WA_Title,prog->pw_Title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_AutoAdjust,TRUE,
 		(prog->pw_Backfill)?WA_BackFill:TAG_IGNORE,prog->pw_Backfill,
 		TAG_DONE);

@@ -428,6 +428,7 @@ struct Window *read_open_window(read_data *data)
 			IDCMP_MOUSEMOVE,
 		WA_PubScreen,screen,
 		WA_PubScreenFallBack,TRUE,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_MinWidth,128,
 		WA_MinHeight,64,
 		WA_MaxWidth,-1,

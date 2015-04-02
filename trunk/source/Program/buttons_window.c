@@ -251,6 +251,7 @@ BOOL buttons_open(Buttons *buttons,struct Screen *screen,short flags)
 		(simple)?WA_SimpleRefresh:TAG_IGNORE,TRUE,
 		WA_CustomScreen,screen,
 		WA_ScreenTitle,GUI->screen_title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_Gadgets,gadget,
 		(buttons->pattern_data.valid)?WA_BackFill:TAG_IGNORE,&buttons->pattern,
 		TAG_END))) return 0;

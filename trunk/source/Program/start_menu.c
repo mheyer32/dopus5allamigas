@@ -626,6 +626,7 @@ void start_show(StartMenu *menu,struct Screen *screen)
 		WA_RMBTrap,TRUE,
 		WA_CustomScreen,screen,
 		WA_ScreenTitle,GUI->screen_title,
+		WA_WindowName, DOPUS_WIN_NAME,
 		(menu->pattern_data.valid)?WA_BackFill:TAG_IGNORE,&menu->pattern,
 		TAG_END)))
 	{

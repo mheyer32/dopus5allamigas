@@ -9,6 +9,7 @@
 // End Temporary defines
 
 #define __ARGS(x) x
+#define DOPUS_WIN_NAME "dOpUs5.win"
 
 #ifdef __amigaos4__
 #include <amiga_compiler.h>

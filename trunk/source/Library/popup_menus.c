@@ -1722,6 +1722,7 @@ BOOL popup_init_list(PopUpData *data,short which)
 			WA_Height,data->menu_list[which].pos.Height+SHADOW_Y,
 			WA_Borderless,TRUE,
 			WA_CustomScreen,data->parent_window->WScreen,
+			WA_WindowName, DOPUS_WIN_NAME,
 			WA_SimpleRefresh,TRUE,
 			WA_IDCMP,IDCMP_REFRESHWINDOW|IDCMP_MOUSEBUTTONS,
 			(data->menu->flags&POPUPMF_BACKFILL && data->menu->backfill)?WA_BackFill:TAG_IGNORE,data->menu->backfill,
