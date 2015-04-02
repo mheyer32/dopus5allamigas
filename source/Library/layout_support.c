@@ -1755,9 +1755,18 @@ void LIBFUNC L_SetWindowID(
 ULONG LIBFUNC L_GetWindowID(REG(a0, struct Window *window))
 {
 	WindowID *id;
+	STRPTR name = NULL;
 
 	// Valid window?
 	if (!window) return WINDOW_UNKNOWN;
+
+#ifdef amigaos4
+	if (!GetWindowAttr(window, WA_WindowName, &name, sizeof(name)))
+		return WINDOW_UNKNOWN;
+	if (name == NULL) return WINDOW_UNKNOWN;
+	if (name[0] == '\0') return WINDOW_UNKNOWN;
+	if ( strcmp(DOPUS_WIN_NAME, name) != 0) return WINDOW_UNKNOWN;
+#endif
 
 	// Get ID pointer
 	if (!(id=(WindowID *)window->UserData) || id<(WindowID *)0x1000 || TypeOfMem(id)==0)
@@ -1778,9 +1787,18 @@ ULONG LIBFUNC L_GetWindowID(REG(a0, struct Window *window))
 struct MsgPort *LIBFUNC L_GetWindowAppPort(REG(a0, struct Window *window))
 {
 	WindowID *id;
+	STRPTR name = NULL;
 
 	// Valid window?
 	if (!window) return 0;
+
+#ifdef amigaos4
+	if (!GetWindowAttr(window, WA_WindowName, &name, sizeof(name)))
+		return 0;
+	if (name == NULL) return 0;
+	if (name[0] == '\0') return 0;
+	if ( strcmp(DOPUS_WIN_NAME, name) != 0) return 0;
+#endif
 
 	// Get ID pointer
 	if (!(id=(WindowID *)window->UserData)) return 0;

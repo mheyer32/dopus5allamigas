@@ -107,6 +107,7 @@ IPCMessage *_config_env_output_window_set(config_env_data *data,UWORD id)
 		WA_Activate,TRUE,
 		WA_IDCMP,IDCMP_CLOSEWINDOW|IDCMP_REFRESHWINDOW,
 		WA_PubScreen,data->window->WScreen,
+		WA_WindowName, DOPUS_WIN_NAME,
 		WA_MinWidth,64,
 		WA_MinHeight,data->window->BorderTop+data->window->BorderBottom+8+data->window->RPort->TxHeight*2,
 		WA_MaxWidth,-1,

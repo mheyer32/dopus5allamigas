@@ -227,6 +227,7 @@ IPC_EntryCode(clock_proc)
 									WA_RMBTrap,TRUE,
 									WA_PubScreen,screen,
 									WA_PubScreenFallBack,TRUE,
+									WA_WindowName, DOPUS_WIN_NAME,
 									TAG_END))) quit=1;
 
 								// Successful?

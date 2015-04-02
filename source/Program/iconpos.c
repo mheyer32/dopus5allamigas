@@ -301,6 +301,7 @@ void iconpos_openwindow(iconpos_info *info,struct MsgPort *port)
 			WA_MaxHeight,(ULONG)~0,
 			WA_SimpleRefresh,TRUE,
 			WA_NoCareRefresh,TRUE,
+			WA_WindowName, DOPUS_WIN_NAME,
 			TAG_END)))
 	{
 		// Install message port

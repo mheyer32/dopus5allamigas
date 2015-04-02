@@ -301,6 +301,7 @@ BOOL display_open(long flags)
 			WA_PubScreen,use_screen,
 			WA_PubScreenFallBack,TRUE,
 			WA_ScreenTitle,GUI->screen_title,
+			WA_WindowName, DOPUS_WIN_NAME,
 			WA_Gadgets,gadget,
 			WA_BackFill,&GUI->main_pattern,
 			TAG_END);
