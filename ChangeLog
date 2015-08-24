@@ -1,4 +1,34 @@
-r[1072] by paraxenic
+[r1078] by paraxenic
+OS4 library: Changed the OS4 low memory handler in dopus5.library libinit.c
+in order to eliminate a system freeze that occurred when the handler was
+activated by low memory conditions. Changes to OS4 low memory handler
+activation caused handler code that works with OS3 to fail with OS4.
+2015-08-24 11:15:57
+
+[r1077] by paraxenic
+Added a global window name definition in Include/dopus/common.h.
+Added a global window name to all windows opened by OS4 Dopus5.
+Added OS4 checks for the Dopus5 global window name before accessing
+ window structure UserData element (field).
+2015-04-02 10:47:09 Tree
+
+[r1076] by paraxenic
+Changed ClearMem() to memset() for non-OS4 platforms to compile.
+2015-01-25 20:25:23 Tree
+
+[r1075] by paraxenic
+Fixed FTP addressbook pattern loading with new ListFormat size.
+2015-01-25 15:33:37 Tree
+
+[r1074] by paraxenic
+Updated FTP addressbook to load & work with new ListFormat size.
+2015-01-24 18:09:18 Tree
+
+[r1073] by paraxenic
+Updated ChangeLog.
+2015-01-22 13:14:05 Tree
+
+[r1072] by paraxenic
 Added library/config_open.h header file for conversion of old config to new.
 2015-01-22 13:06:47 Tree
 
