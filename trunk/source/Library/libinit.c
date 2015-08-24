@@ -69,7 +69,13 @@ static const char USED_VAR copyright[] = COPYRIGHT;
 
 int  UserLibInit(REG(a6, struct MyLibrary *libbase));
 void UserLibCleanup(REG(a6, struct MyLibrary *libbase));
+#ifdef __amigaos4__
+int low_mem_handler(struct ExecBase *ExecBase,
+                    struct MemHandlerData *memh,
+                    struct LibData *data);
+#else
 int low_mem_handler(REG(a0, struct MemHandlerData *), REG(a1,struct LibData *));
+#endif
 
 #if defined(__MORPHOS__)
 static int low_mem_handler_entry(void)
@@ -1683,7 +1689,11 @@ int UserLibInit(REG(a6, struct MyLibrary *libbase))
 	{
 		// Initialise interrupt
 		data->low_mem_handler.is_Node.ln_Pri=50;
+#ifdef __amigaos4__
+		data->low_mem_handler.is_Node.ln_Type=NT_EXTINTERRUPT;
+#else
 		data->low_mem_handler.is_Node.ln_Type=NT_INTERRUPT;
+#endif
 		data->low_mem_handler.is_Node.ln_Name="dopus memhandler";
 		data->low_mem_handler.is_Data=data;
 
@@ -1770,6 +1780,7 @@ void UserLibCleanup(REG(a6, struct MyLibrary *libbase))
 
 
 // Low memory handler
+#ifndef __amigaos4__
 int low_mem_handler(REG(a0,struct MemHandlerData *memh),
 					REG(a1, struct LibData *data))
 {
@@ -1787,3 +1798,22 @@ int low_mem_handler(REG(a0,struct MemHandlerData *memh),
 	// We don't actually do anything
 	return MEM_DID_NOTHING;
 }
+#else
+int low_mem_handler(struct ExecBase *ExecBase,
+                    struct MemHandlerData *memh,
+                    struct LibData *data)
+{
+	// Check if the launcher has set the low mem signal
+	if (data->low_mem_signal>-1)
+	{
+		// Signal the launcher to send the message
+		Signal((struct Task *)data->launcher->proc,1<<data->low_mem_signal);
+
+		// Tell exec we're done
+		return MEM_ALL_DONE;
+	}
+
+	// We don't actually do anything
+	return MEM_DID_NOTHING;
+}
+#endif
