@@ -67,7 +67,7 @@ $(NAME) : all
 endif
 ###########################################################
 # Sets archive type & version.
-REVISION := 91
+REVISION := 92
 ifeq ($(debug), no)
 TYPE :=
 VERSION := _$(REVISION)_
