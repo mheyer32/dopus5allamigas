@@ -1,3 +1,13 @@
+r[1080] by paraxenic
+Added Themes directory to basedata.lha so distribution archives will
+have a Themes directory.
+Bumped the versions for the library, modules & support programs so
+old components cannot be used and cause crashes.
+Made final update to the Changelog before release.
+
+[r1079] by paraxenic
+Updated Changelog.
+
 [r1078] by paraxenic
 OS4 library: Changed the OS4 low memory handler in dopus5.library libinit.c
 in order to eliminate a system freeze that occurred when the handler was
