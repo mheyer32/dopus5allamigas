@@ -28,6 +28,12 @@ For more information on Directory Opus for Windows please see:
 #include <proto/commodities.h>
 #endif
 
+#if defined(__amigaos4__) && !defined(ABNC)
+#define ABC MINTERM_ABC
+#define ABNC MINTERM_ABNC
+#define ANBC MINTERM_ANBC
+#endif
+
 void lock_layers(DragInfo *drag,BOOL lock);
 
 // Allocate and initialise a DragInfo structure
