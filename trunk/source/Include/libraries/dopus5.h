@@ -1733,12 +1733,24 @@ typedef struct
 #define ID_SFS2_DISK    (0x53465302L) // SFS\02 - SmartFileSystem2
 #define ID_SFS3_DISK    (0x53465303L) // SFS\03 - SmartFileSystem3
 #define ID_JXFS_DISK    (0x4a584604L) // JXFS\4 - JXFileSystem
+#ifndef ID_BOX0_DISK
 #define ID_BOX0_DISK    (0x424F5800L) // BOX\0  - BoxFileSystem
+#endif
+#ifndef ID_FAT32_DISK
 #define ID_FAT32_DISK   (0x46415432L) // FAT2   - Fat32
+#endif
+#ifndef ID_EXFAT_DISK
 #define ID_EXFAT_DISK   (0x46415458L) // FATX   - exFATFileSystem
+#endif
+#ifndef ID_EXT2_DISK
 #define ID_EXT2_DISK    (0x45585402L) // EXT\2  - FuseExt2FileSystem
+#endif
+#ifndef ID_HFS_DISK
 #define ID_HFS_DISK     (0x48465300L) // HFS\0  - FuseHFS
+#endif
+#ifndef ID_NTFS_DISK
 #define ID_NTFS_DISK    (0x4e544653L) // NTFS   - NTFileSystem3G
+#endif
 #define ID_SWAP_DISK    (0x53574150L) // SWAP   - OS4's SWAP
 
 

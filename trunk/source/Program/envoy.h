@@ -58,8 +58,12 @@ ULONG IDToGroup( unsigned long groupID, struct GroupInfo *group );
 
 #define ACTION_NAME_TO_UID      (ACTION_Envoy+0) // arg1 cstring
 #define ACTION_NAME_TO_GID      (ACTION_Envoy+1) // arg1 cstring
+#ifndef ACTION_UID_TO_USERINFO
 #define ACTION_UID_TO_USERINFO  (ACTION_Envoy+2)
+#endif
+#ifndef ACTION_GID_TO_GROUPINFO
 #define ACTION_GID_TO_GROUPINFO (ACTION_Envoy+3)
+#endif
 
 #define NEW_ACTION_UID_TO_USERINFO      1037
 #define NEW_ACTION_GID_TO_GROUPINFO     1038
