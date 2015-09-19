@@ -12,6 +12,55 @@ void buttoned_copy_string(ButtonEdData *data,char *from,char **to);
 #define UtilityBase		(data->UtilityBase)
 #define LayersBase		(data->LayersBase)*/
 
+#ifdef __amigaos4__
+ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, ButtonEdStartup *startup))
+#else
+IPC_StartupCode(_buttoned_init, ButtonEdStartup *, startup)
+#endif
+{
+	ButtonEdData *data;
+
+	// Allocate data
+	if (!(data=AllocVec(sizeof(ButtonEdData),MEMF_CLEAR)))
+		return 0;
+
+	// Store data
+	startup->data=data;
+
+	// Initialise some pointers
+	data->ipc=ipc;
+	data->startup=startup;
+	data->button=startup->button;
+	data->locale=startup->func_startup.locale;
+
+	// Initialise library bases
+	/*DOpusBase=startup->func_startup.dopus_base;
+	DOSBase=startup->func_startup.dos_base;
+	IntuitionBase=startup->func_startup.int_base;
+	CxBase=startup->func_startup.cx_base;
+	WorkbenchBase=startup->func_startup.wb_base;
+	GfxBase=startup->func_startup.gfx_base;
+	UtilityBase=startup->func_startup.util_base;
+	LayersBase=startup->func_startup.layers_base;*/
+
+	// Initialise process list
+	InitListLock(&data->proc_list,0);
+
+	// Create function list and timer, and allocate signal bit
+	if (!(data->func_list=Att_NewList(LISTF_POOL)) ||
+		!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)) ||
+		(data->change_bit=AllocSignal(-1))==-1)
+	{
+		FreeTimer(data->drag.timer);
+		Att_RemList(data->func_list,0);
+		FreeVec(data);
+		return 0;
+	}
+
+	return 1;
+}
+
+
 void ButtonEditor(void)
 {
 	ButtonEdStartup *startup=0;
@@ -21,7 +70,7 @@ void ButtonEditor(void)
 	BOOL open_window=1;
 
 	// Do startup
-	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&startup,_buttoned_init)))
+	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&startup, (APTR)&_buttoned_init)))
 		return;
 
 	// Get data pointer
@@ -734,55 +783,6 @@ void ButtonEditor(void)
 }
 
 
-#ifdef __amigaos4__
-ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, ButtonEdStartup *startup))
-#else
-ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a1, ButtonEdStartup *startup))
-#endif
-{
-	ButtonEdData *data;
-
-	// Allocate data
-	if (!(data=AllocVec(sizeof(ButtonEdData),MEMF_CLEAR)))
-		return 0;
-
-	// Store data
-	startup->data=data;
-
-	// Initialise some pointers
-	data->ipc=ipc;
-	data->startup=startup;
-	data->button=startup->button;
-	data->locale=startup->func_startup.locale;
-
-	// Initialise library bases
-	/*DOpusBase=startup->func_startup.dopus_base;
-	DOSBase=startup->func_startup.dos_base;
-	IntuitionBase=startup->func_startup.int_base;
-	CxBase=startup->func_startup.cx_base;
-	WorkbenchBase=startup->func_startup.wb_base;
-	GfxBase=startup->func_startup.gfx_base;
-	UtilityBase=startup->func_startup.util_base;
-	LayersBase=startup->func_startup.layers_base;*/
-
-	// Initialise process list
-	InitListLock(&data->proc_list,0);
-
-	// Create function list and timer, and allocate signal bit
-	if (!(data->func_list=Att_NewList(LISTF_POOL)) ||
-		!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)) ||
-		(data->change_bit=AllocSignal(-1))==-1)
-	{
-		FreeTimer(data->drag.timer);
-		Att_RemList(data->func_list,0);
-		FreeVec(data);
-		return 0;
-	}
-
-	return 1;
-}
-
-
 // Show the button being edited
 void _buttoned_show_button(ButtonEdData *data)
 {
@@ -865,7 +865,7 @@ void _button_editor_edit_function(ButtonEdData *data)
 			&data->proc_list,
 			&ipc,
 			"dopus_function_editor",
-			(ULONG)FunctionEditor,
+			(ULONG)IPC_NATIVE(FunctionEditor),
 			STACK_DEFAULT,
 			(ULONG)startup,
 			DOSBase)) && ipc)

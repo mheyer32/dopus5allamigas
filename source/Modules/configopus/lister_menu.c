@@ -1180,7 +1180,7 @@ void lister_menu_edit_item(lister_menu_data *data)
 			&data->proc_list,
 			&ipc,
 			"dopus_function_editor",
-			(ULONG)FunctionEditor,
+			(ULONG)IPC_NATIVE(FunctionEditor),
 			STACK_DEFAULT,
 			(ULONG)startup,
 			(struct Library *)DOSBase)) && ipc)

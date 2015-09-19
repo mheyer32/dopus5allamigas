@@ -16,6 +16,65 @@
 */
 
 
+// Editor init
+#ifdef __amigaos4__
+ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, filetype_ed_data *data))
+#else
+IPC_StartupCode(_filetypeed_init, filetype_ed_data *, data)
+#endif
+{
+	short a;
+
+	// Store IPC pointer
+	data->ipc=ipc;
+
+	// Fill in new window
+	data->new_win.title=data->type->type.name;
+	data->new_win.flags=WINDOW_VISITOR|WINDOW_REQ_FILL|WINDOW_AUTO_KEYS;
+
+	// Create timer
+	if (!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)))
+		return 0;
+
+	// Open window, create action list
+	if (!(data->window=OpenConfigWindow(&data->new_win)) ||
+		!(data->objlist=AddObjectList(data->window,data->obj_def)) ||
+		!(data->action_list=Att_NewList(0)))
+	{
+		CloseConfigWindow(data->window);
+		FreeTimer(data->drag.timer);
+		return 0;
+	}
+
+	// Store window for drag
+	data->drag.window=data->window;
+
+	// Set window ID
+	SetWindowID(data->window,0,WINDOW_BUTTON_CONFIG,(struct MsgPort *)data->ipc);
+
+	// Build action list
+	for (a=0;data->action_lookup[a];a+=2)
+	{
+		Att_NewNode(
+			data->action_list,
+			GetString(Locale,data->action_lookup[a]),
+			data->action_lookup[a+1],
+			0);
+	}
+
+	// Disable edit and delete buttons
+	DisableObject(data->objlist,GAD_FILETYPES_EDIT_ACTION,TRUE);
+
+	// Update action and icon list
+	filetypeed_update_actions(data);
+	filetypeed_update_iconmenu(data);
+
+	// Initialise process list
+	InitListLock(&data->proc_list,0);
+	return 1;
+}
+
+
 void FiletypeEditor(void)
 {
 	filetype_ed_data *data=0;
@@ -24,7 +83,7 @@ void FiletypeEditor(void)
 	BOOL change_flag=0;
 
 	// Do startup
-	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&data,_filetypeed_init)))
+	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&data, (APTR)&_filetypeed_init)))
 		return;
 
 	// Create App stuff
@@ -584,65 +643,6 @@ void FiletypeEditor(void)
 }
 
 
-// Editor init
-#ifdef __amigaos4__
-ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, filetype_ed_data *data))
-#else
-ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a1, filetype_ed_data *data))
-#endif
-{
-	short a;
-
-	// Store IPC pointer
-	data->ipc=ipc;
-
-	// Fill in new window
-	data->new_win.title=data->type->type.name;
-	data->new_win.flags=WINDOW_VISITOR|WINDOW_REQ_FILL|WINDOW_AUTO_KEYS;
-
-	// Create timer
-	if (!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)))
-		return 0;
-
-	// Open window, create action list
-	if (!(data->window=OpenConfigWindow(&data->new_win)) ||
-		!(data->objlist=AddObjectList(data->window,data->obj_def)) ||
-		!(data->action_list=Att_NewList(0)))
-	{
-		CloseConfigWindow(data->window);
-		FreeTimer(data->drag.timer);
-		return 0;
-	}
-
-	// Store window for drag
-	data->drag.window=data->window;
-
-	// Set window ID
-	SetWindowID(data->window,0,WINDOW_BUTTON_CONFIG,(struct MsgPort *)data->ipc);
-
-	// Build action list
-	for (a=0;data->action_lookup[a];a+=2)
-	{
-		Att_NewNode(
-			data->action_list,
-			GetString(Locale,data->action_lookup[a]),
-			data->action_lookup[a+1],
-			0);
-	}
-
-	// Disable edit and delete buttons
-	DisableObject(data->objlist,GAD_FILETYPES_EDIT_ACTION,TRUE);
-
-	// Update action and icon list
-	filetypeed_update_actions(data);
-	filetypeed_update_iconmenu(data);
-
-	// Initialise process list
-	InitListLock(&data->proc_list,0);
-	return 1;
-}
-
-
 // Update checkmarks in action list
 void filetypeed_update_actions(filetype_ed_data *data)
 {
@@ -724,7 +724,7 @@ void filetypeed_edit_action(
 			&data->proc_list,
 			&data->editor[action],
 			"dopus_function_editor",
-			(ULONG)FunctionEditor,
+			(ULONG)IPC_NATIVE(FunctionEditor),
 			STACK_DEFAULT,
 			(ULONG)startup,
 			(struct Library *)DOSBase)) && data->editor[action]) success=1;
@@ -857,7 +857,7 @@ void filetypeed_edit_definition(filetype_ed_data *data)
 		&data->proc_list,
 		&data->class_editor,
 		"dopus_class_editor",
-		(ULONG)FileclassEditor,
+		(ULONG)IPC_NATIVE(FileclassEditor),
 		STACK_DEFAULT,
 		(ULONG)startup,
 		(struct Library *)DOSBase)) && data->class_editor) success=1;
@@ -1199,7 +1199,7 @@ void filetypeed_edit_iconmenu(filetype_ed_data *data,Att_Node *node)
 			&data->proc_list,
 			&fndata->editor,
 			"dopus_function_editor",
-			(ULONG)FunctionEditor,
+			(ULONG)IPC_NATIVE(FunctionEditor),
 			STACK_DEFAULT,
 			(ULONG)startup,
 			(struct Library *)DOSBase)) && fndata->editor) success=1;

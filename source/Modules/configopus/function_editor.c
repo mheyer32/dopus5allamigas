@@ -6,6 +6,42 @@
 
 /*#define DOpusBase		(data->startup->dopus_base)*/
 
+#ifdef __amigaos4__
+ULONG ASM funced_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, FunctionStartup *startup))
+#else
+IPC_StartupCode(funced_init, FunctionStartup *, startup)
+#endif
+{
+	FuncEdData *data;
+
+	// Allocate data
+	if (!(data=AllocVec(sizeof(FuncEdData),MEMF_CLEAR)))
+		return 0;
+
+	// Store data
+	startup->data=data;
+
+	// Initialise some pointers
+	data->startup=startup;
+	data->function=startup->function;
+	data->locale=startup->locale;
+
+	// Create timer
+	if (!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)))
+		return 0;
+
+	// Create lists
+	if (!(data->func_display_list=Att_NewList(0)) ||
+		!(data->flag_list=Att_NewList(0)) ||
+		!(data->function_list=Att_NewList(0)))
+		return 0;
+
+	// Create app port
+	data->appport=CreateMsgPort();
+	return 1;
+}
+
+
 void FunctionEditor(void)
 {
 	struct IntuiMessage *gmsg,msg;
@@ -23,7 +59,7 @@ void FunctionEditor(void)
 	ConfigWindow windims;
 
 	// Do startup
-	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&startup,funced_init)))
+	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&startup, (APTR)&funced_init)))
 	{
 		funced_cleanup(startup->data);
 		return;
@@ -856,42 +892,6 @@ void FunctionEditor(void)
 	// Free data
 	funced_cleanup(data);
 	FreeVec(startup);
-}
-
-
-#ifdef __amigaos4__
-ULONG ASM funced_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, FunctionStartup *startup))
-#else
-ULONG ASM funced_init(REG(a0, IPCData *ipc), REG(a1, FunctionStartup *startup))
-#endif
-{
-	FuncEdData *data;
-
-	// Allocate data
-	if (!(data=AllocVec(sizeof(FuncEdData),MEMF_CLEAR)))
-		return 0;
-
-	// Store data
-	startup->data=data;
-
-	// Initialise some pointers
-	data->startup=startup;
-	data->function=startup->function;
-	data->locale=startup->locale;
-
-	// Create timer
-	if (!(data->drag.timer=AllocTimer(UNIT_VBLANK,0)))
-		return 0;
-
-	// Create lists
-	if (!(data->func_display_list=Att_NewList(0)) ||
-		!(data->flag_list=Att_NewList(0)) ||
-		!(data->function_list=Att_NewList(0)))
-		return 0;
-
-	// Create app port
-	data->appport=CreateMsgPort();
-	return 1;
 }
 
 

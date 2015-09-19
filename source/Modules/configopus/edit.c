@@ -45,7 +45,7 @@ Cfg_Function *LIBFUNC L_Config_EditFunction(
 		0,
 		&editor,
 		"dopus_function_editor",
-		(ULONG)FunctionEditor,
+		(ULONG)IPC_NATIVE(FunctionEditor),
 		STACK_DEFAULT,
 		(ULONG)startup,
 		(struct Library *)DOSBase)) || !editor)

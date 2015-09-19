@@ -203,11 +203,6 @@ BOOL filetype_remove(config_filetypes_data *,Att_Node *,short);
 short filetype_save(config_filetypes_data *);
 
 void FiletypeEditor(void);
-#ifdef __amigaos4__
-ULONG ASM _filetypeed_init(REG(a0, IPCData *), REG(a2, int skip), REG(a1, filetype_ed_data *));
-#else
-ULONG ASM _filetypeed_init(REG(a0, IPCData *), REG(a1, filetype_ed_data *));
-#endif
 void filetypeed_update_actions(filetype_ed_data *);
 void filetypeed_edit_action(filetype_ed_data *,short,char *);
 short filetypeed_receive_edit(filetype_ed_data *,FunctionReturn *);
@@ -217,11 +212,6 @@ void filetypeed_show_icon(filetype_ed_data *);
 BOOL filetypeed_pick_icon(filetype_ed_data *);
 
 void FileclassEditor(void);
-#ifdef __amigaos4__
-ULONG ASM _fileclassed_init(REG(a0, IPCData *), REG(a2, int skip), REG(a1, fileclass_ed_data *));
-#else
-ULONG ASM _fileclassed_init(REG(a0, IPCData *), REG(a1, fileclass_ed_data *));
-#endif
 void _fileclassed_build_list(fileclass_ed_data *);
 void _fileclassed_build_recognition(fileclass_ed_data *);
 Att_Node *_fileclassed_new_entry(fileclass_ed_data *,short,char *);
