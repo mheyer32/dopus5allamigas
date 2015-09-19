@@ -61,6 +61,17 @@ static inline void atomic_dec(ULONG *counter)
 {
 	__AROS_ATOMIC_DEC_L(*counter);
 }
+#elif defined(__MORPHOS__)
+#include <hardware/atomic.h>
+static inline void atomic_inc(ULONG *counter)
+{
+	ATOMIC_ADD(counter, 1);
+}
+
+static inline void atomic_dec(ULONG *counter)
+{
+	ATOMIC_SUB(counter, 1);
+}
 #else
 static inline void atomic_inc(ULONG *counter)
 {
