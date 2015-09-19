@@ -25,7 +25,7 @@ For more information on Directory Opus for Windows please see:
 #include <devices/audio.h>
 #include <dopus/common.h>
 #if defined(__amigaos3__) || defined(__MORPHOS__)
-static char *modtypes[]={"SoundTracker","MED","Octalyzer","SoundTracker 15"};
+static const char * const modtypes[]={"SoundTracker","MED","Octalyzer","SoundTracker 15"};
 struct Library *MUSICBase = NULL;
 #endif
 
@@ -255,7 +255,7 @@ BOOL play_file(play_data *data)
 			else
 			{
 				BOOL res;
-				char *type;
+				const char *type;
 
 				// Get module type
 				type=(data->module_type>=MOD_STNTPT && data->module_type<=MOD_OLDST)?
@@ -562,10 +562,10 @@ void play_open_window(play_data *data,struct Screen *screen,struct Window *paren
 // Update info fields
 void play_update_info(
 	play_data *data,
-	char *filename,
-	char *length,
-	char *type,
-	char *status)
+	const char *filename,
+	const char *length,
+	const char *type,
+	const char *status)
 {
 	// Change filename?
 	if (filename!=(char *)-1)

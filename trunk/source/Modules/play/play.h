@@ -100,7 +100,7 @@ void play_update_length(play_data *);
 BOOL wait_for_play(play_data *data,BOOL dt);
 void play_iconify(play_data *data);
 void play_open_window(play_data *data,struct Screen *screen,struct Window *parent);
-void play_update_info(play_data *data,char *,char *,char *,char *);
+void play_update_info(play_data *data,const char *,const char *,const char *,const char *);
 void play_reveal(play_data *data,struct Screen *scr);
 void read_parse_set(char **ptr,long *val);
 void play_snapshot(play_data *data,struct AppSnapshotMsg *msg);
