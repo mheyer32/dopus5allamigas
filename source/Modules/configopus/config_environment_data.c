@@ -9,9 +9,16 @@ ConfigWindow
 
 
 // Palette slider callback hook
+#if defined(__MORPHOS__)
+static void _palette_slider_callback_entry(struct TagItem *tag, struct Window *window);
+static struct EmulLibEntry _palette_slider_callback = { TRAP_LIBNR, 0, (void (*)())&_palette_slider_callback_entry };
+
+static void _palette_slider_callback_entry(struct TagItem *tag, struct Window *window)
+#else
 static void ASM _palette_slider_callback(
 	REG(a1, struct TagItem *tag),
 	REG(a2, struct Window *window))
+#endif
 {
 	config_env_data *data;
 	//struct Library *GfxBase;
@@ -125,7 +132,7 @@ static struct TagItem
 		{GTSL_MaxLevelLen,5},
 		{GTSL_LevelFormat,(ULONG)"%ld  "},
 		{GTSL_LevelPlace,PLACETEXT_RIGHT},
-		{GTCustom_CallBack,(ULONG)_palette_slider_callback},
+		{GTCustom_CallBack,(ULONG)&_palette_slider_callback},
 		{TAG_MORE,(ULONG)_environment_relative_taglist}},
 
 	// Colour count slider
