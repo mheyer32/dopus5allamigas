@@ -1669,7 +1669,8 @@ BOOL read_view(read_data *data)
 
 							// Scroll up
 							case CURSORUP:
-							case 0x3e:
+							case 0x7a: /* mouse wheel up */
+							case 0x3e: /* KP 8 */
 
 								// Ok to scroll up?
 								if (data->top<=0) break;
@@ -1711,7 +1712,8 @@ BOOL read_view(read_data *data)
 
 							// Scroll down
 							case CURSORDOWN:
-							case 0x1e:
+							case 0x7b: /* mouse wheel down */
+							case 0x1e: /* KP 2 */
 
 								// Ok to scroll down?
 								if (data->top+data->v_visible>=data->lines) break;
