@@ -1043,7 +1043,7 @@ int LIBFUNC L_Config_Buttons(
 											0,
 											&data->paint_box,
 											"dopus_paint_box",
-											(ULONG)PaletteBox,
+											(ULONG)IPC_NATIVE(PaletteBox),
 											STACK_DEFAULT,
 											(ULONG)&data->palette_data,
 											(struct Library *)DOSBase);

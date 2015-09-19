@@ -183,11 +183,6 @@ extern MenuData _funced_menus[];
 
 // prototypes
 void FunctionEditor(void);
-#ifdef __amigaos4__
-ULONG ASM funced_init(REG(a0, IPCData *), REG(a2, int skip), REG(a1, FunctionStartup *));
-#else
-ULONG ASM funced_init(REG(a0, IPCData *), REG(a1, FunctionStartup *));
-#endif
 void funced_cleanup(FuncEdData *);
 void funced_build_flaglist(FuncEdData *);
 void funced_update_flaglist(FuncEdData *);

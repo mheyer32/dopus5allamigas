@@ -173,7 +173,7 @@ void _config_buttons_edit_button(
 				&data->bank_node->proc_list,
 				&ipc,
 				"dopus_button_editor",
-				(ULONG)ButtonEditor,
+				(ULONG)IPC_NATIVE(ButtonEditor),
 				STACK_DEFAULT,
 				(ULONG)startup,
 				(struct Library *)DOSBase)) && ipc)

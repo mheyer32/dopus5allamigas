@@ -74,7 +74,7 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 		0,
 		&editor,
 		"dopus_filetype_editor",
-		(ULONG)FiletypeEditor,
+		(ULONG)IPC_NATIVE(FiletypeEditor),
 		STACK_DEFAULT,
 		(ULONG)data,
 		(struct Library *)DOSBase)) || !editor)

@@ -618,7 +618,7 @@ void filetype_edit(
 		&data->proc_list,
 		&node->editor,
 		"dopus_filetype_editor",
-		(ULONG)FiletypeEditor,
+		(ULONG)IPC_NATIVE(FiletypeEditor),
 		STACK_DEFAULT,
 		(ULONG)eddata,
 		(struct Library *)DOSBase)) || !node->editor)

@@ -8,6 +8,61 @@
 #define RexxSysBase		(data->rexx_base)
 #define AslBase			(data->asl_base)*/
 
+#ifdef __amigaos4__
+ULONG ASM _fileclassed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, fileclass_ed_data *data))
+#else
+IPC_StartupCode(_fileclassed_init, fileclass_ed_data *, data)
+#endif
+{
+	short a;
+
+	// Save IPC pointer
+	data->ipc=ipc;
+
+	// Create a list of match strings
+	if (!(data->command_list=Att_NewList(0)))
+		return 0;
+	for (a=0;data->strings[a];a+=2)
+	{
+		char buf[80];
+
+		// Build string
+		stccpy(buf,GetString(data->new_win.locale,data->strings[a]),sizeof(buf));
+		strcat(buf,"\t");
+		strcat(buf,GetString(data->new_win.locale,data->strings[a+1]));
+
+		// Add node
+		Att_NewNode(data->command_list,buf,0,0);
+	}
+
+	// Open window
+	if (!(data->window=OpenConfigWindow(&data->new_win)) ||
+		!(data->objlist=AddObjectList(data->window,data->obj_def)))
+	{
+		CloseConfigWindow(data->window);
+		Att_RemList(data->command_list,0);
+		return 0;
+	}
+
+	// Build definition list
+	_fileclassed_build_list(data);
+
+	// Attach list to lister
+	SetGadgetChoices(data->objlist,GAD_CLASSED_DEFINITION,data->match_list);
+
+	// Fill out fields
+	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_NAME,(ULONG)data->type->type.name);
+	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_ID,(ULONG)data->type->type.id);
+	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_PRI,data->type->type.priority);
+
+	// Disable edit fields
+	DisableObject(data->objlist,GAD_CLASSED_MATCHTYPE,TRUE);
+	DisableObject(data->objlist,GAD_CLASSED_MATCHDATA,TRUE);
+
+	return 1;
+}
+
+
 void SAVEDS FileclassEditor(void)
 {
 	fileclass_ed_data *data;
@@ -16,7 +71,7 @@ void SAVEDS FileclassEditor(void)
 	ReaderNode *node;
 
 	// Do startup
-	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&data,_fileclassed_init)))
+	if (!(ipc=Local_IPC_ProcStartup((ULONG *)&data, (APTR)&_fileclassed_init)))
 		return;
 
 	// Open REXX library
@@ -361,61 +416,6 @@ void SAVEDS FileclassEditor(void)
 	Att_RemList(data->match_list,REMLIST_FREEDATA);
 	FreeFiletype(data->type);
 	FreeVec(data);
-}
-
-
-#ifdef __amigaos4__
-ULONG ASM _fileclassed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, fileclass_ed_data *data))
-#else
-ULONG ASM _fileclassed_init(REG(a0, IPCData *ipc), REG(a1, fileclass_ed_data *data))
-#endif
-{
-	short a;
-
-	// Save IPC pointer
-	data->ipc=ipc;
-
-	// Create a list of match strings
-	if (!(data->command_list=Att_NewList(0)))
-		return 0;
-	for (a=0;data->strings[a];a+=2)
-	{
-		char buf[80];
-
-		// Build string
-		stccpy(buf,GetString(data->new_win.locale,data->strings[a]),sizeof(buf));
-		strcat(buf,"\t");
-		strcat(buf,GetString(data->new_win.locale,data->strings[a+1]));
-
-		// Add node
-		Att_NewNode(data->command_list,buf,0,0);
-	}
-
-	// Open window
-	if (!(data->window=OpenConfigWindow(&data->new_win)) ||
-		!(data->objlist=AddObjectList(data->window,data->obj_def)))
-	{
-		CloseConfigWindow(data->window);
-		Att_RemList(data->command_list,0);
-		return 0;
-	}
-
-	// Build definition list
-	_fileclassed_build_list(data);
-
-	// Attach list to lister
-	SetGadgetChoices(data->objlist,GAD_CLASSED_DEFINITION,data->match_list);
-
-	// Fill out fields
-	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_NAME,(ULONG)data->type->type.name);
-	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_ID,(ULONG)data->type->type.id);
-	SetGadgetValue(data->objlist,GAD_CLASSED_CLASS_PRI,data->type->type.priority);
-
-	// Disable edit fields
-	DisableObject(data->objlist,GAD_CLASSED_MATCHTYPE,TRUE);
-	DisableObject(data->objlist,GAD_CLASSED_MATCHDATA,TRUE);
-
-	return 1;
 }
 
 

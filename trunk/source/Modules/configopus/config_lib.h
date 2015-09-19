@@ -116,3 +116,13 @@ short error_saving(short,struct Window *);
 #include "function_editor.h"
 #include "select_colours.h"
 #include "button_editor.h"
+
+/* IPC_Launch */
+
+#if defined(__MORPHOS__)
+#define IPCF_NATIVE     (0x1)
+#else
+#define IPCF_NATIVE     (0x0)
+#endif
+
+#define IPC_NATIVE(entry) ((ULONG)&entry | IPCF_NATIVE)

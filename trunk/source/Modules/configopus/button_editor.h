@@ -108,11 +108,6 @@ enum
 
 // prototypes
 void ButtonEditor(void);
-#ifdef __amigaos4__
-ULONG ASM _buttoned_init(REG(a0, IPCData *), REG(a2, int skip), REG(a1, ButtonEdStartup *));
-#else
-ULONG ASM _buttoned_init(REG(a0, IPCData *), REG(a1, ButtonEdStartup *));
-#endif
 void _buttoned_show_button(ButtonEdData *);
 void _button_editor_edit_function(ButtonEdData *);
 BOOL _button_editor_receive_edit(ButtonEdData *,FunctionReturn *);
