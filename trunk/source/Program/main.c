@@ -728,6 +728,8 @@ void startup_process_args(int argc,char **argv)
 		// if Workbench is not running, set the flag to do startup items
 #ifdef __AROS__
 		if (FindPort("WORKBENCH") == NULL && FindTask("WANDERER:Wanderer") == NULL)
+#elif defined(__MORPHOS__)
+		if (FindPort("WORKBENCH") == NULL && FindPort("AMBIENT") == NULL)
 #else
 		if( FindPort( "WORKBENCH" ) == NULL )
 #endif
