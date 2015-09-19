@@ -129,6 +129,9 @@ enum
 #pragma pack(2)
 #endif
 
+struct _InstructionParsed;
+struct _FunctionHandle;
+
 // Command entry (looks like a (struct Node) as far as ln_Name goes)
 typedef struct _CommandList
 {
