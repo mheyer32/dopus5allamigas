@@ -625,7 +625,7 @@ return ok;
 #ifdef __amigaos4__
 ULONG SAVEDS ASM finder_creator_proc_init( REG(a0, IPCData *ipc), REG(a2, int skip),	REG(a1, finder_data *data ))
 #else
-ULONG SAVEDS ASM finder_creator_proc_init( REG(a0, IPCData *ipc), REG(a1, finder_data *data ))
+IPC_StartupCode(finder_creator_proc_init, finder_data *, data)
 #endif
 {
 ULONG ok = TRUE;
@@ -652,7 +652,7 @@ int ok = FALSE;
 
 //DOpusBase = GET_DOPUSLIB;
 
-IPC_ProcStartup( (ULONG *)&data, (APTR)finder_creator_proc_init );
+IPC_ProcStartup( (ULONG *)&data, (APTR)&finder_creator_proc_init);
 
 strcpy( path, data->current_entry_path );
 name = FilePart( path );
@@ -735,10 +735,14 @@ return ok;
 /********************************/
 
 // Init code for process
+#if defined(__amigaos4__)
 ULONG SAVEDS ASM finder_editor_proc_init(
 	REG(a0, IPCData *ipc),
 	REG(a2, int skip),
 	REG(a1, finder_data *data ))
+#else
+IPC_StartupCode(finder_editor_proc_init, finder_data *, data)
+#endif
 {
 ULONG ok = TRUE;
 
@@ -829,7 +833,7 @@ Cfg_Filetype *edited_filetype;
 
 //DOpusBase = GET_DOPUSLIB;
 
-IPC_ProcStartup( (ULONG *)&data, (APTR)finder_editor_proc_init );
+IPC_ProcStartup( (ULONG *)&data, (APTR)&finder_editor_proc_init);
 
 if	(data->best_installed_ft
 	&& (ConfigOpusBase = OpenLibrary( "Dopus5:Modules/configopus.module", LIB_VERSION))
@@ -1140,7 +1144,7 @@ if	((data->filetype_cache = Att_NewList( LISTF_POOL )))
 	/* Get filetypes from Opus itself */
 
 	data->pointer_packet.type = MODPTR_FILETYPES;
-	(data->func_callback)( EXTCMD_GET_POINTER, IPCDATA(data->ipc), &data->pointer_packet );
+	REFCALL(data->func_callback, EXTCMD_GET_POINTER, IPCDATA(data->ipc), &data->pointer_packet);
 
 	if	(data->pointer_packet.pointer)
 		{
@@ -1191,7 +1195,7 @@ if	((data->filetype_cache = Att_NewList( LISTF_POOL )))
 			}
 
 		if	(data->pointer_packet.flags & POINTERF_LOCKED)
-			data->func_callback( EXTCMD_FREE_POINTER, IPCDATA(data->ipc), &data->pointer_packet );
+			REFCALL(data->func_callback, EXTCMD_FREE_POINTER, IPCDATA(data->ipc), &data->pointer_packet );
 		}
 
 	/* Get filetypes from disk */
@@ -1273,10 +1277,10 @@ if	((data = AllocVec( sizeof(finder_data), MEMF_CLEAR )))
 	if	(finder_openwindow( data ))
 		{
 		// Get path
-		func_callback( EXTCMD_GET_SOURCE, IPCDATA(ipc), data->path );
+		REFCALL(func_callback, EXTCMD_GET_SOURCE, IPCDATA(ipc), data->path);
 
 		// Get first entry
-		while	((entry = (FunctionEntry *)func_callback( EXTCMD_GET_ENTRY, IPCDATA(ipc), 0 )))
+		while	((entry = (FunctionEntry *)REFCALL(func_callback, EXTCMD_GET_ENTRY, IPCDATA(ipc), 0)))
 			{
 			strcpy( data->current_entry_path, data->path );
 			AddPart( data->current_entry_path, entry->name, 256 );
@@ -1324,7 +1328,7 @@ if	((data = AllocVec( sizeof(finder_data), MEMF_CLEAR )))
 			end_pkt.deselect = TRUE;
 
 			// End this entry
-			func_callback( EXTCMD_END_ENTRY, IPCDATA(ipc), &end_pkt );
+			REFCALL(func_callback, EXTCMD_END_ENTRY, IPCDATA(ipc), &end_pkt);
 			}
 
 		finder_free_cache( data );
@@ -2249,7 +2253,7 @@ return ok;
 #ifdef __amigaos4__
 ULONG SAVEDS ASM creator_editor_proc_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, creator_data *data ))
 #else
-ULONG SAVEDS ASM creator_editor_proc_init(REG(a0, IPCData *ipc), REG(a1, creator_data *data ))
+IPC_StartupCode(creator_editor_proc_init, creator_data *, data)
 #endif
 {
 ULONG ok = TRUE;
@@ -2275,7 +2279,7 @@ int ok = FALSE;
 
 //DOpusBase = GET_DOPUSLIB;
 
-IPC_ProcStartup( (ULONG *)&data, (APTR)creator_editor_proc_init );
+IPC_ProcStartup( (ULONG *)&data, (APTR)&creator_editor_proc_init );
 
 // Make a filetype from our current information if filetype has been changed
 if	(!data->filetype || !data->edited)
@@ -2798,12 +2802,12 @@ struct filetype_info *fti;
 Cfg_FiletypeList *ftl;
 int ok = FALSE;
 
-if	(func_callback( EXTCMD_GET_SOURCE, IPCDATA(ipc), path ))
+if	(REFCALL(func_callback, EXTCMD_GET_SOURCE, IPCDATA(ipc), path))
 	{
 	if	((list = Att_NewList( LISTF_POOL )))
 		{
 		// Go through files
-		while	((entry = (FunctionEntry *)func_callback( EXTCMD_GET_ENTRY, IPCDATA(ipc), 0 )))
+		while	((entry = (FunctionEntry *)REFCALL(func_callback, EXTCMD_GET_ENTRY, IPCDATA(ipc), 0)))
 			{
 			if	(file_exists( (BPTR)NULL, path, entry->name, EXISTF_FILE ))
 				{
@@ -2828,7 +2832,7 @@ if	(func_callback( EXTCMD_GET_SOURCE, IPCDATA(ipc), path ))
 			end_pkt.deselect = TRUE;
 
 			// End this entry
-			func_callback( EXTCMD_END_ENTRY, IPCDATA(ipc), &end_pkt );
+			REFCALL(func_callback, EXTCMD_END_ENTRY, IPCDATA(ipc), &end_pkt);
 			}
 
 		if	((ftl = creator_generic(
