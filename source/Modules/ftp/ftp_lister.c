@@ -154,8 +154,8 @@ static D_S(struct FileInfoBlock,fib)
 APTR entry;
 LONG etype;
 struct TagItem tags[2] = {
-			HFFS_NAME,0,
-			TAG_DONE
+			{ HFFS_NAME, 0 },
+			{ TAG_DONE }
 			};
 DOpusCallbackInfo *infoptr = &node->fn_og->og_hooks;
 			
@@ -1268,7 +1268,7 @@ if	(g)
 #ifdef __amigaos4__
 static ULONG ASM ftplister_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
 #else
-static ULONG ASM ftplister_init( REG(a0, IPCData *ipc), REG(a1, struct subproc_data *data ))
+IPC_StartupCode(ftplister_init, struct subproc_data *, data)
 #endif
 {
  struct opusftp_globals *ogp;
@@ -3431,7 +3431,7 @@ struct msg_loop_data    mld;
 	#endif*/
 
 	// This returns true if 'data' is filled in correctly
-	if	(IPC_ProcStartup( (ULONG *)&data, ftplister_init ))
+	if	(IPC_ProcStartup( (ULONG *)&data, (APTR)&ftplister_init))
 		{
 
 		og               = data->spd_ogp;
