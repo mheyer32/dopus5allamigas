@@ -80,11 +80,6 @@ extern ObjectDef ftp_options_objects[],ftp_connect_objects[],ftp_opt_lister[],ft
 extern SubOptionHandle ftp_custom_suboptions[],ftp_default_suboptions[];
 extern MenuData options_menus[],site_menus[];
 
-#if defined(__amigaos4__)
-ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ));
-#else
-ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a1, struct subproc_data *data ));
-#endif
 VOID free_address_book( struct opusftp_globals *); // ftp_main.c
 static void close_addrbook(struct window_params *,BOOL);
 static BOOL end_edit(struct window_params *,BOOL);
@@ -4575,58 +4570,6 @@ free_address_book(ogp);
 }
 
 /*****************************************************************
- *
- *	Addressbook process started by main opusftp
- *	Initialises the system then sits in idle_loop waiting for messages
- */
-
-void addressbook( void )
-{
-//struct Library	*DOpusBase;
-struct subproc_data *data = 0;
-IPCMessage	*loop_quitmsg=0;
-struct display_globals *dg;
-
-
-/*if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
-	{
-	#ifdef __amigaos4__
-	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
-	#endif*/
-		
-	/* returns true if 'data' is filled in correctly */
-	if	(IPC_ProcStartup( (ULONG *)&data, addressbook_init ))
-		{
-
-		if	((dg=init_globals(data)))
-			{
-			idle_loop(dg,data,&loop_quitmsg);
-			cleanup_globals(dg);
-			}
-
-		// if there is one then
-		// Reply to the quit message (might want to do some cleanup first) 
-		if	(loop_quitmsg)
-			IPC_Reply(loop_quitmsg);
-
-
-		IPC_Flush( data->spd_ipc );
-		IPC_Goodbye( data->spd_ipc, data->spd_owner_ipc, 0 );
-		addressbook_cleanup( data->spd_ogp, data->spd_ipc );
-
-		IPC_Free( data->spd_ipc );
-		FreeVec( data );
-		}
-		
-	/*#ifdef __amigaos4__
-	DropInterface((struct Interface *)IDOpus);
-	#endif
-	CloseLibrary(DOpusBase);
-	}*/
-}
-
-
-/*****************************************************************
  *	Init code for process
  *	 Since we use the util function getuseraddress() which calls the socket library, we need to
  * 	 open it and store it in the 'userdata' field of our IPCData
@@ -4635,7 +4578,7 @@ struct display_globals *dg;
 #if defined(__amigaos4__)
 ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
 #else
-ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a1, struct subproc_data *data ))
+IPC_StartupCode(addressbook_init, struct subproc_data *, data)
 #endif
 {
 struct globals *g;
@@ -4666,5 +4609,56 @@ if	(data)
 		addressbook_cleanup( ogp, ipc );
 	}
 return(1);
+}
+
+/*****************************************************************
+ *
+ *	Addressbook process started by main opusftp
+ *	Initialises the system then sits in idle_loop waiting for messages
+ */
+
+void addressbook( void )
+{
+//struct Library	*DOpusBase;
+struct subproc_data *data = 0;
+IPCMessage	*loop_quitmsg=0;
+struct display_globals *dg;
+
+
+/*if	((DOpusBase = OpenLibrary( "dopus5.library", VERSION_DOPUSLIB )))
+	{
+	#ifdef __amigaos4__
+	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
+	#endif*/
+		
+	/* returns true if 'data' is filled in correctly */
+	if	(IPC_ProcStartup( (ULONG *)&data, (APTR)&addressbook_init))
+		{
+
+		if	((dg=init_globals(data)))
+			{
+			idle_loop(dg,data,&loop_quitmsg);
+			cleanup_globals(dg);
+			}
+
+		// if there is one then
+		// Reply to the quit message (might want to do some cleanup first) 
+		if	(loop_quitmsg)
+			IPC_Reply(loop_quitmsg);
+
+
+		IPC_Flush( data->spd_ipc );
+		IPC_Goodbye( data->spd_ipc, data->spd_owner_ipc, 0 );
+		addressbook_cleanup( data->spd_ogp, data->spd_ipc );
+
+		IPC_Free( data->spd_ipc );
+		FreeVec( data );
+		}
+		
+	/*#ifdef __amigaos4__
+	DropInterface((struct Interface *)IDOpus);
+	#endif
+	CloseLibrary(DOpusBase);
+	}*/
 }
 

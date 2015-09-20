@@ -106,7 +106,7 @@ if	((mldata = AllocVec( sizeof(struct modlaunch_data), MEMF_CLEAR )))
 		NULL,				// List to add task to (optional, but useful)
 		&og.og_main_ipc, 		// IPCData ** to store task IPC pointer in (optional)
 		"dopus_ftp",			// Name
-		(ULONG)dopus_ftp,		// Code
+		(ULONG)IPC_NATIVE(dopus_ftp),		// Code
 		STACK_DEFAULT,			// Stack size
 		(ULONG)mldata,			// Data passed to task
 		(struct Library *)DOSBase ))	// Needs pointer to dos.library
@@ -441,14 +441,14 @@ int     mci_need_port;
 
 struct module_command_info module_command_table[] =
 {
-MID_ADDRESSBOOK,	mod_addrbook,	0,
-MID_CONNECT,	mod_connect,	0,
-MID_SETVAR,	mod_setvar,	0,
-MID_COMMAND,	mod_ftpcommand,	0,
-MID_QUIT,	mod_quit,	1,
-MID_ADD,		mod_ftpadd,	0,
-MID_OPTIONS,	mod_options,	0,
-0xffffffff
+	{ MID_ADDRESSBOOK, mod_addrbook, 0 },
+	{ MID_CONNECT,     mod_connect, 0 },
+	{ MID_SETVAR,      mod_setvar, 0 },
+	{ MID_COMMAND,     mod_ftpcommand, 0 },
+	{ MID_QUIT,        mod_quit, 1 },
+	{ MID_ADD,         mod_ftpadd, 0 },
+	{ MID_OPTIONS,     mod_options, 0 },
+	{ 0xffffffff }
 };
 
 //
@@ -520,7 +520,7 @@ og.og_screen = screen;
 		Permit();
 
 		// Get Opus's ARexx port name
-		func_callback( EXTCMD_GET_PORT, IPCDATA(function_ipc), og.og_opusname );
+		REFCALL(func_callback, EXTCMD_GET_PORT, IPCDATA(function_ipc), og.og_opusname);
 
 		if	(mod_id == MID_QUIT || ftpport )
 			{

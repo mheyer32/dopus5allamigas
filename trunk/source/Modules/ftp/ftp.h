@@ -209,5 +209,14 @@ char *stpblk(char *p);
 #endif
 char *stptok(const char *s, char *tok, size_t toklen, char *brk);
 
-#endif /* _FTP_H */
+/* IPC_Launch */
 
+#if defined(__MORPHOS__)
+#define IPCF_NATIVE     (0x1)
+#else
+#define IPCF_NATIVE     (0x0)
+#endif
+
+#define IPC_NATIVE(entry) ((ULONG)&entry | IPCF_NATIVE)
+
+#endif /* _FTP_H */

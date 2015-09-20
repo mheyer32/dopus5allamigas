@@ -62,13 +62,13 @@ long display_msg( struct opusftp_globals *ogp, IPCData *ipc, struct Window *win,
 long           result;
 struct TagItem tags[] =
 	{
-	AR_Window,	NULL,
-	AR_Screen,	NULL,
-	AR_Message,	NULL,
-	AR_Button,	NULL,
-	TAG_IGNORE,	NULL,
-	TAG_IGNORE,	NULL,
-	TAG_DONE
+		{ AR_Window,  NULL },
+		{ AR_Screen,  NULL },
+		{ AR_Message, NULL },
+		{ AR_Button,  NULL },
+		{ TAG_IGNORE, NULL },
+		{ TAG_IGNORE, NULL },
+		{ TAG_DONE }
 	};
 
 
@@ -1454,9 +1454,7 @@ pp.type    = MODPTR_OPTIONS;
 pp.pointer = 0;
 pp.flags   = 0;
 
-og->og_func_callback(
-	EXTCMD_GET_POINTER,
-	IPCDATA(og->og_main_ipc), &pp );
+	REFCALL(og->og_func_callback, EXTCMD_GET_POINTER, IPCDATA(og->og_main_ipc), &pp);
 
 options = (CFG_SETS *)pp.pointer;
 
@@ -1469,7 +1467,7 @@ else if	(type == OPTION_DELETE)
 	rv = options->delete_flags;
 
 if	(pp.flags & POINTERF_LOCKED)
-	og->og_func_callback(EXTCMD_FREE_POINTER,IPCDATA(og->og_main_ipc), &pp );
+	REFCALL(og->og_func_callback, EXTCMD_FREE_POINTER,IPCDATA(og->og_main_ipc), &pp);
 
 return rv;
 }

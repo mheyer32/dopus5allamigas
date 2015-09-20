@@ -221,7 +221,7 @@ if	((data = AllocVec( sizeof(struct subproc_data), MEMF_CLEAR )))
 	data->spd_owner_ipc = ipc;
 
 	// Listers now use STACK_DEFAULT stack size for recursive safety
-	if	(!IPC_Launch( tasklist, &ipcd, name, (ULONG)proc_code, stack, (ULONG)data, (struct Library *)DOSBase ))
+	if	(!IPC_Launch( tasklist, &ipcd, name, (ULONG)IPC_NATIVE(proc_code), stack, (ULONG)data, (struct Library *)DOSBase))
 		ipcd = NULL;
 	}
 
@@ -3015,7 +3015,7 @@ return quit;
 #ifdef __amigaos4__
 static ULONG ASM dopus_ftp_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct modlaunch_data *mldata ))
 #else
-static ULONG ASM dopus_ftp_init( REG(a0, IPCData *ipc), REG(a1, struct modlaunch_data *mldata ))
+IPC_StartupCode(dopus_ftp_init, struct modlaunch_data *, mldata)
 #endif
 {
 // Store IPC pointer
@@ -3175,7 +3175,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 ))
 #define DOpusBase L_DOpusBase
 */
 		// Process startup function
-		if	(IPC_ProcStartup( (ULONG *)&mldata, dopus_ftp_init ))
+		if	(IPC_ProcStartup( (ULONG *)&mldata, (APTR)&dopus_ftp_init))
 //#undef DOpusBase
 			{
 			// Fix pointer to global info
@@ -3188,7 +3188,7 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 ))
 			med.med_ipc = mldata->mld_ftp_ipc;
 
 			// Get Opus ARexx port name via callbacks
-			mldata->mld_func_callback( EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus );
+			REFCALL(mldata->mld_func_callback, EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus);
 
 			// Scan configuration file
 			med.med_log_fp = setup_config( og );

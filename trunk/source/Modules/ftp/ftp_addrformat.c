@@ -98,7 +98,7 @@ return(&og->og_opus_format);
 #ifdef __amigaos4__
 static ULONG ASM format_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct format_data *data ))
 #else
-static ULONG ASM format_init( REG(a0, IPCData *ipc), REG(a1, struct format_data *data ))
+IPC_StartupCode(format_init, struct format_data *, data)
 #endif
 {
 ULONG ok = FALSE;
@@ -140,7 +140,7 @@ int function_no=2;
 	IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL);
 	#endif*/
 
-	if	(IPC_ProcStartup( (ULONG *)&data, format_init ))
+	if	(IPC_ProcStartup( (ULONG *)&data, (APTR)&format_init))
 		{
 		struct window_params *wp=NULL;
 
@@ -249,7 +249,7 @@ if	((data = AllocVec( sizeof(struct format_data), MEMF_CLEAR )))
 		0,				// List to add task to (optional, but useful)
 		&format_ipc,			// IPCData ** to store task IPC pointer in (optional)
 		"dopus_ftp_format",		// Name
-		(ULONG)format_code,		// Code
+		(ULONG)IPC_NATIVE(format_code),		// Code
 		STACK_DEFAULT,				// Stack size
 		(ULONG)data,			// Data passed to task
 		(struct Library *)DOSBase );	// Needs pointer to dos.library

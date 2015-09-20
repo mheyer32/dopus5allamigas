@@ -24,6 +24,7 @@ For more information on Directory Opus for Windows please see:
 #ifndef _addressformat_h
 #define _addressformat_h
 
+struct subproc_data;
 
 BOOL get_listformat(struct window_params *wp);
 BOOL configure_format(struct display_globals *dg,struct subproc_data *data,IPCMessage *imsg);
