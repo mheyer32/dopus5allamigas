@@ -217,6 +217,6 @@ char *stptok(const char *s, char *tok, size_t toklen, char *brk);
 #define IPCF_NATIVE     (0x0)
 #endif
 
-#define IPC_NATIVE(entry) ((ULONG)&entry | IPCF_NATIVE)
+#define IPC_NATIVE(entry) ((ULONG)entry | IPCF_NATIVE)
 
 #endif /* _FTP_H */
