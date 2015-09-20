@@ -10,10 +10,10 @@ ConfigWindow
 
 // Palette slider callback hook
 #if defined(__MORPHOS__)
+static void _palette_slider_callback_entry(struct TagItem *tag, struct Window *window);
+
 static void _palette_slider_callback_trampoline()
 {
-	static void _palette_slider_callback_entry(struct TagItem *tag, struct Window *window);
-
 	struct TagItem *tag = (struct TagItem *)REG_A1;
 	struct Window *window = (struct Window *)REG_A2;
 	_palette_slider_callback_entry(tag, window);
