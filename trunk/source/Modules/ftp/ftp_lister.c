@@ -3685,10 +3685,13 @@ if	((str = (char *)send_rexxa(
 	"lister query %lu handler",
 	handle )))
 	{
-	if	(*str)
-		retval = 1;
+		if	(str != (char *)-1) /* On error -1 is returned */
+		{
+			if (*str)
+				retval = 1;
 
-	DeleteArgstring( str );
+			DeleteArgstring( str );
+		}
 	}
 
 return retval;
