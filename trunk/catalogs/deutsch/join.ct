@@ -1,0 +1,181 @@
+## version $VER: join.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_JOIN_DESC
+Dateien zusammenfügen
+; Join files together
+;
+MSG_SPLIT_DESC
+Datei teilen
+; Split a file into parts
+;
+MSG_JOIN_LISTER
+Dateien _zusammenfügen...
+; Join _files...
+;
+MSG_JOIN_ADD
+_Hinzu
+; _Add
+;
+MSG_JOIN_REMOVE
+_Entf.
+; _Remove
+;
+MSG_JOIN_CLEAR
+_Löschen
+; C_lear
+;
+MSG_JOIN_MOVE_UP
+_Hoch
+; _Up
+;
+MSG_JOIN_MOVE_DOWN
+_Runter
+; _Down
+;
+MSG_JOIN_JOIN
+_Zusammenfügen
+; _Join
+;
+MSG_JOIN_CANCEL
+_Abbruch
+; _Cancel
+;
+MSG_JOIN_TITLE
+Zusammenfügen
+; Join
+;
+MSG_JOIN_TO
+_Zu:
+; _To:
+;
+MSG_JOIN_SELECT_FILE
+Datei wählen
+; Select File
+;
+MSG_REPLACE_RENAME_ABORT
+Ersetzen|Umbenennen|Abbrechen
+; Replace|Rename|Abort
+;
+MSG_FILE_EXISTS
+Datei '%s' existiert bereits!
+; File '%s' already exists!
+;
+MSG_ENTER_FILENAME
+Zieldateiname eingeben.
+; Enter destination filename.
+;
+MSG_OK
+Ok
+; Ok
+;
+MSG_CANCEL
+Abbruch
+; Cancel
+;
+MSG_JOINING_FILES
+Füge Dateien zusammen...
+; Joining files...
+;
+MSG_JOIN_ERROR_OPENING_OUTPUT
+Kann '%s' zur Ausgabe nicht öffnen!
+; Unable to open '%s' for output!
+;
+MSG_JOIN_ERROR
+%s\n\
+Fehler %ld %s
+; %s\nError %ld %s
+;
+MSG_JOIN_RETRY
+Nochmal
+; Retry
+;
+MSG_REMOVE
+Entfernen
+; Remove
+;
+MSG_JOIN_ERROR_OPENING_INPUT
+Kann '%s' nicht öffnen!
+; Unable to open '%s'!
+;
+MSG_JOIN_ERROR_READING
+Fehler beim Lesen von '%s'!
+; Error reading from '%s'!
+;
+MSG_SPLIT_FROM
+Zer_teilen
+; Split _file
+;
+MSG_SPLIT_STEM
+_mit Stamm
+; _With stem
+;
+MSG_SPLIT_INTO
+_Blockgröße
+; _Chunk size
+;
+MSG_SPLIT_SPLIT
+_Teilen
+; _Split
+;
+MSG_SPLIT_SKIP
+Über_gehen
+; S_kip
+;
+MSG_SPLIT_TO
+_Zu
+; _To
+;
+MSG_SPLIT_TITLE
+Teilen
+; Split
+;
+MSG_SPLIT_ERROR_OPENING_FILE
+Kann '%s' nicht öffnen!
+; Unable to open '%s'!
+;
+MSG_SPLIT_NO_MEMORY
+Kein Speicher!
+; No memory!
+;
+MSG_SPLITTING_FILE
+Teile Datei...
+; Splitting file...
+;
+MSG_ENTER_DISK
+Nächste Disk einlegen in %s
+; Insert next floppy into %s
+;
+MSG_CHUNK_CUSTOM
+Custom Size
+; Custom Size
+;
+MSG_CHUNK_FLOPPY_FFS
+865K (DD Floppy - FFS)
+; 865K (DD Floppy - FFS)
+;
+MSG_CHUNK_HD_FLOPPY_FFS
+1733K (HD Floppy - FFS)
+; 1733K (HD Floppy - FFS)
+;
+MSG_CHUNK_FLOPPY_OFS
+824K (DD Floppy - OFS)
+; 824K (DD Floppy - OFS)
+;
+MSG_CHUNK_HD_FLOPPY_OFS
+1651K (HD Floppy - OFS)
+; 1651K (HD Floppy - OFS)
+;
+MSG_CHUNK_MSDOS
+713K (DD MS-DOS)
+; 713K (DD MS-DOS)
+;
+MSG_CHUNK_MSDOS_HD
+1423K (HD MS-DOS)
+; 1423K (HD MS-DOS)
+;
+MSG_CHUNK_LAST
+-
+; -
+;

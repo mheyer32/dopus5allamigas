@@ -1,0 +1,140 @@
+## version $VER: format.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_FORMAT_TITLE
+Datenträger formatieren
+; Format
+;
+MSG_FORMAT_FORMAT
+_Formatieren
+; _Format
+;
+MSG_FORMAT_QUICK_FORMAT
+_Schnell
+; _Quick Format
+;
+MSG_FORMAT_CANCEL
+_Abbruch
+; _Cancel
+;
+MSG_FORMAT_NAME
+_Name
+; _Name
+;
+MSG_FORMAT_FFS
+Fas_t File System
+; F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL
+_Internationaler Modus
+; _International Mode
+;
+MSG_FORMAT_CACHING
+_Verzeichnispufferung
+; _Directory Caching
+;
+MSG_FORMAT_TRASHCAN
+_Mülleimer
+; _Put Trashcan
+;
+MSG_FORMAT_INSTALL
+_Bootfähig ?
+; _Make Bootable
+;
+MSG_FORMAT_VERIFY
+_Überprüfen
+; _Verify
+;
+MSG_FORMAT_DEFAULT_NAME
+Leer
+; Empty
+;
+MSG_FORMAT_STATUS
+%ld Spuren, %ld Bytes/Spur, %s
+; %ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE
+Öffne Gerät...
+; Opening device...
+;
+MSG_CHECKING_DISK
+Überprüfe Disk...
+; Checking disk...
+;
+MSG_CANT_OPEN_DEVICE
+Kann Gerät nicht öffnen!
+; Unable to open device!
+;
+MSG_NO_DISK_PRESENT
+Keine Disk im Laufwerk!
+; No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED
+Disk ist schreibgeschützt!
+; Disk is write-protected!
+;
+MSG_RETRY_CANCEL
+Wiederholen|Abbruch
+; Retry|Cancel
+;
+MSG_PROCEED_CANCEL
+Weiter|Abbruch
+; Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK
+Disk im Laufwerk %s ist nicht leer!\n\
+%s enthält %s.\n\
+Alle Daten werden gelöscht.\n\
+Wählen Sie 'Weiter' um fortzufahren.
+; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+; All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED
+Abgebrochen.
+; Aborted.
+;
+MSG_FORMAT_INITIALISING
+Initialisiere Disk...
+; Initialising disk...
+;
+MSG_FORMAT_FORMATTING
+Formatiere...
+; Formatting...
+;
+MSG_FORMAT_FORMATERROR
+Format error on track %ld.
+; Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR
+Verify error on track %ld.
+; Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL
+Format successful!
+; Format successful!
+;
+MSG_FORMAT_FAILED
+Format failed.
+; Format failed.
+;
+MSG_FORMAT_SETTING_UP
+Setting up...
+; Setting up...
+;
+MSG_FORMAT_CLEANING_UP
+Cleaning up...
+; Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH
+Making Trashcan...
+; Making Trashcan...
+;
+MSG_INSTALLING_DISK
+Installing Bootblock...
+; Installing Bootblock...
+;
+MSG_FORMAT_DESC
+Format disks
+; Format disks
+;
