@@ -555,7 +555,9 @@ void backdrop_draw_object(
 	{
 #ifndef USE_DRAWICONSTATE
 		// Need to clear if transparent
+		#if !defined(__MORPHOS__)
 		if (!has_border)
+		#endif
 			EraseRect(rp,rect.MinX,rect.MinY,rect.MaxX,rect.MaxY);
 #endif
 		object->flags&=~BDOF_STATE_CHANGE;
@@ -629,8 +631,15 @@ void backdrop_draw_object(
 			{
 				IPTR tags[] = { BLTBMA_USESOURCEALPHA, TRUE, TAG_DONE };
 				struct OwnDiskObject *o = (APTR)object->icon;
-				BltBitMapRastPortAlpha(object->state ? o->pngimage2 : o->pngimage,
-					0, 0, rp, left, top, o->pngimage_width, o->pngimage_height, (struct TagItem *)&tags);
+				BltBitMapRastPortAlpha(o->pngimage,
+					0, 0, rp, left, top, o->pngimage_width, o->pngimage_height,
+					(struct TagItem *)&tags);
+
+				if (object->state)
+				{
+					ProcessPixelArray(rp, left, top, o->pngimage_width, o->pngimage_height,
+						POP_TINT, 0x5082ff, NULL);
+				}
 			}
 			else
 			{
