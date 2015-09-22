@@ -23,6 +23,33 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopus.h"
 
+#if defined(__MORPHOS__)
+/*
+ * This is from Ambient source code.
+ */
+#define OWN_MAGIC 0x466f4164
+
+struct OwnDiskObject {
+	struct DiskObject diskobj;
+	struct FreeList *fl;       /* this is safe for WB 3.1 */
+	/* start of additions */
+	ULONG ownmagic;
+	APTR ownptr;
+	APTR png_context;
+	ULONG ttnum;
+	ULONG ttcur;
+	STRPTR path;
+	APTR glowchunk;
+	ULONG glowsize;
+	struct BitMap *pngimage;
+	ULONG pngimage_width;
+	ULONG pngimage_height;
+	struct BitMap *pngimage2;
+};
+
+#define ISOWN(x) (((struct OwnDiskObject *)x)->ownmagic == OWN_MAGIC && ((struct OwnDiskObject *)x)->ownptr == x)
+#endif
+
 // Scroll the icons
 void backdrop_scroll_objects(BackdropInfo *info,short off_x,short off_y)
 {
@@ -448,6 +475,13 @@ void backdrop_draw_object(
 		object->pos.Width = rect.MaxX - rect.MinX + 1;
 		object->pos.Height = rect.MaxY - rect.MinY + 1;
 	}
+#elif defined(__MORPHOS__)
+	if (ISOWN(object->icon))
+	{
+		struct OwnDiskObject *o = (APTR)object->icon;
+		object->pos.Width = o->pngimage_width;
+		object->pos.Height = o->pngimage_height;
+	}
 #endif
 
 	// Get object position
@@ -590,6 +624,17 @@ void backdrop_draw_object(
 				ICONDRAWA_EraseBackground, FALSE,
 				TAG_DONE);
 #else
+			#if defined(__MORPHOS__)
+			if (ISOWN(object->icon))
+			{
+				IPTR tags[] = { BLTBMA_USESOURCEALPHA, TRUE, TAG_DONE };
+				struct OwnDiskObject *o = (APTR)object->icon;
+				BltBitMapRastPortAlpha(object->state ? o->pngimage2 : o->pngimage,
+					0, 0, rp, left, top, o->pngimage_width, o->pngimage_height, (struct TagItem *)&tags);
+			}
+			else
+			{
+			#endif
 			// Get image as a bitmap
 			backdrop_image_bitmap(info,image,imagedata,&bitmap);
 
@@ -672,6 +717,9 @@ void backdrop_draw_object(
 				// Restore mask
 				SetWrMsk(rp,mask);
 			}
+			#if defined(__MORPHOS__)
+			}
+			#endif
 #endif
 
 			// Left out (on desktop), or a link?
