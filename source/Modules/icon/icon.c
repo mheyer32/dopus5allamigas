@@ -877,15 +877,28 @@ if	((draginf = GetDragInfo(
 		ICONDRAWA_EraseBackground, FALSE,
 		TAG_DONE);
 #else
-	// Get icon as bitmap
-	image_to_bitmap( data, image, &bitmap, data->window->RPort->BitMap->Depth );
+	#if defined(__MORPHOS__)
+	if (ISOWN(data->icon))
+	{
+		IPTR tags[] = { BLTBMA_USESOURCEALPHA, TRUE, TAG_DONE };
+		struct OwnDiskObject *o = (APTR)data->icon;
+		BltBitMapRastPortAlpha(data->image_num ? o->pngimage2 : o->pngimage,
+			0, 0, &draginf->drag_rp, 0, 0, o->pngimage_width, o->pngimage_height,
+			(struct TagItem *)&tags);
+	}
+	else
+	#endif
+	{
+		// Get icon as bitmap
+		image_to_bitmap( data, image, &bitmap, data->window->RPort->BitMap->Depth );
 
-	// Draw icon into drag info
-	BltBitMapRastPort(
-		&bitmap, 0, 0,
-		&draginf->drag_rp, 0, 0,
-		image->Width, image->Height,
-		0xc0 );
+		// Draw icon into drag info
+		BltBitMapRastPort(
+			&bitmap, 0, 0,
+			&draginf->drag_rp, 0, 0,
+			image->Width, image->Height,
+			0xc0 );
+	}
 #endif
 
 	// Make mask
@@ -2811,6 +2824,13 @@ if	((region = NewRegion()))
 		image->Height = rect.MaxY - rect.MinY + 1;
 	}
 }
+#elif defined(__MORPHOS__)
+if (ISOWN(data->icon))
+{
+	struct OwnDiskObject *o = (APTR)data->icon;
+	image->Width = o->pngimage_width;
+	image->Height = o->pngimage_height;
+}
 #endif
 
 // Get coordinates to display icon
@@ -2829,15 +2849,28 @@ DrawIconState(
 	ICONDRAWA_EraseBackground, TRUE,
 	TAG_DONE);
 #else
-// Get icon as bitmap
-image_to_bitmap( data, image, &bitmap, data->window->RPort->BitMap->Depth );
+#if defined(__MORPHOS__)
+if (ISOWN(data->icon))
+{
+	IPTR tags[] = { BLTBMA_USESOURCEALPHA, TRUE, TAG_DONE };
+	struct OwnDiskObject *o = (APTR)data->icon;
+	BltBitMapRastPortAlpha(data->image_num ? o->pngimage2 : o->pngimage,
+		0, 0, data->window->RPort, x + data->icon_area.MinX, y + data->icon_area.MinY, o->pngimage_width, o->pngimage_height,
+		(struct TagItem *)&tags);
+}
+else
+#endif
+{
+	// Get icon as bitmap
+	image_to_bitmap( data, image, &bitmap, data->window->RPort->BitMap->Depth );
 
-// Draw icon
-BltBitMapRastPort(
-	&bitmap, 0, 0,
-	data->window->RPort, x+data->icon_area.MinX, y+data->icon_area.MinY,
-	image->Width, image->Height,
-	0xc0 );
+	// Draw icon
+	BltBitMapRastPort(
+		&bitmap, 0, 0,
+		data->window->RPort, x+data->icon_area.MinX, y+data->icon_area.MinY,
+		image->Width, image->Height,
+		0xc0 );
+}
 #endif
 
 // Free region

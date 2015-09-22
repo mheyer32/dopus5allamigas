@@ -273,3 +273,32 @@ BOOL icon_switch_image(icon_data *data,short new);
 extern struct Image oldicon_image;
 
 Att_Node *tooltype_newnode( Att_List *list, char *name, ULONG data, ULONG flags);
+
+/* Ambient icons */
+
+#if defined(__MORPHOS__)
+/*
+ * This is from Ambient source code.
+ */
+#define OWN_MAGIC 0x466f4164
+
+struct OwnDiskObject {
+	struct DiskObject diskobj;
+	struct FreeList *fl;       /* this is safe for WB 3.1 */
+	/* start of additions */
+	ULONG ownmagic;
+	APTR ownptr;
+	APTR png_context;
+	ULONG ttnum;
+	ULONG ttcur;
+	STRPTR path;
+	APTR glowchunk;
+	ULONG glowsize;
+	struct BitMap *pngimage;
+	ULONG pngimage_width;
+	ULONG pngimage_height;
+	struct BitMap *pngimage2;
+};
+
+#define ISOWN(x) (((struct OwnDiskObject *)x)->ownmagic == OWN_MAGIC && ((struct OwnDiskObject *)x)->ownptr == x)
+#endif
