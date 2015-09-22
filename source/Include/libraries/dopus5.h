@@ -1503,7 +1503,7 @@ typedef VOID (*REF_CALLBACK)(ULONG iclass  __asm("d0"), APTR window  __asm("a0")
 	EmulateTags(callback, \
 		ET_RegisterD0, iclass, \
 		ET_RegisterA0, window, \
-		ET_RegisterA1, callbase, \
+		ET_RegisterA1, data, \
 		TAG_DONE)
 #elif defined(__MORPHOS__)
 #define REFCALL(callback, iclass, window, data) \
