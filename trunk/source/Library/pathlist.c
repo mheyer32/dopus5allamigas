@@ -24,8 +24,7 @@ For more information on Directory Opus for Windows please see:
 #include "dopuslib.h"
 
 // Places to look for a path
-static char FAR
-	*path_places[]={
+static const char FAR * const path_places[]={
 		"Workbench",
 		"Initial CLI",
 		"Shell Process",

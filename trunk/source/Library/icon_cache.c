@@ -241,7 +241,14 @@ struct DiskObject *LIBFUNC L_GetCachedDiskObject(
 		return icon;
 		}
 
-
+	#if defined(__MORPHOS__)
+	#define ICONGETA_PNGBitMap                   (ICONA_Dummy + 256) /* struct BitMap ** */
+	{
+		struct BitMap *dummy;
+		if ((icon = GetIconTags(name, ICONGETA_PNGBitMap, &dummy, TAG_DONE)))
+			return icon;
+	}
+	#endif
 
 	// Got NewIcons, and NewIcons is enabled?
 
@@ -295,7 +302,6 @@ struct DiskObject *LIBFUNC L_GetCachedDiskObject(
 
 		// Clear this so we won't think it's cached
 		icon->do_Gadget.SpecialInfo=0;
-		
 	}
 
 	// Caching disabled? Return icon as is
