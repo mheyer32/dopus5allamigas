@@ -1,0 +1,137 @@
+## version $VER: show.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_OK
+_Ok
+; _OK
+;
+MSG_INFO_TITLE
+Bildinformation
+; Picture Information
+;
+MSG_INFO_FILE
+Datei:
+; File:
+;
+MSG_INFO_IMAGE_SIZE
+Bildgröße:
+; Image Size:
+;
+MSG_INFO_COLOURS
+Farben:
+; Colours:
+;
+MSG_INFO_MODE
+Anzeigemodus:
+; Display Mode:
+;
+MSG_INFO_FRAME
+Bild:
+; Frame:
+;
+MSG_INFO_ANIM
+Anim-Typ:
+; Anim Type:
+;
+MSG_INFO_FRAME_NUM
+%ld von %ld bei %ld/Sek
+; %ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT
+_Aspekt:
+; _Aspect:
+;
+MSG_PRINT_IMAGE
+_Bild:
+; _Image:
+;
+MSG_PRINT_SHADE
+_Farbgebung:
+; _Shade:
+;
+MSG_PRINT_PLACEMENT
+_Plazierung:
+; P_lacement:
+;
+MSG_PRINT_FORM_FEED
+_Seitenvorschub
+; _Form Feed
+;
+MSG_PRINT_PRINT_TITLE
+_Titel drucken
+; Print _Title
+;
+MSG_PRINT
+_Drucken
+; _Print
+;
+MSG_PRINT_ASPECT_PORTRAIT
+Horizontal
+; Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE
+Vertikal
+; Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE
+Positiv
+; Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE
+Negativ
+; Negative
+;
+MSG_PRINT_SHADE_BW
+Schwarz/Weiß
+; Black & White
+;
+MSG_PRINT_SHADE_GREY
+Graustufen
+; Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR
+Farbe
+; Colour
+;
+MSG_PRINT_PLACEMENT_CENTER
+Zentrieren
+; Centre
+;
+MSG_PRINT_PLACEMENT_LEFT
+Links
+; Left
+;
+MSG_OPENING_PRINTER
+Öffne Drucker...
+; Opening printer...
+;
+MSG_INITIALISING_PRINTER
+Initialisiere Drucker...
+; Initialising printer...
+;
+MSG_PRINTING_PICTURE
+Drucke Bild...
+; Printing picture...
+;
+MSG_ABORTING_PRINT
+Breche ab...
+; Aborting...
+;
+MSG_ANIM_TITLE
+Animation : %s\tBild %ld von %ld\t%ld x %ld x %ld\n\n
+; Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE
+Bild : %s\t%ld x %ld x %ld\n\n\
+ 
+; Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE
+Bild-Typ:
+; Picture Type:
+;
+MSG_SHOW_DESC
+Zeige Bilder
+; Show pictures
+;

@@ -1,0 +1,68 @@
+## version $VER: play.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_NEXT
+_Nächste
+; _Next
+;
+MSG_ABORT
+_Abbruch
+; _Abort
+;
+MSG_PLAY_TITLE
+Abspielen
+; Play
+;
+MSG_FILENAME
+Datei:
+; File:
+;
+MSG_LENGTH
+Länge:
+; Length:
+;
+MSG_TYPE
+Typ:
+; Type:
+;
+MSG_TYPE_STEREO
+Stereo
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Roh
+; Raw
+;
+MSG_STATUS
+Status:
+; Status:
+;
+MSG_STATUS_LOADING
+Lese Datei...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Entpacke...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Spiele Tondatei...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Tondateien abspielen
+; Play sound files
+;
+MSG_PLAY_NEXT
+Nächste
+; Next
+;
+MSG_PLAY_ABORT
+Abbruch
+; Abort
+;

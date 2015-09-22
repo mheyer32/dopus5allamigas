@@ -1,0 +1,208 @@
+## version $VER: diskinfo.catalog 56.0 (16.10.96)
+## codeset 0
+## language deutsch
+;
+MSG_DISKINFO_TITLE
+Datenträger-Informationen
+; %b (%s) Information
+;
+MSG_DISKINFO_DESC
+Zeige Informationen über Gerät
+; Show information about a device
+;
+MSG_OK
+_OK
+; _OK
+;
+MSG_CANCEL
+_Abbruch
+; _Cancel
+;
+MSG_NAME
+_Name:
+; _Name:
+;
+MSG_HANDLER
+Handler:
+; Handler:
+;
+MSG_TYPE
+Typ:
+; Type:
+;
+MSG_STATE
+Status:
+; State:
+;
+MSG_USED
+Benutzt:
+; Used:
+;
+MSG_FREE
+Frei:
+; Free:
+;
+MSG_CAPACITY
+Gesamt:
+; Total:
+;
+MSG_UNIT
+Einheit
+; unit
+;
+MSG_UNKNOWN
+unbekannt
+; unknown
+;
+MSG_READ_WRITE
+Lesen/Schreiben
+; Read/Write
+;
+MSG_READ_ONLY
+Nur Lesen
+; Read Only
+;
+MSG_VALIDATING
+Validiere
+; Validating
+;
+MSG_BYTES
+ Bytes
+;  bytes
+;
+MSG_ERROR
+%ld Fehler
+; %ld error
+;
+MSG_ERRORS
+%ld Fehler
+; %ld errors
+;
+MSG_DOSTYPE_1
+OFS
+; Old File System
+;
+MSG_DOSTYPE_2
+FFS
+; Fast File System
+;
+MSG_DOSTYPE_3
+OFS (International)
+; Old File System (International)
+;
+MSG_DOSTYPE_4
+FFS (International)
+; Fast File System (International)
+;
+MSG_DOSTYPE_5
+OFS (mit Verzeichnispufferung)
+; Old File System (Dir-Caching)
+;
+MSG_DOSTYPE_6
+FFS (mit Verzeichnispufferung)
+; Fast File System (Dir-Caching)
+;
+MSG_DOSTYPE_7
+MS-DOS (CrossDOS)
+; MS-DOS (CrossDOS)
+;
+MSG_DOSTYPE_8
+AmiFileSafe Pro
+; Ami-FileSafe Pro
+;
+MSG_DOSTYPE_9
+AmiFileSafe User
+; Ami-FileSafe User
+;
+MSG_DOSTYPE_10
+AmiFileSafe Multi
+; Ami-FileSafe Multi
+;
+MSG_DOSTYPE_11
+PFS Diskette
+; PFS Floppy
+;
+MSG_DOSTYPE_12
+PFS Festplatte
+; PFS Hard Drive
+;
+MSG_DOSTYPE_13
+Envoy Network Volume
+; Envoy Network Volume
+;
+MSG_DOSTYPE_14
+Personal File System 2
+; Personal File System 2
+;
+MSG_DOSTYPE_15
+Personal File System 3
+; Personal File System 3
+;
+MSG_DOSTYPE_16
+Personal File System 2 SCSI
+; Personal File System 2 SCSI
+;
+MSG_DOSTYPE_17
+Personal File System 3 SCSI
+; Personal File System 3 SCSI
+;
+MSG_DOSTYPE_18
+Personal File System Multiuser
+; Personal File System Multiuser
+;
+MSG_DOSTYPE_19
+Fast File System (FFS-LNFS)
+; Fast File System (FFS-LNFS)
+;
+MSG_DOSTYPE_20
+Vector Based File System
+; Vector Based File System
+;
+MSG_DOSTYPE_21
+Smart File System 0
+; Smart File System 0
+;
+MSG_DOSTYPE_22
+Smart File System 1
+; Smart File System 1
+;
+MSG_DOSTYPE_23
+Smart File System 2
+; Smart File System 2
+;
+MSG_DOSTYPE_24
+Smart File System 3
+; Smart File System 3
+;
+MSG_DOSTYPE_25
+JX File System
+; JX File System
+;
+MSG_DOSTYPE_26
+Box File System
+; Box File System
+;
+MSG_DOSTYPE_27
+FAT32 File System
+; FAT32 File System
+;
+MSG_DOSTYPE_28
+exFat File System
+; exFat File System
+;
+MSG_DOSTYPE_29
+FUSE ext2 File System
+; FUSE ext2 File System
+;
+MSG_DOSTYPE_30
+FUSE HFS
+; FUSE HFS
+;
+MSG_DOSTYPE_31
+NTFS
+; NTFS
+;
+MSG_DOSTYPE_32
+Swap
+; Swap
+;

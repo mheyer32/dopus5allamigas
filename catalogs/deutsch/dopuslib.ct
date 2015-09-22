@@ -1,0 +1,69 @@
+## version $VER: dopuslib.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_OK
+Ok
+; OK
+;
+MSG_SELECT_FILE
+Datei wählen
+; Select File
+;
+MSG_SELECT_DIRECTORY
+Verzeichnis wählen
+; Select Directory
+;
+MSG_SELECT_FONT
+Zeichensatz wählen
+; Select Font
+;
+MSG_FONT_DRAWMODE
+Modus:
+; Mode:
+;
+MSG_FONT_TEXT
+Text
+; Text
+;
+MSG_FONT_FIELD_TEXT
+Text+Feld
+; Text+Field
+;
+MSG_SIZE_FIT
+9999%%
+; 9999%%
+;
+MSG_SIZE
+%ld%%
+; %ld%%
+;
+MSG_ABORT
+Abbruch
+; Abort
+;
+MSG_FILE_FIT
+9999 v. 9999
+; 9999 of 9999
+;
+MSG_FILE
+%ld / %ld
+; %ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus Anfrage
+; Directory Opus Request
+;
+MSG_UNABLE_TO_OPEN_TOOL
+Kann Program '%s' nicht öffnen
+; Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING
+Opus hat lange genug auf '%s' gewartet.\n\
+Noch länger warten?
+; Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL
+Warten|Abbruch
+; Wait|Cancel
+;

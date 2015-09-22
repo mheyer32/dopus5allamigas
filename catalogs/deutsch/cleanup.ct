@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_PLEASE_WAIT
+Bitte warten...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - Geist der Säuberung
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Säuberungserhaltung durchführen
+; Perform cleanup maintenance
+;

@@ -1257,7 +1257,7 @@ This command allows you to trigger both internal and custom scripts.
 {Qa} parameter.
 
 For example,
-        + @{b}dopus script 'DOpus5:ARexx/ArcDir.dopus5' 'RAM:foo.lha'
+        + @{b}dopus script 'DOpus5:ARexx/ArcDir.dopus5' 'RAM:foo.lha'@{ub}
 
 @endnode
 @NODE dopus_send "DOpus Magellan II ARexx: 'dopus send'."
@@ -3398,7 +3398,7 @@ This command lets you query a value you have previously set with @{" lister set 
 @{bg fill} handle @{bg back} is the handle of the lister in question.
 @{bg fill} name @{bg back} is the name for which a value is queried.
 For example,
-        + @{b}lister query 121132636 value MyName
+        + @{b}lister query 121132636 value MyName@{ub}
         > @{i}Jon Citizen@{ui}
 
 
@@ -4531,7 +4531,7 @@ This command lets you associate your own data with a lister in the form of
 name/value pairs.  The lister will maintain the values until it is closed.
 
 For example,
-        + @{b}lister set 121132636 value MyName "Jon Citizen"
+        + @{b}lister set 121132636 value MyName "Jon Citizen"@{ub}
 
 
 @{fg shine}See also:@{fg text}

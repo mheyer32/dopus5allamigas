@@ -1,0 +1,164 @@
+## version $VER: icon.catalog 5.6 (01.06.97)
+## codeset 0
+## language deutsch
+;
+MSG_READING_FILE
+Lese Datei '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Kann Datei '%s' nicht öffnen!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s %s %ld Zeilen, %ld Bytes   Modus=%s, Tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Datei
+; File
+;
+MSG_MENU_NEXT
+Nächste
+; Next
+;
+MSG_MENU_SEARCH
+Suchen...
+; Search...
+;
+MSG_MENU_REPEAT
+Suche wiederholen
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Drucken...
+; Print...
+;
+MSG_MENU_QUIT
+Verlassen
+; Quit
+;
+MSG_MENU_SETTINGS
+Einstellungen
+; Settings
+;
+MSG_MENU_TAB
+Tabulatorgröße
+; Tab Size
+;
+MSG_MENU_SAVE
+Speichern
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Geben Sie den Suchbegriff ein.
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+Groß/Klein _egal
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Platzhalter
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+_Nur ganze Worte
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Rückwärts suchen
+; _Reverse Search
+;
+MSG_OK_BUTTON
+Ok
+; OK
+;
+MSG_CANCEL_BUTTON
+Abbruch
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+String nicht gefunden.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Lese Textdateien
+; Read text files
+;
+MSG_MENU_MODE
+Modus
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normal
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hex
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Eigener Bildschirm
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Bildschirm wählen...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Font wählen...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Directory Opus Textanzeiger
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Speichern als...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Dateinamen eingeben
+; Enter Filename
+;
+MSG_IO_ERROR
+I/O-Fehler
+; IO Error
+;
+MSG_ERROR_CODE
+DOS-Fehler
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Zum Editor...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Editor auswählen...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+Ok|Abbruch
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Funktion zum Editoraufruf eingeben
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Lese Datei...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Zähle Zeilen...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

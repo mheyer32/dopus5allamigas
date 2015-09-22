@@ -3,7 +3,7 @@
 @$VER: Dopus5Guide 57.9 (12.5.2014)
 @author "Mark Anderson, Andrew Dunbar, Dr Greg Perry, Leo Davidson and Dave Clarke"
 @(c) "Directory Opus 5 Help Guide (c) GPSoftware 1999"
-@(c) "Directory Opus 5 Help Guide (c) DOPUS5 Open Source Team 2012-2014
+@(c) "Directory Opus 5 Help Guide (c) DOPUS5 Open Source Team 2012-2014"
 @index Index
 
 @remark v57.5 - added sections on DOpus versions and Environment variables.
@@ -903,7 +903,7 @@ RECON/S       Causes the connection to be re-established if lost for any
 
 The FTPConnect command now accepts industry standard URL syntax such as:-
 
-@{bg fill}@{fg shine} user:password@host:port/path @{fg text}@{bg back} (all but host are optional)
+@{bg fill}@{fg shine} user:password\@host:port/path @{fg text}@{bg back} (all but host are optional)
 
 * Many anonymous FTP sites have a maximum number of users.  If you attempt to
   log in to such a site without using a log window you will not see the

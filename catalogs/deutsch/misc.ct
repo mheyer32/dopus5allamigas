@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 5.5 (03.09.96)
+## codeset 0
+## language deutsch
+;
+MSG_BEEP_DESC
+Erzeugt einen Piepton
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+L‰ﬂt die Anzeige aufblitzen
+; Flashes the display
+;
+MSG_ALARM_DESC
+Erzeugt einen Alarmton
+; Sounds an alarm
+;
