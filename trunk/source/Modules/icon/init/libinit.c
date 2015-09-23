@@ -1006,6 +1006,11 @@ int UserLibInit()
 		D(bug("can't open dopus5.library\n"));
 		return 1;
 	}	
+
+	#if defined(__MORPHOS__)
+	if ((CyberGfxBase = OpenLibrary("cybergraphics.library", 51)) == NULL)
+		return 10;
+	#endif
 	
 #ifdef __amigaos4__
 	if (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
