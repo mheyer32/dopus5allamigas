@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 0.1 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_PLEASE_WAIT
+Por favor, espere....
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - A limpar os Dados
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+A realizar a limpeza de manutenção
+; Perform cleanup maintenance
+;

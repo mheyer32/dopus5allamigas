@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 1.0 (21.02.97)
+## codeset 0
+## language italiano
+;
+MSG_PLEASE_WAIT
+Attendere, prego...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - Pulizia Djinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Esegue pulizia di manutenzione
+; Perform cleanup maintenance
+;

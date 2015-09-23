@@ -1,0 +1,260 @@
+## version $VER: filetype.catalog 1.1 (8.6.97)
+## codeset 0
+## language svenska
+;
+MSG_FIND_DESC
+Hittar filtypen för en fil
+; Find filetype for a file
+;
+MSG_FIND_TITLE
+Filtypshittare
+; Filetype Finder
+;
+MSG_FIND_PRI
+Pri
+; Pri
+;
+MSG_FIND_ID
+ID
+; ID
+;
+MSG_FIND_FILETYPE
+Filtyp
+; Filetype
+;
+MSG_FIND_FILE
+Fil...
+; File...
+;
+MSG_FIND_USE
+_Använd
+; _Use
+;
+MSG_FIND_INSTALL
+_Installera
+; _Install
+;
+MSG_FIND_CREATE
+_Skapa...
+; _Create
+;
+MSG_FIND_EDIT
+_Redigera...
+; _Edit
+;
+MSG_FIND_CANCEL
+A_vbryt
+; C_ancel
+;
+MSG_FIND_SCANNING
+Läser filtyper...
+; Scanning filetypes...
+;
+MSG_FIND_MATCHING
+Matchar filtyper...
+; Matching filetypes...
+;
+MSG_NONE_FOUND_1
+Ingen filtyp har hittats som motsvarar
+; No filetype has been found that
+;
+MSG_NONE_FOUND_2
+den valda filen. Vill du skapa en ny
+; matches the selected file. Do you
+;
+MSG_NONE_FOUND_3
+filtyp för den här filen?
+; wish to create a new filetype for
+;
+MSG_NONE_FOUND_4
+\x00
+; this file?
+;
+MSG_NONE_FOUND_5
+
+; 
+;
+MSG_NONE_FOUND_6
+
+; 
+;
+MSG_NONE_FOUND_7
+
+; 
+;
+MSG_STORED_FOUND_1
+Ingen installerad filtyp motsvarar den
+; No installed filetype matches the
+;
+MSG_STORED_FOUND_2
+valda filen. Däremot finns det en
+; selected file. However, there is
+;
+MSG_STORED_FOUND_3
+filtyp i "Storage" som motsvarar den.
+; a filetype in storage which does match.
+;
+MSG_STORED_FOUND_4
+Vill du installera den filtypen nu,
+; Do you wish to install this filetype 
+;
+MSG_STORED_FOUND_5
+eller vill du skapa en ny?
+; now or create a new one?
+;
+MSG_STORED_FOUND_6
+
+; 
+;
+MSG_STORED_FOUND_7
+
+; 
+;
+MSG_BETTER_FOUND_1
+Det finns en filtyp i "Storage" som
+; There is a filetype in storage which
+;
+MSG_BETTER_FOUND_2
+motsvarar den valda filen, och som har
+; matches the selected file and has a
+;
+MSG_BETTER_FOUND_3
+en högre prioritet än den installerade
+; higher priority than the currently
+;
+MSG_BETTER_FOUND_4
+filtypen för den här filen. Vill du
+; installed filetype for this file. Do
+;
+MSG_BETTER_FOUND_5
+använda den nuvarande filtypen,
+; you wish to use the current filetype,
+;
+MSG_BETTER_FOUND_6
+installera filtypen i "Storage", eller
+; install the stored filetype, or create
+;
+MSG_BETTER_FOUND_7
+vill du skapa en ny?
+; a new one?
+;
+MSG_INSTALLED_FOUND_1
+Det finns en installerad filtyp som
+; There is a filetype installed
+;
+MSG_INSTALLED_FOUND_2
+motsvarar den valda filen. Vill du
+; which matches the selected file.
+;
+MSG_INSTALLED_FOUND_3
+använda den filtypen, eller vill du
+; Do you wish to use this Filetype
+;
+MSG_INSTALLED_FOUND_4
+skapa en ny?
+; or create a new one?
+;
+MSG_INSTALLED_FOUND_5
+
+; 
+;
+MSG_INSTALLED_FOUND_6
+
+; 
+;
+MSG_INSTALLED_FOUND_7
+
+; 
+;
+MSG_CREATE_DESC
+Skapar en ny filtyp
+; Create new filetype
+;
+MSG_CREATE_TITLE
+Filtypsskapare
+; Filetype Creator
+;
+MSG_CREATE_FILES
+_Filer...
+; Files...
+;
+MSG_CREATE_ADD
+N_y
+; _Add
+;
+MSG_CREATE_DELETE
+B_ort
+; _Delete
+;
+MSG_CREATE_CLEAR
+R_ensa
+; _Clear
+;
+MSG_CREATE_FILETYPE
+Filtyp...
+; Filetype...
+;
+MSG_CREATE_NAME
+_Namn
+;  _Name:
+;
+MSG_CREATE_IFF
+_IFF
+;   _IFF:
+;
+MSG_CREATE_GROUP
+_Grupp
+; _Group:
+;
+MSG_CREATE_ID
+I_D
+;    I_D:
+;
+MSG_CREATE_BYTES
+_Byte
+; _Bytes:
+;
+MSG_CREATE_CASE
+Läge
+; Case
+;
+MSG_CREATE_NOCASE
+Ej läge
+; No Case
+;
+MSG_CREATE_EDIT
+_Redigera
+; _Edit
+;
+MSG_CREATE_SAVE
+_Spara
+; _Save
+;
+MSG_CREATE_CANCEL
+A_vbryt
+; _Cancel
+;
+MSG_CREATE_ADD_FILE
+Lägg till en fil...
+; Add a file...
+;
+MSG_CREATE_WARN_EDITED
+Varning!\n\n\
+Du har ändrat bland filtyperna.\n\
+Om du fortsätter kommer dina\n\
+ändringar att försvinna.
+; WARNING\n\nYou have used the editor.\nIf you continue your changes will be lost...
+;
+MSG_CREATE_CONTINUE_CANCEL
+Fortsätt|Avbryt
+; Continue|Cancel
+;
+MSG_REPLACE_CANCEL
+Ersätt|Avbryt
+; Replace|Cancel
+;
+MSG_FILETYPE_EXISTS
+Filtypen "%s"\n\
+finns redan. Vill du ersätta den?
+; Filetype '%s' exists.\nDo you wish to replace it?
+;

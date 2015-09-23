@@ -1,0 +1,140 @@
+## version $VER: format.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_FORMAT_TITLE
+Formater Disk
+; Format
+;
+MSG_FORMAT_FORMAT
+_Formater
+; _Format
+;
+MSG_FORMAT_QUICK_FORMAT
+_Hurtigformater
+; _Quick Format
+;
+MSG_FORMAT_CANCEL
+_Avbryt
+; _Cancel
+;
+MSG_FORMAT_NAME
+_Navn
+; _Name
+;
+MSG_FORMAT_FFS
+Fa_st File System
+; F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL
+_Internasjonal Modus
+; _International Mode
+;
+MSG_FORMAT_CACHING
+_Directory Caching
+; _Directory Caching
+;
+MSG_FORMAT_TRASHCAN
+_Lag Søppelbøtte
+; _Put Trashcan
+;
+MSG_FORMAT_INSTALL
+_Gjør Oppstartsbar
+; _Make Bootable
+;
+MSG_FORMAT_VERIFY
+_Verifisér
+; _Verify
+;
+MSG_FORMAT_DEFAULT_NAME
+Tom
+; Empty
+;
+MSG_FORMAT_STATUS
+%ld sylindre, %ld bytes/syl, %s
+; %ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE
+Åpner enhet...
+; Opening device...
+;
+MSG_CHECKING_DISK
+Sjekker disk...
+; Checking disk...
+;
+MSG_CANT_OPEN_DEVICE
+Kunne ikke åpne enhet!
+; Unable to open device!
+;
+MSG_NO_DISK_PRESENT
+Ingen disk i enheten!
+; No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED
+Disken er skrivebeskyttet!
+; Disk is write-protected!
+;
+MSG_RETRY_CANCEL
+Prøv igjen|Avbryt
+; Retry|Cancel
+;
+MSG_PROCEED_CANCEL
+Fortsett|Avbryt
+; Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK
+Disken i enhet %s er ikke tom!\n\
+Volum '%s' inneholder %s.\n\
+Alle data vil gå tapt.\n\
+Velg Fortsett for å fortsette.
+; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+; All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED
+Avbrutt.
+; Aborted.
+;
+MSG_FORMAT_INITIALISING
+Initialiserer disk...
+; Initialising disk...
+;
+MSG_FORMAT_FORMATTING
+Formaterer...
+; Formatting...
+;
+MSG_FORMAT_FORMATERROR
+Format error on track %ld.
+; Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR
+Verify error on track %ld.
+; Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL
+Format successful!
+; Format successful!
+;
+MSG_FORMAT_FAILED
+Format failed.
+; Format failed.
+;
+MSG_FORMAT_SETTING_UP
+Setting up...
+; Setting up...
+;
+MSG_FORMAT_CLEANING_UP
+Cleaning up...
+; Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH
+Making Trashcan...
+; Making Trashcan...
+;
+MSG_INSTALLING_DISK
+Installing Bootblock...
+; Installing Bootblock...
+;
+MSG_FORMAT_DESC
+Format disks
+; Format disks
+;

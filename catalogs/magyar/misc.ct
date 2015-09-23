@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 2.1 (22.9.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_BEEP_DESC
+Rövid sípszó
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+A képernyõ megvillantása
+; Flashes the display
+;
+MSG_ALARM_DESC
+Riasztó megszólaltatása
+; Sounds an alarm
+;

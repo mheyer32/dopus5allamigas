@@ -1,0 +1,69 @@
+## version $VER: dopuslib.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_OK
+OK
+; OK
+;
+MSG_SELECT_FILE
+Velg Fil
+; Select File
+;
+MSG_SELECT_DIRECTORY
+Velg Katalog
+; Select Directory
+;
+MSG_SELECT_FONT
+Velg Font
+; Select Font
+;
+MSG_FONT_DRAWMODE
+Modus:
+; Mode:
+;
+MSG_FONT_TEXT
+Tekst
+; Text
+;
+MSG_FONT_FIELD_TEXT
+Tekst+Felt
+; Text+Field
+;
+MSG_SIZE_FIT
+9999%%
+; 9999%%
+;
+MSG_SIZE
+%ld%%
+; %ld%%
+;
+MSG_ABORT
+Avbryt
+; Abort
+;
+MSG_FILE_FIT
+9999 av 9999
+; 9999 of 9999
+;
+MSG_FILE
+%ld av %ld
+; %ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus Forespørsel
+; Directory Opus Request
+;
+MSG_UNABLE_TO_OPEN_TOOL
+Greide ikke åpne verktøyet '%s'
+; Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING
+Opus er drittlei av å vente på '%s'\n\
+Vente lengre?
+; Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL
+Vent|Avbryt
+; Wait|Cancel
+;

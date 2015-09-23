@@ -1,0 +1,184 @@
+## version $VER: print.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_PRINTREQ_TITLE
+Utskrift
+; Print
+;
+MSG_PRINTING_TITLE
+Utskrift pågår...
+; Printing...
+;
+MSG_PRINT
+_Utskrift
+; _Print
+;
+MSG_CANCEL
+_Avbryt
+; _Cancel
+;
+MSG_TEXT
+Tekst
+; Text
+;
+MSG_HEADER_FOOTER
+Topp-/Bunntekst
+; Header/Footer
+;
+MSG_PRINT_QUALITY
+_Kvalitet
+; _Quality
+;
+MSG_PRINT_SPACING
+_Linjeavstand
+; _Spacing
+;
+MSG_PRINT_PITCH
+Skri_ftstørrelse
+; P_itch
+;
+MSG_PRINT_LEFT_MARGIN
+_Venstremarg
+; _Left Margin
+;
+MSG_PRINT_RIGHT_MARGIN
+_Høyremarg
+; _Right Margin
+;
+MSG_PRINT_PAGE_LENGTH
+A_rklengde
+; P_age Length
+;
+MSG_PRINT_TAB_SIZE
+_Tabulator
+; _Tab Size
+;
+MSG_PRINT_QUALITY_DRAFT
+Kladd
+; Draft
+;
+MSG_PRINT_QUALITY_LETTER
+Brev
+; Letter
+;
+MSG_PRINT_SPACING_6
+6 LPI
+; 6 LPI
+;
+MSG_PRINT_SPACING_8
+8 LPI
+; 8 LPI
+;
+MSG_PRINT_PITCH_PICA
+Pica
+; Pica
+;
+MSG_PRINT_PITCH_ELITE
+Elite
+; Elite
+;
+MSG_PRINT_PITCH_FINE
+Fine
+; Fine
+;
+MSG_PRINT_CONFIGURATION
+innstillin_ger
+; c_onfiguration...
+;
+MSG_PRINT_HEADER
+Topptekst
+; Header
+;
+MSG_PRINT_FOOTER
+Bunntekst
+; Footer
+;
+MSG_PRINT_TITLE
+Titt_el
+; Titl_e
+;
+MSG_PRINT_DATE
+_Dato
+; _Date
+;
+MSG_PRINT_PAGE
+Side _nr.
+; Pa_ge
+;
+MSG_PRINT_STYLE
+St_il
+; St_yle
+;
+MSG_PRINT_STYLE_NORMAL
+Normal
+; Normal
+;
+MSG_PRINT_STYLE_BOLD
+Halvfet
+; Bold
+;
+MSG_PRINT_STYLE_ITALICS
+Kursiv
+; Italics
+;
+MSG_PRINT_STYLE_UNDERLINE
+Understreket
+; Uline
+;
+MSG_ABORT
+Avbryt
+; Abort
+;
+MSG_OK
+OK
+; OK
+;
+MSG_OPENING_PRINTER
+Åpner skriver...
+; Opening printer...
+;
+MSG_CANT_OPEN_PRINTER
+Kunne ikke åpne skriver!
+; Couldn't open printer!
+;
+MSG_PRINTER_ERROR
+En feil oppsto (%ld) under utskrift.
+; An error occurred (%ld) while printing.
+;
+MSG_REALLY_ABORT
+Virkelig avbryte utskrift?
+; Really abort print?
+;
+MSG_RETRY_CANCEL
+Prøv igjen|Avbryt
+; Retry|Cancel
+;
+MSG_ABORT_RESUME
+Avbryt|Fortsett
+; Abort|Continue
+;
+MSG_PRINT_PAGENUM
+Side 
+; Page 
+;
+MSG_PRINT_DESC
+Skriv ut tekstfiler
+; Print text files
+;
+MSG_PRINT_OUTPUT
+Ut_skrift til
+; Outp_ut
+;
+MSG_PRINT_OUTPUT_PRINTER
+Skriver
+; Printer
+;
+MSG_PRINT_OUTPUT_FILE
+Fil
+; File
+;
+MSG_SELECT_OUTPUT_FILE
+Velg Utskriftsfil
+; Select Output File
+;

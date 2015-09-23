@@ -1,0 +1,181 @@
+## version $VER: join.catalog 0.5 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_JOIN_DESC
+Juntar os ficheiros
+; Join files together
+;
+MSG_SPLIT_DESC
+Cortar um ficheiro por partes
+; Split a file into parts
+;
+MSG_JOIN_LISTER
+Juntar os _ficheiros...
+; Join _files...
+;
+MSG_JOIN_ADD
+_Adicionar
+; _Add
+;
+MSG_JOIN_REMOVE
+_Eliminar
+; _Remove
+;
+MSG_JOIN_CLEAR
+_Limpar
+; C_lear
+;
+MSG_JOIN_MOVE_UP
+_Acima
+; _Up
+;
+MSG_JOIN_MOVE_DOWN
+A_baixo
+; _Down
+;
+MSG_JOIN_JOIN
+_Juntar
+; _Join
+;
+MSG_JOIN_CANCEL
+_Cancelar
+; _Cancel
+;
+MSG_JOIN_TITLE
+Juntar
+; Join
+;
+MSG_JOIN_TO
+A:
+; _To:
+;
+MSG_JOIN_SELECT_FILE
+Seleccionar o Ficheiro
+; Select File
+;
+MSG_REPLACE_RENAME_ABORT
+Substituir|Mudar o nome|Abortar
+; Replace|Rename|Abort
+;
+MSG_FILE_EXISTS
+O ficheiro '%s' já existe!
+; File '%s' already exists!
+;
+MSG_ENTER_FILENAME
+Introduza o nome do ficheiro de destino
+; Enter destination filename.
+;
+MSG_OK
+Sim
+; Ok
+;
+MSG_CANCEL
+Cancelar
+; Cancel
+;
+MSG_JOINING_FILES
+A juntar os ficheiros...
+; Joining files...
+;
+MSG_JOIN_ERROR_OPENING_OUTPUT
+Não consegui abrir '%s' para sair!
+; Unable to open '%s' for output!
+;
+MSG_JOIN_ERROR
+%s\n\
+Erro %ld %s
+; %s\nError %ld %s
+;
+MSG_JOIN_RETRY
+Voltar a tentar
+; Retry
+;
+MSG_REMOVE
+Eliminar
+; Remove
+;
+MSG_JOIN_ERROR_OPENING_INPUT
+Não consegui abrir '%s'!
+; Unable to open '%s'!
+;
+MSG_JOIN_ERROR_READING
+Erro ao ler de '%s'!
+; Error reading from '%s'!
+;
+MSG_SPLIT_FROM
+repartir o _ficheiro
+; Split _file
+;
+MSG_SPLIT_STEM
+Contem
+; _With stem
+;
+MSG_SPLIT_INTO
+Tamanho do segmento
+; _Chunk size
+;
+MSG_SPLIT_SPLIT
+_Repartir
+; _Split
+;
+MSG_SPLIT_SKIP
+Saltar
+; S_kip
+;
+MSG_SPLIT_TO
+_A
+; _To
+;
+MSG_SPLIT_TITLE
+Repartir
+; Split
+;
+MSG_SPLIT_ERROR_OPENING_FILE
+Não consegui abrir '%s'!
+; Unable to open '%s'!
+;
+MSG_SPLIT_NO_MEMORY
+Não tenho memória suficiente!
+; No memory!
+;
+MSG_SPLITTING_FILE
+A repartir o ficheiro...
+; Splitting file...
+;
+MSG_ENTER_DISK
+Insira a disquete seguinte em %s
+; Insert next floppy into %s
+;
+MSG_CHUNK_CUSTOM
+Custom Size
+; Custom Size
+;
+MSG_CHUNK_FLOPPY_FFS
+865K (DD Floppy - FFS)
+; 865K (DD Floppy - FFS)
+;
+MSG_CHUNK_HD_FLOPPY_FFS
+1733K (HD Floppy - FFS)
+; 1733K (HD Floppy - FFS)
+;
+MSG_CHUNK_FLOPPY_OFS
+824K (DD Floppy - OFS)
+; 824K (DD Floppy - OFS)
+;
+MSG_CHUNK_HD_FLOPPY_OFS
+1651K (HD Floppy - OFS)
+; 1651K (HD Floppy - OFS)
+;
+MSG_CHUNK_MSDOS
+713K (DD MS-DOS)
+; 713K (DD MS-DOS)
+;
+MSG_CHUNK_MSDOS_HD
+1423K (HD MS-DOS)
+; 1423K (HD MS-DOS)
+;
+MSG_CHUNK_LAST
+-
+; -
+;

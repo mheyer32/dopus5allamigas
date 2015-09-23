@@ -1,0 +1,136 @@
+## version $VER: show.catalog 2.0 (13.2.96)
+## codeset 0
+## language nederlands
+;
+MSG_OK
+_Ok
+; _OK
+;
+MSG_INFO_TITLE
+Afbeeldinginformatie
+; Picture Information
+;
+MSG_INFO_FILE
+Bestand:
+; File:
+;
+MSG_INFO_IMAGE_SIZE
+Grootte:
+; Image Size:
+;
+MSG_INFO_COLOURS
+Kleuren:
+; Colours:
+;
+MSG_INFO_MODE
+Weergavemodus:
+; Display Mode:
+;
+MSG_INFO_FRAME
+Beeld:
+; Frame:
+;
+MSG_INFO_ANIM
+Animatiesoort:
+; Anim Type:
+;
+MSG_INFO_FRAME_NUM
+%ld van %ld @ %ld/sec
+; %ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT
+_Ligging:
+; _Aspect:
+;
+MSG_PRINT_IMAGE
+Af_beelding:
+; _Image:
+;
+MSG_PRINT_SHADE
+_Tint:
+; _Shade:
+;
+MSG_PRINT_PLACEMENT
+Plaat_sing:
+; P_lacement:
+;
+MSG_PRINT_FORM_FEED
+_Doorschuiven
+; _Form Feed
+;
+MSG_PRINT_PRINT_TITLE
+Print t_itel
+; Print _Title
+;
+MSG_PRINT
+_Print
+; _Print
+;
+MSG_PRINT_ASPECT_PORTRAIT
+Portret
+; Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE
+Landschap
+; Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE
+Positief
+; Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE
+Negatief
+; Negative
+;
+MSG_PRINT_SHADE_BW
+Zwart­wit
+; Black & White
+;
+MSG_PRINT_SHADE_GREY
+Grijstinten
+; Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR
+Kleur
+; Colour
+;
+MSG_PRINT_PLACEMENT_CENTER
+Midden
+; Centre
+;
+MSG_PRINT_PLACEMENT_LEFT
+Links
+; Left
+;
+MSG_OPENING_PRINTER
+Open printer...
+; Opening printer...
+;
+MSG_INITIALISING_PRINTER
+Initialiseer printer...
+; Initialising printer...
+;
+MSG_PRINTING_PICTURE
+Print afbeelding...
+; Printing picture...
+;
+MSG_ABORTING_PRINT
+Breek af...
+; Aborting...
+;
+MSG_ANIM_TITLE
+Animatie : %s\tBeeld %ld van %ld\t%ld x %ld x %ld\n\n
+; Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE
+Afbeelding : %s\t%ld x %ld x %ld\n\n
+; Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE
+Soort:
+; Picture Type:
+;
+MSG_SHOW_DESC
+Toon afbeeldingen
+; Show pictures
+;

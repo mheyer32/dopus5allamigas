@@ -1,0 +1,69 @@
+## version $VER: dopuslib.catalog 2.1 (06.06.97) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_OK
+Ok
+; OK
+;
+MSG_SELECT_FILE
+Seleziona file
+; Select File
+;
+MSG_SELECT_DIRECTORY
+Seleziona directory
+; Select Directory
+;
+MSG_SELECT_FONT
+Seleziona carattere
+; Select Font
+;
+MSG_FONT_DRAWMODE
+Modo:
+; Mode:
+;
+MSG_FONT_TEXT
+Testo
+; Text
+;
+MSG_FONT_FIELD_TEXT
+Testo+campo
+; Text+Field
+;
+MSG_SIZE_FIT
+9999%%
+; 9999%%
+;
+MSG_SIZE
+%ld%%
+; %ld%%
+;
+MSG_ABORT
+Interrompi
+; Abort
+;
+MSG_FILE_FIT
+9999 su 9999
+; 9999 of 9999
+;
+MSG_FILE
+%ld di %ld
+; %ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Richiesta di Directory Opus
+; Directory Opus Request
+;
+MSG_UNABLE_TO_OPEN_TOOL
+Impossibile aprire il vostro strumento '%s'
+; Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING
+Opus è stufo di aspettare che '%s' ritorni.\n\
+Aspetto ancora?
+; Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL
+Aspetta|Annulla
+; Wait|Cancel
+;

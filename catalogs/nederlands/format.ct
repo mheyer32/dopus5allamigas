@@ -1,0 +1,140 @@
+## version $VER: format.catalog 2.0 (13.2.96)
+## codeset 0
+## language nederlands
+;
+MSG_FORMAT_TITLE
+Formatteer
+; Format
+;
+MSG_FORMAT_FORMAT
+_Formatteer
+; _Format
+;
+MSG_FORMAT_QUICK_FORMAT
+Format. _snel
+; _Quick Format
+;
+MSG_FORMAT_CANCEL
+_Annuleer
+; _Cancel
+;
+MSG_FORMAT_NAME
+_Naam
+; _Name
+;
+MSG_FORMAT_FFS
+F_ast File System
+; F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL
+_Internationale modus
+; _International Mode
+;
+MSG_FORMAT_CACHING
+_Directory Cache
+; _Directory Caching
+;
+MSG_FORMAT_TRASHCAN
+_Plaats prullenbak
+; _Put Trashcan
+;
+MSG_FORMAT_INSTALL
+_Maak opstartbaar
+; _Make Bootable
+;
+MSG_FORMAT_VERIFY
+_Verifieer
+; _Verify
+;
+MSG_FORMAT_DEFAULT_NAME
+Leeg
+; Empty
+;
+MSG_FORMAT_STATUS
+%ld tracks, %ld bytes/trk, %s
+; %ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE
+Open eenheid...
+; Opening device...
+;
+MSG_CHECKING_DISK
+Controleer disk...
+; Checking disk...
+;
+MSG_CANT_OPEN_DEVICE
+Kon eenheid niet openen!
+; Unable to open device!
+;
+MSG_NO_DISK_PRESENT
+Geen disk aanwezig in eenheid!
+; No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED
+Disk is beveiligd tegen schrijven!
+; Disk is write-protected!
+;
+MSG_RETRY_CANCEL
+Opnieuw|Annuleer
+; Retry|Cancel
+;
+MSG_PROCEED_CANCEL
+Ga door|Annuleer
+; Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK
+Disk in eenheid %s is niet leeg!\n\
+Volume '%s' bevat %s.\n\
+Alle gegevens zullen gewist worden.\n\
+Kies 'Ga door' om door te gaan.
+; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+; All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED
+Afgebroken.
+; Aborted.
+;
+MSG_FORMAT_INITIALISING
+Initialiseer disk...
+; Initialising disk...
+;
+MSG_FORMAT_FORMATTING
+Formatteer...
+; Formatting...
+;
+MSG_FORMAT_FORMATERROR
+Format error on track %ld.
+; Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR
+Verify error on track %ld.
+; Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL
+Format successful!
+; Format successful!
+;
+MSG_FORMAT_FAILED
+Format failed.
+; Format failed.
+;
+MSG_FORMAT_SETTING_UP
+Setting up...
+; Setting up...
+;
+MSG_FORMAT_CLEANING_UP
+Cleaning up...
+; Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH
+Making Trashcan...
+; Making Trashcan...
+;
+MSG_INSTALLING_DISK
+Installing Bootblock...
+; Installing Bootblock...
+;
+MSG_FORMAT_DESC
+Format disks
+; Format disks
+;

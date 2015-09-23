@@ -1,0 +1,68 @@
+## version $VER: play.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_NEXT
+_Neste
+; _Next
+;
+MSG_ABORT
+_Avbryt
+; _Abort
+;
+MSG_PLAY_TITLE
+Spill
+; Play
+;
+MSG_FILENAME
+Fil:
+; File:
+;
+MSG_LENGTH
+Lengde:
+; Length:
+;
+MSG_TYPE
+Type:
+; Type:
+;
+MSG_TYPE_STEREO
+Stereo
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Raw
+; Raw
+;
+MSG_STATUS
+Status:
+; Status:
+;
+MSG_STATUS_LOADING
+Leser fil...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Pakker ut...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Spiller lyd...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Spill lydfiler
+; Play sound files
+;
+MSG_PLAY_NEXT
+Neste
+; Next
+;
+MSG_PLAY_ABORT
+Avbryt
+; Abort
+;

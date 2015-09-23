@@ -1,0 +1,2151 @@
+## version $VER: dopus.catalog 2.1 (10.6.97)
+## codeset 0
+## language nederlands
+;
+MSG_ABORTED
+Afgebroken...
+; Aborted...
+;
+MSG_TRY_AGAIN
+Opnieuw
+; Try Again
+;
+MSG_RETRY
+Opnieuw
+; Retry
+;
+MSG_ABORT
+Breek af
+; Abort
+;
+MSG_REPLACE
+Vervang
+; Replace
+;
+MSG_SKIP
+Sla over
+; Skip
+;
+MSG_SKIP_ALL
+Sla alles over
+; Skip All
+;
+MSG_ALL
+Alles
+; All
+;
+MSG_QUIT
+Einde
+; Quit
+;
+MSG_SAVE
+Bewaar
+; Save
+;
+MSG_CLOSE
+Sluit
+; Close
+;
+MSG_YES
+Ja
+; Yes
+;
+MSG_NO
+Nee
+; No
+;
+MSG_CONTINUE
+Ga door
+; Continue
+;
+MSG_OKAY
+Ok
+; OK
+;
+MSG_CANCEL
+Annuleer
+; Cancel
+;
+MSG_REPLACE_ALL
+Vervang alles
+; Replace All
+;
+MSG_PROCEED
+Ga door
+; Proceed
+;
+MSG_MOVE
+Verplaats
+; Move
+;
+MSG_DISCARD
+Vergeet
+; Discard
+;
+MSG_BLOCKS
+blokken
+; blocks
+;
+MSG_FREE
+vrij
+; free
+;
+MSG_MAKELINK
+MaakLink
+; MakeLink
+;
+MSG_SELECT_FILE
+Selecteer bestand
+; Select File
+;
+MSG_SELECT_DIR
+Selecteer directory
+; Select Directory
+;
+MSG_ENTER_FILE
+Voer bestandsnaam in
+; Enter Filename
+;
+MSG_OPEN
+Open...
+; Open...
+;
+MSG_DEFAULTS
+Standaardinstelling
+; Reset To Defaults
+;
+MSG_LAST_SAVED
+Laatst bewaarde
+; Last Saved
+;
+MSG_RESTORE
+Herstel
+; Restore
+;
+MSG_PROJECT
+Project
+; Project
+;
+MSG_EDIT
+Bewerk
+; Edit
+;
+MSG_UNKNOWN_TYPE
+<onbekend>
+; <unknown>
+;
+MSG_SNIFF_CONFIRMATION
+Het bestand '%s' kon niet geïdentificeerd worden.\n\
+Bestandssoortsnuffelaar opstarten om hem te onderzoeken?
+; The file '%s' could not be identified.\n\
+; Launch Filetype Sniffer to investigate?
+;
+MSG_SNIFF
+Snuffel!
+; Sniff!
+;
+MSG_SCRIPTS_CHANGED
+U heeft uw scripts gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; You have modified your scripts and not\nsaved them. Would you like to?
+;
+MSG_LISTER_MENU_CHANGED
+U heeft uw lister­menu gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; You have modified your lister menu and not\nsaved it. Would you like to?
+;
+MSG_USER_MENU_CHANGED
+U heeft uw gebruikermenu's gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; You have modified your user menus and not\nsaved them. Would you like to?
+;
+MSG_HOTKEYS_CHANGED
+U heeft uw opdrachttoetsen gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; You have modified your hotkeys and not\nsaved them. Would you like to?
+;
+MSG_OPEN_NEW_WINDOW
+Open in nieuwe lister
+; Open in New Lister
+;
+MSG_OPEN_WITH_MENU
+Open met...
+; Open With...
+;
+MSG_SELECT_APP
+Open '%s' met
+; Select Application To Open '%s'
+;
+MSG_OPEN_WITH_MENU_SUB
+Open met
+; Open With
+;
+MSG_OPEN_WITH_MENU_OTHER
+Andere...
+; Other...
+;
+MSG_ENTER_ARGUMENTS_FOR
+Voer argumenten in voor '%s'
+; Enter arguments for '%s'
+;
+MSG_DIRECTORY
+Directory 
+; Directory 
+;
+MSG_SELECT_UNPROTECT
+\n\
+Selecteer 'Zet bit' om het wisbaarbit te zetten.
+; \nSelect Unprotect to set the deletion bit.
+;
+MSG_FOUND_A_MATCH
+Tekst gevonden in bestand\n\
+'%s'
+; Found a match in the file\n'%s'
+;
+MSG_COMMENTING
+commentaar zetten
+; commenting
+;
+MSG_PROTECTING
+protectie zetten
+; protecting
+;
+MSG_DATESTAMPING
+datum zetten
+; date stamping
+;
+MSG_DELETING
+verwijderen
+; deleting
+;
+MSG_RENAMING
+hernoemen
+; renaming
+;
+MSG_ENTER_COMMENT
+Voer commentaar in voor '%s'.
+; Enter a comment for '%s'.
+;
+MSG_ENTER_PASSWORD
+Voer wachtwoord in om bestanden te (de)coderen
+; Enter password to encrypt files.
+;
+MSG_ENTER_DATE_AND_TIME
+Voer een nieuwe datum (en tijd) in voor '%s'.
+; Enter new date (and time) for '%s'.
+;
+MSG_ENTER_ARGUMENTS
+Voer argumenten in
+; Enter arguments
+;
+MSG_REALLY_QUIT
+Uw sessie met Directory Opus wordt beëindigd.
+; This will end your Directory Opus session.
+;
+MSG_FILE
+Bestand
+; File
+;
+MSG_SELECT_PROTECTION_BITS
+Selecteer protectiebits
+; Select protection bits
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus verzoek
+; Directory Opus Request
+;
+MSG_MULTI_DRAG
+Breek af
+; Multi-drag - %ld files, %ld dirs selected
+;
+MSG_PRESS_MOUSE_BUTTON
+Vervang
+; Click close button to continue...
+;
+MSG_COMMENT
+Sla over
+; comment
+;
+MSG_PROTECT
+Sla alles over
+; protect
+;
+MSG_DATESTAMP
+Alles
+; date stamp
+;
+MSG_PROGRESS_OPERATION_MOVING
+Einde
+; Moving...
+;
+MSG_PROGRAM_LOADING
+Bewaar
+; Opus 5 loading... please wait.
+;
+MSG_OPEN_MENU
+Sluit
+; Load...
+;
+MSG_SAVE_MENU
+Ja
+; Save
+;
+MSG_SAVEAS_MENU
+Nee
+; Save As...
+;
+MSG_ACT_RECURSIVELY
+Ga door
+; Act on files in sub-directories?
+;
+MSG_PROGRESS_OPERATION_COMMENT
+Ok
+; Setting comments...
+;
+MSG_PROGRESS_OPERATION_PROTECT
+Annuleer
+; Setting protections...
+;
+MSG_PROGRESS_OPERATION_DATESTAMP
+Vervang alles
+; Setting datestamps...
+;
+MSG_SET_PROTECT_OLD
+Ga door
+; Current
+;
+MSG_SET_PROTECT_SET
+Verplaats
+; Set
+;
+MSG_SET_PROTECT_CLEAR
+Vergeet
+; Clear
+;
+MSG_OK_BUTTON
+blokken
+; _OK
+;
+MSG_ALL_BUTTON
+vrij
+; A_ll
+;
+MSG_SKIP_BUTTON
+MaakLink
+; S_kip
+;
+MSG_ABORT_BUTTON
+Selecteer bestand
+; A_bort
+;
+MSG_PROGRESS_OPERATION_ENCRYPTING
+Selecteer directory
+; Encrypting...
+;
+MSG_USER_MENU
+Voer bestandsnaam in
+; User
+;
+MSG_LISTER_MENU_TITLE
+Lister Pop-Up Menu
+; Lister Pop-Up Menu
+;
+MSG_USER_MENU_TITLE
+Standaardinstelling
+; User Menus
+;
+MSG_EMPTY
+Laatst bewaarde
+; empty
+;
+MSG_CANCEL_BUTTON
+Herstel
+; _Cancel
+;
+MSG_OPEN_BUTTON
+_Open
+; _Open
+;
+MSG_NEW_BUTTON
+Bewerk
+; _New
+;
+MSG_PARENT
+<onbekend>
+; Parent Directory
+;
+MSG_ROOT
+Het bestand '%s' kon niet geïdentificeerd worden.\n\
+Bestandssoortsnuffelaar opstarten om hem te onderzoeken?
+; Root Directory
+;
+MSG_DEVICE_LIST
+Snuffel!
+; Device List
+;
+MSG_SCANNING_DIRECTORIES
+U heeft uw scripts gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; Scanning directories...
+;
+MSG_READING_DIRECTORY
+U heeft uw lister­menu gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; Reading directory...
+;
+MSG_CHECK_FIT_RESULTS
+U heeft uw gebruikermenu's gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; Results of fit test:\n
+;
+MSG_FIT
+U heeft uw opdrachttoetsen gewijzigd, maar niet\n\
+bewaard. Wilt u dat alsnog doen?
+; fit
+;
+MSG_BLOCKS_NEEDED
+Open in nieuwe lister
+; blocks needed.
+;
+MSG_EXECUTE_ENTER_COMMAND
+Open met...
+; Enter command and arguments.
+;
+MSG_TOOL_MENU
+Open '%s' met
+; Tools
+;
+MSG_BUFFER_LIST
+Open met
+; Cache List
+;
+MSG_REREAD_DIR
+Andere...
+; Re-read Directory
+;
+MSG_ASSIGN
+Assign
+; Assign
+;
+MSG_FULL
+full
+; full
+;
+MSG_USED
+in use
+; in use
+;
+MSG_VALIDATING
+disk validating
+; disk validating
+;
+MSG_ENTER_FILTER_STRING
+Directories selected - enter filter pattern.
+; Directories selected - enter filter pattern.
+;
+MSG_VOLUME
+Volume
+; Volume
+;
+MSG_SELECT_SOURCE
+Select Source
+; Select Source
+;
+MSG_SELECT_DESTINATION
+Select Destination
+; Select Destination
+;
+MSG_NO_OWNER
+<No Owner>
+; <No Owner>
+;
+MSG_NO_GROUP
+<No Group>
+; <No Group>
+;
+MSG_SCRIPTS_TITLE
+Scripts
+; Scripts
+;
+MSG_PROGRESS_OPERATION_LINKING
+Making Links...
+; Making Links...
+;
+MSG_LINKING
+making a link to
+; making a link to
+;
+MSG_DECRYPT
+_Decrypt files
+; _Decrypt files
+;
+MSG_EMPTY_TRASH
+Empty Trash
+; Empty Trash
+;
+MSG_REALLY_EMPTY_TRASH
+The contents of the trashcan will be lost!\nDo you really want to empty it?
+; The contents of the trashcan will be lost!\nDo you really want to empty it?
+;
+MSG_ENTER_ASSIGN_NAME
+Enter name to assign to '%s'
+; Enter name to assign to '%s'
+;
+MSG_ADD
+Add
+; Add
+;
+MSG_PATH
+Path
+; Path
+;
+MSG_DEFER
+Defer
+; Defer
+;
+MSG_ASSIGNING
+assigning
+; assigning
+;
+MSG_CHANGE_NEEDS_RESET
+Some changes you made will not be\neffective until you next reboot.
+; Some changes you made will not be\neffective until you next reboot.
+;
+MSG_OPENING
+opening
+; opening
+;
+MSG_LIBRARY_ERROR
+Unable to open %s (%s)
+; Unable to open %s (%s)
+;
+MSG_LIBRARY_ANY_VERSION
+any version
+; any version
+;
+MSG_CLI
+CLI
+; CLI
+;
+MSG_CX_DESC
+The Complete Workbench Replacement!
+; The Complete Workbench Replacement!
+;
+MSG_ABORT_STARTUP
+Do you want to abort startup?
+; Do you want to abort startup?
+;
+MSG_ABORT_STARTUP_BUTTONS
+Continue|Abort
+; Continue|Abort
+;
+MSG_PROTECT_TITLE
+Protect
+; Protect
+;
+MSG_DATESTAMP_TITLE
+Datestamp
+; Datestamp
+;
+MSG_COMMENT_TITLE
+Comment
+; Comment
+;
+MSG_PATTERN_OFF
+The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+; The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+;
+MSG_THEMES_MENU
+Themes
+; Themes
+;
+MSG_THEMES_LOAD
+Load Theme...
+; Load Theme...
+;
+MSG_THEMES_SAVE
+Save Theme...
+; Save Theme...
+;
+MSG_THEMES_BUILD
+Build Theme...
+; Build Theme...
+;
+MSG_ADDICONING
+adding icons to
+; adding icons to
+;
+MSG_REGISTERED_TO
+Deze kopie is geregistreerd aan:
+; This copy is registered to:
+;
+MSG_SERIAL_NUMBER
+Volg# 
+; Serial # 
+;
+MSG_UNREGISTERED
+Deze kopie is ongeregistreerd!
+; This copy is unregistered!
+;
+MSG_YOU_SHOULD_REGISTER
+Registreer om dit te voorkomen!
+; Register to prevent this delay!
+;
+MSG_TRANSLATION_BY_YOUR_NAME
+Dutch translation by Edmund Vermeulen. 
+; 
+;
+MSG_SEARCH_DIRECTORIES
+Bestanden in geselecteerde directory's doorzoeken?
+; Search files in selected directories?
+;
+MSG_ENTER_SEARCH_STRING
+Voer tekst in om naar te zoeken...
+; Enter text to search for...
+;
+MSG_SEARCH_NO_CASE
+Geen _verschil kl./gr.
+; _Case insensitive
+;
+MSG_SEARCH_WILD
+Gebruik _patronen
+; _Wildcard search
+;
+MSG_SEARCH_ONLYWORD
+Alleen _hele woorden
+; _Match whole words
+;
+MSG_SEARCH_LEAVE_SELECTED
+Laat geselecteerd
+; Leave selected
+;
+MSG_SEARCH_PROMPT
+Vraag
+; Ask
+;
+MSG_SEARCH_OUTPUT
+Resultatenuitvoer
+; Output results
+;
+MSG_PROGRESS_SEARCHING
+Zoek...
+; Searching...
+;
+MSG_SEARCH_OUTPUT_HEADER
+Bestanden die '%s' bevatten\n\n
+; Files containing '%s'\n\n
+;
+MSG_SEARCH_READ
+Lees
+; Read
+;
+MSG_ENTER_NEW_NAME
+Voer nieuwe bestandsnaam of hernoempatroon in.
+; Enter new filename or rename pattern.
+;
+MSG_PROGRESS_RENAMING
+Hernoem...
+; Renaming...
+;
+MSG_RENAME
+Hernoem
+; Rename
+;
+MSG_RENAME_DISK
+Voer nieuwe naam in voor '%s'.
+; Enter a new name for '%s'.
+;
+MSG_ENTER_ANOTHER_NAME
+Voer andere bestandsnaam in.
+; Enter another filename.
+;
+MSG_ENTER_DIRECTORY_NAME
+Voer directorynaam in
+; Enter directory name
+;
+MSG_MAKEDIR_ICON
+Met icoon
+; With icon
+;
+MSG_MAKEDIR_NOICON
+Zonder icoon
+; Without icon
+;
+MSG_DIRECTORY_CREATED
+Directory aangemaakt.
+; Directory created.
+;
+MSG_PROGRESS_ADDING_ICONS
+Voeg iconen toe...
+; Adding icons...
+;
+MSG_ICON_ALREADY_EXISTS
+Er bestaat al een icoon voor '%s'.\n\
+Wilt u hem vervangen?
+; An icon already exists for '%s'.\nDo you wish to replace it?
+;
+MSG_ICON_REPLACE_IMAGE
+Alleen afbeelding
+; Image Only
+;
+MSG_COPYING
+kopiëren
+; copying
+;
+MSG_PROGRESS_OPERATION_COPYING
+Kopieer...
+; Copying...
+;
+MSG_CANT_OVERCOPY_FILES
+Bron­ en bestemmingdirectory's moeten\n\
+verschillend zijn om bestanden te kopiëren.
+; Source and destination directories\nmust be different to copy files.
+;
+MSG_COPY
+Kopieer
+; Copy
+;
+MSG_PROGRESS_OPERATION_CLONING
+Dupliceer...
+; Duplicating...
+;
+MSG_DUPLICATE
+Dupliceer
+; Duplicate
+;
+MSG_CANT_COPY_DIR_INTO_ITSELF
+Een directory kan niet naar zichzelf gekopieerd worden!
+; You can't copy a directory into itself!
+;
+MSG_MOVING
+verplaatsen
+; moving
+;
+MSG_CANT_OVERLINK_FILES
+Bron­ en bestemmingdirectory's moeten\n\
+verschillend zijn om links te maken.
+; Source and destination directories\nmust be different to make links.
+;
+MSG_CANT_LINK_DIR_INTO_ITSELF
+Een directory kan niet naar zichzelf gelinkt worden!
+; You can't link a directory into itself!
+;
+MSG_FROM_TO
+Van '%s' naar '%s'
+; From '%s' to '%s'
+;
+MSG_FROM
+Van '%s'
+; From '%s'
+;
+MSG_PROJECT_MENU
+Opus
+; Opus
+;
+MSG_BACKDROP_MENU
+Achtergrond
+; Backdrop
+;
+MSG_ABOUT_MENU
+Over...
+; About...
+;
+MSG_HIDE_MENU
+Verberg
+; Hide
+;
+MSG_QUIT_MENU
+Einde...
+; Quit...
+;
+MSG_EXECUTE_MENU
+Voer opdracht uit...
+; Execute Command...
+;
+MSG_HELP_MENU
+Help!
+; Help!
+;
+MSG_KEYFINDER_MENU
+Key Finder...
+; Key Finder...
+;
+MSG_WINDOW_MENU
+Listers
+; Listers
+;
+MSG_NEW_LISTER_MENU
+Nieuw
+; New
+;
+MSG_CLOSE_LISTER_MENU
+Sluit
+; Close
+;
+MSG_LISTER_SOURCE
+Maak bron
+; Make Source
+;
+MSG_LISTER_DEST
+Maak bestemming
+; Make Dest
+;
+MSG_LISTER_LOCK_SOURCE
+Zet vast als bron
+; Lock As Source
+;
+MSG_LISTER_LOCK_DEST
+Zet vast als bestemming
+; Lock As Dest
+;
+MSG_LISTER_UNLOCK
+Geef vrij
+; Unlock
+;
+MSG_LISTER_OFF
+Schakel uit
+; Turn Off
+;
+MSG_LISTER_UNLOCK_ALL
+Geef alles vrij
+; Unlock All
+;
+MSG_CLOSE_ALL_MENU
+Sluit alles
+; Close All
+;
+MSG_EDIT_MENU
+Bewerk...
+; Edit...
+;
+MSG_LISTER_BUTTONS_MENU
+Bewerk lister­toolbalk...
+; Edit Lister Toolbar...
+;
+MSG_LISTER_MENU_MENU
+Bewerk lister­menu...
+; Edit Lister Menu...
+;
+MSG_TILE_MENU
+Betegel
+; Tile
+;
+MSG_TILE_HORIZ_MENU
+Horizontaal
+; Horizontally
+;
+MSG_TILE_VERT_MENU
+Verticaal
+; Vertically
+;
+MSG_CASCADE_MENU
+Cascade
+; Cascade
+;
+MSG_LISTER_LOCK_POS
+Positie vastzetten?
+; Lock Position?
+;
+MSG_LISTER_ICONIFY
+Iconificeer
+; Iconify
+;
+MSG_LISTER_VIEW_ICONS
+Toon iconen
+; View Icons
+;
+MSG_LISTER_VIEW
+Toon als
+; View As
+;
+MSG_LISTER_VIEW_NAME
+Naam
+; Name
+;
+MSG_LISTER_VIEW_ICON
+Icoon
+; Icon
+;
+MSG_LISTER_SHOW_ALL
+Toon alles
+; Show All
+;
+MSG_LISTER_ICON_ACTION
+Icoonactie
+; Icon Action
+;
+MSG_LISTER_ARRANGE_ICONS
+Rangschik iconen
+; Arrange Icons
+;
+MSG_LISTER_ARRANGE_NAME
+op naam
+; by Name
+;
+MSG_LISTER_ARRANGE_TYPE
+op soort
+; by Type
+;
+MSG_LISTER_ARRANGE_SIZE
+op grootte
+; by Size
+;
+MSG_LISTER_ARRANGE_DATE
+op datum
+; by Date
+;
+MSG_LISTER_NEW_DRAWER
+Nieuwe lade...
+; New Drawer...
+;
+MSG_OPEN_PARENT_MENU
+Open hogere
+; Open Parent
+;
+MSG_LISTER_RESTORE
+Restore
+; Restore
+;
+MSG_ICONS_MENU
+Iconen
+; Icons
+;
+MSG_ICON_OPEN_MENU
+Open
+; Open
+;
+MSG_ICON_INFO_MENU
+Informatie...
+; Information...
+;
+MSG_ICON_SNAPSHOT_MENU
+Leg vast
+; Snapshot
+;
+MSG_ICON_LEAVE_OUT_MENU
+Laat eruit
+; Leave Out
+;
+MSG_ICON_PUT_AWAY_MENU
+Zet terug
+; Put Away
+;
+MSG_ICON_SELECT_ALL_MENU
+Selecteer alles
+; Select All
+;
+MSG_ICON_CLEANUP
+Ruim op
+; Clean Up
+;
+MSG_ICON_RESET
+Herstel
+; Reset
+;
+MSG_ICON_RENAME
+Hernoem...
+; Rename...
+;
+MSG_ICON_FORMAT
+Formatteer disk...
+; Format Disk...
+;
+MSG_ICON_DISKINFO
+Diskinformatie...
+; Disk Information...
+;
+MSG_ICON_UNSNAPSHOT_MENU
+Herstel vastlegging
+; Un-Snapshot
+;
+MSG_ICON_COPY
+Opnieuw
+; Copy
+;
+MSG_ICONS_NEW_MENU
+Opnieuw
+; New
+;
+MSG_ICONS_MAKEDIR_MENU
+Breek af
+; Drawer...
+;
+MSG_ICONS_NEWGROUP_MENU
+Vervang
+; Group...
+;
+MSG_ICON_COPY_RAM
+Sla over
+; to RAM:
+;
+MSG_ICON_COPY_DF0
+Sla alles over
+; to DF0:
+;
+MSG_ICON_COPY_OTHER
+Alles
+; to other...
+;
+MSG_ICON_COPY2
+Einde
+; Copy...
+;
+MSG_ICON_COPY_TO
+Bewaar
+; to
+;
+MSG_ICONS_NEWCOMMAND_MENU
+Sluit
+; Command...
+;
+MSG_ICONS_SHORTCUT_MENU
+Ja
+; Create Shortcut
+;
+MSG_DESKTOP_POPUP_LEFTOUT
+Nee
+; Create Left-out
+;
+MSG_DESKTOP_POPUP_COPY
+Ga door
+; Copy to Desktop
+;
+MSG_DESKTOP_POPUP_MOVE
+Ok
+; Move to Desktop
+;
+MSG_ICON_COPY_DESKTOP
+Annuleer
+; to Desktop
+;
+MSG_ICON_LINEUP
+Vervang alles
+; Line Up
+;
+MSG_ICON_SNAPSHOT_LISTER
+Ga door
+; Snapshot Lister
+;
+MSG_ICON_SNAPSHOT_ICONS
+Verplaats
+; Snapshot Icons
+;
+MSG_ICON_SNAPSHOT_ALL
+Vergeet
+; Snapshot All
+;
+MSG_ICON_SNAPSHOT_WINDOW
+blokken
+; Snapshot Window
+;
+MSG_BUTTONS_MENU
+Knoppen
+; Buttons
+;
+MSG_NEW_BUTTONS_MENU
+Nieuw
+; New
+;
+MSG_CLOSE_BUTTONS_MENU
+Sluit
+; Close
+;
+MSG_NEW_BUTTONS_GFX_MENU
+Grafische knoppen...
+; Graphic Buttons...
+;
+MSG_NEW_BUTTONS_TEXT_MENU
+Tekstknoppen...
+; Text Buttons...
+;
+MSG_NEW_STARTMENU_MENU
+Startmenu...
+; Start Menu...
+;
+MSG_SETTINGS_MENU
+Instellingen
+; Settings
+;
+MSG_CLOCK_MENU
+Klok
+; Clock
+;
+MSG_CREATE_ICONS_MENU
+Iconen aanmaken?
+; Create Icons?
+;
+MSG_ENVIRONMENT_MENU
+Omgeving
+; Environment
+;
+MSG_FILETYPES_MENU
+Bestandssoorten...
+; File Types...
+;
+MSG_HOTKEYS_MENU
+Opdrachttoetsen...
+; Hotkeys...
+;
+MSG_MENU_MENU
+Gebruikermenu's...
+; User Menus...
+;
+MSG_FILTER_MENU
+Recursief filter
+; Recursive Filter
+;
+MSG_OPTIONS_MENU
+Opties...
+; Options...
+;
+MSG_DEFPUBSCR_MENU
+Opnieuw
+; Default PubScreen
+;
+MSG_MENU_HOTKEYS
+Opnieuw
+; Hotkeys...
+;
+MSG_HOTKEYS_TITLE
+Opnieuw
+; Hotkeys
+;
+MSG_MENU_SCRIPTS
+Breek af
+; Scripts...
+;
+MSG_MENU_SYSMENU
+Vervang
+; System Menus...
+;
+MSG_MENU_ICONPOS
+Sla over
+; Icon Positioning...
+;
+MSG_ENVIRONMENT_SAVE_LAYOUT_NEW
+Sla alles over
+; Save Layout
+;
+MSG_ENVIRONMENT_EDIT
+Alles
+; Environment...
+;
+MSG_ENVIRONMENT_LOAD_NEW
+Einde
+; Load Environment...
+;
+MSG_ENVIRONMENT_SAVE_NEW
+Bewaar
+; Save Environment
+;
+MSG_SELECT_TITLE
+Bestandsselectie
+; File selection
+;
+MSG_SELECT_IGNORE
+Negeer
+; Ignore
+;
+MSG_SELECT_MATCH
+Gelijk
+; Match
+;
+MSG_SELECT_NOMATCH
+Ongelijk
+; No Match
+;
+MSG_SELECT_NEWER
+Nieuwer
+; Newer
+;
+MSG_SELECT_OLDER
+Ouder
+; Older
+;
+MSG_SELECT_DIFFERENT
+Verschillend
+; Different
+;
+MSG_SELECT_NAME
+_Naam
+; _Name
+;
+MSG_SELECT_DATE_FROM
+Dat_um
+; Da_te
+;
+MSG_SELECT_DATE_TO
+tot
+; to
+;
+MSG_SELECT_PROT
+Bit aan
+; Bits on
+;
+MSG_SELECT_INCLUDE
+Selecteer
+; Include
+;
+MSG_SELECT_EXCLUDE
+Deselecteer
+; Exclude
+;
+MSG_SELECT_COMPARE
+_Vergelijk bestemming
+; Destination _Compare
+;
+MSG_SELECT_SIMPLE
+Simpel
+; Simple
+;
+MSG_SELECT_COMPLEX
+Complex
+; Complex
+;
+MSG_SELECT_ENTER_PATTERN
+Voer patroon in om bestandsnamen mee te vergelijken.
+; Enter pattern to match filenames.
+;
+MSG_SELECT_PROT_OFF
+uit
+; off
+;
+MSG_SELECT_ENTRY_BOTH
+Best. & dirs
+; Files & Dirs
+;
+MSG_SELECT_ENTRY_FILES
+Alleen best.
+; Files Only
+;
+MSG_SELECT_ENTRY_DIRS
+Alleen dirs
+; Dirs Only
+;
+MSG_SELECT_ENTRY_TYPE
+Actie _op
+; _Operate on
+;
+MSG_DOS_ERROR
+DOS­fout
+; DOS error
+;
+MSG_DOS_ERROR_CODE
+Fout %ld
+; Error %ld
+;
+MSG_ERROR_OCCURED
+Er is een fout opgetreden bij %s '%s'\n\
+%s
+; An error occured %s '%s'\n%s
+;
+MSG_ERROR_DEST_IS_DIRECTORY
+Bestemming '%s' is een directory.
+; Destination '%s' is a directory.
+;
+MSG_ERROR_DEST_IS_FILE
+Bestemming '%s' is een bestand.
+; Destination '%s' is a file.
+;
+MSG_ERROR_UNKNOWN_CODE
+Opnieuw
+; Unknown error code
+;
+MSG_BUTTONS_ERROR_SAVING
+Opnieuw
+; Error saving button bank!
+;
+MSG_BUTTONS_ERROR_LOADING
+Breek af
+; Error loading button bank!
+;
+MSG_ERROR_CREATING_DIRECTORY
+Vervang
+; creating the directory
+;
+MSG_CUSTPORT_NOT_FOUND
+Sla over
+; User-specified custom handler port\n'%s'\ncould not be found!
+;
+MSG_ALREADY_RUNNING
+Sla alles over
+; Directory Opus appears to be already running!\n\
+; Running a second copy has the potential to cause\n\
+; problems, and it is recommended that you do not.
+;
+MSG_ALREADY_RUNNING_BUTTONS
+Alles
+; Cancel|Run Again
+;
+MSG_UNABLE_TO_CLOSE_SCREEN
+Einde
+; Directory Opus is unable to close its screen.\nPlease close all windows and try again.
+;
+MSG_ERROR_INVALID_DATE
+Bewaar
+; Invalid date string entered!
+;
+MSG_UNABLE_TO_OPEN_SCREEN
+Sluit
+; Can't open screen!
+;
+MSG_AN_ERROR_OCCURED
+Ja
+; An error occured 
+;
+MSG_ERROR
+Nee
+; Error 
+;
+MSG_SIZE
+Ga door
+; Size
+;
+MSG_DATE
+Ok
+; Date
+;
+MSG_OLD
+Annuleer
+; Old
+;
+MSG_NEW
+Vervang alles
+; New
+;
+MSG_FILE_EXISTS
+Ga door
+; File '%s' already exists!
+;
+MSG_PROGRESS_OPERATION_DELETING
+Verwijder...
+; Deleting...
+;
+MSG_DELETE_CONFIRM
+Waarschuwing: U kunt niet terugkrijgen wat\n\
+u verwijdert! Doorgaan met verwijderen van:\n\n\
+%ld bestand(en) en\n\
+%ld lade(n) (en hun inhoud)?
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n\
+; %ld file(s) and\n%ld drawer(s) (and their contents)?
+;
+MSG_DELETE
+Verwijder
+; Delete
+;
+MSG_DELETE_ALL
+Verwijder alles
+; Delete All
+;
+MSG_DELETE_FILE_CONFIRM
+Verwijder '%s'?
+; Delete '%s'?
+;
+MSG_DELETE_DIR_CONFIRM
+'%s' is een directory.\n\
+Doorgaan met verwijderen?
+; '%s' is a directory.\nProceed with delete operation?
+;
+MSG_DELETE_PROTECTED
+'%s' is beveiligd tegen wissen.\n\
+Protectiebit zetten en opnieuw proberen?
+; '%s' is protected against deletion.\n\
+; Unprotect and try again?
+;
+MSG_UNPROTECT
+Zet bit
+; Unprotect
+;
+MSG_UNPROTECT_ALL
+Zet alle bits
+; Unprotect All
+;
+MSG_DELETE_LINK_CONFIRM_SINGLE
+Werkelijk deze shortcut verwijderen?
+; Really delete this shortcut?
+;
+MSG_DELETE_LINK_CONFIRM_MULTI
+Werkelijk deze shortcuts verwijderen?
+; Really delete these shortcuts?
+;
+MSG_BUTTONS_ENTER_NAME
+Bewaar knoppen
+; Save Buttons
+;
+MSG_BUTTONS_SELECT_FILE
+Laad knoppen
+; Load Buttons
+;
+MSG_BUTTONS_STATUS_TITLE
+Knoppenstatus
+; Buttons Status
+;
+MSG_BUTTONS_LOADING
+Laad knoppenbank...
+; Loading button bank...
+;
+MSG_ENVIRONMENT_ENTER_NAME
+Bewaar omgeving
+; Save Environment
+;
+MSG_ENVIRONMENT_SELECT_FILE
+Laad omgeving
+; Load Environment
+;
+MSG_ENVIRONMENT_LOADING
+Laad omgevingsbestand...
+; Loading environment file...
+;
+MSG_ENVIRONMENT_SAVING
+Bewaar omgevingsbestand...
+; Saving environment file...
+;
+MSG_BUTTONS_CHANGE_WARNING
+Knoppenbank '%s' is gewijzigd.\n\
+Wilt u hem bewaren?
+; Button bank '%s' has been modified.\nDo you wish to save it?
+;
+MSG_BUTTONS_CREATE_WHICH_TYPE
+Wat voor soort knoppenbank wilt u aanmaken?
+; Which button bank type do you wish to create?
+;
+MSG_BUTTONS_TEXT
+Tekst
+; Text
+;
+MSG_BUTTONS_ICONS
+Grafisch
+; Graphics
+;
+MSG_SETTINGS_SELECT_FILE
+Laad opties
+; Load Options
+;
+MSG_SETTINGS_LOADING
+Laad optiesbestand...
+; Loading Options file...
+;
+MSG_SETTINGS_ENTER_NAME
+Bewaar opties
+; Save Options
+;
+MSG_SETTINGS_SAVING
+Bewaar optiesbestand...
+; Saving Options file...
+;
+MSG_ERROR_SAVING_ENV
+Fout bij bewaren omgevingsbestand!
+; Error saving environment file!
+;
+MSG_ERROR_SAVING_OPTS
+Fout bij bewaren optiesbestand!
+; Error saving options file!
+;
+MSG_LAUNCHING_PROGRAM
+Probeer '%s' op te starten...
+; Attempting to launch '%s'...
+;
+MSG_MEMORY_COUNTER
+%s  %ld grafisch geheugen  %ld overig geheugen
+; %s  %ld graphics mem  %ld other mem
+;
+MSG_MEMORY_COUNTER_LOC
+%s  %lU grafisch geheugen  %lU overig geheugen
+; %s  %lU graphics mem  %lU other mem
+;
+MSG_MEMORY_COUNTER_CLOCK
+%s  %ld grafisch  %ld overig
+; %s  %ld graphics  %ld other
+;
+MSG_MEMORY_COUNTER_LOC_CLOCK
+%s  %lU grafisch  %lU overig
+; %s  %lU graphics  %lU other
+;
+MSG_LISTER_STATUS_SOURCE
+BRON
+; SRCE
+;
+MSG_LISTER_STATUS_DEST
+BSTM
+; DEST
+;
+MSG_LISTER_STATUS_BUSY
+BEZIG
+; BUSY
+;
+MSG_LISTER_STATUS_OFF
+UIT
+; OFF
+;
+MSG_HUNT_ENTER_FILENAME
+Voer bestandspatroon in om naar te zoeken.
+; Enter file pattern to search for.
+;
+MSG_HUNT_FOUND_FILE
+Bestand '%s' gevonden in directory\n\
+'%s'\n\
+Daar naar toe gaan?
+; Found the file '%s' in the directory\n'%s'\nShall I go there?
+;
+MSG_NEW_LISTER
+Nieuwe lister
+; New Lister
+;
+MSG_SEARCH_COMMENTS
+Search file comments
+; Search file comments
+;
+MSG_FUNC_DESC_ADDICON
+Voeg iconen toe aan bestanden
+; Add icons to files
+;
+MSG_FUNC_DESC_ALL
+Selecteer alle bestanden
+; Select all files
+;
+MSG_FUNC_DESC_CLEARBUFFERS
+Geef directorybuffers vrij
+; Free directory caches
+;
+MSG_FUNC_DESC_COMMENT
+Geef commentaar aan bestanden
+; Give comments to files
+;
+MSG_FUNC_DESC_COPY
+Kopieer geselecteerde bestanden
+; Copy selected files
+;
+MSG_FUNC_DESC_COPYAS
+Kopieer met nieuwe namen
+; Copy with new names
+;
+MSG_FUNC_DESC_DATESTAMP
+Wijzig datum van bestanden
+; Change datestamp of files
+;
+MSG_FUNC_DESC_DELETE
+Verwijder geselecteerde bestanden
+; Delete selected files
+;
+MSG_FUNC_DESC_DISKCOPY
+Maak kopieën van disks
+; Make copies of disks
+;
+MSG_FUNC_DESC_ENCRYPT
+Codeer bestanden
+; Encrypt files
+;
+MSG_FUNC_DESC_FINDFILE
+Zoek naar bestandsnamen
+; Search for filenames
+;
+MSG_FUNC_DESC_FINISHSECTION
+Beëindig opdrachten erboven
+; Finish above commands
+;
+MSG_FUNC_DESC_FORMAT
+Formatteer disks
+; Format disks
+;
+MSG_FUNC_DESC_GETSIZES
+Bereken directorygroottes
+; Calculate directory sizes
+;
+MSG_FUNC_DESC_ICONINFO
+Toon/bewerk icooninformatie
+; Show/edit icon information
+;
+MSG_FUNC_DESC_LEAVEOUT
+Laat objecten op hoofdvenster
+; Leave objects on main window
+;
+MSG_FUNC_DESC_LOADBUTTONS
+Laad een knoppenbestand
+; Load a button file
+;
+MSG_FUNC_DESC_MAKEDIR
+Maak een nieuwe directory
+; Make a new directory
+;
+MSG_FUNC_DESC_MOVE
+Verplaats geselecteerde bestanden
+; Move selected files
+;
+MSG_FUNC_DESC_MOVEAS
+Verplaats met nieuwe namen
+; Move with new names
+;
+MSG_FUNC_DESC_NONE
+Deselecteer alle bestanden
+; Deselect all files
+;
+MSG_FUNC_DESC_PLAY
+Speel geselecteerde geluiden af
+; Play selected sounds
+;
+MSG_FUNC_DESC_PRINT
+Print geselecteerde bestanden
+; Print selected files
+;
+MSG_FUNC_DESC_PROTECT
+Wijzig bestandsprotectie
+; Change file protections
+;
+MSG_FUNC_DESC_READ
+Lees tekstbestanden
+; Read text files
+;
+MSG_FUNC_DESC_RENAME
+Hernoem geselecteerde bestanden
+; Rename selected files
+;
+MSG_FUNC_DESC_RUN
+Start geselecteerde programma's
+; Run selected programs
+;
+MSG_FUNC_DESC_SCANDIR
+Lees een directory in
+; Read a directory
+;
+MSG_FUNC_DESC_SEARCH
+Zoek naar tekst
+; Search for text strings
+;
+MSG_FUNC_DESC_SELECT
+Selecteer bestanden via patroon
+; Wildcard-select files
+;
+MSG_FUNC_DESC_SHOW
+Toon geselecteerde plaatjes
+; Show selected pictures
+;
+MSG_FUNC_DESC_SMARTREAD
+Auto hex­/tekstweergave
+; Auto hex/text viewer
+;
+MSG_FUNC_DESC_TOGGLE
+Wissel selectietoestand
+; Toggle selection state
+;
+MSG_FUNC_DESC_CHECKFIT
+Kijk of bestanden zullen passen
+; See if files will fit
+;
+MSG_FUNC_DESC_CLEARSIZES
+Wis directorygroottes
+; Clear directory sizes
+;
+MSG_FUNC_DESC_ANSIREAD
+Tekstweergave (ondersteunt ANSI)
+; Text viewer (supports ANSI)
+;
+MSG_FUNC_DESC_HEXREAD
+Hex (binaire) weergave
+; Hex (binary) viewer
+;
+MSG_FUNC_DESC_CLONE
+Dupliceer gesel. bestanden
+; Duplicate selected files
+;
+MSG_FUNC_DESC_LOADENVIRONMENT
+Laad een omgevingsbestand
+; Load an Environment file
+;
+MSG_FUNC_DESC_LOADSETTINGS
+Laad een optiesbestand
+; Load an Options file
+;
+MSG_FUNC_DESC_PARENT
+Lees hogere directory in
+; Read parent directory
+;
+MSG_FUNC_DESC_ROOT
+Lees hoogste directory in
+; Read root directory
+;
+MSG_FUNC_DESC_USER
+Bestandssoortfunctie
+; Execute File Type function
+;
+MSG_FUNC_DESC_DEVICELIST
+Toon eenheden en assigns
+; Show devices and assigns
+;
+MSG_FUNC_DESC_BUFFERLIST
+Toon gebufferde directory's
+; Show cached directories
+;
+MSG_FUNC_DESC_VERIFY
+Vraag om bevestiging
+; Ask for confirmation
+;
+MSG_FUNC_DESC_PRINTDIR
+Print directorylijsten
+; Print directory listings
+;
+MSG_FUNC_DESC_SET
+Zet iets
+; Set something
+;
+MSG_FUNC_DESC_CLOSEBUTTONS
+Sluit een knoppenbank
+; Close a button bank
+;
+MSG_FUNC_DESC_QUIT
+Beëindig Directory Opus 5
+; Quit Directory Opus 5
+;
+MSG_FUNC_DESC_HIDE
+Verberg Directory Opus
+; Hide Directory Opus
+;
+MSG_FUNC_DESC_REVEAL
+Onthul (verborgen) Directory Opus
+; Reveal Directory Opus (when hidden)
+;
+MSG_FUNC_DESC_RESELECT
+Herselecteer laatste bestanden
+; Reselect last-used files
+;
+MSG_FUNC_DESC_MAKELINK
+Maak link naar een bestand
+; Make a link to a file
+;
+MSG_FUNC_DESC_MAKELINKAS
+Maak link met een nieuwe naam
+; Make a link with a new name
+;
+MSG_FUNC_DESC_ASSIGN
+Maak een assign
+; Make an assign
+;
+MSG_FUNC_DESC_CONFIGURE
+Configureer lister­weergave
+; Configure lister display
+;
+MSG_FUNC_DESC_CLI
+Interne 'Command Line Interpreter'
+; Internal Command Line Interpreter
+;
+MSG_FUNC_DESC_SETBACKGROUND
+Stel in als achtergrond
+; Set as background picture
+;
+MSG_FUNC_DESC_RESET
+Reset Things
+; Reset Things
+;
+MSG_FUNC_DESC_STOPSNIFFER
+Stop Filetype Sniffer
+; Stop Filetype Sniffer
+;
+MSG_ICON_GROUP
+Programmagroepen
+; Program Groups
+;
+MSG_GROUP_ENTER_NAME
+Opnieuw
+; Enter Program Group Name
+;
+MSG_RXERR_1
+Bestand verworpen door filters
+; File rejected by filters
+;
+MSG_RXERR_5
+Ongeldige set/query
+; Invalid set/query item
+;
+MSG_RXERR_6
+Ongeldige naam of sleutelwoord
+; Invalid name or keyword
+;
+MSG_RXERR_8
+Ongeldige trap
+; Invalid trap
+;
+MSG_RXERR_10
+Ongeldige lister­handle
+; Invalid lister handle
+;
+MSG_RXERR_12
+Ongeldige toolbalk
+; Invalid toolbar
+;
+MSG_RXERR_13
+Ongeldig pad
+; Invalid path
+;
+MSG_RXERR_14
+Object niet gevonden
+; Object not found
+;
+MSG_RXERR_15
+Geen geheugen
+; No memory
+;
+MSG_RXERR_20
+Kon lister niet openen
+; Unable to open lister
+;
+MSG_RXERR_UNKNOWN
+Onbekende foutcode
+; Unknown error code
+;
+MSG_DESKTOP_REALLY_DELETE
+Waarschuwing: U kunt niet terugkrijgen wat\n\
+u verwijdert! Doorgaan met verwijderen van:\n\n
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n
+;
+MSG_DESKTOP_DELETE_GROUPS
+%ld programmagroep(en)
+; %ld program group(s)
+;
+MSG_DESKTOP_DELETE_ASSIGNS
+Breek af
+; %ld assign(s)
+;
+MSG_DESKTOP_DELETE_GROUP_OBJECTS
+Vervang
+; %ld group object(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_FILES
+Sla over
+; %ld file(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_DIRS
+Sla alles over
+; %ld dir(s)
+;
+MSG_REPLACE_SAME
+De twee bestanden schijnen identiek te zijn.
+; The two files appear to be the same.
+;
+MSG_REPLACE_VERSION_SAME
+Beide bestanden zijn dezelfde versie (%ld.%ld).
+; Both files are the same version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_NEWER
+Het nieuwe bestand is een nieuwere versie (%ld.%ld).
+; The new file is a later version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_OLDER
+Het nieuwe bestand is een oudere versie (%ld.%ld).
+; The new file is an earlier version (%ld.%ld).
+;
+MSG_REPLACE_SIZE_BIGGER
+Het nieuwe bestand is groter dan het oude (%ld bytes verschil).\n
+; The new file is larger than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SMALLER
+Het nieuwe bestand is kleiner dan het oude (%ld bytes verschil).\n
+; The new file is smaller than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SAME
+Beide bestanden hebben dezelfde grootte (%ld bytes).\n
+; The two files are the same size (%ld bytes).\n
+;
+MSG_REPLACE_DATE_NEWER
+Het nieuwe bestand heeft een recentere datum (%s).\n
+; The new file has a more recent date (%s).\n
+;
+MSG_REPLACE_DATE_OLDER
+Het nieuwe bestand heeft een oudere datum (%s).\n
+; The new file has an earlier date (%s).\n
+;
+MSG_REPLACE_DATE_SAME
+De bestanden hebben dezelfde aanmaakdatum.\n
+; The files have the same creation date.\n
+;
+MSG_FILE_ALREADY_EXISTS
+Bestand '%s' bestaat al en zou vervangen worden.\n
+; File '%s' exists and would be replaced.\n
+;
+MSG_BRIEF_FILE_EXISTS
+Bestand '%s' bestaat al. Vervangen?\n\n\
+Nieuw - Grootte : %7ld  Datum : %19s%s\n\
+  Oud - Grootte : %7ld  Datum : %19s%s
+; File '%s' already exists. Replace it?\n\n\
+; New - Size : %7ld  Date : %19s%s\n\
+; Old - Size : %7ld  Date : %19s%s
+;
+MSG_REPLACE_VER
+  Ver : %2ld.%ld
+;   Ver : %2ld.%ld
+;
+MSG_REPLACE_VER_UNKNOWN
+  Ver : ?????
+;   Ver : ?????
+;
+MSG_GET_VERSION
+Versie
+; Version
+;
+MSG_REPLACE_VERSION_TITLE
+Zoek naar versie­info...
+; Looking for version info...
+;
+MSG_LISTER_TITLE_NAME
+Naam
+; Name
+;
+MSG_LISTER_TITLE_SIZE
+Grootte
+; Size
+;
+MSG_LISTER_TITLE_PROTECT
+Toegang
+; Access
+;
+MSG_LISTER_TITLE_DATE
+Datum
+; Date
+;
+MSG_LISTER_TITLE_COMMENT
+Commentaar
+; Comment
+;
+MSG_LISTER_TITLE_FILETYPE
+Soort
+; Type
+;
+MSG_LISTER_TITLE_OWNER
+Eigenaar
+; Owner
+;
+MSG_LISTER_TITLE_GROUP
+Groep
+; Group
+;
+MSG_LISTER_TITLE_NETPROT
+Net
+; Net
+;
+MSG_LISTER_TITLE_VERSION
+Versie
+; Version
+;
+MSG_LISTER_TITLE_VOLUME
+Volume
+; Volume
+;
+MSG_LISTER_TITLE_DEVICE
+Eenheid
+; Device
+;
+MSG_LISTER_TITLE_FULL
+Vol
+; Full
+;
+MSG_LISTER_TITLE_FREE
+Vrij
+; Free
+;
+MSG_LISTER_TITLE_USED
+In gebruik
+; In Use
+;
+MSG_CLI_HELP
+Typ 'help list' voor een lijst met opdrachten\n\
+of 'help <opdracht>' voor de opdracht­template.\n\
+Typ 'quit' om de CLI te verlaten.\n\n\
+Voer een interne opdracht met argumenten in om deze\n\
+uit te voeren. Om een ARexx­opdracht van DOpus uit\n\
+te voeren dient u een '+' symbool voor de opdracht\n\
+op te geven. Voeg er een '&' aan toe als u de\n\
+opdracht asynchroon wilt laten verlopen.\n
+; Type 'help list' for a list of commands,\n\
+; or 'help <command>' for a command template.\n\
+; Type 'quit' to exit the CLI.\n\n\
+; Enter an internal command with arguments to\n\
+; execute it. To execute a DOpus ARexx command,\n\
+; enter a + symbol before the command. Append a &\n\
+; if you want the command to be asynchronous.\n
+;
+MSG_CLI_NO_TEMPLATE
+Opdracht heeft geen template.
+; Command has no template.
+;
+MSG_CLI_TYPE_HELP
+Typ 'help' voor hulp.\n
+; Type 'help' for help.\n
+;
+MSG_CLI_BAD_CMD
+Onbekende opdracht.
+; Unknown command.
+;
+MSG_ICONPOS_WINDOW
+Icoonpositioneringsgebied
+; Icon positioning area
+;
+MSG_ICONPOS_INSTRUCTIONS
+Klik en sleep om gebieden te markeren waar iconen gepositioneerd\n\
+mogen worden. Klik Ok of Annuleer indien gereed.
+; Click and drag to mark areas where icons can be positioned.\n\
+; Click OK or Cancel when finished.
+;
+MSG_ICONPOS_APPICON
+AppIcons
+; AppIcons
+;
+MSG_ICONPOS_DISKS
+Disks
+; Disks
+;
+MSG_ICONPOS_LISTERS
+Listers/knoppen
+; Listers/Buttons
+;
+MSG_ICONPOS_PRIORITY
+Prioriteit
+; Priority
+;
+MSG_ICONPOS_GROUPS
+Groepen
+; Groups
+;
+MSG_ICONPOS_LEFTOUT
+Uitgelaten
+; Left-outs
+;
+MSG_COMMAND_SAVE
+Bewaar opdrachtbestand
+; Enter Filename To Save Command
+;
+MSG_SAVING_COMMAND
+opdracht bewaren
+; saving command
+;
+MSG_EDIT_COMMAND
+Bewerk opdracht...
+; Edit Command...
+;
+MSG_COMMAND_DESCRIPTION
+Enter a description for this command.
+; Enter a description for this command.
+;
+MSG_COMMAND_LEAVEOUT
+Leave out on desktop
+; Leave out on desktop
+;
+MSG_START_APPEARANCE
+Uiterlijk
+; Appearance
+;
+MSG_START_BORDERLESS
+Kader
+; Border
+;
+MSG_START_DRAGBAR_LEFT
+Sleepbalk links
+; Left
+;
+MSG_START_DRAGBAR_RIGHT
+Sleepbalk rechts
+; Right
+;
+MSG_START_IMAGE
+Wijzig afbeelding...
+; Change Image...
+;
+MSG_START_LABEL
+Wijzig label...
+; Change Label...
+;
+MSG_START_SELECT_IMAGE
+Selecteer afbeelding voor startmenu
+; Select Image For Start Menu
+;
+MSG_START_SELECT_LABEL
+Voer label in voor startmenu.
+; Enter label for Start Menu.
+;
+MSG_OPEN_STARTMENU_MENU
+Opnieuw
+; Load Start Menu...
+;
+MSG_START_SELECT_MENU
+Opnieuw
+; Select Start Menu To Load
+;
+MSG_START_FONT
+Breek af
+; Change Font...
+;
+MSG_START_SELECT_FONT
+Vervang
+; Select Font For Start Menu
+;
+MSG_START_SCALING
+Sla over
+; Scale Images
+;
+MSG_START_DRAGBAR
+Sla alles over
+; Drag Bar
+;
+MSG_START_DRAGBAR_OFF
+Alles
+; Off
+;
+MSG_START_LABEL_FONT
+Einde
+; Change Label Font...
+;
+MSG_START_PICTURE
+Bewaar
+; Change Background...
+;
+MSG_START_SELECT_PICTURE
+Sluit
+; Select Background Picture For Start Menu
+;
+MSG_KEYFINDER_TITLE
+Key Finder
+; Key Finder
+;
+MSG_KEYFINDER_KEY
+_Key:
+; _Key:
+;
+MSG_KEYFINDER_FOUND
+Found:
+; Found:
+;
+MSG_KEYFINDER_TYPE_INVALID
+Invalid key!
+; Invalid key!
+;
+MSG_KEYFINDER_TYPE_NONE
+No match found!
+; No match found!
+;
+MSG_KEYFINDER_TYPE_BUTTONS
+Match found in a Button Bank.
+; Match found in a Button Bank.
+;
+MSG_KEYFINDER_TYPE_TOOLBAR
+Match found in Lister Toolbar.
+; Match found in Lister Toolbar.
+;
+MSG_KEYFINDER_TYPE_LISTERMENU
+Match found in Lister Menu.
+; Match found in Lister Menu.
+;
+MSG_KEYFINDER_TYPE_MENU
+Match found in User Menu.
+; Match found in User Menu.
+;
+MSG_KEYFINDER_TYPE_START
+Match found in a Start Menu.
+; Match found in a Start Menu.
+;
+MSG_KEYFINDER_TYPE_HOTKEYS
+Match found in Hotkeys.
+; Match found in Hotkeys.
+;
+MSG_KEYFINDER_TYPE_SCRIPTS
+Match found in Scripts.
+; Match found in Scripts.
+;

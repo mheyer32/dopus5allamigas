@@ -1,0 +1,68 @@
+## version $VER: play.catalog 2.0 (09.02.96) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_NEXT
+_Successivo
+; _Next
+;
+MSG_ABORT
+_Interrompi
+; _Abort
+;
+MSG_PLAY_TITLE
+Suona
+; Play
+;
+MSG_FILENAME
+File:
+; File:
+;
+MSG_LENGTH
+Durata:
+; Length:
+;
+MSG_TYPE
+Tipo:
+; Type:
+;
+MSG_TYPE_STEREO
+Stero
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Raw
+; Raw
+;
+MSG_STATUS
+Stato:
+; Status:
+;
+MSG_STATUS_LOADING
+Lettura del file in corso...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Decompressione...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Sto suonando...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Suona files
+; Play sound files
+;
+MSG_PLAY_NEXT
+Succ.
+; Next
+;
+MSG_PLAY_ABORT
+Interrompi
+; Abort
+;

@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_PLEASE_WAIT
+Παρακαλώ περιμένετε...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - CleanUp Djinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Πραγματοποιείται διεργασία καθαρισμού
+; Perform cleanup maintenance
+;

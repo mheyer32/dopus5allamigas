@@ -1,0 +1,259 @@
+## version $VER: filetype.catalog 2.0 (28.5.96)
+## codeset 0
+## language nederlands
+;
+MSG_FIND_DESC
+Vind bestandssoort
+; Find filetype for a file
+;
+MSG_FIND_TITLE
+Vind bestandssoort
+; Filetype Finder
+;
+MSG_FIND_PRI
+Pri
+; Pri
+;
+MSG_FIND_ID
+ID
+; ID
+;
+MSG_FIND_FILETYPE
+Bestandssoort
+; Filetype
+;
+MSG_FIND_FILE
+Bestand...
+; File...
+;
+MSG_FIND_USE
+_Gebruik
+; _Use
+;
+MSG_FIND_INSTALL
+_Installeer
+; _Install
+;
+MSG_FIND_CREATE
+_Nieuw
+; _Create
+;
+MSG_FIND_EDIT
+B_ewerk
+; _Edit
+;
+MSG_FIND_CANCEL
+_Annuleer
+; C_ancel
+;
+MSG_FIND_SCANNING
+Doorzoek bestandssoorten...
+; Scanning filetypes...
+;
+MSG_FIND_MATCHING
+Zoek overeenkomende bestandssoort...
+; Matching filetypes...
+;
+MSG_NONE_FOUND_1
+Geen bestandssoort gevonden die
+; No filetype has been found that
+;
+MSG_NONE_FOUND_2
+overeenkomt met het geselecteerde
+; matches the selected file. Do you
+;
+MSG_NONE_FOUND_3
+bestand. Wilt u een nieuwe
+; wish to create a new filetype for
+;
+MSG_NONE_FOUND_4
+bestandssoort voor dit bestand aanmaken?
+; this file?
+;
+MSG_NONE_FOUND_5
+
+; 
+;
+MSG_NONE_FOUND_6
+
+; 
+;
+MSG_NONE_FOUND_7
+
+; 
+;
+MSG_STORED_FOUND_1
+Geen geïnstalleerde bestandssoort komt
+; No installed filetype matches the
+;
+MSG_STORED_FOUND_2
+overeen met het geselecteerde bestand.
+; selected file. However, there is
+;
+MSG_STORED_FOUND_3
+Echter, er is een bestandssoort in
+; a filetype in storage which does match.
+;
+MSG_STORED_FOUND_4
+opslag die wel overeenkomt.
+; Do you wish to install this filetype 
+;
+MSG_STORED_FOUND_5
+Deze bestandssoort installeren of
+; now or create a new one?
+;
+MSG_STORED_FOUND_6
+een nieuwe aanmaken?
+; 
+;
+MSG_STORED_FOUND_7
+
+; 
+;
+MSG_BETTER_FOUND_1
+Er is een bestandssoort in opslag die
+; There is a filetype in storage which
+;
+MSG_BETTER_FOUND_2
+overeenkomt met het gekozen bestand en
+; matches the selected file and has a
+;
+MSG_BETTER_FOUND_3
+met een hogere prioriteit dan de huidige
+; higher priority than the currently
+;
+MSG_BETTER_FOUND_4
+geïnstalleerde bestandssoort voor dit
+; installed filetype for this file. Do
+;
+MSG_BETTER_FOUND_5
+bestand. Wilt u de huidige bestandssoort
+; you wish to use the current filetype,
+;
+MSG_BETTER_FOUND_6
+gebruiken, de opgelagen bestandssoort
+; install the stored filetype, or create
+;
+MSG_BETTER_FOUND_7
+installeren of een nieuwe aanmaken?
+; a new one?
+;
+MSG_INSTALLED_FOUND_1
+Er is een bestandssoort geïnstalleerd
+; There is a filetype installed
+;
+MSG_INSTALLED_FOUND_2
+die overeenkomt met het geselecteerde
+; which matches the selected file.
+;
+MSG_INSTALLED_FOUND_3
+bestand. Wilt u deze bestandssoort
+; Do you wish to use this Filetype
+;
+MSG_INSTALLED_FOUND_4
+gebruiken, of een nieuwe aanmaken?
+; or create a new one?
+;
+MSG_INSTALLED_FOUND_5
+
+; 
+;
+MSG_INSTALLED_FOUND_6
+
+; 
+;
+MSG_INSTALLED_FOUND_7
+
+; 
+;
+MSG_CREATE_DESC
+Nieuwe bestandssoort
+; Create new filetype
+;
+MSG_CREATE_TITLE
+Maak bestandssoort
+; Filetype Creator
+;
+MSG_CREATE_FILES
+Bestanden...
+; Files...
+;
+MSG_CREATE_ADD
+_Nieuw
+; _Add
+;
+MSG_CREATE_DELETE
+_Wis
+; _Delete
+;
+MSG_CREATE_CLEAR
+_Leeg
+; _Clear
+;
+MSG_CREATE_FILETYPE
+Soort...
+; Filetype...
+;
+MSG_CREATE_NAME
+Naa_m:
+;  _Name:
+;
+MSG_CREATE_IFF
+  _IFF:
+;   _IFF:
+;
+MSG_CREATE_GROUP
+_Groep:
+; _Group:
+;
+MSG_CREATE_ID
+   I_D:
+;    I_D:
+;
+MSG_CREATE_BYTES
+By_tes:
+; _Bytes:
+;
+MSG_CREATE_CASE
+Case
+; Case
+;
+MSG_CREATE_NOCASE
+NoCase
+; No Case
+;
+MSG_CREATE_EDIT
+B_ewerk
+; _Edit
+;
+MSG_CREATE_SAVE
+_Bewaar
+; _Save
+;
+MSG_CREATE_CANCEL
+_Annuleer
+; _Cancel
+;
+MSG_CREATE_ADD_FILE
+Nieuw bestand...
+; Add a file...
+;
+MSG_CREATE_WARN_EDITED
+WAARSCHUWING\n\n\
+U heeft de bewerker gebruikt.\n\
+Als u doorgaat zullen de wijzigingen verloren gaan...
+; WARNING\n\nYou have used the editor.\nIf you continue your changes will be lost...
+;
+MSG_CREATE_CONTINUE_CANCEL
+Ga door|Annuleer
+; Continue|Cancel
+;
+MSG_REPLACE_CANCEL
+Vervang|Annuleer
+; Replace|Cancel
+;
+MSG_FILETYPE_EXISTS
+Bestandssoort '%s' bestaat al.\n\
+Wilt u hem vervangen?
+; Filetype '%s' exists.\nDo you wish to replace it?
+;

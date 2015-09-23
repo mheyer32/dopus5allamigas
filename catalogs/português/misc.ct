@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 0.4 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_BEEP_DESC
+Ouve-se um bipe
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+O ecrã pisca
+; Flashes the display
+;
+MSG_ALARM_DESC
+Ouve-se um alarme
+; Sounds an alarm
+;

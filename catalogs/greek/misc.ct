@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_BEEP_DESC
+Δημιουργία ηχητικού τόνου
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+Δημιουργία λάμψης οθόνης
+; Flashes the display
+;
+MSG_ALARM_DESC
+Ηχητικός συναγερμός
+; Sounds an alarm
+;

@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_PLEASE_WAIT
+Vennligst vent...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - RyddOpp Djinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Utfør oppryddnings velikehold
+; Perform cleanup maintenance
+;

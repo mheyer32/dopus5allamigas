@@ -1,0 +1,140 @@
+## version $VER: format.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_FORMAT_TITLE
+Διαμόρφωση
+; Format
+;
+MSG_FORMAT_FORMAT
+_Διαμόρφωση
+; _Format
+;
+MSG_FORMAT_QUICK_FORMAT
+_Γρήγορη Διαμ/ση
+; _Quick Format
+;
+MSG_FORMAT_CANCEL
+¶_κυρο
+; _Cancel
+;
+MSG_FORMAT_NAME
+Ό_νομα
+; _Name
+;
+MSG_FORMAT_FFS
+Γ_ρήγορο Σύστημα Αρχ/σης
+; F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL
+Δ_ιεθνής Κατάσταση (Intl)
+; _International Mode
+;
+MSG_FORMAT_CACHING
+_Directory Caching
+; _Directory Caching
+;
+MSG_FORMAT_TRASHCAN
+_Αποριμματοδοχείο
+; _Put Trashcan
+;
+MSG_FORMAT_INSTALL
+Δι_σκέττα εκκίνησης
+; _Make Bootable
+;
+MSG_FORMAT_VERIFY
+_Επαλήθευση
+; _Verify
+;
+MSG_FORMAT_DEFAULT_NAME
+Ανώνυμος
+; Empty
+;
+MSG_FORMAT_STATUS
+%ld τομείς, %ld bytes/τομέα, %s
+; %ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE
+¶νοιγμα συσκευής...
+; Opening device...
+;
+MSG_CHECKING_DISK
+Έλεγχος δίσκου...
+; Checking disk...
+;
+MSG_CANT_OPEN_DEVICE
+Αδύνατο το άνοιγμα συσκευής!
+; Unable to open device!
+;
+MSG_NO_DISK_PRESENT
+Δεν υπάρχει δίσκος στον οδηγό!
+; No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED
+Ο δίσκος είναι προστατευμένος!
+; Disk is write-protected!
+;
+MSG_RETRY_CANCEL
+Νέα Προσπάθεια|Ακύρωση
+; Retry|Cancel
+;
+MSG_PROCEED_CANCEL
+Συνέχεια|Ακύρωση
+; Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK
+Ο δίσκος στον οδηγό %s δεν είναι κενός!\n\
+Ο δίσκος '%s' περιέχει %s.\n\
+Όλα τα δεδομένα θα χαθούν.\n\
+Επιλέξτε "Συνέχεια" για να συνεχίσετε.
+; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+; All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED
+Ακυρώθηκε.
+; Aborted.
+;
+MSG_FORMAT_INITIALISING
+Προετοιμασία δίσκου...
+; Initialising disk...
+;
+MSG_FORMAT_FORMATTING
+Διαμόρφωση...
+; Formatting...
+;
+MSG_FORMAT_FORMATERROR
+Format error on track %ld.
+; Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR
+Verify error on track %ld.
+; Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL
+Format successful!
+; Format successful!
+;
+MSG_FORMAT_FAILED
+Format failed.
+; Format failed.
+;
+MSG_FORMAT_SETTING_UP
+Setting up...
+; Setting up...
+;
+MSG_FORMAT_CLEANING_UP
+Cleaning up...
+; Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH
+Making Trashcan...
+; Making Trashcan...
+;
+MSG_INSTALLING_DISK
+Installing Bootblock...
+; Installing Bootblock...
+;
+MSG_FORMAT_DESC
+Format disks
+; Format disks
+;

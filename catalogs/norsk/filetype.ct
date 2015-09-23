@@ -1,0 +1,259 @@
+## version $VER: filetype.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_FIND_DESC
+Finn filtypen for en fil
+; Find filetype for a file
+;
+MSG_FIND_TITLE
+Filtype Finner
+; Filetype Finder
+;
+MSG_FIND_PRI
+Pri
+; Pri
+;
+MSG_FIND_ID
+ID
+; ID
+;
+MSG_FIND_FILETYPE
+Filtype
+; Filetype
+;
+MSG_FIND_FILE
+Fil...
+; File...
+;
+MSG_FIND_USE
+_Bruk
+; _Use
+;
+MSG_FIND_INSTALL
+_Installere
+; _Install
+;
+MSG_FIND_CREATE
+_Opprett
+; _Create
+;
+MSG_FIND_EDIT
+_Editer
+; _Edit
+;
+MSG_FIND_CANCEL
+_Avbryt
+; C_ancel
+;
+MSG_FIND_SCANNING
+Scanner filtyper...
+; Scanning filetypes...
+;
+MSG_FIND_MATCHING
+Matcher filtyper...
+; Matching filetypes...
+;
+MSG_NONE_FOUND_1
+Ingen filtype er funnet som
+; No filetype has been found that
+;
+MSG_NONE_FOUND_2
+matcher den valgte filen. Ønsker
+; matches the selected file. Do you
+;
+MSG_NONE_FOUND_3
+du å opprette en ny filtype for
+; wish to create a new filetype for
+;
+MSG_NONE_FOUND_4
+denne filen?
+; this file?
+;
+MSG_NONE_FOUND_5
+
+; 
+;
+MSG_NONE_FOUND_6
+
+; 
+;
+MSG_NONE_FOUND_7
+
+; 
+;
+MSG_STORED_FOUND_1
+Ingen installert filtype matcher
+; No installed filetype matches the
+;
+MSG_STORED_FOUND_2
+den valgte filen. Men, det er en
+; selected file. However, there is
+;
+MSG_STORED_FOUND_3
+filtype i oppbevaring som matcher.
+; a filetype in storage which does match.
+;
+MSG_STORED_FOUND_4
+Ønsker du å installere denne filtypen
+; Do you wish to install this filetype 
+;
+MSG_STORED_FOUND_5
+nå eller å opprette en ny?
+; now or create a new one?
+;
+MSG_STORED_FOUND_6
+
+; 
+;
+MSG_STORED_FOUND_7
+
+; 
+;
+MSG_BETTER_FOUND_1
+Det er en filtype i oppbevaring som
+; There is a filetype in storage which
+;
+MSG_BETTER_FOUND_2
+matcher den valgte filen og har en
+; matches the selected file and has a
+;
+MSG_BETTER_FOUND_3
+høyere prioritet enn den nåværende
+; higher priority than the currently
+;
+MSG_BETTER_FOUND_4
+installerte filtypen for denne filen.
+; installed filetype for this file. Do
+;
+MSG_BETTER_FOUND_5
+Ønsker du å bruke den nåværende
+; you wish to use the current filetype,
+;
+MSG_BETTER_FOUND_6
+filtypen, installere den oppbevarte,
+; install the stored filetype, or create
+;
+MSG_BETTER_FOUND_7
+eller opprette en ny?
+; a new one?
+;
+MSG_INSTALLED_FOUND_1
+Det er en filtype installert
+; There is a filetype installed
+;
+MSG_INSTALLED_FOUND_2
+som matcher den valgte filen.
+; which matches the selected file.
+;
+MSG_INSTALLED_FOUND_3
+Ønsker du å bruke denne filtypen
+; Do you wish to use this Filetype
+;
+MSG_INSTALLED_FOUND_4
+eller opprette en ny?
+; or create a new one?
+;
+MSG_INSTALLED_FOUND_5
+
+; 
+;
+MSG_INSTALLED_FOUND_6
+
+; 
+;
+MSG_INSTALLED_FOUND_7
+
+; 
+;
+MSG_CREATE_DESC
+Opprett en ny filtype
+; Create new filetype
+;
+MSG_CREATE_TITLE
+Filtype Oppretter
+; Filetype Creator
+;
+MSG_CREATE_FILES
+Filer...
+; Files...
+;
+MSG_CREATE_ADD
+Legg _til
+; _Add
+;
+MSG_CREATE_DELETE
+_Slett
+; _Delete
+;
+MSG_CREATE_CLEAR
+_Rens
+; _Clear
+;
+MSG_CREATE_FILETYPE
+Filtype...
+; Filetype...
+;
+MSG_CREATE_NAME
+  _Navn:
+;  _Name:
+;
+MSG_CREATE_IFF
+   _IFF:
+;   _IFF:
+;
+MSG_CREATE_GROUP
+_Gruppe:
+; _Group:
+;
+MSG_CREATE_ID
+    I_D:
+;    I_D:
+;
+MSG_CREATE_BYTES
+ _Bytes:
+; _Bytes:
+;
+MSG_CREATE_CASE
+Versal sensitiv
+; Case
+;
+MSG_CREATE_NOCASE
+Overse Versal
+; No Case
+;
+MSG_CREATE_EDIT
+_Editer
+; _Edit
+;
+MSG_CREATE_SAVE
+_Lagre
+; _Save
+;
+MSG_CREATE_CANCEL
+_Avbryt
+; _Cancel
+;
+MSG_CREATE_ADD_FILE
+Legg til en fil...
+; Add a file...
+;
+MSG_CREATE_WARN_EDITED
+ADVARSEL\n\n\
+Du har brukt editoren.\n\
+Hvis du forsetter vil endringene dine forsvinne...
+; WARNING\n\nYou have used the editor.\nIf you continue your changes will be lost...
+;
+MSG_CREATE_CONTINUE_CANCEL
+Fortsett|Avbryt
+; Continue|Cancel
+;
+MSG_REPLACE_CANCEL
+Erstatt|Avbryt
+; Replace|Cancel
+;
+MSG_FILETYPE_EXISTS
+Filtypen '%s' eksisterer.\n\
+Ønsker du å erstatte den?
+; Filetype '%s' exists.\nDo you wish to replace it?
+;

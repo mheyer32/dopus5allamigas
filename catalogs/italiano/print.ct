@@ -1,0 +1,184 @@
+## version $VER: print.catalog 2.0 (09.02.96) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_PRINTREQ_TITLE
+Stampa
+; Print
+;
+MSG_PRINTING_TITLE
+Stampa in corso...
+; Printing...
+;
+MSG_PRINT
+Stam_pa
+; _Print
+;
+MSG_CANCEL
+_Annulla
+; _Cancel
+;
+MSG_TEXT
+Testo
+; Text
+;
+MSG_HEADER_FOOTER
+Intestazione/Piè pagina
+; Header/Footer
+;
+MSG_PRINT_QUALITY
+_Qualità
+; _Quality
+;
+MSG_PRINT_SPACING
+_Spaziatura
+; _Spacing
+;
+MSG_PRINT_PITCH
+Co_rpo
+; P_itch
+;
+MSG_PRINT_LEFT_MARGIN
+Margine s_inistro
+; _Left Margin
+;
+MSG_PRINT_RIGHT_MARGIN
+Margine d_estro
+; _Right Margin
+;
+MSG_PRINT_PAGE_LENGTH
+Lungh. pagina
+; P_age Length
+;
+MSG_PRINT_TAB_SIZE
+Dim. _tab.
+; _Tab Size
+;
+MSG_PRINT_QUALITY_DRAFT
+Bozza
+; Draft
+;
+MSG_PRINT_QUALITY_LETTER
+Lettera
+; Letter
+;
+MSG_PRINT_SPACING_6
+6 lin./poll.
+; 6 LPI
+;
+MSG_PRINT_SPACING_8
+8 lin./poll.
+; 8 LPI
+;
+MSG_PRINT_PITCH_PICA
+Pica
+; Pica
+;
+MSG_PRINT_PITCH_ELITE
+Elite
+; Elite
+;
+MSG_PRINT_PITCH_FINE
+Fine
+; Fine
+;
+MSG_PRINT_CONFIGURATION
+c_onfigurazione...
+; c_onfiguration...
+;
+MSG_PRINT_HEADER
+Intestazione
+; Header
+;
+MSG_PRINT_FOOTER
+Piè pagina
+; Footer
+;
+MSG_PRINT_TITLE
+Titol_o
+; Titl_e
+;
+MSG_PRINT_DATE
+_Data
+; _Date
+;
+MSG_PRINT_PAGE
+Pa_gina
+; Pa_ge
+;
+MSG_PRINT_STYLE
+St_ile
+; St_yle
+;
+MSG_PRINT_STYLE_NORMAL
+Normale
+; Normal
+;
+MSG_PRINT_STYLE_BOLD
+Grassetto
+; Bold
+;
+MSG_PRINT_STYLE_ITALICS
+Corsivo
+; Italics
+;
+MSG_PRINT_STYLE_UNDERLINE
+Sottolineato
+; Uline
+;
+MSG_ABORT
+Interrompi
+; Abort
+;
+MSG_OK
+O
+; OK
+;
+MSG_OPENING_PRINTER
+Sto aprendo la stampante...
+; Opening printer...
+;
+MSG_CANT_OPEN_PRINTER
+Non posso aprire la stampante!
+; Couldn't open printer!
+;
+MSG_PRINTER_ERROR
+Si è verificato un errore (%ld) durante la stampa.
+; An error occurred (%ld) while printing.
+;
+MSG_REALLY_ABORT
+Vuoi veramente interrompere la stampa?
+; Really abort print?
+;
+MSG_RETRY_CANCEL
+Riprova|Annulla
+; Retry|Cancel
+;
+MSG_ABORT_RESUME
+Interrompi|Continua
+; Abort|Continue
+;
+MSG_PRINT_PAGENUM
+Pagina
+; Page 
+;
+MSG_PRINT_DESC
+Stampa files di testo
+; Print text files
+;
+MSG_PRINT_OUTPUT
+Outp_ut
+; Outp_ut
+;
+MSG_PRINT_OUTPUT_PRINTER
+Stampante
+; Printer
+;
+MSG_PRINT_OUTPUT_FILE
+File
+; File
+;
+MSG_SELECT_OUTPUT_FILE
+Seleziona il file di uscita
+; Select Output File
+;

@@ -1,0 +1,2149 @@
+## version $VER: dopus.catalog 0.5 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_ABORTED
+A Abortar...
+; Aborted...
+;
+MSG_TRY_AGAIN
+Tentar de novo
+; Try Again
+;
+MSG_RETRY
+Voltar a tentar
+; Retry
+;
+MSG_ABORT
+Abortar
+; Abort
+;
+MSG_REPLACE
+Substituir
+; Replace
+;
+MSG_SKIP
+Saltar
+; Skip
+;
+MSG_SKIP_ALL
+Saltar todos
+; Skip All
+;
+MSG_ALL
+Todos
+; All
+;
+MSG_QUIT
+Sair
+; Quit
+;
+MSG_SAVE
+Gravar
+; Save
+;
+MSG_CLOSE
+Fechar
+; Close
+;
+MSG_YES
+Sim
+; Yes
+;
+MSG_NO
+Não
+; No
+;
+MSG_CONTINUE
+Continuar
+; Continue
+;
+MSG_OKAY
+Sim
+; OK
+;
+MSG_CANCEL
+Cancelar
+; Cancel
+;
+MSG_REPLACE_ALL
+Substituir todos
+; Replace All
+;
+MSG_PROCEED
+Proceder
+; Proceed
+;
+MSG_MOVE
+Mover
+; Move
+;
+MSG_DISCARD
+Eliminar
+; Discard
+;
+MSG_BLOCKS
+Blocos
+; blocks
+;
+MSG_FREE
+Livres
+; free
+;
+MSG_MAKELINK
+Juntar
+; MakeLink
+;
+MSG_SELECT_FILE
+Seleccionar o Ficheiro
+; Select File
+;
+MSG_SELECT_DIR
+Seleccionar a Directória
+; Select Directory
+;
+MSG_ENTER_FILE
+Introduzir o nome do ficheiro
+; Enter Filename
+;
+MSG_OPEN
+Abrir...
+; Open...
+;
+MSG_DEFAULTS
+Por omição
+; Reset To Defaults
+;
+MSG_LAST_SAVED
+Últimos Gravados
+; Last Saved
+;
+MSG_RESTORE
+Restaurar
+; Restore
+;
+MSG_PROJECT
+Projecto
+; Project
+;
+MSG_EDIT
+Editar
+; Edit
+;
+MSG_UNKNOWN_TYPE
+<desconhecido>
+; <unknown>
+;
+MSG_SNIFF_CONFIRMATION
+O ficheiro '%s' não pode ser identificado.\n\
+Correr o Gerênciador de Tipo de Ficheiros para investigar?
+; The file '%s' could not be identified.\n\
+; Launch Filetype Sniffer to investigate?
+;
+MSG_SNIFF
+Investigar!
+; Sniff!
+;
+MSG_SCRIPTS_CHANGED
+Ocureram modificações, que não foram gravadas Deseja grava-las agora?
+; You have modified your scripts and not\nsaved them. Would you like to?
+;
+MSG_LISTER_MENU_CHANGED
+Você modificou o menu de Listas, e não gravou\n\
+os dados. Deseja grava-los agora?
+; You have modified your lister menu and not\nsaved it. Would you like to?
+;
+MSG_USER_MENU_CHANGED
+Você modificou o menu do Utilizador, e não gravou\n\
+os dados. Deseja grava-los agora?
+; You have modified your user menus and not\nsaved them. Would you like to?
+;
+MSG_HOTKEYS_CHANGED
+Você modificou as suas hotkeys, e não gravou\n\
+os dados. Deseja grava-los agora?
+; You have modified your hotkeys and not\nsaved them. Would you like to?
+;
+MSG_OPEN_NEW_WINDOW
+Abrir uma nova Lista
+; Open in New Lister
+;
+MSG_OPEN_WITH_MENU
+Abrir como...
+; Open With...
+;
+MSG_SELECT_APP
+Seleccionar a aplicação a abrir '%s'
+; Select Application To Open '%s'
+;
+MSG_OPEN_WITH_MENU_SUB
+Abrir como
+; Open With
+;
+MSG_OPEN_WITH_MENU_OTHER
+Outros...
+; Other...
+;
+MSG_ENTER_ARGUMENTS_FOR
+Introduza os argumentos para '%s'
+; Enter arguments for '%s'
+;
+MSG_DIRECTORY
+Directória 
+; Directory 
+;
+MSG_SELECT_UNPROTECT
+\n\
+Seleccionar Desproteger para pôr o bit de apagamento
+; \nSelect Unprotect to set the deletion bit.
+;
+MSG_FOUND_A_MATCH
+Encontrei uma coincidência no ficheiro\n\
+'%s'
+; Found a match in the file\n'%s'
+;
+MSG_COMMENTING
+Comentário
+; commenting
+;
+MSG_PROTECTING
+Protegido
+; protecting
+;
+MSG_DATESTAMPING
+Fechado
+; date stamping
+;
+MSG_DELETING
+Apagado
+; deleting
+;
+MSG_RENAMING
+Mudar de Nome
+; renaming
+;
+MSG_ENTER_COMMENT
+Introduza um comentário para '%s'.
+; Enter a comment for '%s'.
+;
+MSG_ENTER_PASSWORD
+Introduza uma Palavra Chave para encriptar os ficheiros.
+; Enter password to encrypt files.
+;
+MSG_ENTER_DATE_AND_TIME
+Introduza uma nova data (e hora) para '%s'.
+; Enter new date (and time) for '%s'.
+;
+MSG_ENTER_ARGUMENTS
+Introduza os argumentos
+; Enter arguments
+;
+MSG_REALLY_QUIT
+Estou a terminar esta sessão do Directory Opus
+; This will end your Directory Opus session.
+;
+MSG_FILE
+Ficheiro
+; File
+;
+MSG_SELECT_PROTECTION_BITS
+Seleccionar os bits de proteção
+; Select protection bits
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus
+; Directory Opus Request
+;
+MSG_MULTI_DRAG
+Abortar
+; Multi-drag - %ld files, %ld dirs selected
+;
+MSG_PRESS_MOUSE_BUTTON
+Substituir
+; Click close button to continue...
+;
+MSG_COMMENT
+Saltar
+; comment
+;
+MSG_PROTECT
+Saltar todos
+; protect
+;
+MSG_DATESTAMP
+Todos
+; date stamp
+;
+MSG_PROGRESS_OPERATION_MOVING
+Sair
+; Moving...
+;
+MSG_PROGRAM_LOADING
+Gravar
+; Opus 5 loading... please wait.
+;
+MSG_OPEN_MENU
+Fechar
+; Load...
+;
+MSG_SAVE_MENU
+Sim
+; Save
+;
+MSG_SAVEAS_MENU
+Não
+; Save As...
+;
+MSG_ACT_RECURSIVELY
+Continuar
+; Act on files in sub-directories?
+;
+MSG_PROGRESS_OPERATION_COMMENT
+Sim
+; Setting comments...
+;
+MSG_PROGRESS_OPERATION_PROTECT
+Cancelar
+; Setting protections...
+;
+MSG_PROGRESS_OPERATION_DATESTAMP
+Substituir todos
+; Setting datestamps...
+;
+MSG_SET_PROTECT_OLD
+Proceder
+; Current
+;
+MSG_SET_PROTECT_SET
+Mover
+; Set
+;
+MSG_SET_PROTECT_CLEAR
+Eliminar
+; Clear
+;
+MSG_OK_BUTTON
+Blocos
+; _OK
+;
+MSG_ALL_BUTTON
+Livres
+; A_ll
+;
+MSG_SKIP_BUTTON
+Juntar
+; S_kip
+;
+MSG_ABORT_BUTTON
+Seleccionar o Ficheiro
+; A_bort
+;
+MSG_PROGRESS_OPERATION_ENCRYPTING
+Seleccionar a Directória
+; Encrypting...
+;
+MSG_USER_MENU
+Introduzir o nome do ficheiro
+; User
+;
+MSG_LISTER_MENU_TITLE
+Abrir...
+; Lister Pop-Up Menu
+;
+MSG_USER_MENU_TITLE
+Por omição
+; User Menus
+;
+MSG_EMPTY
+Últimos Gravados
+; empty
+;
+MSG_CANCEL_BUTTON
+Restaurar
+; _Cancel
+;
+MSG_OPEN_BUTTON
+Projecto
+; _Open
+;
+MSG_NEW_BUTTON
+Editar
+; _New
+;
+MSG_PARENT
+<desconhecido>
+; Parent Directory
+;
+MSG_ROOT
+O ficheiro '%s' não pode ser identificado.\n\
+Correr o Gerênciador de Tipo de Ficheiros para investigar?
+; Root Directory
+;
+MSG_DEVICE_LIST
+Investigar!
+; Device List
+;
+MSG_SCANNING_DIRECTORIES
+Ocureram modificações, que não foram gravadas Deseja grava-las agora?
+; Scanning directories...
+;
+MSG_READING_DIRECTORY
+Você modificou o menu de Listas, e não gravou\n\
+os dados. Deseja grava-los agora?
+; Reading directory...
+;
+MSG_CHECK_FIT_RESULTS
+Você modificou o menu do Utilizador, e não gravou\n\
+os dados. Deseja grava-los agora?
+; Results of fit test:\n
+;
+MSG_FIT
+Você modificou as suas hotkeys, e não gravou\n\
+os dados. Deseja grava-los agora?
+; fit
+;
+MSG_BLOCKS_NEEDED
+Abrir uma nova Lista
+; blocks needed.
+;
+MSG_EXECUTE_ENTER_COMMAND
+Abrir como...
+; Enter command and arguments.
+;
+MSG_TOOL_MENU
+Seleccionar a aplicação a abrir '%s'
+; Tools
+;
+MSG_BUFFER_LIST
+Abrir como
+; Cache List
+;
+MSG_REREAD_DIR
+Outros...
+; Re-read Directory
+;
+MSG_ASSIGN
+Assign
+; Assign
+;
+MSG_FULL
+full
+; full
+;
+MSG_USED
+in use
+; in use
+;
+MSG_VALIDATING
+disk validating
+; disk validating
+;
+MSG_ENTER_FILTER_STRING
+Directories selected - enter filter pattern.
+; Directories selected - enter filter pattern.
+;
+MSG_VOLUME
+Volume
+; Volume
+;
+MSG_SELECT_SOURCE
+Select Source
+; Select Source
+;
+MSG_SELECT_DESTINATION
+Select Destination
+; Select Destination
+;
+MSG_NO_OWNER
+<No Owner>
+; <No Owner>
+;
+MSG_NO_GROUP
+<No Group>
+; <No Group>
+;
+MSG_SCRIPTS_TITLE
+Scripts
+; Scripts
+;
+MSG_PROGRESS_OPERATION_LINKING
+Making Links...
+; Making Links...
+;
+MSG_LINKING
+making a link to
+; making a link to
+;
+MSG_DECRYPT
+_Decrypt files
+; _Decrypt files
+;
+MSG_EMPTY_TRASH
+Empty Trash
+; Empty Trash
+;
+MSG_REALLY_EMPTY_TRASH
+The contents of the trashcan will be lost!\nDo you really want to empty it?
+; The contents of the trashcan will be lost!\nDo you really want to empty it?
+;
+MSG_ENTER_ASSIGN_NAME
+Enter name to assign to '%s'
+; Enter name to assign to '%s'
+;
+MSG_ADD
+Add
+; Add
+;
+MSG_PATH
+Path
+; Path
+;
+MSG_DEFER
+Defer
+; Defer
+;
+MSG_ASSIGNING
+assigning
+; assigning
+;
+MSG_CHANGE_NEEDS_RESET
+Some changes you made will not be\neffective until you next reboot.
+; Some changes you made will not be\neffective until you next reboot.
+;
+MSG_OPENING
+opening
+; opening
+;
+MSG_LIBRARY_ERROR
+Unable to open %s (%s)
+; Unable to open %s (%s)
+;
+MSG_LIBRARY_ANY_VERSION
+any version
+; any version
+;
+MSG_CLI
+CLI
+; CLI
+;
+MSG_CX_DESC
+The Complete Workbench Replacement!
+; The Complete Workbench Replacement!
+;
+MSG_ABORT_STARTUP
+Do you want to abort startup?
+; Do you want to abort startup?
+;
+MSG_ABORT_STARTUP_BUTTONS
+Continue|Abort
+; Continue|Abort
+;
+MSG_PROTECT_TITLE
+Protect
+; Protect
+;
+MSG_DATESTAMP_TITLE
+Datestamp
+; Datestamp
+;
+MSG_COMMENT_TITLE
+Comment
+; Comment
+;
+MSG_PATTERN_OFF
+The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+; The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+;
+MSG_THEMES_MENU
+Themes
+; Themes
+;
+MSG_THEMES_LOAD
+Load Theme...
+; Load Theme...
+;
+MSG_THEMES_SAVE
+Save Theme...
+; Save Theme...
+;
+MSG_THEMES_BUILD
+Build Theme...
+; Build Theme...
+;
+MSG_ADDICONING
+adding icons to
+; adding icons to
+;
+MSG_REGISTERED_TO
+Esta cópia está registada em nome de:
+; This copy is registered to:
+;
+MSG_SERIAL_NUMBER
+Núm. Série:
+; Serial # 
+;
+MSG_UNREGISTERED
+Esta cópia não está registada!
+; This copy is unregistered!
+;
+MSG_YOU_SHOULD_REGISTER
+Regíste-se para evitar esta mensagem!
+; Register to prevent this delay!
+;
+MSG_TRANSLATION_BY_YOUR_NAME
+Traduzido por Raul José Batista Silva \n\
+ luarsilva@mail.telepac.pt 
+; 
+;
+MSG_SEARCH_DIRECTORIES
+Procurar os ficheiros nas directórias seleccionadas?
+; Search files in selected directories?
+;
+MSG_ENTER_SEARCH_STRING
+Introduza o texto a procurar...
+; Enter text to search for...
+;
+MSG_SEARCH_NO_CASE
+_Como/min
+; _Case insensitive
+;
+MSG_SEARCH_WILD
+Procurar pelo padrão
+; _Wildcard search
+;
+MSG_SEARCH_ONLYWORD
+Palavras inteiras
+; _Match whole words
+;
+MSG_SEARCH_LEAVE_SELECTED
+Deixar seleccionados
+; Leave selected
+;
+MSG_SEARCH_PROMPT
+Preguntar
+; Ask
+;
+MSG_SEARCH_OUTPUT
+Saída dos resultados
+; Output results
+;
+MSG_PROGRESS_SEARCHING
+A procurar...
+; Searching...
+;
+MSG_SEARCH_OUTPUT_HEADER
+Os ficheiros contêm '%s'\n\n
+; Files containing '%s'\n\n
+;
+MSG_SEARCH_READ
+Ler
+; Read
+;
+MSG_ENTER_NEW_NAME
+Introduza o novo nome do ficheiro ou padrão
+; Enter new filename or rename pattern.
+;
+MSG_PROGRESS_RENAMING
+A mudar o Nome...
+; Renaming...
+;
+MSG_RENAME
+Mudar de Nome
+; Rename
+;
+MSG_RENAME_DISK
+Introduza um novo nome para '%s'.
+; Enter a new name for '%s'.
+;
+MSG_ENTER_ANOTHER_NAME
+Introduza outro nome para o ficheiro
+; Enter another filename.
+;
+MSG_ENTER_DIRECTORY_NAME
+Introduza o nome da directória
+; Enter directory name
+;
+MSG_MAKEDIR_ICON
+Com o icone
+; With icon
+;
+MSG_MAKEDIR_NOICON
+Sem o icone
+; Without icon
+;
+MSG_DIRECTORY_CREATED
+Directória criada
+; Directory created.
+;
+MSG_PROGRESS_ADDING_ICONS
+A adicionar os icones...
+; Adding icons...
+;
+MSG_ICON_ALREADY_EXISTS
+Já existe um icone para '%s'.\n\
+Quer que grave por cima do já existente?
+; An icon already exists for '%s'.\nDo you wish to replace it?
+;
+MSG_ICON_REPLACE_IMAGE
+Só a imagem
+; Image Only
+;
+MSG_COPYING
+A copiar
+; copying
+;
+MSG_PROGRESS_OPERATION_COPYING
+A copiar...
+; Copying...
+;
+MSG_CANT_OVERCOPY_FILES
+As directórias de Fonte e de Destino devem\n\
+ser diferentes para copiar os ficheiros.
+; Source and destination directories\nmust be different to copy files.
+;
+MSG_COPY
+Copiar
+; Copy
+;
+MSG_PROGRESS_OPERATION_CLONING
+A duplicar...
+; Duplicating...
+;
+MSG_DUPLICATE
+Duplicar
+; Duplicate
+;
+MSG_CANT_COPY_DIR_INTO_ITSELF
+Não se pode copiar uma directória sobre si mesma!
+; You can't copy a directory into itself!
+;
+MSG_MOVING
+A mover
+; moving
+;
+MSG_CANT_OVERLINK_FILES
+As directórias de Fonte e de Destino devem\n\
+ser diferentes para fazer a junção.
+; Source and destination directories\nmust be different to make links.
+;
+MSG_CANT_LINK_DIR_INTO_ITSELF
+Não se pode juntar uma directória consigo mesma!
+; You can't link a directory into itself!
+;
+MSG_FROM_TO
+De '%s' a '%s'
+; From '%s' to '%s'
+;
+MSG_FROM
+De '%s'
+; From '%s'
+;
+MSG_PROJECT_MENU
+Opus
+; Opus
+;
+MSG_BACKDROP_MENU
+Deixar por Trás
+; Backdrop
+;
+MSG_ABOUT_MENU
+Acerca de...
+; About...
+;
+MSG_HIDE_MENU
+Esconder
+; Hide
+;
+MSG_QUIT_MENU
+Desistir...
+; Quit...
+;
+MSG_EXECUTE_MENU
+Executar o Comando...
+; Execute Command...
+;
+MSG_HELP_MENU
+Ajuda!
+; Help!
+;
+MSG_KEYFINDER_MENU
+Procurador de Teclas...
+; Key Finder...
+;
+MSG_WINDOW_MENU
+Listas
+; Listers
+;
+MSG_NEW_LISTER_MENU
+Novo
+; New
+;
+MSG_CLOSE_LISTER_MENU
+Fechar
+; Close
+;
+MSG_LISTER_SOURCE
+Pôr a Fonte
+; Make Source
+;
+MSG_LISTER_DEST
+Pôr o Destino
+; Make Dest
+;
+MSG_LISTER_LOCK_SOURCE
+Bloquear a Fonte
+; Lock As Source
+;
+MSG_LISTER_LOCK_DEST
+Bloquear o Destino
+; Lock As Dest
+;
+MSG_LISTER_UNLOCK
+Desbloquear
+; Unlock
+;
+MSG_LISTER_OFF
+Apagar
+; Turn Off
+;
+MSG_LISTER_UNLOCK_ALL
+Desbloquear Tudo
+; Unlock All
+;
+MSG_CLOSE_ALL_MENU
+Fechar Tudo
+; Close All
+;
+MSG_EDIT_MENU
+Editar...
+; Edit...
+;
+MSG_LISTER_BUTTONS_MENU
+Editar a Barra da Lista...
+; Edit Lister Toolbar...
+;
+MSG_LISTER_MENU_MENU
+Editar o Menu da Lista...
+; Edit Lister Menu...
+;
+MSG_TILE_MENU
+Ajustar
+; Tile
+;
+MSG_TILE_HORIZ_MENU
+Horizontalmente
+; Horizontally
+;
+MSG_TILE_VERT_MENU
+Verticalmente
+; Vertically
+;
+MSG_CASCADE_MENU
+Em Cascata
+; Cascade
+;
+MSG_LISTER_LOCK_POS
+Bloquear a Posição?
+; Lock Position?
+;
+MSG_LISTER_ICONIFY
+Incognificar
+; Iconify
+;
+MSG_LISTER_VIEW_ICONS
+Ver por Icones
+; View Icons
+;
+MSG_LISTER_VIEW
+Ver por
+; View As
+;
+MSG_LISTER_VIEW_NAME
+Nomes
+; Name
+;
+MSG_LISTER_VIEW_ICON
+Icones
+; Icon
+;
+MSG_LISTER_SHOW_ALL
+Mostrar todos
+; Show All
+;
+MSG_LISTER_ICON_ACTION
+Acção do Icone
+; Icon Action
+;
+MSG_LISTER_ARRANGE_ICONS
+Ordenar os Icones
+; Arrange Icons
+;
+MSG_LISTER_ARRANGE_NAME
+Pelo Nome
+; by Name
+;
+MSG_LISTER_ARRANGE_TYPE
+Pelo Tipo
+; by Type
+;
+MSG_LISTER_ARRANGE_SIZE
+Pelo Tamanho
+; by Size
+;
+MSG_LISTER_ARRANGE_DATE
+Pela Data
+; by Date
+;
+MSG_LISTER_NEW_DRAWER
+Criar uma nova gaveta...
+; New Drawer...
+;
+MSG_OPEN_PARENT_MENU
+Abrir a gaveta anterior
+; Open Parent
+;
+MSG_LISTER_RESTORE
+Restore
+; Restore
+;
+MSG_ICONS_MENU
+Icones
+; Icons
+;
+MSG_ICON_OPEN_MENU
+Abrir
+; Open
+;
+MSG_ICON_INFO_MENU
+Informação...
+; Information...
+;
+MSG_ICON_SNAPSHOT_MENU
+Congelar
+; Snapshot
+;
+MSG_ICON_LEAVE_OUT_MENU
+Deixar de Fora
+; Leave Out
+;
+MSG_ICON_PUT_AWAY_MENU
+Pôr para Dentro
+; Put Away
+;
+MSG_ICON_SELECT_ALL_MENU
+Seleccionar Todos
+; Select All
+;
+MSG_ICON_CLEANUP
+Reorganizar
+; Clean Up
+;
+MSG_ICON_RESET
+Fazer o Reset
+; Reset
+;
+MSG_ICON_RENAME
+Mudar o Nome...
+; Rename...
+;
+MSG_ICON_FORMAT
+Formatar a Disquete ou o Disco...
+; Format Disk...
+;
+MSG_ICON_DISKINFO
+Informações Acerca do Disco...
+; Disk Information...
+;
+MSG_ICON_UNSNAPSHOT_MENU
+Descongelar
+; Un-Snapshot
+;
+MSG_ICON_COPY
+Tentar de novo
+; Copy
+;
+MSG_ICONS_NEW_MENU
+Voltar a tentar
+; New
+;
+MSG_ICONS_MAKEDIR_MENU
+Abortar
+; Drawer...
+;
+MSG_ICONS_NEWGROUP_MENU
+Substituir
+; Group...
+;
+MSG_ICON_COPY_RAM
+Saltar
+; to RAM:
+;
+MSG_ICON_COPY_DF0
+Saltar todos
+; to DF0:
+;
+MSG_ICON_COPY_OTHER
+Todos
+; to other...
+;
+MSG_ICON_COPY2
+Sair
+; Copy...
+;
+MSG_ICON_COPY_TO
+Gravar
+; to
+;
+MSG_ICONS_NEWCOMMAND_MENU
+Fechar
+; Command...
+;
+MSG_ICONS_SHORTCUT_MENU
+Sim
+; Create Shortcut
+;
+MSG_DESKTOP_POPUP_LEFTOUT
+Não
+; Create Left-out
+;
+MSG_DESKTOP_POPUP_COPY
+Continuar
+; Copy to Desktop
+;
+MSG_DESKTOP_POPUP_MOVE
+Sim
+; Move to Desktop
+;
+MSG_ICON_COPY_DESKTOP
+Cancelar
+; to Desktop
+;
+MSG_ICON_LINEUP
+Substituir todos
+; Line Up
+;
+MSG_ICON_SNAPSHOT_LISTER
+Proceder
+; Snapshot Lister
+;
+MSG_ICON_SNAPSHOT_ICONS
+Mover
+; Snapshot Icons
+;
+MSG_ICON_SNAPSHOT_ALL
+Eliminar
+; Snapshot All
+;
+MSG_ICON_SNAPSHOT_WINDOW
+Blocos
+; Snapshot Window
+;
+MSG_BUTTONS_MENU
+Botões
+; Buttons
+;
+MSG_NEW_BUTTONS_MENU
+Novo
+; New
+;
+MSG_CLOSE_BUTTONS_MENU
+Fechar
+; Close
+;
+MSG_NEW_BUTTONS_GFX_MENU
+Botões com Gráficos...
+; Graphic Buttons...
+;
+MSG_NEW_BUTTONS_TEXT_MENU
+Botões com Texto...
+; Text Buttons...
+;
+MSG_NEW_STARTMENU_MENU
+Menu de Arranque...
+; Start Menu...
+;
+MSG_SETTINGS_MENU
+Preferências
+; Settings
+;
+MSG_CLOCK_MENU
+Relógio
+; Clock
+;
+MSG_CREATE_ICONS_MENU
+Criar os Icones?
+; Create Icons?
+;
+MSG_ENVIRONMENT_MENU
+Ambiente
+; Environment
+;
+MSG_FILETYPES_MENU
+Tipos de Ficheiros...
+; File Types...
+;
+MSG_HOTKEYS_MENU
+Hotkeys...
+; Hotkeys...
+;
+MSG_MENU_MENU
+Menus do Utilizador...
+; User Menus...
+;
+MSG_FILTER_MENU
+Filtro Recursivo
+; Recursive Filter
+;
+MSG_OPTIONS_MENU
+Opções...
+; Options...
+;
+MSG_DEFPUBSCR_MENU
+Tentar de novo
+; Default PubScreen
+;
+MSG_MENU_HOTKEYS
+Tentar de novo
+; Hotkeys...
+;
+MSG_HOTKEYS_TITLE
+Voltar a tentar
+; Hotkeys
+;
+MSG_MENU_SCRIPTS
+Abortar
+; Scripts...
+;
+MSG_MENU_SYSMENU
+Substituir
+; System Menus...
+;
+MSG_MENU_ICONPOS
+Saltar
+; Icon Positioning...
+;
+MSG_ENVIRONMENT_SAVE_LAYOUT_NEW
+Saltar todos
+; Save Layout
+;
+MSG_ENVIRONMENT_EDIT
+Todos
+; Environment...
+;
+MSG_ENVIRONMENT_LOAD_NEW
+Sair
+; Load Environment...
+;
+MSG_ENVIRONMENT_SAVE_NEW
+Gravar
+; Save Environment
+;
+MSG_SELECT_TITLE
+Selecção dos ficheiros
+; File selection
+;
+MSG_SELECT_IGNORE
+Ignorar
+; Ignore
+;
+MSG_SELECT_MATCH
+Coincidem
+; Match
+;
+MSG_SELECT_NOMATCH
+Sem coincidências
+; No Match
+;
+MSG_SELECT_NEWER
+Últimos
+; Newer
+;
+MSG_SELECT_OLDER
+Primeiros
+; Older
+;
+MSG_SELECT_DIFFERENT
+Diferentes
+; Different
+;
+MSG_SELECT_NAME
+_Nome
+; _Name
+;
+MSG_SELECT_DATE_FROM
+Data
+; Da_te
+;
+MSG_SELECT_DATE_TO
+Para
+; to
+;
+MSG_SELECT_PROT
+Bits em
+; Bits on
+;
+MSG_SELECT_INCLUDE
+Incluir
+; Include
+;
+MSG_SELECT_EXCLUDE
+Excluir
+; Exclude
+;
+MSG_SELECT_COMPARE
+_Comparar com o Destino
+; Destination _Compare
+;
+MSG_SELECT_SIMPLE
+Simples
+; Simple
+;
+MSG_SELECT_COMPLEX
+Complexo
+; Complex
+;
+MSG_SELECT_ENTER_PATTERN
+Introduza o padrão para coincidir com os ficheiros
+; Enter pattern to match filenames.
+;
+MSG_SELECT_PROT_OFF
+Apagado
+; off
+;
+MSG_SELECT_ENTRY_BOTH
+Ficheiros e Directórias
+; Files & Dirs
+;
+MSG_SELECT_ENTRY_FILES
+Só os ficheiros
+; Files Only
+;
+MSG_SELECT_ENTRY_DIRS
+Só as directórias
+; Dirs Only
+;
+MSG_SELECT_ENTRY_TYPE
+_Operar em
+; _Operate on
+;
+MSG_DOS_ERROR
+Erro de DOS
+; DOS error
+;
+MSG_DOS_ERROR_CODE
+Erro %ld
+; Error %ld
+;
+MSG_ERROR_OCCURED
+Ocureu um erro %s '%s'\n\
+%s
+; An error occured %s '%s'\n%s
+;
+MSG_ERROR_DEST_IS_DIRECTORY
+O Destino '%s' é uma directória.
+; Destination '%s' is a directory.
+;
+MSG_ERROR_DEST_IS_FILE
+O Destino '%s' é um ficheiro.
+; Destination '%s' is a file.
+;
+MSG_ERROR_UNKNOWN_CODE
+Tentar de novo
+; Unknown error code
+;
+MSG_BUTTONS_ERROR_SAVING
+Voltar a tentar
+; Error saving button bank!
+;
+MSG_BUTTONS_ERROR_LOADING
+Abortar
+; Error loading button bank!
+;
+MSG_ERROR_CREATING_DIRECTORY
+Substituir
+; creating the directory
+;
+MSG_CUSTPORT_NOT_FOUND
+Saltar
+; User-specified custom handler port\n'%s'\ncould not be found!
+;
+MSG_ALREADY_RUNNING
+Saltar todos
+; Directory Opus appears to be already running!\n\
+; Running a second copy has the potential to cause\n\
+; problems, and it is recommended that you do not.
+;
+MSG_ALREADY_RUNNING_BUTTONS
+Todos
+; Cancel|Run Again
+;
+MSG_UNABLE_TO_CLOSE_SCREEN
+Sair
+; Directory Opus is unable to close its screen.\nPlease close all windows and try again.
+;
+MSG_ERROR_INVALID_DATE
+Gravar
+; Invalid date string entered!
+;
+MSG_UNABLE_TO_OPEN_SCREEN
+Fechar
+; Can't open screen!
+;
+MSG_AN_ERROR_OCCURED
+Sim
+; An error occured 
+;
+MSG_ERROR
+Não
+; Error 
+;
+MSG_SIZE
+Continuar
+; Size
+;
+MSG_DATE
+Sim
+; Date
+;
+MSG_OLD
+Cancelar
+; Old
+;
+MSG_NEW
+Substituir todos
+; New
+;
+MSG_FILE_EXISTS
+Proceder
+; File '%s' already exists!
+;
+MSG_PROGRESS_OPERATION_DELETING
+A apagar...
+; Deleting...
+;
+MSG_DELETE_CONFIRM
+Aviso: Não se pode recuperar \n\
+o que apagar! APAGAR para apagar:\n\n\
+%ld ficheiro(s) e\n\
+%ld gavetas (e seus conteúdos) ?
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n\
+; %ld file(s) and\n%ld drawer(s) (and their contents)?
+;
+MSG_DELETE
+Apagar
+; Delete
+;
+MSG_DELETE_ALL
+Apagar todos
+; Delete All
+;
+MSG_DELETE_FILE_CONFIRM
+Apagar '%s'?
+; Delete '%s'?
+;
+MSG_DELETE_DIR_CONFIRM
+'%s' é uma directória.\n\
+Deseja proceder com o apagamento?
+; '%s' is a directory.\nProceed with delete operation?
+;
+MSG_DELETE_PROTECTED
+'%s' está protegido contra o apagamento.\n\
+Desprotege-la e tentar de novo?
+; '%s' is protected against deletion.\n\
+; Unprotect and try again?
+;
+MSG_UNPROTECT
+Desproteger
+; Unprotect
+;
+MSG_UNPROTECT_ALL
+Desproteger todos
+; Unprotect All
+;
+MSG_DELETE_LINK_CONFIRM_SINGLE
+Deseja apagar este Atalho?
+; Really delete this shortcut?
+;
+MSG_DELETE_LINK_CONFIRM_MULTI
+Deseja apagar estes Atalhos?
+; Really delete these shortcuts?
+;
+MSG_BUTTONS_ENTER_NAME
+Gravar os Botões
+; Save Buttons
+;
+MSG_BUTTONS_SELECT_FILE
+Abrir os Botões
+; Load Buttons
+;
+MSG_BUTTONS_STATUS_TITLE
+Estado dos Botões
+; Buttons Status
+;
+MSG_BUTTONS_LOADING
+Abrir uma Barra de Botões...
+; Loading button bank...
+;
+MSG_ENVIRONMENT_ENTER_NAME
+Gravar o Ambiente
+; Save Environment
+;
+MSG_ENVIRONMENT_SELECT_FILE
+Abrir o Ambiente
+; Load Environment
+;
+MSG_ENVIRONMENT_LOADING
+A abrir um ficheiro de Ambiente...
+; Loading environment file...
+;
+MSG_ENVIRONMENT_SAVING
+A gravar um ficheiro de Ambiente...
+; Saving environment file...
+;
+MSG_BUTTONS_CHANGE_WARNING
+A Barra de Botões '%s' foi modificada.\n\
+Deseja proceder agora à sua gravação?
+; Button bank '%s' has been modified.\nDo you wish to save it?
+;
+MSG_BUTTONS_CREATE_WHICH_TYPE
+Que tipo de Barra de Botões você deseja criar?
+; Which button bank type do you wish to create?
+;
+MSG_BUTTONS_TEXT
+De Texto
+; Text
+;
+MSG_BUTTONS_ICONS
+De Gráficos
+; Graphics
+;
+MSG_SETTINGS_SELECT_FILE
+Abrir as Opções
+; Load Options
+;
+MSG_SETTINGS_LOADING
+A abrir o ficheiro de Opções...
+; Loading Options file...
+;
+MSG_SETTINGS_ENTER_NAME
+A gravar as Opções
+; Save Options
+;
+MSG_SETTINGS_SAVING
+A gravar o ficheiro de Opções...
+; Saving Options file...
+;
+MSG_ERROR_SAVING_ENV
+Erro ao gravar o ficheiro de Ambiente!
+; Error saving environment file!
+;
+MSG_ERROR_SAVING_OPTS
+Erro ao gravar o ficheiro de Opções!
+; Error saving options file!
+;
+MSG_LAUNCHING_PROGRAM
+A tentar lançar '%s'...
+; Attempting to launch '%s'...
+;
+MSG_MEMORY_COUNTER
+%s  %ld de memória gráfica  %ld de outra memória
+; %s  %ld graphics mem  %ld other mem
+;
+MSG_MEMORY_COUNTER_LOC
+%s  %lU de memória gráfica  %lU de outra memória
+; %s  %lU graphics mem  %lU other mem
+;
+MSG_MEMORY_COUNTER_CLOCK
+%s  %ld gráfica  %ld outra
+; %s  %ld graphics  %ld other
+;
+MSG_MEMORY_COUNTER_LOC_CLOCK
+%s  %lU gráfica  %lU outra
+; %s  %lU graphics  %lU other
+;
+MSG_LISTER_STATUS_SOURCE
+FONT
+; SRCE
+;
+MSG_LISTER_STATUS_DEST
+DEST
+; DEST
+;
+MSG_LISTER_STATUS_BUSY
+:-O
+; BUSY
+;
+MSG_LISTER_STATUS_OFF
+DESL
+; OFF
+;
+MSG_HUNT_ENTER_FILENAME
+Introduza o padrão a procurar
+; Enter file pattern to search for.
+;
+MSG_HUNT_FOUND_FILE
+Encontrei o ficheiro '%s' na directória\n\
+'%s'\n\
+Você deseja lá ir?
+; Found the file '%s' in the directory\n'%s'\nShall I go there?
+;
+MSG_NEW_LISTER
+Nova Lista
+; New Lister
+;
+MSG_SEARCH_COMMENTS
+Search file comments
+; Search file comments
+;
+MSG_FUNC_DESC_ADDICON
+Adicionar os icones aos ficheiros
+; Add icons to files
+;
+MSG_FUNC_DESC_ALL
+Seleccionar todos os ficheiros
+; Select all files
+;
+MSG_FUNC_DESC_CLEARBUFFERS
+Limpar o caché das directórias
+; Free directory caches
+;
+MSG_FUNC_DESC_COMMENT
+Adicionar comentários aos ficheiros
+; Give comments to files
+;
+MSG_FUNC_DESC_COPY
+Copiar todos os ficheiros seleccionados
+; Copy selected files
+;
+MSG_FUNC_DESC_COPYAS
+Copiar com outro nome
+; Copy with new names
+;
+MSG_FUNC_DESC_DATESTAMP
+Mudar a data dos ficheiros
+; Change datestamp of files
+;
+MSG_FUNC_DESC_DELETE
+Apagar todos os ficheiros seleccionados
+; Delete selected files
+;
+MSG_FUNC_DESC_DISKCOPY
+Fazer cópias de disquetes
+; Make copies of disks
+;
+MSG_FUNC_DESC_ENCRYPT
+Encriptar os ficheiros
+; Encrypt files
+;
+MSG_FUNC_DESC_FINDFILE
+Procurar os ficheiros
+; Search for filenames
+;
+MSG_FUNC_DESC_FINISHSECTION
+Terminar os comandos
+; Finish above commands
+;
+MSG_FUNC_DESC_FORMAT
+Formatar os Discos
+; Format disks
+;
+MSG_FUNC_DESC_GETSIZES
+Cálcular o tamanho das directórias
+; Calculate directory sizes
+;
+MSG_FUNC_DESC_ICONINFO
+Mostrar/Editar os icones
+; Show/edit icon information
+;
+MSG_FUNC_DESC_LEAVEOUT
+Deixar os objectos na janela principal
+; Leave objects on main window
+;
+MSG_FUNC_DESC_LOADBUTTONS
+Abrir um Botão
+; Load a button file
+;
+MSG_FUNC_DESC_MAKEDIR
+Criar uma nova directória
+; Make a new directory
+;
+MSG_FUNC_DESC_MOVE
+Mover todos os ficheiros seleccionados
+; Move selected files
+;
+MSG_FUNC_DESC_MOVEAS
+Mover com outro nome
+; Move with new names
+;
+MSG_FUNC_DESC_NONE
+Deseleccionar todos os ficheiros
+; Deselect all files
+;
+MSG_FUNC_DESC_PLAY
+Reproduzir todos os sons seleccionados
+; Play selected sounds
+;
+MSG_FUNC_DESC_PRINT
+Imprimir todos os ficheiros seleccionados
+; Print selected files
+;
+MSG_FUNC_DESC_PROTECT
+Mudar as proteções
+; Change file protections
+;
+MSG_FUNC_DESC_READ
+A ler os ficheiros de texto
+; Read text files
+;
+MSG_FUNC_DESC_RENAME
+A mudar o nome de todos os ficheiros seleccionados
+; Rename selected files
+;
+MSG_FUNC_DESC_RUN
+A correr todos os programas seleccionados
+; Run selected programs
+;
+MSG_FUNC_DESC_SCANDIR
+Ler uma directória
+; Read a directory
+;
+MSG_FUNC_DESC_SEARCH
+Procurar cadeias de texto
+; Search for text strings
+;
+MSG_FUNC_DESC_SELECT
+Seleccionar os ficheiros com padrão
+; Wildcard-select files
+;
+MSG_FUNC_DESC_SHOW
+A mostrar todas as imagens seleccionadas
+; Show selected pictures
+;
+MSG_FUNC_DESC_SMARTREAD
+Visualizador automático de hex/texto
+; Auto hex/text viewer
+;
+MSG_FUNC_DESC_TOGGLE
+Mudar o estado de selecção
+; Toggle selection state
+;
+MSG_FUNC_DESC_CHECKFIT
+A comprovar se cabem todos os ficheiros
+; See if files will fit
+;
+MSG_FUNC_DESC_CLEARSIZES
+A limpar os tamanhos das directórias
+; Clear directory sizes
+;
+MSG_FUNC_DESC_ANSIREAD
+O visualizador de texto (suporta ANSI)
+; Text viewer (supports ANSI)
+;
+MSG_FUNC_DESC_HEXREAD
+O visualizador de Hex (binário) 
+; Hex (binary) viewer
+;
+MSG_FUNC_DESC_CLONE
+Duplicar os ficheiros seleccionados
+; Duplicate selected files
+;
+MSG_FUNC_DESC_LOADENVIRONMENT
+Abrir um ficheiro de Ambiente
+; Load an Environment file
+;
+MSG_FUNC_DESC_LOADSETTINGS
+Abrir um ficheiro de Opções
+; Load an Options file
+;
+MSG_FUNC_DESC_PARENT
+Abrir a directória anterior
+; Read parent directory
+;
+MSG_FUNC_DESC_ROOT
+Ler a directória de raíz
+; Read root directory
+;
+MSG_FUNC_DESC_USER
+Executar a função  Tipo de Ficheiro 
+; Execute File Type function
+;
+MSG_FUNC_DESC_DEVICELIST
+Mostrar os Dispositivos e Assigns
+; Show devices and assigns
+;
+MSG_FUNC_DESC_BUFFERLIST
+Mostrar as directórias com caché
+; Show cached directories
+;
+MSG_FUNC_DESC_VERIFY
+Confirmar
+; Ask for confirmation
+;
+MSG_FUNC_DESC_PRINTDIR
+Imprimir as directórias
+; Print directory listings
+;
+MSG_FUNC_DESC_SET
+Pôr algo
+; Set something
+;
+MSG_FUNC_DESC_CLOSEBUTTONS
+Fechar uma Barra de Botões
+; Close a button bank
+;
+MSG_FUNC_DESC_QUIT
+Sair do Directory Opus 5
+; Quit Directory Opus 5
+;
+MSG_FUNC_DESC_HIDE
+Esconder o Directory Opus
+; Hide Directory Opus
+;
+MSG_FUNC_DESC_REVEAL
+Revelar o Directory Opus (quando este está escondido)
+; Reveal Directory Opus (when hidden)
+;
+MSG_FUNC_DESC_RESELECT
+Reseleccionar os últimos ficheiros usados
+; Reselect last-used files
+;
+MSG_FUNC_DESC_MAKELINK
+Criar uma junção a um ficheiro
+; Make a link to a file
+;
+MSG_FUNC_DESC_MAKELINKAS
+Criar uma junção com um outro nome
+; Make a link with a new name
+;
+MSG_FUNC_DESC_ASSIGN
+Fazer um Assign
+; Make an assign
+;
+MSG_FUNC_DESC_CONFIGURE
+Configurar a apresentação Visual da Lista
+; Configure lister display
+;
+MSG_FUNC_DESC_CLI
+CLI Interno
+; Internal Command Line Interpreter
+;
+MSG_FUNC_DESC_SETBACKGROUND
+Pôr como uma imagem de fundo
+; Set as background picture
+;
+MSG_FUNC_DESC_RESET
+Reset Things
+; Reset Things
+;
+MSG_FUNC_DESC_STOPSNIFFER
+Stop Filetype Sniffer
+; Stop Filetype Sniffer
+;
+MSG_ICON_GROUP
+Grupos de programas
+; Program Groups
+;
+MSG_GROUP_ENTER_NAME
+Voltar a tentar
+; Enter Program Group Name
+;
+MSG_RXERR_1
+Ficheiro rejeitado pelos filtros
+; File rejected by filters
+;
+MSG_RXERR_5
+Elemento inválido
+; Invalid set/query item
+;
+MSG_RXERR_6
+Nome ou Palavra Chave não válida
+; Invalid name or keyword
+;
+MSG_RXERR_8
+Armadilha "Trap" inválida
+; Invalid trap
+;
+MSG_RXERR_10
+Nome de Lista inválido
+; Invalid lister handle
+;
+MSG_RXERR_12
+Barra de Ferramêntas inválida
+; Invalid toolbar
+;
+MSG_RXERR_13
+Caminho inválido
+; Invalid path
+;
+MSG_RXERR_14
+O Objecto não foi encontrado
+; Object not found
+;
+MSG_RXERR_15
+Não tenho memória suficiente
+; No memory
+;
+MSG_RXERR_20
+Não consegui abrir a Lista
+; Unable to open lister
+;
+MSG_RXERR_UNKNOWN
+Código de erro desconhecido
+; Unknown error code
+;
+MSG_DESKTOP_REALLY_DELETE
+Aviso: Você não pode recuperar\n\
+o que apagar! SIM para apagar:\n\n
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n
+;
+MSG_DESKTOP_DELETE_GROUPS
+%ld grupo(s) de programas
+; %ld program group(s)
+;
+MSG_DESKTOP_DELETE_ASSIGNS
+Abortar
+; %ld assign(s)
+;
+MSG_DESKTOP_DELETE_GROUP_OBJECTS
+Substituir
+; %ld group object(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_FILES
+Saltar
+; %ld file(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_DIRS
+Saltar todos
+; %ld dir(s)
+;
+MSG_REPLACE_SAME
+Os dois ficheiros são iguais.
+; The two files appear to be the same.
+;
+MSG_REPLACE_VERSION_SAME
+Os dois ficheiros têm a mesma versão (%ld.%ld).
+; Both files are the same version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_NEWER
+O novo ficheiro é uma versão posterior (%ld.%ld).
+; The new file is a later version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_OLDER
+O novo ficheiro é uma versão anterior (%ld.%ld).
+; The new file is an earlier version (%ld.%ld).
+;
+MSG_REPLACE_SIZE_BIGGER
+O novo ficheiro é maior que o antigo (tem %ld bytes).\n
+; The new file is larger than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SMALLER
+O novo ficheiro é menor que o antigo (tem %ld bytes).\n
+; The new file is smaller than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SAME
+Os dois ficheiros têm o mesmo tamanho (%ld bytes).\n
+; The two files are the same size (%ld bytes).\n
+;
+MSG_REPLACE_DATE_NEWER
+O novo ficheiro tem uma data mais recente (%s).\n
+; The new file has a more recent date (%s).\n
+;
+MSG_REPLACE_DATE_OLDER
+O novo ficheiro tem uma data mais antiga (%s).\n
+; The new file has an earlier date (%s).\n
+;
+MSG_REPLACE_DATE_SAME
+Os ficheiros têm a mesma data de criação.\n
+; The files have the same creation date.\n
+;
+MSG_FILE_ALREADY_EXISTS
+O ficheiro '%s' já existe e pode ser substituido.\n
+; File '%s' exists and would be replaced.\n
+;
+MSG_BRIEF_FILE_EXISTS
+O ficheiro '%s' já existe. Substituir?\n\n\
+Novo - Tamanho : %7ld  Data : %19s%s\n\
+Antigo - Tamanho : %7ld  Data : %19s%s
+; File '%s' already exists. Replace it?\n\n\
+; New - Size : %7ld  Date : %19s%s\n\
+; Old - Size : %7ld  Date : %19s%s
+;
+MSG_REPLACE_VER
+  Ver : %2ld.%ld
+;   Ver : %2ld.%ld
+;
+MSG_REPLACE_VER_UNKNOWN
+  Ver : ?????
+;   Ver : ?????
+;
+MSG_GET_VERSION
+Versão
+; Version
+;
+MSG_REPLACE_VERSION_TITLE
+A procurar a informação acerca da versão...
+; Looking for version info...
+;
+MSG_LISTER_TITLE_NAME
+Nome
+; Name
+;
+MSG_LISTER_TITLE_SIZE
+Tamanho
+; Size
+;
+MSG_LISTER_TITLE_PROTECT
+Acesso
+; Access
+;
+MSG_LISTER_TITLE_DATE
+Data
+; Date
+;
+MSG_LISTER_TITLE_COMMENT
+Comentário
+; Comment
+;
+MSG_LISTER_TITLE_FILETYPE
+Tipo
+; Type
+;
+MSG_LISTER_TITLE_OWNER
+Proprietário
+; Owner
+;
+MSG_LISTER_TITLE_GROUP
+Grupo
+; Group
+;
+MSG_LISTER_TITLE_NETPROT
+Rede
+; Net
+;
+MSG_LISTER_TITLE_VERSION
+Versão
+; Version
+;
+MSG_LISTER_TITLE_VOLUME
+Volume
+; Volume
+;
+MSG_LISTER_TITLE_DEVICE
+Dispositivo
+; Device
+;
+MSG_LISTER_TITLE_FULL
+Ocupados
+; Full
+;
+MSG_LISTER_TITLE_FREE
+Livres
+; Free
+;
+MSG_LISTER_TITLE_USED
+Em Uso
+; In Use
+;
+MSG_CLI_HELP
+Escreva 'help list' para ver a lista dos comandos,\n\
+o 'help <command>' para o padrão do comando.\n\
+Escreva 'quit' para sair da CLI.\n\n\
+Introduza um comando interno com os argumentos\n\
+para o executar. Para executar um comando AREXX do DOPUS,\n\
+Escreva um '+' antes do comando. Adicione um &\n\
+se desejar que o comando corra ansíncrono.\n
+; Type 'help list' for a list of commands,\n\
+; or 'help <command>' for a command template.\n\
+; Type 'quit' to exit the CLI.\n\n\
+; Enter an internal command with arguments to\n\
+; execute it. To execute a DOpus ARexx command,\n\
+; enter a + symbol before the command. Append a &\n\
+; if you want the command to be asynchronous.\n
+;
+MSG_CLI_NO_TEMPLATE
+O comando não tem padrão
+; Command has no template.
+;
+MSG_CLI_TYPE_HELP
+Escreva 'help' para ter acesso à ajuda.\n
+; Type 'help' for help.\n
+;
+MSG_CLI_BAD_CMD
+O comando é desconhecido
+; Unknown command.
+;
+MSG_ICONPOS_WINDOW
+Área de posicionamento dos icones
+; Icon positioning area
+;
+MSG_ICONPOS_INSTRUCTIONS
+Faça Clique e arraste para marcar as áreas onde os icones podem ser posicionados.\n\
+Clique SIM ou Cancelar para acabar.
+; Click and drag to mark areas where icons can be positioned.\n\
+; Click OK or Cancel when finished.
+;
+MSG_ICONPOS_APPICON
+Icones Aparentes "AppIcons"
+; AppIcons
+;
+MSG_ICONPOS_DISKS
+Discos
+; Disks
+;
+MSG_ICONPOS_LISTERS
+Listas/Botões
+; Listers/Buttons
+;
+MSG_ICONPOS_PRIORITY
+Prioridade
+; Priority
+;
+MSG_ICONPOS_GROUPS
+Grupos
+; Groups
+;
+MSG_ICONPOS_LEFTOUT
+Deixados de fora
+; Left-outs
+;
+MSG_COMMAND_SAVE
+Introduza o nome do ficheiro a gravar
+; Enter Filename To Save Command
+;
+MSG_SAVING_COMMAND
+Comando para gravar
+; saving command
+;
+MSG_EDIT_COMMAND
+Editar o comando...
+; Edit Command...
+;
+MSG_COMMAND_DESCRIPTION
+Enter a description for this command.
+; Enter a description for this command.
+;
+MSG_COMMAND_LEAVEOUT
+Leave out on desktop
+; Leave out on desktop
+;
+MSG_START_APPEARANCE
+Aparência
+; Appearance
+;
+MSG_START_BORDERLESS
+Moldura
+; Border
+;
+MSG_START_DRAGBAR_LEFT
+Esquerda
+; Left
+;
+MSG_START_DRAGBAR_RIGHT
+Direita
+; Right
+;
+MSG_START_IMAGE
+Mudar a imagem...
+; Change Image...
+;
+MSG_START_LABEL
+Mudar a etiqueta....
+; Change Label...
+;
+MSG_START_SELECT_IMAGE
+Seleccionar a Imagem para o Menu de Arranque
+; Select Image For Start Menu
+;
+MSG_START_SELECT_LABEL
+Introduzir a etiqueta para o Menu de Arranque.
+; Enter label for Start Menu.
+;
+MSG_OPEN_STARTMENU_MENU
+Tentar de novo
+; Load Start Menu...
+;
+MSG_START_SELECT_MENU
+Voltar a tentar
+; Select Start Menu To Load
+;
+MSG_START_FONT
+Abortar
+; Change Font...
+;
+MSG_START_SELECT_FONT
+Substituir
+; Select Font For Start Menu
+;
+MSG_START_SCALING
+Saltar
+; Scale Images
+;
+MSG_START_DRAGBAR
+Saltar todos
+; Drag Bar
+;
+MSG_START_DRAGBAR_OFF
+Todos
+; Off
+;
+MSG_START_LABEL_FONT
+Sair
+; Change Label Font...
+;
+MSG_START_PICTURE
+Gravar
+; Change Background...
+;
+MSG_START_SELECT_PICTURE
+Fechar
+; Select Background Picture For Start Menu
+;
+MSG_KEYFINDER_TITLE
+Examinador de Teclas
+; Key Finder
+;
+MSG_KEYFINDER_KEY
+Tecla:
+; _Key:
+;
+MSG_KEYFINDER_FOUND
+Encontrado:
+; Found:
+;
+MSG_KEYFINDER_TYPE_INVALID
+Tecla inválida!
+; Invalid key!
+;
+MSG_KEYFINDER_TYPE_NONE
+Não existem coincidências!
+; No match found!
+;
+MSG_KEYFINDER_TYPE_BUTTONS
+Coincidência na Barra de Botões
+; Match found in a Button Bank.
+;
+MSG_KEYFINDER_TYPE_TOOLBAR
+Coincidência na Barra de Lista
+; Match found in Lister Toolbar.
+;
+MSG_KEYFINDER_TYPE_LISTERMENU
+Coincidência no Menu de Lista.
+; Match found in Lister Menu.
+;
+MSG_KEYFINDER_TYPE_MENU
+Coincidência no Menu do Utilizador.
+; Match found in User Menu.
+;
+MSG_KEYFINDER_TYPE_START
+Coincidência no Menu de Arranque.
+; Match found in a Start Menu.
+;
+MSG_KEYFINDER_TYPE_HOTKEYS
+Coincidência nas Hotkeys.
+; Match found in Hotkeys.
+;
+MSG_KEYFINDER_TYPE_SCRIPTS
+Coincidência nos Argumentos.
+; Match found in Scripts.
+;

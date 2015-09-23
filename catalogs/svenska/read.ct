@@ -1,0 +1,165 @@
+## version $VER: read.catalog 1.1 (24.6.97)
+## codeset 0
+## language svenska
+;
+MSG_READING_FILE
+Läser filen "%s"...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Kunde inte öppna filen "%s"!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld rader, %ld tecken   Läge: %s  Tab: %ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Fil
+; File
+;
+MSG_MENU_NEXT
+Nästa
+; Next
+;
+MSG_MENU_SEARCH
+Sök...
+; Search...
+;
+MSG_MENU_REPEAT
+Sök igen
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Skriv ut...
+; Print...
+;
+MSG_MENU_QUIT
+Avsluta
+; Quit
+;
+MSG_MENU_SETTINGS
+Inställningar
+; Settings
+;
+MSG_MENU_TAB
+Tabstorlek
+; Tab Size
+;
+MSG_MENU_SAVE
+Spara inställningar
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Ange text att söka efter:
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+I_gnorera läge
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Mönstersökning
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+_Bara hela ord
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Sök bakåt
+; _Reverse Search
+;
+MSG_OK_BUTTON
+_OK
+; OK
+;
+MSG_CANCEL_BUTTON
+A_vbryt
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+Kunde inte hitta texten.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Läser textfiler
+; Read text files
+;
+MSG_MENU_MODE
+Läge
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normalt
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hex
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Använd egen skärm
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Skärmläge...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Teckensnitt...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+DirectoryOpus - Textläsare
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Spara som...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Ange filnamn
+; Enter Filename
+;
+MSG_IO_ERROR
+IO-fel
+; IO Error
+;
+MSG_ERROR_CODE
+DOS-fel %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Till redigerare...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Redigerare
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+OK|Avbryt
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Ange kommando för att\n\
+starta textredigerare
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Läser fil...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Räknar rader...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

@@ -1,0 +1,68 @@
+## version $VER: play.catalog 2.1 (22.9.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_NEXT
+_Következõ
+; _Next
+;
+MSG_ABORT
+_Hagyd abba
+; _Abort
+;
+MSG_PLAY_TITLE
+Lejátszás
+; Play
+;
+MSG_FILENAME
+Állomány:
+; File:
+;
+MSG_LENGTH
+Hossz:
+; Length:
+;
+MSG_TYPE
+Típus:
+; Type:
+;
+MSG_TYPE_STEREO
+Sztereó
+; Stereo
+;
+MSG_TYPE_MONO
+Monó
+; Mono
+;
+MSG_TYPE_RAW
+Nyers adat
+; Raw
+;
+MSG_STATUS
+Mûvelet:
+; Status:
+;
+MSG_STATUS_LOADING
+Olvasom az állományt...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Kitömörítem...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Lejátszom a hangot...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Hangállományok lejátszása
+; Play sound files
+;
+MSG_PLAY_NEXT
+Következõ
+; Next
+;
+MSG_PLAY_ABORT
+Megszakít
+; Abort
+;
