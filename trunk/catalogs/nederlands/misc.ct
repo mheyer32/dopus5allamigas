@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 2.0 (8.2.96)
+## codeset 0
+## language nederlands
+;
+MSG_BEEP_DESC
+Maak een pieptoon
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+Flits de weergave
+; Flashes the display
+;
+MSG_ALARM_DESC
+Laat een alarm horen
+; Sounds an alarm
+;

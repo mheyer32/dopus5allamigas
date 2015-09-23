@@ -1,0 +1,159 @@
+## version $VER: diskcopy.catalog 2.1 (18.12.96)
+## codeset 0
+## language nederlands
+;
+MSG_DISKCOPY_TITLE
+Diskcopy
+; Diskcopy
+;
+MSG_DISKCOPY_DISKCOPY
+_Diskcopy
+; _Diskcopy
+;
+MSG_DISKCOPY_CANCEL
+_Annuleer
+; _Cancel
+;
+MSG_DISKCOPY_VERIFY
+_Verifieer
+; _Verify
+;
+MSG_DISKCOPY_BUMP
+Ver_hoog naam
+; _Bump Name
+;
+MSG_DISKCOPY_FROM
+Van...
+; From...
+;
+MSG_DISKCOPY_TO
+Naar...
+; To...
+;
+MSG_DISKCOPY_STATUS
+%s, %s gebruikt
+; %s, %s used
+;
+MSG_DISKCOPY_OPEN_DEVICES
+Open eenheden...
+; Opening devices...
+;
+MSG_CANT_OPEN_DEVICE
+Kon broneenheid niet openen!
+; Can't open source device!
+;
+MSG_NO_DISK_PRESENT
+Geen disk aanwezig in bron!
+; No disk present in source!
+;
+MSG_CANT_OPEN_DESTINATION
+Kon bestemming %s niet openen
+; Unable to open destination %s
+;
+MSG_NO_DISK_PRESENT_DEST
+Geen disk aanwezig in %s
+; No disk present in %s
+;
+MSG_WRITE_PROTECTED_DEST
+Disk in %s is beveiligd tegen schrijven!
+; Disk in %s is write protected!
+;
+MSG_ABORTED
+Afgebroken.
+; Aborted.
+;
+MSG_RETRY_CANCEL
+Opnieuw|Annuleer
+; Retry|Cancel
+;
+MSG_RETRY_REMOVE_CANCEL
+Opnieuw|Verwijder|Annuleer
+; Retry|Remove|Cancel
+;
+MSG_PROCEED_CANCEL
+Ga door|Annuleer
+; Proceed|Cancel
+;
+MSG_DISKCOPY_SUCCESSFUL
+Diskcopy succesvol!
+; Diskcopy successful!
+;
+MSG_DISKCOPY_FAILED
+Diskcopy mislukt.
+; Diskcopy failed.
+;
+MSG_READ_ERROR
+Fout bij lezen %s track %ld\n\
+%s
+; Error reading %s track %ld\n%s
+;
+MSG_WRITE_ERROR
+Fout bij schrijven %s track %ld\n\
+%s
+; Error writing %s track %ld\n%s
+;
+MSG_VERIFY_ERROR
+Fout bij verifiëren %s track %ld\n\
+%s
+; Error verifying %s track %ld\n%s
+;
+MSG_DISKCOPY_READING
+Lees track %ld, %ld te gaan.
+; Reading track %ld, %ld to go.
+;
+MSG_DISKCOPY_WRITING
+Schrijf track %ld, %ld te gaan.
+; Writing track %ld, %ld to go.
+;
+MSG_DISKCOPY_VERIFYING
+Verifieer track %ld, %ld te gaan.
+; Verifying track %ld, %ld to go.
+;
+MSG_DISKCOPY_TO_TITLE
+naar
+; to
+;
+MSG_INSERT_DESTINATION
+Plaats bestemmingdisk in %s
+; Insert destination disk in %s
+;
+MSG_INSERT_SOURCE
+Plaats brondisk in %s
+; Insert source disk in %s
+;
+MSG_ERROR_WRITE_PROT
+Disk is beveiligd tegen schrijven
+; Disk is write protected
+;
+MSG_ERROR_NO_DISK
+Geen disk in eenheid
+; No disk in drive
+;
+MSG_ERROR_UNKNOWN
+Onbekende foutcode
+; Unknown error code
+;
+MSG_ERROR_VERIFY
+Gegevens niet correct weggeschreven.
+; Data not written correctly.
+;
+MSG_BUMPING_NAMES
+Verhoog namen...
+; Bumping names...
+;
+MSG_INCOMPATIBLE
+Disks zijn niet compatibel en kunnen niet gekopieerd worden.
+; Disks are of incompatible types and can not be copied.
+;
+MSG_OK
+Ok
+; OK
+;
+MSG_DISKCOPY_DESC
+Maak kopieën van een disk
+; Make copies of a disk
+;
+MSG_DISKCOPY_COPYING
+Kopieer disk...
+; Copying disk...
+;

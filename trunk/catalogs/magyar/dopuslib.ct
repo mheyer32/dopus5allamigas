@@ -1,0 +1,69 @@
+## version $VER: dopuslib.catalog 2.4 (2.10.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_OK
+OK
+; OK
+;
+MSG_SELECT_FILE
+Állomány kiválasztása
+; Select File
+;
+MSG_SELECT_DIRECTORY
+Könyvtár kiválasztása
+; Select Directory
+;
+MSG_SELECT_FONT
+Betûtípus kiválasztása
+; Select Font
+;
+MSG_FONT_DRAWMODE
+Mód:
+; Mode:
+;
+MSG_FONT_TEXT
+Csak szöveg
+; Text
+;
+MSG_FONT_FIELD_TEXT
+Szöveg+Háttér
+; Text+Field
+;
+MSG_SIZE_FIT
+9999%%
+; 9999%%
+;
+MSG_SIZE
+%ld%%
+; %ld%%
+;
+MSG_ABORT
+Hagyd abba
+; Abort
+;
+MSG_FILE_FIT
+9999 a(z) 9999-ból/bõl
+; 9999 of 9999
+;
+MSG_FILE
+%ld a(z) %ld-ból/bõl
+; %ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus kérdezõ
+; Directory Opus Request
+;
+MSG_UNABLE_TO_OPEN_TOOL
+Nem tudom megnyitni a(z) "%s" programot
+; Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING
+Az Opus unatkozva vár a(z) "%s" programra.\n\
+Várjak még egy kicsit?
+; Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL
+Várj még|Hagyd abba
+; Wait|Cancel
+;

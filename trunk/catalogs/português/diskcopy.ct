@@ -1,0 +1,159 @@
+## version $VER: diskcopy.catalog 0.1 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_DISKCOPY_TITLE
+Copiar
+; Diskcopy
+;
+MSG_DISKCOPY_DISKCOPY
+_Copiar
+; _Diskcopy
+;
+MSG_DISKCOPY_CANCEL
+_Cancelar
+; _Cancel
+;
+MSG_DISKCOPY_VERIFY
+_Verificar
+; _Verify
+;
+MSG_DISKCOPY_BUMP
+_Mudar o nome Automaticamente
+; _Bump Name
+;
+MSG_DISKCOPY_FROM
+De...
+; From...
+;
+MSG_DISKCOPY_TO
+Para...
+; To...
+;
+MSG_DISKCOPY_STATUS
+%s, %s usado
+; %s, %s used
+;
+MSG_DISKCOPY_OPEN_DEVICES
+Abrindo os dispositivos...
+; Opening devices...
+;
+MSG_CANT_OPEN_DEVICE
+Não consegui abrir o dispositivo Fonte!
+; Can't open source device!
+;
+MSG_NO_DISK_PRESENT
+Não existe nenhuma disquete na Fonte!
+; No disk present in source!
+;
+MSG_CANT_OPEN_DESTINATION
+Não consegui abrir o Destino %s
+; Unable to open destination %s
+;
+MSG_NO_DISK_PRESENT_DEST
+Não existe nenhuma disquete em %s
+; No disk present in %s
+;
+MSG_WRITE_PROTECTED_DEST
+A disquete em %s está protegida contra a escrita!
+; Disk in %s is write protected!
+;
+MSG_ABORTED
+A abortar.
+; Aborted.
+;
+MSG_RETRY_CANCEL
+Voltar a tentar|Cancelar
+; Retry|Cancel
+;
+MSG_RETRY_REMOVE_CANCEL
+Voltar a Tentar|Desistir|Cancelar
+; Retry|Remove|Cancel
+;
+MSG_PROCEED_CANCEL
+Proceder|Cancelar
+; Proceed|Cancel
+;
+MSG_DISKCOPY_SUCCESSFUL
+Copiando as disquetes correctas!
+; Diskcopy successful!
+;
+MSG_DISKCOPY_FAILED
+Erro ao copiar as disquetes
+; Diskcopy failed.
+;
+MSG_READ_ERROR
+Erro ao ler %s na pista %ld\n\
+%s
+; Error reading %s track %ld\n%s
+;
+MSG_WRITE_ERROR
+Erro ao escrever %s na pista %ld\n\
+%s
+; Error writing %s track %ld\n%s
+;
+MSG_VERIFY_ERROR
+Erro ao verificar %s na pista %ld\n\
+%s
+; Error verifying %s track %ld\n%s
+;
+MSG_DISKCOPY_READING
+A ler a pista %ld, %ld para terminar.
+; Reading track %ld, %ld to go.
+;
+MSG_DISKCOPY_WRITING
+A escrever a pista %ld, %ld para terminar.
+; Writing track %ld, %ld to go.
+;
+MSG_DISKCOPY_VERIFYING
+A verificar a pista %ld, %ld para terminar.
+; Verifying track %ld, %ld to go.
+;
+MSG_DISKCOPY_TO_TITLE
+para
+; to
+;
+MSG_INSERT_DESTINATION
+Insira a disquete de Destino em %s
+; Insert destination disk in %s
+;
+MSG_INSERT_SOURCE
+Insira a disquete Fonte em %s
+; Insert source disk in %s
+;
+MSG_ERROR_WRITE_PROT
+A disquete está protegida contra a escrita
+; Disk is write protected
+;
+MSG_ERROR_NO_DISK
+Não existe nenhuma disquete na Unidade
+; No disk in drive
+;
+MSG_ERROR_UNKNOWN
+Código de erro desconhecido
+; Unknown error code
+;
+MSG_ERROR_VERIFY
+Os dados não foram gravados correctamente..
+; Data not written correctly.
+;
+MSG_BUMPING_NAMES
+A mudar os nomes...
+; Bumping names...
+;
+MSG_INCOMPATIBLE
+As disquetes são de um tipo distinto, não podem ser copiadas.
+; Disks are of incompatible types and can not be copied.
+;
+MSG_OK
+Sim
+; OK
+;
+MSG_DISKCOPY_DESC
+Efectuar cópias de uma disquete
+; Make copies of a disk
+;
+MSG_DISKCOPY_COPYING
+A copiar a disquete...
+; Copying disk...
+;

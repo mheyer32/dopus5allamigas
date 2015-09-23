@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 2.2 (23.9.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_PLEASE_WAIT
+Kérem, várjon...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - Takarító dzsinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Egy kis takarítás
+; Perform cleanup maintenance
+;

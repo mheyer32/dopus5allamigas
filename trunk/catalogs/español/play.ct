@@ -1,0 +1,68 @@
+## version $VER: play.catalog 0.6 (29.8.97)
+## codeset 0
+## language español
+;
+MSG_NEXT
+_Siguiente
+; _Next
+;
+MSG_ABORT
+_Abortar
+; _Abort
+;
+MSG_PLAY_TITLE
+Reproducir
+; Play
+;
+MSG_FILENAME
+Fichero:
+; File:
+;
+MSG_LENGTH
+Longitud:
+; Length:
+;
+MSG_TYPE
+Tipo:
+; Type:
+;
+MSG_TYPE_STEREO
+Stereo
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Raw
+; Raw
+;
+MSG_STATUS
+Status:
+; Status:
+;
+MSG_STATUS_LOADING
+Leyendo fichero...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Descomprimiendo...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Reproduciendo sonido...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Reproduciendo ficheros de sonido
+; Play sound files
+;
+MSG_PLAY_NEXT
+Siguiente
+; Next
+;
+MSG_PLAY_ABORT
+Abortar
+; Abort
+;

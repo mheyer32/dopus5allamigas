@@ -1,0 +1,69 @@
+## version $VER: dopuslib.catalog 2.1 (10.6.97)
+## codeset 0
+## language nederlands
+;
+MSG_OK
+Ok
+; OK
+;
+MSG_SELECT_FILE
+Selecteer bestand
+; Select File
+;
+MSG_SELECT_DIRECTORY
+Selecteer directory
+; Select Directory
+;
+MSG_SELECT_FONT
+Selecteer lettertype
+; Select Font
+;
+MSG_FONT_DRAWMODE
+Modus:
+; Mode:
+;
+MSG_FONT_TEXT
+Tekst
+; Text
+;
+MSG_FONT_FIELD_TEXT
+Tekst+veld
+; Text+Field
+;
+MSG_SIZE_FIT
+9999%%
+; 9999%%
+;
+MSG_SIZE
+%ld%%
+; %ld%%
+;
+MSG_ABORT
+Breek af
+; Abort
+;
+MSG_FILE_FIT
+9999 van 9999
+; 9999 of 9999
+;
+MSG_FILE
+%ld van %ld
+; %ld of %ld
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus verzoek
+; Directory Opus Request
+;
+MSG_UNABLE_TO_OPEN_TOOL
+Kon uw tool '%s' niet openen
+; Unable to open your tool '%s'
+;
+MSG_SICK_OF_WAITING
+Opus wordt niet goed van het wachten op '%s'.\n\
+Nog langer wachten?
+; Opus is sick of waiting for '%s' to return.\nWait some more?
+;
+MSG_WAIT_CANCEL
+Wacht|Annuleer
+; Wait|Cancel
+;

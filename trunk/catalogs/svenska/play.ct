@@ -1,0 +1,68 @@
+## version $VER: play.catalog 1.0 (11.10.96)
+## codeset 0
+## language svenska
+;
+MSG_NEXT
+_Nästa
+; _Next
+;
+MSG_ABORT
+A_vbryt
+; _Abort
+;
+MSG_PLAY_TITLE
+Spela
+; Play
+;
+MSG_FILENAME
+Fil:
+; File:
+;
+MSG_LENGTH
+Längd:
+; Length:
+;
+MSG_TYPE
+Typ:
+; Type:
+;
+MSG_TYPE_STEREO
+Stereo
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Rå
+; Raw
+;
+MSG_STATUS
+Status:
+; Status:
+;
+MSG_STATUS_LOADING
+Läser fil...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Packar upp...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Spelar ljud...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Spelar ljudfiler
+; Play sound files
+;
+MSG_PLAY_NEXT
+Nästa
+; Next
+;
+MSG_PLAY_ABORT
+Avbryt
+; Abort
+;

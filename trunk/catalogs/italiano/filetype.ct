@@ -1,0 +1,259 @@
+## version $VER: filetype.catalog 1.0 (11.08.96)
+## codeset 0
+## language italiano
+;
+MSG_FIND_DESC
+Identifica il tipo di file
+; Find filetype for a file
+;
+MSG_FIND_TITLE
+Identificatore di tipi di file
+; Filetype Finder
+;
+MSG_FIND_PRI
+Pri
+; Pri
+;
+MSG_FIND_ID
+ID
+; ID
+;
+MSG_FIND_FILETYPE
+Tipo file
+; Filetype
+;
+MSG_FIND_FILE
+File...
+; File...
+;
+MSG_FIND_USE
+_Usa
+; _Use
+;
+MSG_FIND_INSTALL
+_Installa
+; _Install
+;
+MSG_FIND_CREATE
+_Crea
+; _Create
+;
+MSG_FIND_EDIT
+_Modifica
+; _Edit
+;
+MSG_FIND_CANCEL
+_Annulla
+; C_ancel
+;
+MSG_FIND_SCANNING
+Sto analizzando i tipi di file...
+; Scanning filetypes...
+;
+MSG_FIND_MATCHING
+Tipi di file coincidenti...
+; Matching filetypes...
+;
+MSG_NONE_FOUND_1
+Non è stato trovato nessun tipo che
+; No filetype has been found that
+;
+MSG_NONE_FOUND_2
+corrisponde al file selezionato. Vuoi
+; matches the selected file. Do you
+;
+MSG_NONE_FOUND_3
+creare un nuovo tipo per questo?
+; wish to create a new filetype for
+;
+MSG_NONE_FOUND_4
+\x00
+; this file?
+;
+MSG_NONE_FOUND_5
+
+; 
+;
+MSG_NONE_FOUND_6
+
+; 
+;
+MSG_NONE_FOUND_7
+
+; 
+;
+MSG_STORED_FOUND_1
+Nessun tipo installato corrisponde
+; No installed filetype matches the
+;
+MSG_STORED_FOUND_2
+al file selezionato. Comunque, c'è un
+; selected file. However, there is
+;
+MSG_STORED_FOUND_3
+tipo di file in magazzino che coincide.
+; a filetype in storage which does match.
+;
+MSG_STORED_FOUND_4
+Vuoi installare questo tipo di file
+; Do you wish to install this filetype 
+;
+MSG_STORED_FOUND_5
+adesso o crearne uno nuovo?
+; now or create a new one?
+;
+MSG_STORED_FOUND_6
+
+; 
+;
+MSG_STORED_FOUND_7
+
+; 
+;
+MSG_BETTER_FOUND_1
+C'è un tipo di file in magazzino che
+; There is a filetype in storage which
+;
+MSG_BETTER_FOUND_2
+corrisponde a quello selezionato ed
+; matches the selected file and has a
+;
+MSG_BETTER_FOUND_3
+ha una priorità più alta di quello
+; higher priority than the currently
+;
+MSG_BETTER_FOUND_4
+attualmente installato per questo file.
+; installed filetype for this file. Do
+;
+MSG_BETTER_FOUND_5
+Vuoi usare il tipo di file attuale,
+; you wish to use the current filetype,
+;
+MSG_BETTER_FOUND_6
+installare quello in magazzino, o
+; install the stored filetype, or create
+;
+MSG_BETTER_FOUND_7
+crearne uno nuovo?
+; a new one?
+;
+MSG_INSTALLED_FOUND_1
+C'è un tipo di file installato
+; There is a filetype installed
+;
+MSG_INSTALLED_FOUND_2
+che corrisponde a quello selezionato.
+; which matches the selected file.
+;
+MSG_INSTALLED_FOUND_3
+Vuoi usare questo tipo di file
+; Do you wish to use this Filetype
+;
+MSG_INSTALLED_FOUND_4
+o crearne uno nuovo?
+; or create a new one?
+;
+MSG_INSTALLED_FOUND_5
+
+; 
+;
+MSG_INSTALLED_FOUND_6
+
+; 
+;
+MSG_INSTALLED_FOUND_7
+
+; 
+;
+MSG_CREATE_DESC
+Crea un nuovo tipo di file
+; Create new filetype
+;
+MSG_CREATE_TITLE
+Creatore di tipi di file
+; Filetype Creator
+;
+MSG_CREATE_FILES
+Files...
+; Files...
+;
+MSG_CREATE_ADD
+_Agg.
+; _Add
+;
+MSG_CREATE_DELETE
+_Elimina
+; _Delete
+;
+MSG_CREATE_CLEAR
+Pulis_ci
+; _Clear
+;
+MSG_CREATE_FILETYPE
+Tipo di file...
+; Filetype...
+;
+MSG_CREATE_NAME
+_Nome:
+;  _Name:
+;
+MSG_CREATE_IFF
+_IFF:
+;   _IFF:
+;
+MSG_CREATE_GROUP
+_Gruppo:
+; _Group:
+;
+MSG_CREATE_ID
+I_D:
+;    I_D:
+;
+MSG_CREATE_BYTES
+_Bytes:
+; _Bytes:
+;
+MSG_CREATE_CASE
+Maiuscolo
+; Case
+;
+MSG_CREATE_NOCASE
+Non maiuscolo
+; No Case
+;
+MSG_CREATE_EDIT
+_Modifica
+; _Edit
+;
+MSG_CREATE_SAVE
+_Salva
+; _Save
+;
+MSG_CREATE_CANCEL
+_Annulla
+; _Cancel
+;
+MSG_CREATE_ADD_FILE
+Aggiungi un file...
+; Add a file...
+;
+MSG_CREATE_WARN_EDITED
+ATTENZIONE\n\n\
+Avete usato l'editor.\n\
+Se continuate i cambiamenti saranno persi...
+; WARNING\n\nYou have used the editor.\nIf you continue your changes will be lost...
+;
+MSG_CREATE_CONTINUE_CANCEL
+Continua|Annulla
+; Continue|Cancel
+;
+MSG_REPLACE_CANCEL
+Sostituisci|Annulla
+; Replace|Cancel
+;
+MSG_FILETYPE_EXISTS
+Il tipo di file '%s' esiste già.\n\
+Vuoi sostituirlo?
+; Filetype '%s' exists.\nDo you wish to replace it?
+;

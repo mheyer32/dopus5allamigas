@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 2.0 (28.7.96)
+## codeset 0
+## language nederlands
+;
+MSG_PLEASE_WAIT
+A.u.b. wachten...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - CleanUp Djinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Verricht opruimonderhoud
+; Perform cleanup maintenance
+;

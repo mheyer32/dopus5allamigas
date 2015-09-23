@@ -1,0 +1,181 @@
+## version $VER: join.catalog 2.1 (22.9.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_JOIN_DESC
+Állományok összefûzése
+; Join files together
+;
+MSG_SPLIT_DESC
+Állományok szétdarabolása
+; Split a file into parts
+;
+MSG_JOIN_LISTER
+Á_llományok összefûzése...
+; Join _files...
+;
+MSG_JOIN_ADD
+_Új
+; _Add
+;
+MSG_JOIN_REMOVE
+_Levesz
+; _Remove
+;
+MSG_JOIN_CLEAR
+_Töröl
+; C_lear
+;
+MSG_JOIN_MOVE_UP
+F_el
+; _Up
+;
+MSG_JOIN_MOVE_DOWN
+_Le
+; _Down
+;
+MSG_JOIN_JOIN
+F_ûzd össze
+; _Join
+;
+MSG_JOIN_CANCEL
+M_égsem
+; _Cancel
+;
+MSG_JOIN_TITLE
+Összefûz
+; Join
+;
+MSG_JOIN_TO
+Cé_l:
+; _To:
+;
+MSG_JOIN_SELECT_FILE
+Állomány kiválasztása
+; Select File
+;
+MSG_REPLACE_RENAME_ABORT
+Cseréld le|Nevezd át|Lépj ki
+; Replace|Rename|Abort
+;
+MSG_FILE_EXISTS
+A(z) "%s" állomány már létezik.
+; File '%s' already exists!
+;
+MSG_ENTER_FILENAME
+Adja meg a célállomány nevét.
+; Enter destination filename.
+;
+MSG_OK
+OK
+; Ok
+;
+MSG_CANCEL
+Mégsem
+; Cancel
+;
+MSG_JOINING_FILES
+Állományok összefûzése...
+; Joining files...
+;
+MSG_JOIN_ERROR_OPENING_OUTPUT
+Nem tudom megnyitni a(z) "%s" kimeneti állományt
+; Unable to open '%s' for output!
+;
+MSG_JOIN_ERROR
+%s\n\
+Hiba: %ld %s
+; %s\nError %ld %s
+;
+MSG_JOIN_RETRY
+Újra
+; Retry
+;
+MSG_REMOVE
+Távolítsd el
+; Remove
+;
+MSG_JOIN_ERROR_OPENING_INPUT
+Nem tudom megnyitni a(z) "%s" állományt
+; Unable to open '%s'!
+;
+MSG_JOIN_ERROR_READING
+Hiba a(z) "%s" állomány olvasása közben
+; Error reading from '%s'!
+;
+MSG_SPLIT_FROM
+_Darabolandó
+; Split _file
+;
+MSG_SPLIT_STEM
+_Nevek eleje
+; _With stem
+;
+MSG_SPLIT_INTO
+D_arabméret
+; _Chunk size
+;
+MSG_SPLIT_SPLIT
+_Darabold
+; _Split
+;
+MSG_SPLIT_SKIP
+_Ugord át
+; S_kip
+;
+MSG_SPLIT_TO
+_Célkönyvtár
+; _To
+;
+MSG_SPLIT_TITLE
+Állomány szétdarabolása
+; Split
+;
+MSG_SPLIT_ERROR_OPENING_FILE
+Nem tudom megnyitni a(z) "%s" állományt
+; Unable to open '%s'!
+;
+MSG_SPLIT_NO_MEMORY
+Nincs elég memória
+; No memory!
+;
+MSG_SPLITTING_FILE
+Darabolom az állományt...
+; Splitting file...
+;
+MSG_ENTER_DISK
+Helyezze be a következõ lemezt a(z) "%s" egységbe
+; Insert next floppy into %s
+;
+MSG_CHUNK_CUSTOM
+Custom Size
+; Custom Size
+;
+MSG_CHUNK_FLOPPY_FFS
+865K (DD Floppy - FFS)
+; 865K (DD Floppy - FFS)
+;
+MSG_CHUNK_HD_FLOPPY_FFS
+1733K (HD Floppy - FFS)
+; 1733K (HD Floppy - FFS)
+;
+MSG_CHUNK_FLOPPY_OFS
+824K (DD Floppy - OFS)
+; 824K (DD Floppy - OFS)
+;
+MSG_CHUNK_HD_FLOPPY_OFS
+1651K (HD Floppy - OFS)
+; 1651K (HD Floppy - OFS)
+;
+MSG_CHUNK_MSDOS
+713K (DD MS-DOS)
+; 713K (DD MS-DOS)
+;
+MSG_CHUNK_MSDOS_HD
+1423K (HD MS-DOS)
+; 1423K (HD MS-DOS)
+;
+MSG_CHUNK_LAST
+-
+; -
+;

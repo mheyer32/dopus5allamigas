@@ -1,0 +1,16 @@
+## version $VER: cleanup.catalog 1.0 (11.10.96)
+## codeset 0
+## language svenska
+;
+MSG_PLEASE_WAIT
+Var god vänta...
+; Please wait...
+;
+MSG_CLEANUP_TITLE
+Directory Opus - Upprensnings-Djinn
+; Directory Opus - CleanUp Djinn
+;
+MSG_CLEANUP_DESC
+Utför upprensningsunderhåll
+; Perform cleanup maintenance
+;

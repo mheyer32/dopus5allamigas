@@ -1,0 +1,136 @@
+## version $VER: show.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_OK
+_Εντάξει
+; _OK
+;
+MSG_INFO_TITLE
+Πληροοφορίες εικόνας
+; Picture Information
+;
+MSG_INFO_FILE
+Αρχείο:
+; File:
+;
+MSG_INFO_IMAGE_SIZE
+Μέγεθος Εικόνας:
+; Image Size:
+;
+MSG_INFO_COLOURS
+Χρώματα:
+; Colours:
+;
+MSG_INFO_MODE
+Ανάλυση:
+; Display Mode:
+;
+MSG_INFO_FRAME
+Καρέ:
+; Frame:
+;
+MSG_INFO_ANIM
+Είδος Animation:
+; Anim Type:
+;
+MSG_INFO_FRAME_NUM
+%ld από %ld @ %ld/sec
+; %ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT
+_Αναλογία:
+; _Aspect:
+;
+MSG_PRINT_IMAGE
+Ε_ικόνα:
+; _Image:
+;
+MSG_PRINT_SHADE
+_Σκίαση:
+; _Shade:
+;
+MSG_PRINT_PLACEMENT
+_Τοποθέτηση:
+; P_lacement:
+;
+MSG_PRINT_FORM_FEED
+_Προώθηση
+; _Form Feed
+;
+MSG_PRINT_PRINT_TITLE
+Εκτύπ_ωση Τίτλου
+; Print _Title
+;
+MSG_PRINT
+Ε_κτύπωση
+; _Print
+;
+MSG_PRINT_ASPECT_PORTRAIT
+Πορτραίτο
+; Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE
+Οριζόντια
+; Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE
+Θετική
+; Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE
+Αρνητική
+; Negative
+;
+MSG_PRINT_SHADE_BW
+Ασπρόμαυρη
+; Black & White
+;
+MSG_PRINT_SHADE_GREY
+Γκρίζα
+; Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR
+Έγχρωμη
+; Colour
+;
+MSG_PRINT_PLACEMENT_CENTER
+Κέντρο
+; Centre
+;
+MSG_PRINT_PLACEMENT_LEFT
+Αριστερά
+; Left
+;
+MSG_OPENING_PRINTER
+Εκκίνηση Εκτυπωτή...
+; Opening printer...
+;
+MSG_INITIALISING_PRINTER
+Προετοιμασία Εκτυπωτή...
+; Initialising printer...
+;
+MSG_PRINTING_PICTURE
+Εκτύπωση Εικόνας...
+; Printing picture...
+;
+MSG_ABORTING_PRINT
+Ακύρωση...
+; Aborting...
+;
+MSG_ANIM_TITLE
+Animation : %s\tΚαρέ %ld από %ld\t%ld x %ld x %ld\n\n
+; Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE
+Εικόνα : %s\t%ld x %ld x %ld\n\n
+; Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE
+Είδος Εικόνας:
+; Picture Type:
+;
+MSG_SHOW_DESC
+Εμφάνιση Εικόνων
+; Show pictures
+;

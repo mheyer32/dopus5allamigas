@@ -1,0 +1,140 @@
+## version $VER: format.catalog 0.1 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_FORMAT_TITLE
+Formatador
+; Format
+;
+MSG_FORMAT_FORMAT
+_Formatar
+; _Format
+;
+MSG_FORMAT_QUICK_FORMAT
+Rapidamente
+; _Quick Format
+;
+MSG_FORMAT_CANCEL
+_Cancelar
+; _Cancel
+;
+MSG_FORMAT_NAME
+_Nome
+; _Name
+;
+MSG_FORMAT_FFS
+F_ast File System
+; F_ast File System
+;
+MSG_FORMAT_INTERNATIONAL
+_Modo Internacional
+; _International Mode
+;
+MSG_FORMAT_CACHING
+_Caché ás directórias
+; _Directory Caching
+;
+MSG_FORMAT_TRASHCAN
+_Caixote do Lixo
+; _Put Trashcan
+;
+MSG_FORMAT_INSTALL
+Com _Arranque
+; _Make Bootable
+;
+MSG_FORMAT_VERIFY
+_Verificar
+; _Verify
+;
+MSG_FORMAT_DEFAULT_NAME
+Vazia
+; Empty
+;
+MSG_FORMAT_STATUS
+%ld pistas, %ld bytes/pista, %s
+; %ld tracks, %ld bytes/trk, %s
+;
+MSG_OPENING_DEVICE
+A abrir o dispositivo...
+; Opening device...
+;
+MSG_CHECKING_DISK
+A examinar a disquete...
+; Checking disk...
+;
+MSG_CANT_OPEN_DEVICE
+Não consegui abrir o dispositivo!
+; Unable to open device!
+;
+MSG_NO_DISK_PRESENT
+Não existe nenhuma disquete na unidade!
+; No disk present in drive!
+;
+MSG_DISK_WRITE_PROTECTED
+A disquete está protegida contra a escrita!
+; Disk is write-protected!
+;
+MSG_RETRY_CANCEL
+Voltar a tentar|Cancelar
+; Retry|Cancel
+;
+MSG_PROCEED_CANCEL
+Proceder|Cancelar
+; Proceed|Cancel
+;
+MSG_DISK_NOT_BLANK
+A disquete na unidade %s não está vazia!\n\
+O volume '%s' contém %s.\n\
+Todos os dados serão apagados .\n\
+Proceder para continuar
+; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
+; All data will be erased.\nChoose Proceed to continue.
+;
+MSG_ABORTED
+Abortar.
+; Aborted.
+;
+MSG_FORMAT_INITIALISING
+A inicializar a disquete...
+; Initialising disk...
+;
+MSG_FORMAT_FORMATTING
+A Formatar...
+; Formatting...
+;
+MSG_FORMAT_FORMATERROR
+Format error on track %ld.
+; Format error on track %ld.
+;
+MSG_FORMAT_VERIFYERROR
+Verify error on track %ld.
+; Verify error on track %ld.
+;
+MSG_FORMAT_SUCCESSFUL
+Format successful!
+; Format successful!
+;
+MSG_FORMAT_FAILED
+Format failed.
+; Format failed.
+;
+MSG_FORMAT_SETTING_UP
+Setting up...
+; Setting up...
+;
+MSG_FORMAT_CLEANING_UP
+Cleaning up...
+; Cleaning up...
+;
+MSG_FORMAT_MAKING_TRASH
+Making Trashcan...
+; Making Trashcan...
+;
+MSG_INSTALLING_DISK
+Installing Bootblock...
+; Installing Bootblock...
+;
+MSG_FORMAT_DESC
+Format disks
+; Format disks
+;

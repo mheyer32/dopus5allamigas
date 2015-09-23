@@ -1,0 +1,164 @@
+## version $VER: read.catalog 2.1 (06.06.97) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_READING_FILE
+Sto leggendo il file '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Impossibile aprire il file '%s'!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld linee, %ld bytes   modo=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+File
+; File
+;
+MSG_MENU_NEXT
+Successivo
+; Next
+;
+MSG_MENU_SEARCH
+Cerca...
+; Search...
+;
+MSG_MENU_REPEAT
+Cerca di nuovo
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Stampa...
+; Print...
+;
+MSG_MENU_QUIT
+Esci
+; Quit
+;
+MSG_MENU_SETTINGS
+Configurazione
+; Settings
+;
+MSG_MENU_TAB
+Dim. Tabulatore
+; Tab Size
+;
+MSG_MENU_SAVE
+Salva
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Inserisci il testo da cercare.
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+_Ignora M/m
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+!_Wildcards
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+S_olo Parole
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+Cerca Indiet_ro
+; _Reverse Search
+;
+MSG_OK_BUTTON
+Ok
+; OK
+;
+MSG_CANCEL_BUTTON
+Annulla
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+Stringa non trovta.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Leggi files di testo
+; Read text files
+;
+MSG_MENU_MODE
+Modo
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normale
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Esadecimale
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Usa schermo
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Scegli un modo schermo...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Segli un Carattere...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Visualizzatore di Testi di Directory Opus
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Salva come...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Inserisci il nome del file
+; Enter Filename
+;
+MSG_IO_ERROR
+Errore di I/O
+; IO Error
+;
+MSG_ERROR_CODE
+Errore DOS %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+All'editor...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Scegli l'editor...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+Procedi|Annulla
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Inserisci la funzione per chiamare l'editor di testi
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Sto leggendo il file...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Sto contando le linee...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 2.0 (09.02.96) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_BEEP_DESC
+Suona un beep
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+Lampeggia il video
+; Flashes the display
+;
+MSG_ALARM_DESC
+Suona un'allarme
+; Sounds an alarm
+;

@@ -1,0 +1,159 @@
+## version $VER: diskcopy.catalog 2.0 (21.02.97) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_DISKCOPY_TITLE
+Copia dischi
+; Diskcopy
+;
+MSG_DISKCOPY_DISKCOPY
+Copia _dischi
+; _Diskcopy
+;
+MSG_DISKCOPY_CANCEL
+_Annulla
+; _Cancel
+;
+MSG_DISKCOPY_VERIFY
+_Verifica
+; _Verify
+;
+MSG_DISKCOPY_BUMP
+Cam_bia nome
+; _Bump Name
+;
+MSG_DISKCOPY_FROM
+Sorgente...
+; From...
+;
+MSG_DISKCOPY_TO
+Destinazione...
+; To...
+;
+MSG_DISKCOPY_STATUS
+%s, %s usato
+; %s, %s used
+;
+MSG_DISKCOPY_OPEN_DEVICES
+Sto aprendo i dispositivi...
+; Opening devices...
+;
+MSG_CANT_OPEN_DEVICE
+Non posso aprire il disp. sorgente!
+; Can't open source device!
+;
+MSG_NO_DISK_PRESENT
+Disco sorgente non presente!
+; No disk present in source!
+;
+MSG_CANT_OPEN_DESTINATION
+Impossibile aprire la destinazione %s
+; Unable to open destination %s
+;
+MSG_NO_DISK_PRESENT_DEST
+Disco non presente in %s
+; No disk present in %s
+;
+MSG_WRITE_PROTECTED_DEST
+Il disco in %s è protetto in scrittura!
+; Disk in %s is write protected!
+;
+MSG_ABORTED
+Interrotto.
+; Aborted.
+;
+MSG_RETRY_CANCEL
+Riprova|Annulla
+; Retry|Cancel
+;
+MSG_RETRY_REMOVE_CANCEL
+Riprova|Rimuovi|Annulla
+; Retry|Remove|Cancel
+;
+MSG_PROCEED_CANCEL
+Procedi|Annulla
+; Proceed|Cancel
+;
+MSG_DISKCOPY_SUCCESSFUL
+Copia disco terminata!
+; Diskcopy successful!
+;
+MSG_DISKCOPY_FAILED
+Copia disco fallita.
+; Diskcopy failed.
+;
+MSG_READ_ERROR
+Errore di lettura di %s, traccia %ld\n\
+%s
+; Error reading %s track %ld\n%s
+;
+MSG_WRITE_ERROR
+Errore di scrittura di %s, traccia %ld\n\
+%s
+; Error writing %s track %ld\n%s
+;
+MSG_VERIFY_ERROR
+Errore di verifica di %s, traccia %ld\n\
+%s
+; Error verifying %s track %ld\n%s
+;
+MSG_DISKCOPY_READING
+Lettura traccia %ld, %ld da fare.
+; Reading track %ld, %ld to go.
+;
+MSG_DISKCOPY_WRITING
+Scrittura traccia %ld, %ld da fare.
+; Writing track %ld, %ld to go.
+;
+MSG_DISKCOPY_VERIFYING
+Verifica traccia %ld, %ld da fare.
+; Verifying track %ld, %ld to go.
+;
+MSG_DISKCOPY_TO_TITLE
+a
+; to
+;
+MSG_INSERT_DESTINATION
+Inserisci il disco destinazione in %s
+; Insert destination disk in %s
+;
+MSG_INSERT_SOURCE
+Inserisci il disco sorgente in %s
+; Insert source disk in %s
+;
+MSG_ERROR_WRITE_PROT
+Il disco è protetto in scrittura
+; Disk is write protected
+;
+MSG_ERROR_NO_DISK
+Nessun disco nel drive
+; No disk in drive
+;
+MSG_ERROR_UNKNOWN
+Codice d'errore sconosciuto
+; Unknown error code
+;
+MSG_ERROR_VERIFY
+I dati non sono stati scritti correttamente.
+; Data not written correctly.
+;
+MSG_BUMPING_NAMES
+Sto cambiando i nomi...
+; Bumping names...
+;
+MSG_INCOMPATIBLE
+I dischi sono di tipo incompatibile e non posso essere copiati.
+; Disks are of incompatible types and can not be copied.
+;
+MSG_OK
+Ok
+; OK
+;
+MSG_DISKCOPY_DESC
+Crea delle copie dei dischi
+; Make copies of a disk
+;
+MSG_DISKCOPY_COPYING
+Copia in corso...
+; Copying disk...
+;

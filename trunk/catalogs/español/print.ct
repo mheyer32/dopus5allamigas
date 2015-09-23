@@ -1,0 +1,184 @@
+## version $VER: print.catalog 0.3 (29.8.97)
+## codeset 0
+## language español
+;
+MSG_PRINTREQ_TITLE
+Imprimir
+; Print
+;
+MSG_PRINTING_TITLE
+Imprimiendo...
+; Printing...
+;
+MSG_PRINT
+Im_primir
+; _Print
+;
+MSG_CANCEL
+_Cancelar
+; _Cancel
+;
+MSG_TEXT
+Texto
+; Text
+;
+MSG_HEADER_FOOTER
+Cabecera/Pié
+; Header/Footer
+;
+MSG_PRINT_QUALITY
+_Calidad
+; _Quality
+;
+MSG_PRINT_SPACING
+_Separación líneas
+; _Spacing
+;
+MSG_PRINT_PITCH
+Tono
+; P_itch
+;
+MSG_PRINT_LEFT_MARGIN
+Margen _izquierdo
+; _Left Margin
+;
+MSG_PRINT_RIGHT_MARGIN
+Margen _derecho
+; _Right Margin
+;
+MSG_PRINT_PAGE_LENGTH
+Longitud de página
+; P_age Length
+;
+MSG_PRINT_TAB_SIZE
+_Tamaño tabulador
+; _Tab Size
+;
+MSG_PRINT_QUALITY_DRAFT
+Borrador
+; Draft
+;
+MSG_PRINT_QUALITY_LETTER
+Carta
+; Letter
+;
+MSG_PRINT_SPACING_6
+6 Líneas x pulgada
+; 6 LPI
+;
+MSG_PRINT_SPACING_8
+8 Líneas x pulgada
+; 8 LPI
+;
+MSG_PRINT_PITCH_PICA
+Pica
+; Pica
+;
+MSG_PRINT_PITCH_ELITE
+Elite
+; Elite
+;
+MSG_PRINT_PITCH_FINE
+Fine
+; Fine
+;
+MSG_PRINT_CONFIGURATION
+c_onfiguración...
+; c_onfiguration...
+;
+MSG_PRINT_HEADER
+Cabecera
+; Header
+;
+MSG_PRINT_FOOTER
+Pié
+; Footer
+;
+MSG_PRINT_TITLE
+Título
+; Titl_e
+;
+MSG_PRINT_DATE
+_Fecha
+; _Date
+;
+MSG_PRINT_PAGE
+Pá_gina
+; Pa_ge
+;
+MSG_PRINT_STYLE
+Est_ilo
+; St_yle
+;
+MSG_PRINT_STYLE_NORMAL
+Normal
+; Normal
+;
+MSG_PRINT_STYLE_BOLD
+Negrita
+; Bold
+;
+MSG_PRINT_STYLE_ITALICS
+Itálica
+; Italics
+;
+MSG_PRINT_STYLE_UNDERLINE
+Sbrydo.
+; Uline
+;
+MSG_ABORT
+Abortar
+; Abort
+;
+MSG_OK
+OK
+; OK
+;
+MSG_OPENING_PRINTER
+Abriendo impresora...
+; Opening printer...
+;
+MSG_CANT_OPEN_PRINTER
+¡No se pudo abrir la impresora!
+; Couldn't open printer!
+;
+MSG_PRINTER_ERROR
+Ha ocurrido un error (%ld) al imprimir.
+; An error occurred (%ld) while printing.
+;
+MSG_REALLY_ABORT
+¿Abortar la impresión?
+; Really abort print?
+;
+MSG_RETRY_CANCEL
+Reintentar|Cancelar
+; Retry|Cancel
+;
+MSG_ABORT_RESUME
+Abortar|Continuar
+; Abort|Continue
+;
+MSG_PRINT_PAGENUM
+Página
+; Page 
+;
+MSG_PRINT_DESC
+Imprimir ficheros de texto
+; Print text files
+;
+MSG_PRINT_OUTPUT
+Salida
+; Outp_ut
+;
+MSG_PRINT_OUTPUT_PRINTER
+Impresora
+; Printer
+;
+MSG_PRINT_OUTPUT_FILE
+Fichero
+; File
+;
+MSG_SELECT_OUTPUT_FILE
+Seleccionar fichero de salida
+; Select Output File
+;

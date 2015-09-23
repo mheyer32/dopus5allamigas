@@ -1,0 +1,181 @@
+## version $VER: join.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_JOIN_DESC
+Ένωση αρχείων
+; Join files together
+;
+MSG_SPLIT_DESC
+Κοπή αρχείου σε μέρη
+; Split a file into parts
+;
+MSG_JOIN_LISTER
+Ένωση _αρχείων...
+; Join _files...
+;
+MSG_JOIN_ADD
+_Προσθήκη
+; _Add
+;
+MSG_JOIN_REMOVE
+Α_φαίρεση
+; _Remove
+;
+MSG_JOIN_CLEAR
+_Καθ/μός
+; C_lear
+;
+MSG_JOIN_MOVE_UP
+Πά_νω
+; _Up
+;
+MSG_JOIN_MOVE_DOWN
+Κά_τω
+; _Down
+;
+MSG_JOIN_JOIN
+Ένω_ση
+; _Join
+;
+MSG_JOIN_CANCEL
+¶κ_υρο
+; _Cancel
+;
+MSG_JOIN_TITLE
+ Ένωση
+; Join
+;
+MSG_JOIN_TO
+_Στο:
+; _To:
+;
+MSG_JOIN_SELECT_FILE
+Επιλογή Αρχείου
+; Select File
+;
+MSG_REPLACE_RENAME_ABORT
+Αντικατάσταση|Μετονομασία|Ακύρωση
+; Replace|Rename|Abort
+;
+MSG_FILE_EXISTS
+Το αρχείο '%s' υπάρχει ήδη!
+; File '%s' already exists!
+;
+MSG_ENTER_FILENAME
+Όνομα τελικού αρχείου.
+; Enter destination filename.
+;
+MSG_OK
+Εντάξει
+; Ok
+;
+MSG_CANCEL
+¶κυρο
+; Cancel
+;
+MSG_JOINING_FILES
+Ένωση αρχείων...
+; Joining files...
+;
+MSG_JOIN_ERROR_OPENING_OUTPUT
+Αδύνατο το άνοιγμα του '%s' για έξοδο!
+; Unable to open '%s' for output!
+;
+MSG_JOIN_ERROR
+%s\n\
+Λάθος %ld %s
+; %s\nError %ld %s
+;
+MSG_JOIN_RETRY
+Νέα προσπάθεια
+; Retry
+;
+MSG_REMOVE
+Αφαίρεση
+; Remove
+;
+MSG_JOIN_ERROR_OPENING_INPUT
+Αδύνατο το άνοιγμα του '%s'!
+; Unable to open '%s'!
+;
+MSG_JOIN_ERROR_READING
+Λάθος στην ανάγνωση του '%s'!
+; Error reading from '%s'!
+;
+MSG_SPLIT_FROM
+Κατατμ. του
+; Split _file
+;
+MSG_SPLIT_STEM
+_Με αρίθμηση
+; _With stem
+;
+MSG_SPLIT_INTO
+_Τμήμα
+; _Chunk size
+;
+MSG_SPLIT_SPLIT
+_Χωρισμός
+; _Split
+;
+MSG_SPLIT_SKIP
+Παράκαμ_ψη
+; S_kip
+;
+MSG_SPLIT_TO
+_Στο
+; _To
+;
+MSG_SPLIT_TITLE
+Χωρισμός
+; Split
+;
+MSG_SPLIT_ERROR_OPENING_FILE
+Αδύνατο το άνοιγμα του '%s'!
+; Unable to open '%s'!
+;
+MSG_SPLIT_NO_MEMORY
+Ανεπαρκής μνήμη!
+; No memory!
+;
+MSG_SPLITTING_FILE
+Χωρισμός αρχείου...
+; Splitting file...
+;
+MSG_ENTER_DISK
+Βάλτε νέα δισκέττα στο %s
+; Insert next floppy into %s
+;
+MSG_CHUNK_CUSTOM
+Custom Size
+; Custom Size
+;
+MSG_CHUNK_FLOPPY_FFS
+865K (DD Floppy - FFS)
+; 865K (DD Floppy - FFS)
+;
+MSG_CHUNK_HD_FLOPPY_FFS
+1733K (HD Floppy - FFS)
+; 1733K (HD Floppy - FFS)
+;
+MSG_CHUNK_FLOPPY_OFS
+824K (DD Floppy - OFS)
+; 824K (DD Floppy - OFS)
+;
+MSG_CHUNK_HD_FLOPPY_OFS
+1651K (HD Floppy - OFS)
+; 1651K (HD Floppy - OFS)
+;
+MSG_CHUNK_MSDOS
+713K (DD MS-DOS)
+; 713K (DD MS-DOS)
+;
+MSG_CHUNK_MSDOS_HD
+1423K (HD MS-DOS)
+; 1423K (HD MS-DOS)
+;
+MSG_CHUNK_LAST
+-
+; -
+;

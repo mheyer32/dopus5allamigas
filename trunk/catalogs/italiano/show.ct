@@ -1,0 +1,136 @@
+## version $VER: show.catalog 2.0 (21.02.97) by Francesco Dipietromaria
+## codeset 0
+## language italiano
+;
+MSG_OK
+_Ok
+; _OK
+;
+MSG_INFO_TITLE
+Informazioni immagine
+; Picture Information
+;
+MSG_INFO_FILE
+File:
+; File:
+;
+MSG_INFO_IMAGE_SIZE
+Dim. Immagine:
+; Image Size:
+;
+MSG_INFO_COLOURS
+Colori:
+; Colours:
+;
+MSG_INFO_MODE
+Modo display:
+; Display Mode:
+;
+MSG_INFO_FRAME
+Fotogrammi:
+; Frame:
+;
+MSG_INFO_ANIM
+Tipo anim:
+; Anim Type:
+;
+MSG_INFO_FRAME_NUM
+%ld su %ld @ %ld/sec
+; %ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT
+_Aspetto:
+; _Aspect:
+;
+MSG_PRINT_IMAGE
+_Immagine:
+; _Image:
+;
+MSG_PRINT_SHADE
+_Ombre:
+; _Shade:
+;
+MSG_PRINT_PLACEMENT
+Posizione:
+; P_lacement:
+;
+MSG_PRINT_FORM_FEED
+Avanza foglio
+; _Form Feed
+;
+MSG_PRINT_PRINT_TITLE
+Stampa _titolo
+; Print _Title
+;
+MSG_PRINT
+Stam_pa
+; _Print
+;
+MSG_PRINT_ASPECT_PORTRAIT
+Ritratto
+; Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE
+Fondale
+; Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE
+Positivo
+; Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE
+Negativo
+; Negative
+;
+MSG_PRINT_SHADE_BW
+Bianco e nero
+; Black & White
+;
+MSG_PRINT_SHADE_GREY
+Tino di grigio
+; Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR
+Colore
+; Colour
+;
+MSG_PRINT_PLACEMENT_CENTER
+Centrato
+; Centre
+;
+MSG_PRINT_PLACEMENT_LEFT
+Sinistra
+; Left
+;
+MSG_OPENING_PRINTER
+Sto aprendo la stampante...
+; Opening printer...
+;
+MSG_INITIALISING_PRINTER
+Sto inizializzando la stampante...
+; Initialising printer...
+;
+MSG_PRINTING_PICTURE
+Stampa in corso...
+; Printing picture...
+;
+MSG_ABORTING_PRINT
+Interrompi...
+; Aborting...
+;
+MSG_ANIM_TITLE
+Animazione: %s\tFotogrammi %ld su %ld\t%ld x %ld x %ld\n\n
+; Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE
+Immagine: %s\t%ld x %ld x %ld\n\n
+; Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE
+Tipo immagine:
+; Picture Type:
+;
+MSG_SHOW_DESC
+Mostra immagini
+; Show pictures
+;

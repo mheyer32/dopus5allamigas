@@ -1,0 +1,68 @@
+## version $VER: play.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_NEXT
+_Επόμενο
+; _Next
+;
+MSG_ABORT
+¶_κυρο
+; _Abort
+;
+MSG_PLAY_TITLE
+Παίξιμο
+; Play
+;
+MSG_FILENAME
+Αρχείο:
+; File:
+;
+MSG_LENGTH
+Διάρκεια:
+; Length:
+;
+MSG_TYPE
+Είδος:
+; Type:
+;
+MSG_TYPE_STEREO
+Στερεοφωνικό
+; Stereo
+;
+MSG_TYPE_MONO
+Μονοφωνικό
+; Mono
+;
+MSG_TYPE_RAW
+Απλό
+; Raw
+;
+MSG_STATUS
+Εργασία:
+; Status:
+;
+MSG_STATUS_LOADING
+Ανάγνωση αρχείου...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Αποσυμπίεση...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Παίξιμο ήχου...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Παίξιμο αρχείων ήχου
+; Play sound files
+;
+MSG_PLAY_NEXT
+Επόμενο
+; Next
+;
+MSG_PLAY_ABORT
+¶κυρο
+; Abort
+;

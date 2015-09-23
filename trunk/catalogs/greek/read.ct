@@ -1,0 +1,164 @@
+## version $VER: read.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_READING_FILE
+Ανάγνωση αρχείου '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Αδύνατο το άνοιγμα του αρχείου '%s'!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld γραμμές, %ld bytes  κατάσταση=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Αρχείο
+; File
+;
+MSG_MENU_NEXT
+Επόμενο
+; Next
+;
+MSG_MENU_SEARCH
+Εύρεση...
+; Search...
+;
+MSG_MENU_REPEAT
+Επανάληψη εύρεσης  
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Εκτύπωση...
+; Print...
+;
+MSG_MENU_QUIT
+Έξοδος
+; Quit
+;
+MSG_MENU_SETTINGS
+Ρυθμίσεις
+; Settings
+;
+MSG_MENU_TAB
+Μέγεθος Στηλογνώμονα
+; Tab Size
+;
+MSG_MENU_SAVE
+Αποθήκευση Ρυθμίσεων
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Κείμενο προς εύρεση.
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+Α_γνόηση Κεφ./Πεζ
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+Κλε_ιδιά
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+_Μόνο λέξεις
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+Α_νάποδη Εύρεση
+; _Reverse Search
+;
+MSG_OK_BUTTON
+Εντάξει
+; OK
+;
+MSG_CANCEL_BUTTON
+¶κυρο
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+Το κείμενο δεν βρέθηκε.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Ανάγνωση αρχείων κειμένου
+; Read text files
+;
+MSG_MENU_MODE
+Κατάσταση
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Κανονική
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Δεκαεξαδική
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Χρήση Οθόνης
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Επιλογή Ανάλυσης Οθόνης...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Επιλογή Γραμματοσειράς...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Αναγνώστης Κειμένου Directory Opus
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Σώσιμο Ως...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Εισαγωγή Ονόματος Αρχείου
+; Enter Filename
+;
+MSG_IO_ERROR
+Λάθος IO
+; IO Error
+;
+MSG_ERROR_CODE
+Λάθος DOS %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Αποστολή στον κειμενογράφο...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Επιλογή κειμενογράφου...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+Εντάξει|¶κυρο
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Παράμετροι κλήσης κειμενογράφου
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Ανάγνωση αρχείου...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Καταμέτρηση γραμμών...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

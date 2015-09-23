@@ -1,0 +1,186 @@
+## version $VER: print.catalog 1.1 (8.6.97)
+## codeset 0
+## language svenska
+;
+MSG_PRINTREQ_TITLE
+Skriv ut
+; Print
+;
+MSG_PRINTING_TITLE
+Skriver ut...
+; Printing...
+;
+MSG_PRINT
+_Skriv ut
+; _Print
+;
+MSG_CANCEL
+A_vbryt
+; _Cancel
+;
+MSG_TEXT
+Text
+; Text
+;
+MSG_HEADER_FOOTER
+Huvud/fot
+; Header/Footer
+;
+MSG_PRINT_QUALITY
+_Kvalitet
+; _Quality
+;
+MSG_PRINT_SPACING
+_Mellanrum
+; _Spacing
+;
+MSG_PRINT_PITCH
+B_redd
+; P_itch
+;
+MSG_PRINT_LEFT_MARGIN
+Vä_nster marg.
+; _Left Margin
+;
+MSG_PRINT_RIGHT_MARGIN
+_Höger marg.
+; _Right Margin
+;
+MSG_PRINT_PAGE_LENGTH
+_Papperslängd
+; P_age Length
+;
+MSG_PRINT_TAB_SIZE
+Ta_bstorlek
+; _Tab Size
+;
+MSG_PRINT_QUALITY_DRAFT
+Utkast
+; Draft
+;
+MSG_PRINT_QUALITY_LETTER
+Brev
+; Letter
+;
+MSG_PRINT_SPACING_6
+6 rpt
+; 6 LPI
+;
+MSG_PRINT_SPACING_8
+8 rpt
+; 8 LPI
+;
+MSG_PRINT_PITCH_PICA
+Pica
+; Pica
+;
+MSG_PRINT_PITCH_ELITE
+Elite
+; Elite
+;
+MSG_PRINT_PITCH_FINE
+Fine
+; Fine
+;
+MSG_PRINT_CONFIGURATION
+K_onfiguration...
+; c_onfiguration...
+;
+MSG_PRINT_HEADER
+Huvud
+; Header
+;
+MSG_PRINT_FOOTER
+Fot
+; Footer
+;
+MSG_PRINT_TITLE
+Tit_el
+; Titl_e
+;
+MSG_PRINT_DATE
+_Datum
+; _Date
+;
+MSG_PRINT_PAGE
+Sid_a
+; Pa_ge
+;
+MSG_PRINT_STYLE
+S_til
+; St_yle
+;
+MSG_PRINT_STYLE_NORMAL
+Normal
+; Normal
+;
+MSG_PRINT_STYLE_BOLD
+Fet
+; Bold
+;
+MSG_PRINT_STYLE_ITALICS
+Lutande
+; Italics
+;
+MSG_PRINT_STYLE_UNDERLINE
+Understr.
+; Uline
+;
+MSG_ABORT
+Avbryt
+; Abort
+;
+MSG_OK
+OK
+; OK
+;
+MSG_OPENING_PRINTER
+Öppnar skrivare...
+; Opening printer...
+;
+MSG_CANT_OPEN_PRINTER
+Kunde inte öppna skrivaren!
+; Couldn't open printer!
+;
+MSG_PRINTER_ERROR
+Kunde inte skriva ut!\n\
+(Fel %ld)
+; An error occurred (%ld) while printing.
+;
+MSG_REALLY_ABORT
+Vill du verkligen\n\
+avbryta utskriften?
+; Really abort print?
+;
+MSG_RETRY_CANCEL
+Försök igen|Avbryt
+; Retry|Cancel
+;
+MSG_ABORT_RESUME
+Avbryt|Fortsätt
+; Abort|Continue
+;
+MSG_PRINT_PAGENUM
+Sida
+; Page 
+;
+MSG_PRINT_DESC
+Skriver ut textfiler
+; Print text files
+;
+MSG_PRINT_OUTPUT
+_Utmatning
+; Outp_ut
+;
+MSG_PRINT_OUTPUT_PRINTER
+Skrivare
+; Printer
+;
+MSG_PRINT_OUTPUT_FILE
+Fil
+; File
+;
+MSG_SELECT_OUTPUT_FILE
+Välj utmatningsfil
+; Select Output File
+;

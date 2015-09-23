@@ -1,0 +1,164 @@
+## version $VER: read.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_READING_FILE
+Leser fil '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Kunne ikke åpne fil '%s'!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld linjer, %ld bytes   modus=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Fil
+; File
+;
+MSG_MENU_NEXT
+Neste
+; Next
+;
+MSG_MENU_SEARCH
+Søk...
+; Search...
+;
+MSG_MENU_REPEAT
+Gjenta Søk  
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Utskrift...
+; Print...
+;
+MSG_MENU_QUIT
+Avslutt
+; Quit
+;
+MSG_MENU_SETTINGS
+Innstilinger
+; Settings
+;
+MSG_MENU_TAB
+Tabulator
+; Tab Size
+;
+MSG_MENU_SAVE
+Lagre Innstillinger
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Oppgi tekst å søke etter...
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+Overse _versaler
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Wildcards
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+Kun _hele ord
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Baklengs søk
+; _Reverse Search
+;
+MSG_OK_BUTTON
+OK
+; OK
+;
+MSG_CANCEL_BUTTON
+Avbryt
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+Søketekst ikke funnet.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Les tekstfiler
+; Read text files
+;
+MSG_MENU_MODE
+Modus
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normal
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hex
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Bruk Egen Skjerm
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Velg Skjemmodus...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Velg Font...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Directory Opus Tekst Fremviser
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Lagre Som...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Oppgi Filnavn
+; Enter Filename
+;
+MSG_IO_ERROR
+IO Feil
+; IO Error
+;
+MSG_ERROR_CODE
+DOS feil %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Til Editor...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Velg Editor...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+OK|Avbryt
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Oppgi funksjon som kaller tekst editor
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Leser fil...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Teller linjer...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

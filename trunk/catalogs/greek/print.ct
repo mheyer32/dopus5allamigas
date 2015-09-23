@@ -1,0 +1,184 @@
+## version $VER: print.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_PRINTREQ_TITLE
+Εκτύπωση
+; Print
+;
+MSG_PRINTING_TITLE
+Εκτύπωση...
+; Printing...
+;
+MSG_PRINT
+_Εκτύπωση
+; _Print
+;
+MSG_CANCEL
+¶_κυρο
+; _Cancel
+;
+MSG_TEXT
+Κείμενο
+; Text
+;
+MSG_HEADER_FOOTER
+Επικεφ./Κατακλ.
+; Header/Footer
+;
+MSG_PRINT_QUALITY
+_Ποιότητα
+; _Quality
+;
+MSG_PRINT_SPACING
+Κενά
+; _Spacing
+;
+MSG_PRINT_PITCH
+Πά_χος
+; P_itch
+;
+MSG_PRINT_LEFT_MARGIN
+Α_ριστερό Περιθ.
+; _Left Margin
+;
+MSG_PRINT_RIGHT_MARGIN
+_Δεξί Περιθ.
+; _Right Margin
+;
+MSG_PRINT_PAGE_LENGTH
+_Μήκος Σελίδας
+; P_age Length
+;
+MSG_PRINT_TAB_SIZE
+Μέ_γεθος Στηλ/να
+; _Tab Size
+;
+MSG_PRINT_QUALITY_DRAFT
+_Απλή
+; Draft
+;
+MSG_PRINT_QUALITY_LETTER
+Γράμμα
+; Letter
+;
+MSG_PRINT_SPACING_6
+6 LPI
+; 6 LPI
+;
+MSG_PRINT_SPACING_8
+8 LPI
+; 8 LPI
+;
+MSG_PRINT_PITCH_PICA
+Pica
+; Pica
+;
+MSG_PRINT_PITCH_ELITE
+Elite
+; Elite
+;
+MSG_PRINT_PITCH_FINE
+Fine
+; Fine
+;
+MSG_PRINT_CONFIGURATION
+_Ρυθμίσεις...
+; c_onfiguration...
+;
+MSG_PRINT_HEADER
+Επικεφαλίδα
+; Header
+;
+MSG_PRINT_FOOTER
+Κατακλείδα
+; Footer
+;
+MSG_PRINT_TITLE
+Τίτ_λος
+; Titl_e
+;
+MSG_PRINT_DATE
+_Ημ/νία
+; _Date
+;
+MSG_PRINT_PAGE
+Σελί_δα
+; Pa_ge
+;
+MSG_PRINT_STYLE
+Σχέδ_ιο
+; St_yle
+;
+MSG_PRINT_STYLE_NORMAL
+Κανονικό
+; Normal
+;
+MSG_PRINT_STYLE_BOLD
+Παχύ
+; Bold
+;
+MSG_PRINT_STYLE_ITALICS
+Πλάγιο
+; Italics
+;
+MSG_PRINT_STYLE_UNDERLINE
+Υπογρ/νο
+; Uline
+;
+MSG_ABORT
+¶κυρο
+; Abort
+;
+MSG_OK
+Εντάξει
+; OK
+;
+MSG_OPENING_PRINTER
+Εκκίνηση Εκτυπωτή...
+; Opening printer...
+;
+MSG_CANT_OPEN_PRINTER
+Αδύνατη η εκκίνηση του εκτυπωτή!
+; Couldn't open printer!
+;
+MSG_PRINTER_ERROR
+Έγινε λάθος (%ld) κατά την εκτύπωση.
+; An error occurred (%ld) while printing.
+;
+MSG_REALLY_ABORT
+Ακύρωση Εκτπυωσης
+; Really abort print?
+;
+MSG_RETRY_CANCEL
+Επανάληψη|Ακύρωση
+; Retry|Cancel
+;
+MSG_ABORT_RESUME
+Ακύρωση|Συνέχεια
+; Abort|Continue
+;
+MSG_PRINT_PAGENUM
+Σελίδα 
+; Page 
+;
+MSG_PRINT_DESC
+Εκτπυωση αρχείων κειμένου
+; Print text files
+;
+MSG_PRINT_OUTPUT
+Έ_ξοδος
+; Outp_ut
+;
+MSG_PRINT_OUTPUT_PRINTER
+Εκτυπωτής
+; Printer
+;
+MSG_PRINT_OUTPUT_FILE
+Αρχείο
+; File
+;
+MSG_SELECT_OUTPUT_FILE
+Επιλογή Αρχείου Εξόδου
+; Select Output File
+;

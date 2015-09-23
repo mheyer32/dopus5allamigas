@@ -1,0 +1,164 @@
+## version $VER: read.catalog 0.2 (11-09-1998) - Por Raul Silva 
+## codeset 0
+## language português
+;
+MSG_READING_FILE
+A ler o ficheiro '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Não consegui abrir o ficheiro '%s'!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld linhas, %ld bytes   modo=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Ficheiro
+; File
+;
+MSG_MENU_NEXT
+Seguinte
+; Next
+;
+MSG_MENU_SEARCH
+Procurar...
+; Search...
+;
+MSG_MENU_REPEAT
+Voltar a procurar
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Imprimir...
+; Print...
+;
+MSG_MENU_QUIT
+Sair
+; Quit
+;
+MSG_MENU_SETTINGS
+Preferências
+; Settings
+;
+MSG_MENU_TAB
+Tamanho do tabulador
+; Tab Size
+;
+MSG_MENU_SAVE
+Gravar as preferências
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Introduza aqui o texto a procurar...
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+_Ignorar as maiúsculas
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Padrão
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+_Só palavras
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Procura inversa
+; _Reverse Search
+;
+MSG_OK_BUTTON
+Sim
+; OK
+;
+MSG_CANCEL_BUTTON
+Cancelar
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+A palavra não foi encontrada.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Ler os ficheiros de texto
+; Read text files
+;
+MSG_MENU_MODE
+Modo
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normal
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hexadécimal
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Usar o ecrã
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Escolher o modo de ecrã...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Escolher o tipo de Letras...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Visualizador de texto do Directory Opus
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Gravar como...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Introduza o nome do ficheiro
+; Enter Filename
+;
+MSG_IO_ERROR
+Erro de entrada/saída
+; IO Error
+;
+MSG_ERROR_CODE
+Erro de DOS %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Editar...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Escolher o Editor...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+Sim|Cancelar
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Introduza a função para chamar o editor de texto
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+A ler o ficheiro...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Estou a contar as linhas...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 1.0 (11.10.96)
+## codeset 0
+## language svenska
+;
+MSG_BEEP_DESC
+Gör ett pipljud
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+Blänker skärmen
+; Flashes the display
+;
+MSG_ALARM_DESC
+Ljuder ett alarm
+; Sounds an alarm
+;

@@ -1,0 +1,136 @@
+## version $VER: show.catalog 1.1 (8.6.97)
+## codeset 0
+## language svenska
+;
+MSG_OK
+_OK
+; _OK
+;
+MSG_INFO_TITLE
+Bildinformation
+; Picture Information
+;
+MSG_INFO_FILE
+Fil:
+; File:
+;
+MSG_INFO_IMAGE_SIZE
+Storlek:
+; Image Size:
+;
+MSG_INFO_COLOURS
+Färger:
+; Colours:
+;
+MSG_INFO_MODE
+Skärmläge:
+; Display Mode:
+;
+MSG_INFO_FRAME
+Bildruta:
+; Frame:
+;
+MSG_INFO_ANIM
+Animationstyp:
+; Anim Type:
+;
+MSG_INFO_FRAME_NUM
+%ld av %ld vid %ld/sek
+; %ld of %ld @ %ld/sec
+;
+MSG_PRINT_ASPECT
+_Riktning:
+; _Aspect:
+;
+MSG_PRINT_IMAGE
+_Bild:
+; _Image:
+;
+MSG_PRINT_SHADE
+S_kuggning:
+; _Shade:
+;
+MSG_PRINT_PLACEMENT
+_Placering:
+; P_lacement:
+;
+MSG_PRINT_FORM_FEED
+_Mata ut sida
+; _Form Feed
+;
+MSG_PRINT_PRINT_TITLE
+Skriv _titel
+; Print _Title
+;
+MSG_PRINT
+_Skriv ut
+; _Print
+;
+MSG_PRINT_ASPECT_PORTRAIT
+Horisontell
+; Portrait
+;
+MSG_PRINT_ASPECT_LANDSCAPE
+Vertikal
+; Landscape
+;
+MSG_PRINT_IMAGE_POSITIVE
+Positiv
+; Positive
+;
+MSG_PRINT_IMAGE_NEGATIVE
+Negativ
+; Negative
+;
+MSG_PRINT_SHADE_BW
+Svartvitt
+; Black & White
+;
+MSG_PRINT_SHADE_GREY
+Gråskala
+; Gray Scale
+;
+MSG_PRINT_SHADE_COLOUR
+Färg
+; Colour
+;
+MSG_PRINT_PLACEMENT_CENTER
+Centrera
+; Centre
+;
+MSG_PRINT_PLACEMENT_LEFT
+Till vänster
+; Left
+;
+MSG_OPENING_PRINTER
+Öppnar skrivare...
+; Opening printer...
+;
+MSG_INITIALISING_PRINTER
+Initierar skrivare...
+; Initialising printer...
+;
+MSG_PRINTING_PICTURE
+Skriver ut bilden...
+; Printing picture...
+;
+MSG_ABORTING_PRINT
+Avbryter...
+; Aborting...
+;
+MSG_ANIM_TITLE
+Animation: %s\tBild %ld av %ld\t%ld x %ld x %ld\n\n
+; Animation : %s\tFrame %ld of %ld\t%ld x %ld x %ld\n\n
+;
+MSG_ILBM_TITLE
+Bild: %s\t%ld x %ld x %ld\n\n
+; Picture : %s\t%ld x %ld x %ld\n\n
+;
+MSG_INFO_TYPE
+Typ:
+; Picture Type:
+;
+MSG_SHOW_DESC
+Visa bilder
+; Show pictures
+;

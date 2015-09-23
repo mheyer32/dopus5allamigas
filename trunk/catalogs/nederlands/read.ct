@@ -1,0 +1,164 @@
+## version $VER: read.catalog 2.1 (10.6.97)
+## codeset 0
+## language nederlands
+;
+MSG_READING_FILE
+Lees bestand '%s'...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+Kon bestand '%s' niet openen!
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld regels, %ld bytes   modus=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Bestand
+; File
+;
+MSG_MENU_NEXT
+Volgende
+; Next
+;
+MSG_MENU_SEARCH
+Zoek...
+; Search...
+;
+MSG_MENU_REPEAT
+Herhaal zoeken
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Print...
+; Print...
+;
+MSG_MENU_QUIT
+Einde
+; Quit
+;
+MSG_MENU_SETTINGS
+Instellingen
+; Settings
+;
+MSG_MENU_TAB
+Tabgrootte
+; Tab Size
+;
+MSG_MENU_SAVE
+Bewaar instellingen
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Voer tekst in om naar te zoeken.
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+_Negeer kl./gr.
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Patronen
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+Alleen _woorden
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Achterwaarts zoeken
+; _Reverse Search
+;
+MSG_OK_BUTTON
+Ok
+; OK
+;
+MSG_CANCEL_BUTTON
+Annuleer
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+Tekst niet gevonden.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Lees tekstbestanden
+; Read text files
+;
+MSG_MENU_MODE
+Modus
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normaal
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hex
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Gebruik scherm
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Kies schermmodus...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Kies lettertype...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Directory Opus tekstweergave
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Bewaar als...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Voer bestandsnaam in
+; Enter Filename
+;
+MSG_IO_ERROR
+IO­fout
+; IO Error
+;
+MSG_ERROR_CODE
+DOS­fout %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Naar editor...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Kies editor...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+Ok|Annuleer
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Voer functie in om teksteditor aan te roepen
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Lees bestand in...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Tel regels...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;

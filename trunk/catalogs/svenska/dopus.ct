@@ -1,0 +1,2163 @@
+## version $VER: dopus.catalog 1.2 (9.7.97)
+## codeset 0
+## language svenska
+;
+MSG_ABORTED
+Avbruten...
+; Aborted...
+;
+MSG_TRY_AGAIN
+Försök igen
+; Try Again
+;
+MSG_RETRY
+Försök igen
+; Retry
+;
+MSG_ABORT
+Avbryt
+; Abort
+;
+MSG_REPLACE
+Ersätt
+; Replace
+;
+MSG_SKIP
+Hoppa över
+; Skip
+;
+MSG_SKIP_ALL
+Hoppa över alla
+; Skip All
+;
+MSG_ALL
+Alla
+; All
+;
+MSG_QUIT
+Avsluta
+; Quit
+;
+MSG_SAVE
+Spara
+; Save
+;
+MSG_CLOSE
+Stäng
+; Close
+;
+MSG_YES
+Ja
+; Yes
+;
+MSG_NO
+Nej
+; No
+;
+MSG_CONTINUE
+Fortsätt
+; Continue
+;
+MSG_OKAY
+OK
+; OK
+;
+MSG_CANCEL
+Avbryt
+; Cancel
+;
+MSG_REPLACE_ALL
+Ersätt alla
+; Replace All
+;
+MSG_PROCEED
+Fortsätt
+; Proceed
+;
+MSG_MOVE
+Flytta
+; Move
+;
+MSG_DISCARD
+Kasta bort
+; Discard
+;
+MSG_BLOCKS
+block
+; blocks
+;
+MSG_FREE
+fritt
+; free
+;
+MSG_MAKELINK
+Skapa länk
+; MakeLink
+;
+MSG_SELECT_FILE
+Välj fil
+; Select File
+;
+MSG_SELECT_DIR
+Välj låda
+; Select Directory
+;
+MSG_ENTER_FILE
+Ange filnamn
+; Enter Filename
+;
+MSG_OPEN
+Öppna...
+; Open...
+;
+MSG_DEFAULTS
+Förinställda värden
+; Reset To Defaults
+;
+MSG_LAST_SAVED
+Senast sparade
+; Last Saved
+;
+MSG_RESTORE
+Återställ
+; Restore
+;
+MSG_PROJECT
+Arkiv
+; Project
+;
+MSG_EDIT
+Redigera
+; Edit
+;
+MSG_UNKNOWN_TYPE
+<okänd>
+; <unknown>
+;
+MSG_SNIFF_CONFIRMATION
+Kunde inte identifiera filen\n\
+"%s".\n\
+Vill du starta filtypssnokaren\n\
+för att undersöka den?
+; The file '%s' could not be identified.\n\
+; Launch Filetype Sniffer to investigate?
+;
+MSG_SNIFF
+Snoka!
+; Sniff!
+;
+MSG_SCRIPTS_CHANGED
+Du har ändrat dina skript och\n\
+inte sparat dem. Vill du spara dem?
+; You have modified your scripts and not\nsaved them. Would you like to?
+;
+MSG_LISTER_MENU_CHANGED
+Du har ändrat din listarmeny och\n\
+inte sparat den. Vill du spara den?
+; You have modified your lister menu and not\nsaved it. Would you like to?
+;
+MSG_USER_MENU_CHANGED
+Du har ändrat menyerna och inte\n\
+sparat dem. Vill du spara dem?
+; You have modified your user menus and not\nsaved them. Would you like to?
+;
+MSG_HOTKEYS_CHANGED
+Du har ändrat dina direktval och\n\
+inte sparat dem. Vill du spara dem?
+; You have modified your hotkeys and not\nsaved them. Would you like to?
+;
+MSG_OPEN_NEW_WINDOW
+Öppna i ny listare
+; Open in New Lister
+;
+MSG_OPEN_WITH_MENU
+Öppna med...
+; Open With...
+;
+MSG_SELECT_APP
+Välj program för att öppna "%s"
+; Select Application To Open '%s'
+;
+MSG_OPEN_WITH_MENU_SUB
+Öppna med
+; Open With
+;
+MSG_OPEN_WITH_MENU_OTHER
+Andra...
+; Other...
+;
+MSG_ENTER_ARGUMENTS_FOR
+Ange argument för "%s"
+; Enter arguments for '%s'
+;
+MSG_DIRECTORY
+Låda
+; Directory 
+;
+MSG_SELECT_UNPROTECT
+\n\
+Välj "Ta bort skydd" för att sätta raderingsflaggan.
+; \nSelect Unprotect to set the deletion bit.
+;
+MSG_FOUND_A_MATCH
+Hittade texten i filen\n\
+"%s"
+; Found a match in the file\n'%s'
+;
+MSG_COMMENTING
+kommentera
+; commenting
+;
+MSG_PROTECTING
+skydda
+; protecting
+;
+MSG_DATESTAMPING
+sätta datum
+; date stamping
+;
+MSG_DELETING
+radera
+; deleting
+;
+MSG_RENAMING
+byta namn på
+; renaming
+;
+MSG_ENTER_COMMENT
+Ange kommentar för "%s".
+; Enter a comment for '%s'.
+;
+MSG_ENTER_PASSWORD
+Ange lösenord för kryptering av filer.
+; Enter password to encrypt files.
+;
+MSG_ENTER_DATE_AND_TIME
+Ange nytt datum (och tid) för "%s".
+; Enter new date (and time) for '%s'.
+;
+MSG_ENTER_ARGUMENTS
+Ange argument
+; Enter arguments
+;
+MSG_REALLY_QUIT
+Det här avslutar DirectoryOpus.
+; This will end your Directory Opus session.
+;
+MSG_FILE
+Fil
+; File
+;
+MSG_SELECT_PROTECTION_BITS
+Välj skyddsflaggor
+; Select protection bits
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Directory Opus - Förfrågan
+; Directory Opus Request
+;
+MSG_MULTI_DRAG
+Avbryt
+; Multi-drag - %ld files, %ld dirs selected
+;
+MSG_PRESS_MOUSE_BUTTON
+Ersätt
+; Click close button to continue...
+;
+MSG_COMMENT
+Hoppa över
+; comment
+;
+MSG_PROTECT
+Hoppa över alla
+; protect
+;
+MSG_DATESTAMP
+Alla
+; date stamp
+;
+MSG_PROGRESS_OPERATION_MOVING
+Avsluta
+; Moving...
+;
+MSG_PROGRAM_LOADING
+Spara
+; Opus 5 loading... please wait.
+;
+MSG_OPEN_MENU
+Stäng
+; Load...
+;
+MSG_SAVE_MENU
+Ja
+; Save
+;
+MSG_SAVEAS_MENU
+Nej
+; Save As...
+;
+MSG_ACT_RECURSIVELY
+Fortsätt
+; Act on files in sub-directories?
+;
+MSG_PROGRESS_OPERATION_COMMENT
+Setting comments...
+; Setting comments...
+;
+MSG_PROGRESS_OPERATION_PROTECT
+Avbryt
+; Setting protections...
+;
+MSG_PROGRESS_OPERATION_DATESTAMP
+Ersätt alla
+; Setting datestamps...
+;
+MSG_SET_PROTECT_OLD
+Fortsätt
+; Current
+;
+MSG_SET_PROTECT_SET
+Flytta
+; Set
+;
+MSG_SET_PROTECT_CLEAR
+Kasta bort
+; Clear
+;
+MSG_OK_BUTTON
+block
+; _OK
+;
+MSG_ALL_BUTTON
+fritt
+; A_ll
+;
+MSG_SKIP_BUTTON
+Skapa länk
+; S_kip
+;
+MSG_ABORT_BUTTON
+Välj fil
+; A_bort
+;
+MSG_PROGRESS_OPERATION_ENCRYPTING
+Välj låda
+; Encrypting...
+;
+MSG_USER_MENU
+Ange filnamn
+; User
+;
+MSG_LISTER_MENU_TITLE
+Öppna...
+; Lister Pop-Up Menu
+;
+MSG_USER_MENU_TITLE
+Förinställda värden
+; User Menus
+;
+MSG_EMPTY
+Senast sparade
+; empty
+;
+MSG_CANCEL_BUTTON
+Återställ
+; _Cancel
+;
+MSG_OPEN_BUTTON
+Arkiv
+; _Open
+;
+MSG_NEW_BUTTON
+Redigera
+; _New
+;
+MSG_PARENT
+<okänd>
+; Parent Directory
+;
+MSG_ROOT
+Kunde inte identifiera filen\n\
+"%s".\n\
+Vill du starta filtypssnokaren\n\
+för att undersöka den?
+; Root Directory
+;
+MSG_DEVICE_LIST
+Snoka!
+; Device List
+;
+MSG_SCANNING_DIRECTORIES
+Du har ändrat dina skript och\n\
+inte sparat dem. Vill du spara dem?
+; Scanning directories...
+;
+MSG_READING_DIRECTORY
+Du har ändrat din listarmeny och\n\
+inte sparat den. Vill du spara den?
+; Reading directory...
+;
+MSG_CHECK_FIT_RESULTS
+Du har ändrat menyerna och inte\n\
+sparat dem. Vill du spara dem?
+; Results of fit test:\n
+;
+MSG_FIT
+Du har ändrat dina direktval och\n\
+inte sparat dem. Vill du spara dem?
+; fit
+;
+MSG_BLOCKS_NEEDED
+Öppna i ny listare
+; blocks needed.
+;
+MSG_EXECUTE_ENTER_COMMAND
+Öppna med...
+; Enter command and arguments.
+;
+MSG_TOOL_MENU
+Välj program för att öppna "%s"
+; Tools
+;
+MSG_BUFFER_LIST
+Öppna med
+; Cache List
+;
+MSG_REREAD_DIR
+Andra...
+; Re-read Directory
+;
+MSG_ASSIGN
+Assign
+; Assign
+;
+MSG_FULL
+full
+; full
+;
+MSG_USED
+in use
+; in use
+;
+MSG_VALIDATING
+disk validating
+; disk validating
+;
+MSG_ENTER_FILTER_STRING
+Directories selected - enter filter pattern.
+; Directories selected - enter filter pattern.
+;
+MSG_VOLUME
+Volume
+; Volume
+;
+MSG_SELECT_SOURCE
+Select Source
+; Select Source
+;
+MSG_SELECT_DESTINATION
+Select Destination
+; Select Destination
+;
+MSG_NO_OWNER
+<No Owner>
+; <No Owner>
+;
+MSG_NO_GROUP
+<No Group>
+; <No Group>
+;
+MSG_SCRIPTS_TITLE
+Scripts
+; Scripts
+;
+MSG_PROGRESS_OPERATION_LINKING
+Making Links...
+; Making Links...
+;
+MSG_LINKING
+making a link to
+; making a link to
+;
+MSG_DECRYPT
+_Decrypt files
+; _Decrypt files
+;
+MSG_EMPTY_TRASH
+Empty Trash
+; Empty Trash
+;
+MSG_REALLY_EMPTY_TRASH
+The contents of the trashcan will be lost!\nDo you really want to empty it?
+; The contents of the trashcan will be lost!\nDo you really want to empty it?
+;
+MSG_ENTER_ASSIGN_NAME
+Enter name to assign to '%s'
+; Enter name to assign to '%s'
+;
+MSG_ADD
+Add
+; Add
+;
+MSG_PATH
+Path
+; Path
+;
+MSG_DEFER
+Defer
+; Defer
+;
+MSG_ASSIGNING
+assigning
+; assigning
+;
+MSG_CHANGE_NEEDS_RESET
+Some changes you made will not be\neffective until you next reboot.
+; Some changes you made will not be\neffective until you next reboot.
+;
+MSG_OPENING
+opening
+; opening
+;
+MSG_LIBRARY_ERROR
+Unable to open %s (%s)
+; Unable to open %s (%s)
+;
+MSG_LIBRARY_ANY_VERSION
+any version
+; any version
+;
+MSG_CLI
+CLI
+; CLI
+;
+MSG_CX_DESC
+The Complete Workbench Replacement!
+; The Complete Workbench Replacement!
+;
+MSG_ABORT_STARTUP
+Do you want to abort startup?
+; Do you want to abort startup?
+;
+MSG_ABORT_STARTUP_BUTTONS
+Continue|Abort
+; Continue|Abort
+;
+MSG_PROTECT_TITLE
+Protect
+; Protect
+;
+MSG_DATESTAMP_TITLE
+Datestamp
+; Datestamp
+;
+MSG_COMMENT_TITLE
+Comment
+; Comment
+;
+MSG_PATTERN_OFF
+The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+; The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+;
+MSG_THEMES_MENU
+Themes
+; Themes
+;
+MSG_THEMES_LOAD
+Load Theme...
+; Load Theme...
+;
+MSG_THEMES_SAVE
+Save Theme...
+; Save Theme...
+;
+MSG_THEMES_BUILD
+Build Theme...
+; Build Theme...
+;
+MSG_ADDICONING
+adding icons to
+; adding icons to
+;
+MSG_REGISTERED_TO
+Den här kopian är registrerad till:
+; This copy is registered to:
+;
+MSG_SERIAL_NUMBER
+Serienummer: 
+; Serial # 
+;
+MSG_UNREGISTERED
+Den här kopian är inte registrerad!
+; This copy is unregistered!
+;
+MSG_YOU_SHOULD_REGISTER
+Registrera för att slippa den här pausen!
+; Register to prevent this delay!
+;
+MSG_TRANSLATION_BY_YOUR_NAME
+Swedish translation by Magnus Holmgren. 
+; 
+;
+MSG_SEARCH_DIRECTORIES
+Söka efter filer i de valda lådorna?
+; Search files in selected directories?
+;
+MSG_ENTER_SEARCH_STRING
+Ange text att söka efter:
+; Enter text to search for...
+;
+MSG_SEARCH_NO_CASE
+I_gnorera läge
+; _Case insensitive
+;
+MSG_SEARCH_WILD
+_Mönstersökning
+; _Wildcard search
+;
+MSG_SEARCH_ONLYWORD
+_Endast hela ord
+; _Match whole words
+;
+MSG_SEARCH_LEAVE_SELECTED
+Lämna valda
+; Leave selected
+;
+MSG_SEARCH_PROMPT
+Fråga
+; Ask
+;
+MSG_SEARCH_OUTPUT
+Visa resultat
+; Output results
+;
+MSG_PROGRESS_SEARCHING
+Söker...
+; Searching...
+;
+MSG_SEARCH_OUTPUT_HEADER
+Filer innehållande\n\
+"%s":\n\n
+; Files containing '%s'\n\n
+;
+MSG_SEARCH_READ
+Läs
+; Read
+;
+MSG_ENTER_NEW_NAME
+Ange nytt filnamn eller namnmönster:
+; Enter new filename or rename pattern.
+;
+MSG_PROGRESS_RENAMING
+Byter namn...
+; Renaming...
+;
+MSG_RENAME
+Byt namn
+; Rename
+;
+MSG_RENAME_DISK
+Ange nytt namn för\n\
+"%s":
+; Enter a new name for '%s'.
+;
+MSG_ENTER_ANOTHER_NAME
+Ange ett annat filnamn:
+; Enter another filename.
+;
+MSG_ENTER_DIRECTORY_NAME
+Ange lådnamn:
+; Enter directory name
+;
+MSG_MAKEDIR_ICON
+Med ikon
+; With icon
+;
+MSG_MAKEDIR_NOICON
+Utan ikon
+; Without icon
+;
+MSG_DIRECTORY_CREATED
+Lådan skapad.
+; Directory created.
+;
+MSG_PROGRESS_ADDING_ICONS
+Lägger till ikoner...
+; Adding icons...
+;
+MSG_ICON_ALREADY_EXISTS
+En ikon finns redan för\n\
+"%s".\n\
+Vill du ersätta den?
+; An icon already exists for '%s'.\nDo you wish to replace it?
+;
+MSG_ICON_REPLACE_IMAGE
+Bara bilden
+; Image Only
+;
+MSG_COPYING
+kopiera
+; copying
+;
+MSG_PROGRESS_OPERATION_COPYING
+Kopierar...
+; Copying...
+;
+MSG_CANT_OVERCOPY_FILES
+Käll- och destinationslådan måste\n\
+vara olika för att kopiera filer.
+; Source and destination directories\nmust be different to copy files.
+;
+MSG_COPY
+Kopiera
+; Copy
+;
+MSG_PROGRESS_OPERATION_CLONING
+Duplicerar...
+; Duplicating...
+;
+MSG_DUPLICATE
+Duplicera
+; Duplicate
+;
+MSG_CANT_COPY_DIR_INTO_ITSELF
+Du kan inte kopiera en låda till sig själv!
+; You can't copy a directory into itself!
+;
+MSG_MOVING
+flytta
+; moving
+;
+MSG_CANT_OVERLINK_FILES
+Käll- och destinationslådan måste\n\
+vara olika för att skapa länkar.
+; Source and destination directories\nmust be different to make links.
+;
+MSG_CANT_LINK_DIR_INTO_ITSELF
+Du kan inte länka en låda till sig själv!
+; You can't link a directory into itself!
+;
+MSG_FROM_TO
+Från "%s" till "%s"
+; From '%s' to '%s'
+;
+MSG_FROM
+Från "%s"
+; From '%s'
+;
+MSG_PROJECT_MENU
+Opus
+; Opus
+;
+MSG_BACKDROP_MENU
+Bakgrund
+; Backdrop
+;
+MSG_ABOUT_MENU
+Om...
+; About...
+;
+MSG_HIDE_MENU
+Göm
+; Hide
+;
+MSG_QUIT_MENU
+Avsluta...
+; Quit...
+;
+MSG_EXECUTE_MENU
+Utför kommando...
+; Execute Command...
+;
+MSG_HELP_MENU
+Hjälp!
+; Help!
+;
+MSG_KEYFINDER_MENU
+Tangenthittare...
+; Key Finder...
+;
+MSG_WINDOW_MENU
+Listare
+; Listers
+;
+MSG_NEW_LISTER_MENU
+Ny
+; New
+;
+MSG_CLOSE_LISTER_MENU
+Stäng
+; Close
+;
+MSG_LISTER_SOURCE
+Gör till källa
+; Make Source
+;
+MSG_LISTER_DEST
+Gör till destination
+; Make Dest
+;
+MSG_LISTER_LOCK_SOURCE
+Lås som källa
+; Lock As Source
+;
+MSG_LISTER_LOCK_DEST
+Lås som destination
+; Lock As Dest
+;
+MSG_LISTER_UNLOCK
+Lås upp
+; Unlock
+;
+MSG_LISTER_OFF
+Stäng av
+; Turn Off
+;
+MSG_LISTER_UNLOCK_ALL
+Lås upp alla
+; Unlock All
+;
+MSG_CLOSE_ALL_MENU
+Stäng alla
+; Close All
+;
+MSG_EDIT_MENU
+Redigera...
+; Edit...
+;
+MSG_LISTER_BUTTONS_MENU
+Redigera verktygslista...
+; Edit Lister Toolbar...
+;
+MSG_LISTER_MENU_MENU
+Redigera listarmeny...
+; Edit Lister Menu...
+;
+MSG_TILE_MENU
+Stapla
+; Tile
+;
+MSG_TILE_HORIZ_MENU
+Horisontellt
+; Horizontally
+;
+MSG_TILE_VERT_MENU
+Vertikalt
+; Vertically
+;
+MSG_CASCADE_MENU
+Kaskad
+; Cascade
+;
+MSG_LISTER_LOCK_POS
+Lås position?
+; Lock Position?
+;
+MSG_LISTER_ICONIFY
+Ikonifiera
+; Iconify
+;
+MSG_LISTER_VIEW_ICONS
+Visa ikoner
+; View Icons
+;
+MSG_LISTER_VIEW
+Visa som
+; View As
+;
+MSG_LISTER_VIEW_NAME
+Namn
+; Name
+;
+MSG_LISTER_VIEW_ICON
+Ikon
+; Icon
+;
+MSG_LISTER_SHOW_ALL
+Visa alla
+; Show All
+;
+MSG_LISTER_ICON_ACTION
+Ikonverktyg
+; Icon Action
+;
+MSG_LISTER_ARRANGE_ICONS
+Ordna ikoner
+; Arrange Icons
+;
+MSG_LISTER_ARRANGE_NAME
+Efter namn
+; by Name
+;
+MSG_LISTER_ARRANGE_TYPE
+Efter typ
+; by Type
+;
+MSG_LISTER_ARRANGE_SIZE
+Efter storlek
+; by Size
+;
+MSG_LISTER_ARRANGE_DATE
+Efter datum
+; by Date
+;
+MSG_LISTER_NEW_DRAWER
+Ny låda...
+; New Drawer...
+;
+MSG_OPEN_PARENT_MENU
+Öppna moder
+; Open Parent
+;
+MSG_LISTER_RESTORE
+Restore
+; Restore
+;
+MSG_ICONS_MENU
+Ikoner
+; Icons
+;
+MSG_ICON_OPEN_MENU
+Öppna
+; Open
+;
+MSG_ICON_INFO_MENU
+Information...
+; Information...
+;
+MSG_ICON_SNAPSHOT_MENU
+Memorera placering
+; Snapshot
+;
+MSG_ICON_LEAVE_OUT_MENU
+Lämna utanför
+; Leave Out
+;
+MSG_ICON_PUT_AWAY_MENU
+Stoppa tillbaka
+; Put Away
+;
+MSG_ICON_SELECT_ALL_MENU
+Välj alla
+; Select All
+;
+MSG_ICON_CLEANUP
+Städa upp
+; Clean Up
+;
+MSG_ICON_RESET
+Uppdatera
+; Reset
+;
+MSG_ICON_RENAME
+Byt namn...
+; Rename...
+;
+MSG_ICON_FORMAT
+Formatera disk...
+; Format Disk...
+;
+MSG_ICON_DISKINFO
+Diskinformation...
+; Disk Information...
+;
+MSG_ICON_UNSNAPSHOT_MENU
+Glöm placering
+; Un-Snapshot
+;
+MSG_ICON_COPY
+Försök igen
+; Copy
+;
+MSG_ICONS_NEW_MENU
+Försök igen
+; New
+;
+MSG_ICONS_MAKEDIR_MENU
+Avbryt
+; Drawer...
+;
+MSG_ICONS_NEWGROUP_MENU
+Ersätt
+; Group...
+;
+MSG_ICON_COPY_RAM
+Hoppa över
+; to RAM:
+;
+MSG_ICON_COPY_DF0
+Hoppa över alla
+; to DF0:
+;
+MSG_ICON_COPY_OTHER
+Alla
+; to other...
+;
+MSG_ICON_COPY2
+Avsluta
+; Copy...
+;
+MSG_ICON_COPY_TO
+Spara
+; to
+;
+MSG_ICONS_NEWCOMMAND_MENU
+Stäng
+; Command...
+;
+MSG_ICONS_SHORTCUT_MENU
+Ja
+; Create Shortcut
+;
+MSG_DESKTOP_POPUP_LEFTOUT
+Nej
+; Create Left-out
+;
+MSG_DESKTOP_POPUP_COPY
+Fortsätt
+; Copy to Desktop
+;
+MSG_DESKTOP_POPUP_MOVE
+Move to Desktop
+; Move to Desktop
+;
+MSG_ICON_COPY_DESKTOP
+Avbryt
+; to Desktop
+;
+MSG_ICON_LINEUP
+Ersätt alla
+; Line Up
+;
+MSG_ICON_SNAPSHOT_LISTER
+Fortsätt
+; Snapshot Lister
+;
+MSG_ICON_SNAPSHOT_ICONS
+Flytta
+; Snapshot Icons
+;
+MSG_ICON_SNAPSHOT_ALL
+Kasta bort
+; Snapshot All
+;
+MSG_ICON_SNAPSHOT_WINDOW
+block
+; Snapshot Window
+;
+MSG_BUTTONS_MENU
+Docka
+; Buttons
+;
+MSG_NEW_BUTTONS_MENU
+Ny
+; New
+;
+MSG_CLOSE_BUTTONS_MENU
+Stäng
+; Close
+;
+MSG_NEW_BUTTONS_GFX_MENU
+Grafisk docka...
+; Graphic Buttons...
+;
+MSG_NEW_BUTTONS_TEXT_MENU
+Textdocka...
+; Text Buttons...
+;
+MSG_NEW_STARTMENU_MENU
+Startmeny...
+; Start Menu...
+;
+MSG_SETTINGS_MENU
+Inställningar
+; Settings
+;
+MSG_CLOCK_MENU
+Klocka?
+; Clock
+;
+MSG_CREATE_ICONS_MENU
+Skapa ikoner?
+; Create Icons?
+;
+MSG_ENVIRONMENT_MENU
+Miljö
+; Environment
+;
+MSG_FILETYPES_MENU
+Filtyper...
+; File Types...
+;
+MSG_HOTKEYS_MENU
+Direktval...
+; Hotkeys...
+;
+MSG_MENU_MENU
+Användarmenyer...
+; User Menus...
+;
+MSG_FILTER_MENU
+Rekursivt filter?
+; Recursive Filter
+;
+MSG_OPTIONS_MENU
+Alternativ...
+; Options...
+;
+MSG_DEFPUBSCR_MENU
+Försök igen
+; Default PubScreen
+;
+MSG_MENU_HOTKEYS
+Försök igen
+; Hotkeys...
+;
+MSG_HOTKEYS_TITLE
+Försök igen
+; Hotkeys
+;
+MSG_MENU_SCRIPTS
+Avbryt
+; Scripts...
+;
+MSG_MENU_SYSMENU
+Ersätt
+; System Menus...
+;
+MSG_MENU_ICONPOS
+Hoppa över
+; Icon Positioning...
+;
+MSG_ENVIRONMENT_SAVE_LAYOUT_NEW
+Hoppa över alla
+; Save Layout
+;
+MSG_ENVIRONMENT_EDIT
+Alla
+; Environment...
+;
+MSG_ENVIRONMENT_LOAD_NEW
+Avsluta
+; Load Environment...
+;
+MSG_ENVIRONMENT_SAVE_NEW
+Spara
+; Save Environment
+;
+MSG_SELECT_TITLE
+Filväljning
+; File selection
+;
+MSG_SELECT_IGNORE
+Ignorera
+; Ignore
+;
+MSG_SELECT_MATCH
+Matchar
+; Match
+;
+MSG_SELECT_NOMATCH
+Matchar ej
+; No Match
+;
+MSG_SELECT_NEWER
+Nyare
+; Newer
+;
+MSG_SELECT_OLDER
+Äldre
+; Older
+;
+MSG_SELECT_DIFFERENT
+Olika
+; Different
+;
+MSG_SELECT_NAME
+_Namn
+; _Name
+;
+MSG_SELECT_DATE_FROM
+Da_tum
+; Da_te
+;
+MSG_SELECT_DATE_TO
+- 
+; to
+;
+MSG_SELECT_PROT
+På
+; Bits on
+;
+MSG_SELECT_INCLUDE
+Inkludera
+; Include
+;
+MSG_SELECT_EXCLUDE
+Exkludera
+; Exclude
+;
+MSG_SELECT_COMPARE
+_Jämför mål
+; Destination _Compare
+;
+MSG_SELECT_SIMPLE
+Enkel
+; Simple
+;
+MSG_SELECT_COMPLEX
+Komplex
+; Complex
+;
+MSG_SELECT_ENTER_PATTERN
+Ange mönster för matchning av filnamn:
+; Enter pattern to match filenames.
+;
+MSG_SELECT_PROT_OFF
+av
+; off
+;
+MSG_SELECT_ENTRY_BOTH
+Filer & låd.
+; Files & Dirs
+;
+MSG_SELECT_ENTRY_FILES
+Bara filer
+; Files Only
+;
+MSG_SELECT_ENTRY_DIRS
+Bara lådor
+; Dirs Only
+;
+MSG_SELECT_ENTRY_TYPE
+A_gera på
+; _Operate on
+;
+MSG_DOS_ERROR
+DOS-fel
+; DOS error
+;
+MSG_DOS_ERROR_CODE
+Fel %ld
+; Error %ld
+;
+MSG_ERROR_OCCURED
+Kunde inte %s\n\
+"%s":\n\
+%s!
+; An error occured %s '%s'\n%s
+;
+MSG_ERROR_DEST_IS_DIRECTORY
+Målet "%s" är en låda!
+; Destination '%s' is a directory.
+;
+MSG_ERROR_DEST_IS_FILE
+Målet "%s" är en fil!
+; Destination '%s' is a file.
+;
+MSG_ERROR_UNKNOWN_CODE
+Försök igen
+; Unknown error code
+;
+MSG_BUTTONS_ERROR_SAVING
+Försök igen
+; Error saving button bank!
+;
+MSG_BUTTONS_ERROR_LOADING
+Avbryt
+; Error loading button bank!
+;
+MSG_ERROR_CREATING_DIRECTORY
+Ersätt
+; creating the directory
+;
+MSG_CUSTPORT_NOT_FOUND
+Hoppa över
+; User-specified custom handler port\n'%s'\ncould not be found!
+;
+MSG_ALREADY_RUNNING
+Hoppa över alla
+; Directory Opus appears to be already running!\n\
+; Running a second copy has the potential to cause\n\
+; problems, and it is recommended that you do not.
+;
+MSG_ALREADY_RUNNING_BUTTONS
+Alla
+; Cancel|Run Again
+;
+MSG_UNABLE_TO_CLOSE_SCREEN
+Avsluta
+; Directory Opus is unable to close its screen.\nPlease close all windows and try again.
+;
+MSG_ERROR_INVALID_DATE
+Spara
+; Invalid date string entered!
+;
+MSG_UNABLE_TO_OPEN_SCREEN
+Stäng
+; Can't open screen!
+;
+MSG_AN_ERROR_OCCURED
+Ja
+; An error occured 
+;
+MSG_ERROR
+Nej
+; Error 
+;
+MSG_SIZE
+Fortsätt
+; Size
+;
+MSG_DATE
+Date
+; Date
+;
+MSG_OLD
+Avbryt
+; Old
+;
+MSG_NEW
+Ersätt alla
+; New
+;
+MSG_FILE_EXISTS
+Fortsätt
+; File '%s' already exists!
+;
+MSG_PROGRESS_OPERATION_DELETING
+Raderar...
+; Deleting...
+;
+MSG_DELETE_CONFIRM
+Varning: Du kan inte få tillbaka\n\
+det du raderar! OK att radera:\n\n\
+%ld fil/filer och\n\
+%ld låda/lådor (samt deras innehåll)?
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n\
+; %ld file(s) and\n%ld drawer(s) (and their contents)?
+;
+MSG_DELETE
+Radera
+; Delete
+;
+MSG_DELETE_ALL
+Radera alla
+; Delete All
+;
+MSG_DELETE_FILE_CONFIRM
+Radera "%s"?
+; Delete '%s'?
+;
+MSG_DELETE_DIR_CONFIRM
+"%s" är en låda.\n\
+Vill du fortsätta med raderingen?
+; '%s' is a directory.\nProceed with delete operation?
+;
+MSG_DELETE_PROTECTED
+"%s"\n\
+är skyddad mot radering.\n\
+Vill du ta bort skyddet och försök igen?
+; '%s' is protected against deletion.\n\
+; Unprotect and try again?
+;
+MSG_UNPROTECT
+Ta bort
+; Unprotect
+;
+MSG_UNPROTECT_ALL
+Ta bort alla
+; Unprotect All
+;
+MSG_DELETE_LINK_CONFIRM_SINGLE
+Vill du verkligen ta bort\n\
+den här länken?
+; Really delete this shortcut?
+;
+MSG_DELETE_LINK_CONFIRM_MULTI
+Vill du verkligen ta bort\n\
+de här länkarna?
+; Really delete these shortcuts?
+;
+MSG_BUTTONS_ENTER_NAME
+Spara docka
+; Save Buttons
+;
+MSG_BUTTONS_SELECT_FILE
+Ladda docka
+; Load Buttons
+;
+MSG_BUTTONS_STATUS_TITLE
+Dockstatus
+; Buttons Status
+;
+MSG_BUTTONS_LOADING
+Laddar docka...
+; Loading button bank...
+;
+MSG_ENVIRONMENT_ENTER_NAME
+Spara miljö
+; Save Environment
+;
+MSG_ENVIRONMENT_SELECT_FILE
+Ladda miljö
+; Load Environment
+;
+MSG_ENVIRONMENT_LOADING
+Laddar miljöfil...
+; Loading environment file...
+;
+MSG_ENVIRONMENT_SAVING
+Sparar mijlöfil...
+; Saving environment file...
+;
+MSG_BUTTONS_CHANGE_WARNING
+Dockan "%s" har ändrats.\n\
+Vill du spara den?
+; Button bank '%s' has been modified.\nDo you wish to save it?
+;
+MSG_BUTTONS_CREATE_WHICH_TYPE
+Vad för sorts docka vill du skapa?
+; Which button bank type do you wish to create?
+;
+MSG_BUTTONS_TEXT
+Text
+; Text
+;
+MSG_BUTTONS_ICONS
+Grafik
+; Graphics
+;
+MSG_SETTINGS_SELECT_FILE
+Ladda alternativ
+; Load Options
+;
+MSG_SETTINGS_LOADING
+Laddar alternativ...
+; Loading Options file...
+;
+MSG_SETTINGS_ENTER_NAME
+Spara alternativ
+; Save Options
+;
+MSG_SETTINGS_SAVING
+Sparar alternativ...
+; Saving Options file...
+;
+MSG_ERROR_SAVING_ENV
+Kunde inte spara miljöfil!
+; Error saving environment file!
+;
+MSG_ERROR_SAVING_OPTS
+Kunde inte spara alternativsfil!
+; Error saving options file!
+;
+MSG_LAUNCHING_PROGRAM
+Försöker starta "%s"...
+; Attempting to launch '%s'...
+;
+MSG_MEMORY_COUNTER
+%s  %ld grafikminne  %ld övrigt minne
+; %s  %ld graphics mem  %ld other mem
+;
+MSG_MEMORY_COUNTER_LOC
+%s  %lU grafikminne  %lU övrigt minne
+; %s  %lU graphics mem  %lU other mem
+;
+MSG_MEMORY_COUNTER_CLOCK
+%s  %ld grafik  %ld övrigt
+; %s  %ld graphics  %ld other
+;
+MSG_MEMORY_COUNTER_LOC_CLOCK
+%s  %lU grafik  %lU övrigt
+; %s  %lU graphics  %lU other
+;
+MSG_LISTER_STATUS_SOURCE
+FRÅN
+; SRCE
+;
+MSG_LISTER_STATUS_DEST
+TILL
+; DEST
+;
+MSG_LISTER_STATUS_BUSY
+JOBB
+; BUSY
+;
+MSG_LISTER_STATUS_OFF
+AV
+; OFF
+;
+MSG_HUNT_ENTER_FILENAME
+Ange filmönster att söka efter:
+; Enter file pattern to search for.
+;
+MSG_HUNT_FOUND_FILE
+Hittade filen "%s"\n\
+i lådan "%s"\n\
+Ska jag gå dit?
+; Found the file '%s' in the directory\n'%s'\nShall I go there?
+;
+MSG_NEW_LISTER
+Ny listare
+; New Lister
+;
+MSG_SEARCH_COMMENTS
+Search file comments
+; Search file comments
+;
+MSG_FUNC_DESC_ADDICON
+Lägger till ikoner till filer
+; Add icons to files
+;
+MSG_FUNC_DESC_ALL
+Väljer alla filer
+; Select all files
+;
+MSG_FUNC_DESC_CLEARBUFFERS
+Rensar fickminne
+; Free directory caches
+;
+MSG_FUNC_DESC_COMMENT
+Redigerar filkommentarer
+; Give comments to files
+;
+MSG_FUNC_DESC_COPY
+Kopierar filer/lådor
+; Copy selected files
+;
+MSG_FUNC_DESC_COPYAS
+Kopierar filer med nya namn
+; Copy with new names
+;
+MSG_FUNC_DESC_DATESTAMP
+Ändrar filers datum
+; Change datestamp of files
+;
+MSG_FUNC_DESC_DELETE
+Raderar filer
+; Delete selected files
+;
+MSG_FUNC_DESC_DISKCOPY
+Kopierar diskar
+; Make copies of disks
+;
+MSG_FUNC_DESC_ENCRYPT
+Krypterar filer
+; Encrypt files
+;
+MSG_FUNC_DESC_FINDFILE
+Söker efter filer
+; Search for filenames
+;
+MSG_FUNC_DESC_FINISHSECTION
+Avslutar tidigare kommandon
+; Finish above commands
+;
+MSG_FUNC_DESC_FORMAT
+Formaterar diskar
+; Format disks
+;
+MSG_FUNC_DESC_GETSIZES
+Beräknar lådstorlekar
+; Calculate directory sizes
+;
+MSG_FUNC_DESC_ICONINFO
+Redigerar ikoninformation
+; Show/edit icon information
+;
+MSG_FUNC_DESC_LEAVEOUT
+Lämnar objekt på huvudfönstret
+; Leave objects on main window
+;
+MSG_FUNC_DESC_LOADBUTTONS
+Laddar dockfil
+; Load a button file
+;
+MSG_FUNC_DESC_MAKEDIR
+Skapar ny låda
+; Make a new directory
+;
+MSG_FUNC_DESC_MOVE
+Flyttar filer
+; Move selected files
+;
+MSG_FUNC_DESC_MOVEAS
+Flyttar filer med nya namn
+; Move with new names
+;
+MSG_FUNC_DESC_NONE
+Tar bort alla val
+; Deselect all files
+;
+MSG_FUNC_DESC_PLAY
+Spelar ljud
+; Play selected sounds
+;
+MSG_FUNC_DESC_PRINT
+Skriver ut filer
+; Print selected files
+;
+MSG_FUNC_DESC_PROTECT
+Ändrar skyddsflaggor
+; Change file protections
+;
+MSG_FUNC_DESC_READ
+Läser textfiler
+; Read text files
+;
+MSG_FUNC_DESC_RENAME
+Byter namn på filer/lådor
+; Rename selected files
+;
+MSG_FUNC_DESC_RUN
+Kör program
+; Run selected programs
+;
+MSG_FUNC_DESC_SCANDIR
+Läser låda
+; Read a directory
+;
+MSG_FUNC_DESC_SEARCH
+Söker efter text
+; Search for text strings
+;
+MSG_FUNC_DESC_SELECT
+Mönsterväljer filer
+; Wildcard-select files
+;
+MSG_FUNC_DESC_SHOW
+Visar bilder
+; Show selected pictures
+;
+MSG_FUNC_DESC_SMARTREAD
+Automatisk hex/text läsare
+; Auto hex/text viewer
+;
+MSG_FUNC_DESC_TOGGLE
+Växlar valstatus
+; Toggle selection state
+;
+MSG_FUNC_DESC_CHECKFIT
+Ser om filer får plats
+; See if files will fit
+;
+MSG_FUNC_DESC_CLEARSIZES
+Rensar lådstorlekar
+; Clear directory sizes
+;
+MSG_FUNC_DESC_ANSIREAD
+Textäsare (med ANSI)
+; Text viewer (supports ANSI)
+;
+MSG_FUNC_DESC_HEXREAD
+Hex (binär) läsare
+; Hex (binary) viewer
+;
+MSG_FUNC_DESC_CLONE
+Duplicerar filer/lådor
+; Duplicate selected files
+;
+MSG_FUNC_DESC_LOADENVIRONMENT
+Laddar mijlöfil
+; Load an Environment file
+;
+MSG_FUNC_DESC_LOADSETTINGS
+Laddar alternativsfil
+; Load an Options file
+;
+MSG_FUNC_DESC_PARENT
+Läser moderlåda
+; Read parent directory
+;
+MSG_FUNC_DESC_ROOT
+Läser rotlåda
+; Read root directory
+;
+MSG_FUNC_DESC_USER
+Utför filtypsfunktion
+; Execute File Type function
+;
+MSG_FUNC_DESC_DEVICELIST
+Visar volymer och tilldeln.
+; Show devices and assigns
+;
+MSG_FUNC_DESC_BUFFERLIST
+Visar lådor i fickminne
+; Show cached directories
+;
+MSG_FUNC_DESC_VERIFY
+Ber om bekräftelse
+; Ask for confirmation
+;
+MSG_FUNC_DESC_PRINTDIR
+Skriver ut lådlista
+; Print directory listings
+;
+MSG_FUNC_DESC_SET
+Sätter något
+; Set something
+;
+MSG_FUNC_DESC_CLOSEBUTTONS
+Stänger docka
+; Close a button bank
+;
+MSG_FUNC_DESC_QUIT
+Avslutar Directory Opus 5
+; Quit Directory Opus 5
+;
+MSG_FUNC_DESC_HIDE
+Gömmer Directory Opus
+; Hide Directory Opus
+;
+MSG_FUNC_DESC_REVEAL
+Visar Directory Opus (när gömd)
+; Reveal Directory Opus (when hidden)
+;
+MSG_FUNC_DESC_RESELECT
+Väljer senast valda filer igen
+; Reselect last-used files
+;
+MSG_FUNC_DESC_MAKELINK
+Skapar länk till fil/låda
+; Make a link to a file
+;
+MSG_FUNC_DESC_MAKELINKAS
+Skapar länk med nytt namn
+; Make a link with a new name
+;
+MSG_FUNC_DESC_ASSIGN
+Skapar tilldelning
+; Make an assign
+;
+MSG_FUNC_DESC_CONFIGURE
+Konfigurerar listarutseende
+; Configure lister display
+;
+MSG_FUNC_DESC_CLI
+Intern kommandoradstolk
+; Internal Command Line Interpreter
+;
+MSG_FUNC_DESC_SETBACKGROUND
+Sätt som bakgrundsbild
+; Set as background picture
+;
+MSG_FUNC_DESC_RESET
+Reset Things
+; Reset Things
+;
+MSG_FUNC_DESC_STOPSNIFFER
+Stop Filetype Sniffer
+; Stop Filetype Sniffer
+;
+MSG_ICON_GROUP
+Programgrupper
+; Program Groups
+;
+MSG_GROUP_ENTER_NAME
+Försök igen
+; Enter Program Group Name
+;
+MSG_RXERR_1
+Filen filtrerades bort
+; File rejected by filters
+;
+MSG_RXERR_5
+Ogiltlig post för sätt/fråga
+; Invalid set/query item
+;
+MSG_RXERR_6
+Ogiltligt namn eller nyckelord
+; Invalid name or keyword
+;
+MSG_RXERR_8
+Ogiltlig fälla
+; Invalid trap
+;
+MSG_RXERR_10
+Ogiltlig listarhanterare
+; Invalid lister handle
+;
+MSG_RXERR_12
+Ogiltlig verktygslist
+; Invalid toolbar
+;
+MSG_RXERR_13
+Ogiltig sökväg
+; Invalid path
+;
+MSG_RXERR_14
+Kunde inte hitta objektet
+; Object not found
+;
+MSG_RXERR_15
+Ej tillräckligt med minne
+; No memory
+;
+MSG_RXERR_20
+Kunde inte öppna listare
+; Unable to open lister
+;
+MSG_RXERR_UNKNOWN
+Okänd felkod
+; Unknown error code
+;
+MSG_DESKTOP_REALLY_DELETE
+Varning: Du kan inte få tillbaka\n\
+det du raderar! OK att radera:\n\n
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n
+;
+MSG_DESKTOP_DELETE_GROUPS
+%ld programgrupp/programgrupper
+; %ld program group(s)
+;
+MSG_DESKTOP_DELETE_ASSIGNS
+Avbryt
+; %ld assign(s)
+;
+MSG_DESKTOP_DELETE_GROUP_OBJECTS
+Ersätt
+; %ld group object(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_FILES
+Hoppa över
+; %ld file(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_DIRS
+Hoppa över alla
+; %ld dir(s)
+;
+MSG_REPLACE_SAME
+De två filerna verkar vara samma.
+; The two files appear to be the same.
+;
+MSG_REPLACE_VERSION_SAME
+Båda filerna är av samma version (%ld.%ld).
+; Both files are the same version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_NEWER
+Den nya filen är av en högre version (%ld.%ld).
+; The new file is a later version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_OLDER
+Den nya filen är av en lägre version (%ld.%ld).
+; The new file is an earlier version (%ld.%ld).
+;
+MSG_REPLACE_SIZE_BIGGER
+Den nya filen är större än den gamla (med %lD bytes).\n
+; The new file is larger than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SMALLER
+Den nya filen är mindre än den gamla (med %lD bytes).\n
+; The new file is smaller than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SAME
+De två filerna är lika stora (%lD bytes).\n
+; The two files are the same size (%ld bytes).\n
+;
+MSG_REPLACE_DATE_NEWER
+Den nya filen är av ett senare datum (%s).\n
+; The new file has a more recent date (%s).\n
+;
+MSG_REPLACE_DATE_OLDER
+Den nya filen är av ett tidigare datum (%s).\n
+; The new file has an earlier date (%s).\n
+;
+MSG_REPLACE_DATE_SAME
+De två filerna har är av samma datum.\n
+; The files have the same creation date.\n
+;
+MSG_FILE_ALREADY_EXISTS
+Filen "%s" finns redan och skulle ersättas.\n
+; File '%s' exists and would be replaced.\n
+;
+MSG_BRIEF_FILE_EXISTS
+File "%s" finns redan. Ersätta den?\n\n\
+Ny - Storlek: %lD  Datum: %s%s\n\
+Gammal - Storlek: %lD  Datum: %s%s
+; File '%s' already exists. Replace it?\n\n\
+; New - Size : %7ld  Date : %19s%s\n\
+; Old - Size : %7ld  Date : %19s%s
+;
+MSG_REPLACE_VER
+  Version: %ld.%ld
+;   Ver : %2ld.%ld
+;
+MSG_REPLACE_VER_UNKNOWN
+  Version: ?????
+;   Ver : ?????
+;
+MSG_GET_VERSION
+Version
+; Version
+;
+MSG_REPLACE_VERSION_TITLE
+Letar efter versionsinformation....
+; Looking for version info...
+;
+MSG_LISTER_TITLE_NAME
+Namn
+; Name
+;
+MSG_LISTER_TITLE_SIZE
+Storlek
+; Size
+;
+MSG_LISTER_TITLE_PROTECT
+Åtkomst
+; Access
+;
+MSG_LISTER_TITLE_DATE
+Datum
+; Date
+;
+MSG_LISTER_TITLE_COMMENT
+Kommentar
+; Comment
+;
+MSG_LISTER_TITLE_FILETYPE
+Typ
+; Type
+;
+MSG_LISTER_TITLE_OWNER
+Ägare
+; Owner
+;
+MSG_LISTER_TITLE_GROUP
+Grupp
+; Group
+;
+MSG_LISTER_TITLE_NETPROT
+Nät
+; Net
+;
+MSG_LISTER_TITLE_VERSION
+Version
+; Version
+;
+MSG_LISTER_TITLE_VOLUME
+Volym
+; Volume
+;
+MSG_LISTER_TITLE_DEVICE
+Enhet
+; Device
+;
+MSG_LISTER_TITLE_FULL
+Full
+; Full
+;
+MSG_LISTER_TITLE_FREE
+Fritt
+; Free
+;
+MSG_LISTER_TITLE_USED
+Används
+; In Use
+;
+MSG_CLI_HELP
+Skriv "help list" för en lista över kommandon,\n\
+eller "help <kommando>" för mallen för ett kommando.\n\
+Skriv "quit" för att avsluta kommandotolken.\n\n\
+Skriv ett internt kommando med argument för att\n\
+utföra det. För att utföra ett DOpus ARexx-kommando,\n\
+skriv ett '+'-tecken före kommandot. Lägg till ett\n\
+'&'-tecken efteråt om du vill att kommandot skall\n\
+utföras asynkront.\n
+; Type 'help list' for a list of commands,\n\
+; or 'help <command>' for a command template.\n\
+; Type 'quit' to exit the CLI.\n\n\
+; Enter an internal command with arguments to\n\
+; execute it. To execute a DOpus ARexx command,\n\
+; enter a + symbol before the command. Append a &\n\
+; if you want the command to be asynchronous.\n
+;
+MSG_CLI_NO_TEMPLATE
+Kommandot har inte någon mall.
+; Command has no template.
+;
+MSG_CLI_TYPE_HELP
+Skriv "help" för hjälp.\n
+; Type 'help' for help.\n
+;
+MSG_CLI_BAD_CMD
+Okänt kommando.
+; Unknown command.
+;
+MSG_ICONPOS_WINDOW
+Ikonplaceringsområde
+; Icon positioning area
+;
+MSG_ICONPOS_INSTRUCTIONS
+Klicka och dra för att markera\n\
+områden där ikoner kan placeras.\n\
+Välj "OK" eller "Avbryt" när du är klar.
+; Click and drag to mark areas where icons can be positioned.\n\
+; Click OK or Cancel when finished.
+;
+MSG_ICONPOS_APPICON
+Applikationsikoner
+; AppIcons
+;
+MSG_ICONPOS_DISKS
+Volymer
+; Disks
+;
+MSG_ICONPOS_LISTERS
+Listare/knappar
+; Listers/Buttons
+;
+MSG_ICONPOS_PRIORITY
+Prioritet
+; Priority
+;
+MSG_ICONPOS_GROUPS
+Grupper
+; Groups
+;
+MSG_ICONPOS_LEFTOUT
+Lämnade utanför
+; Left-outs
+;
+MSG_COMMAND_SAVE
+Ange filnamn för att spara kommando
+; Enter Filename To Save Command
+;
+MSG_SAVING_COMMAND
+sparar kommando
+; saving command
+;
+MSG_EDIT_COMMAND
+Redigera kommando...
+; Edit Command...
+;
+MSG_COMMAND_DESCRIPTION
+Enter a description for this command.
+; Enter a description for this command.
+;
+MSG_COMMAND_LEAVEOUT
+Leave out on desktop
+; Leave out on desktop
+;
+MSG_START_APPEARANCE
+Utseende
+; Appearance
+;
+MSG_START_BORDERLESS
+Ram
+; Border
+;
+MSG_START_DRAGBAR_LEFT
+Till vänster
+; Left
+;
+MSG_START_DRAGBAR_RIGHT
+Till höger
+; Right
+;
+MSG_START_IMAGE
+Ändra bild...
+; Change Image...
+;
+MSG_START_LABEL
+Ändra text...
+; Change Label...
+;
+MSG_START_SELECT_IMAGE
+Välj bild för startmeny
+; Select Image For Start Menu
+;
+MSG_START_SELECT_LABEL
+Ange text för startmeny
+; Enter label for Start Menu.
+;
+MSG_OPEN_STARTMENU_MENU
+Försök igen
+; Load Start Menu...
+;
+MSG_START_SELECT_MENU
+Försök igen
+; Select Start Menu To Load
+;
+MSG_START_FONT
+Avbryt
+; Change Font...
+;
+MSG_START_SELECT_FONT
+Ersätt
+; Select Font For Start Menu
+;
+MSG_START_SCALING
+Hoppa över
+; Scale Images
+;
+MSG_START_DRAGBAR
+Hoppa över alla
+; Drag Bar
+;
+MSG_START_DRAGBAR_OFF
+Alla
+; Off
+;
+MSG_START_LABEL_FONT
+Avsluta
+; Change Label Font...
+;
+MSG_START_PICTURE
+Spara
+; Change Background...
+;
+MSG_START_SELECT_PICTURE
+Stäng
+; Select Background Picture For Start Menu
+;
+MSG_KEYFINDER_TITLE
+Tangenthittare
+; Key Finder
+;
+MSG_KEYFINDER_KEY
+_Tangent:
+; _Key:
+;
+MSG_KEYFINDER_FOUND
+Hittade:
+; Found:
+;
+MSG_KEYFINDER_TYPE_INVALID
+Ogiltig tangent!
+; Invalid key!
+;
+MSG_KEYFINDER_TYPE_NONE
+Ingen tangent hittades!
+; No match found!
+;
+MSG_KEYFINDER_TYPE_BUTTONS
+Tangent hittad i en docka.
+; Match found in a Button Bank.
+;
+MSG_KEYFINDER_TYPE_TOOLBAR
+Tangent hittad i verktygslisten.
+; Match found in Lister Toolbar.
+;
+MSG_KEYFINDER_TYPE_LISTERMENU
+Tangent hittad i listarmenyn.
+; Match found in Lister Menu.
+;
+MSG_KEYFINDER_TYPE_MENU
+Tangent hittad i användarmenyerna.
+; Match found in User Menu.
+;
+MSG_KEYFINDER_TYPE_START
+Tangent hittad i en startmeny.
+; Match found in a Start Menu.
+;
+MSG_KEYFINDER_TYPE_HOTKEYS
+Tangent hittad bland direktvalen.
+; Match found in Hotkeys.
+;
+MSG_KEYFINDER_TYPE_SCRIPTS
+Tangent hittad bland skripten.
+; Match found in Scripts.
+;

@@ -1,0 +1,68 @@
+## version $VER: play.catalog 2.0 (28.7.96)
+## codeset 0
+## language nederlands
+;
+MSG_NEXT
+_Volgende
+; _Next
+;
+MSG_ABORT
+_Breek af
+; _Abort
+;
+MSG_PLAY_TITLE
+Afspelen
+; Play
+;
+MSG_FILENAME
+Bestand:
+; File:
+;
+MSG_LENGTH
+Lengte:
+; Length:
+;
+MSG_TYPE
+Soort:
+; Type:
+;
+MSG_TYPE_STEREO
+Stereo
+; Stereo
+;
+MSG_TYPE_MONO
+Mono
+; Mono
+;
+MSG_TYPE_RAW
+Rauw
+; Raw
+;
+MSG_STATUS
+Status:
+; Status:
+;
+MSG_STATUS_LOADING
+Lees bestand in...
+; Reading file...
+;
+MSG_STATUS_DECOMPRESSING
+Decomprimeer...
+; Decompressing...
+;
+MSG_STATUS_PLAYING
+Speel geluid af...
+; Playing sound...
+;
+MSG_PLAY_DESC
+Speel geluidsbestanden af
+; Play sound files
+;
+MSG_PLAY_NEXT
+Volgende
+; Next
+;
+MSG_PLAY_ABORT
+Breek af
+; Abort
+;

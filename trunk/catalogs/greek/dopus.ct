@@ -1,0 +1,2152 @@
+## version $VER: dopus.catalog 5.65 (8.9.97)
+## codeset 0
+## language greek
+;
+MSG_ABORTED
+Ακυρώθηκε
+; Aborted...
+;
+MSG_TRY_AGAIN
+Προσπαθείστε ξανά
+; Try Again
+;
+MSG_RETRY
+Νέα προσπάθεια
+; Retry
+;
+MSG_ABORT
+Άκυρο
+; Abort
+;
+MSG_REPLACE
+Αντικατάσταση
+; Replace
+;
+MSG_SKIP
+Παράκαμψη
+; Skip
+;
+MSG_SKIP_ALL
+Παράκαμψη Όλων
+; Skip All
+;
+MSG_ALL
+Όλα
+; All
+;
+MSG_QUIT
+Έξοδος
+; Quit
+;
+MSG_SAVE
+Σώσιμο
+; Save
+;
+MSG_CLOSE
+Κλείσιμο
+; Close
+;
+MSG_YES
+Ναι
+; Yes
+;
+MSG_NO
+Όχι
+; No
+;
+MSG_CONTINUE
+Συνέχεια
+; Continue
+;
+MSG_OKAY
+Εντάξει
+; OK
+;
+MSG_CANCEL
+Άκυρο
+; Cancel
+;
+MSG_REPLACE_ALL
+Αντικατάσταση Όλων
+; Replace All
+;
+MSG_PROCEED
+Συνέχεια
+; Proceed
+;
+MSG_MOVE
+Μετακίνηση
+; Move
+;
+MSG_DISCARD
+Κατάργηση
+; Discard
+;
+MSG_BLOCKS
+blocks
+; blocks
+;
+MSG_FREE
+ελευθ
+; free
+;
+MSG_MAKELINK
+Σύνδεσμος
+; MakeLink
+;
+MSG_SELECT_FILE
+Επιλογή Αρχείου
+; Select File
+;
+MSG_SELECT_DIR
+Επιλογή Καταλόγου
+; Select Directory
+;
+MSG_ENTER_FILE
+Εισαγωγή Αρχείου
+; Enter Filename
+;
+MSG_OPEN
+Άνοιγμα...
+; Open...
+;
+MSG_DEFAULTS
+Επαναδορά στις Αρχικές
+; Reset To Defaults
+;
+MSG_LAST_SAVED
+Τελευταίες Αποθηκευμένες
+; Last Saved
+;
+MSG_RESTORE
+Επαναφορά
+; Restore
+;
+MSG_PROJECT
+Σχέδιο
+; Project
+;
+MSG_EDIT
+Επεξεργασία
+; Edit
+;
+MSG_UNKNOWN_TYPE
+<άγνωστο>
+; <unknown>
+;
+MSG_SNIFF_CONFIRMATION
+Το αρχείο '%s' δεν μπορεί να αναγνωρισθεί.\n\
+Να το ερευνήσω;
+; The file '%s' could not be identified.\n\
+; Launch Filetype Sniffer to investigate?
+;
+MSG_SNIFF
+Έρευνα
+; Sniff!
+;
+MSG_SCRIPTS_CHANGED
+Τα scripts έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; You have modified your scripts and not\nsaved them. Would you like to?
+;
+MSG_LISTER_MENU_CHANGED
+Το Menu του καταλογέα έχει αλλαχθεί και δεν\n\
+καταχωρήθηκε. Να καταχωρηθεί;
+; You have modified your lister menu and not\nsaved it. Would you like to?
+;
+MSG_USER_MENU_CHANGED
+Τα Menu του χρήστη έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; You have modified your user menus and not\nsaved them. Would you like to?
+;
+MSG_HOTKEYS_CHANGED
+Τα hotkeys έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; You have modified your hotkeys and not\nsaved them. Would you like to?
+;
+MSG_OPEN_NEW_WINDOW
+Άνοιγμα σε νέο καταλογέα;
+; Open in New Lister
+;
+MSG_OPEN_WITH_MENU
+Άνοιγμα με...
+; Open With...
+;
+MSG_SELECT_APP
+Επιλέξτε εφαρμογή για άνοιγμα του '%s'
+; Select Application To Open '%s'
+;
+MSG_OPEN_WITH_MENU_SUB
+Άνοιγμα με
+; Open With
+;
+MSG_OPEN_WITH_MENU_OTHER
+Άλλο...
+; Other...
+;
+MSG_ENTER_ARGUMENTS_FOR
+Παράμετροι για το '%s'
+; Enter arguments for '%s'
+;
+MSG_DIRECTORY
+Κατάλογος
+; Directory 
+;
+MSG_SELECT_UNPROTECT
+\n\
+Επιλέξτε Αποπροστασία για να θέσετε τη μάσκα διαγραφής.
+; \nSelect Unprotect to set the deletion bit.
+;
+MSG_FOUND_A_MATCH
+Βρέθηκε ταίρι για το αρχείο\n\
+'%s'
+; Found a match in the file\n'%s'
+;
+MSG_COMMENTING
+σχολιάση
+; commenting
+;
+MSG_PROTECTING
+προστασία
+; protecting
+;
+MSG_DATESTAMPING
+ημερομηνία
+; date stamping
+;
+MSG_DELETING
+διαγραφή
+; deleting
+;
+MSG_RENAMING
+μετονομασία
+; renaming
+;
+MSG_ENTER_COMMENT
+Σχόλιο για το '%s'.
+; Enter a comment for '%s'.
+;
+MSG_ENTER_PASSWORD
+Κωδικός κρυπτογράφησης Αρχείων.
+; Enter password to encrypt files.
+;
+MSG_ENTER_DATE_AND_TIME
+Νέα Ημ/νία (και ώρα) για το '%s'.
+; Enter new date (and time) for '%s'.
+;
+MSG_ENTER_ARGUMENTS
+Εισαγωγή Παραμέτρων
+; Enter arguments
+;
+MSG_REALLY_QUIT
+Θα τερματισθεί η εργασία σας με το Opus.
+; This will end your Directory Opus session.
+;
+MSG_FILE
+Αρχείο
+; File
+;
+MSG_SELECT_PROTECTION_BITS
+Επιλογή bits προστασίας
+; Select protection bits
+;
+MSG_DIRECTORY_OPUS_REQUEST
+Μήνυμα του Directory Opus
+; Directory Opus Request
+;
+MSG_MULTI_DRAG
+Άκυρο
+; Multi-drag - %ld files, %ld dirs selected
+;
+MSG_PRESS_MOUSE_BUTTON
+Αντικατάσταση
+; Click close button to continue...
+;
+MSG_COMMENT
+Παράκαμψη
+; comment
+;
+MSG_PROTECT
+Παράκαμψη Όλων
+; protect
+;
+MSG_DATESTAMP
+Όλα
+; date stamp
+;
+MSG_PROGRESS_OPERATION_MOVING
+Έξοδος
+; Moving...
+;
+MSG_PROGRAM_LOADING
+Σώσιμο
+; Opus 5 loading... please wait.
+;
+MSG_OPEN_MENU
+Κλείσιμο
+; Load...
+;
+MSG_SAVE_MENU
+Ναι
+; Save
+;
+MSG_SAVEAS_MENU
+Όχι
+; Save As...
+;
+MSG_ACT_RECURSIVELY
+Συνέχεια
+; Act on files in sub-directories?
+;
+MSG_PROGRESS_OPERATION_COMMENT
+Εντάξει
+; Setting comments...
+;
+MSG_PROGRESS_OPERATION_PROTECT
+Άκυρο
+; Setting protections...
+;
+MSG_PROGRESS_OPERATION_DATESTAMP
+Αντικατάσταση Όλων
+; Setting datestamps...
+;
+MSG_SET_PROTECT_OLD
+Συνέχεια
+; Current
+;
+MSG_SET_PROTECT_SET
+Μετακίνηση
+; Set
+;
+MSG_SET_PROTECT_CLEAR
+Κατάργηση
+; Clear
+;
+MSG_OK_BUTTON
+_OK
+; _OK
+;
+MSG_ALL_BUTTON
+ελευθ
+; A_ll
+;
+MSG_SKIP_BUTTON
+Σύνδεσμος
+; S_kip
+;
+MSG_ABORT_BUTTON
+Επιλογή Αρχείου
+; A_bort
+;
+MSG_PROGRESS_OPERATION_ENCRYPTING
+Επιλογή Καταλόγου
+; Encrypting...
+;
+MSG_USER_MENU
+Εισαγωγή Αρχείου
+; User
+;
+MSG_LISTER_MENU_TITLE
+Άνοιγμα...
+; Lister Pop-Up Menu
+;
+MSG_USER_MENU_TITLE
+Επαναδορά στις Αρχικές
+; User Menus
+;
+MSG_EMPTY
+Τελευταίες Αποθηκευμένες
+; empty
+;
+MSG_CANCEL_BUTTON
+Επαναφορά
+; _Cancel
+;
+MSG_OPEN_BUTTON
+Σχέδιο
+; _Open
+;
+MSG_NEW_BUTTON
+Επεξεργασία
+; _New
+;
+MSG_PARENT
+<άγνωστο>
+; Parent Directory
+;
+MSG_ROOT
+Το αρχείο '%s' δεν μπορεί να αναγνωρισθεί.\n\
+Να το ερευνήσω;
+; Root Directory
+;
+MSG_DEVICE_LIST
+Έρευνα
+; Device List
+;
+MSG_SCANNING_DIRECTORIES
+Τα scripts έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; Scanning directories...
+;
+MSG_READING_DIRECTORY
+Το Menu του καταλογέα έχει αλλαχθεί και δεν\n\
+καταχωρήθηκε. Να καταχωρηθεί;
+; Reading directory...
+;
+MSG_CHECK_FIT_RESULTS
+Τα Menu του χρήστη έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; Results of fit test:\n
+;
+MSG_FIT
+Τα hotkeys έχουν αλλαχθεί και δεν\n\
+καταχωρήθηκαν. Να καταχωρηθούν;
+; fit
+;
+MSG_BLOCKS_NEEDED
+Άνοιγμα σε νέο καταλογέα;
+; blocks needed.
+;
+MSG_EXECUTE_ENTER_COMMAND
+Άνοιγμα με...
+; Enter command and arguments.
+;
+MSG_TOOL_MENU
+Επιλέξτε εφαρμογή για άνοιγμα του '%s'
+; Tools
+;
+MSG_BUFFER_LIST
+Άνοιγμα με
+; Cache List
+;
+MSG_REREAD_DIR
+Άλλο...
+; Re-read Directory
+;
+MSG_ASSIGN
+Assign
+; Assign
+;
+MSG_FULL
+full
+; full
+;
+MSG_USED
+in use
+; in use
+;
+MSG_VALIDATING
+disk validating
+; disk validating
+;
+MSG_ENTER_FILTER_STRING
+Directories selected - enter filter pattern.
+; Directories selected - enter filter pattern.
+;
+MSG_VOLUME
+Volume
+; Volume
+;
+MSG_SELECT_SOURCE
+Select Source
+; Select Source
+;
+MSG_SELECT_DESTINATION
+Select Destination
+; Select Destination
+;
+MSG_NO_OWNER
+<No Owner>
+; <No Owner>
+;
+MSG_NO_GROUP
+<No Group>
+; <No Group>
+;
+MSG_SCRIPTS_TITLE
+Scripts
+; Scripts
+;
+MSG_PROGRESS_OPERATION_LINKING
+Making Links...
+; Making Links...
+;
+MSG_LINKING
+making a link to
+; making a link to
+;
+MSG_DECRYPT
+_Decrypt files
+; _Decrypt files
+;
+MSG_EMPTY_TRASH
+Empty Trash
+; Empty Trash
+;
+MSG_REALLY_EMPTY_TRASH
+The contents of the trashcan will be lost!\nDo you really want to empty it?
+; The contents of the trashcan will be lost!\nDo you really want to empty it?
+;
+MSG_ENTER_ASSIGN_NAME
+Enter name to assign to '%s'
+; Enter name to assign to '%s'
+;
+MSG_ADD
+Add
+; Add
+;
+MSG_PATH
+Path
+; Path
+;
+MSG_DEFER
+Defer
+; Defer
+;
+MSG_ASSIGNING
+assigning
+; assigning
+;
+MSG_CHANGE_NEEDS_RESET
+Some changes you made will not be\neffective until you next reboot.
+; Some changes you made will not be\neffective until you next reboot.
+;
+MSG_OPENING
+opening
+; opening
+;
+MSG_LIBRARY_ERROR
+Unable to open %s (%s)
+; Unable to open %s (%s)
+;
+MSG_LIBRARY_ANY_VERSION
+any version
+; any version
+;
+MSG_CLI
+CLI
+; CLI
+;
+MSG_CX_DESC
+The Complete Workbench Replacement!
+; The Complete Workbench Replacement!
+;
+MSG_ABORT_STARTUP
+Do you want to abort startup?
+; Do you want to abort startup?
+;
+MSG_ABORT_STARTUP_BUTTONS
+Continue|Abort
+; Continue|Abort
+;
+MSG_PROTECT_TITLE
+Protect
+; Protect
+;
+MSG_DATESTAMP_TITLE
+Datestamp
+; Datestamp
+;
+MSG_COMMENT_TITLE
+Comment
+; Comment
+;
+MSG_PATTERN_OFF
+The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+; The backdrop picture is disabled in the Environment.\n\
+; Would you like it enabled?
+;
+MSG_THEMES_MENU
+Themes
+; Themes
+;
+MSG_THEMES_LOAD
+Load Theme...
+; Load Theme...
+;
+MSG_THEMES_SAVE
+Save Theme...
+; Save Theme...
+;
+MSG_THEMES_BUILD
+Build Theme...
+; Build Theme...
+;
+MSG_ADDICONING
+adding icons to
+; adding icons to
+;
+MSG_REGISTERED_TO
+Νόμιμος Κάτοχος:
+; This copy is registered to:
+;
+MSG_SERIAL_NUMBER
+Σειριακός #
+; Serial # 
+;
+MSG_UNREGISTERED
+Μή νόμιμος κάτοχος!
+; This copy is unregistered!
+;
+MSG_YOU_SHOULD_REGISTER
+Καταχωρηθείτε για να μην καθυστερεί!
+; Register to prevent this delay!
+;
+MSG_TRANSLATION_BY_YOUR_NAME
+ 
+; 
+;
+MSG_SEARCH_DIRECTORIES
+Εύρεση αρχείων στους επιλεγμένους καταλόγους;
+; Search files in selected directories?
+;
+MSG_ENTER_SEARCH_STRING
+Κείμενο για αναζήτηση...
+; Enter text to search for...
+;
+MSG_SEARCH_NO_CASE
+Κεφαλαία=Πεζά
+; _Case insensitive
+;
+MSG_SEARCH_WILD
+Εύρεση με κλειδιά
+; _Wildcard search
+;
+MSG_SEARCH_ONLYWORD
+Ταίριασμα πλήρων λέξεων
+; _Match whole words
+;
+MSG_SEARCH_LEAVE_SELECTED
+Τα επιλεγμένα
+; Leave selected
+;
+MSG_SEARCH_PROMPT
+Ερώτηση
+; Ask
+;
+MSG_SEARCH_OUTPUT
+Αποτελέσματα
+; Output results
+;
+MSG_PROGRESS_SEARCHING
+Αναζήτηση...
+; Searching...
+;
+MSG_SEARCH_OUTPUT_HEADER
+Αρχεία περιέχοντα '%s'\n\n
+; Files containing '%s'\n\n
+;
+MSG_SEARCH_READ
+Διάβασμα
+; Read
+;
+MSG_ENTER_NEW_NAME
+Νέο όνομα ή σχέδιο μετονομασίας.
+; Enter new filename or rename pattern.
+;
+MSG_PROGRESS_RENAMING
+Μετονομασία...
+; Renaming...
+;
+MSG_RENAME
+Μετονομασία
+; Rename
+;
+MSG_RENAME_DISK
+Νέο όνομα για το '%s'.
+; Enter a new name for '%s'.
+;
+MSG_ENTER_ANOTHER_NAME
+Δώστε άλλο όνομα.
+; Enter another filename.
+;
+MSG_ENTER_DIRECTORY_NAME
+Όνομα καταλόγου
+; Enter directory name
+;
+MSG_MAKEDIR_ICON
+Με εικονίδιο
+; With icon
+;
+MSG_MAKEDIR_NOICON
+Χωρίς εικονίδιο
+; Without icon
+;
+MSG_DIRECTORY_CREATED
+Δημιουργήθηκε ο κατάλογος.
+; Directory created.
+;
+MSG_PROGRESS_ADDING_ICONS
+Προσθήκη εικονιδίων...
+; Adding icons...
+;
+MSG_ICON_ALREADY_EXISTS
+Ένα εικονίδιο υπάρχει ήση για το '%s'.\n\
+Να αντικατασταθεί;
+; An icon already exists for '%s'.\nDo you wish to replace it?
+;
+MSG_ICON_REPLACE_IMAGE
+Μόνο εικόνα
+; Image Only
+;
+MSG_COPYING
+αντιγραφή
+; copying
+;
+MSG_PROGRESS_OPERATION_COPYING
+Αντιγραφή...
+; Copying...
+;
+MSG_CANT_OVERCOPY_FILES
+Ο αρχικός και τελικός κατάλογος πρέπει να είναι\n\
+διαφορετικοί για να αντιγραφούν αρχεία.
+; Source and destination directories\nmust be different to copy files.
+;
+MSG_COPY
+Αντιγραφή
+; Copy
+;
+MSG_PROGRESS_OPERATION_CLONING
+Αναπαραγωγή...
+; Duplicating...
+;
+MSG_DUPLICATE
+Αναπαραγωγή
+; Duplicate
+;
+MSG_CANT_COPY_DIR_INTO_ITSELF
+Ο κατάλογος δεν μπορεί να μπει μέσα στον εαυτό του!
+; You can't copy a directory into itself!
+;
+MSG_MOVING
+μετακίνηση
+; moving
+;
+MSG_CANT_OVERLINK_FILES
+Ο αρχικός και τελικός κατάλογος πρέπει να είναι\n\
+διαφορετικοί για να μπουν σύνδεσμοι.
+; Source and destination directories\nmust be different to make links.
+;
+MSG_CANT_LINK_DIR_INTO_ITSELF
+Αδύνατο να συνδεθεί ο κατάλογος με τον εαυτό του!
+; You can't link a directory into itself!
+;
+MSG_FROM_TO
+Από '%s' στο '%s'
+; From '%s' to '%s'
+;
+MSG_FROM
+Από '%s'
+; From '%s'
+;
+MSG_PROJECT_MENU
+Opus
+; Opus
+;
+MSG_BACKDROP_MENU
+Χωρίς περιθώρια
+; Backdrop
+;
+MSG_ABOUT_MENU
+Σχετικά...
+; About...
+;
+MSG_HIDE_MENU
+Απόκρυψη
+; Hide
+;
+MSG_QUIT_MENU
+Έξοδος...
+; Quit...
+;
+MSG_EXECUTE_MENU
+Εκτέλεση Εντολής...
+; Execute Command...
+;
+MSG_HELP_MENU
+Βοήθεια!
+; Help!
+;
+MSG_KEYFINDER_MENU
+Εύρεση Πλήκτρου...
+; Key Finder...
+;
+MSG_WINDOW_MENU
+Καταλογείς
+; Listers
+;
+MSG_NEW_LISTER_MENU
+Νέος
+; New
+;
+MSG_CLOSE_LISTER_MENU
+Κλείσιμο
+; Close
+;
+MSG_LISTER_SOURCE
+Αρχικός
+; Make Source
+;
+MSG_LISTER_DEST
+Τελικός
+; Make Dest
+;
+MSG_LISTER_LOCK_SOURCE
+Αρχικός (ασφαλισμένος)
+; Lock As Source
+;
+MSG_LISTER_LOCK_DEST
+Τελικός (ασφαλισμένος)
+; Lock As Dest
+;
+MSG_LISTER_UNLOCK
+Απασφάλιση
+; Unlock
+;
+MSG_LISTER_OFF
+Απενεργοποίηση
+; Turn Off
+;
+MSG_LISTER_UNLOCK_ALL
+Απενεργοποίηση Όλων
+; Unlock All
+;
+MSG_CLOSE_ALL_MENU
+Κλείσιμο Όλων
+; Close All
+;
+MSG_EDIT_MENU
+Επεξεργασία...
+; Edit...
+;
+MSG_LISTER_BUTTONS_MENU
+Επεξεργασία Λωρίδας Εικονιδίων
+; Edit Lister Toolbar...
+;
+MSG_LISTER_MENU_MENU
+Επεξεργασία Menu
+; Edit Lister Menu...
+;
+MSG_TILE_MENU
+Τίτλος
+; Tile
+;
+MSG_TILE_HORIZ_MENU
+Οριζόντια
+; Horizontally
+;
+MSG_TILE_VERT_MENU
+Κάθετα
+; Vertically
+;
+MSG_CASCADE_MENU
+Cascade
+; Cascade
+;
+MSG_LISTER_LOCK_POS
+Ασφάλιση Θέσης;
+; Lock Position?
+;
+MSG_LISTER_ICONIFY
+Εικονιδιοποίηση
+; Iconify
+;
+MSG_LISTER_VIEW_ICONS
+Εμφάνιση Εικονιδίων
+; View Icons
+;
+MSG_LISTER_VIEW
+Εμφάνιση ως
+; View As
+;
+MSG_LISTER_VIEW_NAME
+Όνομα
+; Name
+;
+MSG_LISTER_VIEW_ICON
+Εικονίδιο
+; Icon
+;
+MSG_LISTER_SHOW_ALL
+Εμφάνιση Όλων
+; Show All
+;
+MSG_LISTER_ICON_ACTION
+Ενεργά Εικονίδια
+; Icon Action
+;
+MSG_LISTER_ARRANGE_ICONS
+Τακτοποίηση Εικονιδίων
+; Arrange Icons
+;
+MSG_LISTER_ARRANGE_NAME
+κατά όνομα
+; by Name
+;
+MSG_LISTER_ARRANGE_TYPE
+κατά είδος
+; by Type
+;
+MSG_LISTER_ARRANGE_SIZE
+κατά μέγεθος
+; by Size
+;
+MSG_LISTER_ARRANGE_DATE
+κατά ημ/νία
+; by Date
+;
+MSG_LISTER_NEW_DRAWER
+Νέος Κατάλογος...
+; New Drawer...
+;
+MSG_OPEN_PARENT_MENU
+Άνοιγμα Προηγούμενου
+; Open Parent
+;
+MSG_LISTER_RESTORE
+Restore
+; Restore
+;
+MSG_ICONS_MENU
+Εικονίδια
+; Icons
+;
+MSG_ICON_OPEN_MENU
+Άνοιγμα
+; Open
+;
+MSG_ICON_INFO_MENU
+Πληροφορίες...
+; Information...
+;
+MSG_ICON_SNAPSHOT_MENU
+Αποθήκευση
+; Snapshot
+;
+MSG_ICON_LEAVE_OUT_MENU
+Στην Επιφάνεια
+; Leave Out
+;
+MSG_ICON_PUT_AWAY_MENU
+Στο Γραφείο
+; Put Away
+;
+MSG_ICON_SELECT_ALL_MENU
+Επιλογή Όλων
+; Select All
+;
+MSG_ICON_CLEANUP
+Τακτοποίηση
+; Clean Up
+;
+MSG_ICON_RESET
+Επαναφορά
+; Reset
+;
+MSG_ICON_RENAME
+Μετονομασία...
+; Rename...
+;
+MSG_ICON_FORMAT
+Διαμόρφωση Δίσκου...
+; Format Disk...
+;
+MSG_ICON_DISKINFO
+Πληροφορίες Δίσκου...
+; Disk Information...
+;
+MSG_ICON_UNSNAPSHOT_MENU
+Τυχαίες Θέσεις
+; Un-Snapshot
+;
+MSG_ICON_COPY
+Προσπαθείστε ξανά
+; Copy
+;
+MSG_ICONS_NEW_MENU
+Νέα προσπάθεια
+; New
+;
+MSG_ICONS_MAKEDIR_MENU
+Άκυρο
+; Drawer...
+;
+MSG_ICONS_NEWGROUP_MENU
+Αντικατάσταση
+; Group...
+;
+MSG_ICON_COPY_RAM
+Παράκαμψη
+; to RAM:
+;
+MSG_ICON_COPY_DF0
+Παράκαμψη Όλων
+; to DF0:
+;
+MSG_ICON_COPY_OTHER
+Όλα
+; to other...
+;
+MSG_ICON_COPY2
+Έξοδος
+; Copy...
+;
+MSG_ICON_COPY_TO
+Σώσιμο
+; to
+;
+MSG_ICONS_NEWCOMMAND_MENU
+Κλείσιμο
+; Command...
+;
+MSG_ICONS_SHORTCUT_MENU
+Ναι
+; Create Shortcut
+;
+MSG_DESKTOP_POPUP_LEFTOUT
+Όχι
+; Create Left-out
+;
+MSG_DESKTOP_POPUP_COPY
+Συνέχεια
+; Copy to Desktop
+;
+MSG_DESKTOP_POPUP_MOVE
+Εντάξει
+; Move to Desktop
+;
+MSG_ICON_COPY_DESKTOP
+Άκυρο
+; to Desktop
+;
+MSG_ICON_LINEUP
+Αντικατάσταση Όλων
+; Line Up
+;
+MSG_ICON_SNAPSHOT_LISTER
+Συνέχεια
+; Snapshot Lister
+;
+MSG_ICON_SNAPSHOT_ICONS
+Μετακίνηση
+; Snapshot Icons
+;
+MSG_ICON_SNAPSHOT_ALL
+Κατάργηση
+; Snapshot All
+;
+MSG_ICON_SNAPSHOT_WINDOW
+Snapshot Window
+; Snapshot Window
+;
+MSG_BUTTONS_MENU
+Κουμπιά
+; Buttons
+;
+MSG_NEW_BUTTONS_MENU
+Νέα
+; New
+;
+MSG_CLOSE_BUTTONS_MENU
+Κλείσιμο
+; Close
+;
+MSG_NEW_BUTTONS_GFX_MENU
+Γραφικά Κουμπιά...
+; Graphic Buttons...
+;
+MSG_NEW_BUTTONS_TEXT_MENU
+Κουμπιά Κειμένου...
+; Text Buttons...
+;
+MSG_NEW_STARTMENU_MENU
+Menu Έναρξης...
+; Start Menu...
+;
+MSG_SETTINGS_MENU
+Ρυθμίσεις
+; Settings
+;
+MSG_CLOCK_MENU
+Ρολόι
+; Clock
+;
+MSG_CREATE_ICONS_MENU
+Δημιουργία Εικονιδίων;
+; Create Icons?
+;
+MSG_ENVIRONMENT_MENU
+Περιβάλλον
+; Environment
+;
+MSG_FILETYPES_MENU
+Είδη Αρχείων...
+; File Types...
+;
+MSG_HOTKEYS_MENU
+Hotkeys...
+; Hotkeys...
+;
+MSG_MENU_MENU
+Menu Χρήστη...
+; User Menus...
+;
+MSG_FILTER_MENU
+Φίλτρο Εσωτερικής Αναζήτησης;
+; Recursive Filter
+;
+MSG_OPTIONS_MENU
+Επιλογές...
+; Options...
+;
+MSG_DEFPUBSCR_MENU
+Προσπαθείστε ξανά
+; Default PubScreen
+;
+MSG_MENU_HOTKEYS
+Προσπαθείστε ξανά
+; Hotkeys...
+;
+MSG_HOTKEYS_TITLE
+Νέα προσπάθεια
+; Hotkeys
+;
+MSG_MENU_SCRIPTS
+Άκυρο
+; Scripts...
+;
+MSG_MENU_SYSMENU
+Αντικατάσταση
+; System Menus...
+;
+MSG_MENU_ICONPOS
+Παράκαμψη
+; Icon Positioning...
+;
+MSG_ENVIRONMENT_SAVE_LAYOUT_NEW
+Παράκαμψη Όλων
+; Save Layout
+;
+MSG_ENVIRONMENT_EDIT
+Όλα
+; Environment...
+;
+MSG_ENVIRONMENT_LOAD_NEW
+Έξοδος
+; Load Environment...
+;
+MSG_ENVIRONMENT_SAVE_NEW
+Σώσιμο
+; Save Environment
+;
+MSG_SELECT_TITLE
+Επιλογή Αρχείων
+; File selection
+;
+MSG_SELECT_IGNORE
+Αγνόηση
+; Ignore
+;
+MSG_SELECT_MATCH
+Ταίριασμα
+; Match
+;
+MSG_SELECT_NOMATCH
+Μή ταίριασμα
+; No Match
+;
+MSG_SELECT_NEWER
+Νεώτερο
+; Newer
+;
+MSG_SELECT_OLDER
+Παλαιότερο
+; Older
+;
+MSG_SELECT_DIFFERENT
+Διαφορετικό
+; Different
+;
+MSG_SELECT_NAME
+Ό_νομα
+; _Name
+;
+MSG_SELECT_DATE_FROM
+_Ημ/νία
+; Da_te
+;
+MSG_SELECT_DATE_TO
+στο
+; to
+;
+MSG_SELECT_PROT
+Bits on
+; Bits on
+;
+MSG_SELECT_INCLUDE
+Συμπερίληψη
+; Include
+;
+MSG_SELECT_EXCLUDE
+Εξαίρεση
+; Exclude
+;
+MSG_SELECT_COMPARE
+_Σύγκριση Τελικού
+; Destination _Compare
+;
+MSG_SELECT_SIMPLE
+Απλό
+; Simple
+;
+MSG_SELECT_COMPLEX
+Σύνθετο
+; Complex
+;
+MSG_SELECT_ENTER_PATTERN
+Σχέδιο για ταίριασμα ονομάτων.
+; Enter pattern to match filenames.
+;
+MSG_SELECT_PROT_OFF
+κλειστό
+; off
+;
+MSG_SELECT_ENTRY_BOTH
+Αρχεία & Κατάλογοι
+; Files & Dirs
+;
+MSG_SELECT_ENTRY_FILES
+Μόνο Αρχεία
+; Files Only
+;
+MSG_SELECT_ENTRY_DIRS
+Μόνο Κατάλογοι
+; Dirs Only
+;
+MSG_SELECT_ENTRY_TYPE
+_Λειτουργία σε
+; _Operate on
+;
+MSG_DOS_ERROR
+Λάθος DOS
+; DOS error
+;
+MSG_DOS_ERROR_CODE
+Λάθος %ld
+; Error %ld
+;
+MSG_ERROR_OCCURED
+Συνέβει λάθος %s '%s'\n\
+%s
+; An error occured %s '%s'\n%s
+;
+MSG_ERROR_DEST_IS_DIRECTORY
+Ο τελικός '%s' είναι κατάλογος.
+; Destination '%s' is a directory.
+;
+MSG_ERROR_DEST_IS_FILE
+Ο τελικός '%s' είναι αρχείο.
+; Destination '%s' is a file.
+;
+MSG_ERROR_UNKNOWN_CODE
+Προσπαθείστε ξανά
+; Unknown error code
+;
+MSG_BUTTONS_ERROR_SAVING
+Νέα προσπάθεια
+; Error saving button bank!
+;
+MSG_BUTTONS_ERROR_LOADING
+Άκυρο
+; Error loading button bank!
+;
+MSG_ERROR_CREATING_DIRECTORY
+Αντικατάσταση
+; creating the directory
+;
+MSG_CUSTPORT_NOT_FOUND
+Παράκαμψη
+; User-specified custom handler port\n'%s'\ncould not be found!
+;
+MSG_ALREADY_RUNNING
+Παράκαμψη Όλων
+; Directory Opus appears to be already running!\n\
+; Running a second copy has the potential to cause\n\
+; problems, and it is recommended that you do not.
+;
+MSG_ALREADY_RUNNING_BUTTONS
+Όλα
+; Cancel|Run Again
+;
+MSG_UNABLE_TO_CLOSE_SCREEN
+Έξοδος
+; Directory Opus is unable to close its screen.\nPlease close all windows and try again.
+;
+MSG_ERROR_INVALID_DATE
+Σώσιμο
+; Invalid date string entered!
+;
+MSG_UNABLE_TO_OPEN_SCREEN
+Κλείσιμο
+; Can't open screen!
+;
+MSG_AN_ERROR_OCCURED
+Ναι
+; An error occured 
+;
+MSG_ERROR
+Όχι
+; Error 
+;
+MSG_SIZE
+Συνέχεια
+; Size
+;
+MSG_DATE
+Εντάξει
+; Date
+;
+MSG_OLD
+Άκυρο
+; Old
+;
+MSG_NEW
+Αντικατάσταση Όλων
+; New
+;
+MSG_FILE_EXISTS
+Συνέχεια
+; File '%s' already exists!
+;
+MSG_PROGRESS_OPERATION_DELETING
+Διαγραφή...
+; Deleting...
+;
+MSG_DELETE_CONFIRM
+Προσοχή: δεν μπορείτε να επανακτήσετε\n\
+ό,τι διαγράψετε! Να διαγραφούν:\n\n\
+%ld αρχείο(α) και\n\
+%ld κατάλογος(οι) (και τα περιεχόμενά τους);
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n\
+; %ld file(s) and\n%ld drawer(s) (and their contents)?
+;
+MSG_DELETE
+Διαγραφή
+; Delete
+;
+MSG_DELETE_ALL
+Διαγραφή Όλων
+; Delete All
+;
+MSG_DELETE_FILE_CONFIRM
+\x00
+; Delete '%s'?
+;
+MSG_DELETE_DIR_CONFIRM
+Το '%s' είναι κατάλογος.\n\
+Να συνεχιστεί η διαγραφή;
+; '%s' is a directory.\nProceed with delete operation?
+;
+MSG_DELETE_PROTECTED
+Το '%s' είναι προστατευμένο από διαγραφή.\n\
+Να απο-προστατευθεί και να ξαναπροσπαθήσετε;
+; '%s' is protected against deletion.\n\
+; Unprotect and try again?
+;
+MSG_UNPROTECT
+Αποπροστασία
+; Unprotect
+;
+MSG_UNPROTECT_ALL
+Αποπροστασία Όλων
+; Unprotect All
+;
+MSG_DELETE_LINK_CONFIRM_SINGLE
+Να διαγραφεί η συντόμευση;
+; Really delete this shortcut?
+;
+MSG_DELETE_LINK_CONFIRM_MULTI
+Να διαγραφούν οι συντομεύσεις;
+; Really delete these shortcuts?
+;
+MSG_BUTTONS_ENTER_NAME
+Καταχώρηση Κουμπιών
+; Save Buttons
+;
+MSG_BUTTONS_SELECT_FILE
+Άνοιγμα Κουμπιών
+; Load Buttons
+;
+MSG_BUTTONS_STATUS_TITLE
+Κατάσταση Κουμπιών
+; Buttons Status
+;
+MSG_BUTTONS_LOADING
+Άνοιγμα αρχείου κουμπιών...
+; Loading button bank...
+;
+MSG_ENVIRONMENT_ENTER_NAME
+Αποθήκευση Περιβάλλοντος
+; Save Environment
+;
+MSG_ENVIRONMENT_SELECT_FILE
+Άνοιγμα Περιβάλλοντος
+; Load Environment
+;
+MSG_ENVIRONMENT_LOADING
+Άνοιγμα αρχείου περιβάλλοντος...
+; Loading environment file...
+;
+MSG_ENVIRONMENT_SAVING
+Σώσιμο αρχείου περιβάλλοντος...
+; Saving environment file...
+;
+MSG_BUTTONS_CHANGE_WARNING
+Η ομάδα κουμπιών '%s' έχει αλλαχθεί.\n\
+Να καταχωρηθεί;
+; Button bank '%s' has been modified.\nDo you wish to save it?
+;
+MSG_BUTTONS_CREATE_WHICH_TYPE
+Ποιό είδος ομάδας κουμπιών θέλετε να δημιουργήσετε;
+; Which button bank type do you wish to create?
+;
+MSG_BUTTONS_TEXT
+Κείμενο
+; Text
+;
+MSG_BUTTONS_ICONS
+Γραφικά
+; Graphics
+;
+MSG_SETTINGS_SELECT_FILE
+Άνοιγμα Επιλογών
+; Load Options
+;
+MSG_SETTINGS_LOADING
+Άνοιγμα αρχείου επιλογών...
+; Loading Options file...
+;
+MSG_SETTINGS_ENTER_NAME
+Σώσιμο Επιλογών
+; Save Options
+;
+MSG_SETTINGS_SAVING
+Σώσιμο αρχείου επιλογών...
+; Saving Options file...
+;
+MSG_ERROR_SAVING_ENV
+Λάθος στο σώσιμο του αρχείου περιβ/ντος!
+; Error saving environment file!
+;
+MSG_ERROR_SAVING_OPTS
+Λάθος στο σώσιμο του αρχείου επιλογών!
+; Error saving options file!
+;
+MSG_LAUNCHING_PROGRAM
+Προσπάθεια να ανοιχθεί το '%s'...
+; Attempting to launch '%s'...
+;
+MSG_MEMORY_COUNTER
+%s  %ld μνήμη γραφικών  %ld άλλη μνήμη
+; %s  %ld graphics mem  %ld other mem
+;
+MSG_MEMORY_COUNTER_LOC
+%s  %lU μνήμη γραφικών  %lU άλλη μνήμη
+; %s  %lU graphics mem  %lU other mem
+;
+MSG_MEMORY_COUNTER_CLOCK
+%s  %ld γραφική  %ld άλλη
+; %s  %ld graphics  %ld other
+;
+MSG_MEMORY_COUNTER_LOC_CLOCK
+%s  %lU γραφική  %lU άλλη
+; %s  %lU graphics  %lU other
+;
+MSG_LISTER_STATUS_SOURCE
+ΑΡΧΙΚΟ
+; SRCE
+;
+MSG_LISTER_STATUS_DEST
+ΤΕΛΙΚΟ
+; DEST
+;
+MSG_LISTER_STATUS_BUSY
+ΧΡΗΣΗ
+; BUSY
+;
+MSG_LISTER_STATUS_OFF
+ΑΝ/ΓΟ
+; OFF
+;
+MSG_HUNT_ENTER_FILENAME
+Σχέδιο αρχείου για αναζήτηση.
+; Enter file pattern to search for.
+;
+MSG_HUNT_FOUND_FILE
+Το αρχείο '%s' βρέθηκε στον κατάλογο\n\
+'%s'\n\
+Να πάω εκεί;
+; Found the file '%s' in the directory\n'%s'\nShall I go there?
+;
+MSG_NEW_LISTER
+Νέος Καταλογέας
+; New Lister
+;
+MSG_SEARCH_COMMENTS
+Search file comments
+; Search file comments
+;
+MSG_FUNC_DESC_ADDICON
+Προσθήκη εικονιδίων στα αρχεία
+; Add icons to files
+;
+MSG_FUNC_DESC_ALL
+Επιλογή όλων των αρχείων
+; Select all files
+;
+MSG_FUNC_DESC_CLEARBUFFERS
+Απελευθέρωση cache καταλόγων
+; Free directory caches
+;
+MSG_FUNC_DESC_COMMENT
+Σχολιάστε τα αρχεία
+; Give comments to files
+;
+MSG_FUNC_DESC_COPY
+Αντιγραφή επιλ/νων αρχείων
+; Copy selected files
+;
+MSG_FUNC_DESC_COPYAS
+Αντιγραφή με νέα ονόματα
+; Copy with new names
+;
+MSG_FUNC_DESC_DATESTAMP
+Αλλαγή ημ/νίας των αρχείων
+; Change datestamp of files
+;
+MSG_FUNC_DESC_DELETE
+Διαγραφή επιλεγμένων αρχείων
+; Delete selected files
+;
+MSG_FUNC_DESC_DISKCOPY
+Δημιουργία αντιγράφων δίσκων
+; Make copies of disks
+;
+MSG_FUNC_DESC_ENCRYPT
+Κρυπτογράφηση αρχείων
+; Encrypt files
+;
+MSG_FUNC_DESC_FINDFILE
+Αναζήτηση αρχείων
+; Search for filenames
+;
+MSG_FUNC_DESC_FINISHSECTION
+Τερματισμός προηγ. εντολών
+; Finish above commands
+;
+MSG_FUNC_DESC_FORMAT
+Διαμόρφωση δίσκων
+; Format disks
+;
+MSG_FUNC_DESC_GETSIZES
+Μέτρηση μεγέθους καταλόγων
+; Calculate directory sizes
+;
+MSG_FUNC_DESC_ICONINFO
+Εμφάνιση πληροφοριών εικονιδίου
+; Show/edit icon information
+;
+MSG_FUNC_DESC_LEAVEOUT
+Τοποθέτηση αντικ/νων στο κεντρικό παράθυρο
+; Leave objects on main window
+;
+MSG_FUNC_DESC_LOADBUTTONS
+Άνοιγμα αρχείου κουμπιών
+; Load a button file
+;
+MSG_FUNC_DESC_MAKEDIR
+Δημιουργία Καταλόγου
+; Make a new directory
+;
+MSG_FUNC_DESC_MOVE
+Μετακίνηση επιλεγμένων αρχείων
+; Move selected files
+;
+MSG_FUNC_DESC_MOVEAS
+Μετακίνηση με νέα ονόματα
+; Move with new names
+;
+MSG_FUNC_DESC_NONE
+Απεπιλογή όλων των αρχείων
+; Deselect all files
+;
+MSG_FUNC_DESC_PLAY
+Αναπαραγωγή επιλεγμένων ήχων
+; Play selected sounds
+;
+MSG_FUNC_DESC_PRINT
+Εκτύπωση επιλεγμένων αρχείων
+; Print selected files
+;
+MSG_FUNC_DESC_PROTECT
+Αλλαγή προστασίας αρχείων
+; Change file protections
+;
+MSG_FUNC_DESC_READ
+Ανάγνωση αρχείβν κειμένου
+; Read text files
+;
+MSG_FUNC_DESC_RENAME
+Μετονομασίας επιλεγμένων αρχείων
+; Rename selected files
+;
+MSG_FUNC_DESC_RUN
+Εκκίνηση επιλεγμένων εφαρμογών
+; Run selected programs
+;
+MSG_FUNC_DESC_SCANDIR
+Ανάγνωση καταλόγου
+; Read a directory
+;
+MSG_FUNC_DESC_SEARCH
+Αναζήτηση αλφαριθμητικού
+; Search for text strings
+;
+MSG_FUNC_DESC_SELECT
+Επιλογή αρχείων με κλειδιά
+; Wildcard-select files
+;
+MSG_FUNC_DESC_SHOW
+Εμφάνιση επιλεγμένων εικόνων
+; Show selected pictures
+;
+MSG_FUNC_DESC_SMARTREAD
+Αυτ/τος αναγνώστης αρχείων
+; Auto hex/text viewer
+;
+MSG_FUNC_DESC_TOGGLE
+Αλλαγή κατάστασης επιλογής
+; Toggle selection state
+;
+MSG_FUNC_DESC_CHECKFIT
+Έλεγχος πληρότητας αρχείων
+; See if files will fit
+;
+MSG_FUNC_DESC_CLEARSIZES
+Καθαρισμός μεγεθών κατ/γων
+; Clear directory sizes
+;
+MSG_FUNC_DESC_ANSIREAD
+Αναγνώστης κειμένου (υποστηρίζει ANSI)
+; Text viewer (supports ANSI)
+;
+MSG_FUNC_DESC_HEXREAD
+Δεκαεξ/κός (δυαδικός) αναγώστης
+; Hex (binary) viewer
+;
+MSG_FUNC_DESC_CLONE
+Αναπαραγωγή επιλεγμένων αρχείων
+; Duplicate selected files
+;
+MSG_FUNC_DESC_LOADENVIRONMENT
+Άνοιγμα αρχείου περιβάλλοντος
+; Load an Environment file
+;
+MSG_FUNC_DESC_LOADSETTINGS
+Άνοιγμα αρχείου επιλογών
+; Load an Options file
+;
+MSG_FUNC_DESC_PARENT
+Ανάγνωση προηγ. καταλόγου
+; Read parent directory
+;
+MSG_FUNC_DESC_ROOT
+Ανάγνωση κεντρικού καταλόγου
+; Read root directory
+;
+MSG_FUNC_DESC_USER
+Εκτλεση λειτουργίας είδους αρχείου
+; Execute File Type function
+;
+MSG_FUNC_DESC_DEVICELIST
+Εμφάνιση συσκευών & ψευδ/δων
+; Show devices and assigns
+;
+MSG_FUNC_DESC_BUFFERLIST
+Εμφάνιση cache καταλόγων
+; Show cached directories
+;
+MSG_FUNC_DESC_VERIFY
+Επιβεβαίωση
+; Ask for confirmation
+;
+MSG_FUNC_DESC_PRINTDIR
+Εκτύπωση καταλόγων
+; Print directory listings
+;
+MSG_FUNC_DESC_SET
+Θέση παραμέτρου
+; Set something
+;
+MSG_FUNC_DESC_CLOSEBUTTONS
+Κλείσιμο πίνακα κουμπιών
+; Close a button bank
+;
+MSG_FUNC_DESC_QUIT
+Τερματισμός Directory Opus 5
+; Quit Directory Opus 5
+;
+MSG_FUNC_DESC_HIDE
+Απόκρυψη Directory Opus 5
+; Hide Directory Opus
+;
+MSG_FUNC_DESC_REVEAL
+Εμφάνιση Directory Opus
+; Reveal Directory Opus (when hidden)
+;
+MSG_FUNC_DESC_RESELECT
+Επανεπιλογή επιλεγμένων αρχείων
+; Reselect last-used files
+;
+MSG_FUNC_DESC_MAKELINK
+Δημιουργία συνδέσμου σε αρχείο
+; Make a link to a file
+;
+MSG_FUNC_DESC_MAKELINKAS
+Δημιουργία συνδέσμου με νέο όνομα
+; Make a link with a new name
+;
+MSG_FUNC_DESC_ASSIGN
+Δημιουργία ψευδομονάδας
+; Make an assign
+;
+MSG_FUNC_DESC_CONFIGURE
+Ρύθμιση διαμόρφωσης καταλογέα
+; Configure lister display
+;
+MSG_FUNC_DESC_CLI
+Εσωτερική γραμμή εντολών
+; Internal Command Line Interpreter
+;
+MSG_FUNC_DESC_SETBACKGROUND
+Χρήση σαν εικόνα υποβάθρου
+; Set as background picture
+;
+MSG_FUNC_DESC_RESET
+Reset Things
+; Reset Things
+;
+MSG_FUNC_DESC_STOPSNIFFER
+Stop Filetype Sniffer
+; Stop Filetype Sniffer
+;
+MSG_ICON_GROUP
+Ομάδες Εφαρμογών
+; Program Groups
+;
+MSG_GROUP_ENTER_NAME
+Νέα προσπάθεια
+; Enter Program Group Name
+;
+MSG_RXERR_1
+Το αρχείο απερρίφθη από τα φίλτρα
+; File rejected by filters
+;
+MSG_RXERR_5
+Invalid set/query item
+; Invalid set/query item
+;
+MSG_RXERR_6
+Λάθος όνομα ή εντολή
+; Invalid name or keyword
+;
+MSG_RXERR_8
+Invalid trap
+; Invalid trap
+;
+MSG_RXERR_10
+Invalid lister handle
+; Invalid lister handle
+;
+MSG_RXERR_12
+Λάθος πίνακας
+; Invalid toolbar
+;
+MSG_RXERR_13
+Λάθος κατάλογος
+; Invalid path
+;
+MSG_RXERR_14
+Το αντικείμενο δεν βρέθηκε
+; Object not found
+;
+MSG_RXERR_15
+Ανεπαρκής μνήμη
+; No memory
+;
+MSG_RXERR_20
+Αδύνατο το άνοιγμα καταλογέα
+; Unable to open lister
+;
+MSG_RXERR_UNKNOWN
+Άγνωστος κωδικός λάθους
+; Unknown error code
+;
+MSG_DESKTOP_REALLY_DELETE
+Προσοχή: Δεν μπορείτε να ανακτήσετε\n\
+ό,τι διαγράψετε! Να διαγραφούν:\n\n
+; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n
+;
+MSG_DESKTOP_DELETE_GROUPS
+%ld ομάδα(ες) εφαρμογών
+; %ld program group(s)
+;
+MSG_DESKTOP_DELETE_ASSIGNS
+Άκυρο
+; %ld assign(s)
+;
+MSG_DESKTOP_DELETE_GROUP_OBJECTS
+Αντικατάσταση
+; %ld group object(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_FILES
+Παράκαμψη
+; %ld file(s)
+;
+MSG_DESKTOP_DELETE_DESKTOP_DIRS
+Παράκαμψη Όλων
+; %ld dir(s)
+;
+MSG_REPLACE_SAME
+Τα δύο αρχεία μοιάζουν να είναι ίδια.
+; The two files appear to be the same.
+;
+MSG_REPLACE_VERSION_SAME
+Τα δύο αρχεία είναι της ίδιας έκδοσης (%ld.%ld).
+; Both files are the same version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_NEWER
+Το νέο αρχείο είναι νεώτερης έκδοσης (%ld.%ld).
+; The new file is a later version (%ld.%ld).
+;
+MSG_REPLACE_VERSION_OLDER
+Το νέο αρχείο είναι παλαιότερης έκδοσης (%ld.%ld).
+; The new file is an earlier version (%ld.%ld).
+;
+MSG_REPLACE_SIZE_BIGGER
+Το νέο αρχείο είναι μεγαλύτερο από το παλιό (κατά %ld bytes).\n
+; The new file is larger than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SMALLER
+Το νέο αρχείο είναι μικρότερο από το παλιό (κατά %ld bytes).\n
+; The new file is smaller than the old one (by %ld bytes).\n
+;
+MSG_REPLACE_SIZE_SAME
+Τα δύο αρχεία είναι του ιδίου μεγέθους (%ld bytes).\n
+; The two files are the same size (%ld bytes).\n
+;
+MSG_REPLACE_DATE_NEWER
+Το νέο αρχείο έχει νεώτερη ημερομηνία (%s).\n
+; The new file has a more recent date (%s).\n
+;
+MSG_REPLACE_DATE_OLDER
+Το νέο αρχείο έχει παλαιότερη ημερομηνία (%s).\n
+; The new file has an earlier date (%s).\n
+;
+MSG_REPLACE_DATE_SAME
+Τα αρχεία έχουν την ίδια ημερομηνία δημιουργίας.\n
+; The files have the same creation date.\n
+;
+MSG_FILE_ALREADY_EXISTS
+Το αρχείο '%s' υπάρχει και θα αντικατασταθεί.\n
+; File '%s' exists and would be replaced.\n
+;
+MSG_BRIEF_FILE_EXISTS
+Το αρχείο '%s' υπάρχει ήδη. Να αντικατασταθεί;\n\n\
+Νέο - Μέγεθος : %7ld  Ημ/νία : %19s%s\n\
+Παλαιό - Μέγεθος : %7ld  Ημ/νία : %19s%s
+; File '%s' already exists. Replace it?\n\n\
+; New - Size : %7ld  Date : %19s%s\n\
+; Old - Size : %7ld  Date : %19s%s
+;
+MSG_REPLACE_VER
+  Έκδοση : %2ld.%ld
+;   Ver : %2ld.%ld
+;
+MSG_REPLACE_VER_UNKNOWN
+  Έκδοση : ?????
+;   Ver : ?????
+;
+MSG_GET_VERSION
+Έκδοση
+; Version
+;
+MSG_REPLACE_VERSION_TITLE
+Αναζήτηση πληροφοριών έκδοσης...
+; Looking for version info...
+;
+MSG_LISTER_TITLE_NAME
+Όνομα
+; Name
+;
+MSG_LISTER_TITLE_SIZE
+Μέγεθος
+; Size
+;
+MSG_LISTER_TITLE_PROTECT
+Πρόσβαση
+; Access
+;
+MSG_LISTER_TITLE_DATE
+Ημ/νία
+; Date
+;
+MSG_LISTER_TITLE_COMMENT
+Σχόλιο
+; Comment
+;
+MSG_LISTER_TITLE_FILETYPE
+Είδος
+; Type
+;
+MSG_LISTER_TITLE_OWNER
+Χρήστης
+; Owner
+;
+MSG_LISTER_TITLE_GROUP
+Ομάδα
+; Group
+;
+MSG_LISTER_TITLE_NETPROT
+Δύκτιο
+; Net
+;
+MSG_LISTER_TITLE_VERSION
+Έκδοση
+; Version
+;
+MSG_LISTER_TITLE_VOLUME
+Μονάδα
+; Volume
+;
+MSG_LISTER_TITLE_DEVICE
+Συσκευή
+; Device
+;
+MSG_LISTER_TITLE_FULL
+Πλήρης
+; Full
+;
+MSG_LISTER_TITLE_FREE
+Ελευθ.
+; Free
+;
+MSG_LISTER_TITLE_USED
+Χρήση
+; In Use
+;
+MSG_CLI_HELP
+Γράψτε 'help list' για έναν κατάλογο των εντολών,\n\
+ή 'help <εντολή>' για τις παραμέτρους της.\n\
+Γράψτε 'quit' για έξοδο.\n\n\
+Εισάγετε μια εσωτερική εντολή με παραμέτρους\n\
+για να εκτελεσθεί. Για να εκτελέσετε μια εντολή ARexx του DOpus\n\
+γράψτε ένα σύμβολο "+" πριν την εντολή.\n\
+Προσθέστε το "&" εάν θέλετε η εντολή να εκτελεσθεί\n\
+στο υπόβαθρο.\n
+; Type 'help list' for a list of commands,\n\
+; or 'help <command>' for a command template.\n\
+; Type 'quit' to exit the CLI.\n\n\
+; Enter an internal command with arguments to\n\
+; execute it. To execute a DOpus ARexx command,\n\
+; enter a + symbol before the command. Append a &\n\
+; if you want the command to be asynchronous.\n
+;
+MSG_CLI_NO_TEMPLATE
+Η εντολή δεν έχει ορίσματα
+; Command has no template.
+;
+MSG_CLI_TYPE_HELP
+Γραψτε 'help' για βοήθεια.\n
+; Type 'help' for help.\n
+;
+MSG_CLI_BAD_CMD
+Άγνωστη εντολή.
+; Unknown command.
+;
+MSG_ICONPOS_WINDOW
+Θέση τοποθέτησης εικονιδίων
+; Icon positioning area
+;
+MSG_ICONPOS_INSTRUCTIONS
+Ορίστε με το ποντίκι (πατώντας και τραβώντας) τις περιοχές όπυ θα\n\
+εμφανίζονται τα εικονίδια. Πατήστε\n\
+στο "Εντάξει" ή "Άκυρο" όταν τελειώσετε.
+; Click and drag to mark areas where icons can be positioned.\n\
+; Click OK or Cancel when finished.
+;
+MSG_ICONPOS_APPICON
+AppIcons
+; AppIcons
+;
+MSG_ICONPOS_DISKS
+Δίσκοι
+; Disks
+;
+MSG_ICONPOS_LISTERS
+Καταλογείς/Κουμπιά
+; Listers/Buttons
+;
+MSG_ICONPOS_PRIORITY
+Προτεραιότητα
+; Priority
+;
+MSG_ICONPOS_GROUPS
+Ομάδες
+; Groups
+;
+MSG_ICONPOS_LEFTOUT
+Left-outs
+; Left-outs
+;
+MSG_COMMAND_SAVE
+Δώστε όνομα αρχείου για την εντολή καταχώρησης
+; Enter Filename To Save Command
+;
+MSG_SAVING_COMMAND
+καταχώρηση εντολής
+; saving command
+;
+MSG_EDIT_COMMAND
+Επεξεργασία Εντολής...
+; Edit Command...
+;
+MSG_COMMAND_DESCRIPTION
+Enter a description for this command.
+; Enter a description for this command.
+;
+MSG_COMMAND_LEAVEOUT
+Leave out on desktop
+; Leave out on desktop
+;
+MSG_START_APPEARANCE
+Εμφάνιση
+; Appearance
+;
+MSG_START_BORDERLESS
+Πλαίσιο
+; Border
+;
+MSG_START_DRAGBAR_LEFT
+Αριστερά
+; Left
+;
+MSG_START_DRAGBAR_RIGHT
+Δεξιά
+; Right
+;
+MSG_START_IMAGE
+Αλλαγή Εικόνας...
+; Change Image...
+;
+MSG_START_LABEL
+Αλλαγή Ετικέττας...
+; Change Label...
+;
+MSG_START_SELECT_IMAGE
+Επιλογή Εικόνας για το Menu έναρξης
+; Select Image For Start Menu
+;
+MSG_START_SELECT_LABEL
+Επιλογή ετικέττας για το Menu έναρξης.
+; Enter label for Start Menu.
+;
+MSG_OPEN_STARTMENU_MENU
+Προσπαθείστε ξανά
+; Load Start Menu...
+;
+MSG_START_SELECT_MENU
+Νέα προσπάθεια
+; Select Start Menu To Load
+;
+MSG_START_FONT
+Άκυρο
+; Change Font...
+;
+MSG_START_SELECT_FONT
+Αντικατάσταση
+; Select Font For Start Menu
+;
+MSG_START_SCALING
+Παράκαμψη
+; Scale Images
+;
+MSG_START_DRAGBAR
+Παράκαμψη Όλων
+; Drag Bar
+;
+MSG_START_DRAGBAR_OFF
+Όλα
+; Off
+;
+MSG_START_LABEL_FONT
+Έξοδος
+; Change Label Font...
+;
+MSG_START_PICTURE
+Σώσιμο
+; Change Background...
+;
+MSG_START_SELECT_PICTURE
+Κλείσιμο
+; Select Background Picture For Start Menu
+;
+MSG_KEYFINDER_TITLE
+Αναζήτηση Πλήκτρου
+; Key Finder
+;
+MSG_KEYFINDER_KEY
+Πλήκτρο:
+; _Key:
+;
+MSG_KEYFINDER_FOUND
+Βρέθηκε:
+; Found:
+;
+MSG_KEYFINDER_TYPE_INVALID
+Λάθος πλήκτρο!
+; Invalid key!
+;
+MSG_KEYFINDER_TYPE_NONE
+Δεν βρέθηκε ταίρι!
+; No match found!
+;
+MSG_KEYFINDER_TYPE_BUTTONS
+Βρέθηκε ταίρι σε πίνακα κουμπιών.
+; Match found in a Button Bank.
+;
+MSG_KEYFINDER_TYPE_TOOLBAR
+Βρέθηκε ταίρι σε πίνακα καταλογέα.
+; Match found in Lister Toolbar.
+;
+MSG_KEYFINDER_TYPE_LISTERMENU
+Βρέθηκε ταίρι σε Menu καταλογέα.
+; Match found in Lister Menu.
+;
+MSG_KEYFINDER_TYPE_MENU
+Βρέθηκε ταίρι σε Menu χρήστη.
+; Match found in User Menu.
+;
+MSG_KEYFINDER_TYPE_START
+Βρέθηκε ταίρι σε Menu έναρξης.
+; Match found in a Start Menu.
+;
+MSG_KEYFINDER_TYPE_HOTKEYS
+Βρέθηκε ταίρι στα Hotkeys.
+; Match found in Hotkeys.
+;
+MSG_KEYFINDER_TYPE_SCRIPTS
+Βρέθηκε ταίρι στα Scripts.
+; Match found in Scripts.
+;

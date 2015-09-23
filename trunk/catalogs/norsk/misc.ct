@@ -1,0 +1,16 @@
+## version $VER: misc.catalog 5.61 (20.06.97)
+## codeset 0
+## language norsk
+;
+MSG_BEEP_DESC
+Lager en pipelyd
+; Makes a beep sound
+;
+MSG_FLASH_DESC
+Skjermen blinker
+; Flashes the display
+;
+MSG_ALARM_DESC
+En alarm går av
+; Sounds an alarm
+;

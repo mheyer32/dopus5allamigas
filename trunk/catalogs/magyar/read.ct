@@ -1,0 +1,164 @@
+## version $VER: read.catalog 2.1 (23.9.97) Készítette Horváth Péter és Miklós Árpád
+## codeset 0
+## language magyar
+;
+MSG_READING_FILE
+A(z) "%s" állományt olvasom...
+; Reading file '%s'...
+;
+MSG_CANT_OPEN_FILE
+A(z) "%s" állományt nem tudom megnyitni.
+; Unable to open file '%s'!
+;
+MSG_FILE_TITLE
+%s  %s  %ld sor, %ld byte   mód=%s, tab=%ld
+; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
+;
+MSG_MENU_FILE
+Állomány
+; File
+;
+MSG_MENU_NEXT
+Következõ
+; Next
+;
+MSG_MENU_SEARCH
+Keres
+; Search...
+;
+MSG_MENU_REPEAT
+Ismételten keres
+; Repeat Search  
+;
+MSG_MENU_PRINT
+Nyomtat...
+; Print...
+;
+MSG_MENU_QUIT
+Kilép
+; Quit
+;
+MSG_MENU_SETTINGS
+Beállítások
+; Settings
+;
+MSG_MENU_TAB
+Tabulátorméret
+; Tab Size
+;
+MSG_MENU_SAVE
+Beállításokat ment
+; Save Settings
+;
+MSG_ENTER_SEARCH_STRING
+Írja be a keresett szöveget:
+; Enter text to search for.
+;
+MSG_SEARCH_NO_CASE
+_k/N mindegy
+; _Ignore Case
+;
+MSG_SEARCH_WILD
+_Minta
+; _Wildcards
+;
+MSG_SEARCH_ONLYWORD
+_Csak teljes szavak
+; _Only Words
+;
+MSG_SEARCH_REVERSE
+_Keresés visszafelé
+; _Reverse Search
+;
+MSG_OK_BUTTON
+OK
+; OK
+;
+MSG_CANCEL_BUTTON
+Mégsem
+; Cancel
+;
+MSG_STRING_NOT_FOUND
+A szöveget nem találtam.
+; String not found.
+;
+MSG_READ_DESCRIPTION
+Szövegállományok olvasása
+; Read text files
+;
+MSG_MENU_MODE
+Üzemmód
+; Mode
+;
+MSG_MENU_MODE_NORMAL
+Normál
+; Normal
+;
+MSG_MENU_MODE_ANSI
+ANSI
+; ANSI
+;
+MSG_MENU_MODE_HEX
+Hexa
+; Hex
+;
+MSG_MENU_USE_SCREEN
+Saját képernyõ
+; Use Screen
+;
+MSG_MENU_SCREEN_MODE
+Képernyõmód...
+; Pick Screen Mode...
+;
+MSG_MENU_SELECT_FONT
+Betûtípus...
+; Pick Font...
+;
+MSG_SCREEN_TITLE
+Directory Opus szövegmegjelenítõ
+; Directory Opus Text Viewer
+;
+MSG_MENU_SAVE_AS
+Más néven ment...
+; Save As...
+;
+MSG_ENTER_FILENAME
+Adja meg az állomány nevét
+; Enter Filename
+;
+MSG_IO_ERROR
+I/O hiba
+; IO Error
+;
+MSG_ERROR_CODE
+DOS hiba: %ld
+; DOS error %ld
+;
+MSG_MENU_TO_EDITOR
+Szövegszerkesztõbe...
+; To Editor...
+;
+MSG_MENU_SELECT_EDITOR
+Szövegszerkesztõ...
+; Pick Editor...
+;
+MSG_OK_CANCEL_BUTTON
+OK|Mégsem
+; OK|Cancel
+;
+MSG_SELECT_EDITOR
+Adja meg a szövegszerkesztõ parancssorát.
+; Enter function to call text editor
+;
+MSG_READING_FILE_TITLE
+Olvasom az állományt...
+; Reading file...
+;
+MSG_COUNTING_LINES
+Számolom a sorokat...
+; Counting lines...
+;
+MSG_CLOSE
+Close
+; Close
+;
