@@ -246,7 +246,12 @@ struct DiskObject *LIBFUNC L_GetCachedDiskObject(
 	{
 		struct BitMap *dummy;
 		if ((icon = GetIconTags(name, ICONGETA_PNGBitMap, &dummy, TAG_DONE)))
+		{
+			if (!strcmp(name, "Disk") || !strcmp(name, "env:sys/def_disk"))
+				icon->do_Type = WBDISK;
+
 			return icon;
+		}
 	}
 	#endif
 
