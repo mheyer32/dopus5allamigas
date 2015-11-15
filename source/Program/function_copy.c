@@ -125,6 +125,9 @@ DOPUS_FUNC(function_copy)
 	ULONG rec_size=0;
 #endif
 	CopyData *data;
+	struct DateStamp top_date = {0,0,0};
+	char top_name[256] = {0};
+	char filepath[512] = {0};
 
 	// Get function
 	function=command->function;
@@ -185,7 +188,7 @@ DOPUS_FUNC(function_copy)
 			handle->instruction_flags|=INSTF_DIR_CLEAR_SIZES;
 			move_flag=1;
 		}
-	}		
+	}
 
 	// Go through destination paths
 	while ((path=function_path_next(&handle->dest_paths)))
@@ -212,7 +215,7 @@ DOPUS_FUNC(function_copy)
 						handle,
 						GetString(&locale,(function==FUNC_MAKELINK)?MSG_CANT_OVERLINK_FILES:MSG_CANT_OVERCOPY_FILES),
 						0,
-						GetString(&locale,MSG_CONTINUE),0);
+						(ULONG)GetString(&locale,MSG_CONTINUE),0);
 				}
 
 				// Flag this lister as invalid
@@ -366,8 +369,8 @@ DOPUS_FUNC(function_copy)
 				ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
 #else
 				Examine(lock,handle->d_info);
-#endif				
-				
+#endif
+
 				// Get device name
 				DevNameFromLockDopus(lock,handle->work_buffer+512,256);
 				UnLock(lock);
@@ -404,8 +407,8 @@ DOPUS_FUNC(function_copy)
 #ifdef USE_64BIT
 						ExamineLock64(lock,(FileInfoBlock64 *)handle->s_info);
 #else
-						Examine(lock,handle->s_info);						
-#endif				
+						Examine(lock,handle->s_info);
+#endif
 						
 						// Unlock directory
 						UnLock(lock);
@@ -501,14 +504,14 @@ DOPUS_FUNC(function_copy)
 									handle,
 									GetString(&locale,MSG_ENTER_NEW_NAME),
 									SRF_BUFFER|SRF_BUFFER2|SRF_PATH_FILTER,
-									new_name_edit,GUI->def_filename_length,
-									old_name_edit,GUI->def_filename_length,
-									GetString(&locale,
+									(ULONG)new_name_edit,GUI->def_filename_length,
+									(ULONG)old_name_edit,GUI->def_filename_length,
+									(ULONG)GetString(&locale,
 										(move_flag)?MSG_MOVE:
 										((link_flag)?MSG_MAKELINK:
 											((function==FUNC_CLONE)?MSG_DUPLICATE:MSG_COPY))),
-									GetString(&locale,MSG_ABORT),
-									GetString(&locale,MSG_SKIP),0))==2)
+									(ULONG)GetString(&locale,MSG_ABORT),
+									(ULONG)GetString(&locale,MSG_SKIP),0))==2)
 								{
 									function_abort(handle);
 									ret=0;
@@ -600,10 +603,11 @@ DOPUS_FUNC(function_copy)
 						handle,
 						GetString(&locale,MSG_ENTER_PASSWORD),
 						SRF_BUFFER|SRF_CHECKMARK,
-						password_buf,24,
-						GetString(&locale,MSG_DECRYPT),&data->func.encrypt.decrypt,
-						GetString(&locale,MSG_OKAY),
-						GetString(&locale,MSG_ABORT),0)) || !password_buf[0])
+						(ULONG)password_buf,24,
+						(ULONG)GetString(&locale,MSG_DECRYPT),
+					    (ULONG)&data->func.encrypt.decrypt,
+						(ULONG)GetString(&locale,MSG_OKAY),
+						(ULONG)GetString(&locale,MSG_ABORT),0)) || !password_buf[0])
 					{
 						function_abort(handle);
 						ret=0;
@@ -641,6 +645,26 @@ DOPUS_FUNC(function_copy)
 			// Exited directory?
 			if (entry->flags&FUNCENTF_EXITED)
 			{
+				if ( (copy_flags & COPY_DATE) && (top_date.ds_Days != 0) )
+				{
+					// Get top level destination path
+					strcpy(filepath, handle->dest_path);
+					// Add destination directory name to path
+					AddPart(filepath, top_name, sizeof(filepath));
+
+					// Set the directory date
+					SetFileDate((CONST_STRPTR)filepath, &top_date);
+
+					// Update directory date in destination lister
+					function_filechange_modify(handle,
+					                           handle->dest_path,
+					                           top_name,
+					                           FM_Date, &top_date,
+					                           TAG_DONE);
+
+					top_date.ds_Days = 0;
+				}
+
 				// Add size update
 				function_filechange_modify(
 					handle,
@@ -653,6 +677,21 @@ DOPUS_FUNC(function_copy)
 #endif
 					TAG_END);
 				rec_size=0;
+			}
+			else if (entry->type > 0)
+			{
+				BPTR lock = 0; D_S(struct FileInfoBlock, fib)
+				if ((lock = Lock(source_file, ACCESS_READ)))
+				{
+					if (Examine(lock, fib))
+					{
+						top_date.ds_Days = fib->fib_Date.ds_Days;
+						top_date.ds_Minute = fib->fib_Date.ds_Minute;
+						top_date.ds_Tick = fib->fib_Date.ds_Tick;
+					}
+					UnLock(lock);
+				}
+				strcpy(top_name, dest_name);
 			}
 		}
 
@@ -687,7 +726,7 @@ DOPUS_FUNC(function_copy)
 					char *file,ch=0;
 
 					// Clear filename
-					if ((file=FilePart(source_file)))
+					if ((file=(STRPTR)FilePart(source_file)))
 					{
 						ch=*file;
 						*file=0;
@@ -728,8 +767,8 @@ DOPUS_FUNC(function_copy)
 									handle,
 									GetString(&locale,(link_flag)?MSG_CANT_LINK_DIR_INTO_ITSELF:MSG_CANT_COPY_DIR_INTO_ITSELF),
 									0,
-									GetString(&locale,MSG_CONTINUE),
-									GetString(&locale,MSG_ABORT),0))) ret=-1;
+									(ULONG)GetString(&locale,MSG_CONTINUE),
+									(ULONG)GetString(&locale,MSG_ABORT),0))) ret=-1;
 								else ret=0;
 								ok=0;
 							}
@@ -795,7 +834,7 @@ DOPUS_FUNC(function_copy)
 										ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
 #else
 										Examine(lock,handle->d_info);
-#endif				
+#endif
 										UnLock(lock);
 									}
 								}
@@ -829,7 +868,7 @@ DOPUS_FUNC(function_copy)
 
 								// Try to make link
 								if (lock &&
-									!(MakeLink(dest_file,lock,FALSE))) error=IoErr();
+									!(MakeLink(dest_file,(APTR)lock,FALSE))) error=IoErr();
 
 								// Successful?
 								if (!error)
@@ -844,7 +883,7 @@ DOPUS_FUNC(function_copy)
 										ExamineLock64(lock,(FileInfoBlock64 *)handle->d_info);
 #else
 										Examine(lock,handle->d_info);
-#endif				
+#endif
 										UnLock(dest);
 
 										// Fix type to indicate link
@@ -995,6 +1034,30 @@ DOPUS_FUNC(function_copy)
 				// Exited directory, set flag to change info
 				else change_info=1;
 
+				if ((entry->type == ENTRY_DIRECTORY) &&
+				    (top_date.ds_Days != 0))
+				{
+					if (entry->flags & FUNCENTF_EXITED)
+					{
+						if (copy_flags & COPY_DATE)
+						{
+							char *file = NULL;
+							// Get top level destination path
+							strcpy(filepath, handle->dest_path);
+							// Add top destination directory name to path
+							AddPart(filepath, top_name, sizeof(filepath));
+
+							// Add remainder of destination path
+							file = strchr(entry->name, '/');
+							strcat(filepath, file);
+
+							// Set the directory date
+							SetFileDate((CONST_STRPTR)filepath,
+							             &handle->recurse_info.fib_Date);
+						}
+					}
+				}
+
 				// If clone, break out
 				if (function==FUNC_CLONE) break;
 
@@ -1072,10 +1135,10 @@ DOPUS_FUNC(function_copy)
 							handle,
 							handle->work_buffer,
 							0,
-							GetString(&locale,MSG_UNPROTECT),
-							GetString(&locale,MSG_UNPROTECT_ALL),
-							GetString(&locale,MSG_ABORT),
-							GetString(&locale,MSG_SKIP),0))) break;
+							(ULONG)GetString(&locale,MSG_UNPROTECT),
+							(ULONG)GetString(&locale,MSG_UNPROTECT_ALL),
+							(ULONG)GetString(&locale,MSG_ABORT),
+							(ULONG)GetString(&locale,MSG_SKIP),0))) break;
 
 						// Abort?
 						if (ret==3)
@@ -1237,7 +1300,7 @@ int function_copy_file(
 
 			// Adjust position for top-level files
 			if (copy_flags&COPY_TOP_LEVEL)
-				copy_icon_position(handle,FilePart(source_file),icon);
+				copy_icon_position(handle,(STRPTR)FilePart(source_file),icon);
 
 			// Check abort
 			if (function_check_abort(handle))
@@ -1362,7 +1425,7 @@ int function_copy_file(
 		// Set file size
 //		function_progress_file(handle,file_size*2,0);
 #ifdef USE_64BIT
-		function_progress_file64(handle,&file_size,0);
+		function_progress_file64(handle,(QUAD *)&file_size,0);
 #else
 		function_progress_file(handle,file_size,0);
 #endif
@@ -1455,7 +1518,7 @@ int function_copy_file(
 					read_size=(file_size>buffer_size)?buffer_size:file_size;
 
 					// Get current time
-					GetSysTime(&start);
+					GetSysTime((APTR)&start);
 
 					// Read data
 					if ((size=Read(in_file,file_buffer,read_size))<1)
@@ -1477,7 +1540,7 @@ int function_copy_file(
 
 					// Update file progress
 #ifdef USE_64BIT
-					function_progress_file64(handle,0,(ULONG)&total_size);
+					function_progress_file64(handle,0,(QUAD *)&total_size);
 #else
 					function_progress_file(handle,0,total_size);
 #endif
@@ -1527,10 +1590,10 @@ int function_copy_file(
 					if (write_size<read_size) break;
 
 					// Get current time
-					GetSysTime(&end);
+					GetSysTime((APTR)&end);
 
 					// Calculate time that portion of the copy took
-					SubTime(&end,&start);
+					SubTime((APTR)&end,(APTR)&start);
 					copytime=(end.tv_secs*1000000)+end.tv_micro;
 
 					// Subtract from remaining size
@@ -1542,7 +1605,7 @@ int function_copy_file(
 
 					// Update file progress
 #ifdef USE_64BIT
-					function_progress_file64(handle,0,(ULONG)&total_size);
+					function_progress_file64(handle,0,(QUAD *)&total_size);
 #else
 					function_progress_file(handle,0,total_size);
 #endif
@@ -1574,11 +1637,11 @@ int function_copy_file(
 			if ((lock=Lock(dest_file,ACCESS_READ)))
 			{
 				// Examine file
-#ifdef USE_64BIT				
+#ifdef USE_64BIT
 				if (ExamineLock64(lock,(FileInfoBlock64 *)d_info))
 #else
 				if (Examine(lock,d_info))
-#endif				
+#endif
 					got_dest_info=1;
 				UnLock(lock);
 			}
@@ -1733,3 +1796,4 @@ void copy_icon_position(FunctionHandle *handle,char *name,struct DiskObject *ico
 	// Set flags
 	SetIconFlags(icon,flags);
 }
+
