@@ -1,150 +1,150 @@
-## version $VER: join.catalog 5.65 (8.9.97)
-## codeset 10
-## language greek
+## version $VER: join.catalog 56.0 (08.07.97) © Marcin Orξowski <carlos@wfmh.man.szczecin.pl>
+## codeset 5
+## language polski
 ;
 MSG_JOIN_DESC
-Ένωση αρχείων
+Ξβczy pliki w caξoτκ
 ; Join files together
 ;
 MSG_SPLIT_DESC
-Κοπή αρχείου σε μέρη
+Dzieli pliki na mniejsze czλτci
 ; Split a file into parts
 ;
 MSG_JOIN_LISTER
-Ένωση _αρχείων...
+Pliki d_o poξβczenia...
 ; Join _files...
 ;
 MSG_JOIN_ADD
-_Προσθήκη
+Dod_aj
 ; _Add
 ;
 MSG_JOIN_REMOVE
-Α_φαίρεση
+S_kasuj
 ; _Remove
 ;
 MSG_JOIN_CLEAR
-_Καθ/μός
+_Wyczyτκ
 ; C_lear
 ;
 MSG_JOIN_MOVE_UP
-Πά_νω
+W _gσrλ
 ; _Up
 ;
 MSG_JOIN_MOVE_DOWN
-Κά_τω
+W _dσξ
 ; _Down
 ;
 MSG_JOIN_JOIN
-Ένω_ση
+_Poξβcz
 ; _Join
 ;
 MSG_JOIN_CANCEL
-¶κ_υρο
+Ponie_chaj
 ; _Cancel
 ;
 MSG_JOIN_TITLE
- Ένωση
+Poξβcz pliki
 ; Join
 ;
 MSG_JOIN_TO
-_Στο:
+P_lik:
 ; _To:
 ;
 MSG_JOIN_SELECT_FILE
-Επιλογή Αρχείου
+Wybierz plik
 ; Select File
 ;
 MSG_REPLACE_RENAME_ABORT
-Αντικατάσταση|Μετονομασία|Ακύρωση
+_Zastβp|Zmieο _nazwλ|_Przerwij
 ; Replace|Rename|Abort
 ;
 MSG_FILE_EXISTS
-Το αρχείο '%s' υπάρχει ήδη!
+Plik "%s" juϋ istnieje
 ; File '%s' already exists!
 ;
 MSG_ENTER_FILENAME
-Όνομα τελικού αρχείου.
+Podaj nazwλ pliku wyjτciowego
 ; Enter destination filename.
 ;
 MSG_OK
-Εντάξει
+Ok
 ; Ok
 ;
 MSG_CANCEL
-¶κυρο
+Poniechaj
 ; Cancel
 ;
 MSG_JOINING_FILES
-Ένωση αρχείων...
+Ξβczλ pliki...
 ; Joining files...
 ;
 MSG_JOIN_ERROR_OPENING_OUTPUT
-Αδύνατο το άνοιγμα του '%s' για έξοδο!
+Nie mogλ otworzyκ pliku "%s"!
 ; Unable to open '%s' for output!
 ;
 MSG_JOIN_ERROR
 %s\n\
-Λάθος %ld %s
+Bξβd %ld %s
 ; %s\nError %ld %s
 ;
 MSG_JOIN_RETRY
-Νέα προσπάθεια
+Powtσrz
 ; Retry
 ;
 MSG_REMOVE
-Αφαίρεση
+Skasuj
 ; Remove
 ;
 MSG_JOIN_ERROR_OPENING_INPUT
-Αδύνατο το άνοιγμα του '%s'!
+Nie mogλ otworzyκ "%s"!
 ; Unable to open '%s'!
 ;
 MSG_JOIN_ERROR_READING
-Λάθος στην ανάγνωση του '%s'!
+Bξβd podczas odczytu "%s"!
 ; Error reading from '%s'!
 ;
 MSG_SPLIT_FROM
-Κατατμ. του
+Po_dziel
 ; Split _file
 ;
 MSG_SPLIT_STEM
-_Με αρίθμηση
+_Nazwa
 ; _With stem
 ;
 MSG_SPLIT_INTO
-_Τμήμα
+Dξ. _bloku
 ; _Chunk size
 ;
 MSG_SPLIT_SPLIT
-_Χωρισμός
+_Podziel
 ; _Split
 ;
 MSG_SPLIT_SKIP
-Παράκαμ_ψη
+P_omiο
 ; S_kip
 ;
 MSG_SPLIT_TO
-_Στο
+_Wynik
 ; _To
 ;
 MSG_SPLIT_TITLE
-Χωρισμός
+Podziel plik
 ; Split
 ;
 MSG_SPLIT_ERROR_OPENING_FILE
-Αδύνατο το άνοιγμα του '%s'!
+Nie mogλ otworzyκ "%s"!
 ; Unable to open '%s'!
 ;
 MSG_SPLIT_NO_MEMORY
-Ανεπαρκής μνήμη!
+Zbyt maξo wolnej pamiλci!
 ; No memory!
 ;
 MSG_SPLITTING_FILE
-Χωρισμός αρχείου...
+Dzielλ plik...
 ; Splitting file...
 ;
 MSG_ENTER_DISK
-Βάλτε νέα δισκέττα στο %s
+Wξσϋ kolejnβ dyskietkλ do %s
 ; Insert next floppy into %s
 ;
 MSG_CHUNK_CUSTOM

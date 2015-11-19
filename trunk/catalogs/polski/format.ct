@@ -1,105 +1,105 @@
-## version $VER: format.catalog 5.65 (8.9.97)
-## codeset 10
-## language greek
+## version $VER: format.catalog 56.0 (08.07.97) © Marcin Orξowski <carlos@wfmh.man.szczecin.pl>
+## codeset 5
+## language polski
 ;
 MSG_FORMAT_TITLE
-Διαμόρφωση
+Formatowanie
 ; Format
 ;
 MSG_FORMAT_FORMAT
-_Διαμόρφωση
+_Formatuj
 ; _Format
 ;
 MSG_FORMAT_QUICK_FORMAT
-_Γρήγορη Διαμ/ση
+Form. _szybko
 ; _Quick Format
 ;
 MSG_FORMAT_CANCEL
-¶_κυρο
+Ponie_chaj
 ; _Cancel
 ;
 MSG_FORMAT_NAME
-Ό_νομα
+_Nazwa
 ; _Name
 ;
 MSG_FORMAT_FFS
-Γ_ρήγορο Σύστημα Αρχ/σης
+F_ast File System
 ; F_ast File System
 ;
 MSG_FORMAT_INTERNATIONAL
-Δ_ιεθνής Κατάσταση (Intl)
+_Tryb miλdzynarodowy
 ; _International Mode
 ;
 MSG_FORMAT_CACHING
-_Directory Caching
+_Buforowanie katalogu
 ; _Directory Caching
 ;
 MSG_FORMAT_TRASHCAN
-_Αποριμματοδοχείο
+_Zaξσϋ τmietnik
 ; _Put Trashcan
 ;
 MSG_FORMAT_INSTALL
-Δι_σκέττα εκκίνησης
+_Dysk startowy
 ; _Make Bootable
 ;
 MSG_FORMAT_VERIFY
-_Επαλήθευση
+_Weryfikacja
 ; _Verify
 ;
 MSG_FORMAT_DEFAULT_NAME
-Ανώνυμος
+Pusty
 ; Empty
 ;
 MSG_FORMAT_STATUS
-%ld τομείς, %ld bytes/τομέα, %s
+%ld τcieϋek, %ld bajtσw/τcieϋkλ, %s
 ; %ld tracks, %ld bytes/trk, %s
 ;
 MSG_OPENING_DEVICE
-¶νοιγμα συσκευής...
+Otwieram urzβdzenie...
 ; Opening device...
 ;
 MSG_CHECKING_DISK
-Έλεγχος δίσκου...
+Sprawdzam dysk...
 ; Checking disk...
 ;
 MSG_CANT_OPEN_DEVICE
-Αδύνατο το άνοιγμα συσκευής!
+Nie mogλ otworzyκ urzβdzenia!
 ; Unable to open device!
 ;
 MSG_NO_DISK_PRESENT
-Δεν υπάρχει δίσκος στον οδηγό!
+Nie ma dysku w napλdzie!
 ; No disk present in drive!
 ;
 MSG_DISK_WRITE_PROTECTED
-Ο δίσκος είναι προστατευμένος!
+Dysk jest zabezpieczony przed zapisem!
 ; Disk is write-protected!
 ;
 MSG_RETRY_CANCEL
-Νέα Προσπάθεια|Ακύρωση
+_Powtσrz|Ponie_chaj
 ; Retry|Cancel
 ;
 MSG_PROCEED_CANCEL
-Συνέχεια|Ακύρωση
+_Kontynuuj|Ponie_chaj
 ; Proceed|Cancel
 ;
 MSG_DISK_NOT_BLANK
-Ο δίσκος στον οδηγό %s δεν είναι κενός!\n\
-Ο δίσκος '%s' περιέχει %s.\n\
-Όλα τα δεδομένα θα χαθούν.\n\
-Επιλέξτε "Συνέχεια" για να συνεχίσετε.
+Dysk w napλdzie %s nie jest pusty!\n\
+Wolumen "%s" zawiera %s.\n\
+Wszystkie dane zostanβ skasowane!\n\
+Na pewno chcesz kontynuowaκ?
 ; Disk in drive %s is not blank!\nVolume '%s' contains %s.\n\
 ; All data will be erased.\nChoose Proceed to continue.
 ;
 MSG_ABORTED
-Ακυρώθηκε.
+Przerwane
 ; Aborted.
 ;
 MSG_FORMAT_INITIALISING
-Προετοιμασία δίσκου...
+Inicjalizujλ dysk...
 ; Initialising disk...
 ;
 MSG_FORMAT_FORMATTING
-Διαμόρφωση...
+Formatujλ...
 ; Formatting...
 ;
 MSG_FORMAT_FORMATERROR

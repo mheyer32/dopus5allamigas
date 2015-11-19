@@ -7,7 +7,7 @@ Erzeugt einen Piepton
 ; Makes a beep sound
 ;
 MSG_FLASH_DESC
-L‰ﬂt die Anzeige aufblitzen
+L‰sst die Anzeige aufblitzen
 ; Flashes the display
 ;
 MSG_ALARM_DESC

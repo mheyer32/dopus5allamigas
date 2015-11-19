@@ -1,105 +1,105 @@
-## version $VER: diskinfo.catalog 56.2 (23.9.97) Készítette Horváth Péter és Miklós Árpád
+## version $VER: diskinfo.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.p
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_DISKINFO_TITLE
-%b (%s) - Információk
+%b (%s) Informacje
 ; %b (%s) Information
 ;
 MSG_DISKINFO_DESC
-Információkat jelenít meg egy eszközrõl
+Wyôwietla informacje o urzâdzeniu
 ; Show information about a device
 ;
 MSG_OK
-_OK
+_Ok
 ; _OK
 ;
 MSG_CANCEL
-_Mégsem
+Ponie_chaj
 ; _Cancel
 ;
 MSG_NAME
-_Név:
+_Nazwa:
 ; _Name:
 ;
 MSG_HANDLER
-Kezelõ:
+Sterownik:
 ; Handler:
 ;
 MSG_TYPE
-Típus:
+Typ:
 ; Type:
 ;
 MSG_STATE
-Állapot:
+Stan:
 ; State:
 ;
 MSG_USED
-Foglalt:
+Zajëte:
 ; Used:
 ;
 MSG_FREE
-Szabad:
+Wolne:
 ; Free:
 ;
 MSG_CAPACITY
-Összesen:
+Ogóîem:
 ; Total:
 ;
 MSG_UNIT
-egység:
+jedn.
 ; unit
 ;
 MSG_UNKNOWN
-ismeretlen
+nieznany
 ; unknown
 ;
 MSG_READ_WRITE
-olvasható/Írható
+Do odczytu/zapisu
 ; Read/Write
 ;
 MSG_READ_ONLY
-csak olvasható
+Tylko do zapisu
 ; Read Only
 ;
 MSG_VALIDATING
-érvényesítés alatt
+Aktualizowany
 ; Validating
 ;
 MSG_BYTES
- byte
+ bajtów
 ;  bytes
 ;
 MSG_ERROR
-%ld hiba
+%ld bîâd 
 ; %ld error
 ;
 MSG_ERRORS
-%ld hiba
+%ld bîëdów
 ; %ld errors
 ;
 MSG_DOSTYPE_1
-Old File System
+OFS
 ; Old File System
 ;
 MSG_DOSTYPE_2
-Fast File System
+FFS
 ; Fast File System
 ;
 MSG_DOSTYPE_3
-Old File System (nemzetközi)
+OFS (Tryb miëdzynarodowy)
 ; Old File System (International)
 ;
 MSG_DOSTYPE_4
-Fast File System (nemzetközi)
+FFS (Tryb miëdzynarodowy)
 ; Fast File System (International)
 ;
 MSG_DOSTYPE_5
-Old File System (könyvtár-cache)
+OFS (Buforowanie katalogu)
 ; Old File System (Dir-Caching)
 ;
 MSG_DOSTYPE_6
-Fast File System (könyvtár-cache)
+FFS (Buforowanie katalogu)
 ; Fast File System (Dir-Caching)
 ;
 MSG_DOSTYPE_7
@@ -119,11 +119,11 @@ Ami-FileSafe Multi
 ; Ami-FileSafe Multi
 ;
 MSG_DOSTYPE_11
-PFS floppy
+Dyskietka PFS
 ; PFS Floppy
 ;
 MSG_DOSTYPE_12
-PFS merevlemez
+Dysk PFS
 ; PFS Hard Drive
 ;
 MSG_DOSTYPE_13

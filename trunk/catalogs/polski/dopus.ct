@@ -1,93 +1,93 @@
-## version $VER: dopus.catalog 2.25 (2.10.97) Készítette Horváth Péter és Miklós Árpád
+## version $VER: dopus.catalog 56.4 (31.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.pl>
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_ABORTED
-Megszakítva..
+Przerwane...
 ; Aborted...
 ;
 MSG_TRY_AGAIN
-Próbáld újra
+_Powtórz
 ; Try Again
 ;
 MSG_RETRY
-Újra
+_Powtórz
 ; Retry
 ;
 MSG_ABORT
-Hagyd abba
+P_rzerwij
 ; Abort
 ;
 MSG_REPLACE
-Cseréld le
+_Zastâp
 ; Replace
 ;
 MSG_SKIP
-Hagyd ki
+P_omiï
 ; Skip
 ;
 MSG_SKIP_ALL
-Mindet hagyd ki
+Pomiï _wszystko
 ; Skip All
 ;
 MSG_ALL
-Mindet
+Wszystko
 ; All
 ;
 MSG_QUIT
-Lépj ki
+_Skoïcz
 ; Quit
 ;
 MSG_SAVE
-Mentsd el
+Zapisz
 ; Save
 ;
 MSG_CLOSE
-Bezárás
+Zamknij
 ; Close
 ;
 MSG_YES
-Igen
+_Tak
 ; Yes
 ;
 MSG_NO
-Nem
+_Nie
 ; No
 ;
 MSG_CONTINUE
-Tovább
+_Kontynuuj
 ; Continue
 ;
 MSG_OKAY
-OK
+_Ok
 ; OK
 ;
 MSG_CANCEL
-Mégsem
+Poniechaj
 ; Cancel
 ;
 MSG_REPLACE_ALL
-Mindet cseréld
+Zastâp _wszystko
 ; Replace All
 ;
 MSG_PROCEED
-Tovább
+Kontynuuj
 ; Proceed
 ;
 MSG_MOVE
-Helyezd át
+Pr_zenieô
 ; Move
 ;
 MSG_DISCARD
-Dobd el
+Usuï
 ; Discard
 ;
 MSG_BLOCKS
-blokk
+bloków
 ; blocks
 ;
 MSG_FREE
-szabad
+wolne
 ; free
 ;
 MSG_MAKELINK
@@ -95,239 +95,244 @@ MakeLink
 ; MakeLink
 ;
 MSG_SELECT_FILE
-Állomány kiválasztása
+Wybierz plik
 ; Select File
 ;
 MSG_SELECT_DIR
-Könyvtár kiválasztása
+Wybierz katalog
 ; Select Directory
 ;
 MSG_ENTER_FILE
-Név megadása
+Podaj nazwë pliku
 ; Enter Filename
 ;
 MSG_OPEN
-Megnyit...
+Otwórz...
 ; Open...
 ;
 MSG_DEFAULTS
-Alapbeállítások
+Ustawienia standardowe
 ; Reset To Defaults
 ;
 MSG_LAST_SAVED
-Utoljára tárolt
+Ustawienia ostatnio zapisane
 ; Last Saved
 ;
 MSG_RESTORE
-Visszaállít
+Anuluj zmiany ustawieï
 ; Restore
 ;
 MSG_PROJECT
-Állomány
+Projekt
 ; Project
 ;
 MSG_EDIT
-Szerkesztés
+Edytuj
 ; Edit
 ;
 MSG_UNKNOWN_TYPE
-<ismeretlen>
+<nieznany>
 ; <unknown>
 ;
 MSG_SNIFF_CONFIRMATION
-A(z) "%s" állomány nem azonosítható.\n\
-Elindítsam az állománytípus-szimatolót?
+Plik "%s" nie zostaî zidentyfikowany.\n\
+Czy chcesz uruchomiê moduî Sniffera, aby\n\
+zidentyfikowaî ten typ pliku?
 ; The file '%s' could not be identified.\n\
 ; Launch Filetype Sniffer to investigate?
 ;
 MSG_SNIFF
-Szimat!
+Szukaj
 ; Sniff!
 ;
 MSG_SCRIPTS_CHANGED
-Módosította a script-eket, de nem\n\
-mentette el õket. Megteszi most?
+Zmodyfikowaîeô swoje skrypty\n\
+ale ich nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; You have modified your scripts and not\nsaved them. Would you like to?
 ;
 MSG_LISTER_MENU_CHANGED
-Módosította a listaablakok menüjét, de nem\n\
-mentette el. Megteszi most?
+Zmodyfikowaîeô menu listera\n\
+ale go nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; You have modified your lister menu and not\nsaved it. Would you like to?
 ;
 MSG_USER_MENU_CHANGED
-Módosította a felhasználói menüt, de nem\n\
-mentette el. Megteszi most?
+Zmodyfikowaîeô swoje menu\n\
+uûytkownika ale go nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; You have modified your user menus and not\nsaved them. Would you like to?
 ;
 MSG_HOTKEYS_CHANGED
-Módosította a hívógombokat, de nem\n\
-mentette el õket. Megteszi most?
+Zmodyfikowaîeô ustawienia\n\
+klawiszy wywoîujâcych ale ich\n\
+nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; You have modified your hotkeys and not\nsaved them. Would you like to?
 ;
 MSG_OPEN_NEW_WINDOW
-Megnyit új ablakban
+Otwórz w nowym listerze
 ; Open in New Lister
 ;
 MSG_OPEN_WITH_MENU
-Mással megnyit...
+Otwórz uûywajâc...
 ; Open With...
 ;
 MSG_SELECT_APP
-Válasszon egy alkalmazást a(z) "%s"-hoz
+Wybierz program otwierajâcy "%s"
 ; Select Application To Open '%s'
 ;
 MSG_OPEN_WITH_MENU_SUB
-Megnyitó program:
+Otwórz uûywajâc
 ; Open With
 ;
 MSG_OPEN_WITH_MENU_OTHER
-Egyéb...
+Inny...
 ; Other...
 ;
 MSG_ENTER_ARGUMENTS_FOR
-Írja be "%s" paramétereit.
+Podaj argumenty dla "%s"
 ; Enter arguments for '%s'
 ;
 MSG_DIRECTORY
-Könyvtár
+Katalog
 ; Directory 
 ;
 MSG_SELECT_UNPROTECT
-\n\
-Válassza a "Védelem ki" funkciót a "Törölhetõ" bit átállításához.
+Wybierz "Odbezpiecz" aby ustawiê atrybut "Kasowalny".
 ; \nSelect Unprotect to set the deletion bit.
 ;
 MSG_FOUND_A_MATCH
-Egyezést találtam a következõ file-ban:\n\
-'%s'
+Znalazîem w pliku\n\
+"%s"
 ; Found a match in the file\n'%s'
 ;
 MSG_COMMENTING
-megjegyzések...
+komentowania
 ; commenting
 ;
 MSG_PROTECTING
-jelzõbitek...
+ustawiania atrybutów
 ; protecting
 ;
 MSG_DATESTAMPING
-dátumozok...
+zmiany daty
 ; date stamping
 ;
 MSG_DELETING
-törlök...
+kasowania
 ; deleting
 ;
 MSG_RENAMING
-átnevezek...
+zmiany nazwy
 ; renaming
 ;
 MSG_ENTER_COMMENT
-Írja be a(z) "%s" megjegyzését.
+Podaj komentarz do "%s"
 ; Enter a comment for '%s'.
 ;
 MSG_ENTER_PASSWORD
-Írja be a jelszót az álományok titkosításához.
+Podaj hasîo aby zaszyfrowaê plik
 ; Enter password to encrypt files.
 ;
 MSG_ENTER_DATE_AND_TIME
-Írja be az új dátumot (és idõt) a(z) "%s" állományhoz.
+Podaj nowâ datë i czas dla "%s"
 ; Enter new date (and time) for '%s'.
 ;
 MSG_ENTER_ARGUMENTS
-Írja be a paramétereket.
+Podaj argumenty
 ; Enter arguments
 ;
 MSG_REALLY_QUIT
-Ezzel befejezi a Directory Opus használatát.
+Na pewno chcesz skoïczyê?
 ; This will end your Directory Opus session.
 ;
 MSG_FILE
-Állomány
+Plik
 ; File
 ;
 MSG_SELECT_PROTECTION_BITS
-Válassza ki a jelzõbiteket.
+Wybierz atrybuty
 ; Select protection bits
 ;
 MSG_DIRECTORY_OPUS_REQUEST
-Directory Opus kérdezõ
+Directory Opus
 ; Directory Opus Request
 ;
 MSG_MULTI_DRAG
-Hagyd abba
+P_rzerwij
 ; Multi-drag - %ld files, %ld dirs selected
 ;
 MSG_PRESS_MOUSE_BUTTON
-Cseréld le
+_Zastâp
 ; Click close button to continue...
 ;
 MSG_COMMENT
-Hagyd ki
+P_omiï
 ; comment
 ;
 MSG_PROTECT
-Mindet hagyd ki
+Pomiï _wszystko
 ; protect
 ;
 MSG_DATESTAMP
-Mindet
+Wszystko
 ; date stamp
 ;
 MSG_PROGRESS_OPERATION_MOVING
-Lépj ki
+_Skoïcz
 ; Moving...
 ;
 MSG_PROGRAM_LOADING
-Mentsd el
+Zapisz
 ; Opus 5 loading... please wait.
 ;
 MSG_OPEN_MENU
-Bezárás
+Zamknij
 ; Load...
 ;
 MSG_SAVE_MENU
-Igen
+_Tak
 ; Save
 ;
 MSG_SAVEAS_MENU
-Nem
+_Nie
 ; Save As...
 ;
 MSG_ACT_RECURSIVELY
-Tovább
+_Kontynuuj
 ; Act on files in sub-directories?
 ;
 MSG_PROGRESS_OPERATION_COMMENT
-OK
+_Ok
 ; Setting comments...
 ;
 MSG_PROGRESS_OPERATION_PROTECT
-Mégsem
+Poniechaj
 ; Setting protections...
 ;
 MSG_PROGRESS_OPERATION_DATESTAMP
-Mindet cseréld
+Zastâp _wszystko
 ; Setting datestamps...
 ;
 MSG_SET_PROTECT_OLD
-Tovább
+Kontynuuj
 ; Current
 ;
 MSG_SET_PROTECT_SET
-Helyezd át
+Pr_zenieô
 ; Set
 ;
 MSG_SET_PROTECT_CLEAR
-Dobd el
+Usuï
 ; Clear
 ;
 MSG_OK_BUTTON
-blokk
+bloków
 ; _OK
 ;
 MSG_ALL_BUTTON
-szabad
+wolne
 ; A_ll
 ;
 MSG_SKIP_BUTTON
@@ -335,92 +340,98 @@ MakeLink
 ; S_kip
 ;
 MSG_ABORT_BUTTON
-Állomány kiválasztása
+Wybierz plik
 ; A_bort
 ;
 MSG_PROGRESS_OPERATION_ENCRYPTING
-Könyvtár kiválasztása
+Wybierz katalog
 ; Encrypting...
 ;
 MSG_USER_MENU
-Név megadása
+Podaj nazwë pliku
 ; User
 ;
 MSG_LISTER_MENU_TITLE
-Megnyit...
+Otwórz...
 ; Lister Pop-Up Menu
 ;
 MSG_USER_MENU_TITLE
-Alapbeállítások
+Ustawienia standardowe
 ; User Menus
 ;
 MSG_EMPTY
-Utoljára tárolt
+Ustawienia ostatnio zapisane
 ; empty
 ;
 MSG_CANCEL_BUTTON
-Visszaállít
+Anuluj zmiany ustawieï
 ; _Cancel
 ;
 MSG_OPEN_BUTTON
-Állomány
+Projekt
 ; _Open
 ;
 MSG_NEW_BUTTON
-Szerkesztés
+Edytuj
 ; _New
 ;
 MSG_PARENT
-<ismeretlen>
+<nieznany>
 ; Parent Directory
 ;
 MSG_ROOT
-A(z) "%s" állomány nem azonosítható.\n\
-Elindítsam az állománytípus-szimatolót?
+Plik "%s" nie zostaî zidentyfikowany.\n\
+Czy chcesz uruchomiê moduî Sniffera, aby\n\
+zidentyfikowaî ten typ pliku?
 ; Root Directory
 ;
 MSG_DEVICE_LIST
-Szimat!
+Szukaj
 ; Device List
 ;
 MSG_SCANNING_DIRECTORIES
-Módosította a script-eket, de nem\n\
-mentette el õket. Megteszi most?
+Zmodyfikowaîeô swoje skrypty\n\
+ale ich nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; Scanning directories...
 ;
 MSG_READING_DIRECTORY
-Módosította a listaablakok menüjét, de nem\n\
-mentette el. Megteszi most?
+Zmodyfikowaîeô menu listera\n\
+ale go nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; Reading directory...
 ;
 MSG_CHECK_FIT_RESULTS
-Módosította a felhasználói menüt, de nem\n\
-mentette el. Megteszi most?
+Zmodyfikowaîeô swoje menu\n\
+uûytkownika ale go nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; Results of fit test:\n
 ;
 MSG_FIT
-Módosította a hívógombokat, de nem\n\
-mentette el õket. Megteszi most?
+Zmodyfikowaîeô ustawienia\n\
+klawiszy wywoîujâcych ale ich\n\
+nie zapisaîeô.\n\
+Czy chcesz to teraz zrobiê?
 ; fit
 ;
 MSG_BLOCKS_NEEDED
-Megnyit új ablakban
+Otwórz w nowym listerze
 ; blocks needed.
 ;
 MSG_EXECUTE_ENTER_COMMAND
-Mással megnyit...
+Otwórz uûywajâc...
 ; Enter command and arguments.
 ;
 MSG_TOOL_MENU
-Válasszon egy alkalmazást a(z) "%s"-hoz
+Wybierz program otwierajâcy "%s"
 ; Tools
 ;
 MSG_BUFFER_LIST
-Megnyitó program:
+Otwórz uûywajâc
 ; Cache List
 ;
 MSG_REREAD_DIR
-Egyéb...
+Inny...
 ; Re-read Directory
 ;
 MSG_ASSIGN
@@ -578,166 +589,173 @@ adding icons to
 ; adding icons to
 ;
 MSG_REGISTERED_TO
-E regisztrált példány tulajdonosa:
+Wîaôcicielem niniejszej kopii jest:
 ; This copy is registered to:
 ;
 MSG_SERIAL_NUMBER
-Sorozatszám: 
+Numer 
 ; Serial # 
 ;
 MSG_UNREGISTERED
-Ez a példány nincs regisztrálva.
+Kopia niezarejestrowana!
 ; This copy is unregistered!
 ;
 MSG_YOU_SHOULD_REGISTER
-Kérjük, regisztrálja, hogy elkerülje ezt a várakozást!
+Zarejestruj sië aby wiëcej nie czekaê!
 ; Register to prevent this delay!
 ;
 MSG_TRANSLATION_BY_YOUR_NAME
-Hungarian catalogs were created by Horváth Péter & Miklós Árpád. 
+\n\n\
+Polska wersja jëzykowa:\n\
+Marcin Orîowski\n\n\
+Wszelkie uwagi dotyczâce polskiej wersji\n\
+jëzykowej proszë kierowaê na adres:\n\n\
+carlos@wfmh.pl\n\n\
+lub\n\n\
+carlos@inet.com.pl\n\n
 ; 
 ;
 MSG_SEARCH_DIRECTORIES
-Keressek a kiválasztott könyvtárakban?
+Szukaê plików w zaznaczonych katalogach?
 ; Search files in selected directories?
 ;
 MSG_ENTER_SEARCH_STRING
-Írja be a keresendõ szöveget...
+Wpisz tekst który chcesz odszukaê
 ; Enter text to search for...
 ;
 MSG_SEARCH_NO_CASE
-_kis/NAGY nem számít
+_DUÛE = maîe
 ; _Case insensitive
 ;
 MSG_SEARCH_WILD
-K_eresés minta alapján
+_Znaki zastëpcze
 ; _Wildcard search
 ;
 MSG_SEARCH_ONLYWORD
-_Csak teljes szavakat
+Tylk_o caîe sîowa
 ; _Match whole words
 ;
 MSG_SEARCH_LEAVE_SELECTED
-Hagyd kiválasztva
+Zostaw zaznaczone
 ; Leave selected
 ;
 MSG_SEARCH_PROMPT
-Kérdezz rá
+Pytaj
 ; Ask
 ;
 MSG_SEARCH_OUTPUT
-Eredményt mutasd
+Wyniki
 ; Output results
 ;
 MSG_PROGRESS_SEARCHING
-Keresek...
+Szukam...
 ; Searching...
 ;
 MSG_SEARCH_OUTPUT_HEADER
-"%s"-t tartalmazó állományok\n\n
+Pliki zawierajâ "%s"\n\n
 ; Files containing '%s'\n\n
 ;
 MSG_SEARCH_READ
-Olvasd be
+Wyôwietl
 ; Read
 ;
 MSG_ENTER_NEW_NAME
-Írja be az új nevet vagy átnevezési mintát.
+Podaj nowâ nazwë bâdú wzorzec.
 ; Enter new filename or rename pattern.
 ;
 MSG_PROGRESS_RENAMING
-Átnevezek...
+Zmieniam nazwë...
 ; Renaming...
 ;
 MSG_RENAME
-Nevezd át
+Zmieï nazwë
 ; Rename
 ;
 MSG_RENAME_DISK
-Írja be "%s" új nevét.
+Podaj nowâ nazwë dla "%s"
 ; Enter a new name for '%s'.
 ;
 MSG_ENTER_ANOTHER_NAME
-Adjon meg egy új nevet.
+Podaj innâ nazwë pliku
 ; Enter another filename.
 ;
 MSG_ENTER_DIRECTORY_NAME
-Adja meg a könyvtár nevét.
+Podaj nazwë katalogu
 ; Enter directory name
 ;
 MSG_MAKEDIR_ICON
-Ikonnal
+Z ikonkâ
 ; With icon
 ;
 MSG_MAKEDIR_NOICON
-Ikon nélkül
+Bez ikonki
 ; Without icon
 ;
 MSG_DIRECTORY_CREATED
-A könyvtár elkészült.
+Katalog utworzony
 ; Directory created.
 ;
 MSG_PROGRESS_ADDING_ICONS
-Ikonok hozzáadása...
+Dodajë ikonki...
 ; Adding icons...
 ;
 MSG_ICON_ALREADY_EXISTS
-"%s" már rendelkezik ikonnal.\n\
-Le kívánja cserélni?
+Ikonka "%s" juû istnieje.\n\
+Chcesz jâ zastâpiê?
 ; An icon already exists for '%s'.\nDo you wish to replace it?
 ;
 MSG_ICON_REPLACE_IMAGE
-Csak a képet
+Tylko obrazek
 ; Image Only
 ;
 MSG_COPYING
-másolok
+kopiowania
 ; copying
 ;
 MSG_PROGRESS_OPERATION_COPYING
-Másolok...
+Kopiujë...
 ; Copying...
 ;
 MSG_CANT_OVERCOPY_FILES
-Másoláshoz a forrás- és cél-\n\
-könyvtár(ak)nak különbözniük kell.
+Katalogi úródîowy i docelowy muszâ byê\n\
+róûne aby moûna byîo skopiowaê pliki.
 ; Source and destination directories\nmust be different to copy files.
 ;
 MSG_COPY
-Másold
+Skopiuj
 ; Copy
 ;
 MSG_PROGRESS_OPERATION_CLONING
-Megkettõzök...
+Powielam...
 ; Duplicating...
 ;
 MSG_DUPLICATE
-Kettõzd meg
+Powiel
 ; Duplicate
 ;
 MSG_CANT_COPY_DIR_INTO_ITSELF
-Egy könyvtárat nem lehet önmagára másolni.
+Nie moûesz skopiowaê katalogu do niego samego!
 ; You can't copy a directory into itself!
 ;
 MSG_MOVING
-áthelyezek
+przenoszenia
 ; moving
 ;
 MSG_CANT_OVERLINK_FILES
-Link létrehozásához a forrás- és a célkönyvtárnak\n\
-különbözõnek kell lennie.
+Katalogi úródîowy i docelowy muszâ byê\n\
+róûne aby moûna byîo utworzyê link.
 ; Source and destination directories\nmust be different to make links.
 ;
 MSG_CANT_LINK_DIR_INTO_ITSELF
-Egy könyvtárat nem lehet önmagához link-elni.
+You can't link a directory into itself!
 ; You can't link a directory into itself!
 ;
 MSG_FROM_TO
-"%s"-ból/bõl "%s"-ba/be
+Z "%s" do "%s"
 ; From '%s' to '%s'
 ;
 MSG_FROM
-"%s"-ból/bõl
+Z "%s"
 ; From '%s'
 ;
 MSG_PROJECT_MENU
@@ -745,163 +763,163 @@ Opus
 ; Opus
 ;
 MSG_BACKDROP_MENU
-Háttérben?
+Okno Opusa jako tîo
 ; Backdrop
 ;
 MSG_ABOUT_MENU
-A programról...
+O programie...
 ; About...
 ;
 MSG_HIDE_MENU
-Elrejtõzik
+Schowaj
 ; Hide
 ;
 MSG_QUIT_MENU
-Kilép...
+Skoïcz...
 ; Quit...
 ;
 MSG_EXECUTE_MENU
-Parancsot végrehajt...
+Wykonaj polecenie...
 ; Execute Command...
 ;
 MSG_HELP_MENU
-Segíts!
+Pomóû!
 ; Help!
 ;
 MSG_KEYFINDER_MENU
-Billentyût keres...
+Przeszukiwacz klawiszy...
 ; Key Finder...
 ;
 MSG_WINDOW_MENU
-Listaablakok
+Lister
 ; Listers
 ;
 MSG_NEW_LISTER_MENU
-Új
+Nowy
 ; New
 ;
 MSG_CLOSE_LISTER_MENU
-Bezár
+Zamknij
 ; Close
 ;
 MSG_LISTER_SOURCE
-Forrássá tesz
+Ustaw jako úródîo
 ; Make Source
 ;
 MSG_LISTER_DEST
-Céllá tesz
+Ustaw jako docelowy
 ; Make Dest
 ;
 MSG_LISTER_LOCK_SOURCE
-Forrásként lezár
+Zablokuj jako úródîo
 ; Lock As Source
 ;
 MSG_LISTER_LOCK_DEST
-Célként lezár
+Zablokuj jako docelowy
 ; Lock As Dest
 ;
 MSG_LISTER_UNLOCK
-Felold
+Odblokuj
 ; Unlock
 ;
 MSG_LISTER_OFF
-Kikapcsol
+Wyîâcz
 ; Turn Off
 ;
 MSG_LISTER_UNLOCK_ALL
-Mindet feloldja
+Odblokuj wszystkie
 ; Unlock All
 ;
 MSG_CLOSE_ALL_MENU
-Mindet bezárja
+Zamknij wyszystkie
 ; Close All
 ;
 MSG_EDIT_MENU
-Módosít...
+Edytuj
 ; Edit...
 ;
 MSG_LISTER_BUTTONS_MENU
-Listák eszköztárát módosítja...
+Edycja paska narzëdzi...
 ; Edit Lister Toolbar...
 ;
 MSG_LISTER_MENU_MENU
-Listák menüjét módosítja...
+Edycja menu...
 ; Edit Lister Menu...
 ;
 MSG_TILE_MENU
-Elrendez
+Uîoûenie
 ; Tile
 ;
 MSG_TILE_HORIZ_MENU
-Vízszintesen
+Poziome
 ; Horizontally
 ;
 MSG_TILE_VERT_MENU
-Függõlegesen
+Pionowe
 ; Vertically
 ;
 MSG_CASCADE_MENU
-Vízesés
+Kaskada
 ; Cascade
 ;
 MSG_LISTER_LOCK_POS
-Pozíció lezárása?
+Zablokuj poîoûenie
 ; Lock Position?
 ;
 MSG_LISTER_ICONIFY
-Ikonállapot
+Ikonifikuj
 ; Iconify
 ;
 MSG_LISTER_VIEW_ICONS
-Ikonokat mutat
+Pokaû ikonki
 ; View Icons
 ;
 MSG_LISTER_VIEW
-Felsorol
+Pokazuj jako
 ; View As
 ;
 MSG_LISTER_VIEW_NAME
-Nevekkel
+Lista plików
 ; Name
 ;
 MSG_LISTER_VIEW_ICON
-Ikonokkal
+Ikonki
 ; Icon
 ;
 MSG_LISTER_SHOW_ALL
-Mindent mutat
+Pokaû wszystkie
 ; Show All
 ;
 MSG_LISTER_ICON_ACTION
-Ikonok+funkciók
+Ikonki i narzëdzia
 ; Icon Action
 ;
 MSG_LISTER_ARRANGE_ICONS
-Ikonok elrendezése
+Uporzâdkuj wg.
 ; Arrange Icons
 ;
 MSG_LISTER_ARRANGE_NAME
-Név szerint
+Nazwy
 ; by Name
 ;
 MSG_LISTER_ARRANGE_TYPE
-Típus szerint
+Typu
 ; by Type
 ;
 MSG_LISTER_ARRANGE_SIZE
-Méret szerint
+Rozmiaru
 ; by Size
 ;
 MSG_LISTER_ARRANGE_DATE
-Dátum szerint
+Daty
 ; by Date
 ;
 MSG_LISTER_NEW_DRAWER
-Új könyvtár...
+Nowy katalog...
 ; New Drawer...
 ;
 MSG_OPEN_PARENT_MENU
-Szülõt megnyit
+Katalog nadrzëdny
 ; Open Parent
 ;
 MSG_LISTER_RESTORE
@@ -909,828 +927,828 @@ Restore
 ; Restore
 ;
 MSG_ICONS_MENU
-Ikonok
+Ikonki
 ; Icons
 ;
 MSG_ICON_OPEN_MENU
-Megnyit
+Otwórz
 ; Open
 ;
 MSG_ICON_INFO_MENU
-Információ...
+Informacje...
 ; Information...
 ;
 MSG_ICON_SNAPSHOT_MENU
-Rögzít
+Utrwal pozycjë
 ; Snapshot
 ;
 MSG_ICON_LEAVE_OUT_MENU
-Kint hagy
+Wyjmij
 ; Leave Out
 ;
 MSG_ICON_PUT_AWAY_MENU
-Eltesz
+Schowaj
 ; Put Away
 ;
 MSG_ICON_SELECT_ALL_MENU
-Mindent kiválaszt
+Zaznacz wszystko
 ; Select All
 ;
 MSG_ICON_CLEANUP
-Rendet rak
+Uporzâdkuj
 ; Clean Up
 ;
 MSG_ICON_RESET
-Újraolvas
+Przywróê
 ; Reset
 ;
 MSG_ICON_RENAME
-Átnevez...
+Zmieï nazwë...
 ; Rename...
 ;
 MSG_ICON_FORMAT
-Lemezt formáz...
+Sformatuj dysk...
 ; Format Disk...
 ;
 MSG_ICON_DISKINFO
-Lemezinformációk...
+Informacje o dysku...
 ; Disk Information...
 ;
 MSG_ICON_UNSNAPSHOT_MENU
-Rögzítést felold
+Uwolnij pozycjë
 ; Un-Snapshot
 ;
 MSG_ICON_COPY
-Próbáld újra
+_Powtórz
 ; Copy
 ;
 MSG_ICONS_NEW_MENU
-Újra
+_Powtórz
 ; New
 ;
 MSG_ICONS_MAKEDIR_MENU
-Hagyd abba
+P_rzerwij
 ; Drawer...
 ;
 MSG_ICONS_NEWGROUP_MENU
-Cseréld le
+_Zastâp
 ; Group...
 ;
 MSG_ICON_COPY_RAM
-Hagyd ki
+P_omiï
 ; to RAM:
 ;
 MSG_ICON_COPY_DF0
-Mindet hagyd ki
+Pomiï _wszystko
 ; to DF0:
 ;
 MSG_ICON_COPY_OTHER
-Mindet
+Wszystko
 ; to other...
 ;
 MSG_ICON_COPY2
-Lépj ki
+_Skoïcz
 ; Copy...
 ;
 MSG_ICON_COPY_TO
-Mentsd el
+Zapisz
 ; to
 ;
 MSG_ICONS_NEWCOMMAND_MENU
-Bezárás
+Zamknij
 ; Command...
 ;
 MSG_ICONS_SHORTCUT_MENU
-Igen
+_Tak
 ; Create Shortcut
 ;
 MSG_DESKTOP_POPUP_LEFTOUT
-Nem
+_Nie
 ; Create Left-out
 ;
 MSG_DESKTOP_POPUP_COPY
-Tovább
+_Kontynuuj
 ; Copy to Desktop
 ;
 MSG_DESKTOP_POPUP_MOVE
-OK
+_Ok
 ; Move to Desktop
 ;
 MSG_ICON_COPY_DESKTOP
-Mégsem
+Poniechaj
 ; to Desktop
 ;
 MSG_ICON_LINEUP
-Mindet cseréld
+Zastâp _wszystko
 ; Line Up
 ;
 MSG_ICON_SNAPSHOT_LISTER
-Tovább
+Kontynuuj
 ; Snapshot Lister
 ;
 MSG_ICON_SNAPSHOT_ICONS
-Helyezd át
+Pr_zenieô
 ; Snapshot Icons
 ;
 MSG_ICON_SNAPSHOT_ALL
-Dobd el
+Usuï
 ; Snapshot All
 ;
 MSG_ICON_SNAPSHOT_WINDOW
-blokk
+bloków
 ; Snapshot Window
 ;
 MSG_BUTTONS_MENU
-Gombok
+Przyciski
 ; Buttons
 ;
 MSG_NEW_BUTTONS_MENU
-Új
+Nowy...
 ; New
 ;
 MSG_CLOSE_BUTTONS_MENU
-Bezár
+Zamknij
 ; Close
 ;
 MSG_NEW_BUTTONS_GFX_MENU
-Grafikus gombok...
+Przyciski graficzne...
 ; Graphic Buttons...
 ;
 MSG_NEW_BUTTONS_TEXT_MENU
-Szöveges gombok...
+Przyciski tekstowe...
 ; Text Buttons...
 ;
 MSG_NEW_STARTMENU_MENU
-Start menü...
+Menu Start...
 ; Start Menu...
 ;
 MSG_SETTINGS_MENU
-Beállítások
+Ustawienia
 ; Settings
 ;
 MSG_CLOCK_MENU
-Óra
+Zegarek
 ; Clock
 ;
 MSG_CREATE_ICONS_MENU
-Létrehozzak ikonokat?
+Zapisuj ikonki
 ; Create Icons?
 ;
 MSG_ENVIRONMENT_MENU
-Környezet
+Ôrodowisko
 ; Environment
 ;
 MSG_FILETYPES_MENU
-Állománytípusok...
+Typy plików...
 ; File Types...
 ;
 MSG_HOTKEYS_MENU
-Hívógombok...
+Klawisze specjalne...
 ; Hotkeys...
 ;
 MSG_MENU_MENU
-Felhasználói menük...
+Menu uûytkownika...
 ; User Menus...
 ;
 MSG_FILTER_MENU
-Rekurzív szûrõ
+Filtr rekurencyjny
 ; Recursive Filter
 ;
 MSG_OPTIONS_MENU
-Opciók...
+Opcje
 ; Options...
 ;
 MSG_DEFPUBSCR_MENU
-Próbáld újra
+_Powtórz
 ; Default PubScreen
 ;
 MSG_MENU_HOTKEYS
-Próbáld újra
+_Powtórz
 ; Hotkeys...
 ;
 MSG_HOTKEYS_TITLE
-Újra
+_Powtórz
 ; Hotkeys
 ;
 MSG_MENU_SCRIPTS
-Hagyd abba
+P_rzerwij
 ; Scripts...
 ;
 MSG_MENU_SYSMENU
-Cseréld le
+_Zastâp
 ; System Menus...
 ;
 MSG_MENU_ICONPOS
-Hagyd ki
+P_omiï
 ; Icon Positioning...
 ;
 MSG_ENVIRONMENT_SAVE_LAYOUT_NEW
-Mindet hagyd ki
+Pomiï _wszystko
 ; Save Layout
 ;
 MSG_ENVIRONMENT_EDIT
-Mindet
+Wszystko
 ; Environment...
 ;
 MSG_ENVIRONMENT_LOAD_NEW
-Lépj ki
+_Skoïcz
 ; Load Environment...
 ;
 MSG_ENVIRONMENT_SAVE_NEW
-Mentsd el
+Zapisz
 ; Save Environment
 ;
 MSG_SELECT_TITLE
-Állomány kiválasztása
+Zaznaczanie plików
 ; File selection
 ;
 MSG_SELECT_IGNORE
-Nem kell
+Ignoruj
 ; Ignore
 ;
 MSG_SELECT_MATCH
-Azonos
+Pasuje
 ; Match
 ;
 MSG_SELECT_NOMATCH
-Nem azonos
+Nie pasuje
 ; No Match
 ;
 MSG_SELECT_NEWER
-Újabb
+Nowszy
 ; Newer
 ;
 MSG_SELECT_OLDER
-Régebbi
+Starszy
 ; Older
 ;
 MSG_SELECT_DIFFERENT
-Eltérõ
+Róûny
 ; Different
 ;
 MSG_SELECT_NAME
-_Név
+_Nazwa
 ; _Name
 ;
 MSG_SELECT_DATE_FROM
-Dá_tumtól:
+Da_ta
 ; Da_te
 ;
 MSG_SELECT_DATE_TO
--ig:
+_do
 ; to
 ;
 MSG_SELECT_PROT
-Bitek be
+Atr. wî.
 ; Bits on
 ;
 MSG_SELECT_INCLUDE
-Tartalmaz
+Wîâczajâc
 ; Include
 ;
 MSG_SELECT_EXCLUDE
-Nem tartalmaz
+Wyîâczajâc
 ; Exclude
 ;
 MSG_SELECT_COMPARE
-Összehasonlítás a _céllal 
+Porównanie _z docelowym
 ; Destination _Compare
 ;
 MSG_SELECT_SIMPLE
-Egyszerû
+_Proste
 ; Simple
 ;
 MSG_SELECT_COMPLEX
-Összetett
+_Zîoûone
 ; Complex
 ;
 MSG_SELECT_ENTER_PATTERN
-Írja be a mintát a nevek kereséséhez
+Podaj wzorzec dla plików
 ; Enter pattern to match filenames.
 ;
 MSG_SELECT_PROT_OFF
-ki
+wyî.
 ; off
 ;
 MSG_SELECT_ENTRY_BOTH
-Mindenre
+Plikach i katalogach
 ; Files & Dirs
 ;
 MSG_SELECT_ENTRY_FILES
-Állományokra
+Plikach
 ; Files Only
 ;
 MSG_SELECT_ENTRY_DIRS
-Könyvtárakra
+Katalogach
 ; Dirs Only
 ;
 MSG_SELECT_ENTRY_TYPE
-Hatással van:
+_Operuj na
 ; _Operate on
 ;
 MSG_DOS_ERROR
-DOS hiba
+Bîâd DOS-u
 ; DOS error
 ;
 MSG_DOS_ERROR_CODE
-Kód: %ld
+Bîâd %ld
 ; Error %ld
 ;
 MSG_ERROR_OCCURED
-%s hiba fordult elõ: "%s"\n\
+Nastâpiî bîâd podczas %s "%s"\n\
 %s
 ; An error occured %s '%s'\n%s
 ;
 MSG_ERROR_DEST_IS_DIRECTORY
-A cél (%s) egy könyvtár
+"%s" jest katalogiem.
 ; Destination '%s' is a directory.
 ;
 MSG_ERROR_DEST_IS_FILE
-A cél (%s) egy állomány
+"%s" jest plikiem.
 ; Destination '%s' is a file.
 ;
 MSG_ERROR_UNKNOWN_CODE
-Próbáld újra
+_Powtórz
 ; Unknown error code
 ;
 MSG_BUTTONS_ERROR_SAVING
-Újra
+_Powtórz
 ; Error saving button bank!
 ;
 MSG_BUTTONS_ERROR_LOADING
-Hagyd abba
+P_rzerwij
 ; Error loading button bank!
 ;
 MSG_ERROR_CREATING_DIRECTORY
-Cseréld le
+_Zastâp
 ; creating the directory
 ;
 MSG_CUSTPORT_NOT_FOUND
-Hagyd ki
+P_omiï
 ; User-specified custom handler port\n'%s'\ncould not be found!
 ;
 MSG_ALREADY_RUNNING
-Mindet hagyd ki
+Pomiï _wszystko
 ; Directory Opus appears to be already running!\n\
 ; Running a second copy has the potential to cause\n\
 ; problems, and it is recommended that you do not.
 ;
 MSG_ALREADY_RUNNING_BUTTONS
-Mindet
+Wszystko
 ; Cancel|Run Again
 ;
 MSG_UNABLE_TO_CLOSE_SCREEN
-Lépj ki
+_Skoïcz
 ; Directory Opus is unable to close its screen.\nPlease close all windows and try again.
 ;
 MSG_ERROR_INVALID_DATE
-Mentsd el
+Zapisz
 ; Invalid date string entered!
 ;
 MSG_UNABLE_TO_OPEN_SCREEN
-Bezárás
+Zamknij
 ; Can't open screen!
 ;
 MSG_AN_ERROR_OCCURED
-Igen
+_Tak
 ; An error occured 
 ;
 MSG_ERROR
-Nem
+_Nie
 ; Error 
 ;
 MSG_SIZE
-Tovább
+_Kontynuuj
 ; Size
 ;
 MSG_DATE
-OK
+_Ok
 ; Date
 ;
 MSG_OLD
-Mégsem
+Poniechaj
 ; Old
 ;
 MSG_NEW
-Mindet cseréld
+Zastâp _wszystko
 ; New
 ;
 MSG_FILE_EXISTS
-Tovább
+Kontynuuj
 ; File '%s' already exists!
 ;
 MSG_PROGRESS_OPERATION_DELETING
-Törlök...
+Kasujë...
 ; Deleting...
 ;
 MSG_DELETE_CONFIRM
-VIgyázat: amit letöröl, az elvész!\n\
-Valóban le kíván törölni\n\
-%ld állományt, illetve\n\
-%ld könyvtárat (és tartalmukat)?
+Uwaga: nieîatwo odzyskaê to\n\
+co teraz skasujesz! Na pewno chcesz skasowaê:\n\n\
+%ld plik(ów) oraz\n\
+%ld katalog(ów) wraz z zawartoôciâ?
 ; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n\
 ; %ld file(s) and\n%ld drawer(s) (and their contents)?
 ;
 MSG_DELETE
-Töröl
+Skasuj
 ; Delete
 ;
 MSG_DELETE_ALL
-Mindet töröld
+Skasuj _wszystko
 ; Delete All
 ;
 MSG_DELETE_FILE_CONFIRM
-Töröljem a(z) "%s" objektumot?
+Skasowaê "%s"?
 ; Delete '%s'?
 ;
 MSG_DELETE_DIR_CONFIRM
-"%s" egy könyvtár.\n\
-Folytatni kívánja a törlést?
+"%s" jest katalogiem\n\
+Kontynuowaê kasowanie?
 ; '%s' is a directory.\nProceed with delete operation?
 ;
 MSG_DELETE_PROTECTED
-'%s' védve van törlés ellen.\n\
-Eltávolítsam a védelmet?
+"%s" jest zabezpieczony przed skasowaniem.\n\
+Czy mam go odbezpieczyê i spróbowaê ponownie?
 ; '%s' is protected against deletion.\n\
 ; Unprotect and try again?
 ;
 MSG_UNPROTECT
-Távolítsd el
+Odbezpiecz
 ; Unprotect
 ;
 MSG_UNPROTECT_ALL
-Távolítsd el mindrõl
+Odbezpiecz _wszystko
 ; Unprotect All
 ;
 MSG_DELETE_LINK_CONFIRM_SINGLE
-Valóban törli ezt az álruhát?
+Na pewno chcesz skasowaê ten skrót?
 ; Really delete this shortcut?
 ;
 MSG_DELETE_LINK_CONFIRM_MULTI
-Valóban törli ezeket az álruhákat?
+Na pewno chcesz skasowaê te skróty?
 ; Really delete these shortcuts?
 ;
 MSG_BUTTONS_ENTER_NAME
-Gombok mentése
+Zapisz przyciski
 ; Save Buttons
 ;
 MSG_BUTTONS_SELECT_FILE
-Gombok betöltése
+Wczytaj przyciski
 ; Load Buttons
 ;
 MSG_BUTTONS_STATUS_TITLE
-Gombok állapotsora
+Buttons Status
 ; Buttons Status
 ;
 MSG_BUTTONS_LOADING
-Töltöm a gombcsoportot...
+Wczytujë bank przycisków...
 ; Loading button bank...
 ;
 MSG_ENVIRONMENT_ENTER_NAME
-Környezet mentése
+Zapisz ôrodowisko
 ; Save Environment
 ;
 MSG_ENVIRONMENT_SELECT_FILE
-Környezet betöltése
+Wczytaj ôrodowisko
 ; Load Environment
 ;
 MSG_ENVIRONMENT_LOADING
-Betöltöm a környezetet...
+Wczytujë ôrodowisko...
 ; Loading environment file...
 ;
 MSG_ENVIRONMENT_SAVING
-Kimentem a környezetet...
+Zapisujë ôrodowisko...
 ; Saving environment file...
 ;
 MSG_BUTTONS_CHANGE_WARNING
-A(z) "%s" gombcsoport megváltozott.\n\
-El kívánja menteni?
+Bank przycisków "%s" zostaî zmieniony.\n\
+Czy chcesz go zapisac?
 ; Button bank '%s' has been modified.\nDo you wish to save it?
 ;
 MSG_BUTTONS_CREATE_WHICH_TYPE
-Milyen típusú gombcsoportot kíván létrehozni?
+Jakiego rodzaju bank przycisków chcesz utworzyê?
 ; Which button bank type do you wish to create?
 ;
 MSG_BUTTONS_TEXT
-Szöveges
+Tekstowy
 ; Text
 ;
 MSG_BUTTONS_ICONS
-Grafikus
+Graficzny
 ; Graphics
 ;
 MSG_SETTINGS_SELECT_FILE
-Opciók betöltése
+Wczytaj opcjë
 ; Load Options
 ;
 MSG_SETTINGS_LOADING
-Betöltöm az opciókat...
+Wczytujë plik z opcjami...
 ; Loading Options file...
 ;
 MSG_SETTINGS_ENTER_NAME
-Opciók mentése
+Zapisz opcjë
 ; Save Options
 ;
 MSG_SETTINGS_SAVING
-Kimentem az opciókat...
+Zapisujë plik z opcjami...
 ; Saving Options file...
 ;
 MSG_ERROR_SAVING_ENV
-Hiba a környezet mentésekor.
+Bîâd podczas zapisu plik ôrodowiskowego!
 ; Error saving environment file!
 ;
 MSG_ERROR_SAVING_OPTS
-Hiba az opciók mentésekor.
+Bîâd podczas zapisu pliku z opcjami!
 ; Error saving options file!
 ;
 MSG_LAUNCHING_PROGRAM
-Megpróbálom elindítani a(z) "%s" programot...
+Wczytujë program "%s"...
 ; Attempting to launch '%s'...
 ;
 MSG_MEMORY_COUNTER
-%s  %ld grafikus memória  %ld egyéb memória
+%s  %ld pamiëci graficznej, %ld pozostaîej.
 ; %s  %ld graphics mem  %ld other mem
 ;
 MSG_MEMORY_COUNTER_LOC
-%s  %lU grafikus memória  %lU egyéb memória
+%s  %lU pamiëci graficznej, %lU pozostaîej.
 ; %s  %lU graphics mem  %lU other mem
 ;
 MSG_MEMORY_COUNTER_CLOCK
-%s  %ld grafikus  %ld egyéb
+%s  %ld pamiëci graficznej, %ld pozostaîej.
 ; %s  %ld graphics  %ld other
 ;
 MSG_MEMORY_COUNTER_LOC_CLOCK
-%s  %lU grafikus  %lU egyéb
+%s  %lU pamiëci graficznej, %lU pozostaîej.
 ; %s  %lU graphics  %lU other
 ;
 MSG_LISTER_STATUS_SOURCE
-FORR
+ÚR.
 ; SRCE
 ;
 MSG_LISTER_STATUS_DEST
-CÉL
+DOC.
 ; DEST
 ;
 MSG_LISTER_STATUS_BUSY
-FOGL
+ZAJËTY
 ; BUSY
 ;
 MSG_LISTER_STATUS_OFF
-KI
+WYÎ.
 ; OFF
 ;
 MSG_HUNT_ENTER_FILENAME
-Kérem, írja be a keresési mintát.
+Podaj wzorzec nazwy pliku
 ; Enter file pattern to search for.
 ;
 MSG_HUNT_FOUND_FILE
-Megtaláltam a(z) "%s" állományt a(z)\n\
-'%s' könyvtárban.\n\
-Odamehetek?
+Znaleziono w pliku "%s" w katalogu\n\
+"%s".\n\
+Czy odczytaê ten katalog?
 ; Found the file '%s' in the directory\n'%s'\nShall I go there?
 ;
 MSG_NEW_LISTER
-Új listaablak
+N_owy
 ; New Lister
 ;
 MSG_SEARCH_COMMENTS
-Megjegyzésekben is?
+Search file comments
 ; Search file comments
 ;
 MSG_FUNC_DESC_ADDICON
-Ikon hozzáadása állományokhoz
+Dodaje ikonki do plików
 ; Add icons to files
 ;
 MSG_FUNC_DESC_ALL
-Minden file kiválasztása
+Zaznacza wszystie pliki
 ; Select all files
 ;
 MSG_FUNC_DESC_CLEARBUFFERS
-Könyvtártároló ürítése
+Zwalnia bufory katalogów
 ; Free directory caches
 ;
 MSG_FUNC_DESC_COMMENT
-Megjegyzés hozzáfûzése
+Pozwala ustawiê komentarze do plików
 ; Give comments to files
 ;
 MSG_FUNC_DESC_COPY
-Kiválasztott állományok másolása
+Kopiuje zaznaczone pliki
 ; Copy selected files
 ;
 MSG_FUNC_DESC_COPYAS
-Másolás új néven
+Kopiuje ze zmianâ nazwy
 ; Copy with new names
 ;
 MSG_FUNC_DESC_DATESTAMP
-A dátum módosítása 
+Zmienia datë modyfikacji plików
 ; Change datestamp of files
 ;
 MSG_FUNC_DESC_DELETE
-Kiválasztott állományok törlése
+Kasuje zaznaczone pliki
 ; Delete selected files
 ;
 MSG_FUNC_DESC_DISKCOPY
-Lemezmásolatok készítése
+Kopiuje caîe dyski
 ; Make copies of disks
 ;
 MSG_FUNC_DESC_ENCRYPT
-Titkosítás
+Szyfruje zawartoôê plików
 ; Encrypt files
 ;
 MSG_FUNC_DESC_FINDFILE
-Állománynevek keresése
+Szuka pliku po podanej nazwie
 ; Search for filenames
 ;
 MSG_FUNC_DESC_FINISHSECTION
-Fenti parancsok befejezése
+Zamyka powyûszy fragment skryptu
 ; Finish above commands
 ;
 MSG_FUNC_DESC_FORMAT
-Lemez formázása
+Formatuje dyski
 ; Format disks
 ;
 MSG_FUNC_DESC_GETSIZES
-Könyvtárméret kiszámítása
+Oblicza wielkoôê katalogu
 ; Calculate directory sizes
 ;
 MSG_FUNC_DESC_ICONINFO
-Ikoninformációk mutatása/módosítása
+Pokazuje/Edytuje ikonki
 ; Show/edit icon information
 ;
 MSG_FUNC_DESC_LEAVEOUT
-Ikonokat kint hagyása a fõablakban
+Wyjmuje obiekt do gîównego okna
 ; Leave objects on main window
 ;
 MSG_FUNC_DESC_LOADBUTTONS
-Gombok betöltése
+Wczytuje bank przycisków
 ; Load a button file
 ;
 MSG_FUNC_DESC_MAKEDIR
-Új könyvtár létrehozása
+Tworzy nowy katalog
 ; Make a new directory
 ;
 MSG_FUNC_DESC_MOVE
-Kiválasztott állományok áthelyezése
+Przenosi zaznaczone pliki
 ; Move selected files
 ;
 MSG_FUNC_DESC_MOVEAS
-Áthelyezés új néven
+Przenosi ze zmianâ nazwy
 ; Move with new names
 ;
 MSG_FUNC_DESC_NONE
-Minden kijelöltet töröl
+Odznacza wszystkie pliki
 ; Deselect all files
 ;
 MSG_FUNC_DESC_PLAY
-Kiválasztott hangok lejátszása
+Odtwarza zaznaczone dúwiëki
 ; Play selected sounds
 ;
 MSG_FUNC_DESC_PRINT
-Kiválasztott állományok nyomtatása
+Drukuje zaznaczone pliki
 ; Print selected files
 ;
 MSG_FUNC_DESC_PROTECT
-Jelzõbitek módosítása
+Zmienia atrybuty
 ; Change file protections
 ;
 MSG_FUNC_DESC_READ
-Szöveges állományok olvasása
+Odczytuje plik tekstowy
 ; Read text files
 ;
 MSG_FUNC_DESC_RENAME
-Kiválasztott állományok átnevezése
+Zmienia nazwë
 ; Rename selected files
 ;
 MSG_FUNC_DESC_RUN
-Kiválasztott programok futtatása
+Uruchamia wybrany program
 ; Run selected programs
 ;
 MSG_FUNC_DESC_SCANDIR
-Könyvtár beolvasása
+Odczytuje katalog
 ; Read a directory
 ;
 MSG_FUNC_DESC_SEARCH
-Szöveg keresése
+Szuka podanego ciâgu znaków
 ; Search for text strings
 ;
 MSG_FUNC_DESC_SELECT
-Kiválasztás minta alapján
+Zaznacza pliki pasujâce do wzorca
 ; Wildcard-select files
 ;
 MSG_FUNC_DESC_SHOW
-Kiválasztott képek megmutatása
+Pokazuje obrazki
 ; Show selected pictures
 ;
 MSG_FUNC_DESC_SMARTREAD
-Automatikus hexa/szövegolvasó
+Pokazuje plik tekst/hex
 ; Auto hex/text viewer
 ;
 MSG_FUNC_DESC_TOGGLE
-Kiválasztás váltogatása
+Zmienia zaznaczenie plików
 ; Toggle selection state
 ;
 MSG_FUNC_DESC_CHECKFIT
-Elférnek az állományok?
+Sprawdza czy pliki sië zmieszczâ
 ; See if files will fit
 ;
 MSG_FUNC_DESC_CLEARSIZES
-Könyvtárméretek törlése
+Kasuje obl. wielkoôci katalogów
 ; Clear directory sizes
 ;
 MSG_FUNC_DESC_ANSIREAD
-Szövegolvasó (ANSI-t támogat)
+Pokazuje tekst (uwzgl. ANSI)
 ; Text viewer (supports ANSI)
 ;
 MSG_FUNC_DESC_HEXREAD
-Hex (bináris) olvasó
+Pokazuje plik binarnie (hex)
 ; Hex (binary) viewer
 ;
 MSG_FUNC_DESC_CLONE
-Kiválasztott objektumok megkettõzése
+Powiela zaznaczone pliki
 ; Duplicate selected files
 ;
 MSG_FUNC_DESC_LOADENVIRONMENT
-Környezet betöltése
+Wczytuje ôrodowisko
 ; Load an Environment file
 ;
 MSG_FUNC_DESC_LOADSETTINGS
-Opciók betöltése
+Wczytuje plik z opcjami
 ; Load an Options file
 ;
 MSG_FUNC_DESC_PARENT
-Szülõ könyvtár olvasása
+Oczytuje katalog nadrzëdny
 ; Read parent directory
 ;
 MSG_FUNC_DESC_ROOT
-Gyökérkönyvtár olvasása
+Oczytuje katalog gîówny
 ; Read root directory
 ;
 MSG_FUNC_DESC_USER
-Állománytípus-funkció végrehajtása
+Wyk. funkcje okr. w Rodzajach Plików
 ; Execute File Type function
 ;
 MSG_FUNC_DESC_DEVICELIST
-Eszközök és hozzárendelések
+Pokazuje urzâdzenia i przypisania
 ; Show devices and assigns
 ;
 MSG_FUNC_DESC_BUFFERLIST
-Tárolt könyvtárak listája
+Pokazuje listë buforowanych katalogów
 ; Show cached directories
 ;
 MSG_FUNC_DESC_VERIFY
-Jóváhagyandó kérdés
+Prosi o potwierdzenie
 ; Ask for confirmation
 ;
 MSG_FUNC_DESC_PRINTDIR
-Könyvtárlisták nyomtatása
+Drukuje zawartoôê katalogu
 ; Print directory listings
 ;
 MSG_FUNC_DESC_SET
-Változó beállítása
+Ustawia coô
 ; Set something
 ;
 MSG_FUNC_DESC_CLOSEBUTTONS
-Gombcsoport bezárása
+Zamyka bank przycisków
 ; Close a button bank
 ;
 MSG_FUNC_DESC_QUIT
-Kilépés a Directory Opus-ból
+Koïczy pracë DOpusa 5
 ; Quit Directory Opus 5
 ;
 MSG_FUNC_DESC_HIDE
-A Directory Opus elrejtõzik
+Ikonifikuje Directory Opusa
 ; Hide Directory Opus
 ;
 MSG_FUNC_DESC_REVEAL
-Elõbújás (ha a program rejtve volt)
+Otwiera DOpusa (jeôli byî zikonifikowany)
 ; Reveal Directory Opus (when hidden)
 ;
 MSG_FUNC_DESC_RESELECT
-Utoljára használt állományok kiválasztása
+Ponownie zaznacza ostatnio uûywane pliki
 ; Reselect last-used files
 ;
 MSG_FUNC_DESC_MAKELINK
-Link létrehozása egy objektumhoz
+Tworzy link do pliku
 ; Make a link to a file
 ;
 MSG_FUNC_DESC_MAKELINKAS
-Új link létrehozása új néven
+Tworzy link z nowâ nazwâ
 ; Make a link with a new name
 ;
 MSG_FUNC_DESC_ASSIGN
-Hozzárendelés
+Tworzy przypisanie
 ; Make an assign
 ;
 MSG_FUNC_DESC_CONFIGURE
-Listaablak-megjelenés beállítása
+Konfiguruje opcje listera
 ; Configure lister display
 ;
 MSG_FUNC_DESC_CLI
-Belsõ parancsértelmezõ (CLI)
+Wewnëtrzny interpreter poleceï
 ; Internal Command Line Interpreter
 ;
 MSG_FUNC_DESC_SETBACKGROUND
-Kiválasztás háttérképként
+Jako obrazek tîa
 ; Set as background picture
 ;
 MSG_FUNC_DESC_RESET
@@ -1742,218 +1760,219 @@ Stop Filetype Sniffer
 ; Stop Filetype Sniffer
 ;
 MSG_ICON_GROUP
-Programcsoportok
+Grupy
 ; Program Groups
 ;
 MSG_GROUP_ENTER_NAME
-Újra
+_Powtórz
 ; Enter Program Group Name
 ;
 MSG_RXERR_1
-A szûrõk kiszûrték az állományt
+Plik odrzucony przez filtry
 ; File rejected by filters
 ;
 MSG_RXERR_5
-Érvénytelen beállítás/lekérdezés
+Invalid set/query item
 ; Invalid set/query item
 ;
 MSG_RXERR_6
-Érvénytelen név vagy kulcsszó
+Bîëdna nazwa lub sîowo kluczowe
 ; Invalid name or keyword
 ;
 MSG_RXERR_8
-Érvénytelen hívás (trap)
+Invalid trap
 ; Invalid trap
 ;
 MSG_RXERR_10
-Érvénytelen listaablak-azonosító
+Invalid lister handle
 ; Invalid lister handle
 ;
 MSG_RXERR_12
-Érvénytelen eszköztár
+Invalid toolbar
 ; Invalid toolbar
 ;
 MSG_RXERR_13
-Érvénytelen útvonal
+Bîëdna ôcieûka dostëpu
 ; Invalid path
 ;
 MSG_RXERR_14
-Nem találtam meg az objektumot
+Obiekt nie znaleziony
 ; Object not found
 ;
 MSG_RXERR_15
-Nincs elég memória
+Zbyt maîo wolnej pamiëci
 ; No memory
 ;
 MSG_RXERR_20
-Nem tudom megnyitni a listaablakot
+Nie mogë otworzyê listera
 ; Unable to open lister
 ;
 MSG_RXERR_UNKNOWN
-Ismeretlen típusú hiba
+Nieznany kod bîëdu
 ; Unknown error code
 ;
 MSG_DESKTOP_REALLY_DELETE
-VIgyázat: amit letöröl, az elvész.\n\
-Biztos, hogy letöröljem ezeket?\n\n
+Uwaga: nieîatwo odzyskaê to\n\
+co teraz skasujesz! Na pewno chcesz skasowaê:\n\n
 ; Warning: you cannot get back\nwhat you delete! OK to delete:\n\n
 ;
 MSG_DESKTOP_DELETE_GROUPS
-%ld programcsoport
+%ld grup programów
 ; %ld program group(s)
 ;
 MSG_DESKTOP_DELETE_ASSIGNS
-Hagyd abba
+P_rzerwij
 ; %ld assign(s)
 ;
 MSG_DESKTOP_DELETE_GROUP_OBJECTS
-Cseréld le
+_Zastâp
 ; %ld group object(s)
 ;
 MSG_DESKTOP_DELETE_DESKTOP_FILES
-Hagyd ki
+P_omiï
 ; %ld file(s)
 ;
 MSG_DESKTOP_DELETE_DESKTOP_DIRS
-Mindet hagyd ki
+Pomiï _wszystko
 ; %ld dir(s)
 ;
 MSG_REPLACE_SAME
-Úgy tûnik, ez a két állomány megegyezik.
+Pliki wydajâ sië byê identyczne
 ; The two files appear to be the same.
 ;
 MSG_REPLACE_VERSION_SAME
-Mindkét állomány ugyanaz a változat (%ld.%ld).
+Oba pliki sâ w tej samej wersji (%ld.%ld).
 ; Both files are the same version (%ld.%ld).
 ;
 MSG_REPLACE_VERSION_NEWER
-Az új állomány a késõbbi változat (%ld.%ld).
+Nowy plik jest w nowszej wersji (%ld.%ld).
 ; The new file is a later version (%ld.%ld).
 ;
 MSG_REPLACE_VERSION_OLDER
-Az új állomány a korábbi változat (%ld.%ld).
+Nowy plik jest w starszej wersji (%ld.%ld).
 ; The new file is an earlier version (%ld.%ld).
 ;
 MSG_REPLACE_SIZE_BIGGER
-Az új állomány nagyobb, mint a régi (%ld byte-tal).\n
+Nowy plik jest dîuûszy o %ld bajtów.\n
 ; The new file is larger than the old one (by %ld bytes).\n
 ;
 MSG_REPLACE_SIZE_SMALLER
-Az új állomány kisebb, mint a régi (%ld byte-tal).\n
+Nowy plik jest krótszy o %ld bajtów.\n
 ; The new file is smaller than the old one (by %ld bytes).\n
 ;
 MSG_REPLACE_SIZE_SAME
-A két állomány mérete megegyezik (%ld byte).\n
+Plik sâ identycznej dîugoôci (%ld bajtów).\n
 ; The two files are the same size (%ld bytes).\n
 ;
 MSG_REPLACE_DATE_NEWER
-Az új állomány késõbbi dátumú (%s).\n
+Nowy plik ma aktualniejszâ datë (%s).\n
 ; The new file has a more recent date (%s).\n
 ;
 MSG_REPLACE_DATE_OLDER
-Az új állomány korábbi dátumú (%s).\n
+Nowy plik jest wczeôniejszy (%s).\n
 ; The new file has an earlier date (%s).\n
 ;
 MSG_REPLACE_DATE_SAME
-Az állományokat ugyanakkor hozták létre.\n
+Pliki majâ identycznâ datë utworzenia.\n
 ; The files have the same creation date.\n
 ;
 MSG_FILE_ALREADY_EXISTS
-A(z) "%s" állomány már létezik, és lecserélném.\n
+Plik "%s" istnieje i zostanie zastâpiony.\n
 ; File '%s' exists and would be replaced.\n
 ;
 MSG_BRIEF_FILE_EXISTS
-A(z) "%s" állomány már létezik. Lecseréljem?\n\n\
-Új - mérete: %7ld,  dátuma: %19s%s\n\
-Régi - mérete: %7ld  dátuma: %19s%s
+Plik "%s" juû istnieje.\n\
+Chcesz go zastâpiê?\n\n\
+Nowy - Rozmar: %7ld  Data: %19s%s\n\
+Stary - Rozmar: %7ld  Data: %19s%s
 ; File '%s' already exists. Replace it?\n\n\
 ; New - Size : %7ld  Date : %19s%s\n\
 ; Old - Size : %7ld  Date : %19s%s
 ;
 MSG_REPLACE_VER
-  Változat: %2ld.%ld
+  Wer: %2ld.%ld
 ;   Ver : %2ld.%ld
 ;
 MSG_REPLACE_VER_UNKNOWN
-  Változat: ?????
+  Wer: ?????
 ;   Ver : ?????
 ;
 MSG_GET_VERSION
-Változat
+Wersja
 ; Version
 ;
 MSG_REPLACE_VERSION_TITLE
-Keresem a verzióadatokat...
+Szukam informacji o wersji...
 ; Looking for version info...
 ;
 MSG_LISTER_TITLE_NAME
-Név
+Nazwa
 ; Name
 ;
 MSG_LISTER_TITLE_SIZE
-Méret
+Rozmiar
 ; Size
 ;
 MSG_LISTER_TITLE_PROTECT
-Jelzõbitek
+Atrybuty
 ; Access
 ;
 MSG_LISTER_TITLE_DATE
-Dátum
+Data
 ; Date
 ;
 MSG_LISTER_TITLE_COMMENT
-Megjegyzés
+Komentarz
 ; Comment
 ;
 MSG_LISTER_TITLE_FILETYPE
-Típus
+Typ
 ; Type
 ;
 MSG_LISTER_TITLE_OWNER
-Tulajdonos
+Wîaôciciel
 ; Owner
 ;
 MSG_LISTER_TITLE_GROUP
-Csoport
+Grupa
 ; Group
 ;
 MSG_LISTER_TITLE_NETPROT
-Hálózat
+Sieê
 ; Net
 ;
 MSG_LISTER_TITLE_VERSION
-Változat
+Wersja
 ; Version
 ;
 MSG_LISTER_TITLE_VOLUME
-Kötet
+Wolumen
 ; Volume
 ;
 MSG_LISTER_TITLE_DEVICE
-Eszköz
+Urzâdzenie
 ; Device
 ;
 MSG_LISTER_TITLE_FULL
-tele
+Peîen
 ; Full
 ;
 MSG_LISTER_TITLE_FREE
-szabad
+Wolne
 ; Free
 ;
 MSG_LISTER_TITLE_USED
-foglalt
+W uûyciu
 ; In Use
 ;
 MSG_CLI_HELP
-A "help list" paranccsal megkapja a parancsok listáját,\n\
-a "help <parancs>" utasítással példát kap az adott parancshoz.\n\
-A "quit" utasítással kiléphet a parancsértelmezõbõl.\n\n\
-Írjon be egy belsõ parancsot paraméterekkel,\n\
-ha végre akarja hajtatni. DOpus ARexx parancs végrehajtásához\n\
-írjon egy + szimbólumot a parancs elé; ha pedig\n\
-párhuzamosan kívánja futtatni, fûzzön hozzá egy & jelet.\n
+Type 'help list' for a list of commands,\n\
+or 'help <command>' for a command template.\n\
+Type 'quit' to exit the CLI.\n\n\
+Enter an internal command with arguments to\n\
+execute it. To execute a DOpus ARexx command,\n\
+enter a + symbol before the command. Append a &\n\
+if you want the command to be asynchronous.\n
 ; Type 'help list' for a list of commands,\n\
 ; or 'help <command>' for a command template.\n\
 ; Type 'quit' to exit the CLI.\n\n\
@@ -1963,188 +1982,189 @@ párhuzamosan kívánja futtatni, fûzzön hozzá egy & jelet.\n
 ; if you want the command to be asynchronous.\n
 ;
 MSG_CLI_NO_TEMPLATE
-A parancshoz nincs példa.
+Polecenie nie ma wzorca
 ; Command has no template.
 ;
 MSG_CLI_TYPE_HELP
-Segítséget a "help" paranccsal kaphat.\n
+Napisz 'help' aby uzyskaê pomoc.\n
 ; Type 'help' for help.\n
 ;
 MSG_CLI_BAD_CMD
-Ismeretlen parancs.
+Nieznane polecenie.
 ; Unknown command.
 ;
 MSG_ICONPOS_WINDOW
-Terület az ikonok számára
+Obszar umieszczania ikonek
 ; Icon positioning area
 ;
 MSG_ICONPOS_INSTRUCTIONS
-Kattintson és igazítsa az ablakot arra a területre, ahol az ikonok\n\
-megjelenhetnek. Ha kész, nyomja meg az OK vagy a Mégsem gombot.
+Kliknij na pulpicie, a nastëpnie ustaw okno w miejsu\n\
+przeznaczonym na ikonki oraz dopasuj rozmiary.\n\
+Aby skoïczyê kliknij "Ok" lub "Poniechaj"
 ; Click and drag to mark areas where icons can be positioned.\n\
 ; Click OK or Cancel when finished.
 ;
 MSG_ICONPOS_APPICON
-AppIkonok
+AppIkonki
 ; AppIcons
 ;
 MSG_ICONPOS_DISKS
-Lemezek
+Dyski
 ; Disks
 ;
 MSG_ICONPOS_LISTERS
-Listák/gombok
+Lister/Przyciski
 ; Listers/Buttons
 ;
 MSG_ICONPOS_PRIORITY
-Prioritás
+Priorytet
 ; Priority
 ;
 MSG_ICONPOS_GROUPS
-Csoportok
+Grupy
 ; Groups
 ;
 MSG_ICONPOS_LEFTOUT
-Kint hagyott ikonok
+Ikonki wyjëte
 ; Left-outs
 ;
 MSG_COMMAND_SAVE
-Adjon meg egy nevet a parancs elmentéséhez
+Zapisz polecenie
 ; Enter Filename To Save Command
 ;
 MSG_SAVING_COMMAND
-elmentem a parancsot
+zapisujë polecenie
 ; saving command
 ;
 MSG_EDIT_COMMAND
-Parancs módosítása...
+Edytuj polecenie...
 ; Edit Command...
 ;
 MSG_COMMAND_DESCRIPTION
-Írja be a parancsot és paramétereit.
+Enter a description for this command.
 ; Enter a description for this command.
 ;
 MSG_COMMAND_LEAVEOUT
-Hagyd kint a munkaasztalon
+Leave out on desktop
 ; Leave out on desktop
 ;
 MSG_START_APPEARANCE
-Megjelenés
+Wyglâd
 ; Appearance
 ;
 MSG_START_BORDERLESS
-Keret
+Ramka
 ; Border
 ;
 MSG_START_DRAGBAR_LEFT
-Bal
+Uchwyt po lewej
 ; Left
 ;
 MSG_START_DRAGBAR_RIGHT
-Jobb
+Uchwyt po prawej
 ; Right
 ;
 MSG_START_IMAGE
-Kép cseréje...
+Zmieï obrazek...
 ; Change Image...
 ;
 MSG_START_LABEL
-Cimke cseréje...
+Zmieï etykietë...
 ; Change Label...
 ;
 MSG_START_SELECT_IMAGE
-Válassza ki a képet a start menühöz
+Wybierz obrazek dla menu Start
 ; Select Image For Start Menu
 ;
 MSG_START_SELECT_LABEL
-Adja meg a start menü nevét
+Podaj etykietë menu Start
 ; Enter label for Start Menu.
 ;
 MSG_OPEN_STARTMENU_MENU
-Próbáld újra
+_Powtórz
 ; Load Start Menu...
 ;
 MSG_START_SELECT_MENU
-Újra
+_Powtórz
 ; Select Start Menu To Load
 ;
 MSG_START_FONT
-Hagyd abba
+P_rzerwij
 ; Change Font...
 ;
 MSG_START_SELECT_FONT
-Cseréld le
+_Zastâp
 ; Select Font For Start Menu
 ;
 MSG_START_SCALING
-Hagyd ki
+P_omiï
 ; Scale Images
 ;
 MSG_START_DRAGBAR
-Mindet hagyd ki
+Pomiï _wszystko
 ; Drag Bar
 ;
 MSG_START_DRAGBAR_OFF
-Mindet
+Wszystko
 ; Off
 ;
 MSG_START_LABEL_FONT
-Lépj ki
+_Skoïcz
 ; Change Label Font...
 ;
 MSG_START_PICTURE
-Mentsd el
+Zapisz
 ; Change Background...
 ;
 MSG_START_SELECT_PICTURE
-Bezárás
+Zamknij
 ; Select Background Picture For Start Menu
 ;
 MSG_KEYFINDER_TITLE
-Billentyûkeresõ
+Przeszukiwacz klawiszy...
 ; Key Finder
 ;
 MSG_KEYFINDER_KEY
-Billentyû:
+_Klawisze
 ; _Key:
 ;
 MSG_KEYFINDER_FOUND
-Találat:
+Wynik
 ; Found:
 ;
 MSG_KEYFINDER_TYPE_INVALID
-Érvénytelen billentyû.
+Niepoprawne klawisze!
 ; Invalid key!
 ;
 MSG_KEYFINDER_TYPE_NONE
-Nem találtam megfelelõt.
+Nie znaleziono tej sekwencji klawiszy!
 ; No match found!
 ;
 MSG_KEYFINDER_TYPE_BUTTONS
-Egy gombcsoportban találtam megfelelõt.
+Znaleziono w banku przycisków.
 ; Match found in a Button Bank.
 ;
 MSG_KEYFINDER_TYPE_TOOLBAR
-Egy listaablak-eszköztárban találtam megfelelõt.
+Znaleziono w pasku narzëdzi listera.
 ; Match found in Lister Toolbar.
 ;
 MSG_KEYFINDER_TYPE_LISTERMENU
-Egy listaablak-menüben találtam megfelelõt.
+Znaleziono w menu listera.
 ; Match found in Lister Menu.
 ;
 MSG_KEYFINDER_TYPE_MENU
-Egy felhasználói menüben találtam megfelelõt.
+Znaleziono w menu uûytkownika.
 ; Match found in User Menu.
 ;
 MSG_KEYFINDER_TYPE_START
-Egy start menüben találtam megfelelõt.
+Znaleziono w menu Start.
 ; Match found in a Start Menu.
 ;
 MSG_KEYFINDER_TYPE_HOTKEYS
-A hívógombok között találtam megfelelõt.
+Znaleziono w klawiszach wywoîujâcych.
 ; Match found in Hotkeys.
 ;
 MSG_KEYFINDER_TYPE_SCRIPTS
-Egy script-ben találtam megfelelõt.
+Znaleziono w definicjach skryptów.
 ; Match found in Scripts.
 ;

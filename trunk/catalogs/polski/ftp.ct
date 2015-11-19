@@ -1,77 +1,77 @@
-## version $VER: ftp.catalog 5.9 (23.9.97) Készítette Miklós Árpád
+## version $VER: ftp.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.pl>
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_FTP_ADDRBOOK
-FTP címlista megmutatása
+Wyôwietla spis adresów FTP
 ; Show FTP address book
 ;
 MSG_FTP_CONNECT_SITE
-Rákapcsolódás az FTP állomásra
+Îâczy sië z serwerem FTP
 ; Connect to FTP site
 ;
 OBSOLETE001
-Könyvtárváltás az FTP állomáson
+Zmienia katalog na serwerze
 ; 
 ;
 OBSOLETE002
-Másolás az FTP állomásról
+Pobiera pliki z serwera
 ; 
 ;
 OBSOLETE003
-Átnevezés az FTP állomáson
+Zmienia nazwë plikom na serwerze
 ; 
 ;
 OBSOLETE004
-Törlés az FTP állomásról
+Kasuje pliki na serwerze
 ; 
 ;
 MSG_FTP_COMMAND
-Parancs az FTP szervernek
+Wysyîa polecenia do serwera FTP
 ; Send command to FTP site
 ;
 MSG_FTP_SETVAR
-FTP változó beállítása
+Ustawia zmiennâ FTP
 ; Set FTP variable
 ;
 MSG_FTP_QUIT
-Kilépés az OpusFTP-bõl
+Koïczy pracë moduîu FTP
 ; Quit OpusFTP
 ;
 MSG_FTP_OKAY
-OK
+_Ok
 ; OK
 ;
 MSG_FTP_CANCEL
-Mégsem
+Ponie_chaj
 ; Cancel
 ;
 OBSOLETE005
-OK|Mégsem
+_Ok|Ponie_chaj
 ; 
 ;
 OBSOLETE006
-OK|Anonymous|Mégsem
+_Ok|_Anonimowy|Ponie_chaj
 ; 
 ;
 OBSOLETE007
-Cseréld le|Hagyd ki|Folytasd|Mégsem
+_Zastâp|P_omiï|_Wznów|_Przerwij
 ; 
 ;
 OBSOLETE008
-Cseréld le|Mindet cseréld|Hagyd ki|Hagyd ki mind|Elég volt
+_Zastâp|Zastâp _wszystkie|P_omiï|Pomiï w_szystkie|_Przerwij
 ; 
 ;
 OBSOLETE009
-Egy állományt|Minden állományt|Elég volt
+_Jeden plik|_Wszystkie pliki|_Przerwij
 ; 
 ;
 OBSOLETE010
-Nevezd át|Elég volt
+_Zmieï nazwë|_Przerwij
 ; 
 ;
 OBSOLETE011
-Töröld|Mindet töröld|Mégsem
+_Kontynuuj|S_kasuj wszystkie|Ponie_chaj
 ; 
 ;
 OBSOLETE012
@@ -79,286 +79,288 @@ A
 ; 
 ;
 OBSOLETE013
-F 
+U 
 ; 
 ;
 OBSOLETE014
-Opus FTP címlista
+Spis adresów FTP
 ; 
 ;
 MSG_FTP_CONNECTING
-Kapcsolat kiépítése...
+Próbujë nawiâzaê poîâczenie...
 ; Connecting...
 ;
 MSG_FTP_LOGGING_IN
-Bejelentkezés:
+Logujë sië jako
 ; Logging in as
 ;
 MSG_FTP_ENTER_HOSTNAME
-Adja meg a host nevét
+Podaj nazwë wezîa
 ; Enter host name
 ;
 MSG_FTP_ENTER_USERNAME
-Adja meg a felhasználó nevét
+Podaj idenyfikator uûytkownika
 ; Enter user name
 ;
 MSG_FTP_ENTER_PASSWORD
-Adja meg a jelszót
+Podaj hasîo
 ; Enter password
 ;
 MSG_FTP_CANT_LOG_IN_TO
-Nem tudok bejelentkezni ide:
+Nie mogë sië zalogowaê do
 ; Cannot log in to
 ;
 MSG_FTP_NOT_AVAILABLE
-már nem áll rendelkezésre
+nie jest dîuûej dostëpny
 ; no longer available
 ;
 OBSOLETE015
-másolás
+skopiowania
 ; 
 ;
 MSG_FTP_ENTER_NEW_FILENAME
-Adja meg az új nevet
+Podaj nowâ nazwë pliku
 ; Enter new filename.
 ;
 OBSOLETE016
-Fogadom az adatokat...
+Pobieram pliki...
 ; 
 ;
 OBSOLETE017
-Tárolom az adaokat...
+Wysyîam pliki...
 ; 
 ;
 MSG_FTP_ENTER_FILENAME_TO
-Adjon meg egy nevet
+Podaj nazwë pliku do
 ; Enter filename to
 ;
 MSG_FTP_SKIP
-Hagyd ki
+Pomiï
 ; Skip
 ;
 MSG_FTP_REPLACE
-Cseréld le
+Zastâp
 ; Replace
 ;
 MSG_FTP_RESUME
-Folytasd
+Wznów
 ; Resume
 ;
 MSG_FTP_FILE
-Állomány
+Plik
 ; File
 ;
 MSG_FTP_ALREADY_EXISTS
-már létezik
+juû istnieje
 ; already exists
 ;
 MSG_FTP_NEWSIZE
-Új - mérete
+Nowy  - Dîugoôê
 ; New - Size
 ;
 MSG_FTP_OLDSIZE
-Régi - méreze
+Stary - Dîugoôê
 ; Old - Size
 ;
 MSG_FTP_DATE
-Dátum
+Data
 ; Date
 ;
 OBSOLETE018
-Lecseréli, vagy folytatja a le/feltöltést?
+Czy chcesz go zastâpiê\n\
+czy kontynuowaê pobieranie?
 ; 
 ;
 MSG_FTP_REPLACE_IT
-Lecseréli?
+Zastâpiê plik?
 ; Replace it?
 ;
 OBSOLETE019
-minden kiválasztottat?
+wszystkie zaznaczone pliki?
 ; 
 ;
 MSG_FTP_XFER_BYTES
-byte
+bajtów
 ; bytes
 ;
 MSG_FTP_ENTER_DIRNAME
-Adjon meg a könyvtár nevét
+Podaj nazwë katalogu
 ; Enter directory name
 ;
 MSG_FTP_MAKEDIR_ERROR
-Hiba a könyvtár létrehozása közben
+Wystâpiî bîâd podczas tworzenia katalogu
 ; An error occured creating the directory
 ;
 OBSOLETE020
-átnevezés
+zmiany nazwy
 ; 
 ;
 MSG_FTP_RENAME_ERROR
-Hiba az objektum átnevezése közben
+Wystâpiî bîâd podczas zmiany nazwy
 ; An error occured renaming the entry
 ;
 OBSOLETE021
-törlés
+skasowania
 ; 
 ;
 MSG_FTP_WARNING_CANT_GET_BACK
-Vigyázat: a letörölt adatokat
+Uwaga! nie bëdziesz mógî odzyskaê tego
 ; Warning: you cannot get back
 ;
 MSG_FTP_OK_TO_DELETE
-nem kaphatja vissza. Valóban
+co teraz skasujesz! Na pewno chcesz skasowaê:
 ; what you delete! OK to delete
 ;
 MSG_FTP_FILES_AND
-le kívánja törölni az állományokat
+plik(ów) oraz
 ; file(s) and
 ;
 OBSOLETE022
-és a(z üres) könyvtárakat
+katalog(ów) (jeôli sâ puste)
 ; 
 ;
 MSG_FTP_FROM
-innen:
+z
 ; from
 ;
 OBSOLETE023
-Hiba törlés közben
+Wystâpiî bîâd podczas kasowania danych
 ; 
 ;
 MSG_FTP_RETRIEVING_FILE
-Fogadom az adatokat...
+Pobieram plik...
 ; Retrieving file...
 ;
 OBSOLETE024
-Listázom a könyvtárat...
+Odczytujë zawartoôê katalogu...
 ; 
 ;
 MSG_FTP_CHANGING_DIR
-Könyvtárat váltok...
+Zmieniam katalog...
 ; Changing directory...
 ;
 OBSOLETE025
-Adja meg az új aktív könyvtár nevét
+Podaj nazwë katalogu do którego chcesz przejôê
 ; 
 ;
 MSG_FTP_PATH_NOT_FOUND
-Nem találom ezt az elérési utat az FTP állomáson
+Podany katalog nie istnieje na serwerze
 ; Path not found on FTP site
 ;
 MSG_FTP_CMD_TO_SEND
-Adja meg az FTP parancsot
+Podaj polecenie FTP do wysîania
 ; Enter FTP command to send
 ;
 MSG_FTP_SENDING_CMD
-Küldöm az FTP parancsot...
+Wysyîam polecenie FTP...
 ; Sending FTP command...
 ;
 MSG_FTP_LOCAL_VAR
-Adja meg a helyi változó új értékét
+Podaj nowâ wartoôê zmiennej lokalnej
 ; Enter new value for local variable
 ;
 MSG_FTP_DELETING
-Törlök...
+Kasujë...
 ; Deleting...
 ;
 MSG_FTP_RENAMING
-Átnevezek...
+Zmieniam nazweë...
 ; Renaming...
 ;
 MSG_FTP_COULD_NOT_CONNECT
-(A kapcsolatfelvétel sikertelen volt)
+(Nie mogë nawiâzaê poîâczenia)
 ; (Could not connect)
 ;
 MSG_FTP_USERNAME_FAILED
-(Hibás felhasználónév)
+(Bîëdna nazwa uûytkownika)
 ; (User name failed)
 ;
 MSG_FTP_PASSWORD_FAILED
-(Hibás jelszó)
+(Niepoprawne hasîo)
 ; (Password failed)
 ;
 MSG_FTP_SERVER_CLOSED_CONN
-(A szerver megszakította a kapcsolatot)
+(Serwer zamknâî polâczenie)
 ; (Server closed connection)
 ;
 MSG_FTP_NO_ERR
-(Nem történt hiba)
+(No error detected)
 ; (No error detected)
 ;
 MSG_FTP_INT_SYS_CALL
-(Megszakadt egy rendszerhívás)
+(Interrupted system call)
 ; (Interrupted system call)
 ;
 MSG_FTP_PERMISSION_DENIED
-(Engedély megtagadva)
+(Brak dostëpu)
 ; (Permission denied)
 ;
 MSG_FTP_PROTO_NOT_SUPP
-(Nem támogatott protokoll)
+(Nie obsîugiwany protokóî)
 ; (Protocol not supported)
 ;
 MSG_FTP_CANT_ASSIGN_ADDR
-(Nem tudom értelmezni a kért címet)
+(Cannot assign requested address)
 ; (Cannot assign requested address)
 ;
 MSG_FTP_CONN_RESET_PEER
-(A partner újraindította a kapcsolatot)
+(Connection reset by peer)
 ; (Connection reset by peer)
 ;
 MSG_FTP_TIMEOUT
-(Idõtúllépés történt)
+(Przekroczenie czasu)
 ; (Connection timed out)
 ;
 MSG_FTP_CONN_REFUSED
-(Kapcsolatfelvétel megtagadva)
+(Brak zgody na poîâczenie)
 ; (Connection refused)
 ;
 MSG_FTP_NO_ROUTE
-(Nincs út a host-hoz)
+(Nie mogë znaleúê serwera)
 ; (No route to host)
 ;
 MSG_ERR_XX
-(Hibakód: xx)
+(Bîâd xx)
 ; (Error xx)
 ;
 MSG_MAIN_NEED_TCPIP
-Az OpusFTP haszálatához egy TCP/IP\n\
-programnak (AmiTCP, AS225, Inet\n\
-vagy MLink) futnia kell.
+Aby uûywaê OpusFTP musisz zainstalowaê\n\
+AmiTCP, AS225, Miami, INet lub podobny\n\
+pakiet TCP/IP!
 ; You must have a TCP/IP stack\nsuch as AmiTCP, AS225, INet,\nMiami, MLink, or TermiteTCP\nrunning to use\nOpusFTP
 ;
 MSG_MAIN_THE
-A(z)
+Polecenie
 ; The
 ;
 MSG_MAIN_CMD_NOT_SUPP
-parancsot\n\
-az OpusFTP még nem támogatja.
+\n\
+nie jest aktualnie obsîugiwane\n\
+przez moduî OpusFTP
 ; command\nis not currently supported\nby OpusFTP
 ;
 MSG_FTP_TITLE
-Opus FTP állomások
+Spis serwerów
 ; Opus FTP Sites
 ;
 MSG_SITE_DETAILS
-Az FTP állomás adatai
+Detale
 ; Site Details
 ;
 MSG_OPTIONS_TITLE
-Opus FTP beállítások
+Opcje
 ; Opus FTP Options
 ;
 MSG_FTP_SITES
-FTP állomások...
+Lista serwerów...
 ; FTP Sites...
 ;
 MSG_SITE_NAME
-Név
+Nazwa
 ; Name
 ;
 MSG_SITE_HOST
-Host
+Serwer
 ; Host
 ;
 MSG_SITE_PORT
@@ -370,43 +372,43 @@ Anon
 ; Anon
 ;
 MSG_FTP_CONNECT
-Kapcsola_t
+_Poîâcz sië
 ; Connec_t
 ;
 MSG_FTP_SAVE
-_Tárold
+Zapi_sz
 ; _Save
 ;
 MSG_FTP_EDIT
-Sz_erkeszt
+_Edytuj
 ; _Edit
 ;
 MSG_FTP_NEW
-_Új
+_Nowy
 ; Ne_w
 ;
 MSG_DELETE
-_Töröl
+S_kasuj
 ; _Del
 ;
 MSG_OPTIONS
-_Opciók
+_Opcje
 ; _Options
 ;
 MSG_FTP_OK
-_OK
+_Ok
 ; _Ok
 ;
 MSG_FTP_CANCEL_ULINE
-_Mégsem
+Ponie_chaj
 ; _Cancel
 ;
 MSG_EDIT_NAME
-Né_v
+_Nazwa
 ; _Name
 ;
 MSG_EDIT_HOST
-_Host
+_Serwer
 ; _Host
 ;
 MSG_EDIT_PORT
@@ -414,35 +416,35 @@ _Port
 ; _Port
 ;
 MSG_EDIT_ANON
-A_non
+_Anon
 ; _Anon
 ;
 MSG_EDIT_USER
-_Felh.
+_Uûyt.
 ; _User
 ;
 MSG_EDIT_PASSWORD
-Jel_szó
+Ha_sîo
 ; Pa_ss
 ;
 MSG_EDIT_DIR
-_Ktr
+_Katalog
 ; _Dir
 ;
 OBSOLETE26
-Anon belé_pés
+_Hasîo anon
 ; 
 ;
 MSG_LOG_FILE
-N_apló
+_Plik logu
 ; Log _File
 ;
 MSG_LOG_ON
-N_aplózás
+_Log
 ; _Log
 ;
 MSG_UPDATE
-_Frissítés
+Akt_ual.
 ; _Update
 ;
 MSG_DEBUG
@@ -450,23 +452,23 @@ _Debug
 ; _Debug
 ;
 MSG_TIMEOUT
-_Idõtúllépés
+_Maks. czas
 ; _Timeout
 ;
 MSG_SHOW_INDEX
-Inde_x
+_Indeks
 ; Inde_x
 ;
 MSG_AUTO_INDEX
-Au_to
+Aut_o
 ; Aut_o
 ;
 MSG_INDEX_SIZE
-_Max.méret
+Maks. _dî.
 ; _Max Size
 ;
 MSG_SECONDS
-mp
+sek
 ; sec
 ;
 MSG_KILOBYTES
@@ -474,59 +476,60 @@ KB
 ; kb
 ;
 MSG_SEND_NOOP
-_NOOP-ok
+NOOPs
 ; NOOPs
 ;
 MSG_BADSITE
-Érvénytelen állomásadatok.\n\
-A host IP vagy szöveges címét meg kell adnia.
+Niepoprawne dane dot. serwera\n\
+Musisz podaê jego adres lub numer IP
 ; Invalid Site Details\nYou must enter a Host IP or Address.
 ;
 MSG_BADVER
-Ehhez az OpusFTP modulhoz a DOpus 5.51-es\n\
-vagy újabb változata szükséges.
+Ten moduî FTP wymaga DOpusa\n\
+w wersji 5.51 lub nowszej!
 ; This OpusFTP module requires\nDOpus version 5.51 or higher!
 ;
 MSG_QUERYSAVE
-Módosította az FTP beállításokat, de még nem\n\
-mentette el õket. Elmenti a változtatásokat?
+Ustawienia moduîu FTP zostaîy zmienione lecz\n\
+nie zapisane. Czy chcesz je teraz zapisaê?
 ; You have modified the FTP config and not\nsaved it. Would you like to?
 ;
 MSG_FTP_USE
-_Használd
+_Uûyj
 ; _Use
 ;
 MSG_QUERYINDEX
-Megtaláltam a(z) %s állományt (mérete: %ld %s).\n\
-Lehívjam és frissítsem a megjegyzését?
+Znaleziono plik "%s" (%ld %s)\n\
+Pobraê go i zaktualizowaê komentarze?
 ; Found file %s of size %ld %s.\nFetch it and update file comments?
 ;
 MSG_BADHASH
-Sajnálom, de az OpusFTP nem mûködik\n\
-a '#' karakterrel kezdõdõ nevekkel.
+Przykro mi, OpusFTP nie potrafi obsîuûyê plików\n\
+których nazwy rozpoczynajâ sië od znaku '#'.
 ; Sorry, OpusFTP cannot handle files\nbeginning with the '#' character.
 ;
 MSG_FTP_DOS_ERROR
-DOS hiba
+Bîâd DOS-u
 ; DOS error
 ;
 OBSOLETE027
-Írási hiba.\n\
-Talán tele van a lemez?
+Bîâd podczas zapisu.\n\
+Dysk jest peîen?
 ; 
 ;
 MSG_NO_LOCALHOST
-Sajnálom, de @127... localhost-tal\n\
-nem tudok dolgozni.\n
+Przykro mi, nie mogë przesyîaê plików\n\
+uûywajâc localhosts @127...!\n
 ; Site to site transfer is not possible using localhost.\nPlease use the full address instead.
 ;
 OBSOLETE028
-Átvitel folyamatban...
+Trwa przesyîanie pliku...
 ; 
 ;
 OBSOLETE029
-Könyvtárakat is kiválasztott, a rekurzív\n\
-másolás azonban még nem mûködik.
+Zaznaczyîeô takûe katalogi.\n\
+Rekurencyjne kopiowanie nie\n\
+aktualnie jest obsîugiwane.
 ; 
 ;
 MSG_FTP_FTPADD
