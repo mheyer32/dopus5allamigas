@@ -198,6 +198,10 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 			// Get stop time
 			CurrentTime(&sec,&mic);
 
+			// Draw GELs list
+			SortGList(&GUI->drag_screen_rp);
+			DrawDragList(&GUI->drag_screen_rp,&info->window->WScreen->ViewPort,(info->flags&BDIF_CUSTOM_DRAG)?DRAGF_CUSTOM|DRAGF_REMOVE:0);
+
 			// Normal dragging?
 			if (!(info->flags&BDIF_CUSTOM_DRAG))
 			{
@@ -214,10 +218,6 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 					}
 				}
 			}
-
-			// Draw GELs list
-			SortGList(&GUI->drag_screen_rp);
-			DrawDragList(&GUI->drag_screen_rp,&info->window->WScreen->ViewPort,(info->flags&BDIF_CUSTOM_DRAG)?DRAGF_CUSTOM|DRAGF_REMOVE:0);
 
 			// Clear drag flag
 			GUI->flags&=~GUIF_DRAGGING;
