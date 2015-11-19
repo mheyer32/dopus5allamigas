@@ -1,97 +1,97 @@
-## version $VER: read.catalog 2.1 (23.9.97) Készítette Horváth Péter és Miklós Árpád
+## version $VER: read.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.pl>
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_READING_FILE
-A(z) "%s" állományt olvasom...
+Wczytujë plik "%s"...
 ; Reading file '%s'...
 ;
 MSG_CANT_OPEN_FILE
-A(z) "%s" állományt nem tudom megnyitni.
+Nie mogë otworzyê pliku "%s"!°
 ; Unable to open file '%s'!
 ;
 MSG_FILE_TITLE
-%s  %s  %ld sor, %ld byte   mód=%s, tab=%ld
+%s  %s  %ld linii, %ld bajtów  tryb=%s, tab=%ld
 ; %s  %s  %ld lines, %ld bytes   mode=%s, tab=%ld
 ;
 MSG_MENU_FILE
-Állomány
+Plik
 ; File
 ;
 MSG_MENU_NEXT
-Következõ
+Nastëpny
 ; Next
 ;
 MSG_MENU_SEARCH
-Keres
+Szukaj...
 ; Search...
 ;
 MSG_MENU_REPEAT
-Ismételten keres
+Znajdú nastëpny
 ; Repeat Search  
 ;
 MSG_MENU_PRINT
-Nyomtat...
+Wydrukuj...
 ; Print...
 ;
 MSG_MENU_QUIT
-Kilép
+Skoïcz
 ; Quit
 ;
 MSG_MENU_SETTINGS
-Beállítások
+Ustawienia
 ; Settings
 ;
 MSG_MENU_TAB
-Tabulátorméret
+Szerokoôê tabulatora
 ; Tab Size
 ;
 MSG_MENU_SAVE
-Beállításokat ment
+Zapisz
 ; Save Settings
 ;
 MSG_ENTER_SEARCH_STRING
-Írja be a keresett szöveget:
+Wpisz tekst który chcesz odszukaê
 ; Enter text to search for.
 ;
 MSG_SEARCH_NO_CASE
-_k/N mindegy
+_DUÛE = maîe
 ; _Ignore Case
 ;
 MSG_SEARCH_WILD
-_Minta
+_Znaki zastëpcze
 ; _Wildcards
 ;
 MSG_SEARCH_ONLYWORD
-_Csak teljes szavak
+Tylk_o caîe sîowa
 ; _Only Words
 ;
 MSG_SEARCH_REVERSE
-_Keresés visszafelé
+Szukaj _wstecz
 ; _Reverse Search
 ;
 MSG_OK_BUTTON
-OK
+Ok
 ; OK
 ;
 MSG_CANCEL_BUTTON
-Mégsem
+Poniechaj
 ; Cancel
 ;
 MSG_STRING_NOT_FOUND
-A szöveget nem találtam.
+Sekwencja nie znaleziona
 ; String not found.
 ;
 MSG_READ_DESCRIPTION
-Szövegállományok olvasása
+Wyôwietla pliki tekstowe
 ; Read text files
 ;
 MSG_MENU_MODE
-Üzemmód
+Pokaû jako...
 ; Mode
 ;
 MSG_MENU_MODE_NORMAL
-Normál
+Tekst
 ; Normal
 ;
 MSG_MENU_MODE_ANSI
@@ -99,63 +99,63 @@ ANSI
 ; ANSI
 ;
 MSG_MENU_MODE_HEX
-Hexa
+Hex
 ; Hex
 ;
 MSG_MENU_USE_SCREEN
-Saját képernyõ
+Uûyj wîasnego ekranu
 ; Use Screen
 ;
 MSG_MENU_SCREEN_MODE
-Képernyõmód...
+Tryb wyôwietlania...
 ; Pick Screen Mode...
 ;
 MSG_MENU_SELECT_FONT
-Betûtípus...
+Czcionka...
 ; Pick Font...
 ;
 MSG_SCREEN_TITLE
-Directory Opus szövegmegjelenítõ
+Directory Opus · Przeglâdarka tekstu
 ; Directory Opus Text Viewer
 ;
 MSG_MENU_SAVE_AS
-Más néven ment...
+Zapisz jako...
 ; Save As...
 ;
 MSG_ENTER_FILENAME
-Adja meg az állomány nevét
+Podaj nazwë pliku
 ; Enter Filename
 ;
 MSG_IO_ERROR
-I/O hiba
+Bîâd wy/we
 ; IO Error
 ;
 MSG_ERROR_CODE
-DOS hiba: %ld
+Bîâd DOS-u %ld
 ; DOS error %ld
 ;
 MSG_MENU_TO_EDITOR
-Szövegszerkesztõbe...
+Wywoîaj edytor...
 ; To Editor...
 ;
 MSG_MENU_SELECT_EDITOR
-Szövegszerkesztõ...
+Wybierz edytor...
 ; Pick Editor...
 ;
 MSG_OK_CANCEL_BUTTON
-OK|Mégsem
+Ok|Poniechaj
 ; OK|Cancel
 ;
 MSG_SELECT_EDITOR
-Adja meg a szövegszerkesztõ parancssorát.
+Podaj funkcjë wywoîujâcâ edytor tekstu
 ; Enter function to call text editor
 ;
 MSG_READING_FILE_TITLE
-Olvasom az állományt...
+Odczytujë plik...
 ; Reading file...
 ;
 MSG_COUNTING_LINES
-Számolom a sorokat...
+Liczë linie...
 ; Counting lines...
 ;
 MSG_CLOSE

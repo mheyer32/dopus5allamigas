@@ -1,93 +1,93 @@
-## version $VER: icon.catalog 5.6 (01.06.97)
-## codeset 0
-## language deutsch
+## version $VER: icon.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.pl>
+## codeset 5
+## language polski
 ;
 MSG_ICON_TITLE
-Piktogramm Information : %s (%s)
+Informacje: %s (%s)
 ; %s : %s (%s)
 ;
 MSG_ICON_SAVE
-_Speichern
+Zapi_sz
 ; _Save
 ;
 MSG_ICON_NEXT
-_Nächstes
+_Nastëpny
 ; Ne_xt
 ;
 MSG_ICON_CANCEL
-_Abbruch
+Ponie_chaj
 ; _Cancel
 ;
 MSG_BLOCKS
-Blöcke:
+Bloków:
 ; Blocks:
 ;
 MSG_BYTES
-Bytes:
+Bajtów:
 ; Bytes:
 ;
 MSG_STACK
-S_tack:
+S_tos:
 ; St_ack:
 ;
 MSG_LAST_CHANGED
-Zuletzt geändert:
+Ostatnia zmiana:
 ; Last Changed:
 ;
 MSG_COMMENT
-Ko_mmentar:
+_Komentarz:
 ; Co_mment:
 ;
 MSG_TOOLTYPES
-_Tooltypes:
+_Parametry:
 ; _Tool Types:
 ;
 MSG_NEW
-_Neu
+_Nowy
 ; _New
 ;
 MSG_DELETE
-_Löschen
+S_kasuj
 ; _Delete
 ;
 MSG_DEFAULT_TOOL
-Sta_ndardwerkzeug:
+P_rogram:
 ; Defau_lt Tool:
 ;
 MSG_SIZE
-Größe:
+Rozm.:
 ; Size:
 ;
 MSG_USED
-Belegt:
+Zajëte:
 ; Used:
 ;
 MSG_FREE
-Frei:
+Wolne:
 ; Free:
 ;
 MSG_FILE_SYSTEM
-D.Sys:
+System:
 ; F.Sys:
 ;
 MSG_CREATED
-Erzeugt:
+Utworzony:
 ; Created:
 ;
 MSG_VOLUME_IS
-Objektstatus:
+Wolumen
 ; Volume is
 ;
 MSG_ICON_DISK
-Disk
+Wolumen
 ; Volume
 ;
 MSG_ICON_DRAWER
-Verzeichnis
+Katalog
 ; Drawer
 ;
 MSG_ICON_TOOL
-Werkzeug
+Narzëdzie
 ; Tool
 ;
 MSG_ICON_PROJECT
@@ -95,43 +95,43 @@ Projekt
 ; Project
 ;
 MSG_ICON_SCRIPT
-Skript
+Skrypt
 ; Script
 ;
 MSG_ICON_ARCHIVED
-Archiviert
+Zarchiwizowany
 ; Archived
 ;
 MSG_ICON_READABLE
-Lesbar
+Odczytywalny
 ; Readable
 ;
 MSG_ICON_WRITABLE
-Schreibbar
+Zapisywalny
 ; Writable
 ;
 MSG_ICON_EXECUTABLE
-Ausführbar
+Wykonywalny
 ; Executable
 ;
 MSG_ICON_DELETABLE
-Löschbar
+Kasowalny
 ; Deletable
 ;
 MSG_VALIDATING
-Validiere
+Aktualizowany
 ; Validating
 ;
 MSG_WRITE_PROTECTED
-Nur Lesen
+Tylko do odczytu
 ; Read Only
 ;
 MSG_READ_WRITE
-Lesen/Schreiben
+Do odczytu/zapisu
 ; Read/Write
 ;
 MSG_UNREADABLE
-Unlesbar
+Nieodczytywalny
 ; Unreadable
 ;
 MSG_OFS
@@ -159,7 +159,7 @@ FFS (C)
 ; FFS (C)
 ;
 MSG_NDOS
-Non-DOS
+Nie-DOS
 ; Non-DOS
 ;
 MSG_MSDOS
@@ -171,7 +171,7 @@ MSG_UNKNOWN
 ; ???
 ;
 MSG_ICONINFO_DESC
-Zeige/Bearb. Piktogramminformationen
+Pokaû/edytuj ikonkë
 ; Show/edit icon information
 ;
 MSG_AFS
@@ -255,7 +255,7 @@ Edit
 ; Edit
 ;
 MSG_PICK_EDITOR
-Pick Editor ...
+Pick Editor...
 ; Pick Editor...
 ;
 MSG_COPY_OLDICON

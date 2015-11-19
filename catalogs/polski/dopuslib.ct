@@ -1,33 +1,33 @@
-## version $VER: dopuslib.catalog 2.4 (2.10.97) Készítette Horváth Péter és Miklós Árpád
+## version $VER: dopuslib.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.p
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_OK
-OK
+Ok
 ; OK
 ;
 MSG_SELECT_FILE
-Állomány kiválasztása
+Wybierz plik
 ; Select File
 ;
 MSG_SELECT_DIRECTORY
-Könyvtár kiválasztása
+Wybierz katalog
 ; Select Directory
 ;
 MSG_SELECT_FONT
-Betûtípus kiválasztása
+Wybierz czcionkë
 ; Select Font
 ;
 MSG_FONT_DRAWMODE
-Mód:
+Tryb:
 ; Mode:
 ;
 MSG_FONT_TEXT
-Csak szöveg
+Tekst
 ; Text
 ;
 MSG_FONT_FIELD_TEXT
-Szöveg+Háttér
+Tekst+Tîo
 ; Text+Field
 ;
 MSG_SIZE_FIT
@@ -39,31 +39,32 @@ MSG_SIZE
 ; %ld%%
 ;
 MSG_ABORT
-Hagyd abba
+_Przerwij
 ; Abort
 ;
 MSG_FILE_FIT
-9999 a(z) 9999-ból/bõl
+9999 z 9999
 ; 9999 of 9999
 ;
 MSG_FILE
-%ld a(z) %ld-ból/bõl
+%ld z %ld
 ; %ld of %ld
 ;
 MSG_DIRECTORY_OPUS_REQUEST
-Directory Opus kérdezõ
+Directory Opus
 ; Directory Opus Request
 ;
 MSG_UNABLE_TO_OPEN_TOOL
-Nem tudom megnyitni a(z) "%s" programot
+Nie mogë uruchomiê programu "%s"
 ; Unable to open your tool '%s'
 ;
 MSG_SICK_OF_WAITING
-Az Opus unatkozva vár a(z) "%s" programra.\n\
-Várjak még egy kicsit?
+Program "%s"\n\
+jeszcze nie skoïczyî pracy.\n\
+Czy mam dîuûej poczekaê?
 ; Opus is sick of waiting for '%s' to return.\nWait some more?
 ;
 MSG_WAIT_CANCEL
-Várj még|Hagyd abba
+_Tak|_Nie
 ; Wait|Cancel
 ;

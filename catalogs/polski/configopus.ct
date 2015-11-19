@@ -1,17 +1,17 @@
-## version $VER: configopus.catalog 5.6 (01.06.97)
-## codeset 0
-## language deutsch
+## version $VER: configdopus.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczeci
+## codeset 5
+## language polski
 ;
 MSG_OKAY
 _Ok
 ; _OK
 ;
 MSG_CANCEL
-_Abbruch
+Ponie_chaj
 ; _Cancel
 ;
 MSG_USE
-_Benutzen
+_Uûyj
 ; _Use
 ;
 MSG_PROJECT
@@ -19,47 +19,47 @@ Projekt
 ; Project
 ;
 MSG_SAVE
-_Speichern
+Zapi_sz
 ; _Save
 ;
 MSG_EDIT
-Editieren
+Edytuj
 ; Edit
 ;
 MSG_CUT
-Ausschneiden
+Wytnij
 ; Cut
 ;
 MSG_COPY
-Kopieren
+Skopiuj
 ; Copy
 ;
 MSG_PASTE
-Einfügen
+Wstaw
 ; Paste
 ;
 MSG_ICON_MENU
-Piktogramm-Menü
+Icon Menu
 ; Icon Menu
 ;
 MSG_SETTINGS_TITLE
-Optionen
+Opcje
 ; Options
 ;
 MSG_SETTINGS_SUB_COPY
-Kopieren
+Kopiowanie
 ; Copy
 ;
 MSG_SETTINGS_SUB_DELETE
-Löschen
+Kasowanie
 ; Delete
 ;
 MSG_SETTINGS_SUB_ICONS
-Piktogramme
+Ikonki
 ; Icons
 ;
 MSG_SETTINGS_WHEN_COPYING_FILES
-Beim Kopieren ...
+Podczas kopiowania plików i katalogów...
 ; When copying files and directories...
 ;
 MSG_SETTINGS_SET_ARCHIVE_BIT
@@ -67,11 +67,11 @@ _Ok
 ; Set source _archive bit
 ;
 MSG_SETTINGS_ALSO_COPY_SOURCE
-_Abbruch
+Ponie_chaj
 ; Also copy source's...
 ;
 MSG_SETTINGS_COPY_DATESTAMP
-_Benutzen
+_Uûyj
 ; Da_testamp
 ;
 MSG_SETTINGS_COPY_PROTECTION
@@ -79,7 +79,7 @@ Projekt
 ; _Protection Bits
 ;
 MSG_SETTINGS_COPY_COMMENT
-_Speichern
+Zapi_sz
 ; C_omment
 ;
 MSG_SETTINGS_ASK_BEFORE
@@ -87,11 +87,11 @@ _Ok
 ; Ask before...
 ;
 MSG_SETTINGS_COMMENCING_DELETE
-_Abbruch
+Ponie_chaj
 ; C_ommencing delete
 ;
 MSG_SETTINGS_DELETING_FILES
-_Benutzen
+_Uûyj
 ; Deleting _files
 ;
 MSG_SETTINGS_DELETING_DIRS
@@ -99,27 +99,27 @@ Projekt
 ; Deleting _directories
 ;
 MSG_SETTINGS_PERFORM_ALL_ACTIONS
-_Speichern
+Zapi_sz
 ; Perform all actions on icons
 ;
 MSG_SETTINGS_SELECT_ICONS_AUTOMATICALLY
-Editieren
+Edytuj
 ; Select icons automatically
 ;
 MSG_SETTINGS_MISC
-Ausschneiden
+Wytnij
 ; Misc. flags...
 ;
 MSG_SETTINGS_CACHING_MAX_BUFFERS
-Kopieren
+Skopiuj
 ; _Maximum number of dirs cached
 ;
 MSG_SETTINGS_DISABLE_CACHING
-Einfügen
+Wstaw
 ; _Disable directory caching
 ;
 MSG_SETTINGS_REREAD_CHANGED_BUFFERS
-Piktogramm-Menü
+Icon Menu
 ; _Re-read modified caches
 ;
 MSG_SETTINGS_SUB_DATE_FORMAT
@@ -127,7 +127,7 @@ Locale
 ; Locale
 ;
 MSG_SETTINGS_DATE_FORMAT
-Datumsformat ...
+Date Format...
 ; Date Format...
 ;
 MSG_SETTINGS_NAME_SUBSTITUTION
@@ -155,11 +155,11 @@ DD-MM-YY     (30-10-46)
 ; DD-MM-YY     (30-10-46)
 ;
 MSG_SETTINGS_SUB_HIDE
-Verberge Methode
+Hide Method
 ; Hide Method
 ;
 MSG_SETTINGS_SUB_HIDE_TITLE
-Verberge Methode ...
+Hide Method...
 ; Hide Method...
 ;
 MSG_SETTINGS_SUB_HIDE_ICON
@@ -171,7 +171,7 @@ AppMenu (Workbench only)
 ; AppMenu (Workbench only)
 ;
 MSG_SETTINGS_SUB_HIDE_CLOCK
-Uhr
+Clock
 ; Clock
 ;
 MSG_SETTINGS_SUB_HIDE_NONE
@@ -191,11 +191,11 @@ _Ok
 ; Trap 'More' in default tool
 ;
 MSG_SETTINGS_SUB_MISC
-_Abbruch
+Ponie_chaj
 ; Miscellaneous
 ;
 MSG_SETTINGS_SUB_MISC_TITLE
-_Benutzen
+_Uûyj
 ; Miscellaneous Settings...
 ;
 MSG_SETTINGS_MOUSE_HOOK
@@ -203,27 +203,27 @@ Projekt
 ; _Mouse buttons over inactive banks
 ;
 MSG_SETTINGS_SUB_PRI
-_Speichern
+Zapi_sz
 ; Priority
 ;
 MSG_SETTINGS_SUB_PRI_TITLE
-Editieren
+Edytuj
 ; Task priorities...
 ;
 MSG_SETTINGS_PRI_MAIN
-Ausschneiden
+Wytnij
 ; _Main priority
 ;
 MSG_SETTINGS_PRI_LISTER
-Kopieren
+Skopiuj
 ; _Listers
 ;
 MSG_SETTINGS_PRI_WHEN_BUSY
-Einfügen
+Wstaw
 ; When busy
 ;
 MSG_SETTINGS_VERBOSE_REPLACE
-_Benutzen
+_Uûyj
 ; _Verbose 'Replace?' requester
 ;
 MSG_SETTINGS_QUICK_QUIT
@@ -231,27 +231,27 @@ Projekt
 ; _Quick quit
 ;
 MSG_SETTINGS_SUB_REPLACE
-_Speichern
+Zapi_sz
 ; Replace
 ;
 MSG_SETTINGS_SUB_REPLACE_TITLE
-Editieren
+Edytuj
 ; When replacing files...
 ;
 MSG_SETTINGS_CHECK_VERSION
-Ausschneiden
+Wytnij
 ; Auto_matically check version
 ;
 MSG_SETTINGS_EXTENDED_KEY
-Kopieren
+Skopiuj
 ; _Extended lister key selection
 ;
 MSG_SETTINGS_FILETYPE_SNIFFER
-Einfügen
+Wstaw
 ; _Filetype Sniffer
 ;
 MSG_SETTINGS_POPKEY
-Piktogramm-Menü
+Icon Menu
 ; _PopKey:
 ;
 MSG_SETTINGS_ENABLE_MUFS
@@ -315,27 +315,27 @@ _Delete
 ; _Delete
 ;
 MSG_ENVIRONMENT_TITLE
-Umgebung
+Ôrodowisko
 ; Environment
 ;
 MSG_ENVIRONMENT_SUB_DISPLAY
-Bildschirmmodus
+Tryb wyôwietlania
 ; Display
 ;
 MSG_ENVIRONMENT_SUB_PALETTE
-Farbpalette
+Paleta
 ; Palette
 ;
 MSG_ENVIRONMENT_SCREENMODE_MODE
-Bildschirm_modus ...
+_Tryb wyôwietlania...
 ; _Display Mode...
 ;
 MSG_ENVIRONMENT_SCREENMODE_WIDTH
-B_reite:
+Sze_rokoôê
 ; _Width:
 ;
 MSG_ENVIRONMENT_SCREENMODE_HEIGHT
-_Höhe:
+_Wysokoôê
 ; _Height:
 ;
 MSG_ENVIRONMENT_SCREENMODE_DEFAULT
@@ -343,31 +343,31 @@ Standard
 ; Default
 ;
 MSG_ENVIRONMENT_SCREENMODE_COLORS
-_Farben:
+_Kolory
 ; C_olours:
 ;
 MSG_ENVIRONMENT_SCREENMODE_WB_USE
-Workbench:Benutzen
+Workbench:Uûyj
 ; Workbench:Use
 ;
 MSG_ENVIRONMENT_SCREENMODE_WB_CLONE
-Workbench:Klonen
+Workbench:Powiel
 ; Workbench:Clone
 ;
 MSG_ENVIRONMENT_PALETTE_RED
-_Rot
+Cze_rwony
 ; _Red
 ;
 MSG_ENVIRONMENT_PALETTE_GREEN
-_Grün
+Zi_elony
 ; _Green
 ;
 MSG_ENVIRONMENT_PALETTE_BLUE
-Bla_u
+Nie_bieski
 ; _Blue
 ;
 MSG_ENVIRONMENT_PALETTE_COUNT
-Def._Farben
+_Pisaki
 ; User _Pens
 ;
 MSG_ENVIRONMENT_LISTER_EXAMPLE
@@ -375,11 +375,11 @@ _Ok
 ; Example
 ;
 MSG_ENVIRONMENT_SUB_LISTER_DISPLAY
-_Abbruch
+Ponie_chaj
 ; Lister Display
 ;
 MSG_ENVIRONMENT_LISTER_COLOUR_ITEMS
-_Benutzen
+_Uûyj
 ; Lister _Element Colours...
 ;
 MSG_ENVIRONMENT_LISTER_FG_PALETTE
@@ -387,7 +387,7 @@ Projekt
 ; _Foreground
 ;
 MSG_ENVIRONMENT_LISTER_BG_PALETTE
-_Speichern
+Zapi_sz
 ; _Background
 ;
 MSG_ENVIRONMENT_LISTER_FILES
@@ -395,11 +395,11 @@ _Ok
 ; Files
 ;
 MSG_ENVIRONMENT_LISTER_DIRS
-_Abbruch
+Ponie_chaj
 ; Directories
 ;
 MSG_ENVIRONMENT_LISTER_SEL_FILES
-_Benutzen
+_Uûyj
 ; Selected Files
 ;
 MSG_ENVIRONMENT_LISTER_SEL_DIRS
@@ -407,27 +407,27 @@ Projekt
 ; Selected Dirs
 ;
 MSG_ENVIRONMENT_LISTER_SOURCE
-_Speichern
+Zapi_sz
 ; Source
 ;
 MSG_ENVIRONMENT_LISTER_DEST
-Editieren
+Edytuj
 ; Destination
 ;
 MSG_ENVIRONMENT_LISTER_DEVICES
-Ausschneiden
+Wytnij
 ; Devices
 ;
 MSG_ENVIRONMENT_LISTER_VOLUMES
-Kopieren
+Skopiuj
 ; Assigns
 ;
 MSG_ENVIRONMENT_USE
-Einfügen
+Wstaw
 ; Use
 ;
 MSG_ENVIRONMENT_BUTTONS_FIELD
-_Benutzen
+_Uûyj
 ; _Prefs:
 ;
 MSG_ENVIRONMENT_PALETTE_RESET
@@ -439,11 +439,11 @@ _Ok
 ; S_et...
 ;
 MSG_ENVIRONMENT_OUTPUT_NAME
-_Abbruch
+Ponie_chaj
 ; _Title:
 ;
 MSG_ENVIRONMENT_OUTPUT_DIMENSIONS
-_Benutzen
+_Uûyj
 ; Size:
 ;
 MSG_ENVIRONMENT_SIZE_INST_1
@@ -451,15 +451,15 @@ Projekt
 ; Size and position window as desired.
 ;
 MSG_ENVIRONMENT_SIZE_INST_2
-_Speichern
+Zapi_sz
 ; Click the close button when finished.
 ;
 MSG_ENVIRONMENT_OPTIONS_APPICONS
-Editieren
+Edytuj
 ; Display App_Icons
 ;
 MSG_ENVIRONMENT_OPTIONS_APPMENU
-Ausschneiden
+Wytnij
 ; Display '_Tools' Menu
 ;
 MSG_ENVIRONMENT_PATCH_OPTIONS
@@ -471,11 +471,11 @@ _Ok
 ; Select Lister Font
 ;
 MSG_ENVIRONMENT_OPTIONS_HIDEBAD
-_Abbruch
+Ponie_chaj
 ; _Hide Bad Disks
 ;
 MSG_ENVIRONMENT_SUB_LISTER_OPTIONS
-_Benutzen
+_Uûyj
 ; Lister Options
 ;
 MSG_ENVIRONMENT_NEW_DEVICELIST
@@ -483,19 +483,19 @@ Projekt
 ; _Device List In New Lister
 ;
 MSG_ENVIRONMENT_DEFAULT_SIZE
-_Speichern
+Zapi_sz
 ; Default Size:
 ;
 MSG_ENVIRONMENT_DEFLISTER_SIZE
-Editieren
+Edytuj
 ; Default Lister Size
 ;
 MSG_ENVIRONMENT_SIZE_INST_3
-Ausschneiden
+Wytnij
 ; Size window as desired.
 ;
 MSG_ENVIRONMENT_2XCLICK_EDITING
-Kopieren
+Skopiuj
 ; _RMB Double-Click Editing
 ;
 MSG_ENVIRONMENT_LISTER_STATUS
@@ -503,11 +503,11 @@ _Ok
 ; S_tatus Text:
 ;
 MSG_ENVIRONMENT_LISTER_SELECT_STATUS
-_Abbruch
+Ponie_chaj
 ; Select Code
 ;
 MSG_ENVIRONMENT_SIMPLE_REFRESH
-_Benutzen
+_Uûyj
 ; S_impleRefresh Windows
 ;
 MSG_ENVIRONMENT_SCREENMODE_FONT
@@ -515,19 +515,19 @@ Projekt
 ; _Font:
 ;
 MSG_ENVIRONMENT_SUB_DESKTOP
-_Speichern
+Zapi_sz
 ; Desktop
 ;
 MSG_ENVIRONMENT_DESKTOP_TITLE
-Editieren
+Edytuj
 ; Desktop Icons...
 ;
 MSG_ENVIRONMENT_HIDDEN_DRIVES
-_Abbruch
+Ponie_chaj
 ; Hidden drives...
 ;
 MSG_ENVIRONMENT_OUTPUT_DEVICE
-_Benutzen
+_Uûyj
 ; _Device
 ;
 MSG_ENVIRONMENT_PALETTE_LOAD
@@ -535,7 +535,7 @@ Projekt
 ; _Load
 ;
 MSG_ENVIRONMENT_SELECT_PALETTE
-_Speichern
+Zapi_sz
 ; Select Palette
 ;
 MSG_ENVIRONMENT_LISTER_OPTIONS
@@ -543,11 +543,11 @@ _Ok
 ; Lister Options...
 ;
 MSG_ENVIRONMENT_FIELD_TITLES
-_Abbruch
+Ponie_chaj
 ; F_ield Titles
 ;
 MSG_ENVIRONMENT_USE_SNAPSHOT
-_Benutzen
+_Uûyj
 ; _Always Use Snapshot Position
 ;
 MSG_ENVIRONMENT_NAME_POPUP
@@ -559,11 +559,11 @@ _Ok
 ; Inline _Editing
 ;
 MSG_LISTEREDIT_DISABLED
-_Abbruch
+Ponie_chaj
 ; Disabled
 ;
 MSG_LISTEREDIT_LEFT
-_Benutzen
+_Uûyj
 ; Left Button
 ;
 MSG_LISTEREDIT_MIDDLE
@@ -571,55 +571,55 @@ Projekt
 ; Middle Button
 ;
 MSG_LISTEREDIT_BOTH
-_Speichern
+Zapi_sz
 ; Left & Middle
 ;
 MSG_ENVIRONMENT_OPTIONS_ICONPOS
-Editieren
+Edytuj
 ; Use Workbench icon positions
 ;
 MSG_ENVIRONMENT_CACHE_ICONS
-Ausschneiden
+Wytnij
 ; Cache icon images
 ;
 MSG_ENVIRONMENT_REMAP_ICONS
-Kopieren
+Skopiuj
 ; Remap icon images
 ;
 MSG_ENVIRONMENT_BORDERS_ON
-Einfügen
+Wstaw
 ; Icon borders on by default
 ;
 MSG_ENVIRONMENT_ARROW_ON
-Piktogramm-Menü
+Icon Menu
 ; Show arrow on left-out icons
 ;
 MSG_ENVIRONMENT_ICON_SETTINGS
-Piktogramm-Einstellungen ...
+Icon Settings...
 ; Icon Settings...
 ;
 MSG_ENVIRONMENT_ICON_FONTCOL
-Label Font und Farbe ...
+Label Font and Colour...
 ; Label Font and Colour...
 ;
 MSG_ENVIRONMENT_ICON_FONT_DESKTOP
-Des_ktop ...
+Des_ktop...
 ; Des_ktop...
 ;
 MSG_ENVIRONMENT_ICON_FONT_WINDOWS
-_Windows ...
+_Windows...
 ; _Windows...
 ;
 MSG_ENVIRONMENT_SUB_ICONS
-Piktogramm-Einstellungen
+Icon Settings
 ; Icon Settings
 ;
 MSG_SELECT_FONT
-Wähle Font und Farbe
+Select Font And Colour
 ; Select Font And Colour
 ;
 MSG_FONT_DRAWMODE
-Modus:
+Mode:
 ; Mode:
 ;
 MSG_FONT_TEXT
@@ -627,7 +627,7 @@ Text
 ; Text
 ;
 MSG_FONT_FIELD_TEXT
-Text+Feld
+Text+Field
 ; Text+Field
 ;
 MSG_ENVIRONMENT_OPTIONS_APPTOOLS
@@ -635,7 +635,7 @@ _Move AppIcons to 'Tools' Menu
 ; _Move AppIcons to 'Tools' Menu
 ;
 MSG_ENVIRONMENT_COLOURS_MODIFY
-_Modifizieren ...
+_Modify...
 ; _Modify...
 ;
 MSG_ENVIRONMENT_GAUGE_COLOUR
@@ -643,11 +643,11 @@ _Ok
 ; Gauge Fill
 ;
 MSG_ENVIRONMENT_DEFAULT_FORMAT
-_Abbruch
+Ponie_chaj
 ; Default Format:
 ;
 MSG_ENVIRONMENT_FORMAT_SET
-_Benutzen
+_Uûyj
 ; Se_t...
 ;
 MSG_ENVIRONMENT_SUB_LISTER_DEFAULT
@@ -655,39 +655,39 @@ Projekt
 ; Lister Default
 ;
 MSG_ENVIRONMENT_SPLIT_LABELS
-_Speichern
+Zapi_sz
 ; Split long icon labels
 ;
 MSG_ENVIRONMENT_SUB_LISTER_COLOURS
-Editieren
+Edytuj
 ; Lister Colours
 ;
 MSG_ENVIRONMENT_OUTPUT_WINDOW
-Ausschneiden
+Wytnij
 ; Output Window...
 ;
 MSG_ENVIRONMENT_STACK
-Kopieren
+Skopiuj
 ; S_tack:
 ;
 MSG_ENVIRONMENT_AMIGADOS
-Einfügen
+Wstaw
 ; AmigaDOS...
 ;
 MSG_ENVIRONMENT_SUB_LAUNCHING
-Piktogramm-Menü
+Icon Menu
 ; CLI Launching
 ;
 MSG_ENVIRONMENT_LISTER_SETTINGS
-Lister Display Einstellungen ...
+Lister Display Settings...
 ; Lister Display Settings...
 ;
 MSG_ENVIRONMENT_SUB_PICTURES
-Hintergründe
+Backgrounds
 ; Backgrounds
 ;
 MSG_ENVIRONMENT_OPTIONS_DISPLAY_BACKDROPS
-Hintergrundbilder ...
+Background Pictures...
 ; Background Pictures...
 ;
 MSG_ENVIRONMENT_OPTIONS_ENABLE_PATTERN
@@ -707,7 +707,7 @@ _Requester:
 ; _Requester:
 ;
 MSG_ENVIRONMENT_PICTURE_WBPATTERN
-WBPattern Einstellungen ...
+WBPattern Settings...
 ; WBPattern Settings...
 ;
 MSG_ENVIRONMENT_PICTURE_USE_WBPATTERN
@@ -715,11 +715,11 @@ Use W_BPattern Prefs
 ; Use W_BPattern Prefs
 ;
 MSG_ENVIRONMENT_SUB_WBEMULATION
-WB-Emulation
+WB Emulation
 ; WB Emulation
 ;
 MSG_ENVIRONMENT_LISTER_DEFAULT
-Default Lister-Einstellungen ...
+Default Lister Settings...
 ; Default Lister Settings...
 ;
 MSG_ENVIRONMENT_FULL_TRANSPARENCY
@@ -731,11 +731,11 @@ Remove Opus icon positions
 ; Remove Opus icon positions
 ;
 MSG_FONT_SHADOW
-Schatten
+Shadow
 ; Shadow
 ;
 MSG_FONT_OUTLINE
-Umriss
+Outline
 ; Outline
 ;
 MSG_ENVIRONMENT_OPTIONS_REALTIME_SCROLL
@@ -743,7 +743,7 @@ Real-time icon scrolling
 ; Real-time icon scrolling
 ;
 MSG_ENVIRONMENT_CACHING_TITLE
-Verzeichnis-Caching ...
+Directory Caching...
 ; Directory Caching...
 ;
 MSG_ERROR_WRONG_TYPE_ENV
@@ -755,11 +755,11 @@ Show Workbench Leftout icons
 ; Show Workbench Leftout icons
 ;
 MSG_BUTTONS_TITLE
-Knopfbank-Editor
+Edytor przycisków
 ; Button Bank Editor
 ;
 MSG_BUTTONS_NAME
-_Name
+_Nazwa
 ; _Name
 ;
 MSG_BUTTONS_COLUMNS
@@ -767,11 +767,11 @@ _Ok
 ; Columns
 ;
 MSG_BUTTONS_ROWS
-_Abbruch
+Ponie_chaj
 ; Rows
 ;
 MSG_BUTTONS_ADD
-_Benutzen
+_Uûyj
 ; Add
 ;
 MSG_BUTTONS_REMOVE
@@ -779,27 +779,27 @@ Projekt
 ; Xform
 ;
 MSG_BUTTONS_INSERT
-_Speichern
+Zapi_sz
 ; Insert
 ;
 MSG_BUTTONS_DELETE
-Editieren
+Edytuj
 ; Delete
 ;
 MSG_BUTTONS_FONT
-Ausschneiden
+Wytnij
 ; _Font
 ;
 MSG_BUTTONS_SELECT_FONT
-Kopieren
+Skopiuj
 ; Select Button Font
 ;
 MSG_BUTTONS_BUTTON
-Einfügen
+Wstaw
 ; Button
 ;
 MSG_BUTTONS_COPY
-Piktogramm-Menü
+Icon Menu
 ; Copy
 ;
 MSG_BUTTONS_CUT
@@ -843,19 +843,19 @@ _Ok
 ; Automatic
 ;
 MSG_BUTTONS_BORDERLESS
-_Abbruch
+Ponie_chaj
 ; _Borderless Buttons
 ;
 MSG_BUTTONS_SIMPLE_REFRESH
-_Benutzen
+_Uûyj
 ; S_imple-Refresh
 ;
 MSG_BUTTONS_SHOW_CLIPBOARD
-_Abbruch
+Ponie_chaj
 ; Show C_lipboard
 ;
 MSG_BUTTONS_NO_DOGEARS
-_Benutzen
+_Uûyj
 ; No 'Do_g ears'
 ;
 MSG_BUTTONS_DRAG
@@ -863,27 +863,27 @@ Projekt
 ; _Drag: 
 ;
 MSG_BUTTONS_AUTO_CLOSE
-_Speichern
+Zapi_sz
 ; _Auto Close
 ;
 MSG_BUTTONS_DRAG_NONE
-Editieren
+Edytuj
 ; None
 ;
 MSG_BUTTONS_AUTO_ICONIFY
-Ausschneiden
+Wytnij
 ; A_uto Iconify
 ;
 MSG_BUTTONS_DRAG_TOP
-Kopieren
+Skopiuj
 ; Top
 ;
 MSG_BUTTONS_DRAG_LEFT
-Einfügen
+Wstaw
 ; Left
 ;
 MSG_BUTTONS_DRAG_BOTTOM
-Piktogramm-Menü
+Icon Menu
 ; Bottom
 ;
 MSG_BUTTONS_DRAG_RIGHT
@@ -903,7 +903,7 @@ Pic_ture
 ; Pic_ture
 ;
 MSG_FUNCED_TITLE
-Funktionseditor
+Edycja funkcji
 ; Function Editor
 ;
 MSG_FUNCED_KEY
@@ -911,11 +911,11 @@ _Ok
 ; _Key
 ;
 MSG_FUNCED_FLAGS
-_Abbruch
+Ponie_chaj
 ; Flags
 ;
 MSG_FUNCED_NEW_ENTRY
-_Benutzen
+_Uûyj
 ; _Add
 ;
 MSG_FUNCED_INSERT
@@ -923,35 +923,35 @@ Projekt
 ; _Insert
 ;
 MSG_FUNCED_DELETE
-_Speichern
+Zapi_sz
 ; _Delete
 ;
 MSG_FUNCED_FUNCTYPE_COMMAND
-Editieren
+Edytuj
 ; Command
 ;
 MSG_FUNCED_FUNCTYPE_AMIGADOS
-Ausschneiden
+Wytnij
 ; AmigaDOS
 ;
 MSG_FUNCED_FUNCTYPE_WORKBENCH
-Kopieren
+Skopiuj
 ; Workbench
 ;
 MSG_FUNCED_FUNCTYPE_BATCH
-Einfügen
+Wstaw
 ; Script
 ;
 MSG_FUNCED_FUNCTYPE_AREXX
-Piktogramm-Menü
+Icon Menu
 ; ARexx
 ;
 MSG_FUNCED_SELECT_COMMAND
-_Abbruch
+Ponie_chaj
 ; Select Command
 ;
 MSG_SELECT_FILE
-_Benutzen
+_Uûyj
 ; Select File
 ;
 MSG_FUNCED_SELECT_ARG
@@ -959,27 +959,27 @@ Projekt
 ; Select Argument
 ;
 MSG_FUNCED_EXPORT_ASCII_MENU
-_Speichern
+Zapi_sz
 ; Export As ASCII...
 ;
 MSG_FUNCED_SELECT_FILE
-Editieren
+Edytuj
 ; Enter Filename
 ;
 MSG_FUNCED_LABEL
-Ausschneiden
+Wytnij
 ; _Label
 ;
 MSG_FUNCED_EXPORT_CMD_MENU
-Kopieren
+Skopiuj
 ; Export As Command File...
 ;
 MSG_ENVIRONMENT_HIDDEN_BAD_DRIVES
-Einfügen
+Wstaw
 ; Hidden drives (bad disks only)...
 ;
 MSG_ENVIRONMENT_DESKTOP_LOCATION
-Piktogramm-Menü
+Icon Menu
 ; Desktop _Folder:
 ;
 MSG_ENVIRONMENT_DESKTOP_ENABLE
@@ -1007,7 +1007,7 @@ Copy to Desktop
 ; Copy to Desktop
 ;
 MSG_ENVIRONMENT_NEWICONS
-NewIcons-Einstellungen ...
+NewIcons Settings...
 ; NewIcons Settings...
 ;
 MSG_ENVIRONMENT_NEWICONS_ENABLE
@@ -1063,7 +1063,7 @@ I_mage
 ; I_mage
 ;
 MSG_ENVIRONMENT_NEWICONS_RTGMODE
-_RTG-Modus
+_RTG Mode
 ; _RTG Mode
 ;
 MSG_ENVIRONMENT_NO_ACTIVE_SELECT
@@ -1103,7 +1103,7 @@ Use custom drag routines
 ; Use custom drag routines
 ;
 MSG_ENVIRONMENT_SCREEN_TITLE
-Custom Bildschirm Titel ...
+Custom Screen Title...
 ; Custom Screen Title...
 ;
 MSG_ENVIRONMENT_CLL
@@ -1119,7 +1119,7 @@ Stretch Picture
 ; Stretch Picture
 ;
 MSG_ENVIRONMENT_PICTURE_TILED
-Kachel
+Tile
 ; Tile
 ;
 MSG_ENVIRONMENT_PICTURE_TYPE
@@ -1139,15 +1139,15 @@ Normal
 ; Normal
 ;
 MSG_ENVIRONMENT_PICTURE_BLACK
-Schwarz
+Black
 ; Black
 ;
 MSG_ENVIRONMENT_PICTURE_WHITE
-Weiß
+White
 ; White
 ;
 MSG_ENVIRONMENT_THEMES_PATH
-Default Themenpfad ...
+Default Theme Path...
 ; Default Theme Path...
 ;
 MSG_ENVIRONMENT_THEMES_LOCATION
@@ -1155,163 +1155,163 @@ _Location:
 ; _Location:
 ;
 MSG_FUNCED_FLAG_OUTPUT_WINDOW
-Ausgabe in Fenster
+Okno komunikacyjne
 ; Output to window
 ;
 MSG_FUNCED_FLAG_OUTPUT_FILE
-Ausgabe in Anzeiger
+Wyjôcie do przeglâdarki
 ; Output to reader
 ;
 MSG_FUNCED_FLAG_WORKBENCH_OUTPUT
-Fenster auf WB
+Okno na Workbenchu
 ; Window on Workbench
 ;
 MSG_FUNCED_FLAG_RUN_ASYNC
-Asynchroner Start
+Uruchom asynchronicznie
 ; Run asynchronously
 ;
 MSG_FUNCED_FLAG_CD_SOURCE
-CD-Quelle
+CD do kat. úródîowego
 ; CD source
 ;
 MSG_FUNCED_FLAG_CD_DEST
-CD-Ziel
+CD do kat. docelowego
 ; CD destination
 ;
 MSG_FUNCED_FLAG_DO_ALL_FILES
-Mit allen Dateien
+Wszystkie pliki
 ; Do all files
 ;
 MSG_FUNCED_FLAG_RECURSE_DIRS
-Verz. rekursiv
+Czytaj katalogi rekurencyjnie
 ; Recursive dirs
 ;
 MSG_FUNCED_FLAG_RELOAD_EACH_FILE
-Dateien neu lesen
+Wczytaj przy kaûdym pliku
 ; Reload each file
 ;
 MSG_FUNCED_FLAG_NO_FILENAME_QUOTE
-Keine Anf.zeichen
+Bez cudzysîowów
 ; No file quote
 ;
 MSG_FUNCED_FLAG_RESCAN_SOURCE
-Quelle erneut lesen
+Zaktualizuj kat. úródîowy
 ; Rescan source
 ;
 MSG_FUNCED_FLAG_RESCAN_DEST
-Ziel erneut lesen
+Zaktualizuj kat. docelowy
 ; Rescan dest
 ;
 MSG_FUNCED_FLAG_WAIT_CLOSE
-Fensterschließsymbol
+Przycisk zamkniëcia okna
 ; Window close button
 ;
 MSG_FUNCED_ARGUMENT_1
-{f}\tErster angew. Eintrag (mit Pfad)
+{f}\tPierwszy zaznaczony element (ze ôcieûkâ)
 ; {f}\tFirst selected entry (with path)
 ;
 MSG_FUNCED_ARGUMENT_2
-{fu}\tErster Eintrag (Pfad bleibt angew.)
+{fu}\tPierwszy element (ze ôcieûkâ)
 ; {fu}\tFirst entry (path ; no unselect)
 ;
 MSG_FUNCED_ARGUMENT_3
-{F}\tAlle angew. Einträge (mit Pfad)
+{F}\tWszystkie zaznaczone elementy (ze ôcieûkâ)
 ; {F}\tAll selected entries (with paths)
 ;
 MSG_FUNCED_ARGUMENT_4
-{o}\tErster angew. Eintrag (ohne Pfad)
+{o}\tPierwszy zaznaczony element (tylko nazwa)
 ; {o}\tFirst selected entry (name only)
 ;
 MSG_FUNCED_ARGUMENT_5
-{ou}\tErster Eintrag (Name bleibt angew.)
+{ou}\tPierwszy element (tylko nazwa; bez odznaczania)
 ; {ou}\tFirst entry (name ; no unselect)
 ;
 MSG_FUNCED_ARGUMENT_6
-{O}\tAlle angew. Einträge (ohne Pfad)
+{O}\tWszystkie zaznaczone elementy (tylko nazwy)
 ; {O}\tAll selected entries (names only)
 ;
 MSG_FUNCED_ARGUMENT_7
-{d}\tPfad des Zielverzeichnisses
+{d}\tNazwa katalogu docelowego
 ; {d}\tDestination directory name
 ;
 MSG_FUNCED_ARGUMENT_8
-{s}\tPfad des Quellverzeichnisses
+{s}\tNazwa katalogu úródîowego
 ; {s}\tSource directory name
 ;
 MSG_FUNCED_ARGUMENT_9
-{f!}\tWie {f}, jedoch optional
+{Qs}\tNazwa ekranu publicznego
 ; {f!}\tAs {f} but not required
 ;
 MSG_FUNCED_ARGUMENT_10
-{fu!}\tWie {fu}, jedoch optional
+{Qp}\tNazwa portu ARexx'a
 ; {fu!}\tAs {fu} but not required
 ;
 MSG_FUNCED_ARGUMENT_11
-{F!}\tWie {F}, jedoch optional
+{F!}\tJak {F} ale nie wymagane
 ; {F!}\tAs {F} but not required
 ;
 MSG_FUNCED_ARGUMENT_12
-{o!}\tWie {o}, jedoch optional
+{o!}\tJak {o} ale nie wymagane
 ; {o!}\tAs {o} but not required
 ;
 MSG_FUNCED_ARGUMENT_13
-{ou!}\tWie {ou}, jedoch optional
+{ou!}\tJak {ou} ale nie wymagane
 ; {ou!}\tAs {ou} but not required
 ;
 MSG_FUNCED_ARGUMENT_14
-{O!}\tWie {O}, jedoch optional
+{O!}\tJak {O} ale nie wymagane
 ; {O!}\tAs {O} but not required
 ;
 MSG_FUNCED_ARGUMENT_15
-{d!}\tWie {d}, jedoch optional
+{d!}\tJak {d} ale nie wymagane
 ; {d!}\tAs {d} but not required
 ;
 MSG_FUNCED_ARGUMENT_16
-{s!}\tWie {s}, jedoch optional
+{s!}\tJak {s} ale nie wymagane
 ; {s!}\tAs {s} but not required
 ;
 MSG_FUNCED_ARGUMENT_17
-{Qa}\tArgument an Funktion übergeben
+{Qa}\tArgument przekazany do funkcji
 ; {Qa}\tArgument passed to function
 ;
 MSG_FUNCED_ARGUMENT_18
-{Qd}\tZiellisterhandle
+{Qd}\tDestination lister handle
 ; {Qd}\tDestination lister handle
 ;
 MSG_FUNCED_ARGUMENT_19
-{Ql}\tQuellisterhandle
+{Ql}\tSource lister handle
 ; {Ql}\tSource lister handle
 ;
 MSG_FUNCED_ARGUMENT_20
-{Qs}\tÖffentlicher Bildschirmname
+{Qs}\tNazwa ekranu publicznego
 ; {Qs}\tPublic screen name
 ;
 MSG_FUNCED_ARGUMENT_21
-{Qp}\tARexx Portname
+{Qp}\tNazwa portu ARexx'a
 ; {Qp}\tAREXX port name
 ;
 MSG_FUNCED_ARGUMENT_22
-{Rs}\tStringauswahlfenster
+{Rs}\tString requester
 ; {Rs}\tString requester
 ;
 MSG_FUNCED_ARGUMENT_23
-{RS}\tSicheres Stringauswahlfenster
+{RS}\tSecure string requester
 ; {RS}\tSecure string requester
 ;
 MSG_FUNCED_ARGUMENT_24
-{Rf}\tDateiauswahlfenster
+{Rf}\tOkno wyboru plików
 ; {Rf}\tFile requester
 ;
 MSG_FUNCED_ARGUMENT_25
-{RF}\tDateiauswahlfenster (Speichern)
+{RF}\tOkno wyboru plików (tryb zapisu)
 ; {RF}\tFile requester (save)
 ;
 MSG_FUNCED_ARGUMENT_26
-{Rd}\tVerzeichnisauswahlfenster
+{Rd}\tOkno wyboru katalogów
 ; {Rd}\tDirectory requester
 ;
 MSG_FUNCED_ARGUMENT_27
-{v}\tUmgebungsvariable
+{v}\tZmienna ôrodowiskowa
 ; {v}\tEnvironment variable
 ;
 MSG_FUNCED_ARGUMENT_LAST
@@ -1319,31 +1319,31 @@ MSG_FUNCED_ARGUMENT_LAST
 ; -
 ;
 MSG_STATUSBAR_CODE_FIRST
-*bs\tGröße aller angewählten Dat. & Verz.
+*bs\tDîugoôê zaznaczonych plików
 ; *bs\tSelected byte count
 ;
 MSG_STATUSBAR_CODE_2
-*bt\tGröße Dateien & Verzeichnisse gesamt
+*bt\tDîugoôê wszystkich plików
 ; *bt\tTotal byte count
 ;
 MSG_STATUSBAR_CODE_3
-*ds\tAnzahl der angewählten Verzeichnisse
+*ds\tLiczba zaznaczonych katalogów
 ; *ds\tSelected directory count
 ;
 MSG_STATUSBAR_CODE_4
-*dt\tAnzahl der Verzeichnisse gesamt
+*dt\tLiczba wszystkich katalogów
 ; *dt\tTotal directory count
 ;
 MSG_STATUSBAR_CODE_5
-*fs\tAnzahl der angewählten Dateien
+*fs\tLiczba zaznaczonych plików
 ; *fs\tSelected file count
 ;
 MSG_STATUSBAR_CODE_6
-*ft\tAnzahl der Dateien gesamt
+*ft\tLiczba wszystkich plików
 ; *ft\tTotal file count
 ;
 MSG_STATUSBAR_CODE_LAST
-*h*\tAnzahl verborgene Dateien
+*h*\tLiczba ukrytych plików
 ; *h*\tHidden file count
 ;
 MSG_SCREENTITLE_CODE_FIRST
@@ -1439,207 +1439,207 @@ MSG_SCREENTITLE_CODE_LAST
 ; -
 ;
 MSG_BUTTONED_TITLE
-Knopf-Editor
+Edytor przycisków
 ; Button Editor
 ;
 MSG_BUTTONED_FUNCTIONS
-Funktionen
+_Funkcje
 ; Functions
 ;
 MSG_BUTTONED_NAME
-_Name
+_Nazwa
 ; _Name
 ;
 MSG_BUTTONED_LABEL
-Be_schr.
+Etykieta
 ; _Label
 ;
 MSG_BUTTONED_IMAGE
-_Pikt.
+_Obrazek
 ; _Image
 ;
 MSG_BUTTONED_EDIT_FUNCTION
-Bearb. _Funktion ...
+_Edycja funkcji...
 ; _Edit Function...
 ;
 MSG_BUTTONED_LEFT_FUNCTION
-Linke Taste
+Lewy przycisk
 ; Left
 ;
 MSG_BUTTONED_RIGHT_FUNCTION
-Rechte Taste
+Prawy przycisk
 ; Right
 ;
 MSG_BUTTONED_MID_FUNCTION
-Mittl. Taste
+Ôrodkowy przycisk
 ; Middle
 ;
 MSG_BUTTONED_PALETTE
-Palette
+Paleta
 ; Palette
 ;
 MSG_SELECT_COLOURS
-Wähle Farben
+Wybierz kolory
 ; Select Colours
 ;
 MSG_PALETTE_FOREGROUND
-_Vordergrund
+_Kolor tekstu
 ; _Foreground
 ;
 MSG_PALETTE_BACKGROUND
-_Hintergrund
+Kolor _tîa
 ; _Background
 ;
 MSG_BUTTONED_BUTTON
-Knopf
+Przycisk
 ; Button
 ;
 MSG_BUTTONED_ADD
-_Zufügen
+Dod_aj
 ; _Add
 ;
 MSG_BUTTONED_DEL
-_Löschen
+S_kasuj
 ; _Del
 ;
 MSG_BUTTONED_NEW_FUNC
-Neue Funktion
+nowa funkcja
 ; new function
 ;
 MSG_CONVERT_REQ_TITLE
-Konvertiere Konfiguration
+Konwersja pliku konfiguracyjnego
 ; Convert configuration
 ;
 MSG_CONVERT_TITLE_1
-Alte Konfiguration entdeckt.
+Wykryto konfiguracjë starego typu.
 ; Old-style configuration detected.
 ;
 MSG_CONVERT_TITLE_2
-Welche Bereiche konvertieren?
+Co chcesz skonwertowaê?
 ; Convert which sections?
 ;
 MSG_CONVERT_SETTINGS
-_Optionen
+_Opcje
 ; _Options
 ;
 MSG_CONVERT_BUTTONS
-_Knöpfe
+_Przyciski
 ; _Buttons
 ;
 MSG_CONVERT_MENUS
-_Menüs
+_Menu
 ; _Menus
 ;
 MSG_CONVERT_DRIVES
-_Laufwerke
+Napë_dy
 ; _Drives
 ;
 MSG_CONVERT_FILETYPES
-_Dateitypen
+Typy plików
 ; _File Types
 ;
 MSG_CONVERT_HOTKEYS
-_Hotkeys
+_Klawisze wywoîujâce
 ; _Hotkeys
 ;
 MSG_CONVERT_BASENAME
-_Basisname
+_Nazwa
 ; Base_name
 ;
 MSG_CONVERT_CONVERT
-Kon_vertieren
+Kon_wertuj
 ; Con_vert
 ;
 MSG_CONVERT_OLD_BASENAME
-alt
+stara_konfiguracja
 ; old
 ;
 MSG_CONVERTING_CONFIGURATION
-Konvertiere alte Konfiguration ...
+Konwertujë...
 ; Converting old configuration...
 ;
 MSG_CONVERT_ENVIRONMENT
-_Umgebung
+Ô_rodowisko
 ; _Environment
 ;
 MSG_FILETYPES_TITLE
-Dateitypen
+Typy plików
 ; File Types
 ;
 MSG_FILETYPES_ADD
-_Hinzufügen
+Dod_aj
 ; _Add
 ;
 MSG_FILETYPES_DUPLICATE
-_Duplizieren
+_Powiel
 ; _Duplicate
 ;
 MSG_FILETYPES_REMOVE
-_Entfernen
+S_kasuj
 ; _Remove
 ;
 MSG_FILETYPES_SAVE
-_Speichern
+Zapi_sz
 ; _Save
 ;
 MSG_FILETYPES_STORE
-_Lagern
+_Zachowaj
 ; S_tore
 ;
 MSG_FILETYPE_EDIT_CLASS
-_Def. bearb ...
+Edytuj _klasë
 ; Edit Cla_ss...
 ;
 MSG_FILETYPE_ACTION_DOUBLECLICK
-Doppelklick
+Dwuklik
 ; Double-click
 ;
 MSG_FILETYPE_ACTION_DRAGNDROP
-Nehmen&Ablegen
+Drag'n'drop
 ; Drag'n'drop
 ;
 MSG_FILETYPE_ACTION_USER1
-Benutzer1
+Uûytkownik1
 ; User Function 1
 ;
 MSG_FILETYPE_ACTION_USER2
-Benutzer2
+Uûytkownik2
 ; User Function 2
 ;
 MSG_FILETYPE_ACTION_USER3
-Benutzer3
+Uûytkownik3
 ; User Function 3
 ;
 MSG_FILETYPE_ACTION_USER4
-Benutzer4
+Uûytkownik4
 ; User Function 4
 ;
 MSG_FILETYPE_EDITOR_TITLE
-Editieren
+Edytuj
 ; File Type Editor
 ;
 MSG_FILETYPE_REMOVE_REQ
-Ausschneiden
+Wytnij
 ; Really remove the '%s' file type?
 ;
 MSG_FILETYPE_SELECT_ICON
-Kopieren
+Skopiuj
 ; Select Ico_n
 ;
 MSG_FILETYPE_PICK_ICON
-Einfügen
+Wstaw
 ; File Type Icon
 ;
 MSG_FILETYPES_EDIT
-Piktogramm-Menü
+Icon Menu
 ; _Edit
 ;
 MSG_FILETYPES_EVENTS
-E_reignisse ...
+E_vents...
 ; E_vents...
 ;
 MSG_FILETYPES_ICON_MENU
-Pikt_ogramm-Menü ...
+Ic_on Menu...
 ; Ic_on Menu...
 ;
 MSG_FILETYPES_EDIT_ACTION
@@ -1659,7 +1659,7 @@ De_l
 ; De_l
 ;
 MSG_FILETYPES_ICON
-Default Piktogramm ...
+Default Icon...
 ; Default Icon...
 ;
 MSG_CLASSED_DEL
@@ -1715,7 +1715,7 @@ Drag'n'drop (Alt)
 ; Drag'n'drop (Alt)
 ;
 MSG_CLASSED_CLASS_NAME
-_Name
+_Nazwa
 ; _Name
 ;
 MSG_CLASSED_CLASS_ID
@@ -1723,67 +1723,67 @@ _ID
 ; _ID
 ;
 MSG_CLASSED_ADD
-_Hinzufügen
+Dod_aj
 ; _Add
 ;
 MSG_CLASSED_REMOVE
-_Entfernen
+S_kasuj
 ; _Remove
 ;
 MSG_CLASSED_MATCH_MATCH
-Vergl.
+Match
 ; Match
 ;
 MSG_CLASSED_MATCH_MATCHNAME
-Vergl. Name
+Match Name
 ; Match Name
 ;
 MSG_CLASSED_MATCH_MATCHFORM
-Vergl. FORM
+Match FORM
 ; Match FORM
 ;
 MSG_CLASSED_MATCH_MATCHBITS
-Vergl. Bits
+Match Bits
 ; Match Bits
 ;
 MSG_CLASSED_MATCH_MATCHCOMMENT
-Vergl. Komm.
+Match Comment
 ; Match Comment
 ;
 MSG_CLASSED_MATCH_MATCHDATE
-Vergl. Datum
+Match Date
 ; Match Date
 ;
 MSG_CLASSED_MATCH_MATCHSIZE
-Vergl. Größe
+Match Size
 ; Match Size
 ;
 MSG_CLASSED_MATCH_SEARCHFOR
-Suche nach
+Search For
 ; Search For
 ;
 MSG_CLASSED_MATCH_FINDCHUNK
-Suche Chunk
+Find Chunk
 ; Find Chunk
 ;
 MSG_CLASSED_MATCH_MOVE
-Verzw. REL
+Move
 ; Move
 ;
 MSG_CLASSED_MATCH_MOVETO
-Verzw. ABS
+Move To
 ; Move To
 ;
 MSG_CLASSED_MATCH_AND
-Und
+And
 ; And
 ;
 MSG_CLASSED_MATCH_OR
-Oder
+Or
 ; Or
 ;
 MSG_CLASSED_INSERT
-_Einfügen
+W_staw
 ; In_sert
 ;
 MSG_CLASSED_CLASS_PRI
@@ -1791,103 +1791,103 @@ _Pri
 ; _Pri
 ;
 MSG_CLASSED_MATCH_DTGROUP
-Vergl. DTGr.
+Match DT Group
 ; Match DT Group
 ;
 MSG_CLASSED_MATCH_DTID
-Vergl. DTID
+Match DT ID
 ; Match DT ID
 ;
 MSG_CLASSED_MATCH_MATCHI
-Vergl. (ign.)
+Match (NoCase)
 ; Match (NoCase)
 ;
 MSG_CLASSED_MATCH_MATCH_DESC
-Vergl. Bytes
+Sprawdú zawartoôê
 ; Match bytes
 ;
 MSG_CLASSED_MATCH_MATCHNAME_DESC
-Vergl. Dateiname
+Sprawdú czy nazwa pasuje do wzorca
 ; Match file name
 ;
 MSG_CLASSED_MATCH_MATCHFORM_DESC
-Vergl. IFF FORM
+Sprawdú typ IFF FORM
 ; Match an IFF FORM type
 ;
 MSG_CLASSED_MATCH_MATCHBITS_DESC
-Vergl. Schutzbits
+Sprawdú atrybuty pliku
 ; Match protection bits
 ;
 MSG_CLASSED_MATCH_MATCHCOMMENT_DESC
-Vergl. Kommentar
+Sprawdú komentarz do pliku
 ; Match file comment
 ;
 MSG_CLASSED_MATCH_MATCHDATE_DESC
-Vergl. Erzeugungsdatum
+Sprawdú datë utworzenia pliku
 ; Match creation date
 ;
 MSG_CLASSED_MATCH_MATCHSIZE_DESC
-Vergl. Dateigröße
+Sprawdú dîugoôê pliku
 ; Match file size
 ;
 MSG_CLASSED_MATCH_SEARCHFOR_DESC
-Suche nach Bytefolgen
+Szukaj podanych bajtów
 ; Search for bytes
 ;
 MSG_CLASSED_MATCH_FINDCHUNK_DESC
-Suche nach IFF-Chunk
+Szukaj chunka IFF
 ; Find an IFF chunk
 ;
 MSG_CLASSED_MATCH_MOVE_DESC
-Verzw. zu rel. Position
+Move to relative position
 ; Move to relative position
 ;
 MSG_CLASSED_MATCH_MOVETO_DESC
-Verzw. zu abs. Position
+Move to absolute position
 ; Move to absolute position
 ;
 MSG_CLASSED_MATCH_AND_DESC
-Bedingung muss auch stimmen
+To równieû musi byê prawdâ
 ; This must also be true
 ;
 MSG_CLASSED_MATCH_OR_DESC
-Bei Fehlschlag, versuche dies
+Jeôli to zawiedzie, spróbuj tego
 ; If that failed, try this
 ;
 MSG_CLASSED_MATCH_DTGROUP_DESC
-Vergl. Datatypegruppe
+Sprawdú Grupë DataType
 ; Match a DataTypes Group
 ;
 MSG_CLASSED_MATCH_DTID_DESC
-Vergl. Datatype-ID
+Sprawdú DataTypes ID
 ; Match a DataTypes ID
 ;
 MSG_CLASSED_MATCH_MATCHI_DESC
-Groß/klein ignorieren
+Sprawdú czy ciâg pasuje (DUÛE=maîe)
 ; Case-insensitive Match
 ;
 MSG_CLASSED_MATCH_DIRECTORY
-Verzeichnis
+Directory
 ; Directory
 ;
 MSG_CLASSED_MATCH_DIRECTORY_DESC
-Passende Verzeichnisse
+Sprawdú katalog
 ; Matches directories
 ;
 MSG_CLASSED_VIEW_FILE
-Datei an_z.
+_Pokaû plik
 ; _View File
 ;
 MSG_CLASSED_SELECT_VIEW_FILE
-Zu betrachtende Datei wählen
+Wybierz plik do wyôwietlenia
 ; Select File To View
 ;
 MSG_CLASSED_MATCH_MODULE
-Soundmodul
+Sound Module
 ; Sound Module
 ;
 MSG_CLASSED_MATCH_MODULE_DESC
-Inovamusic.library benötigt
+Wymaga inovamusic.library
 ; Requires inovamusic.library
 ;
 MSG_CLASSED_MATCH_DISK
@@ -1895,7 +1895,7 @@ Disk
 ; Disk
 ;
 MSG_CLASSED_MATCH_DISK_DESC
-Vergl. Disk
+Sprawdú dysk
 ; Matches disks
 ;
 MSG_CLASSED_MATCH_SEARCHRANGE
@@ -1915,27 +1915,27 @@ Match an IFF chunk
 ; Match an IFF chunk
 ;
 MSG_LISTER_BUTTONS_USE
-_Benutzen
+_Uûyj
 ; _Use
 ;
 MSG_LISTER_BUTTONS_CANCEL
-_Abbruch
+Ponie_chaj
 ; _Cancel
 ;
 MSG_LISTER_BUTTONS_MENU_NEW
-Ausschneiden
+Wytnij
 ; New
 ;
 MSG_LISTER_BUTTONS_MENU_OPEN
-Kopieren
+Skopiuj
 ; Open...
 ;
 MSG_LISTER_BUTTONS_MENU_SAVE
-Einfügen
+Wstaw
 ; Save
 ;
 MSG_LISTER_BUTTONS_MENU_SAVEAS
-Piktogramm-Menü
+Icon Menu
 ; Save As...
 ;
 MSG_LISTER_BUTTONS_MENU_QUIT
@@ -1943,7 +1943,7 @@ Quit
 ; Quit
 ;
 MSG_SAVE_DISCARD
-_Benutzen
+_Uûyj
 ; Save|Discard
 ;
 MSG_SAVE_DISCARD_CANCEL
@@ -1951,51 +1951,51 @@ Projekt
 ; Save|Discard|Cancel
 ;
 MSG_UNTITLED
-_Speichern
+Zapi_sz
 ; Untitled
 ;
 MSG_LISTER_BUTTONS_SAVE
-Editieren
+Edytuj
 ; _Save
 ;
 MSG_DISCARD_CANCEL
-Ausschneiden
+Wytnij
 ; Discard|Cancel
 ;
 MSG_RESET_DEFAULTS
-Kopieren
+Skopiuj
 ; Reset To Defaults
 ;
 MSG_LAST_SAVED
-Einfügen
+Wstaw
 ; Last Saved
 ;
 MSG_RESTORE
-Piktogramm-Menü
+Icon Menu
 ; Restore
 ;
 MSG_LISTER_MENU_ITEMS
-Einträge ...
+Ele_menty...
 ; I_tems...
 ;
 MSG_LISTER_MENU_ADD
-_Hinzufügen
+Dod_aj
 ; _Add
 ;
 MSG_LISTER_MENU_INSERT
-_Einfügen
+_Wstaw
 ; _Insert
 ;
 MSG_LISTER_MENU_REMOVE
-_Löschen
+S_kasuj
 ; _Delete
 ;
 MSG_LISTER_MENU_EDIT
-_Abbruch
+Ponie_chaj
 ; _Edit
 ;
 MSG_LISTER_MENU_NAME
-_Benutzen
+_Uûyj
 ; Item _Name
 ;
 MSG_LISTER_MENU_ENTER_NAME
@@ -2003,40 +2003,40 @@ Projekt
 ; Save Menu
 ;
 MSG_LISTER_MENU_SELECT_FILE
-_Speichern
+Zapi_sz
 ; Open Menu
 ;
 MSG_LISTER_MENU_CHANGED
-Editieren
+Edytuj
 ; The menu (%s) has been modified.\n\
 ; Do you wish to save it before proceeding?
 ;
 MSG_LISTER_MENU_CHANGED_NOSAVE
-Ausschneiden
+Wytnij
 ; The menu (%s) has been modified.\n\
 ; Do you wish to discard it?
 ;
 MSG_LISTER_MENU_DUPLICATE
-Kopieren
+Skopiuj
 ; Dup_licate
 ;
 MSG_HOTKEYS_ENTER_NAME
-Einfügen
+Wstaw
 ; Save Hotkeys
 ;
 MSG_HOTKEYS_SELECT_FILE
-Piktogramm-Menü
+Icon Menu
 ; Open Hotkeys
 ;
 MSG_HOTKEYS_CHANGED
 The hotkeys file (%s) has been modified.\n\
-Do you wish to save it before proceeding?
+; Do you wish to save it before proceeding?
 ; The hotkeys file (%s) has been modified.\n\
 ; Do you wish to save it before proceeding?
 ;
 MSG_HOTKEYS_CHANGED_NOSAVE
 The hotkeys file (%s) has been modified.\n\
-Do you wish to discard it?
+; Do you wish to discard it?
 ; The hotkeys file (%s) has been modified.\n\
 ; Do you wish to discard it?
 ;
@@ -2045,137 +2045,137 @@ System-_global Hotkey
 ; System-_global Hotkey
 ;
 MSG_SCRIPTS_ENTER_NAME
-Speichere Skripte
+Save Scripts
 ; Save Scripts
 ;
 MSG_SCRIPTS_SELECT_FILE
-Öffne Skripte
+Open Scripts
 ; Open Scripts
 ;
 MSG_SCRIPTS_CHANGED
 The scripts file (%s) has been modified.\n\
-Do you wish to save it before proceeding?
+; Do you wish to save it before proceeding?
 ; The scripts file (%s) has been modified.\n\
 ; Do you wish to save it before proceeding?
 ;
 MSG_SCRIPTS_CHANGED_NOSAVE
 The scripts file (%s) has been modified.\n\
-Do you wish to discard it?
+; Do you wish to discard it?
 ; The scripts file (%s) has been modified.\n\
 ; Do you wish to discard it?
 ;
 MSG_SCRIPTS
-Skripte ...
+Scripts...
 ; Scripts...
 ;
 MSG_ERROR_SAVING
-Ein Fehler beim Speichern!
+Bîâd podczas zapisu!
 ; An error occurred while saving!
 ;
 MSG_DOS_ERROR
-DOS-Fehler
+Bîâd DOS-u
 ; DOS error
 ;
 MSG_RETRY_CANCEL
-Nochmal|Abbruch
+_Powtórz|Ponie_chaj
 ; Retry|Cancel
 ;
 MSG_ERROR_SAVING_BUILD
-Ein Fehler beim Speichern!\n\
-DOS-Fehler %ld%s
+Bîâd podczas zapisu pliku!\n\
+Bîâd DOS-u %ld%s
 ; An error occurred while saving!\nDOS error %ld%s
 ;
 MSG_ERROR_LOADING_BUILD
-Ein Fehler beim Laden!\n\
-DOS-Fehler %ld%s
+Bîâd podczas odczytu pliku!\n\
+Bîâd DOS-u %ld%s
 ; An error occurred while loading!\nDOS error %ld%s
 ;
 MSG_FUNCTION_ASCII_NAME
-    Name : 
+    Nazwa:
 ;     Name : 
 ;
 MSG_FUNCTION_ASCII_IMAGE
-    Bild : 
+  Obrazek:
 ;    Image : 
 ;
 MSG_FUNCTION_ASCII_LABEL
- Beschr. : 
+ Etykieta:
 ;    Label : 
 ;
 MSG_FUNCTION_ASCII_KEY
-   Taste : 
+  Klawisz:
 ;      Key : 
 ;
 MSG_FUNCTION_ASCII_FUNCTION
-Funktion : 
+  Funkcja:
 ; Function : 
 ;
 MSG_FUNCTION_ASCII_FLAGS
-   Flags : 
+    Flagi:
 ;    Flags : 
 ;
 MSG_SCRIPTS_STARTUP
-Starten
+Uruchomienie DOpusa
 ; Startup
 ;
 MSG_SCRIPTS_SHUTDOWN
-Beenden
+Koniec pracy DOpusa
 ; Shutdown
 ;
 MSG_SCRIPTS_HIDE
-Verbergen
+Schowaj
 ; Hide
 ;
 MSG_SCRIPTS_REVEAL
-Zeigen
+Ponowne otwarcie
 ; Reveal
 ;
 MSG_SCRIPTS_DISKINSERT
-Disk eingelegt
+Wîoûenie dysku
 ; Disk inserted
 ;
 MSG_SCRIPTS_BAD_DISKINSERT
-Unlesbare Disk eingelegt
+Wîoûenie bîëdnego dysku
 ; Bad disk inserted
 ;
 MSG_SCRIPTS_DISKREMOVE
-Disk entnommen
+Wyjëcie dysku
 ; Disk removed
 ;
 MSG_SCRIPTS_DOUBLECLICK
-Doppelklick
+Dwuklik lewym przyciskiem myszy
 ; Double-click
 ;
 MSG_SCRIPTS_OPEN_LISTER
-Lister öffnen
+Otwarcie listera
 ; Open lister
 ;
 MSG_SCRIPTS_OPEN_BUTTONS
-Knöpfe öffnen
+Otwarcie banku przycisków
 ; Open buttons
 ;
 MSG_SCRIPTS_OPEN_GROUP
-Gruppen öffnen
+Otwarcie grupy
 ; Open group
 ;
 MSG_SCRIPTS_CLOSE_LISTER
-Lister schließen
+Zamkniëcie listera
 ; Close lister
 ;
 MSG_SCRIPTS_CLOSE_BUTTONS
-Knöpfe schließen
+Zamkniëcie banku przycisków
 ; Close buttons
 ;
 MSG_SCRIPTS_CLOSE_GROUP
-Gruppen schließen
+Zamkniëcie grupy
 ; Close group
 ;
 MSG_SCRIPTS_RIGHT_DOUBLECLICK
-Doppelklick rechts
+Dwuklik prawym przyciskiem myszy
 ; Right double-click
 ;
 MSG_SCRIPTS_MID_DOUBLECLICK
-Doppelklick Mitte
+Dwuklik ôrodkowym przyciskiem myszy
 ; Middle double-click
 ;
 MSG_SCRIPTS_LAST
@@ -2183,64 +2183,64 @@ MSG_SCRIPTS_LAST
 ; -
 ;
 MSG_MENUS_TITLE
-Benutzer-Menüs
+Menu uûytkownika
 ; User Menus
 ;
 MSG_MENUS_MENU_TITLE
-_Menü
+_Menu
 ; _Menu
 ;
 MSG_MENUS_ITEM_TITLE
-Menü_punkt
+_Elementy
 ; _Item
 ;
 MSG_MENUS_SUB_TITLE
-_Unterpunkt
+_Pod-menu
 ; Su_b-item
 ;
 MSG_MENUS_ADD
-Hinzu
+Nowy
 ; Add
 ;
 MSG_MENUS_COPY
-Kopie
+Kopia
 ; Copy
 ;
 MSG_MENUS_DEL
-Lösch
+Usuï
 ; Del
 ;
 MSG_MENUS_EDIT
-Bearb
+Edytuj
 ; Edit
 ;
 MSG_USER_MENU_DEF_TITLE
-Benutzer-Menü
+Menu uûytkownika
 ; User Menu
 ;
 MSG_USER_MENU_NEW_MENU
-Neues Menü
+Nowe menu
 ; New Menu
 ;
 MSG_USER_MENU_NEW_ITEM
-Neuer Punkt
+Nowy element
 ; New Item
 ;
 MSG_MENUS_LISTER_TITLE
-Lister-Menü
+Menu listera
 ; Lister Menu
 ;
 MSG_LISTER_MENU_DEF_TITLE
-Lister-Menü
+Menu listera
 ; Lister Menu
 ;
 MSG_REPLACE_CANCEL
-Ersetzen|Abbruch
+_Zastâp|Ponie_chaj
 ; Replace|Cancel
 ;
 MSG_FILE_EXISTS
-Datei '%s' existiert bereits\n\
-Ersetzen?
+Plik "%s" juû istnieje.\n\
+Na pewno chesz go zastâpiê?
 ; File '%s' already exists.\nOk to replace it?
 ;
 MSG_OK
@@ -2248,34 +2248,34 @@ Ok
 ; Ok
 ;
 MSG_INVALID_BUTTON_FILE
-'%s' ist keine gültige Knopfdatei!
+"%s" nie jest plikiem banku przycisków!
 ; '%s' is not a valid button file!
 ;
 MSG_MENUS_UP
-Hoch
+/\
 ; Up
 ;
 MSG_MENUS_DOWN
-Runt.
+\/
 ; Down
 ;
 MSG_MENUKEYS_TITLE
-Menü-Knöpfe
+Klawisze menu
 ; Menu Keys
 ;
 MSG_MENUKEYS_DEF_TITLE
-Menü-Knöpfe
+Klawisze menu
 ; Menu Keys
 ;
 MSG_MENUS_MENU_KEY
-_RAmiga +
+_RAmiga + 
 ; _RAmiga + 
 ;
 MSG_MENUS_START_TITLE
-Start-Menü
+Menu Start
 ; Start Menu
 ;
 MSG_START_DEF_TITLE
-Start-Menü
+Menu Start
 ; Start Menu
 ;

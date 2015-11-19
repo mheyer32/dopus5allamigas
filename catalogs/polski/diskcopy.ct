@@ -1,159 +1,163 @@
-## version $VER: diskcopy.catalog 2.1 (22.9.97) Készítette Horváth Péter és Miklós Árpád
+## version $VER: diskcopy.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.p
 ## codeset 5
-## language magyar
+## language polski
 ;
 MSG_DISKCOPY_TITLE
-Lemezmásolás  
+Kopiowanie dysku
 ; Diskcopy
 ;
 MSG_DISKCOPY_DISKCOPY
-_Másold
+_Skopiuj
 ; _Diskcopy
 ;
 MSG_DISKCOPY_CANCEL
-_Mégsem
+Ponie_chaj
 ; _Cancel
 ;
 MSG_DISKCOPY_VERIFY
-_Ellenõrzés
+_Weryfikacja
 ; _Verify
 ;
 MSG_DISKCOPY_BUMP
-_Névváltoztatás
+_Zmieï nazwë
 ; _Bump Name
 ;
 MSG_DISKCOPY_FROM
-Forrás...
+Z dysku...
 ; From...
 ;
 MSG_DISKCOPY_TO
-Cél...
+Na dysk...
 ; To...
 ;
 MSG_DISKCOPY_STATUS
-%s, %s foglalt
+%s, %s w uûyciu
 ; %s, %s used
 ;
 MSG_DISKCOPY_OPEN_DEVICES
-Eszközök megnyitása...
+Otwieram urzâdzenia...
 ; Opening devices...
 ;
 MSG_CANT_OPEN_DEVICE
-A forráslemezt nem tudom megnyitni.
+Nie mogë otworzyê urzâdzenia úródîowego!
 ; Can't open source device!
 ;
 MSG_NO_DISK_PRESENT
-Nincs lemez a forrásmeghajtóban.
+Brak dysku úródîowego!
 ; No disk present in source!
 ;
 MSG_CANT_OPEN_DESTINATION
-Nem lehet megnyitni a céllemezt (%s)
+Nie mogë otworzyê %s
 ; Unable to open destination %s
 ;
 MSG_NO_DISK_PRESENT_DEST
-Nincs lemez behelyezve (%s)
+Brak dysku w %s
 ; No disk present in %s
 ;
 MSG_WRITE_PROTECTED_DEST
-%s  - a lemez írásvédett.
+Dysk w %s jest zabezpieczony przed zapisem!
 ; Disk in %s is write protected!
 ;
 MSG_ABORTED
-Megszakítva
+Przerwane.
 ; Aborted.
 ;
 MSG_RETRY_CANCEL
-Újra|Mégsem
+_Powtórz|Ponie_chaj
 ; Retry|Cancel
 ;
 MSG_RETRY_REMOVE_CANCEL
-Újra|Töröld|Mégsem
+_Powtórz|S_kasuj|Ponie_chaj
 ; Retry|Remove|Cancel
 ;
 MSG_PROCEED_CANCEL
-Tovább|Mégsem
+_Kontynuuj|Ponie_chaj
 ; Proceed|Cancel
 ;
 MSG_DISKCOPY_SUCCESSFUL
-A másolás sikeres volt.
+Kopiowanie zakoïczone
 ; Diskcopy successful!
 ;
 MSG_DISKCOPY_FAILED
-A másolás nem sikerült.
+Kopiowanie nie powiodîo sië.
 ; Diskcopy failed.
 ;
 MSG_READ_ERROR
-%s - a(z) %ld. sáv olvasásakor hiba történt:\n\
+Bîâd odczytu dysku w urzâdzeniu %s\n\
+na ôcieûce %ld.\n\
 %s
 ; Error reading %s track %ld\n%s
 ;
 MSG_WRITE_ERROR
-%s - a(z) %ld. sáv írásakor hiba történt:\n\
+Bîâd zapisu dysku w urzâdzeniu %s\n\
+na ôcieûce %ld.\n\
 %s
 ; Error writing %s track %ld\n%s
 ;
 MSG_VERIFY_ERROR
-%s - a(z) %ld. sáv ellenõrzésekor hiba történt:\n\
+Bîâd weryfikacji w urzâdzeniu %s\n\
+na ôcieûce %ld.\n\
 %s
 ; Error verifying %s track %ld\n%s
 ;
 MSG_DISKCOPY_READING
-A(z) %ld. sávot olvasom, %ld van hátra
+Odczytujë  %ld. cylinder, %ld do koïca
 ; Reading track %ld, %ld to go.
 ;
 MSG_DISKCOPY_WRITING
-A(z) %ld. sávot írom, %ld van hátra
+Zapisujë   %ld. cylinder, %ld do koïca  
 ; Writing track %ld, %ld to go.
 ;
 MSG_DISKCOPY_VERIFYING
-A(z) %ld. sávot ellenõrzöm, %ld van hátra
+Weryfikujë %ld. cylinder, %ld do koïca  
 ; Verifying track %ld, %ld to go.
 ;
 MSG_DISKCOPY_TO_TITLE
-, cél:
+do
 ; to
 ;
 MSG_INSERT_DESTINATION
-Helyezze be a céllemezt a(z) %s meghajtóba
+Wîóû dysk docelowy do urzâdzenia %s
 ; Insert destination disk in %s
 ;
 MSG_INSERT_SOURCE
-Helyezze be a forráslemezt a(z) %s meghajtóba
+Wîóû dysk úródîowy do urzâdzenia %s
 ; Insert source disk in %s
 ;
 MSG_ERROR_WRITE_PROT
-A lemez írásvédett
+Dysk jest zabezpieczony przed zapisem
 ; Disk is write protected
 ;
 MSG_ERROR_NO_DISK
-Nincs lemez a meghajtóban
+Brak dysku u napëdzie
 ; No disk in drive
 ;
 MSG_ERROR_UNKNOWN
-Ismeretlen hiba
+Nieznany rodzaj bîëdu
 ; Unknown error code
 ;
 MSG_ERROR_VERIFY
-Az adat felírása nem sikerült
+Dane nie zostaîy zapisane poprawnie.
 ; Data not written correctly.
 ;
 MSG_BUMPING_NAMES
-Névváltoztatás...
+Modyfikujë nazwë dysku...
 ; Bumping names...
 ;
 MSG_INCOMPATIBLE
-A lemezek típusa nem kompatibilis, így nem másolhatók.
+Dyski nie sâ tego samego typu\n\
+i nie mogâ zostaê skopiowane.
 ; Disks are of incompatible types and can not be copied.
 ;
 MSG_OK
-OK
+Ok
 ; OK
 ;
 MSG_DISKCOPY_DESC
-Másolatok készítése lemezrõl
+Tworzy kopie dysku
 ; Make copies of a disk
 ;
 MSG_DISKCOPY_COPYING
-Másolom a lemezt...
+Kopiujë dysk...
 ; Copying disk...
 ;

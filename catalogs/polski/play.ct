@@ -1,25 +1,25 @@
-## version $VER: play.catalog 5.5 (03.09.96)
-## codeset 0
-## language deutsch
+## version $VER: play.catalog 56.0 (08.07.97) © Marcin Orîowski <carlos@wfmh.man.szczecin.pl>
+## codeset 5
+## language polski
 ;
 MSG_NEXT
-_Nächste
+_Nastëpny
 ; _Next
 ;
 MSG_ABORT
-_Abbruch
+P_rzerwij
 ; _Abort
 ;
 MSG_PLAY_TITLE
-Abspielen
+Odtwórz
 ; Play
 ;
 MSG_FILENAME
-Datei:
+Plik:
 ; File:
 ;
 MSG_LENGTH
-Länge:
+Dîugoôê:
 ; Length:
 ;
 MSG_TYPE
@@ -35,34 +35,34 @@ Mono
 ; Mono
 ;
 MSG_TYPE_RAW
-Roh
+Raw
 ; Raw
 ;
 MSG_STATUS
-Status:
+Stan:
 ; Status:
 ;
 MSG_STATUS_LOADING
-Lese Datei ...
+Wczytujë plik...
 ; Reading file...
 ;
 MSG_STATUS_DECOMPRESSING
-Entpacke ...
+Dekompresujë...
 ; Decompressing...
 ;
 MSG_STATUS_PLAYING
-Spiele Tondatei ...
+Odtwarzam dúwiëk...
 ; Playing sound...
 ;
 MSG_PLAY_DESC
-Tondateien abspielen
+Odtwarza pliki dúwiëkowe
 ; Play sound files
 ;
 MSG_PLAY_NEXT
-Nächste
+Nastëpny
 ; Next
 ;
 MSG_PLAY_ABORT
-Abbruch
+Przerwij
 ; Abort
 ;
