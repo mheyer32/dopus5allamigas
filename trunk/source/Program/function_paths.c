@@ -174,7 +174,7 @@ void function_path_end(FunctionHandle *handle,PathList *list,int cleanup)
 	while (list->current)
 	{
 		// Is the current one valid?
-		if (list->current->node.mln_Succ)
+		if (list->current->node.mln_Succ && list->current->lister)
 		{
 			// Get next lister
 			list->current=(PathNode *)list->current->node.mln_Succ;
