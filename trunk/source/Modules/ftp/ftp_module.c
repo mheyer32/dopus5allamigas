@@ -520,8 +520,11 @@ og.og_screen = screen;
 		Permit();
 
 		// Get Opus's ARexx port name
+#ifdef __MORPHOS__
 		REFCALL(func_callback, EXTCMD_GET_PORT, IPCDATA(function_ipc), og.og_opusname);
-
+#else
+		func_callback( EXTCMD_GET_PORT, IPCDATA(function_ipc), og.og_opusname );
+#endif
 		if	(mod_id == MID_QUIT || ftpport )
 			{
 			D(bug( "not launching dopus_ftp\n" ));

@@ -3188,8 +3188,11 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 ))
 			med.med_ipc = mldata->mld_ftp_ipc;
 
 			// Get Opus ARexx port name via callbacks
+#ifdef __MORPHOS__
 			REFCALL(mldata->mld_func_callback, EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus);
-
+#else
+			mldata->mld_func_callback( EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus );
+#endif
 			// Scan configuration file
 			med.med_log_fp = setup_config( og );
 

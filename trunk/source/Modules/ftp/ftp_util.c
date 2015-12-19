@@ -1454,7 +1454,11 @@ pp.type    = MODPTR_OPTIONS;
 pp.pointer = 0;
 pp.flags   = 0;
 
+#ifdef __MORPHOS__
 	REFCALL(og->og_func_callback, EXTCMD_GET_POINTER, IPCDATA(og->og_main_ipc), &pp);
+#else
+	og->og_func_callback(EXTCMD_GET_POINTER, IPCDATA(og->og_main_ipc), &pp);
+#endif
 
 options = (CFG_SETS *)pp.pointer;
 
@@ -1467,7 +1471,11 @@ else if	(type == OPTION_DELETE)
 	rv = options->delete_flags;
 
 if	(pp.flags & POINTERF_LOCKED)
+#ifdef __MORPHOS__
 	REFCALL(og->og_func_callback, EXTCMD_FREE_POINTER,IPCDATA(og->og_main_ipc), &pp);
+#else
+	og->og_func_callback(EXTCMD_FREE_POINTER,IPCDATA(og->og_main_ipc), &pp);
+#endif
 
 return rv;
 }
