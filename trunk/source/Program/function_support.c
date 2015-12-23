@@ -428,6 +428,14 @@ void function_cleanup(FunctionHandle *handle,PathNode *node,BOOL full)
 		// Get lister
 		if ((lister=node->lister))
 		{
+			/* If the lister that a xad lister is started from with
+			 * a double click is closed, we get a corrupt buffer
+			 * when the xad lister is closed. This pointer check
+			 * is a workaround to prevent illegal memory access.
+			 */
+			if ((LONG)lister->cur_buffer <= 0L)
+				return;
+
 			// Get source buffer and lock it
 			buffer=lister->cur_buffer;
 			buffer_lock(buffer,TRUE);
@@ -512,7 +520,6 @@ void function_cleanup(FunctionHandle *handle,PathNode *node,BOOL full)
 		}
 	}
 }
-
 
 
 // Do changes to listers
@@ -657,3 +664,4 @@ void get_trunc_path(char *source,char *dest)
 		*dest=0;
 	}
 }
+
