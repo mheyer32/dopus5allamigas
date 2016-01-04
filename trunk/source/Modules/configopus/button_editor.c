@@ -12,11 +12,11 @@ void buttoned_copy_string(ButtonEdData *data,char *from,char **to);
 #define UtilityBase		(data->UtilityBase)
 #define LayersBase		(data->LayersBase)*/
 
-#ifdef __amigaos4__
-ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, ButtonEdStartup *startup))
-#else
+//#ifdef __amigaos4__
+//ULONG ASM _buttoned_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, ButtonEdStartup *startup))
+//#else
 IPC_StartupCode(_buttoned_init, ButtonEdStartup *, startup)
-#endif
+//#endif
 {
 	ButtonEdData *data;
 

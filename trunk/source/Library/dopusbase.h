@@ -427,24 +427,14 @@ For more information on Directory Opus for Windows please see:
 #define IPCSIG_QUIT		SIGBREAKF_CTRL_F
 
 
-// Requesters
-#if defined(__amigaos4__) || defined(__MORPHOS__)
+// Requesters - Duplicated from Include/libraries/dopus5.h
+#if defined(__MORPHOS__)
 typedef VOID (*REF_CALLBACK)(VOID);
 #else
 typedef VOID ASM (*REF_CALLBACK)(REG(d0, ULONG iclass), REG(a0, APTR window), REG(a1, APTR data));
 #endif
 
-#if defined(__amigaos4__)
-
-#include <exec/emulation.h>
-
-#define REFCALL(callback, iclass, window, data) \
-	EmulateTags(callback, \
-		ET_RegisterD0, iclass, \
-		ET_RegisterA0, window, \
-		ET_RegisterA1, data, \
-		TAG_DONE)
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 #define REFCALL(callback, iclass, window, data) \
 ({ \
 	REG_D0 = (ULONG)iclass; \

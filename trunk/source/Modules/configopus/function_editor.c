@@ -6,11 +6,11 @@
 
 /*#define DOpusBase		(data->startup->dopus_base)*/
 
-#ifdef __amigaos4__
-ULONG ASM funced_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, FunctionStartup *startup))
-#else
+//#ifdef __amigaos4__
+//ULONG ASM funced_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, FunctionStartup *startup))
+//#else
 IPC_StartupCode(funced_init, FunctionStartup *, startup)
-#endif
+//#endif
 {
 	FuncEdData *data;
 

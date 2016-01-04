@@ -95,11 +95,11 @@ return(&og->og_opus_format);
 
 
 // Init code for process
-#ifdef __amigaos4__
-static ULONG ASM format_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct format_data *data ))
-#else
+//#ifdef __amigaos4__
+//static ULONG ASM format_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct format_data *data ))
+//#else
 IPC_StartupCode(format_init, struct format_data *, data)
-#endif
+//#endif
 {
 ULONG ok = FALSE;
 

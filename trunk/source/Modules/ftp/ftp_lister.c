@@ -1265,11 +1265,11 @@ if	(g)
  *	Init code for lister process
  */
 
-#ifdef __amigaos4__
-static ULONG ASM ftplister_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
-#else
+//#ifdef __amigaos4__
+//static ULONG ASM ftplister_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
+//#else
 IPC_StartupCode(ftplister_init, struct subproc_data *, data)
-#endif
+//#endif
 {
  struct opusftp_globals *ogp;
 ULONG                            retval  = 0;
