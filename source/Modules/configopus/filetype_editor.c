@@ -17,11 +17,11 @@
 
 
 // Editor init
-#ifdef __amigaos4__
-ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, filetype_ed_data *data))
-#else
+//#ifdef __amigaos4__
+//ULONG ASM _filetypeed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, filetype_ed_data *data))
+//#else
 IPC_StartupCode(_filetypeed_init, filetype_ed_data *, data)
-#endif
+//#endif
 {
 	short a;
 

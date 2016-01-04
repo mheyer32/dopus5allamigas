@@ -4575,11 +4575,11 @@ free_address_book(ogp);
  * 	 open it and store it in the 'userdata' field of our IPCData
  *
  */
-#if defined(__amigaos4__)
-ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
-#else
+//#if defined(__amigaos4__)
+//ULONG ASM addressbook_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct subproc_data *data ))
+//#else
 IPC_StartupCode(addressbook_init, struct subproc_data *, data)
-#endif
+//#endif
 {
 struct globals *g;
 struct opusftp_globals *ogp;

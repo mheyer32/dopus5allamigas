@@ -1,69 +1,7 @@
 #ifndef __CALLBACK_MAIN_H__
 #define __CALLBACK_MAIN_H__
 
-#if defined(__amigaos4__)
-#define CALLBACK_0(ret,name) static ret name##_stubs (ULONG *regs) \
-	{ return (ret)name(); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_1(ret,name,r1,t1,n1) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	return (ret)name(n1); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_2(ret,name,r1,t1,n1,r2,t2,n2) ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	return (ret)name(n1, n2); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_3(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	t3 n3 = (t3)regs[ REG68K_##r3 / 4 ]; \
-	return (ret)name(n1, n2, n3); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_4(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3,r4,t4,n4) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	t3 n3 = (t3)regs[ REG68K_##r3 / 4 ]; \
-	t4 n4 = (t4)regs[ REG68K_##r4 / 4 ]; \
-	return (ret)name(n1, n2, n3, n4); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_5(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3,r4,t4,n4,r5,t5,n5) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	t3 n3 = (t3)regs[ REG68K_##r3 / 4 ]; \
-	t4 n4 = (t4)regs[ REG68K_##r4 / 4 ]; \
-	t5 n5 = (t5)regs[ REG68K_##r5 / 4 ]; \
-	return (ret)name(n1, n2, n3, n4, n5); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_6(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3,r4,t4,n4,r5,t5,n5,r6,t6,n6) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	t3 n3 = (t3)regs[ REG68K_##r3 / 4 ]; \
-	t4 n4 = (t4)regs[ REG68K_##r4 / 4 ]; \
-	t5 n5 = (t5)regs[ REG68K_##r5 / 4 ]; \
-	t6 n6 = (t6)regs[ REG68K_##r6 / 4 ]; \
-	return (ret)name(n1, n2, n3, n4, n5, n6); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define CALLBACK_7(ret,name,r1,t1,n1,r2,t2,n2,r3,t3,n3,r4,t4,n4,r5,t5,n5,r6,t6,n6,r7,t7,n7) static ret name##_stubs (ULONG *regs) { \
-	t1 n1 = (t1)regs[ REG68K_##r1 / 4 ]; \
-	t2 n2 = (t2)regs[ REG68K_##r2 / 4 ]; \
-	t3 n3 = (t3)regs[ REG68K_##r3 / 4 ]; \
-	t4 n4 = (t4)regs[ REG68K_##r4 / 4 ]; \
-	t5 n5 = (t5)regs[ REG68K_##r5 / 4 ]; \
-	t6 n6 = (t6)regs[ REG68K_##r6 / 4 ]; \
-	t7 n7 = (t7)regs[ REG68K_##r7 / 4 ]; \
-	return (ret)name(n1, n2, n3, n4, n5, n6, n7); } \
-	static struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##_stubs };
-
-#define GET_DOPUS_CALLBACK(name) (ULONG)&name##_trap
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 
 #define CALLBACK_0(ret,name) static ret name##_stubs(void) { return (ret)name(); } \
 	static struct EmulLibEntry name##_trap = { TRAP_LIB, 0, (APTR)&name##_stubs };
@@ -130,7 +68,8 @@
 #define GET_DOPUS_CALLBACK(name) (ULONG)&name
 #endif
 
-#if defined(__amigaos4__) || defined(__MORPHOS__)
+//#if defined(__amigaos4__) || defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 CALLBACK_3(DirEntry *, HookCreateFileEntry,
 	a0, Lister *,lister,
 	a1, struct FileInfoBlock *,fib,

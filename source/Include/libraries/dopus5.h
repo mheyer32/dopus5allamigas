@@ -1488,8 +1488,10 @@ enum {
 #define IPCSIG_QUIT		SIGBREAKF_CTRL_F
 
 
-// Requesters
-#if defined(__amigaos4__) || defined(__MORPHOS__)
+// Requesters - Duplicated in Library/dopusbase.h
+#if defined(__amigaos4__)
+typedef VOID (*REF_CALLBACK)(REG(d0, ULONG iclass), REG(a0, APTR window), REG(a1, APTR data));
+#elif defined(__MORPHOS__)
 typedef VOID (*REF_CALLBACK)(VOID);
 #elif defined(__AROS__)
 typedef VOID (*REF_CALLBACK)(ULONG iclass, APTR window, APTR data);
@@ -1498,14 +1500,7 @@ typedef VOID (*REF_CALLBACK)(ULONG iclass, APTR window, APTR data);
 typedef VOID (*REF_CALLBACK)(ULONG iclass  __asm("d0"), APTR window  __asm("a0"), APTR data  __asm("a1"));
 #endif
 
-#if defined(__amigaos4__)
-#define REFCALL(callback, iclass, window, data) \
-	EmulateTags(callback, \
-		ET_RegisterD0, iclass, \
-		ET_RegisterA0, window, \
-		ET_RegisterA1, data, \
-		TAG_DONE)
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 #define REFCALL(callback, iclass, window, data) \
 ({ \
 	REG_D0 = (ULONG)iclass; \
@@ -1517,15 +1512,7 @@ typedef VOID (*REF_CALLBACK)(ULONG iclass  __asm("d0"), APTR window  __asm("a0")
 #define REFCALL(callback, iclass, window, data) callback(iclass, window, data)
 #endif
 
-#if defined(__amigaos4__)
-#define GET_CALLBACK(name) &name
-#define REF_CALLBACK_PROTO(ret, name,r1,t1,n1,r2,t2,n2,r3,t3,n3) extern ret name(t1 n1, t2 n2, t3 n3); extern struct EmuTrap name##_trap
-#define REF_CALLBACK_BEGIN(ret, name,r1,t1,n1,r2,t2,n2,r3,t3,n3, ...) \
-	__VA_ARGS__ ret name(t1 n1, t2 n2, t3 n3); \
-	static ret name##stubs(ULONG *r) { return (ret) name((t1)r[REG68K_##r1 / 4], (t2)r[REG68K_##r2 / 4], (t3)r[REG68K_##r2 / 4]); } \
-	struct EmuTrap name##_trap = { TRAPINST, TRAPTYPE, (APTR)&name##stubs }; \
-	__VA_ARGS__ ret name(REG(r1, t1 n1), REG(r2, t2 n2), REG(r3, t3 n3))
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 #define GET_CALLBACK(name) &name##_trap
 #define REF_CALLBACK_PROTO(ret, name,r1,t1,n1,r2,t2,n2,r3,t3,n3) extern ret name(t1 n1, t2 n2, t3 n3); extern struct EmulLibEntry name##_trap
 #define REF_CALLBACK_BEGIN(ret, name,r1,t1,n1,r2,t2,n2,r3,t3,n3, ...) \
@@ -2894,36 +2881,7 @@ typedef struct
 #pragma pack()
 #endif 
 
-#if defined(__amigaos4__)
-
-#define DC_REGA0 ET_RegisterA0
-#define DC_REGA1 ET_RegisterA1
-#define DC_REGA2 ET_RegisterA2
-#define DC_REGA3 ET_RegisterA3
-#define DC_REGA4 ET_RegisterA4
-#define DC_REGD0 ET_RegisterD0
-#define DC_REGD1 ET_RegisterD1
-#define DC_REGD2 ET_RegisterD2
-
-#define DC_CALL1(dc, func, t1, v1) \
-	EmulateTags(dc->func, t1, v1, TAG_DONE)
-
-#define DC_CALL2(dc, func, t1, v1, t2, v2) \
-	EmulateTags(dc->func, t1, v1, t2, v2, TAG_DONE)
-
-#define DC_CALL3(dc, func, t1, v1, t2, v2, t3, v3) \
-	EmulateTags(dc->func, t1, v1, t2, v2, t3, v3, TAG_DONE)
-
-#define DC_CALL4(dc, func, t1, v1, t2, v2, t3, v3, t4, v4) \
-	EmulateTags(dc->func, t1, v1, t2, v2, t3, v3, t4, v4, TAG_DONE)
-
-#define DC_CALL5(dc, func, t1, v1, t2, v2, t3, v3, t4, v4, t5, v5) \
-	EmulateTags(dc->func, t1, v1, t2, v2, t3, v3, t4, v4, t5, v5, TAG_DONE)
-
-#define DC_CALL6(dc, func, t1, v1, t2, v2, t3, v3, t4, v4, t5, v5, t6, v6) \
-	EmulateTags(dc->func, t1, v1, t2, v2, t3, v3, t4, v4, t5, v5, t6, v6, TAG_DONE)
-
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 
 #define DC_REGA0 REG_A0
 #define DC_REGA1 REG_A0
@@ -3021,21 +2979,7 @@ typedef struct
 
 /*********************************************************************/
 
-#if defined(__amigaos4__)
-#define IPC_StartupCode(name, t2, n2, ...) \
-	STATIC ULONG name##PPC(IPCData *ipc, t2 n2); \
-	STATIC ULONG name##stubs(ULONG *r) \
-	{ \
-		return name##PPC((IPCData *)r[REG68K_A0 / 4], (t2)r[REG68K_A1 / 4]); \
-	} \
-	__VA_ARGS__ struct EmuTrap name = { TRAPINST, TRAPTYPE, (APTR)&name##stubs }; \
-	STATIC ULONG name##PPC(IPCData *ipc, t2 n2)
-#define IPC_EntryCode(name, ...) \
-	STATIC VOID name##PPC(); \
-	__VA_ARGS__ struct EmuTrap name = { TRAPINST, TRAPTYPE, (APTR)&name##PPC }; \
-	STATIC VOID name##PPC()
-#define IPC_EntryProto(name, ...) __VA_ARGS__ struct EmuTrap name
-#elif defined(__MORPHOS__)
+#if defined(__MORPHOS__)
 #define IPC_StartupCode(name, t2, n2, ...) \
 	STATIC ULONG name##PPC(IPCData *ipc, t2 n2); \
 	STATIC ULONG name##stubs(void) \

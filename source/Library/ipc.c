@@ -167,18 +167,13 @@ int ASM L_IPC_Startup(
 	return 1;
 }
 
-#ifdef __amigaos4__
-#include <exec/emulation.h>
-#endif
 STATIC ULONG CallStartupCode(ULONG (*ASM code)(REG(a0, IPCData *),REG(a1, APTR)), APTR ipc, APTR data)
 {
 	ULONG rc = 1;
 
 	if (code)
 	{
-		#if defined(__amigaos4__)
-		rc = EmulateTags(code, ET_RegisterA0, ipc, ET_RegisterA1, data, TAG_DONE);
-		#elif defined(__MORPHOS__)
+		#if defined(__MORPHOS__)
 		REG_A0 = (ULONG)ipc;
 		REG_A1 = (ULONG)data;
 		rc = MyEmulHandle->EmulCallDirect68k(code);

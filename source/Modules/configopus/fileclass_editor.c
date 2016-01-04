@@ -8,11 +8,11 @@
 #define RexxSysBase		(data->rexx_base)
 #define AslBase			(data->asl_base)*/
 
-#ifdef __amigaos4__
-ULONG ASM _fileclassed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, fileclass_ed_data *data))
-#else
+//#ifdef __amigaos4__
+//ULONG ASM _fileclassed_init(REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, fileclass_ed_data *data))
+//#else
 IPC_StartupCode(_fileclassed_init, fileclass_ed_data *, data)
-#endif
+//#endif
 {
 	short a;
 

@@ -3012,11 +3012,11 @@ return quit;
 
 /********************************/
 
-#ifdef __amigaos4__
-static ULONG ASM dopus_ftp_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct modlaunch_data *mldata ))
-#else
+//#ifdef __amigaos4__
+//static ULONG ASM dopus_ftp_init( REG(a0, IPCData *ipc), REG(a2, int skip), REG(a1, struct modlaunch_data *mldata ))
+//#else
 IPC_StartupCode(dopus_ftp_init, struct modlaunch_data *, mldata)
-#endif
+//#endif
 {
 // Store IPC pointer
 mldata->mld_ftp_ipc = ipc;
@@ -3188,11 +3188,10 @@ if	((ourbase = OpenLibrary( "ftp.module", 0 ))
 			med.med_ipc = mldata->mld_ftp_ipc;
 
 			// Get Opus ARexx port name via callbacks
-#ifdef __MORPHOS__
+
 			REFCALL(mldata->mld_func_callback, EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus);
-#else
-			mldata->mld_func_callback( EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus );
-#endif
+//			mldata->mld_func_callback( EXTCMD_GET_PORT, IPCDATA(mldata->mld_ftp_ipc), med.med_opus );
+
 			// Scan configuration file
 			med.med_log_fp = setup_config( og );
 
