@@ -966,7 +966,7 @@ void filetypeed_show_icon(filetype_ed_data *data)
 // Pick icon image
 BOOL filetypeed_pick_icon(filetype_ed_data *data)
 {
-	char path[256],file[32],*ptr,pattern[18];
+	char path[256], file[32],*ptr,pattern[18];
 	BOOL ret=0;
 
 	// Make window busy
@@ -975,15 +975,20 @@ BOOL filetypeed_pick_icon(filetype_ed_data *data)
 	// Get current path
 	path[0]=0;
 	file[0]=0;
-	if (data->type->icon_path)
+	if (data->type->icon_path && data->type->icon_path[0])
 	{
-		strcpy(path,data->type->icon_path);
-		if ((ptr=FilePart(path)))
+		if ((ptr = strstr(data->type->icon_path, ":")))
 		{
-			strcpy(file,ptr);
-			*ptr=0;
+			strcpy(path,data->type->icon_path);
+			if ((ptr=FilePart(path)))
+			{
+				strcpy(file,ptr);
+				*ptr=0;
+			}
 		}
 	}
+
+	if (!path[0]) strcpy(path, "Dopus5:");
 
 	// Build pattern
 	ParsePatternNoCase("#?.info",pattern,18);
@@ -999,13 +1004,31 @@ BOOL filetypeed_pick_icon(filetype_ed_data *data)
 		ASLFR_AcceptPattern,pattern,
 		TAG_END))
 	{
+		char *reqpath = DATA(data->window)->request->fr_Drawer;
+		BPTR lock = 0;
+
 		// Free existing path
 		FreeMemH(data->type->icon_path);
 		data->type->icon_path=0;
 
 		// Build new path
-		strcpy(path,DATA(data->window)->request->fr_Drawer);
-		AddPart(path,DATA(data->window)->request->fr_File,256);
+		if (reqpath[0] && (lock = Lock(reqpath, ACCESS_READ)))
+		{
+			// Copy drawer path if it's in Dopus5 dir
+			if (strstr(reqpath, "Dopus5:") && !strstr(reqpath, ":/"))
+				strcpy(path,reqpath);
+			// Get absolute path to avoid relative paths
+			else if (!(NameFromLock(lock, path, sizeof(path))))
+				path[0] = 0;
+			UnLock(lock);
+		}
+		else
+		{
+			path[0] = 0;
+		}
+
+		// Add filename if path is valid
+		if (path[0]) AddPart(path,DATA(data->window)->request->fr_File,256);
 
 		// Throw it away if it's not an icon
 		if (!(ptr=strstr(path,".info"))) path[0]=0;
