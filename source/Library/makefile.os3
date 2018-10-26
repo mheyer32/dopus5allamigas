@@ -24,7 +24,7 @@ LDFLAGS  := -nostartfiles -noixemul
 WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
-LIBS     := -lpools -lamiga -ldebug
+LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
