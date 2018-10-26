@@ -53,6 +53,10 @@ int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
 }
+
+__stdargs void exit(int status) {
+    Exit(status);
+}
 #endif
 
 /****************************************************************************/
@@ -645,7 +649,7 @@ static BPTR                   LIBFUNC LibExpunge (REG(a6, struct MyLibrary *base
 static struct MyLibrary * LIBFUNC LibOpen    (REG(d0, ULONG version), REG(a6, struct MyLibrary *base));
 static BPTR                   LIBFUNC LibClose   (REG(a6, struct MyLibrary *base));
 static LONG                   LIBFUNC LibNull    (void);
-
+struct WBenchMsg *_WBenchMsg = NULL;
 #endif
 
 /****************************************************************************/
@@ -1817,3 +1821,4 @@ int low_mem_handler(struct ExecBase *ExecBase,
 	return MEM_DID_NOTHING;
 }
 #endif
+

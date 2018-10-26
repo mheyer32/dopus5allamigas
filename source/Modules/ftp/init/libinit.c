@@ -1077,9 +1077,8 @@ ModuleInfo *LIBFUNC L_Module_Identify(REG(d0, int num))
 
 
 #ifdef __amigaos3__
-void exit(int exitcode)
-{
-abort();
+__stdargs void exit(int status) {
+	Exit(status);
 }
 #endif
 
