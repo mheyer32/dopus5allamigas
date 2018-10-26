@@ -1,3 +1,4 @@
+include ../../../makefile.common
 
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
@@ -5,25 +6,6 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 NAME := DOpusRT5
 DESTDIR := ../../../bin.os3
 TARGET   := $(DESTDIR)/$(NAME)
-
-# Enter debug=no on "Make" command line to disable debug output.
-ifeq ($(debug), no)
-DEBUG := 
-STRIP := m68k-amigaos-strip --remove-section=.comment $(TARGET)
-else
-DEBUG := -DDEBUG
-STRIP := 
-endif
-
-OPTIMIZE := -O2
-DEBUGSYM := 
-OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../../../Include
-LDFLAGS  := -noixemul
-WARNINGS := -Wall
-CC       := m68k-amigaos-gcc
-CFLAGS   := $(OPTIONS) $(DEBUGSYM) $(OPTIMIZE) -noixemul
-LIBS     := -lamiga -ldebug
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p

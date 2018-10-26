@@ -49,7 +49,7 @@ For more information on Directory Opus for Windows please see:
  */
 
 #if defined(__amigaos3__) || defined(__amigaos4__)
-int _start(void) //must be first for 68k library
+USED int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
 }

@@ -51,6 +51,11 @@ int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
 }
+
+void	__stdargs  exit (int __status)
+{
+    Exit(__status);
+}
 #endif
 
 /****************************************************************************/
@@ -170,6 +175,7 @@ struct Library 			*__UtilityBase = NULL; // required by clib2 & libnix
 
 struct Library *DOpusBase;
 struct DOpusLocale *locale;
+struct WBStartup *_WBenchMsg = NULL;
 
 /**************************************************************************/
 static const char UserLibName[] = userlibname;

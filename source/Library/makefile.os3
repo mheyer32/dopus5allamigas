@@ -1,4 +1,5 @@
 include makefile.objs
+include ../makefile.common
 
 SHELL:= sh
 NEWDATE  := $(shell date +%d.%m.%Y)
@@ -6,25 +7,9 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 NAME := dopus5.library
 DESTDIR  := ../bin.os3
 TARGET   := $(DESTDIR)/$(NAME)
-OPTIMIZE := -O2
 
-# Enter debug=no on "Make" command line to disable debug output.
-ifeq ($(debug), no)
-DEBUG := 
-STRIP := m68k-amigaos-strip --remove-section=.comment $(TARGET)
-else
-DEBUG := -DDEBUG
-STRIP := 
-endif
-
-DEBUGSYM := 
-OPTIONS  := -m68020-60 -D__amigaos3__ -D__USE_SYSBASE -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
-INCLUDES := -I../ -I../Include
-LDFLAGS  := $(OPTIONS) -nostartfiles -noixemul
-WARNINGS := -Wall
-CC       := m68k-amigaos-gcc
-CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
-LIBS     := -lamiga -ldebug
+LDFLAGS  += -nostartfiles -nostdlib
+LIBS := -ldebug -lgcc -lnix20 -lnix -lstubs -lamiga
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
