@@ -27,8 +27,8 @@ extern struct ExecBase *SysBase;
 
 
 // replacements for the C library memory functions, which can't be used in shared libraries
-void free(void *ptr) { return FreeVec(ptr); }
-char *strdup (const char *orig)
+STDARGS void free(void *ptr) { return FreeVec(ptr); }
+STDARGS char *strdup (const char *orig)
 {
 	char *copy = AllocVec(strlen(orig)+1, MEMF_ANY);
 	if (copy)
