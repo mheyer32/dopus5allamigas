@@ -244,7 +244,7 @@ extern struct Library *DOpusBase;
 extern struct Library *IntuitionBase;
 extern struct Library *GfxBase;
 extern struct Library *IconBase;
-extern struct Library *UtilityBase;
+extern struct UtilityBase *UtilityBase;
 extern struct Library *LayersBase;
 extern struct Library *GadToolsBase;
 extern struct Library *AslBase;

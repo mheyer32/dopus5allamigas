@@ -1405,7 +1405,7 @@ LIBPROTO(L_CheckProgressAbort, BOOL,	REG(a0, struct _ProgressWindow *prog));
 
 LIBPROTO(L_CalcPercent, long,	REG(d0, ULONG amount),
 								REG(d1, ULONG total),
-								REG(a0, struct Library *UtilityBase));
+								REG(a0, struct UtilityBase *UtilityBase));
 
 LIBPROTO(L_GetProgressWindow, void,	REG(a0, ProgressWindow *prog),
 									REG(a1, struct TagItem *tags));

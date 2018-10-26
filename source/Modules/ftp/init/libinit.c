@@ -165,7 +165,7 @@ struct Device  			*ConsoleDevice = NULL;
 #ifdef __AROS__
 struct UtilityBase		*UtilityBase = NULL;
 #else
-struct Library 			*UtilityBase = NULL;
+struct UtilityBase 			*UtilityBase = NULL;
 #endif
 struct Library 			*__UtilityBase = NULL; // required by clib2 & libnix
 

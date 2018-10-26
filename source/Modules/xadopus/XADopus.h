@@ -77,7 +77,7 @@ struct xoData
 	struct DOpusLocale *locale;
 	/*struct Library *DOpusBase;
 	struct DosLibrary *DOSBase;
-	struct Library *UtilityBase;*/
+	struct UtilityBase *UtilityBase;*/
 	ULONG pad1[3];
 	struct path_node *listp2, *destp;
 	APTR ptr;
