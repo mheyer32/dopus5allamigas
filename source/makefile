@@ -87,12 +87,19 @@ endif
 ifeq ($(HOST), AROS)
 	SYSTEM := amiga
 endif
+ifeq ($(HOST), Linux)
+	SYSTEM := linux
+endif
 ###########################################################
 # Sets destination directory and lha command for releases
 DEST := ../releases/
 ifeq ($(SYSTEM), amiga)
 ARCDEST := /releases/
 LHA := lha a -a -r -q
+else ifeq ($(SYSTEM), linux)
+ARCDEST := $(DEST)
+LHAEXT := lha -xfw=./ 
+ZIP := zip -r 
 else
 ARCDEST := $(DEST)
 LHA := lha ao5q
@@ -201,8 +208,15 @@ endif
 ifeq ($(log), yes)
 	@$(COPY) ../ChangeLog Dopus5
 endif
+ifeq ($(SYSTEM), linux)
+# lhasa on Linux seems not to be able to pack, so use zip instead
+# first unpack the base archive, then zip up everything
+	@$(LHAEXT) ../archive/$(BASEARC) 
+	@$(ZIP) -r $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).zip Dopus5
+else
 	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
 	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
+endif
 	@$(REMOVE) Dopus5
 	@echo ">>>>>Release date:" $(shell $(DATE) "+%m/%d/%Y")
 
