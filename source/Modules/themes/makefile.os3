@@ -20,7 +20,7 @@ OPTIMIZE := -O2
 DEBUGSYM := 
 OPTIONS  := -m68020-60 -D__amigaos3__ -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I../../Include -Iinit -Iinit/../ -I../../ $(OS3_INCLUDE)
-LDFLAGS  := -nostartfiles -noixemul
+LDFLAGS  := $(OPTIONS) -nostartfiles -noixemul
 WARNINGS := -Wall
 CC       := m68k-amigaos-gcc
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
