@@ -69,7 +69,7 @@
 **
 ** To keep confusion level low: When changing this file, please note it in
 ** above history list and indicate that the change was not made by myself
-** (e.g. add your name or nick name).
+** (e.g. add your name or nick name).
 **
 ** Find the latest version of this file at:
 ** http://cvs.sourceforge.net/viewcvs.py/sditools/sditools/headers/
@@ -139,7 +139,7 @@
     #define INLINE static __inline __attribute__((always_inline))
   #endif
   /* we have to distinguish between AmigaOS4 and MorphOS */
-  #if (defined(_M68000) || defined(__M68000) || defined(__mc68000)) && !defined(__AROS__)
+  #if (defined(_M68000) || defined(__M68000) || defined(__mc68000) || defined(__mc68020)) && !defined(__AROS__)
     #define REG(reg,arg) arg __asm(#reg)
     #define LREG(reg,arg) register REG(reg,arg)
   #else
