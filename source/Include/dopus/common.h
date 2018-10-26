@@ -82,6 +82,7 @@
 
 #ifdef __amigaos3__
 #include <clib/alib_protos.h>
+#include <intuition/intuitionbase.h>
 #endif
 
 #ifdef __MORPHOS__
