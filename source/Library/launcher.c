@@ -1556,10 +1556,10 @@ BOOL doslist_get(struct LibData *data,struct MinList *list,APTR memory,ULONG fla
 
 				// Get device and unit
 				GetDeviceUnit(dos->dol_misc.dol_handler.dol_Startup,found->dle_DeviceName,&found->dle_DeviceUnit);
+				// Add to list
+				AddHead((struct List *)list,(struct Node *)found);
 			}
 
-			// Add to list
-			AddHead((struct List *)list,(struct Node *)found);
 		}
 
 		// Got node?
