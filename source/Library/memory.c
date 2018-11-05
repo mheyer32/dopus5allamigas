@@ -219,7 +219,7 @@ void *LIBFUNC L_AllocMemH(
 		// If there's a memory pool, use that
 		if (handle->pool_header)
 		{
-			AllocPooled(handle->pool_header,size);
+			mem = AllocPooled(handle->pool_header,size);
 
 			// If successful
 			if (mem)
