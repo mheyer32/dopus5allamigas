@@ -168,7 +168,11 @@ struct UtilityBase		*UtilityBase = NULL;
 #else
 struct UtilityBase 			*UtilityBase = NULL;
 #endif
-struct Library 			*__UtilityBase = NULL; // required by clib2 & libnix
+#ifdef __libnix__
+extern struct Library 	*__UtilityBase; // libnix defined it in stubs.a
+#else
+struct Library 			*__UtilityBase = NULL; // required by clib2
+#endif
 
 
 struct xadMasterBase 	*xadMasterBase = NULL;
@@ -987,7 +991,7 @@ ULONG initBase(struct LibraryHeader *lib)
   
     // we have to please the internal utilitybase
     // pointers of libnix and clib2
-    #if !defined(__NEWLIB__) && !defined(__AROS__)
+    #if defined(__libnix__) || (!defined(__NEWLIB__) && !defined(__AROS__))
       __UtilityBase = (APTR)UtilityBase;
       #if defined(__amigaos4__)
       __IUtility = IUtility;
