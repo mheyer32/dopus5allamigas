@@ -19,7 +19,7 @@
 #if defined(__amigaos4__)
   #define bug(fmt, args...)  {DebugPrintF("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); DebugPrintF(fmt, ##args);}
 #elif defined(__amigaos3__)
-  #define bug(fmt, args...)  {kprintf("[%s:%ld] ", __FILE__, __LINE__); kprintf(fmt, ##args);}
+  #define bug(fmt, args...)  {kprintf("[%s:%s:%ld] ", __FILE__, __FUNCTION__, __LINE__); kprintf(fmt, ##args);}
 #elif defined(__MORPHOS__) || defined(__AROS__)
   #define bug(fmt, args...)  {kprintf("[%s:%ld %s] ", __FILE__, __LINE__, __FUNCTION__); kprintf(fmt, ##args);}
 #endif
