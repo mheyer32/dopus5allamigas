@@ -2948,7 +2948,7 @@ if	(wp->wp_parentwp)
 else
 	close_configwin(wp);
 
-if	(--dg->dg_edit_count==0);
+if	(--dg->dg_edit_count==0)
 	set_ftp_menu(dg->dg_addrwp,TRUE);
 
 return(TRUE);
