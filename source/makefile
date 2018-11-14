@@ -113,7 +113,6 @@ REMOVE := rm -rf
 COPY := cp -p
 MAKEDIR := mkdir -p
 DATE := date
-STRIP = m68k-amigaos-strip
 ###########################################################
 ifeq ($(PLATFORM), os4)
 SHELL := sh
@@ -184,7 +183,7 @@ clean-commands:
 ###########################################################
 
 .PHONY : release
-release: all
+release: cleanall all
 	@echo " "
 	@echo ">>>>>Creating release archive: Dopus5$(VERSION)$(NAME)$(TYPE).lha"
 	@$(MAKEDIR) Dopus5/Libs
@@ -200,8 +199,7 @@ ifeq ($(PLATFORM), os4)
 endif
 	@$(COPY) bin.$(NAME)/dopus5.library Dopus5/Libs
 	@$(COPY) bin.$(NAME)/*.module Dopus5/Modules
-	@$(STRIP) --strip-debug -o Dopus5/DirectoryOpus bin.$(NAME)/DirectoryOpus 
-#	@$(COPY) bin.$(NAME)/DirectoryOpus Dopus5
+	@$(COPY) bin.$(NAME)/DirectoryOpus Dopus5
 	@$(COPY) bin.$(NAME)/DOpusRT5 Dopus5/C
 	@$(COPY) bin.$(NAME)/LoadDB Dopus5/C
 	@$(COPY) bin.$(NAME)/viewfont Dopus5/C
@@ -219,8 +217,7 @@ else
 	@$(COPY) ../archive/$(BASEARC) $(DEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha
 	@$(LHA) $(ARCDEST)Dopus5$(VERSION)$(NAME)$(TYPE).lha Dopus5
 endif
-	@$(COPY) -r Dopus5 /media/sf_Amiga/
-#	@$(REMOVE) Dopus5
+	@$(REMOVE) Dopus5
 	@echo ">>>>>Release date:" $(shell $(DATE) "+%m/%d/%Y")
 
 ###########################################################
