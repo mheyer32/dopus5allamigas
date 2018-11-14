@@ -5,6 +5,6 @@ include $(SELF_DIR)/../makefile.common
 INCLUDES += -Iinit $(OS3_INCLUDE)
 
 LDFLAGS  += -nostartfiles -nostdlib
-LIBS := -lamiga -ldebug -lnixmain -lm -lnix -lnix20 -lstubs -lgcc
+LIBS := -lamiga -ldebug -lnixmain -lm -lgcc -lnix -lnix20 -lstubs
 
 
