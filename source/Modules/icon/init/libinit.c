@@ -58,6 +58,11 @@ void	__stdargs  exit (int __status)
 }
 #endif
 
+void __restore_a4(void)
+{
+    __asm volatile("\tlea ___a4_init, a4");
+}
+
 /****************************************************************************/
 
 #define MIN_STACKSIZE 512
