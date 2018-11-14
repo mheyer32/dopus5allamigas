@@ -252,7 +252,7 @@ short convert_config(
 			env->list_format.sort.sort_flags=oldconfig->sortflags&1;
 			env->list_format.sort.separation=oldconfig->separatemethod[0];
 			memcpy(env->list_format.display_pos,oldconfig->displaypos[0],16);
-			for (a=0;a<16;a++) env->list_format.display_len[a]=-1;
+			for (a=0;a<15;a++) env->list_format.display_len[a]=-1;
 			env->list_format.show_free=oldconfig->showfree;
 			strcpy(env->list_format.show_pattern,oldconfig->showpat);
 			strcpy(env->list_format.show_pattern_p,oldconfig->showpatparsed);
