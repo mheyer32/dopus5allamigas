@@ -92,7 +92,7 @@
 	, DOPUS_BASE_NAME)
 
 #define IPC_Command(ipc, command, flags, data, data_free, reply) \
-	LP6(0x228, ULONG, IPC_Command, IPCData *, ipc, a0, ULONG, command, d0, ULONG, flags, d1, APTR, data, a1, APTR, data_free, a2, struct MsgPort *, reply, a3, \
+	LP6a(0x228, ULONG, IPC_Command, IPCData *, ipc, a0, ULONG, command, d0, ULONG, flags, d1, APTR, data, a1, APTR, data_free, a2, struct MsgPort *, reply, a3, \
 	, DOPUS_BASE_NAME)
 
 #define IPC_Free(ipc) \
