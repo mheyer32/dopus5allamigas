@@ -4,6 +4,9 @@ SOURCE_TOP := $(SELF_DIR)
 
 CC := m68k-amigaos-gcc
 
+SHELL:= sh
+NEWDATE  := $(shell date +%d.%m.%Y)
+
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
     OPTIMIZE := -Os
