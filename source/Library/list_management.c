@@ -538,7 +538,7 @@ void LIBFUNC L_AddSorted(
 
 
 // FindName case-insensitive
-struct Node *SAVEDS ASM L_FindNameI(REG(a0, struct List *list),REG(a1, char *name))
+struct Node *LIBFUNC L_FindNameI(REG(a0, struct List *list),REG(a1, char *name))
 {
 	register struct Node *node;
 	short len;
@@ -581,7 +581,7 @@ struct Node *SAVEDS ASM L_FindNameI(REG(a0, struct List *list),REG(a1, char *nam
 
 
 // Lock a list
-void SAVEDS ASM L_LockAttList(
+void LIBFUNC L_LockAttList(
 	REG(a0, Att_List *list),
 	REG(d0, short exclusive))
 {
@@ -592,7 +592,7 @@ void SAVEDS ASM L_LockAttList(
 
 
 // Unlock list
-void SAVEDS ASM L_UnlockAttList(REG(a0, Att_List *list))
+void LIBFUNC L_UnlockAttList(REG(a0, Att_List *list))
 {
 	// List required locking?
 	if (list && list->flags&LISTF_LOCK)
@@ -601,7 +601,7 @@ void SAVEDS ASM L_UnlockAttList(REG(a0, Att_List *list))
 
 
 // Swap two nodes in a list
-void SAVEDS ASM L_SwapListNodes(
+void LIBFUNC L_SwapListNodes(
 	REG(a0, struct List *list),
 	REG(a1, struct Node *swap1),
 	REG(a2, struct Node *swap2))

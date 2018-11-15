@@ -98,10 +98,10 @@ struct LoginPkt
 #pragma pack()
 #endif 
 
-BOOL ASM L_WB_LaunchNew(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *));
-BOOL ASM L_WB_LaunchNotify(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *),REG(a3, struct Process **),REG(a4, IPCData *),REG(d2, ULONG));
+BOOL LIBFUNC L_WB_LaunchNew(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *));
+BOOL LIBFUNC L_WB_LaunchNotify(REG(a0, char *),REG(a1, struct Screen *),REG(d0, short),REG(d1, long),REG(a2, char *),REG(a3, struct Process **),REG(a4, IPCData *),REG(d2, ULONG));
 
-BOOL SAVEDS ASM L_WB_Launch(
+BOOL LIBFUNC L_WB_Launch(
 	REG(a0, char *name),
 	REG(a1, struct Screen *errors),
 	REG(d0, short wait))
@@ -109,7 +109,7 @@ BOOL SAVEDS ASM L_WB_Launch(
 	return L_WB_LaunchNotify(name,errors,wait,STACK_DEFAULT,0,0,0,0);
 }
 
-BOOL SAVEDS ASM L_WB_LaunchNew(
+BOOL LIBFUNC L_WB_LaunchNew(
 	REG(a0, char *name),
 	REG(a1, struct Screen *errors),
 	REG(d0, short wait),
@@ -119,7 +119,7 @@ BOOL SAVEDS ASM L_WB_LaunchNew(
 	return L_WB_LaunchNotify(name,errors,wait,stack,default_tool,0,0,0);
 }
 
-BOOL SAVEDS ASM L_WB_LaunchNotify(
+BOOL LIBFUNC L_WB_LaunchNotify(
 	REG(a0, char *name),
 	REG(a1, struct Screen *errors),
 	REG(d0, short wait),
@@ -165,7 +165,7 @@ BOOL SAVEDS ASM L_WB_LaunchNotify(
 	return result;
 }
 
-BOOL SAVEDS ASM L_CLI_Launch(
+BOOL LIBFUNC L_CLI_Launch(
 	REG(a0, char *name),
 	REG(a1, struct Screen *errors),
 	REG(d0, BPTR currentdir),
@@ -215,7 +215,7 @@ BOOL SAVEDS ASM L_CLI_Launch(
 }
 
 
-void SAVEDS ASM L_MUFSLogin(
+void LIBFUNC L_MUFSLogin(
 	REG(a0, struct Window *window),
 	REG(a1, char *name),
 	REG(a2, char *password))

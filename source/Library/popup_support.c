@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-PopUpItem *ASM L_PopUpNewItem(REG(a0, PopUpHandle *),REG(d0, ULONG),REG(d1, ULONG),REG(d2, ULONG));
+PopUpItem *LIBFUNC L_PopUpNewItem(REG(a0, PopUpHandle *),REG(d0, ULONG),REG(d1, ULONG),REG(d2, ULONG));
 
 // New PopUpHandle
 PopUpHandle *LIBFUNC L_PopUpNewHandle(REG(d0, ULONG userdata),REG(a0, REF_CALLBACK callback),REG(a1, struct DOpusLocale *locale))

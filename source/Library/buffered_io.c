@@ -268,7 +268,7 @@ long LIBFUNC L_WriteBuf(
 
 
 // Flush a buffered file
-long ASM L_FlushBuf(REG(a0, APTR file))
+long LIBFUNC L_FlushBuf(REG(a0, APTR file))
 {
 	long total=0;
 

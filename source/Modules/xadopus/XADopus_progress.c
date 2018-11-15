@@ -19,7 +19,7 @@
 
 #include "XADopus.h"
 
-LIBFUNC ULONG SAVEDS ASM L_ProgressHook(REG(a0, struct Hook *hook), REG(a2, int skip),REG(a1, struct xadProgressInfo *xpi))
+ULONG LIBFUNC L_ProgressHook(REG(a0, struct Hook *hook), REG(a2, int skip),REG(a1, struct xadProgressInfo *xpi))
 {
 	struct xoData *data = hook->h_Data;
 	/*struct Library *DOpusBase;

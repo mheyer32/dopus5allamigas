@@ -1983,7 +1983,7 @@ PATCH_END
 
 
 //// AddTask patch (for statistics)
-PATCHED_3(APTR, ASM L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initialPC, a3, APTR, finalPC)
+PATCHED_3(APTR, LIBFUNC L_PatchedAddTask, a1, struct Task *, task, a2, APTR, initialPC, a3, APTR, finalPC)
 {
 	atomic_inc(&usecount[WB_PATCH_ADDTASK]);
 	{
@@ -2015,7 +2015,7 @@ PATCH_END
 
 
 //// RemTask patch (for statistics)
-PATCHED_1(void, ASM L_PatchedRemTask,a1, struct Task *, task)
+PATCHED_1(void, LIBFUNC L_PatchedRemTask,a1, struct Task *, task)
 {
 	atomic_inc(&usecount[WB_PATCH_REMTASK]);
 	{
@@ -2046,7 +2046,7 @@ PATCH_END
 
 
 //// FindTask patch
-PATCHED_1(struct Task *, ASM L_PatchedFindTask, a1, char *, name)
+PATCHED_1(struct Task *, LIBFUNC L_PatchedFindTask, a1, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_FINDTASK]);
 	{

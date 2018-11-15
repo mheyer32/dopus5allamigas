@@ -40,12 +40,12 @@ struct RexxStem
 #endif 
 
 
-struct RexxMsg *ASM L_CreateRexxMsgEx(
+struct RexxMsg *LIBFUNC L_CreateRexxMsgEx(
 	REG(a0, struct MsgPort *),
 	REG(a1, UBYTE *),
 	REG(d0, UBYTE *));
 
-long ASM L_SetRexxVarEx(
+long LIBFUNC L_SetRexxVarEx(
 	REG(a0, struct RexxMsg *),
 	REG(a1, char *),
 	REG(d0, char *),

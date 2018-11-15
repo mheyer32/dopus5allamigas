@@ -26,7 +26,7 @@ For more information on Directory Opus for Windows please see:
 void ipc_remove_list(IPCData *ipc);
 
 // Launch a generic process
-int ASM L_IPC_Launch(
+int LIBFUNC L_IPC_Launch(
 	REG(a0, struct ListLock *list),
 	REG(a1, IPCData **storage),
 	REG(a2, char *name),
@@ -135,7 +135,7 @@ int ASM L_IPC_Launch(
 
 
 // Send an IPC startup
-int ASM L_IPC_Startup(
+int LIBFUNC L_IPC_Startup(
 	REG(a0, IPCData *ipc),
 	REG(a1, APTR data),
 	REG(a2, struct MsgPort *reply))
@@ -186,7 +186,7 @@ STATIC ULONG CallStartupCode(ULONG (*ASM code)(REG(a0, IPCData *),REG(a1, APTR))
 }
 
 // Generic IPC startup code
-IPCData *ASM L_IPC_ProcStartup(
+IPCData *LIBFUNC L_IPC_ProcStartup(
 	REG(a0, ULONG *data),
 	REG(a1, ULONG (*ASM code)(REG(a0, IPCData *),REG(a1, APTR))))
 {

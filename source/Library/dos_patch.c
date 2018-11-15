@@ -74,7 +74,7 @@ extern ULONG usecount[WB_PATCH_COUNT];
 /********************************** CreateDir **********************************/
 
 // Patched CreateDir()
-PATCHED_1(BPTR, ASM L_PatchedCreateDir, d1, char *, name)
+PATCHED_1(BPTR, LIBFUNC L_PatchedCreateDir, d1, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_CREATEDIR]);
 	{
@@ -145,7 +145,7 @@ BPTR LIBFUNC L_OriginalCreateDir(
 /********************************** DeleteFile **********************************/
 
 // Patched DeleteFile()
-PATCHED_1(long, ASM L_PatchedDeleteFile, d1, char *, name)
+PATCHED_1(long, LIBFUNC L_PatchedDeleteFile, d1, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_DELETEFILE]);
 	{
@@ -250,7 +250,7 @@ long LIBFUNC L_OriginalDeleteFile(
 /********************************** SetFileDate **********************************/
 
 // Patched SetFileDate()
-PATCHED_2(BOOL, ASM L_PatchedSetFileDate, d1, char *, name, d2, struct DateStamp *, date)
+PATCHED_2(BOOL, LIBFUNC L_PatchedSetFileDate, d1, char *, name, d2, struct DateStamp *, date)
 {
 	atomic_inc(&usecount[WB_PATCH_SETFILEDATE]);
 	{
@@ -350,7 +350,7 @@ BOOL LIBFUNC L_OriginalSetFileDate(
 /********************************** SetComment **********************************/
 
 // Patched SetComment()
-PATCHED_2(BOOL, ASM L_PatchedSetComment, d1, char *, name, d2, char *, comment)
+PATCHED_2(BOOL, LIBFUNC L_PatchedSetComment, d1, char *, name, d2, char *, comment)
 {
 	atomic_inc(&usecount[WB_PATCH_SETCOMMENT]);
 	{
@@ -450,7 +450,7 @@ BOOL LIBFUNC L_OriginalSetComment(
 /********************************** SetProtection **********************************/
 
 // Patched SetProtection()
-PATCHED_2(BOOL, ASM L_PatchedSetProtection, d1, char *, name, d2, ULONG, mask)
+PATCHED_2(BOOL, LIBFUNC L_PatchedSetProtection, d1, char *, name, d2, ULONG, mask)
 {
 	atomic_inc(&usecount[WB_PATCH_SETPROTECTION]);
 	{
@@ -550,7 +550,7 @@ BOOL LIBFUNC L_OriginalSetProtection(
 /********************************** Rename **********************************/
 
 // Patched Rename()
-PATCHED_2(BOOL, ASM L_PatchedRename, d1, char *, oldname, d2, char *, newname)
+PATCHED_2(BOOL, LIBFUNC L_PatchedRename, d1, char *, oldname, d2, char *, newname)
 {
 	atomic_inc(&usecount[WB_PATCH_RENAME]);
 	{
@@ -685,7 +685,7 @@ BOOL LIBFUNC L_OriginalRename(
 /********************************** Relabel **********************************/
 
 // Patched Relabel()
-PATCHED_2(BOOL, ASM L_PatchedRelabel, d1, char *, volumename, d2, char *, name)
+PATCHED_2(BOOL, LIBFUNC L_PatchedRelabel, d1, char *, volumename, d2, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_RELABEL]);
 	{
@@ -750,7 +750,7 @@ BOOL LIBFUNC L_OriginalRelabel(
 /********************************** Open **********************************/
 
 // Patched Open()
-PATCHED_2(BPTR, ASM L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
+PATCHED_2(BPTR, LIBFUNC L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
 {
 	atomic_inc(&usecount[WB_PATCH_OPEN]);
 	{
@@ -924,7 +924,7 @@ BPTR LIBFUNC L_OriginalOpen(
 /********************************** Close **********************************/
 
 // Patched Close()
-PATCHED_1(BOOL, ASM L_PatchedClose, d1, BPTR, file)
+PATCHED_1(BOOL, LIBFUNC L_PatchedClose, d1, BPTR, file)
 {
 	atomic_inc(&usecount[WB_PATCH_CLOSE]);
 	{
@@ -1056,7 +1056,7 @@ BOOL LIBFUNC L_OriginalClose(
 /********************************** Write **********************************/
 
 // Patched Write()
-PATCHED_3(LONG, ASM L_PatchedWrite, d1, BPTR, file, d2, void *, wdata, d3, LONG, length)
+PATCHED_3(LONG, LIBFUNC L_PatchedWrite, d1, BPTR, file, d2, void *, wdata, d3, LONG, length)
 {
 	atomic_inc(&usecount[WB_PATCH_WRITE]);
 	{

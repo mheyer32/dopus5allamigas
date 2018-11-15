@@ -927,7 +927,7 @@ BOOL ExtractF(struct xoData *data)
 ///
 
 /// Main
-int LIBFUNC SAVEDS ASM L_Module_Entry(
+int LIBFUNC L_Module_Entry(
 	REG(a0, char *args),	
 	REG(a1, struct Screen *screen), 
 	REG(a2, IPCData *ipc), 

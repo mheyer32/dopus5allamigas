@@ -1135,7 +1135,7 @@ char *strstri(char *string,char *substring)
 
 
 // Statistics
-long ASM L_GetStatistics(REG(d0, long id),REG(a6, struct MyLibrary *libbase))
+long LIBFUNC L_GetStatistics(REG(d0, long id),REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 

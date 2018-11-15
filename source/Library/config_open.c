@@ -796,7 +796,7 @@ void free_config_string(string_handle *handle)
 
 
 // Convert start menu to version 2
-void ASM L_ConvertStartMenu(REG(a0, Cfg_ButtonBank *bank))
+void LIBFUNC L_ConvertStartMenu(REG(a0, Cfg_ButtonBank *bank))
 {
 	Cfg_Button *button,*prev=0,*next_but=0;
 
