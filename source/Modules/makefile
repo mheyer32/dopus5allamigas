@@ -70,7 +70,7 @@ endif
 
 .PHONY : all
 all: about cleanup configopus diskcopy diskinfo filetype fixicons \
-     format icon join listerformat misc pathformat play print \
+     format ftp icon join listerformat misc pathformat play print \
      read show themes xadopus
 	@echo " "
 
