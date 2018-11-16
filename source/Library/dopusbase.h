@@ -831,7 +831,7 @@ typedef struct _ObjectDef {
 	ULONG gadget_text;
 	ULONG flags;
 	UWORD gadgetid;
-	struct TagItem *taglist;
+	const struct TagItem *taglist;
 } ObjectDef;
 
 typedef struct _GL_Object

@@ -38,13 +38,13 @@ enum
 };
 
 
-static ConfigWindow
+const static ConfigWindow
 	_selection_list_window={
 		{POS_CENTER,POS_CENTER,42,10},
 		{0,0,30,20}};
 
-static struct TagItem
-	_selection_lister_tags[]={
+const static struct TagItem
+	 _selection_lister_tags[]={
 		{GTLV_ShowSelected,0},
 		{TAG_END}},
 
@@ -62,7 +62,7 @@ static struct TagItem
 		{TAG_END}};
 
 
-static ObjectDef
+const static ObjectDef
 	_selection_list_objects[]={
 
 		// Lister
