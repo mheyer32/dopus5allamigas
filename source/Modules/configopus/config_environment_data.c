@@ -2,7 +2,7 @@
 #include "config_environment.h"
 
 // environment window dimensions
-ConfigWindow
+const ConfigWindow
 	_config_environment_window={
 		{POS_CENTER,POS_CENTER,68,14},
 		{0,0,36,64}};
@@ -42,7 +42,7 @@ static void ASM _palette_slider_callback(
 
 
 // Labels
-UWORD
+const UWORD
 	_environment_listeredit_labels[]={
 		MSG_LISTEREDIT_DISABLED,
 		MSG_LISTEREDIT_LEFT,
@@ -98,7 +98,7 @@ UWORD
 
 
 // Tags for gadgets
-static struct TagItem
+const static struct TagItem
 
 	// Option lister
 	_environment_lister_taglist[]={
@@ -374,7 +374,7 @@ static struct TagItem
 
 
 // Flags objects
-ObjectDef
+const ObjectDef
 	_config_environment_objects[]={
 
 		// Config item lister
@@ -2058,7 +2058,7 @@ ObjectDef
 
 
 // Sub options
-SubOptionHandle
+const SubOptionHandle
 	_environment_options[]={
 		{ENVIRONMENT_DISPLAY,MSG_ENVIRONMENT_SUB_DISPLAY,_environment_display_gadgets},
 		{ENVIRONMENT_PALETTE,MSG_ENVIRONMENT_SUB_PALETTE,_environment_palette_gadgets},

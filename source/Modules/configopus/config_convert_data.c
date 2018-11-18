@@ -1,11 +1,11 @@
 #include "config_lib.h"
 
-ConfigWindow
+const ConfigWindow
 	_config_convert_window={
 		{POS_CENTER,POS_CENTER,40,11},
 		{0,0,16,78}};
 
-struct TagItem
+const struct TagItem
 	_convert_layout_taglist[]={
 		{GTCustom_LayoutRel,GAD_CONVERT_LAYOUT},
 		{TAG_END}},
@@ -15,7 +15,7 @@ struct TagItem
 		{GTCustom_LayoutRel,GAD_CONVERT_LAYOUT},
 		{TAG_END}};
 
-ObjectDef
+const ObjectDef
 	_config_convert_objects[]={
 
 		// Layout box

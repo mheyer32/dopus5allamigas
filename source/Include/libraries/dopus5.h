@@ -928,7 +928,7 @@ typedef struct _ObjectDef {
 	ULONG gadget_text;
 	ULONG flags;
 	UWORD gadgetid;
-	struct TagItem *taglist;
+	const struct TagItem *taglist;
 } ObjectDef;
 
 #define GADFLAG_GLASS			(1<<16)		// Magnifying-glass gadget

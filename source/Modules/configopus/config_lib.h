@@ -19,7 +19,7 @@ extern struct DOpusLocale	*locale;
 typedef struct _SubOptionHandle {
 	int num;		// Option number
 	ULONG name;		// Option name ID
-	ObjectDef *objects;	// Object list
+	const ObjectDef *objects;	// Object list
 } SubOptionHandle;
 #ifndef __amigaos3__
 #pragma pack()

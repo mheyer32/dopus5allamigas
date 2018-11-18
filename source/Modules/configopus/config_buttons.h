@@ -134,7 +134,7 @@ void button_receive_appmsg(config_buttons_data *data,struct AppMessage *msg);
 #define DRAW_FIRST	2
 
 
-extern MenuData button_toolbar_menu[],button_menu[];
+extern const MenuData button_toolbar_menu[],button_menu[];
 
 Cfg_Button *button_create_drop(
 	config_buttons_data *data,

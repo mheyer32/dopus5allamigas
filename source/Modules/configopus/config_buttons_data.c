@@ -1,7 +1,7 @@
 #include "config_lib.h"
 
 // Buttons editor window dimensions
-ConfigWindow
+const ConfigWindow
 	_config_buttons_window={
 		{POS_CENTER,POS_CENTER,66,11},
 		{0,0,90,85}},
@@ -12,7 +12,7 @@ ConfigWindow
 
 
 // Labels
-UWORD
+const UWORD
 
 	_buttons_dragbar_labels[]={
 		MSG_BUTTONS_DRAG_AUTO,
@@ -24,7 +24,7 @@ UWORD
 		0};
 
 // Tags
-struct TagItem
+const struct TagItem
 	_buttons_thin_tags[]={
 		{GTCustom_ThinBorders,TRUE},
 		{TAG_END}},
@@ -80,7 +80,7 @@ struct TagItem
 
 
 // Objects
-ObjectDef
+const ObjectDef
 	_config_buttons_objects[]={
 
 		// Layout area
@@ -507,7 +507,7 @@ ObjectDef
 
 
 // Menu for button banks
-MenuData
+const MenuData
 	button_toolbar_menu[]={
 		{NM_TITLE,0,MSG_PROJECT,0},
 		{NM_ITEM,BUTTONEDIT_MENU_NEW,MSG_LISTER_BUTTONS_MENU_NEW,MENUFLAG_USE_SEQ|MENUFLAG_MAKE_SEQ('N')},

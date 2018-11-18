@@ -2,7 +2,7 @@
 #include "config_filetypes.h"
 
 // Filetypes editor window dimensions
-ConfigWindow
+const ConfigWindow
 	_config_filetypes_window={
 		{POS_CENTER,POS_CENTER,48,11},
 		{0,0,42,16}},
@@ -17,7 +17,7 @@ ConfigWindow
 
 
 // Labels
-UWORD
+const UWORD
 
 	matchtype_labels[]={
 		MSG_CLASSED_MATCH_MATCH,MSG_CLASSED_MATCH_MATCH_DESC,
@@ -45,7 +45,7 @@ UWORD
 
 
 // Tags
-struct TagItem
+const struct TagItem
 
 	_filetype_function_rel[]={
 		{GTCustom_LayoutRel,GAD_FILETYPES_FUNCTION_AREA},
@@ -88,7 +88,7 @@ struct TagItem
 
 
 // Objects
-ObjectDef
+const ObjectDef
 	_config_filetypes_objects[]={
 
 		// Filetype list
@@ -465,7 +465,7 @@ ObjectDef
 
 
 // Filetype action lookup
-short filetype_action_lookup[]=
+const short filetype_action_lookup[]=
 {
 	MSG_FILETYPE_ACTION_DOUBLECLICK,FTTYPE_DOUBLE_CLICK,
 	MSG_FILETYPE_ACTION_CTRL_DCLICK,FTTYPE_CTRL_DOUBLECLICK,
@@ -488,7 +488,7 @@ short filetype_action_lookup[]=
 
 
 // Fileclass match lookup
-short fileclass_match_lookup[]=
+const short fileclass_match_lookup[]=
 {
 	FTOP_MATCH,
 	FTOP_MATCHNOCASE,

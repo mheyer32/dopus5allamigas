@@ -112,7 +112,7 @@ typedef struct
 #pragma pack()
 #endif
 
-extern ObjectDef _lister_format_gadgets[];
+extern const ObjectDef _lister_format_gadgets[];
 
 BOOL _config_env_open(config_env_data *,struct Screen *);
 void _config_env_close(config_env_data *);
@@ -198,7 +198,7 @@ enum
 	MAINCMD_SAVE_ENV,		// Save environment
 };
 
-extern MenuData button_toolbar_menu[];
+extern const MenuData button_toolbar_menu[];
 
 void config_env_fix_picture_gads(config_env_data *);
 void config_env_picture_menu(config_env_data *,short);
@@ -212,7 +212,7 @@ void config_env_path_del(config_env_data *);
 void config_env_path_edit(config_env_data *);
 void config_env_paths_end_drag(config_env_data *,BOOL);
 
-extern UWORD _environment_iconsettings_labels[];
+extern const UWORD _environment_iconsettings_labels[];
 
 void config_env_show_sound(config_env_data *);
 void config_env_store_sound(config_env_data *);

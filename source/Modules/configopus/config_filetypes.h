@@ -130,9 +130,9 @@ typedef struct
 #pragma pack()
 #endif
 
-extern short filetype_action_lookup[];
-extern short fileclass_match_lookup[];
-extern UWORD matchtype_labels[];
+extern const short filetype_action_lookup[];
+extern const short fileclass_match_lookup[];
+extern const UWORD matchtype_labels[];
 
 enum
 {
