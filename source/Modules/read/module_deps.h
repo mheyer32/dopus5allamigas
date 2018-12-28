@@ -6,7 +6,7 @@
 #include <proto/module.h>
 
 extern struct DOpusLocale *locale;
-extern ModuleInfo module_info;
+extern const ModuleInfo module_info;
 
 
 #define VALID_QUALIFIERS (IEQUALIFIER_LCOMMAND|IEQUALIFIER_RCOMMAND|\

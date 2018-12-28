@@ -1,7 +1,7 @@
 #include "config_lib.h"
 
 // Button editor window dimensions
-ConfigWindow
+const ConfigWindow
 	_button_editor_window={
 		{POS_MOUSE_CENTER,0,50,9},
 		{0,0,52,93}};
@@ -35,7 +35,7 @@ static void ASM button_editor_bit_callback(
 
 
 // Taglists
-struct TagItem
+const struct TagItem
 
 	_button_editor_relative[]={
 		{GTCustom_LayoutRel,GAD_BUTTONED_LAYOUT_AREA},
@@ -74,7 +74,7 @@ struct TagItem
 
 
 // Button editor objects
-ObjectDef
+const ObjectDef
 	_button_editor_objects[]={
 
 		// Layout box

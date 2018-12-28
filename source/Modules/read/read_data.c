@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "read.h"
 
-ModuleInfo
+const ModuleInfo
 	module_info={
 		1,
 		"read.module",
@@ -32,7 +32,7 @@ ModuleInfo
 		1,
 		{{0,"Read",MSG_READ_DESCRIPTION,0,0}}};
 
-MenuData
+const MenuData
 	read_menus[]={
 		{NM_TITLE,0,MSG_MENU_FILE,0},
 			{NM_ITEM,MENU_NEXT,MSG_MENU_NEXT,MENUFLAG_USE_SEQ|MENUFLAG_MAKE_SEQ('N')},
@@ -70,12 +70,12 @@ MenuData
 		{NM_END}};
 
 
-ConfigWindow
+const ConfigWindow
 	search_window={
 		{POS_CENTER,POS_CENTER,48,5},
 		{0,0,0,48}};
 
-struct TagItem
+const struct TagItem
 	search_layout[]={
 		{GTCustom_LayoutRel,GAD_SEARCH_LAYOUT},
 		{TAG_DONE}},
@@ -84,7 +84,7 @@ struct TagItem
 		{GTST_MaxChars,80},
 		{TAG_MORE,(ULONG)search_layout}};
 
-ObjectDef
+const ObjectDef
 	search_objects[]={
 
 		// Search layout area
@@ -171,7 +171,7 @@ ObjectDef
 
 
 // ANSI palette
-ULONG
+const ULONG
 	ansi_palette[PEN_COUNT]=
 		{0x009999,	/* Cyan */
 		 0x000000,	/* Black */

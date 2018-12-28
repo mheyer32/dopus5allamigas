@@ -2,15 +2,15 @@
 
 const char USED_VAR version[] = "\0$VER: ViewFont "CMD_STRING;
 
-ConfigWindow
+const ConfigWindow
 	font_window={
 		{POS_CENTER,POS_CENTER,40,9},
 		{0,0,44,67}};
 
 
-static char *dummy_labels[]={"",0};
+const static char *dummy_labels[]={"",0};
 
-struct TagItem
+const struct TagItem
 
 	font_name_tags[]={
 		{GTST_MaxChars,32},
@@ -40,7 +40,7 @@ struct TagItem
 		{TAG_END,0}};
 
 
-ObjectDef
+const ObjectDef
 
 	font_objects[]={
 
@@ -163,7 +163,7 @@ struct Library *DOpusBase = NULL;
 	struct Library *WorkbenchBase = NULL;
 #endif
 
-MenuData
+const MenuData
 	font_menus[]={
 		{NM_TITLE,0,MSG_MENU_PROJECT,0},
 			{NM_ITEM,MENU_OPEN_FONT,MSG_MENU_OPEN_FONT,MENUFLAG_USE_SEQ|MENUFLAG_MAKE_SEQ('O')},

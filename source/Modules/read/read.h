@@ -193,9 +193,9 @@ struct read_startup
 #define READF_HIGH_OK		(1<<1)
 #define READF_RESIZED		(1<<2)
 
-extern MenuData read_menus[];
-extern ConfigWindow search_window;
-extern ObjectDef search_objects[];
+extern const MenuData read_menus[];
+extern const ConfigWindow search_window;
+extern const ObjectDef search_objects[];
 
 #define SEARCHF_NOCASE		(1<<0)
 #define SEARCHF_WILDCARD	(1<<1)
@@ -249,7 +249,7 @@ enum
 
 #define ABS(x) (((x)<0)?(-x):(x))
 
-extern ULONG ansi_palette[PEN_COUNT];
+extern const ULONG ansi_palette[PEN_COUNT];
 
 /*struct Window *STDARGS my_OpenWindowTags(Tag tag,...);
 struct Screen *STDARGS my_OpenScreenTags(Tag tag,...);

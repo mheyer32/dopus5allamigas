@@ -23,7 +23,7 @@ For more information on Directory Opus for Windows please see:
 
 #include "about.h"
 
-ModuleInfo
+const ModuleInfo
 	module_info={
 		1,
 		"about.module",
@@ -31,12 +31,12 @@ ModuleInfo
 		0,
 		0};
 
-ConfigWindow
+const ConfigWindow
 	about_window={
 		{POS_CENTER,POS_CENTER,50,8},
 		{0,0,22+logo_width,26+logo_height}};
 
-struct TagItem
+const struct TagItem
 	copyright_tags[]={
 		{GTCustom_LayoutRel,GAD_ABOUT_COPYRIGHT},
 		{TAG_END}},
@@ -46,7 +46,7 @@ struct TagItem
 		{TAG_END}};
 
 
-ObjectDef
+const ObjectDef
 	about_objects[]={
 
 		// Logo area
@@ -195,7 +195,7 @@ ObjectDef
 APTR logo_obj[logo_frames];
 ImageRemap remap;
 
-UWORD
+const UWORD
 	logo_image[logo_frames][472]={
 		{0x0000,0x0000,0x8000,0x0000,0x0000,0x0030,0x8800,0x0000,
 		0x0000,0x0230,0x8c20,0x0000,0x0000,0x0331,0xdc62,0x0000,
@@ -807,7 +807,7 @@ UWORD
 		0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,0x0000,
 		0x0000,0x0000,0x0000,0x0000}};
 
-image_data images[image_count]={
+const image_data images[image_count]={
 	{71,67,4,335,jon_data,jon_palette},
 	{70,67,4,335,greg_data,greg_palette},
 	{70,67,4,330,andrew_data,andrew_palette},
@@ -826,7 +826,7 @@ image_data images[image_count]={
 	{70,67,4,335,juggler_data,juggler_palette},
 	{70,67,4,335,tick_data,tick_palette}};
 
-unsigned char about_message[]=
+const unsigned char about_message[]=
 	{0xBC,0x97,0x8E,0x9B,0x9D,0x8C,0x91,0x8E,0x87,0xE0,0xB1,0x90,0x8B,0x8D,0xE0,0xCB,
 	0xE0,0x89,0x9F,0x8D,0xE0,0x89,0x8E,0x97,0x8C,0x8C,0x9B,0x92,0xE0,0x9E,0x87,0xE0,
 	0xB6,0x91,0x92,0x9F,0x8C,0x98,0x9F,0x92,0xE0,0xB0,0x91,0x8C,0x8C,0x9B,0x8E,0xD4,

@@ -92,9 +92,9 @@ typedef struct _ButtonEdData
 #pragma pack()
 #endif
 
-extern ConfigWindow
+extern const ConfigWindow
 	_button_editor_window;
-extern ObjectDef
+extern const ObjectDef
 	_button_editor_objects[],
 	_button_editor_image_objects[],
 	_button_editor_label_objects[];

@@ -67,8 +67,8 @@ void font_show_font(font_data *data,BOOL refresh);
 void font_get_name(font_data *data,char *name);
 void font_ask_name(font_data *data);
 
-extern ConfigWindow font_window;
-extern ObjectDef font_objects[];
+extern const ConfigWindow font_window;
+extern const ObjectDef font_objects[];
 
 enum
 {
@@ -92,7 +92,7 @@ enum
 	MENU_ABOUT,
 };
 
-extern MenuData font_menus[];
+extern const MenuData font_menus[];
 
 void init_locale_data(struct DOpusLocale *locale);
 ULONG ASM font_refresh(REG(a0, struct Hook *hook),REG(a1, struct IntuiMessage *msg));
