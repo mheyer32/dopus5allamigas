@@ -15,7 +15,7 @@ ULONG initBase(struct LibraryHeader* lib);
 // protos:
 
 
-LIBPROTO(L_Module_Entry, int, 	REG(a0, char *args),
+LIBPROTO(L_Module_Entry, int, 	REG(a0, struct List *files),
 								REG(a1, struct Screen *screen),
 								REG(a2, IPCData *ipc),
 								REG(a3, IPCData *main_ipc),
