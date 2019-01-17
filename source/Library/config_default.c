@@ -246,6 +246,8 @@ Cfg_ButtonBank *LIBFUNC L_DefaultButtonBank(void)
 	return bank;
 }
 
+#define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
+
 void LIBFUNC L_UpdateEnvironment(REG(a0, CFG_ENVR *env))
 {
 	// Old-old-old version?
@@ -256,9 +258,9 @@ void LIBFUNC L_UpdateEnvironment(REG(a0, CFG_ENVR *env))
 		// Clear some things
 		env->font_name[0][0]=0;
 		env->font_size[0]=0;
-		for (a=0;a<130;a++)
+		for (a=0;a<ARRAY_SIZE(env->pad3);a++)
 			env->pad3[a]=0;
-		for (a=0;a<14;a++)
+		for (a=0;a<ARRAY_SIZE(env->pad4);a++)
 			env->pad4[0]=0;
 
 /* changed 8/11/99 gjp
