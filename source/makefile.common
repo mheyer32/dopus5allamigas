@@ -24,6 +24,12 @@ endif
 OPTIONS  := -m68020-60 -flto -D__amigaos3__ -D__USE_SYSBASE -D__NO_NET_API -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I./../ -Iinit/../ -I$(SOURCE_TOP) -I$(SOURCE_TOP)/Include $(OS3_INCLUDE)
 LDFLAGS  := $(OPTIONS) $(DEBUGSYM) -noixemul
+#
+# With Link Time Optimization, provide the optimization flags to the linker, too
+ifneq ($(filter -flto%,$(OPTIONS)),)
+	LDFLAGS += $(OPTIMIZE)
+endif
+
 WARNINGS := -Wall -Wno-pointer-sign -Wno-attributes -Wno-int-conversion -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast
 
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
