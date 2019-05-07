@@ -45,9 +45,12 @@ For more information on Directory Opus for Windows please see:
  */
 
 #if defined(__amigaos3__) || defined(__amigaos4__)
-int _start(void) //must be first for 68k library
+USED int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
+}
+__stdargs void exit(int status) {
+	Exit(status);
 }
 #endif
 
@@ -165,16 +168,13 @@ struct Device  			*ConsoleDevice = NULL;
 #endif*/
 
 #ifdef __AROS__
-struct UtilityBase		*UtilityBase = NULL;
+struct UtilityBase *UtilityBase = NULL;
+#elif defined(__libnix__)
+extern struct UtilityBase *UtilityBase;
 #else
-struct UtilityBase 			*UtilityBase = NULL;
-#endif 
-#ifdef __libnix__
-extern struct Library 	*__UtilityBase; // libnix defined it in stubs.a
-#else
-struct Library 			*__UtilityBase = NULL; // required by clib2
+struct UtilityBase *UtilityBase = NULL;
+extern struct Library __UtilityBase = NULL;  // required by clib2
 #endif
-
 
 struct Library *DOpusBase;
 struct DOpusLocale *locale;
@@ -1005,7 +1005,7 @@ ULONG initBase(struct LibraryHeader *lib)
   
     // we have to please the internal utilitybase
     // pointers of libnix and clib2
-    #if defined(__libnix__) || (!defined(__NEWLIB__) && !defined(__AROS__))
+	#if !defined(__libnix__) && !defined(__NEWLIB__) && !defined(__AROS__)
       __UtilityBase = (APTR)UtilityBase;
       #if defined(__amigaos4__)
       __IUtility = IUtility;

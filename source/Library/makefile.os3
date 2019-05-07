@@ -8,8 +8,7 @@ NAME := dopus5.library
 DESTDIR  := ../bin.os3
 TARGET   := $(DESTDIR)/$(NAME)
 
-LDFLAGS  += -nostartfiles -nostdlib
-LIBS := -ldebug -lgcc -lnix20 -lnix -lstubs -lamiga
+LDFLAGS  += -nostartfiles
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p

@@ -49,6 +49,9 @@ int _start(void) //must be first for 68k library
 {
   return RETURN_FAIL;
 }
+__stdargs void exit(int status) {
+	Exit(status);
+}
 #endif
 
 void __restore_a4(void)
@@ -163,14 +166,12 @@ struct Device  			*ConsoleDevice = NULL;
 #endif*/
 
 #ifdef __AROS__
-struct UtilityBase		*UtilityBase = NULL;
+struct UtilityBase *UtilityBase = NULL;
+#elif defined(__libnix__)
+extern struct UtilityBase *UtilityBase;
 #else
-struct UtilityBase 			*UtilityBase = NULL;
-#endif
-#ifdef __libnix__
-extern struct Library 	*__UtilityBase; // libnix defined it in stubs.a
-#else
-struct Library 			*__UtilityBase = NULL; // required by clib2
+struct UtilityBase *UtilityBase = NULL;
+extern struct Library __UtilityBase = NULL;  // required by clib2
 #endif
 
 
@@ -982,8 +983,8 @@ ULONG initBase(struct LibraryHeader *lib)
   {
   
     // we have to please the internal utilitybase
-    // pointers of libnix and clib2
-    #if defined(__libnix__) || (!defined(__NEWLIB__) && !defined(__AROS__))
+	// pointers clib2
+	#if (!defined (__libnix__) && !defined(__NEWLIB__) && !defined(__AROS__))
       __UtilityBase = (APTR)UtilityBase;
       #if defined(__amigaos4__)
       __IUtility = IUtility;

@@ -9,19 +9,20 @@ NEWDATE  := $(shell date +%d.%m.%Y)
 
 # Enter debug=no on "Make" command line to disable debug output.
 ifeq ($(debug), no)
-    OPTIMIZE := -Os -fomit-frame-pointer
+	OPTIMIZE := -Os -fomit-frame-pointer
 	DEBUGSYM := -g -ggdb
 	DEBUG := -DNDEBUG
 	#deferred evalution of $(TARGET)
 	STRIP = m68k-amigaos-strip --remove-section=.comment $(TARGET)
 else
-    OPTIMIZE := -Og -fomit-frame-pointer
+	OPTIMIZE := -Og -fno-omit-frame-pointer
 	DEBUGSYM := -g -ggdb
 	DEBUG := -DDEBUG
 	STRIP :=
+	LIBS += -ldebug
 endif
 
-OPTIONS  := -m68020-60 -flto -D__amigaos3__ -D__USE_SYSBASE -D__NO_NET_API -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
+OPTIONS  := -m68020-60 -flto -fshort-enums -D__amigaos3__ -D__USE_SYSBASE -D__NO_NET_API -DUSE_64BIT -DCOMPDATE=$(NEWDATE)
 INCLUDES := -I./../ -Iinit/../ -I$(SOURCE_TOP) -I$(SOURCE_TOP)/Include $(OS3_INCLUDE)
 LDFLAGS  := $(OPTIONS) $(DEBUGSYM) -noixemul
 #
@@ -33,4 +34,4 @@ endif
 WARNINGS := -Wall -Wno-pointer-sign -Wno-attributes -Wno-int-conversion -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast
 
 CFLAGS   := $(OPTIONS) $(DEBUG) $(DEBUGSYM) $(OPTIMIZE) -noixemul
-LIBS     := -lamiga -ldebug
+LIBS  += -lamiga
