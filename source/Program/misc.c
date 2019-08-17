@@ -284,7 +284,7 @@ void get_screen_data(DOpusScreenData *data)
 // Locale print-f
 static unsigned long ASM printf_hook(
 	REG(a0, struct Hook *hook), REG(a2, ULONG dummy),
-	REG(a1, char ch))
+	REG(d0, char ch))
 {
 	char *ptr=(char *)hook->h_Data;
 	*ptr++=ch;
