@@ -29,12 +29,8 @@ struct line
 	Point p2;
 };
 
-short __inline geo_ccw(Point *p0,Point *p1,Point *p2);
-short __inline geo_line_intersect(struct line *l1,struct line *l2);
-BOOL __inline geo_point_in_box(WORD x,WORD y,struct Rectangle *box);
-
 // Find if an intersection point is on a line
-short __inline geo_ccw(Point *p0,Point *p1,Point *p2)
+short static inline geo_ccw(Point *p0,Point *p1,Point *p2)
 {
 	short dx1,dx2,dy1,dy2;
 
@@ -54,7 +50,7 @@ short __inline geo_ccw(Point *p0,Point *p1,Point *p2)
 
 
 // Find if two lines intersect
-short __inline geo_line_intersect(struct line *l1,struct line *l2)
+short static inline geo_line_intersect(struct line *l1,struct line *l2)
 {
 	return	(short)	(((geo_ccw(&l1->p1,&l1->p2,&l2->p1)
 					 *geo_ccw(&l1->p1,&l1->p2,&l2->p2))<=0)
@@ -64,7 +60,7 @@ short __inline geo_line_intersect(struct line *l1,struct line *l2)
 
 
 // See if a point is within a box
-BOOL __inline geo_point_in_box(WORD x,WORD y,struct Rectangle *box)
+BOOL static inline geo_point_in_box(WORD x,WORD y,struct Rectangle *box)
 {
 	return (BOOL)(  ((box->MinX<=box->MaxX && x>=box->MinX && x<=box->MaxX) ||
 					 (box->MaxX<box->MinX && x>=box->MaxX && x<=box->MinX)) &&
