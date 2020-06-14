@@ -210,7 +210,7 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 					if (object->drag_info)
 					{
 						// Hide object
-						RemBob(&object->drag_info->bob);
+						RemVSprite(&object->drag_info->sprite);
 					}
 				}
 			}
@@ -308,8 +308,8 @@ void backdrop_show_drag(
 			// Not dragging yet?
 			if (!(GUI->flags&GUIF_DRAGGING))
 			{
-				// Add bob to list
-				AddBob(&object->drag_info->bob,&GUI->drag_screen_rp);
+				// Add sprite to list
+				AddVSprite(&object->drag_info->sprite,&GUI->drag_screen_rp);
 			}
 		}
 	}
