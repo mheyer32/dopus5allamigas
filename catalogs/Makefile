@@ -4,6 +4,12 @@ L= LOCALE:Catalogs/
 all: deutsch español français greek italiano magyar nederlands norsk polski português svenska
 .PHONY: $(wildcard *)
 
+# built-in catalog
+../source/Program/string_data.h: ../source/Program/dopus.cd
+../source/Library/string_data.h: ../source/Library/dopuslib.cd
+../source/Modules/configopus/string_data.h: ../source/Modules/configopus/configopus.cd
+
+# other catalogs
 deutsch:
 	$(CATCOMP) /source/Modules/cleanup/cleanup.cd		$@/cleanup.ct CATALOG $@/cleanup.catalog
 	$(CATCOMP) /source/Modules/configopus/configopus.cd	$@/configopus.ct CATALOG $@/configopus.catalog
@@ -24,6 +30,7 @@ deutsch:
 	$(CATCOMP) /source/Modules/print/print.cd		$@/print.ct CATALOG $@/print.catalog
 	$(CATCOMP) /source/Modules/read/read.cd			$@/read.ct CATALOG $@/read.catalog
 	$(CATCOMP) /source/Modules/show/show.cd			$@/show.ct CATALOG $@/show.catalog
+	$(CATCOMP) /source/Modules/xadopus/xadopus.cd		$@/xadopus.ct CATALOG $@/xadopus.catalog
 
 español:
 	$(CATCOMP) /source/Modules/cleanup/cleanup.cd		$@/cleanup.ct CATALOG $@/cleanup.catalog
@@ -45,6 +52,7 @@ español:
 	$(CATCOMP) /source/Modules/print/print.cd		$@/print.ct CATALOG $@/print.catalog
 	$(CATCOMP) /source/Modules/read/read.cd			$@/read.ct CATALOG $@/read.catalog
 	$(CATCOMP) /source/Modules/show/show.cd			$@/show.ct CATALOG $@/show.catalog
+	$(CATCOMP) /source/Modules/xadopus/xadopus.cd		$@/xadopus.ct CATALOG $@/xadopus.catalog
 
 français:
 	$(CATCOMP) /source/Modules/cleanup/cleanup.cd		$@/cleanup.ct CATALOG $@/cleanup.catalog
@@ -171,6 +179,7 @@ norsk:
 	$(CATCOMP) /source/Modules/print/print.cd		$@/print.ct CATALOG $@/print.catalog
 	$(CATCOMP) /source/Modules/read/read.cd			$@/read.ct CATALOG $@/read.catalog
 	$(CATCOMP) /source/Modules/show/show.cd			$@/show.ct CATALOG $@/show.catalog
+	$(CATCOMP) /source/Modules/xadopus/xadopus.cd		$@/xadopus.ct CATALOG $@/xadopus.catalog
 
 polski:
 	$(CATCOMP) /source/Modules/cleanup/cleanup.cd		$@/cleanup.ct CATALOG $@/cleanup.catalog
@@ -192,6 +201,7 @@ polski:
 	$(CATCOMP) /source/Modules/print/print.cd		$@/print.ct CATALOG $@/print.catalog
 	$(CATCOMP) /source/Modules/read/read.cd			$@/read.ct CATALOG $@/read.catalog
 	$(CATCOMP) /source/Modules/show/show.cd			$@/show.ct CATALOG $@/show.catalog
+	$(CATCOMP) /source/Modules/xadopus/xadopus.cd		$@/xadopus.ct CATALOG $@/xadopus.catalog
 
 português:
 	$(CATCOMP) /source/Modules/cleanup/cleanup.cd		$@/cleanup.ct CATALOG $@/cleanup.catalog
