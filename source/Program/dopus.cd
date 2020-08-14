@@ -1017,7 +1017,7 @@ MSG_BUTTONS_ERROR_LOADING (//)
 Error loading button bank!
 ;
 MSG_ERROR_CREATING_DIRECTORY (//)
-creating the directory
+Error creating the directory
 ;
 MSG_CUSTPORT_NOT_FOUND (//)
 User-specified custom handler port\n'%s'\ncould not be found!
