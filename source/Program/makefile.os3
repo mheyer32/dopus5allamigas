@@ -19,7 +19,7 @@ all : $(TARGET)
 
 $(TARGET): $(OBJS)
 	@$(MAKEDIR) $(DESTDIR)
-	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@
+	$(CC) $^ $(LDFLAGS) $(LIBS) -o $@_unstripped
 	@$(STRIP)
 
 68k_asm_a5_a6.o : 68k_asm_a5_a6.c
