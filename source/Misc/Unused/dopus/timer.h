@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,26 +30,26 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
- 
+	#pragma pack(2)
+#endif
+
 typedef struct TimerHandle
 {
-	struct MsgPort		*port;		// Port to wait on
-	struct timerequest	req;		// Timer request
-	struct MsgPort		*my_port;	// Supplied port
-	short			active;		// Indicates active request
+	struct MsgPort *port;	  // Port to wait on
+	struct timerequest req;	  // Timer request
+	struct MsgPort *my_port;  // Supplied port
+	short active;			  // Indicates active request
 } TimerHandle;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
-TimerHandle *AllocTimer(ULONG,struct MsgPort *);
+TimerHandle *AllocTimer(ULONG, struct MsgPort *);
 BOOL CheckTimer(TimerHandle *);
 void FreeTimer(TimerHandle *);
 struct Library *GetTimerBase(void);
-void StartTimer(TimerHandle *,ULONG,ULONG);
+void StartTimer(TimerHandle *, ULONG, ULONG);
 void StopTimer(TimerHandle *);
 BOOL TimerActive(TimerHandle *);
 

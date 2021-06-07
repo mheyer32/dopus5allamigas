@@ -17,17 +17,10 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "cleanup.h"
 
-ModuleInfo
-	module_info={
-		1,
-		"cleanup.module",
-		"cleanup.catalog",
-		0,
-		1,
-		{{0,"CleanUp",MSG_CLEANUP_DESC,0,0}}};
+ModuleInfo module_info = {1, "cleanup.module", "cleanup.catalog", 0, 1, {{0, "CleanUp", MSG_CLEANUP_DESC, 0, 0}}};

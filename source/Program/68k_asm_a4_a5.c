@@ -1,25 +1,26 @@
-/* 
+/*
 !! For 68k build only !!
- 
- That file have 7 functions which use a4 and/or a5 registers as arguments which can cause problems with 68k gcc's inline macroses.
- 
+
+ That file have 7 functions which use a4 and/or a5 registers as arguments which can cause problems with 68k gcc's inline
+macroses.
+
  3 function from dopus5 itself (SimpleRequest, SelectionList and WB_LaunchNotify)
  4 functions from configopus module (ConfigEditFunction, ConfigEnvironment, ConfigMenu and ShowPaletteBox).
- 
+
  The reassons to create them like this, is that there is not possible by fd2pragma generate "right" inlines
  for such functions where a5 and a6 used as arguments at the same time.
- 
+
  We tryed all of possible gcc-68k-inlines started from SPECIAL 40 to SPECIAL 47. Even if in some cases inlines
  still generates, they still didn't works in end.
- 
+
  Because of that we need to create those functions on pure assembler, so they will works as they intended to.
- 
- All the other 68k inlines generated with SPECIAL 43 (the best and clean look) via usage of inline/macros.h from 68k gcc.
- 
+
+ All the other 68k inlines generated with SPECIAL 43 (the best and clean look) via usage of inline/macros.h from 68k
+gcc.
+
  It is worth to try to create necessary macroses to put it inside of inline/macros.h, but currently we go that way.
 
-*/ 
-
+*/
 
 asm(".text                    \n\
      .even                    \n\
@@ -60,7 +61,6 @@ _WB_LaunchNotify:                \n\
       moveml sp@+,d2/a2-a6  	 \n\
       rts                        \n\
       ");
-	  	  
 
 asm(".text                       \n\
      .even                       \n\
@@ -114,5 +114,3 @@ _ShowPaletteBox:                 \n\
       moveml sp@+,a2-a6          \n\
       rts                        \n\
       ");
-
-

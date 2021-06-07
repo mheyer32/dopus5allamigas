@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -38,53 +38,58 @@ For more information on Directory Opus for Windows please see:
 #define CATCOMP_NUMBERS
 #include "string_data.h"
 
-#define APPWINID     1
+#define APPWINID 1
 
-#define VALID_QUALIFIERS (IEQUALIFIER_LCOMMAND|IEQUALIFIER_RCOMMAND|\
-                         IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
-                         IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
+#define VALID_QUALIFIERS                                                                                           \
+	(IEQUALIFIER_LCOMMAND | IEQUALIFIER_RCOMMAND | IEQUALIFIER_CONTROL | IEQUALIFIER_LSHIFT | IEQUALIFIER_RSHIFT | \
+	 IEQUALIFIER_LALT | IEQUALIFIER_RALT)
 
-#define IEQUAL_ANYSHIFT	(IEQUALIFIER_LSHIFT|IEQUALIFIER_RSHIFT)
-#define IEQUAL_ANYALT	(IEQUALIFIER_LALT|IEQUALIFIER_RALT)
-#define IEQUAL_ANYAMIGA	(IEQUALIFIER_LCOMMAND|IEQUALIFIER_RCOMMAND)
+#define IEQUAL_ANYSHIFT (IEQUALIFIER_LSHIFT | IEQUALIFIER_RSHIFT)
+#define IEQUAL_ANYALT (IEQUALIFIER_LALT | IEQUALIFIER_RALT)
+#define IEQUAL_ANYAMIGA (IEQUALIFIER_LCOMMAND | IEQUALIFIER_RCOMMAND)
 
-#define KEY_CURSORUP	0x3e
-#define KEY_CURSORDOWN	0x1e
-#define PAGEUP		0x3f
-#define PAGEDOWN	0x1f
-#define HOME		0x3d
-#define END		0x1d
+#define KEY_CURSORUP 0x3e
+#define KEY_CURSORDOWN 0x1e
+#define PAGEUP 0x3f
+#define PAGEDOWN 0x1f
+#define HOME 0x3d
+#define END 0x1d
 
-#define isonlyword(c) (!c || c==10 || c==13 || isspace(c) || ispunct(c))
+#define isonlyword(c) (!c || c == 10 || c == 13 || isspace(c) || ispunct(c))
 
-#define NUMFONTS			16					// Number of fonts
+#define NUMFONTS 16	 // Number of fonts
 
 enum {
-	MAIN_MENU_EVENT,			// Menu event from a sub-process
+	MAIN_MENU_EVENT,  // Menu event from a sub-process
 };
 
-
-#define REQ_OFF(save) { save=main_proc->pr_WindowPtr; main_proc->pr_WindowPtr=(APTR)-1; }
-#define REQ_ON(save) { main_proc->pr_WindowPtr=save; }
-
+#define REQ_OFF(save)                       \
+	{                                       \
+		save = main_proc->pr_WindowPtr;     \
+		main_proc->pr_WindowPtr = (APTR)-1; \
+	}
+#define REQ_ON(save)                    \
+	{                                   \
+		main_proc->pr_WindowPtr = save; \
+	}
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct _rego_data
 {
-	char			serial_number[20];
-	char			name[40];
-	char			company[40];
-	char			address1[40];
-	char			address2[40];
-	char			address3[40];
-	struct DateStamp	install_date;
-	struct DateStamp	harddrive_date;
-	short			pirate;
-	short			pirate_count;
-	long			checksum;
+	char serial_number[20];
+	char name[40];
+	char company[40];
+	char address1[40];
+	char address2[40];
+	char address3[40];
+	struct DateStamp install_date;
+	struct DateStamp harddrive_date;
+	short pirate;
+	short pirate_count;
+	long checksum;
 } rego_data;
 
 typedef struct
@@ -96,28 +101,27 @@ typedef struct
 
 typedef struct
 {
-	long	offset;
-	APTR	function;
+	long offset;
+	APTR function;
 } PatchList;
 
 typedef struct
 {
-	short	type;
-	char	name[2];
+	short type;
+	char name[2];
 } env_packet;
 
 #if defined(__amigaos4__)
 struct LocaleBase
 {
 	struct Library lb_LibNode;
-	BOOL           lb_SysPatches;
+	BOOL lb_SysPatches;
 };
 #endif /* __amigaos4__ */
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
-
 
 // Include files
 #include "function_select.h"
@@ -170,39 +174,33 @@ struct LocaleBase
 
 #include "callback.h"
 
-
 #define WBArgDir(a) (!(a)->wa_Name || !*(a)->wa_Name)
 
-#define ABS(x) (((x)>0)?(x):(-x))
+#define ABS(x) (((x) > 0) ? (x) : (-x))
 
-#define SNIFF_REXX	0
-#define SNIFF_BOTH	1
-#define SNIFF_USER	2
+#define SNIFF_REXX 0
+#define SNIFF_BOTH 1
+#define SNIFF_USER 2
 
-#define FILENAME_LEN	31
+#define FILENAME_LEN 31
 
 /***  an offset to correctly position the iconify and padlock
-      gadgets in the window titlebar
+	  gadgets in the window titlebar
 ****/
 #ifdef __amigaos4__
-#define TBGADGETOFFSET -10
+	#define TBGADGETOFFSET -10
 #else
-#define TBGADGETOFFSET 0
+	#define TBGADGETOFFSET 0
 #endif
-
 
 /*********************************************************************/
 
 #if defined(__MORPHOS__)
-#define Module_Expunge() \
-	LP0NR(12, Module_Expunge, \
-		, ModuleBase, 0, 0, 0, 0, 0, 0)
+	#define Module_Expunge() LP0NR(12, Module_Expunge, , ModuleBase, 0, 0, 0, 0, 0, 0)
 #elif defined(__amigaos4__)
-#define Module_Expunge() IModule->Expunge()
+	#define Module_Expunge() IModule->Expunge()
 #elif defined(__AROS__)
-#define Module_Expunge() \
-	AROS_LC0(BPTR, Module_Expunge, \
-	struct Library *, MODULE_BASE_NAME, 3, /* s */)
+	#define Module_Expunge() AROS_LC0(BPTR, Module_Expunge, struct Library *, MODULE_BASE_NAME, 3, /* s */)
 #else
 //#pragma libcall ModuleBase Module_Expunge 12 0
 void Module_Expunge(void);

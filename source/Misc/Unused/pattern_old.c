@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -407,7 +407,6 @@ void GetPattern(PatternData *pattern,struct Screen *screen)
 	pattern->valid=TRUE;
 }
 */
-
 
 /*
 		long start_offset_x,start_offset_y;

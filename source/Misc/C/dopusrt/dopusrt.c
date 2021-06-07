@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -32,21 +32,22 @@ For more information on Directory Opus for Windows please see:
 
 #include <SDI/SDI_compiler.h>
 
-const char USED_VAR version[] = "\0$VER: DOpusRT "CMD_STRING;
+const char USED_VAR version[] = "\0$VER: DOpusRT " CMD_STRING;
 
 int main(int argc, char **argv)
 {
 	struct Library *DOpusBase = NULL;
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	struct DOpusIFace *IDOpus = NULL;
-	#endif
+#endif
 	char buffer[1024] = {0};
 	char *command = buffer;
 
 	signal(SIGINT, SIG_IGN);
 
 	// Valid arguments?
-	if (argc < 2) return(RETURN_ERROR);
+	if (argc < 2)
+		return (RETURN_ERROR);
 
 	if (argc < 3)
 		sprintf(buffer, "\"%s\"", argv[1]);
@@ -54,25 +55,25 @@ int main(int argc, char **argv)
 		sprintf(buffer, "\"%s\" \"%s\"", argv[1], argv[2]);
 
 	// Open dopus library
-	if (!(DOpusBase=OpenLibrary("dopus5:libs/dopus5.library",LIB_VERSION)))
-		return(RETURN_ERROR);
-		
-	#ifdef __amigaos4__
+	if (!(DOpusBase = OpenLibrary("dopus5:libs/dopus5.library", LIB_VERSION)))
+		return (RETURN_ERROR);
+
+#ifdef __amigaos4__
 	if (!(IDOpus = (struct DOpusIFace *)GetInterface(DOpusBase, "main", 1, NULL)))
 	{
 		CloseLibrary(DOpusBase);
-		return(RETURN_ERROR);
+		return (RETURN_ERROR);
 	}
-	#endif
+#endif
 
 	// Launch program
-	WB_Launch(command,NULL,LAUNCH_WAIT);
+	WB_Launch(command, NULL, LAUNCH_WAIT);
 
-	// Close library
-	#ifdef __amigaos4__
+// Close library
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDOpus);
-	#endif
+#endif
 	CloseLibrary(DOpusBase);
 
-	return(RETURN_OK);
+	return (RETURN_OK);
 }

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,8 +29,5 @@ For more information on Directory Opus for Windows please see:
 /* init.c */
 ULONG freeBase(struct MyLibrary* lib);
 ULONG initBase(struct MyLibrary* lib);
-
-
-
 
 #endif /* _LIB_PROTOS_H */

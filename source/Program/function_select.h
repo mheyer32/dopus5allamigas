@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -27,8 +27,7 @@ For more information on Directory Opus for Windows please see:
 extern ObjectDef _function_select_objects[];
 extern struct TagItem _select_layout_tags[];
 
-enum
-{
+enum {
 	GAD_SELECT_LAYOUT_AREA,
 	GAD_SELECT_NAME_STRING,
 	GAD_SELECT_NAME_CYCLE,
@@ -47,69 +46,45 @@ enum
 };
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	char		type;			// Simple or complex
-	char		entry_type;		// Type of entry to match
+	char type;		  // Simple or complex
+	char entry_type;  // Type of entry to match
 
-	char		name[60];		// Filename pattern
-	short		name_match;
-	char		date_from[10];		// Date from
-	char		date_to[10];		// Date to
-	short		date_match;
-	unsigned short	bits;			// Protection bits
-	short		bits_match;
-	short		compare;		// Compare destination
-	short		compare_match;
-	short		include;		// Include/exclude
+	char name[60];	// Filename pattern
+	short name_match;
+	char date_from[10];	 // Date from
+	char date_to[10];	 // Date to
+	short date_match;
+	unsigned short bits;  // Protection bits
+	short bits_match;
+	short compare;	// Compare destination
+	short compare_match;
+	short include;	// Include/exclude
 } SelectData;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-enum
-{
-	SELECT_SIMPLE,
-	SELECT_COMPLEX
-};
+enum { SELECT_SIMPLE, SELECT_COMPLEX };
 
-#define SELECT_TYPE_MASK	1
-#define SELECTF_MAKE_VISIBLE	(1<<2)
-#define SELECTF_EXCLUSIVE	(1<<3)
+#define SELECT_TYPE_MASK 1
+#define SELECTF_MAKE_VISIBLE (1 << 2)
+#define SELECTF_EXCLUSIVE (1 << 3)
 
-enum
-{
-	SELECT_MATCH_IGNORE,
-	SELECT_MATCH_MATCH,
-	SELECT_MATCH_NO_MATCH
-};
+enum { SELECT_MATCH_IGNORE, SELECT_MATCH_MATCH, SELECT_MATCH_NO_MATCH };
 
-enum
-{
-	SELECT_COMPARE_NEWER,
-	SELECT_COMPARE_OLDER,
-	SELECT_COMPARE_DIFFERENT
-};
+enum { SELECT_COMPARE_NEWER, SELECT_COMPARE_OLDER, SELECT_COMPARE_DIFFERENT };
 
-enum
-{
-	SELECT_INCLUDE,
-	SELECT_EXCLUDE
-};
+enum { SELECT_INCLUDE, SELECT_EXCLUDE };
 
-enum
-{
-	SELECT_ENTRY_BOTH,
-	SELECT_ENTRY_FILES,
-	SELECT_ENTRY_DIRS
-};
+enum { SELECT_ENTRY_BOTH, SELECT_ENTRY_FILES, SELECT_ENTRY_DIRS };
 
-enum
-{
+enum {
 	SELECT_VAR_NAME,
 	SELECT_VAR_FROM,
 	SELECT_VAR_TO,

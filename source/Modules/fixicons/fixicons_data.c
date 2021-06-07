@@ -17,22 +17,20 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "fixicons.h"
 
-#define ARG_TEMPLATE	"FILE/M,ALLOWNOBORDERS=ANB/S,ALLOWNOLABELS=ANL/S,NOFIXOFFSET=NFO/S,SYNCWBTOOPUS=SWO/S,SYNCOPUSTOWB=SOW/S,REPORT/S"
+#define ARG_TEMPLATE \
+	"FILE/M,ALLOWNOBORDERS=ANB/S,ALLOWNOLABELS=ANL/S,NOFIXOFFSET=NFO/S,SYNCWBTOOPUS=SWO/S,SYNCOPUSTOWB=SOW/S,REPORT/S"
 
-char *arg_template=ARG_TEMPLATE;
+char *arg_template = ARG_TEMPLATE;
 
-ModuleInfo
-	module_info={
-		1,
-		"fixicons.module",
-		"fixicons.catalog",
-		0,
-		1,
-		{{0,"FixIcons",MSG_FIXICONS_DESC,FUNCF_WANT_SOURCE|FUNCF_WANT_ENTRIES,ARG_TEMPLATE}}};
-
+ModuleInfo module_info = {1,
+						  "fixicons.module",
+						  "fixicons.catalog",
+						  0,
+						  1,
+						  {{0, "FixIcons", MSG_FIXICONS_DESC, FUNCF_WANT_SOURCE | FUNCF_WANT_ENTRIES, ARG_TEMPLATE}}};

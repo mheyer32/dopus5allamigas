@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -39,13 +39,11 @@ struct LibraryHeader
 /***************************************************************************/
 
 #if defined(__MORPHOS__)
-#define __TEXTSEGMENT__ __attribute__((section(".text")))
+	#define __TEXTSEGMENT__ __attribute__((section(".text")))
 #else
-#define __TEXTSEGMENT__
+	#define __TEXTSEGMENT__
 #endif
 
 /***************************************************************************/
 
-
 #endif
-

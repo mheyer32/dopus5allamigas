@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,23 +25,19 @@ For more information on Directory Opus for Windows please see:
 #include "config.h"
 #include <Program/dopus_config.h>
 
-Cfg_Function *LIBFUNC L_FindFunctionType(
-	REG(a0, struct List *list),
-	REG(d0, UWORD type))
+Cfg_Function *LIBFUNC L_FindFunctionType(REG(a0, struct List *list), REG(d0, UWORD type))
 {
 	Cfg_Function *func;
 
 	// Go through list
-	for (func=(Cfg_Function *)list->lh_Head;
-		func->node.ln_Succ;
-		func=(Cfg_Function *)func->node.ln_Succ)
+	for (func = (Cfg_Function *)list->lh_Head; func->node.ln_Succ; func = (Cfg_Function *)func->node.ln_Succ)
 	{
 		// Skip over 'label' functions
-		if (func->function.flags2&FUNCF2_LABEL_FUNC)
+		if (func->function.flags2 & FUNCF2_LABEL_FUNC)
 			continue;
 
 		// Correct type?
-		if (func->function.func_type==type)
+		if (func->function.func_type == type)
 			return func;
 	}
 

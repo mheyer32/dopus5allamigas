@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -32,22 +32,22 @@ For more information on Directory Opus for Windows please see:
 
 // This is what 'dopus_ftp' gets sent when we launch it
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 struct modlaunch_data
 {
-IPCData       *mld_ftp_ipc;		// dopus_ftp's ipc
-BOOL          mld_okay;			// proc_init() sets this to TRUE so it can be checked after calling IPC_Launch() */
+	IPCData *mld_ftp_ipc;  // dopus_ftp's ipc
+	BOOL mld_okay;		   // proc_init() sets this to TRUE so it can be checked after calling IPC_Launch() */
 
-struct Screen *mld_screen;		// Screen we're on
-IPCData       *mld_opus_ipc;		// The main Opus process's ipc
-IPCData       *mld_function_ipc;	// dopus_function's ipc, needed for callback hooks
-EXT_FUNC      (mld_func_callback);
+	struct Screen *mld_screen;	// Screen we're on
+	IPCData *mld_opus_ipc;		// The main Opus process's ipc
+	IPCData *mld_function_ipc;	// dopus_function's ipc, needed for callback hooks
+	EXT_FUNC(mld_func_callback);
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-struct opusftp_globals *mld_og;		// Points back to global info
+	struct opusftp_globals *mld_og;	 // Points back to global info
 };
 
 #endif

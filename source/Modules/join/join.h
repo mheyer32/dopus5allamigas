@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,41 +26,31 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 
 #define COPY_INITIAL_BUFFER 8192
-#define COPY_MIN_BUFFER		2048
-#define COPY_LOW_THRESH		500000
-#define COPY_HIGH_THRESH	1000000
+#define COPY_MIN_BUFFER 2048
+#define COPY_LOW_THRESH 500000
+#define COPY_HIGH_THRESH 1000000
 
 // Using QUAD args with OS3/AROS Seek() & SetFileSize() can corrupt files.
 // Do not change these defintions unless AROS becomes 64bit aware.
 #undef DO_64BIT
 #ifdef USE_64BIT
-#if defined(__amigaos4__) || defined(__MORPHOS__)
-#define DO_64BIT
+	#if defined(__amigaos4__) || defined(__MORPHOS__)
+		#define DO_64BIT
+	#endif
 #endif
-#endif
 
-enum
-{
-	JOIN,
-	SPLIT
-};
+enum { JOIN, SPLIT };
 
-enum
-{
-	JOINARG_FROM,
-	JOINARG_TO
-};
+enum { JOINARG_FROM, JOINARG_TO };
 
-enum
-{
+enum {
 	SPLITARG_FROM,
 	SPLITARG_TO,
 	SPLITARG_CHUNK,
 	SPLITARG_STEM,
 };
 
-enum
-{
+enum {
 	GAD_JOIN_LAYOUT,
 	GAD_JOIN_LISTER,
 	GAD_JOIN_ADD,
@@ -84,8 +74,8 @@ enum
 	GAD_SPLIT_SIZES,
 };
 
-extern ConfigWindow join_window,split_window;
-extern ObjectDef join_objects[],split_objects[];
+extern ConfigWindow join_window, split_window;
+extern ObjectDef join_objects[], split_objects[];
 
 /*#ifdef __amigaos4__
 #define JPTR struct TimerIFace *
@@ -94,64 +84,64 @@ extern ObjectDef join_objects[],split_objects[];
 #endif*/
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	struct Screen		*screen;
-	struct Window		*window;
-	IPCData			*ipc;
+	struct Screen *screen;
+	struct Window *window;
+	IPCData *ipc;
 
-	ConfigWindow		win_dims;
-	NewConfigWindow		new_win;
-	ObjectList		*list;
+	ConfigWindow win_dims;
+	NewConfigWindow new_win;
+	ObjectList *list;
 
-	struct MsgPort		*app_port;
-	struct AppWindow	*app_window;
+	struct MsgPort *app_port;
+	struct AppWindow *app_window;
 
-	Att_List		*join_list;
+	Att_List *join_list;
 
-	char			source[256];
-	char			dest[256];
+	char source[256];
+	char dest[256];
 
-	struct timerequest	timer_req;
+	struct timerequest timer_req;
 	/*struct Library		*TimerBase;
 	JPTR				ITimer;*/
-	ULONG 			pad1;
+	ULONG pad1;
 
-	short			function;
+	short function;
 
-	char			buf[256];
+	char buf[256];
 
-	FuncArgs		*args;
+	FuncArgs *args;
 } join_data;
 
 typedef struct _FunctionEntry
 {
-	struct MinNode		node;
-	char			*name;
-	struct DirEntry		*entry;
-	short			type;
-	short			flags;
+	struct MinNode node;
+	char *name;
+	struct DirEntry *entry;
+	short type;
+	short flags;
 } FunctionEntry;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
 BOOL join_open(join_data *);
 void join_close(join_data *);
 void join_free(join_data *);
-void join_add_file(join_data *,char *,short);
-void join_do_gadgets(join_data *,short);
+void join_add_file(join_data *, char *, short);
+void join_do_gadgets(join_data *, short);
 void join_remove(join_data *);
 void join_clear(join_data *);
-void join_move(join_data *,short);
+void join_move(join_data *, short);
 void join_add(join_data *);
 short join_check_filename(join_data *);
 BOOL join_do_join(join_data *);
 BOOL join_join_files(join_data *);
-short join_show_error(join_data *,short,char *,BOOL);
-void split_do_gadgets(join_data *data,Att_Node *node);
+short join_show_error(join_data *, short, char *, BOOL);
+void split_do_gadgets(join_data *data, Att_Node *node);
 short split_do_split(join_data *data);
 short split_split_file(join_data *data);
 

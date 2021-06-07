@@ -8,29 +8,29 @@
 ** calls by substituting functions.
 **
 ** Do not edit manually.
-*/ 
+*/
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 #ifndef EXEC_EXEC_H
-#include <exec/exec.h>
+	#include <exec/exec.h>
 #endif
 #ifndef EXEC_INTERFACES_H
-#include <exec/interfaces.h>
+	#include <exec/interfaces.h>
 #endif
 
 #include <interfaces/music.h>
 
 /* Inline macros for Interface "main" */
-#define PlayModule(par1, last) IMUSIC->PlayModule((par1), (last)) 
-#define StopModule() IMUSIC->StopModule() 
-#define IsModule(last) IMUSIC->IsModule((last)) 
-#define FlushModule() IMUSIC->FlushModule() 
-#define ContModule() IMUSIC->ContModule() 
-#define SetVolume(last) IMUSIC->SetVolume((last)) 
-#define PlayFaster() IMUSIC->PlayFaster() 
-#define PlaySlower() IMUSIC->PlaySlower() 
-#define TempoReset() IMUSIC->TempoReset() 
+#define PlayModule(par1, last) IMUSIC->PlayModule((par1), (last))
+#define StopModule() IMUSIC->StopModule()
+#define IsModule(last) IMUSIC->IsModule((last))
+#define FlushModule() IMUSIC->FlushModule()
+#define ContModule() IMUSIC->ContModule()
+#define SetVolume(last) IMUSIC->SetVolume((last))
+#define PlayFaster() IMUSIC->PlayFaster()
+#define PlaySlower() IMUSIC->PlaySlower()
+#define TempoReset() IMUSIC->TempoReset()
 
 #endif /* INLINE4_MUSIC_H */

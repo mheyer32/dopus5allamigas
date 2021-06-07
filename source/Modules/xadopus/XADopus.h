@@ -23,35 +23,34 @@
 
 #define DOpusGetString GetString
 
-#define ADDNODEF_SORT		1		// Sort names
+#define ADDNODEF_SORT 1	 // Sort names
 
 #ifdef __amigaos3__
-#define xadERROR LONG
+	#define xadERROR LONG
 #endif
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 struct function_entry
 {
-	ULONG			pad[2];
-	char			*name;	// File name
-	APTR			entry;	// Entry pointer (don't touch!)
-	short			type;	// Type of file
-	short			flags;	// File flags
+	ULONG pad[2];
+	char *name;	  // File name
+	APTR entry;	  // Entry pointer (don't touch!)
+	short type;	  // Type of file
+	short flags;  // File flags
 };
 
 struct path_node
 {
-	ULONG			pad[2];
-	char			buffer[512];	// Contains path string
-	char			*path;		// Points to path string
-	APTR			lister;		// Lister pointer
-	ULONG			flags;		// Flags
-}; 
+	ULONG pad[2];
+	char buffer[512];  // Contains path string
+	char *path;		   // Points to path string
+	APTR lister;	   // Lister pointer
+	ULONG flags;	   // Flags
+};
 //----
-
 
 struct Tree
 {
@@ -63,7 +62,7 @@ struct Tree
 
 struct xoData
 {
-	ULONG	ArcMode, listh;
+	ULONG ArcMode, listh;
 	char lists[20], listpath[512], rootpath[108];
 	struct xadArchiveInfo *ArcInf;
 	struct MsgPort *mp;
@@ -102,5 +101,5 @@ struct MyPacket
 };
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif

@@ -5,10 +5,10 @@
 */
 
 #ifdef __USE_INLINE__
-#undef __USE_INLINE__
+	#undef __USE_INLINE__
 #endif
 #ifndef __NOGLOBALIFACE__
-#define __NOGLOBALIFACE__
+	#define __NOGLOBALIFACE__
 #endif
 
 #include <proto/dopus5.h>
@@ -18,5556 +18,4652 @@
 #include <interfaces/exec.h>
 #include <interfaces/dopus5.h>
 
-
-
-static inline int8  convert_int8 (uint32 x) { return x; }
-static inline int16 convert_int16(uint32 x) { return x; }
-
-
-STATIC struct Library * stub_OpenPPC(ULONG *regarray)
+static inline int8 convert_int8(uint32 x)
 {
-    struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-    struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((ULONG)Base + Base->lib_PosSize);
-    struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *) ExtLib->ILibrary;
-
-    return Self->Open(0);
+	return x;
 }
-STATIC CONST struct EmuTrap stub_Open = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_OpenPPC };
+static inline int16 convert_int16(uint32 x)
+{
+	return x;
+}
+
+STATIC struct Library *stub_OpenPPC(ULONG *regarray)
+{
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((ULONG)Base + Base->lib_PosSize);
+	struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *)ExtLib->ILibrary;
+
+	return Self->Open(0);
+}
+STATIC CONST struct EmuTrap stub_Open = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_OpenPPC};
 
 STATIC APTR stub_ClosePPC(ULONG *regarray)
 {
-    struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-    struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((ULONG)Base + Base->lib_PosSize);
-    struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *) ExtLib->ILibrary;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((ULONG)Base + Base->lib_PosSize);
+	struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *)ExtLib->ILibrary;
 
-    return Self->Close();
+	return Self->Close();
 }
-STATIC CONST struct EmuTrap stub_Close = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_ClosePPC };
+STATIC CONST struct EmuTrap stub_Close = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_ClosePPC};
 
 STATIC APTR stub_ExpungePPC(ULONG *regarray __attribute__((unused)))
 {
-    return NULL;
+	return NULL;
 }
-STATIC CONST struct EmuTrap stub_Expunge = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_ExpungePPC };
+STATIC CONST struct EmuTrap stub_Expunge = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_ExpungePPC};
 
 STATIC ULONG stub_ReservedPPC(ULONG *regarray __attribute__((unused)))
 {
-    return 0UL;
+	return 0UL;
 }
-STATIC CONST struct EmuTrap stub_Reserved = { TRAPINST, TRAPTYPE, stub_ReservedPPC };
+STATIC CONST struct EmuTrap stub_Reserved = {TRAPINST, TRAPTYPE, stub_ReservedPPC};
 
 static void stub_RemovedFunc0PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc0(
-	);
+	Self->RemovedFunc0();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc0 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc0PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc0 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc0PPC};
 
 static UWORD stub_RandomDopusPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->RandomDopus(
-		(int)regarray[0]
-	);
+	return Self->RandomDopus((int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_RandomDopus = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_RandomDopusPPC };
+STATIC CONST struct EmuTrap stub_RandomDopus = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_RandomDopusPPC};
 
 static ULONG stub_AtohPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Atoh(
-		(char *)regarray[8],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->Atoh((char *)regarray[8], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_Atoh = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AtohPPC };
+STATIC CONST struct EmuTrap stub_Atoh = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AtohPPC};
 
 static void stub_BtoCStrPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->BtoCStr(
-		(BSTR)regarray[8],
-		(char *)regarray[9],
-		(int)regarray[0]
-	);
+	Self->BtoCStr((BSTR)regarray[8], (char *)regarray[9], (int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_BtoCStr = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BtoCStrPPC };
+STATIC CONST struct EmuTrap stub_BtoCStr = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_BtoCStrPPC};
 
 static ULONG stub_DivideUPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DivideU(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG *)regarray[8],
-		(struct Library *)regarray[9]
-	);
+	return Self->DivideU((ULONG)regarray[0], (ULONG)regarray[1], (ULONG *)regarray[8], (struct Library *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_DivideU = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DivideUPPC };
+STATIC CONST struct EmuTrap stub_DivideU = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DivideUPPC};
 
 static void stub_ItoaPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Itoa(
-		(long)regarray[0],
-		(char *)regarray[8],
-		(char)convert_int8(regarray[1])
-	);
+	Self->Itoa((long)regarray[0], (char *)regarray[8], (char)convert_int8(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_Itoa = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ItoaPPC };
+STATIC CONST struct EmuTrap stub_Itoa = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ItoaPPC};
 
 static void stub_ItoaUPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ItoaU(
-		(ULONG)regarray[0],
-		(char *)regarray[8],
-		(char)convert_int8(regarray[1])
-	);
+	Self->ItoaU((ULONG)regarray[0], (char *)regarray[8], (char)convert_int8(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_ItoaU = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ItoaUPPC };
+STATIC CONST struct EmuTrap stub_ItoaU = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ItoaUPPC};
 
 static void stub_Ito26PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Ito26(
-		(ULONG)regarray[0],
-		(char *)regarray[8]
-	);
+	Self->Ito26((ULONG)regarray[0], (char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_Ito26 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_Ito26PPC };
+STATIC CONST struct EmuTrap stub_Ito26 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_Ito26PPC};
 
 static void stub_BytesToStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->BytesToString(
-		(ULONG)regarray[0],
-		(char *)regarray[8],
-		(short)convert_int16(regarray[1]),
-		(char)convert_int8(regarray[2])
-	);
+		(ULONG)regarray[0], (char *)regarray[8], (short)convert_int16(regarray[1]), (char)convert_int8(regarray[2]));
 }
-STATIC CONST struct EmuTrap stub_BytesToString = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BytesToStringPPC };
+STATIC CONST struct EmuTrap stub_BytesToString = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_BytesToStringPPC};
 
 static void stub_DivideToStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DivideToString(
-		(char *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(short)convert_int16(regarray[2]),
-		(char)convert_int8(regarray[3])
-	);
+	Self->DivideToString((char *)regarray[8],
+						 (ULONG)regarray[0],
+						 (ULONG)regarray[1],
+						 (short)convert_int16(regarray[2]),
+						 (char)convert_int8(regarray[3]));
 }
-STATIC CONST struct EmuTrap stub_DivideToString = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideToStringPPC };
+STATIC CONST struct EmuTrap stub_DivideToString = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DivideToStringPPC};
 
 static void stub_SetBusyPointerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetBusyPointer(
-		(struct Window *)regarray[8]
-	);
+	Self->SetBusyPointer((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_SetBusyPointer = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetBusyPointerPPC };
+STATIC CONST struct EmuTrap stub_SetBusyPointer = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetBusyPointerPPC};
 
 static void stub_BuildKeyStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->BuildKeyString(
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff),
-		(UWORD)(regarray[2] & 0xffff),
-		(UWORD)(regarray[3] & 0xffff),
-		(char *)regarray[8]
-	);
+	Self->BuildKeyString((UWORD)(regarray[0] & 0xffff),
+						 (UWORD)(regarray[1] & 0xffff),
+						 (UWORD)(regarray[2] & 0xffff),
+						 (UWORD)(regarray[3] & 0xffff),
+						 (char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_BuildKeyString = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BuildKeyStringPPC };
+STATIC CONST struct EmuTrap stub_BuildKeyString = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_BuildKeyStringPPC};
 
 static void stub_ActivateStrGadPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ActivateStrGad(
-		(struct Gadget *)regarray[8],
-		(struct Window *)regarray[9]
-	);
+	Self->ActivateStrGad((struct Gadget *)regarray[8], (struct Window *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ActivateStrGad = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ActivateStrGadPPC };
+STATIC CONST struct EmuTrap stub_ActivateStrGad = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ActivateStrGadPPC};
 
-static struct TimerHandle * stub_AllocTimerPPC(uint32 *regarray)
+static struct TimerHandle *stub_AllocTimerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AllocTimer(
-		(ULONG)regarray[0],
-		(struct MsgPort *)regarray[8]
-	);
+	return Self->AllocTimer((ULONG)regarray[0], (struct MsgPort *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_AllocTimer = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AllocTimerPPC };
+STATIC CONST struct EmuTrap stub_AllocTimer = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AllocTimerPPC};
 
 static void stub_FreeTimerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeTimer(
-		(TimerHandle *)regarray[8]
-	);
+	Self->FreeTimer((TimerHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeTimer = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeTimerPPC };
+STATIC CONST struct EmuTrap stub_FreeTimer = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeTimerPPC};
 
 static void stub_StartTimerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StartTimer(
-		(TimerHandle *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->StartTimer((TimerHandle *)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_StartTimer = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StartTimerPPC };
+STATIC CONST struct EmuTrap stub_StartTimer = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_StartTimerPPC};
 
 static BOOL stub_CheckTimerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckTimer(
-		(TimerHandle *)regarray[8]
-	);
+	return Self->CheckTimer((TimerHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CheckTimer = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckTimerPPC };
+STATIC CONST struct EmuTrap stub_CheckTimer = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CheckTimerPPC};
 
 static void stub_StopTimerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StopTimer(
-		(TimerHandle *)regarray[8]
-	);
+	Self->StopTimer((TimerHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_StopTimer = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StopTimerPPC };
+STATIC CONST struct EmuTrap stub_StopTimer = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_StopTimerPPC};
 
 static BPTR stub_GetDosPathListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetDosPathList(
-		(BPTR)regarray[8]
-	);
+	return Self->GetDosPathList((BPTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetDosPathList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetDosPathListPPC };
+STATIC CONST struct EmuTrap stub_GetDosPathList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetDosPathListPPC};
 
 static void stub_FreeDosPathListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeDosPathList(
-		(BPTR)regarray[8]
-	);
+	Self->FreeDosPathList((BPTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeDosPathList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeDosPathListPPC };
+STATIC CONST struct EmuTrap stub_FreeDosPathList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeDosPathListPPC};
 
 static short stub_DoSimpleRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DoSimpleRequest(
-		(struct Window *)regarray[8],
-		(struct DOpusSimpleRequest *)regarray[9]
-	);
+	return Self->DoSimpleRequest((struct Window *)regarray[8], (struct DOpusSimpleRequest *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_DoSimpleRequest = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DoSimpleRequestPPC };
+STATIC CONST struct EmuTrap stub_DoSimpleRequest = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DoSimpleRequestPPC};
 
 static short stub_SimpleRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SimpleRequest(
-		(struct Window *)regarray[8],
-		(char *)regarray[9],
-		(char *)regarray[10],
-		(char *)regarray[11],
-		(char *)regarray[12],
-		(APTR)regarray[13],
-		(long)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->SimpleRequest((struct Window *)regarray[8],
+							   (char *)regarray[9],
+							   (char *)regarray[10],
+							   (char *)regarray[11],
+							   (char *)regarray[12],
+							   (APTR)regarray[13],
+							   (long)regarray[0],
+							   (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SimpleRequest = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SimpleRequestPPC };
+STATIC CONST struct EmuTrap stub_SimpleRequest = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SimpleRequestPPC};
 
 static short stub_SelectionListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SelectionList(
-		(Att_List *)regarray[8],
-		(struct Window *)regarray[9],
-		(struct Screen *)regarray[10],
-		(char *)regarray[11],
-		(short)convert_int16(regarray[0]),
-		(ULONG)regarray[1],
-		(char *)regarray[2],
-		(char *)regarray[3],
-		(char *)regarray[4],
-		(char **)regarray[12],
-		(ULONG *)regarray[13]
-	);
+	return Self->SelectionList((Att_List *)regarray[8],
+							   (struct Window *)regarray[9],
+							   (struct Screen *)regarray[10],
+							   (char *)regarray[11],
+							   (short)convert_int16(regarray[0]),
+							   (ULONG)regarray[1],
+							   (char *)regarray[2],
+							   (char *)regarray[3],
+							   (char *)regarray[4],
+							   (char **)regarray[12],
+							   (ULONG *)regarray[13]);
 }
-STATIC CONST struct EmuTrap stub_SelectionList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SelectionListPPC };
+STATIC CONST struct EmuTrap stub_SelectionList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SelectionListPPC};
 
 static BOOL stub_WriteIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WriteIcon(
-		(char *)regarray[8],
-		(struct DiskObject *)regarray[9]
-	);
+	return Self->WriteIcon((char *)regarray[8], (struct DiskObject *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_WriteIcon = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WriteIconPPC };
+STATIC CONST struct EmuTrap stub_WriteIcon = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WriteIconPPC};
 
 static void stub_WriteFileIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->WriteFileIcon(
-		(char *)regarray[8],
-		(char *)regarray[9]
-	);
+	Self->WriteFileIcon((char *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_WriteFileIcon = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_WriteFileIconPPC };
+STATIC CONST struct EmuTrap stub_WriteFileIcon = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_WriteFileIconPPC};
 
-static DragInfo * stub_GetDragInfoPPC(uint32 *regarray)
+static DragInfo *stub_GetDragInfoPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetDragInfo(
-		(struct Window *)regarray[8],
-		(struct RastPort *)regarray[9],
-		(long)regarray[0],
-		(long)regarray[1],
-		(long)regarray[2]
-	);
+	return Self->GetDragInfo((struct Window *)regarray[8],
+							 (struct RastPort *)regarray[9],
+							 (long)regarray[0],
+							 (long)regarray[1],
+							 (long)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_GetDragInfo = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetDragInfoPPC };
+STATIC CONST struct EmuTrap stub_GetDragInfo = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetDragInfoPPC};
 
 static void stub_FreeDragInfoPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeDragInfo(
-		(DragInfo *)regarray[8]
-	);
+	Self->FreeDragInfo((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeDragInfo = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeDragInfoPPC };
+STATIC CONST struct EmuTrap stub_FreeDragInfo = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeDragInfoPPC};
 
 static void stub_GetDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetDragImage(
-		(DragInfo *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->GetDragImage((DragInfo *)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_GetDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetDragImagePPC };
+STATIC CONST struct EmuTrap stub_GetDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetDragImagePPC};
 
 static void stub_ShowDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ShowDragImage(
-		(DragInfo *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->ShowDragImage((DragInfo *)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_ShowDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ShowDragImagePPC };
+STATIC CONST struct EmuTrap stub_ShowDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ShowDragImagePPC};
 
 static void stub_HideDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->HideDragImage(
-		(DragInfo *)regarray[8]
-	);
+	Self->HideDragImage((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_HideDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_HideDragImagePPC };
+STATIC CONST struct EmuTrap stub_HideDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_HideDragImagePPC};
 
 static void stub_StampDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StampDragImage(
-		(DragInfo *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->StampDragImage((DragInfo *)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_StampDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StampDragImagePPC };
+STATIC CONST struct EmuTrap stub_StampDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_StampDragImagePPC};
 
 static void stub_GetDragMaskPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetDragMask(
-		(DragInfo *)regarray[8]
-	);
+	Self->GetDragMask((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetDragMask = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetDragMaskPPC };
+STATIC CONST struct EmuTrap stub_GetDragMask = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetDragMaskPPC};
 
 static BOOL stub_CheckDragDeadlockPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckDragDeadlock(
-		(DragInfo *)regarray[8]
-	);
+	return Self->CheckDragDeadlock((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CheckDragDeadlock = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckDragDeadlockPPC };
+STATIC CONST struct EmuTrap stub_CheckDragDeadlock = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_CheckDragDeadlockPPC};
 
 static void stub_AddDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->AddDragImage(
-		(DragInfo *)regarray[8]
-	);
+	Self->AddDragImage((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_AddDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_AddDragImagePPC };
+STATIC CONST struct EmuTrap stub_AddDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_AddDragImagePPC};
 
 static void stub_RemDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemDragImage(
-		(DragInfo *)regarray[8]
-	);
+	Self->RemDragImage((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_RemDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemDragImagePPC };
+STATIC CONST struct EmuTrap stub_RemDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemDragImagePPC};
 
-static struct Window * stub_OpenConfigWindowPPC(uint32 *regarray)
+static struct Window *stub_OpenConfigWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenConfigWindow(
-		(NewConfigWindow *)regarray[8]
-	);
+	return Self->OpenConfigWindow((NewConfigWindow *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_OpenConfigWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenConfigWindowPPC };
+STATIC CONST struct EmuTrap stub_OpenConfigWindow = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenConfigWindowPPC};
 
 static void stub_CloseConfigWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseConfigWindow(
-		(struct Window *)regarray[8]
-	);
+	Self->CloseConfigWindow((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseConfigWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseConfigWindowPPC };
+STATIC CONST struct EmuTrap stub_CloseConfigWindow = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_CloseConfigWindowPPC};
 
-static struct IntuiMessage * stub_GetWindowMsgPPC(uint32 *regarray)
+static struct IntuiMessage *stub_GetWindowMsgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetWindowMsg(
-		(struct MsgPort *)regarray[8]
-	);
+	return Self->GetWindowMsg((struct MsgPort *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetWindowMsg = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetWindowMsgPPC };
+STATIC CONST struct EmuTrap stub_GetWindowMsg = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetWindowMsgPPC};
 
 static void stub_ReplyWindowMsgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ReplyWindowMsg(
-		(struct IntuiMessage *)regarray[8]
-	);
+	Self->ReplyWindowMsg((struct IntuiMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ReplyWindowMsg = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ReplyWindowMsgPPC };
+STATIC CONST struct EmuTrap stub_ReplyWindowMsg = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ReplyWindowMsgPPC};
 
 static void stub_StripIntuiMessagesDopusPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StripIntuiMessagesDopus(
-		(struct Window *)regarray[8]
-	);
+	Self->StripIntuiMessagesDopus((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_StripIntuiMessagesDopus = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StripIntuiMessagesDopusPPC };
+STATIC CONST struct EmuTrap stub_StripIntuiMessagesDopus = {TRAPINST,
+															TRAPTYPENR,
+															(uint32(*)(uint32 *))stub_StripIntuiMessagesDopusPPC};
 
 static void stub_CloseWindowSafelyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseWindowSafely(
-		(struct Window *)regarray[8]
-	);
+	Self->CloseWindowSafely((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseWindowSafely = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseWindowSafelyPPC };
+STATIC CONST struct EmuTrap stub_CloseWindowSafely = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_CloseWindowSafelyPPC};
 
 static int stub_CalcObjectDimsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CalcObjectDims(
-		(void *)regarray[8],
-		(struct TextFont *)regarray[9],
-		(struct IBox *)regarray[10],
-		(struct IBox *)regarray[11],
-		(GL_Object *)regarray[12],
-		(ULONG)regarray[0],
-		(GL_Object *)regarray[1],
-		(GL_Object *)regarray[2]
-	);
+	return Self->CalcObjectDims((void *)regarray[8],
+								(struct TextFont *)regarray[9],
+								(struct IBox *)regarray[10],
+								(struct IBox *)regarray[11],
+								(GL_Object *)regarray[12],
+								(ULONG)regarray[0],
+								(GL_Object *)regarray[1],
+								(GL_Object *)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_CalcObjectDims = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CalcObjectDimsPPC };
+STATIC CONST struct EmuTrap stub_CalcObjectDims = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CalcObjectDimsPPC};
 
 static int stub_CalcWindowDimsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CalcWindowDims(
-		(struct Screen *)regarray[8],
-		(ConfigWindow *)regarray[9],
-		(struct IBox *)regarray[10],
-		(struct TextFont *)regarray[11],
-		(ULONG)regarray[0]
-	);
+	return Self->CalcWindowDims((struct Screen *)regarray[8],
+								(ConfigWindow *)regarray[9],
+								(struct IBox *)regarray[10],
+								(struct TextFont *)regarray[11],
+								(ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_CalcWindowDims = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CalcWindowDimsPPC };
+STATIC CONST struct EmuTrap stub_CalcWindowDims = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CalcWindowDimsPPC};
 
-static ObjectList * stub_AddObjectListPPC(uint32 *regarray)
+static ObjectList *stub_AddObjectListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AddObjectList(
-		(struct Window *)regarray[8],
-		(ObjectDef *)regarray[9]
-	);
+	return Self->AddObjectList((struct Window *)regarray[8], (ObjectDef *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_AddObjectList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AddObjectListPPC };
+STATIC CONST struct EmuTrap stub_AddObjectList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AddObjectListPPC};
 
 static void stub_FreeObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeObject(
-		(ObjectList *)regarray[8],
-		(GL_Object *)regarray[9]
-	);
+	Self->FreeObject((ObjectList *)regarray[8], (GL_Object *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_FreeObject = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeObjectPPC };
+STATIC CONST struct EmuTrap stub_FreeObject = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeObjectPPC};
 
 static void stub_FreeObjectListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeObjectList(
-		(ObjectList *)regarray[8]
-	);
+	Self->FreeObjectList((ObjectList *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeObjectList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeObjectListPPC };
+STATIC CONST struct EmuTrap stub_FreeObjectList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeObjectListPPC};
 
 static void stub_RefreshObjectListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RefreshObjectList(
-		(struct Window *)regarray[8],
-		(ObjectList *)regarray[9]
-	);
+	Self->RefreshObjectList((struct Window *)regarray[8], (ObjectList *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_RefreshObjectList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RefreshObjectListPPC };
+STATIC CONST struct EmuTrap stub_RefreshObjectList = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_RefreshObjectListPPC};
 
-static GL_Object * stub_GetObjectPPC(uint32 *regarray)
+static GL_Object *stub_GetObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetObject(
-		(ObjectList *)regarray[8],
-		(int)regarray[0]
-	);
+	return Self->GetObject((ObjectList *)regarray[8], (int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetObject = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetObjectPPC };
+STATIC CONST struct EmuTrap stub_GetObject = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetObjectPPC};
 
 static void stub_StoreGadgetValuePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StoreGadgetValue(
-		(ObjectList *)regarray[8],
-		(struct IntuiMessage *)regarray[9]
-	);
+	Self->StoreGadgetValue((ObjectList *)regarray[8], (struct IntuiMessage *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_StoreGadgetValue = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StoreGadgetValuePPC };
+STATIC CONST struct EmuTrap stub_StoreGadgetValue = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_StoreGadgetValuePPC};
 
 static void stub_SetGadgetValuePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetGadgetValue(
-		(ObjectList *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff),
-		(ULONG)regarray[1]
-	);
+	Self->SetGadgetValue((ObjectList *)regarray[8], (UWORD)(regarray[0] & 0xffff), (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SetGadgetValue = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetGadgetValuePPC };
+STATIC CONST struct EmuTrap stub_SetGadgetValue = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetGadgetValuePPC};
 
 static long stub_GetGadgetValuePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetGadgetValue(
-		(ObjectList *)regarray[8],
-		(UWORD)(regarray[9] & 0xffff)
-	);
+	return Self->GetGadgetValue((ObjectList *)regarray[8], (UWORD)(regarray[9] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_GetGadgetValue = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetGadgetValuePPC };
+STATIC CONST struct EmuTrap stub_GetGadgetValue = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetGadgetValuePPC};
 
 static void stub_SetObjectKindPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetObjectKind(
-		(ObjectList *)regarray[8],
-		(ULONG)regarray[0],
-		(UWORD)(regarray[1] & 0xffff)
-	);
+	Self->SetObjectKind((ObjectList *)regarray[8], (ULONG)regarray[0], (UWORD)(regarray[1] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_SetObjectKind = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetObjectKindPPC };
+STATIC CONST struct EmuTrap stub_SetObjectKind = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetObjectKindPPC};
 
 static void stub_SetGadgetChoicesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetGadgetChoices(
-		(ObjectList *)regarray[8],
-		(ULONG)regarray[0],
-		(APTR)regarray[9]
-	);
+	Self->SetGadgetChoices((ObjectList *)regarray[8], (ULONG)regarray[0], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SetGadgetChoices = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetGadgetChoicesPPC };
+STATIC CONST struct EmuTrap stub_SetGadgetChoices = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_SetGadgetChoicesPPC};
 
 static BOOL stub_CheckObjectAreaPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckObjectArea(
-		(GL_Object *)regarray[8],
-		(int)regarray[0],
-		(int)regarray[1]
-	);
+	return Self->CheckObjectArea((GL_Object *)regarray[8], (int)regarray[0], (int)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_CheckObjectArea = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckObjectAreaPPC };
+STATIC CONST struct EmuTrap stub_CheckObjectArea = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CheckObjectAreaPPC};
 
 static BOOL stub_GetObjectRectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetObjectRect(
-		(ObjectList *)regarray[8],
-		(ULONG)regarray[0],
-		(struct Rectangle *)regarray[9]
-	);
+	return Self->GetObjectRect((ObjectList *)regarray[8], (ULONG)regarray[0], (struct Rectangle *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_GetObjectRect = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetObjectRectPPC };
+STATIC CONST struct EmuTrap stub_GetObjectRect = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetObjectRectPPC};
 
 static void stub_DisplayObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DisplayObject(
-		(struct Window *)regarray[8],
-		(GL_Object *)regarray[9],
-		(int)regarray[0],
-		(int)regarray[1],
-		(char *)regarray[10]
-	);
+	Self->DisplayObject((struct Window *)regarray[8],
+						(GL_Object *)regarray[9],
+						(int)regarray[0],
+						(int)regarray[1],
+						(char *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_DisplayObject = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DisplayObjectPPC };
+STATIC CONST struct EmuTrap stub_DisplayObject = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DisplayObjectPPC};
 
 static void stub_DisableObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DisableObject(
-		(ObjectList *)regarray[8],
-		(ULONG)regarray[0],
-		(BOOL)convert_int16(regarray[1])
-	);
+	Self->DisableObject((ObjectList *)regarray[8], (ULONG)regarray[0], (BOOL)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_DisableObject = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DisableObjectPPC };
+STATIC CONST struct EmuTrap stub_DisableObject = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DisableObjectPPC};
 
 static int stub_BoundsCheckGadgetPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->BoundsCheckGadget(
-		(ObjectList *)regarray[8],
-		(ULONG)regarray[0],
-		(int)regarray[1],
-		(int)regarray[2]
-	);
+	return Self->BoundsCheckGadget((ObjectList *)regarray[8], (ULONG)regarray[0], (int)regarray[1], (int)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_BoundsCheckGadget = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_BoundsCheckGadgetPPC };
+STATIC CONST struct EmuTrap stub_BoundsCheckGadget = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_BoundsCheckGadgetPPC};
 
 static void stub_AddWindowMenusPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->AddWindowMenus(
-		(struct Window *)regarray[8],
-		(MenuData *)regarray[9]
-	);
+	Self->AddWindowMenus((struct Window *)regarray[8], (MenuData *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_AddWindowMenus = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_AddWindowMenusPPC };
+STATIC CONST struct EmuTrap stub_AddWindowMenus = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_AddWindowMenusPPC};
 
 static void stub_FreeWindowMenusPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeWindowMenus(
-		(struct Window *)regarray[8]
-	);
+	Self->FreeWindowMenus((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeWindowMenus = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeWindowMenusPPC };
+STATIC CONST struct EmuTrap stub_FreeWindowMenus = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeWindowMenusPPC};
 
 static void stub_SetWindowBusyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetWindowBusy(
-		(struct Window *)regarray[8]
-	);
+	Self->SetWindowBusy((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_SetWindowBusy = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetWindowBusyPPC };
+STATIC CONST struct EmuTrap stub_SetWindowBusy = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetWindowBusyPPC};
 
 static void stub_ClearWindowBusyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ClearWindowBusy(
-		(struct Window *)regarray[8]
-	);
+	Self->ClearWindowBusy((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ClearWindowBusy = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ClearWindowBusyPPC };
+STATIC CONST struct EmuTrap stub_ClearWindowBusy = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ClearWindowBusyPPC};
 
 static STRPTR stub_GetStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetString(
-		(struct DOpusLocale *)regarray[8],
-		(LONG)regarray[0]
-	);
+	return Self->GetString((struct DOpusLocale *)regarray[8], (LONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetString = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetStringPPC };
+STATIC CONST struct EmuTrap stub_GetString = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetStringPPC};
 
-static struct Gadget * stub_FindKeyEquivalentPPC(uint32 *regarray)
+static struct Gadget *stub_FindKeyEquivalentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindKeyEquivalent(
-		(ObjectList *)regarray[8],
-		(struct IntuiMessage *)regarray[9],
-		(int)regarray[0]
-	);
+	return Self->FindKeyEquivalent((ObjectList *)regarray[8], (struct IntuiMessage *)regarray[9], (int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_FindKeyEquivalent = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindKeyEquivalentPPC };
+STATIC CONST struct EmuTrap stub_FindKeyEquivalent = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_FindKeyEquivalentPPC};
 
 static void stub_ShowProgressBarPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->ShowProgressBar(
-		(struct Window *)regarray[8],
-		(GL_Object *)regarray[9],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+		(struct Window *)regarray[8], (GL_Object *)regarray[9], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_ShowProgressBar = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ShowProgressBarPPC };
+STATIC CONST struct EmuTrap stub_ShowProgressBar = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ShowProgressBarPPC};
 
 static void stub_SetWindowIDPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->SetWindowID(
-		(struct Window *)regarray[8],
-		(WindowID *)regarray[9],
-		(ULONG)regarray[0],
-		(struct MsgPort *)regarray[10]
-	);
+		(struct Window *)regarray[8], (WindowID *)regarray[9], (ULONG)regarray[0], (struct MsgPort *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_SetWindowID = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetWindowIDPPC };
+STATIC CONST struct EmuTrap stub_SetWindowID = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetWindowIDPPC};
 
 static ULONG stub_GetWindowIDPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetWindowID(
-		(struct Window *)regarray[8]
-	);
+	return Self->GetWindowID((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetWindowID = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetWindowIDPPC };
+STATIC CONST struct EmuTrap stub_GetWindowID = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetWindowIDPPC};
 
-static struct MsgPort * stub_GetWindowAppPortPPC(uint32 *regarray)
+static struct MsgPort *stub_GetWindowAppPortPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetWindowAppPort(
-		(struct Window *)regarray[8]
-	);
+	return Self->GetWindowAppPort((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetWindowAppPort = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetWindowAppPortPPC };
+STATIC CONST struct EmuTrap stub_GetWindowAppPort = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetWindowAppPortPPC};
 
-static Att_List * stub_Att_NewListPPC(uint32 *regarray)
+static Att_List *stub_Att_NewListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NewList(
-		(ULONG)regarray[0]
-	);
+	return Self->Att_NewList((ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_NewList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NewListPPC };
+STATIC CONST struct EmuTrap stub_Att_NewList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_NewListPPC};
 
-static Att_Node * stub_Att_NewNodePPC(uint32 *regarray)
+static Att_Node *stub_Att_NewNodePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NewNode(
-		(Att_List *)regarray[8],
-		(char *)regarray[9],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->Att_NewNode((Att_List *)regarray[8], (char *)regarray[9], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_Att_NewNode = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NewNodePPC };
+STATIC CONST struct EmuTrap stub_Att_NewNode = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_NewNodePPC};
 
 static void stub_Att_RemNodePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Att_RemNode(
-		(Att_Node *)regarray[8]
-	);
+	Self->Att_RemNode((Att_Node *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_Att_RemNode = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_Att_RemNodePPC };
+STATIC CONST struct EmuTrap stub_Att_RemNode = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_Att_RemNodePPC};
 
 static void stub_Att_PosNodePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Att_PosNode(
-		(Att_List *)regarray[8],
-		(Att_Node *)regarray[9],
-		(Att_Node *)regarray[10]
-	);
+	Self->Att_PosNode((Att_List *)regarray[8], (Att_Node *)regarray[9], (Att_Node *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_Att_PosNode = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_Att_PosNodePPC };
+STATIC CONST struct EmuTrap stub_Att_PosNode = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_Att_PosNodePPC};
 
 static void stub_Att_RemListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Att_RemList(
-		(Att_List *)regarray[8],
-		(long)regarray[0]
-	);
+	Self->Att_RemList((Att_List *)regarray[8], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_RemList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_Att_RemListPPC };
+STATIC CONST struct EmuTrap stub_Att_RemList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_Att_RemListPPC};
 
-static Att_Node * stub_Att_FindNodePPC(uint32 *regarray)
+static Att_Node *stub_Att_FindNodePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_FindNode(
-		(Att_List *)regarray[8],
-		(long)regarray[0]
-	);
+	return Self->Att_FindNode((Att_List *)regarray[8], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_FindNode = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_FindNodePPC };
+STATIC CONST struct EmuTrap stub_Att_FindNode = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_FindNodePPC};
 
 static long stub_Att_NodeNumberPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NodeNumber(
-		(Att_List *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->Att_NodeNumber((Att_List *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_Att_NodeNumber = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NodeNumberPPC };
+STATIC CONST struct EmuTrap stub_Att_NodeNumber = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_NodeNumberPPC};
 
-static Att_Node * stub_Att_FindNodeDataPPC(uint32 *regarray)
+static Att_Node *stub_Att_FindNodeDataPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_FindNodeData(
-		(Att_List *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->Att_FindNodeData((Att_List *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_FindNodeData = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_FindNodeDataPPC };
+STATIC CONST struct EmuTrap stub_Att_FindNodeData = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_FindNodeDataPPC};
 
 static long stub_Att_NodeDataNumberPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NodeDataNumber(
-		(Att_List *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->Att_NodeDataNumber((Att_List *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_NodeDataNumber = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NodeDataNumberPPC };
+STATIC CONST struct EmuTrap stub_Att_NodeDataNumber = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_Att_NodeDataNumberPPC};
 
-static char * stub_Att_NodeNamePPC(uint32 *regarray)
+static char *stub_Att_NodeNamePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NodeName(
-		(Att_List *)regarray[8],
-		(long)regarray[0]
-	);
+	return Self->Att_NodeName((Att_List *)regarray[8], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Att_NodeName = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NodeNamePPC };
+STATIC CONST struct EmuTrap stub_Att_NodeName = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_NodeNamePPC};
 
 static long stub_Att_NodeCountPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_NodeCount(
-		(Att_List *)regarray[8]
-	);
+	return Self->Att_NodeCount((Att_List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_Att_NodeCount = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_NodeCountPPC };
+STATIC CONST struct EmuTrap stub_Att_NodeCount = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Att_NodeCountPPC};
 
 static void stub_Att_ChangeNodeNamePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Att_ChangeNodeName(
-		(Att_Node *)regarray[8],
-		(char *)regarray[9]
-	);
+	Self->Att_ChangeNodeName((Att_Node *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_Att_ChangeNodeName = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_Att_ChangeNodeNamePPC };
+STATIC CONST struct EmuTrap stub_Att_ChangeNodeName = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_Att_ChangeNodeNamePPC};
 
 static long stub_Att_FindNodeNumberPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->Att_FindNodeNumber(
-		(Att_List *)regarray[8],
-		(Att_Node *)regarray[9]
-	);
+	return Self->Att_FindNodeNumber((Att_List *)regarray[8], (Att_Node *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_Att_FindNodeNumber = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Att_FindNodeNumberPPC };
+STATIC CONST struct EmuTrap stub_Att_FindNodeNumber = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_Att_FindNodeNumberPPC};
 
 static void stub_AddSortedPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->AddSorted(
-		(struct List *)regarray[8],
-		(struct Node *)regarray[9]
-	);
+	Self->AddSorted((struct List *)regarray[8], (struct Node *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_AddSorted = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_AddSortedPPC };
+STATIC CONST struct EmuTrap stub_AddSorted = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_AddSortedPPC};
 
-static struct Menu * stub_BuildMenuStripPPC(uint32 *regarray)
+static struct Menu *stub_BuildMenuStripPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->BuildMenuStrip(
-		(MenuData *)regarray[8],
-		(struct DOpusLocale *)regarray[9]
-	);
+	return Self->BuildMenuStrip((MenuData *)regarray[8], (struct DOpusLocale *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_BuildMenuStrip = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_BuildMenuStripPPC };
+STATIC CONST struct EmuTrap stub_BuildMenuStrip = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_BuildMenuStripPPC};
 
-static struct MenuItem * stub_FindMenuItemPPC(uint32 *regarray)
+static struct MenuItem *stub_FindMenuItemPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindMenuItem(
-		(struct Menu *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->FindMenuItem((struct Menu *)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_FindMenuItem = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindMenuItemPPC };
+STATIC CONST struct EmuTrap stub_FindMenuItem = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindMenuItemPPC};
 
 static UWORD stub_DoPopUpMenuPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DoPopUpMenu(
-		(struct Window *)regarray[8],
-		(PopUpMenu *)regarray[9],
-		(PopUpItem **)regarray[10],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->DoPopUpMenu((struct Window *)regarray[8],
+							 (PopUpMenu *)regarray[9],
+							 (PopUpItem **)regarray[10],
+							 (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_DoPopUpMenu = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DoPopUpMenuPPC };
+STATIC CONST struct EmuTrap stub_DoPopUpMenu = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DoPopUpMenuPPC};
 
-static PopUpItem * stub_GetPopUpItemPPC(uint32 *regarray)
+static PopUpItem *stub_GetPopUpItemPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetPopUpItem(
-		(PopUpMenu *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->GetPopUpItem((PopUpMenu *)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_GetPopUpItem = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetPopUpItemPPC };
+STATIC CONST struct EmuTrap stub_GetPopUpItem = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetPopUpItemPPC};
 
 static int stub_IPC_StartupPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_Startup(
-		(IPCData *)regarray[8],
-		(APTR)regarray[9],
-		(struct MsgPort *)regarray[10]
-	);
+	return Self->IPC_Startup((IPCData *)regarray[8], (APTR)regarray[9], (struct MsgPort *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Startup = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_StartupPPC };
+STATIC CONST struct EmuTrap stub_IPC_Startup = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_StartupPPC};
 
 static ULONG stub_IPC_CommandPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_Command(
-		(IPCData *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(APTR)regarray[9],
-		(APTR)regarray[10],
-		(struct MsgPort *)regarray[11]
-	);
+	return Self->IPC_Command((IPCData *)regarray[8],
+							 (ULONG)regarray[0],
+							 (ULONG)regarray[1],
+							 (APTR)regarray[9],
+							 (APTR)regarray[10],
+							 (struct MsgPort *)regarray[11]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Command = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_CommandPPC };
+STATIC CONST struct EmuTrap stub_IPC_Command = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_CommandPPC};
 
 static void stub_IPC_ReplyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Reply(
-		(IPCMessage *)regarray[8]
-	);
+	Self->IPC_Reply((IPCMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Reply = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_ReplyPPC };
+STATIC CONST struct EmuTrap stub_IPC_Reply = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_ReplyPPC};
 
 static void stub_IPC_FreePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Free(
-		(IPCData *)regarray[8]
-	);
+	Self->IPC_Free((IPCData *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Free = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_FreePPC };
+STATIC CONST struct EmuTrap stub_IPC_Free = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_FreePPC};
 
-static IPCData * stub_IPC_FindProcPPC(uint32 *regarray)
+static IPCData *stub_IPC_FindProcPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->IPC_FindProc(
-		(struct ListLock *)regarray[8],
-		(char *)regarray[9],
-		(BOOL)convert_int16(regarray[0]),
-		(ULONG)regarray[1]
-	);
+		(struct ListLock *)regarray[8], (char *)regarray[9], (BOOL)convert_int16(regarray[0]), (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_IPC_FindProc = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_FindProcPPC };
+STATIC CONST struct EmuTrap stub_IPC_FindProc = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_FindProcPPC};
 
 static void stub_IPC_QuitPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Quit(
-		(IPCData *)regarray[8],
-		(ULONG)regarray[0],
-		(BOOL)convert_int16(regarray[1])
-	);
+	Self->IPC_Quit((IPCData *)regarray[8], (ULONG)regarray[0], (BOOL)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_IPC_Quit = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_QuitPPC };
+STATIC CONST struct EmuTrap stub_IPC_Quit = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_QuitPPC};
 
 static void stub_IPC_HelloPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Hello(
-		(IPCData *)regarray[8],
-		(IPCData *)regarray[9]
-	);
+	Self->IPC_Hello((IPCData *)regarray[8], (IPCData *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Hello = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_HelloPPC };
+STATIC CONST struct EmuTrap stub_IPC_Hello = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_HelloPPC};
 
 static void stub_IPC_GoodbyePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Goodbye(
-		(IPCData *)regarray[8],
-		(IPCData *)regarray[9],
-		(ULONG)regarray[0]
-	);
+	Self->IPC_Goodbye((IPCData *)regarray[8], (IPCData *)regarray[9], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Goodbye = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_GoodbyePPC };
+STATIC CONST struct EmuTrap stub_IPC_Goodbye = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_GoodbyePPC};
 
 static ULONG stub_IPC_GetGoodbyePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_GetGoodbye(
-		(IPCMessage *)regarray[8]
-	);
+	return Self->IPC_GetGoodbye((IPCMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IPC_GetGoodbye = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_GetGoodbyePPC };
+STATIC CONST struct EmuTrap stub_IPC_GetGoodbye = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_GetGoodbyePPC};
 
 static ULONG stub_IPC_ListQuitPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->IPC_ListQuit(
-		(struct ListLock *)regarray[8],
-		(IPCData *)regarray[9],
-		(ULONG)regarray[0],
-		(BOOL)convert_int16(regarray[1])
-	);
+		(struct ListLock *)regarray[8], (IPCData *)regarray[9], (ULONG)regarray[0], (BOOL)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_IPC_ListQuit = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_ListQuitPPC };
+STATIC CONST struct EmuTrap stub_IPC_ListQuit = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_ListQuitPPC};
 
 static void stub_IPC_FlushPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_Flush(
-		(IPCData *)regarray[8]
-	);
+	Self->IPC_Flush((IPCData *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Flush = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_FlushPPC };
+STATIC CONST struct EmuTrap stub_IPC_Flush = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_FlushPPC};
 
 static void stub_IPC_ListCommandPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_ListCommand(
-		(struct ListLock *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2],
-		(BOOL)convert_int16(regarray[3])
-	);
+	Self->IPC_ListCommand((struct ListLock *)regarray[8],
+						  (ULONG)regarray[0],
+						  (ULONG)regarray[1],
+						  (ULONG)regarray[2],
+						  (BOOL)convert_int16(regarray[3]));
 }
-STATIC CONST struct EmuTrap stub_IPC_ListCommand = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_ListCommandPPC };
+STATIC CONST struct EmuTrap stub_IPC_ListCommand = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_ListCommandPPC};
 
-static IPCData * stub_IPC_ProcStartupPPC(uint32 *regarray)
+static IPCData *stub_IPC_ProcStartupPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_ProcStartup(
-		(ULONG *)regarray[8],
-		(ULONG (*)(IPCData *, APTR))regarray[9]
-	);
+	return Self->IPC_ProcStartup((ULONG *)regarray[8], (ULONG(*)(IPCData *, APTR))regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_IPC_ProcStartup = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_ProcStartupPPC };
+STATIC CONST struct EmuTrap stub_IPC_ProcStartup = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_ProcStartupPPC};
 
 static int stub_IPC_LaunchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_Launch(
-		(struct ListLock *)regarray[8],
-		(IPCData **)regarray[9],
-		(char *)regarray[10],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2],
-		(struct Library *)regarray[11]
-	);
+	return Self->IPC_Launch((struct ListLock *)regarray[8],
+							(IPCData **)regarray[9],
+							(char *)regarray[10],
+							(ULONG)regarray[0],
+							(ULONG)regarray[1],
+							(ULONG)regarray[2],
+							(struct Library *)regarray[11]);
 }
-STATIC CONST struct EmuTrap stub_IPC_Launch = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_LaunchPPC };
+STATIC CONST struct EmuTrap stub_IPC_Launch = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_LaunchPPC};
 
 static APTR stub_OpenImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenImage(
-		(char *)regarray[8],
-		(OpenImageInfo *)regarray[9]
-	);
+	return Self->OpenImage((char *)regarray[8], (OpenImageInfo *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_OpenImage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenImagePPC };
+STATIC CONST struct EmuTrap stub_OpenImage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenImagePPC};
 
 static void stub_CloseImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseImage(
-		(APTR)regarray[8]
-	);
+	Self->CloseImage((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseImagePPC };
+STATIC CONST struct EmuTrap stub_CloseImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CloseImagePPC};
 
 static APTR stub_CopyImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyImage(
-		(APTR)regarray[8]
-	);
+	return Self->CopyImage((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CopyImage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyImagePPC };
+STATIC CONST struct EmuTrap stub_CopyImage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyImagePPC};
 
 static void stub_FlushImagesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FlushImages(
-	);
+	Self->FlushImages();
 }
-STATIC CONST struct EmuTrap stub_FlushImages = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FlushImagesPPC };
+STATIC CONST struct EmuTrap stub_FlushImages = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FlushImagesPPC};
 
 static short stub_RenderImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->RenderImage(
-		(struct RastPort *)regarray[8],
-		(APTR)regarray[9],
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff),
-		(struct TagItem *)regarray[10]
-	);
+	return Self->RenderImage((struct RastPort *)regarray[8],
+							 (APTR)regarray[9],
+							 (UWORD)(regarray[0] & 0xffff),
+							 (UWORD)(regarray[1] & 0xffff),
+							 (struct TagItem *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_RenderImage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_RenderImagePPC };
+STATIC CONST struct EmuTrap stub_RenderImage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_RenderImagePPC};
 
 static void stub_GetImageAttrsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetImageAttrs(
-		(APTR)regarray[8],
-		(struct TagItem *)regarray[9]
-	);
+	Self->GetImageAttrs((APTR)regarray[8], (struct TagItem *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_GetImageAttrs = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetImageAttrsPPC };
+STATIC CONST struct EmuTrap stub_GetImageAttrs = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetImageAttrsPPC};
 
-static void * stub_NewMemHandlePPC(uint32 *regarray)
+static void *stub_NewMemHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewMemHandle(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2]
-	);
+	return Self->NewMemHandle((ULONG)regarray[0], (ULONG)regarray[1], (ULONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_NewMemHandle = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewMemHandlePPC };
+STATIC CONST struct EmuTrap stub_NewMemHandle = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewMemHandlePPC};
 
 static void stub_FreeMemHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeMemHandle(
-		(void *)regarray[8]
-	);
+	Self->FreeMemHandle((void *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeMemHandle = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeMemHandlePPC };
+STATIC CONST struct EmuTrap stub_FreeMemHandle = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeMemHandlePPC};
 
 static void stub_ClearMemHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ClearMemHandle(
-		(void *)regarray[8]
-	);
+	Self->ClearMemHandle((void *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ClearMemHandle = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ClearMemHandlePPC };
+STATIC CONST struct EmuTrap stub_ClearMemHandle = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ClearMemHandlePPC};
 
-static void * stub_AllocMemHPPC(uint32 *regarray)
+static void *stub_AllocMemHPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AllocMemH(
-		(void *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->AllocMemH((void *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_AllocMemH = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AllocMemHPPC };
+STATIC CONST struct EmuTrap stub_AllocMemH = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AllocMemHPPC};
 
 static void stub_FreeMemHPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeMemH(
-		(void *)regarray[8]
-	);
+	Self->FreeMemH((void *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeMemH = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeMemHPPC };
+STATIC CONST struct EmuTrap stub_FreeMemH = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeMemHPPC};
 
 static void stub_DrawBoxPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DrawBox(
-		(struct RastPort *)regarray[8],
-		(struct Rectangle *)regarray[9],
-		(struct DrawInfo *)regarray[10],
-		(BOOL)convert_int16(regarray[0])
-	);
+	Self->DrawBox((struct RastPort *)regarray[8],
+				  (struct Rectangle *)regarray[9],
+				  (struct DrawInfo *)regarray[10],
+				  (BOOL)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_DrawBox = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DrawBoxPPC };
+STATIC CONST struct EmuTrap stub_DrawBox = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DrawBoxPPC};
 
 static void stub_DrawFieldBoxPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->DrawFieldBox(
-		(struct RastPort *)regarray[8],
-		(struct Rectangle *)regarray[9],
-		(struct DrawInfo *)regarray[10]
-	);
+		(struct RastPort *)regarray[8], (struct Rectangle *)regarray[9], (struct DrawInfo *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_DrawFieldBox = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DrawFieldBoxPPC };
+STATIC CONST struct EmuTrap stub_DrawFieldBox = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DrawFieldBoxPPC};
 
-static Cfg_Lister * stub_NewListerPPC(uint32 *regarray)
+static Cfg_Lister *stub_NewListerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewLister(
-		(char *)regarray[8]
-	);
+	return Self->NewLister((char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_NewLister = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewListerPPC };
+STATIC CONST struct EmuTrap stub_NewLister = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewListerPPC};
 
-static Cfg_ButtonBank * stub_NewButtonBankPPC(uint32 *regarray)
+static Cfg_ButtonBank *stub_NewButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewButtonBank(
-		(BOOL)convert_int16(regarray[0]),
-		(short)convert_int16(regarray[1])
-	);
+	return Self->NewButtonBank((BOOL)convert_int16(regarray[0]), (short)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_NewButtonBank = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewButtonBankPPC };
+STATIC CONST struct EmuTrap stub_NewButtonBank = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewButtonBankPPC};
 
-static Cfg_Button * stub_NewButtonPPC(uint32 *regarray)
+static Cfg_Button *stub_NewButtonPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewButton(
-		(APTR)regarray[8]
-	);
+	return Self->NewButton((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_NewButton = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewButtonPPC };
+STATIC CONST struct EmuTrap stub_NewButton = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewButtonPPC};
 
-static Cfg_Function * stub_NewFunctionPPC(uint32 *regarray)
+static Cfg_Function *stub_NewFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewFunction(
-		(APTR)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->NewFunction((APTR)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_NewFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewFunctionPPC };
+STATIC CONST struct EmuTrap stub_NewFunction = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewFunctionPPC};
 
-static Cfg_Instruction * stub_NewInstructionPPC(uint32 *regarray)
+static Cfg_Instruction *stub_NewInstructionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewInstruction(
-		(APTR)regarray[8],
-		(short)convert_int16(regarray[0]),
-		(char *)regarray[9]
-	);
+	return Self->NewInstruction((APTR)regarray[8], (short)convert_int16(regarray[0]), (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_NewInstruction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewInstructionPPC };
+STATIC CONST struct EmuTrap stub_NewInstruction = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewInstructionPPC};
 
 static short stub_ReadSettingsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadSettings(
-		(CFG_SETS *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->ReadSettings((CFG_SETS *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ReadSettings = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadSettingsPPC };
+STATIC CONST struct EmuTrap stub_ReadSettings = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadSettingsPPC};
 
-static Cfg_Lister * stub_ReadListerDefPPC(uint32 *regarray)
+static Cfg_Lister *stub_ReadListerDefPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadListerDef(
-		(APTR)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->ReadListerDef((APTR)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ReadListerDef = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadListerDefPPC };
+STATIC CONST struct EmuTrap stub_ReadListerDef = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadListerDefPPC};
 
-static Cfg_ButtonBank * stub_OpenButtonBankPPC(uint32 *regarray)
+static Cfg_ButtonBank *stub_OpenButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenButtonBank(
-		(char *)regarray[8]
-	);
+	return Self->OpenButtonBank((char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_OpenButtonBank = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenButtonBankPPC };
+STATIC CONST struct EmuTrap stub_OpenButtonBank = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenButtonBankPPC};
 
 static void stub_DefaultSettingsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DefaultSettings(
-		(CFG_SETS *)regarray[8]
-	);
+	Self->DefaultSettings((CFG_SETS *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DefaultSettings = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DefaultSettingsPPC };
+STATIC CONST struct EmuTrap stub_DefaultSettings = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DefaultSettingsPPC};
 
 static void stub_DefaultEnvironmentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DefaultEnvironment(
-		(CFG_ENVR *)regarray[8]
-	);
+	Self->DefaultEnvironment((CFG_ENVR *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DefaultEnvironment = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DefaultEnvironmentPPC };
+STATIC CONST struct EmuTrap stub_DefaultEnvironment = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_DefaultEnvironmentPPC};
 
-static Cfg_ButtonBank * stub_DefaultButtonBankPPC(uint32 *regarray)
+static Cfg_ButtonBank *stub_DefaultButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DefaultButtonBank(
-	);
+	return Self->DefaultButtonBank();
 }
-STATIC CONST struct EmuTrap stub_DefaultButtonBank = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DefaultButtonBankPPC };
+STATIC CONST struct EmuTrap stub_DefaultButtonBank = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_DefaultButtonBankPPC};
 
 static int stub_SaveSettingsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveSettings(
-		(CFG_SETS *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->SaveSettings((CFG_SETS *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveSettings = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveSettingsPPC };
+STATIC CONST struct EmuTrap stub_SaveSettings = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveSettingsPPC};
 
 static long stub_SaveListerDefPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveListerDef(
-		(APTR)regarray[8],
-		(Cfg_Lister *)regarray[9]
-	);
+	return Self->SaveListerDef((APTR)regarray[8], (Cfg_Lister *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveListerDef = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveListerDefPPC };
+STATIC CONST struct EmuTrap stub_SaveListerDef = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveListerDefPPC};
 
 static int stub_SaveButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveButtonBank(
-		(Cfg_ButtonBank *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->SaveButtonBank((Cfg_ButtonBank *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveButtonBank = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveButtonBankPPC };
+STATIC CONST struct EmuTrap stub_SaveButtonBank = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveButtonBankPPC};
 
 static void stub_CloseButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseButtonBank(
-		(Cfg_ButtonBank *)regarray[8]
-	);
+	Self->CloseButtonBank((Cfg_ButtonBank *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseButtonBank = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseButtonBankPPC };
+STATIC CONST struct EmuTrap stub_CloseButtonBank = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CloseButtonBankPPC};
 
 static void stub_FreeListerDefPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeListerDef(
-		(Cfg_Lister *)regarray[8]
-	);
+	Self->FreeListerDef((Cfg_Lister *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeListerDef = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeListerDefPPC };
+STATIC CONST struct EmuTrap stub_FreeListerDef = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeListerDefPPC};
 
 static void stub_FreeButtonListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeButtonList(
-		(struct List *)regarray[8]
-	);
+	Self->FreeButtonList((struct List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeButtonList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeButtonListPPC };
+STATIC CONST struct EmuTrap stub_FreeButtonList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeButtonListPPC};
 
 static void stub_FreeButtonImagesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeButtonImages(
-		(struct List *)regarray[8]
-	);
+	Self->FreeButtonImages((struct List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeButtonImages = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeButtonImagesPPC };
+STATIC CONST struct EmuTrap stub_FreeButtonImages = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_FreeButtonImagesPPC};
 
 static void stub_FreeButtonPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeButton(
-		(Cfg_Button *)regarray[8]
-	);
+	Self->FreeButton((Cfg_Button *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeButton = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeButtonPPC };
+STATIC CONST struct EmuTrap stub_FreeButton = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeButtonPPC};
 
 static void stub_FreeFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeFunction(
-		(Cfg_Function *)regarray[8]
-	);
+	Self->FreeFunction((Cfg_Function *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeFunction = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeFunctionPPC };
+STATIC CONST struct EmuTrap stub_FreeFunction = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeFunctionPPC};
 
 static void stub_FreeInstructionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeInstruction(
-		(Cfg_Instruction *)regarray[8]
-	);
+	Self->FreeInstruction((Cfg_Instruction *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeInstruction = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeInstructionPPC };
+STATIC CONST struct EmuTrap stub_FreeInstruction = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeInstructionPPC};
 
 static void stub_FreeInstructionListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeInstructionList(
-		(Cfg_Function *)regarray[8]
-	);
+	Self->FreeInstructionList((Cfg_Function *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeInstructionList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeInstructionListPPC };
+STATIC CONST struct EmuTrap stub_FreeInstructionList = {TRAPINST,
+														TRAPTYPENR,
+														(uint32(*)(uint32 *))stub_FreeInstructionListPPC};
 
-static Cfg_ButtonBank * stub_CopyButtonBankPPC(uint32 *regarray)
+static Cfg_ButtonBank *stub_CopyButtonBankPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyButtonBank(
-		(Cfg_ButtonBank *)regarray[8]
-	);
+	return Self->CopyButtonBank((Cfg_ButtonBank *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CopyButtonBank = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyButtonBankPPC };
+STATIC CONST struct EmuTrap stub_CopyButtonBank = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyButtonBankPPC};
 
-static Cfg_Button * stub_CopyButtonPPC(uint32 *regarray)
+static Cfg_Button *stub_CopyButtonPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyButton(
-		(Cfg_Button *)regarray[8],
-		(APTR)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->CopyButton((Cfg_Button *)regarray[8], (APTR)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_CopyButton = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyButtonPPC };
+STATIC CONST struct EmuTrap stub_CopyButton = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyButtonPPC};
 
-static Cfg_Function * stub_CopyFunctionPPC(uint32 *regarray)
+static Cfg_Function *stub_CopyFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyFunction(
-		(Cfg_Function *)regarray[8],
-		(APTR)regarray[9],
-		(Cfg_Function *)regarray[10]
-	);
+	return Self->CopyFunction((Cfg_Function *)regarray[8], (APTR)regarray[9], (Cfg_Function *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_CopyFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyFunctionPPC };
+STATIC CONST struct EmuTrap stub_CopyFunction = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyFunctionPPC};
 
-static Cfg_Filetype * stub_NewFiletypePPC(uint32 *regarray)
+static Cfg_Filetype *stub_NewFiletypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewFiletype(
-		(APTR)regarray[8]
-	);
+	return Self->NewFiletype((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_NewFiletype = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewFiletypePPC };
+STATIC CONST struct EmuTrap stub_NewFiletype = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewFiletypePPC};
 
-static Cfg_FiletypeList * stub_ReadFiletypesPPC(uint32 *regarray)
+static Cfg_FiletypeList *stub_ReadFiletypesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadFiletypes(
-		(char *)regarray[8],
-		(APTR)regarray[9]
-	);
+	return Self->ReadFiletypes((char *)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ReadFiletypes = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadFiletypesPPC };
+STATIC CONST struct EmuTrap stub_ReadFiletypes = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadFiletypesPPC};
 
 static int stub_SaveFiletypeListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveFiletypeList(
-		(Cfg_FiletypeList *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->SaveFiletypeList((Cfg_FiletypeList *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveFiletypeList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveFiletypeListPPC };
+STATIC CONST struct EmuTrap stub_SaveFiletypeList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveFiletypeListPPC};
 
 static void stub_FreeFiletypeListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeFiletypeList(
-		(Cfg_FiletypeList *)regarray[8]
-	);
+	Self->FreeFiletypeList((Cfg_FiletypeList *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeFiletypeList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeFiletypeListPPC };
+STATIC CONST struct EmuTrap stub_FreeFiletypeList = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_FreeFiletypeListPPC};
 
 static void stub_FreeFiletypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeFiletype(
-		(Cfg_Filetype *)regarray[8]
-	);
+	Self->FreeFiletype((Cfg_Filetype *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeFiletype = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeFiletypePPC };
+STATIC CONST struct EmuTrap stub_FreeFiletype = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeFiletypePPC};
 
-static Cfg_Filetype * stub_CopyFiletypePPC(uint32 *regarray)
+static Cfg_Filetype *stub_CopyFiletypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyFiletype(
-		(Cfg_Filetype *)regarray[8],
-		(APTR)regarray[9]
-	);
+	return Self->CopyFiletype((Cfg_Filetype *)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_CopyFiletype = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyFiletypePPC };
+STATIC CONST struct EmuTrap stub_CopyFiletype = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyFiletypePPC};
 
-static Cfg_Function * stub_FindFunctionTypePPC(uint32 *regarray)
+static Cfg_Function *stub_FindFunctionTypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindFunctionType(
-		(struct List *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->FindFunctionType((struct List *)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_FindFunctionType = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindFunctionTypePPC };
+STATIC CONST struct EmuTrap stub_FindFunctionType = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindFunctionTypePPC};
 
 static short stub_SaveButtonPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveButton(
-		(APTR)regarray[8],
-		(Cfg_Button *)regarray[9]
-	);
+	return Self->SaveButton((APTR)regarray[8], (Cfg_Button *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveButton = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveButtonPPC };
+STATIC CONST struct EmuTrap stub_SaveButton = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveButtonPPC};
 
-static Cfg_Button * stub_ReadButtonPPC(uint32 *regarray)
+static Cfg_Button *stub_ReadButtonPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadButton(
-		(APTR)regarray[8],
-		(APTR)regarray[9]
-	);
+	return Self->ReadButton((APTR)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ReadButton = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadButtonPPC };
+STATIC CONST struct EmuTrap stub_ReadButton = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadButtonPPC};
 
-static Cfg_Function * stub_ReadFunctionPPC(uint32 *regarray)
+static Cfg_Function *stub_ReadFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->ReadFunction(
-		(APTR)regarray[8],
-		(APTR)regarray[9],
-		(struct List *)regarray[10],
-		(Cfg_Function *)regarray[11]
-	);
+		(APTR)regarray[8], (APTR)regarray[9], (struct List *)regarray[10], (Cfg_Function *)regarray[11]);
 }
-STATIC CONST struct EmuTrap stub_ReadFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadFunctionPPC };
+STATIC CONST struct EmuTrap stub_ReadFunction = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadFunctionPPC};
 
-static struct IFFHandle * stub_OpenIFFFilePPC(uint32 *regarray)
+static struct IFFHandle *stub_OpenIFFFilePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenIFFFile(
-		(char *)regarray[8],
-		(int)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->OpenIFFFile((char *)regarray[8], (int)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_OpenIFFFile = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenIFFFilePPC };
+STATIC CONST struct EmuTrap stub_OpenIFFFile = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenIFFFilePPC};
 
 static void stub_CloseIFFFilePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseIFFFile(
-		(struct IFFHandle *)regarray[8]
-	);
+	Self->CloseIFFFile((struct IFFHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseIFFFile = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseIFFFilePPC };
+STATIC CONST struct EmuTrap stub_CloseIFFFile = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CloseIFFFilePPC};
 
-static struct Window * stub_OpenStatusWindowPPC(uint32 *regarray)
+static struct Window *stub_OpenStatusWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->OpenStatusWindow(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(struct Screen *)regarray[10],
-		(LONG)regarray[1],
-		(ULONG)regarray[0]
-	);
+		(char *)regarray[8], (char *)regarray[9], (struct Screen *)regarray[10], (LONG)regarray[1], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_OpenStatusWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenStatusWindowPPC };
+STATIC CONST struct EmuTrap stub_OpenStatusWindow = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenStatusWindowPPC};
 
 static void stub_SetStatusTextPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetStatusText(
-		(struct Window *)regarray[8],
-		(char *)regarray[9]
-	);
+	Self->SetStatusText((struct Window *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SetStatusText = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetStatusTextPPC };
+STATIC CONST struct EmuTrap stub_SetStatusText = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetStatusTextPPC};
 
 static void stub_UpdateStatusGraphPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UpdateStatusGraph(
-		(struct Window *)regarray[8],
-		(char *)regarray[9],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->UpdateStatusGraph((struct Window *)regarray[8], (char *)regarray[9], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_UpdateStatusGraph = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdateStatusGraphPPC };
+STATIC CONST struct EmuTrap stub_UpdateStatusGraph = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_UpdateStatusGraphPPC};
 
-static ILBMHandle * stub_ReadILBMPPC(uint32 *regarray)
+static ILBMHandle *stub_ReadILBMPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadILBM(
-		(char *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->ReadILBM((char *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ReadILBM = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadILBMPPC };
+STATIC CONST struct EmuTrap stub_ReadILBM = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadILBMPPC};
 
 static void stub_FreeILBMPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeILBM(
-		(ILBMHandle *)regarray[8]
-	);
+	Self->FreeILBM((ILBMHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeILBM = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeILBMPPC };
+STATIC CONST struct EmuTrap stub_FreeILBM = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeILBMPPC};
 
 static void stub_DecodeILBMPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DecodeILBM(
-		(char *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff),
-		(UWORD)(regarray[2] & 0xffff),
-		(struct BitMap *)regarray[9],
-		(ULONG)regarray[3],
-		(char)convert_int8(regarray[4])
-	);
+	Self->DecodeILBM((char *)regarray[8],
+					 (UWORD)(regarray[0] & 0xffff),
+					 (UWORD)(regarray[1] & 0xffff),
+					 (UWORD)(regarray[2] & 0xffff),
+					 (struct BitMap *)regarray[9],
+					 (ULONG)regarray[3],
+					 (char)convert_int8(regarray[4]));
 }
-STATIC CONST struct EmuTrap stub_DecodeILBM = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DecodeILBMPPC };
+STATIC CONST struct EmuTrap stub_DecodeILBM = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DecodeILBMPPC};
 
 static void stub_DecodeRLEPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DecodeRLE(
-		(RLEinfo *)regarray[8]
-	);
+	Self->DecodeRLE((RLEinfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DecodeRLE = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DecodeRLEPPC };
+STATIC CONST struct EmuTrap stub_DecodeRLE = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DecodeRLEPPC};
 
 static void stub_LoadPalette32PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->LoadPalette32(
-		(struct ViewPort *)regarray[8],
-		(ULONG *)regarray[9]
-	);
+	Self->LoadPalette32((struct ViewPort *)regarray[8], (ULONG *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_LoadPalette32 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_LoadPalette32PPC };
+STATIC CONST struct EmuTrap stub_LoadPalette32 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_LoadPalette32PPC};
 
 static void stub_GetPalette32PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetPalette32(
-		(struct ViewPort *)regarray[8],
-		(ULONG *)regarray[9],
-		(UWORD)(regarray[0] & 0xffff),
-		(short)convert_int16(regarray[1])
-	);
+	Self->GetPalette32((struct ViewPort *)regarray[8],
+					   (ULONG *)regarray[9],
+					   (UWORD)(regarray[0] & 0xffff),
+					   (short)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_GetPalette32 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetPalette32PPC };
+STATIC CONST struct EmuTrap stub_GetPalette32 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetPalette32PPC};
 
 static APTR stub_OpenBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenBuf(
-		(char *)regarray[8],
-		(long)regarray[0],
-		(long)regarray[1]
-	);
+	return Self->OpenBuf((char *)regarray[8], (long)regarray[0], (long)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_OpenBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenBufPPC };
+STATIC CONST struct EmuTrap stub_OpenBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenBufPPC};
 
 static long stub_CloseBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CloseBuf(
-		(APTR)regarray[8]
-	);
+	return Self->CloseBuf((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CloseBufPPC };
+STATIC CONST struct EmuTrap stub_CloseBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CloseBufPPC};
 
 static long stub_ReadBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadBuf(
-		(APTR)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->ReadBuf((APTR)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ReadBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadBufPPC };
+STATIC CONST struct EmuTrap stub_ReadBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadBufPPC};
 
 static long stub_WriteBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WriteBuf(
-		(APTR)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->WriteBuf((APTR)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_WriteBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WriteBufPPC };
+STATIC CONST struct EmuTrap stub_WriteBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WriteBufPPC};
 
 static long stub_FlushBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FlushBuf(
-		(APTR)regarray[8]
-	);
+	return Self->FlushBuf((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FlushBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FlushBufPPC };
+STATIC CONST struct EmuTrap stub_FlushBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FlushBufPPC};
 
 static long stub_SeekBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SeekBuf(
-		(APTR)regarray[8],
-		(long)regarray[0],
-		(long)regarray[1]
-	);
+	return Self->SeekBuf((APTR)regarray[8], (long)regarray[0], (long)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SeekBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SeekBufPPC };
+STATIC CONST struct EmuTrap stub_SeekBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SeekBufPPC};
 
 static long stub_ExamineBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ExamineBuf(
-		(APTR)regarray[8],
-		(struct FileInfoBlock *)regarray[9]
-	);
+	return Self->ExamineBuf((APTR)regarray[8], (struct FileInfoBlock *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ExamineBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineBufPPC };
+STATIC CONST struct EmuTrap stub_ExamineBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ExamineBufPPC};
 
-static DiskHandle * stub_OpenDiskPPC(uint32 *regarray)
+static DiskHandle *stub_OpenDiskPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenDisk(
-		(char *)regarray[8],
-		(struct MsgPort *)regarray[9]
-	);
+	return Self->OpenDisk((char *)regarray[8], (struct MsgPort *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_OpenDisk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenDiskPPC };
+STATIC CONST struct EmuTrap stub_OpenDisk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenDiskPPC};
 
 static void stub_CloseDiskPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseDisk(
-		(DiskHandle *)regarray[8]
-	);
+	Self->CloseDisk((DiskHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseDisk = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseDiskPPC };
+STATIC CONST struct EmuTrap stub_CloseDisk = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CloseDiskPPC};
 
-static struct Gadget * stub_AddScrollBarsPPC(uint32 *regarray)
+static struct Gadget *stub_AddScrollBarsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AddScrollBars(
-		(struct Window *)regarray[8],
-		(struct List *)regarray[9],
-		(struct DrawInfo *)regarray[10],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->AddScrollBars((struct Window *)regarray[8],
+							   (struct List *)regarray[9],
+							   (struct DrawInfo *)regarray[10],
+							   (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_AddScrollBars = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AddScrollBarsPPC };
+STATIC CONST struct EmuTrap stub_AddScrollBars = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AddScrollBarsPPC};
 
-static struct Gadget * stub_FindBOOPSIGadgetPPC(uint32 *regarray)
+static struct Gadget *stub_FindBOOPSIGadgetPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindBOOPSIGadget(
-		(struct List *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->FindBOOPSIGadget((struct List *)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_FindBOOPSIGadget = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindBOOPSIGadgetPPC };
+STATIC CONST struct EmuTrap stub_FindBOOPSIGadget = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindBOOPSIGadgetPPC};
 
 static void stub_BOOPSIFreePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->BOOPSIFree(
-		(struct List *)regarray[8]
-	);
+	Self->BOOPSIFree((struct List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_BOOPSIFree = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BOOPSIFreePPC };
+STATIC CONST struct EmuTrap stub_BOOPSIFree = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_BOOPSIFreePPC};
 
 static BOOL stub_SerialValidPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SerialValid(
-		(serial_data *)regarray[8]
-	);
+	return Self->SerialValid((serial_data *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_SerialValid = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SerialValidPPC };
+STATIC CONST struct EmuTrap stub_SerialValid = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SerialValidPPC};
 
 static void stub_WB_Install_PatchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->WB_Install_Patch(
-	);
+	Self->WB_Install_Patch();
 }
-STATIC CONST struct EmuTrap stub_WB_Install_Patch = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_WB_Install_PatchPPC };
+STATIC CONST struct EmuTrap stub_WB_Install_Patch = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_WB_Install_PatchPPC};
 
 static BOOL stub_WB_Remove_PatchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_Remove_Patch(
-	);
+	return Self->WB_Remove_Patch();
 }
-STATIC CONST struct EmuTrap stub_WB_Remove_Patch = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_Remove_PatchPPC };
+STATIC CONST struct EmuTrap stub_WB_Remove_Patch = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_Remove_PatchPPC};
 
-static struct AppWindow * stub_WB_AddAppWindowPPC(uint32 *regarray)
+static struct AppWindow *stub_WB_AddAppWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_AddAppWindow(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(struct Window *)regarray[8],
-		(struct MsgPort *)regarray[9],
-		(struct TagItem *)regarray[10]
-	);
+	return Self->WB_AddAppWindow((ULONG)regarray[0],
+								 (ULONG)regarray[1],
+								 (struct Window *)regarray[8],
+								 (struct MsgPort *)regarray[9],
+								 (struct TagItem *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_WB_AddAppWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_AddAppWindowPPC };
+STATIC CONST struct EmuTrap stub_WB_AddAppWindow = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_AddAppWindowPPC};
 
 static BOOL stub_WB_RemoveAppWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_RemoveAppWindow(
-		(struct AppWindow *)regarray[8]
-	);
+	return Self->WB_RemoveAppWindow((struct AppWindow *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_WB_RemoveAppWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_RemoveAppWindowPPC };
+STATIC CONST struct EmuTrap stub_WB_RemoveAppWindow = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_WB_RemoveAppWindowPPC};
 
-static struct AppWindow * stub_WB_FindAppWindowPPC(uint32 *regarray)
+static struct AppWindow *stub_WB_FindAppWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_FindAppWindow(
-		(struct Window *)regarray[8]
-	);
+	return Self->WB_FindAppWindow((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_WB_FindAppWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_FindAppWindowPPC };
+STATIC CONST struct EmuTrap stub_WB_FindAppWindow = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_FindAppWindowPPC};
 
-static struct MsgPort * stub_WB_AppWindowDataPPC(uint32 *regarray)
+static struct MsgPort *stub_WB_AppWindowDataPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_AppWindowData(
-		(struct AppWindow *)regarray[8],
-		(ULONG *)regarray[9],
-		(ULONG *)regarray[10]
-	);
+	return Self->WB_AppWindowData((struct AppWindow *)regarray[8], (ULONG *)regarray[9], (ULONG *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_WB_AppWindowData = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_AppWindowDataPPC };
+STATIC CONST struct EmuTrap stub_WB_AppWindowData = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_AppWindowDataPPC};
 
 static BOOL stub_WB_AppWindowLocalPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_AppWindowLocal(
-		(struct AppWindow *)regarray[8]
-	);
+	return Self->WB_AppWindowLocal((struct AppWindow *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_WB_AppWindowLocal = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_AppWindowLocalPPC };
+STATIC CONST struct EmuTrap stub_WB_AppWindowLocal = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_WB_AppWindowLocalPPC};
 
 static APTR stub_LockAppListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->LockAppList(
-	);
+	return Self->LockAppList();
 }
-STATIC CONST struct EmuTrap stub_LockAppList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_LockAppListPPC };
+STATIC CONST struct EmuTrap stub_LockAppList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_LockAppListPPC};
 
 static APTR stub_NextAppEntryPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NextAppEntry(
-		(APTR)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->NextAppEntry((APTR)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_NextAppEntry = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NextAppEntryPPC };
+STATIC CONST struct EmuTrap stub_NextAppEntry = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NextAppEntryPPC};
 
 static void stub_UnlockAppListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UnlockAppList(
-	);
+	Self->UnlockAppList();
 }
-STATIC CONST struct EmuTrap stub_UnlockAppList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UnlockAppListPPC };
+STATIC CONST struct EmuTrap stub_UnlockAppList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_UnlockAppListPPC};
 
 static APTR stub_AddNotifyRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AddNotifyRequest(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(struct MsgPort *)regarray[8]
-	);
+	return Self->AddNotifyRequest((ULONG)regarray[0], (ULONG)regarray[1], (struct MsgPort *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_AddNotifyRequest = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AddNotifyRequestPPC };
+STATIC CONST struct EmuTrap stub_AddNotifyRequest = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AddNotifyRequestPPC};
 
 static void stub_RemoveNotifyRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemoveNotifyRequest(
-		(APTR)regarray[8]
-	);
+	Self->RemoveNotifyRequest((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_RemoveNotifyRequest = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemoveNotifyRequestPPC };
+STATIC CONST struct EmuTrap stub_RemoveNotifyRequest = {TRAPINST,
+														TRAPTYPENR,
+														(uint32(*)(uint32 *))stub_RemoveNotifyRequestPPC};
 
 static void stub_SendNotifyMsgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SendNotifyMsg(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2],
-		(short)convert_int16(regarray[3]),
-		(char *)regarray[8],
-		(struct FileInfoBlock *)regarray[9]
-	);
+	Self->SendNotifyMsg((ULONG)regarray[0],
+						(ULONG)regarray[1],
+						(ULONG)regarray[2],
+						(short)convert_int16(regarray[3]),
+						(char *)regarray[8],
+						(struct FileInfoBlock *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SendNotifyMsg = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SendNotifyMsgPPC };
+STATIC CONST struct EmuTrap stub_SendNotifyMsg = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SendNotifyMsgPPC};
 
 static BOOL stub_StrCombinePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->StrCombine(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(char *)regarray[10],
-		(int)regarray[0]
-	);
+	return Self->StrCombine((char *)regarray[8], (char *)regarray[9], (char *)regarray[10], (int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_StrCombine = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_StrCombinePPC };
+STATIC CONST struct EmuTrap stub_StrCombine = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_StrCombinePPC};
 
 static BOOL stub_StrConcatPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->StrConcat(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(int)regarray[0]
-	);
+	return Self->StrConcat((char *)regarray[8], (char *)regarray[9], (int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_StrConcat = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_StrConcatPPC };
+STATIC CONST struct EmuTrap stub_StrConcat = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_StrConcatPPC};
 
 static BOOL stub_WB_LaunchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_Launch(
-		(char *)regarray[8],
-		(struct Screen *)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->WB_Launch((char *)regarray[8], (struct Screen *)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_WB_Launch = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_LaunchPPC };
+STATIC CONST struct EmuTrap stub_WB_Launch = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_LaunchPPC};
 
 static void stub_CopyLocalEnvPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CopyLocalEnv(
-		(struct Library *)regarray[8]
-	);
+	Self->CopyLocalEnv((struct Library *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CopyLocalEnv = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CopyLocalEnvPPC };
+STATIC CONST struct EmuTrap stub_CopyLocalEnv = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CopyLocalEnvPPC};
 
 static BOOL stub_CLI_LaunchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CLI_Launch(
-		(char *)regarray[8],
-		(struct Screen *)regarray[9],
-		(BPTR)regarray[0],
-		(BPTR)regarray[1],
-		(BPTR)regarray[2],
-		(short)convert_int16(regarray[3]),
-		(long)regarray[4]
-	);
+	return Self->CLI_Launch((char *)regarray[8],
+							(struct Screen *)regarray[9],
+							(BPTR)regarray[0],
+							(BPTR)regarray[1],
+							(BPTR)regarray[2],
+							(short)convert_int16(regarray[3]),
+							(long)regarray[4]);
 }
-STATIC CONST struct EmuTrap stub_CLI_Launch = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CLI_LaunchPPC };
+STATIC CONST struct EmuTrap stub_CLI_Launch = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CLI_LaunchPPC};
 
 static BOOL stub_SerialCheckPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SerialCheck(
-		(char *)regarray[8],
-		(ULONG *)regarray[9]
-	);
+	return Self->SerialCheck((char *)regarray[8], (ULONG *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SerialCheck = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SerialCheckPPC };
+STATIC CONST struct EmuTrap stub_SerialCheck = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SerialCheckPPC};
 
 static ULONG stub_ChecksumFilePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ChecksumFile(
-		(char *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->ChecksumFile((char *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ChecksumFile = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ChecksumFilePPC };
+STATIC CONST struct EmuTrap stub_ChecksumFile = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ChecksumFilePPC};
 
 static void stub_ReplyFreeMsgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ReplyFreeMsg(
-		(APTR)regarray[8]
-	);
+	Self->ReplyFreeMsg((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ReplyFreeMsg = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ReplyFreeMsgPPC };
+STATIC CONST struct EmuTrap stub_ReplyFreeMsg = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ReplyFreeMsgPPC};
 
 static BOOL stub_TimerActivePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->TimerActive(
-		(TimerHandle *)regarray[8]
-	);
+	return Self->TimerActive((TimerHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_TimerActive = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_TimerActivePPC };
+STATIC CONST struct EmuTrap stub_TimerActive = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_TimerActivePPC};
 
-static Cfg_ButtonFunction * stub_NewButtonFunctionPPC(uint32 *regarray)
+static Cfg_ButtonFunction *stub_NewButtonFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewButtonFunction(
-		(APTR)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->NewButtonFunction((APTR)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_NewButtonFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewButtonFunctionPPC };
+STATIC CONST struct EmuTrap stub_NewButtonFunction = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_NewButtonFunctionPPC};
 
 static APTR stub_IFFOpenPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFOpen(
-		(char *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff),
-		(ULONG)regarray[1]
-	);
+	return Self->IFFOpen((char *)regarray[8], (UWORD)(regarray[0] & 0xffff), (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_IFFOpen = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFOpenPPC };
+STATIC CONST struct EmuTrap stub_IFFOpen = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFOpenPPC};
 
 static void stub_IFFClosePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IFFClose(
-		(APTR)regarray[8]
-	);
+	Self->IFFClose((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFClose = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IFFClosePPC };
+STATIC CONST struct EmuTrap stub_IFFClose = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IFFClosePPC};
 
 static long stub_IFFPushChunkPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFPushChunk(
-		(APTR)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->IFFPushChunk((APTR)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IFFPushChunk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFPushChunkPPC };
+STATIC CONST struct EmuTrap stub_IFFPushChunk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFPushChunkPPC};
 
 static long stub_IFFWriteChunkBytesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFWriteChunkBytes(
-		(APTR)regarray[8],
-		(APTR)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->IFFWriteChunkBytes((APTR)regarray[8], (APTR)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IFFWriteChunkBytes = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFWriteChunkBytesPPC };
+STATIC CONST struct EmuTrap stub_IFFWriteChunkBytes = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_IFFWriteChunkBytesPPC};
 
 static long stub_IFFPopChunkPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFPopChunk(
-		(APTR)regarray[8]
-	);
+	return Self->IFFPopChunk((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFPopChunk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFPopChunkPPC };
+STATIC CONST struct EmuTrap stub_IFFPopChunk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFPopChunkPPC};
 
 static long stub_IFFWriteChunkPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFWriteChunk(
-		(APTR)regarray[8],
-		(APTR)regarray[9],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->IFFWriteChunk((APTR)regarray[8], (APTR)regarray[9], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_IFFWriteChunk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFWriteChunkPPC };
+STATIC CONST struct EmuTrap stub_IFFWriteChunk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFWriteChunkPPC};
 
-static struct Node * stub_FindNameIPPC(uint32 *regarray)
+static struct Node *stub_FindNameIPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindNameI(
-		(struct List *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->FindNameI((struct List *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_FindNameI = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindNameIPPC };
+STATIC CONST struct EmuTrap stub_FindNameI = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindNameIPPC};
 
 static void stub_AnimDecodeRIFFXorPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->AnimDecodeRIFFXor(
-		(unsigned char *)regarray[8],
-		(char *)regarray[9],
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff)
-	);
+	Self->AnimDecodeRIFFXor((unsigned char *)regarray[8],
+							(char *)regarray[9],
+							(UWORD)(regarray[0] & 0xffff),
+							(UWORD)(regarray[1] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_AnimDecodeRIFFXor = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_AnimDecodeRIFFXorPPC };
+STATIC CONST struct EmuTrap stub_AnimDecodeRIFFXor = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_AnimDecodeRIFFXorPPC};
 
 static void stub_AnimDecodeRIFFSetPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->AnimDecodeRIFFSet(
-		(unsigned char *)regarray[8],
-		(char *)regarray[9],
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff)
-	);
+	Self->AnimDecodeRIFFSet((unsigned char *)regarray[8],
+							(char *)regarray[9],
+							(UWORD)(regarray[0] & 0xffff),
+							(UWORD)(regarray[1] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_AnimDecodeRIFFSet = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_AnimDecodeRIFFSetPPC };
+STATIC CONST struct EmuTrap stub_AnimDecodeRIFFSet = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_AnimDecodeRIFFSetPPC};
 
 static BOOL stub_ConvertRawKeyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ConvertRawKey(
-		(UWORD)(regarray[0] & 0xffff),
-		(UWORD)(regarray[1] & 0xffff),
-		(char *)regarray[8]
-	);
+	return Self->ConvertRawKey((UWORD)(regarray[0] & 0xffff), (UWORD)(regarray[1] & 0xffff), (char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ConvertRawKey = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ConvertRawKeyPPC };
+STATIC CONST struct EmuTrap stub_ConvertRawKey = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ConvertRawKeyPPC};
 
-static struct ClipHandle * stub_OpenClipBoardPPC(uint32 *regarray)
+static struct ClipHandle *stub_OpenClipBoardPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenClipBoard(
-		(ULONG)regarray[0]
-	);
+	return Self->OpenClipBoard((ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_OpenClipBoard = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenClipBoardPPC };
+STATIC CONST struct EmuTrap stub_OpenClipBoard = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenClipBoardPPC};
 
 static void stub_CloseClipBoardPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseClipBoard(
-		(struct ClipHandle *)regarray[8]
-	);
+	Self->CloseClipBoard((struct ClipHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseClipBoard = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseClipBoardPPC };
+STATIC CONST struct EmuTrap stub_CloseClipBoard = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_CloseClipBoardPPC};
 
 static BOOL stub_WriteClipStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WriteClipString(
-		(struct ClipHandle *)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->WriteClipString((struct ClipHandle *)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_WriteClipString = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WriteClipStringPPC };
+STATIC CONST struct EmuTrap stub_WriteClipString = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WriteClipStringPPC};
 
 static long stub_ReadClipStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadClipString(
-		(struct ClipHandle *)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->ReadClipString((struct ClipHandle *)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ReadClipString = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadClipStringPPC };
+STATIC CONST struct EmuTrap stub_ReadClipString = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadClipStringPPC};
 
 static void stub_LockAttListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->LockAttList(
-		(Att_List *)regarray[8],
-		(short)convert_int16(regarray[0])
-	);
+	Self->LockAttList((Att_List *)regarray[8], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_LockAttList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_LockAttListPPC };
+STATIC CONST struct EmuTrap stub_LockAttList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_LockAttListPPC};
 
 static void stub_UnlockAttListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UnlockAttList(
-		(Att_List *)regarray[8]
-	);
+	Self->UnlockAttList((Att_List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_UnlockAttList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UnlockAttListPPC };
+STATIC CONST struct EmuTrap stub_UnlockAttList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_UnlockAttListPPC};
 
 static void stub_RemovedFunc1PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc1(
-	);
+	Self->RemovedFunc1();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc1 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc1PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc1 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc1PPC};
 
 static void stub_RemovedFunc2PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc2(
-	);
+	Self->RemovedFunc2();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc2 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc2PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc2 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc2PPC};
 
 static void stub_RemovedFunc3PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc3(
-	);
+	Self->RemovedFunc3();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc3 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc3PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc3 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc3PPC};
 
 static void stub_RemovedFunc4PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc4(
-	);
+	Self->RemovedFunc4();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc4 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc4PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc4 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc4PPC};
 
 static void stub_RemovedFunc5PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc5(
-	);
+	Self->RemovedFunc5();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc5 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc5PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc5 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc5PPC};
 
 static void stub_RemovedFunc6PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc6(
-	);
+	Self->RemovedFunc6();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc6 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc6PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc6 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc6PPC};
 
 static void stub_RemovedFunc7PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc7(
-	);
+	Self->RemovedFunc7();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc7 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc7PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc7 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc7PPC};
 
 static long stub_GetSemaphorePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetSemaphore(
-		(struct SignalSemaphore *)regarray[8],
-		(long)regarray[0],
-		(char *)regarray[9]
-	);
+	return Self->GetSemaphore((struct SignalSemaphore *)regarray[8], (long)regarray[0], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_GetSemaphore = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetSemaphorePPC };
+STATIC CONST struct EmuTrap stub_GetSemaphore = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetSemaphorePPC};
 
 static void stub_FreeSemaphorePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeSemaphore(
-		(struct SignalSemaphore *)regarray[8]
-	);
+	Self->FreeSemaphore((struct SignalSemaphore *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeSemaphore = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeSemaphorePPC };
+STATIC CONST struct EmuTrap stub_FreeSemaphore = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeSemaphorePPC};
 
 static void stub_ShowSemaphorePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ShowSemaphore(
-		(struct SignalSemaphore *)regarray[8]
-	);
+	Self->ShowSemaphore((struct SignalSemaphore *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ShowSemaphore = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ShowSemaphorePPC };
+STATIC CONST struct EmuTrap stub_ShowSemaphore = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ShowSemaphorePPC};
 
 static BOOL stub_SaveFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SaveFunction(
-		(APTR)regarray[8],
-		(Cfg_Function *)regarray[9]
-	);
+	return Self->SaveFunction((APTR)regarray[8], (Cfg_Function *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SaveFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SaveFunctionPPC };
+STATIC CONST struct EmuTrap stub_SaveFunction = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SaveFunctionPPC};
 
 static ULONG stub_IFFNextChunkPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFNextChunk(
-		(APTR)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->IFFNextChunk((APTR)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IFFNextChunk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFNextChunkPPC };
+STATIC CONST struct EmuTrap stub_IFFNextChunk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFNextChunkPPC};
 
 static long stub_IFFChunkSizePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFChunkSize(
-		(APTR)regarray[8]
-	);
+	return Self->IFFChunkSize((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFChunkSize = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFChunkSizePPC };
+STATIC CONST struct EmuTrap stub_IFFChunkSize = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFChunkSizePPC};
 
 static long stub_IFFReadChunkBytesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFReadChunkBytes(
-		(APTR)regarray[8],
-		(APTR)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->IFFReadChunkBytes((APTR)regarray[8], (APTR)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IFFReadChunkBytes = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFReadChunkBytesPPC };
+STATIC CONST struct EmuTrap stub_IFFReadChunkBytes = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_IFFReadChunkBytesPPC};
 
 static APTR stub_IFFFileHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFFileHandle(
-		(APTR)regarray[8]
-	);
+	return Self->IFFFileHandle((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFFileHandle = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFFileHandlePPC };
+STATIC CONST struct EmuTrap stub_IFFFileHandle = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFFileHandlePPC};
 
 static long stub_IFFChunkRemainPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFChunkRemain(
-		(APTR)regarray[8]
-	);
+	return Self->IFFChunkRemain((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFChunkRemain = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFChunkRemainPPC };
+STATIC CONST struct EmuTrap stub_IFFChunkRemain = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFChunkRemainPPC};
 
 static ULONG stub_IFFChunkIDPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFChunkID(
-		(APTR)regarray[8]
-	);
+	return Self->IFFChunkID((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFChunkID = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFChunkIDPPC };
+STATIC CONST struct EmuTrap stub_IFFChunkID = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFChunkIDPPC};
 
 static ULONG stub_IFFGetFORMPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IFFGetFORM(
-		(APTR)regarray[8]
-	);
+	return Self->IFFGetFORM((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFGetFORM = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IFFGetFORMPPC };
+STATIC CONST struct EmuTrap stub_IFFGetFORM = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IFFGetFORMPPC};
 
 static ULONG stub_ScreenInfoPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ScreenInfo(
-		(struct Screen *)regarray[8]
-	);
+	return Self->ScreenInfo((struct Screen *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ScreenInfo = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ScreenInfoPPC };
+STATIC CONST struct EmuTrap stub_ScreenInfo = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ScreenInfoPPC};
 
-static struct Hook * stub_GetEditHookPPC(uint32 *regarray)
+static struct Hook *stub_GetEditHookPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetEditHook(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(struct TagItem *)regarray[8]
-	);
+	return Self->GetEditHook((ULONG)regarray[0], (ULONG)regarray[1], (struct TagItem *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetEditHook = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetEditHookPPC };
+STATIC CONST struct EmuTrap stub_GetEditHook = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetEditHookPPC};
 
 static void stub_FreeEditHookPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeEditHook(
-		(struct Hook *)regarray[8]
-	);
+	Self->FreeEditHook((struct Hook *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeEditHook = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeEditHookPPC };
+STATIC CONST struct EmuTrap stub_FreeEditHook = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeEditHookPPC};
 
 static void stub_InitWindowDimsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->InitWindowDims(
-		(struct Window *)regarray[8],
-		(WindowDimensions *)regarray[9]
-	);
+	Self->InitWindowDims((struct Window *)regarray[8], (WindowDimensions *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_InitWindowDims = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_InitWindowDimsPPC };
+STATIC CONST struct EmuTrap stub_InitWindowDims = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_InitWindowDimsPPC};
 
 static void stub_StoreWindowDimsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StoreWindowDims(
-		(struct Window *)regarray[8],
-		(WindowDimensions *)regarray[9]
-	);
+	Self->StoreWindowDims((struct Window *)regarray[8], (WindowDimensions *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_StoreWindowDims = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StoreWindowDimsPPC };
+STATIC CONST struct EmuTrap stub_StoreWindowDims = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_StoreWindowDimsPPC};
 
 static BOOL stub_CheckWindowDimsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckWindowDims(
-		(struct Window *)regarray[8],
-		(WindowDimensions *)regarray[9]
-	);
+	return Self->CheckWindowDims((struct Window *)regarray[8], (WindowDimensions *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_CheckWindowDims = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckWindowDimsPPC };
+STATIC CONST struct EmuTrap stub_CheckWindowDims = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CheckWindowDimsPPC};
 
 static void stub_InitListLockPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->InitListLock(
-		(struct ListLock *)regarray[8],
-		(char *)regarray[9]
-	);
+	Self->InitListLock((struct ListLock *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_InitListLock = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_InitListLockPPC };
+STATIC CONST struct EmuTrap stub_InitListLock = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_InitListLockPPC};
 
 static void stub_IPC_QuitNamePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IPC_QuitName(
-		(struct ListLock *)regarray[8],
-		(char *)regarray[9],
-		(ULONG)regarray[0]
-	);
+	Self->IPC_QuitName((struct ListLock *)regarray[8], (char *)regarray[9], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_IPC_QuitName = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IPC_QuitNamePPC };
+STATIC CONST struct EmuTrap stub_IPC_QuitName = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IPC_QuitNamePPC};
 
 static UWORD stub_QualValidPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->QualValid(
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->QualValid((UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_QualValid = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_QualValidPPC };
+STATIC CONST struct EmuTrap stub_QualValid = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_QualValidPPC};
 
 static BPTR stub_FHFromBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FHFromBuf(
-		(APTR)regarray[8]
-	);
+	return Self->FHFromBuf((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FHFromBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FHFromBufPPC };
+STATIC CONST struct EmuTrap stub_FHFromBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FHFromBufPPC};
 
 static ULONG stub_WB_AppIconFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_AppIconFlags(
-		(struct AppIcon *)regarray[8]
-	);
+	return Self->WB_AppIconFlags((struct AppIcon *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_WB_AppIconFlags = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_AppIconFlagsPPC };
+STATIC CONST struct EmuTrap stub_WB_AppIconFlags = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_AppIconFlagsPPC};
 
 static BOOL stub_GetWBArgPathPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetWBArgPath(
-		(struct WBArg *)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->GetWBArgPath((struct WBArg *)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetWBArgPath = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetWBArgPathPPC };
+STATIC CONST struct EmuTrap stub_GetWBArgPath = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetWBArgPathPPC};
 
 static void stub_RemovedFunc8PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc8(
-	);
+	Self->RemovedFunc8();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc8 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc8PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc8 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc8PPC};
 
-static struct DosList * stub_DeviceFromLockPPC(uint32 *regarray)
+static struct DosList *stub_DeviceFromLockPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DeviceFromLock(
-		(BPTR)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->DeviceFromLock((BPTR)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_DeviceFromLock = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DeviceFromLockPPC };
+STATIC CONST struct EmuTrap stub_DeviceFromLock = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DeviceFromLockPPC};
 
-static struct DosList * stub_DeviceFromHandlerPPC(uint32 *regarray)
+static struct DosList *stub_DeviceFromHandlerPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DeviceFromHandler(
-		(struct MsgPort *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->DeviceFromHandler((struct MsgPort *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_DeviceFromHandler = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DeviceFromHandlerPPC };
+STATIC CONST struct EmuTrap stub_DeviceFromHandler = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_DeviceFromHandlerPPC};
 
 static BOOL stub_DevNameFromLockDopusPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DevNameFromLockDopus(
-		(BPTR)regarray[1],
-		(char *)regarray[2],
-		(long)regarray[3]
-	);
+	return Self->DevNameFromLockDopus((BPTR)regarray[1], (char *)regarray[2], (long)regarray[3]);
 }
-STATIC CONST struct EmuTrap stub_DevNameFromLockDopus = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DevNameFromLockDopusPPC };
+STATIC CONST struct EmuTrap stub_DevNameFromLockDopus = {TRAPINST,
+														 TRAPTYPE,
+														 (uint32(*)(uint32 *))stub_DevNameFromLockDopusPPC};
 
 static ULONG stub_GetIconFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetIconFlags(
-		(struct DiskObject *)regarray[8]
-	);
+	return Self->GetIconFlags((struct DiskObject *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetIconFlags = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetIconFlagsPPC };
+STATIC CONST struct EmuTrap stub_GetIconFlags = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetIconFlagsPPC};
 
 static void stub_SetIconFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetIconFlags(
-		(struct DiskObject *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	Self->SetIconFlags((struct DiskObject *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_SetIconFlags = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetIconFlagsPPC };
+STATIC CONST struct EmuTrap stub_SetIconFlags = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetIconFlagsPPC};
 
 static void stub_GetIconPositionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetIconPosition(
-		(struct DiskObject *)regarray[8],
-		(short *)regarray[9],
-		(short *)regarray[10]
-	);
+	Self->GetIconPosition((struct DiskObject *)regarray[8], (short *)regarray[9], (short *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_GetIconPosition = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetIconPositionPPC };
+STATIC CONST struct EmuTrap stub_GetIconPosition = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetIconPositionPPC};
 
 static void stub_SetIconPositionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->SetIconPosition(
-		(struct DiskObject *)regarray[8],
-		(short)convert_int16(regarray[0]),
-		(short)convert_int16(regarray[1])
-	);
+		(struct DiskObject *)regarray[8], (short)convert_int16(regarray[0]), (short)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_SetIconPosition = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetIconPositionPPC };
+STATIC CONST struct EmuTrap stub_SetIconPosition = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetIconPositionPPC};
 
 static BOOL stub_BuildTransDragMaskPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->BuildTransDragMask(
-		(UWORD *)regarray[8],
-		(UWORD *)regarray[9],
-		(short)convert_int16(regarray[0]),
-		(short)convert_int16(regarray[1]),
-		(short)convert_int16(regarray[2]),
-		(long)regarray[3]
-	);
+	return Self->BuildTransDragMask((UWORD *)regarray[8],
+									(UWORD *)regarray[9],
+									(short)convert_int16(regarray[0]),
+									(short)convert_int16(regarray[1]),
+									(short)convert_int16(regarray[2]),
+									(long)regarray[3]);
 }
-STATIC CONST struct EmuTrap stub_BuildTransDragMask = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_BuildTransDragMaskPPC };
+STATIC CONST struct EmuTrap stub_BuildTransDragMask = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_BuildTransDragMaskPPC};
 
-static ULONG * stub_GetImagePalettePPC(uint32 *regarray)
+static ULONG *stub_GetImagePalettePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetImagePalette(
-		(APTR)regarray[8]
-	);
+	return Self->GetImagePalette((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetImagePalette = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetImagePalettePPC };
+STATIC CONST struct EmuTrap stub_GetImagePalette = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetImagePalettePPC};
 
 static void stub_FreeImageRemapPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeImageRemap(
-		(ImageRemap *)regarray[8]
-	);
+	Self->FreeImageRemap((ImageRemap *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeImageRemap = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeImageRemapPPC };
+STATIC CONST struct EmuTrap stub_FreeImageRemap = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeImageRemapPPC};
 
 static void stub_SwapListNodesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SwapListNodes(
-		(struct List *)regarray[8],
-		(struct Node *)regarray[9],
-		(struct Node *)regarray[10]
-	);
+	Self->SwapListNodes((struct List *)regarray[8], (struct Node *)regarray[9], (struct Node *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_SwapListNodes = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SwapListNodesPPC };
+STATIC CONST struct EmuTrap stub_SwapListNodes = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SwapListNodesPPC};
 
 static void stub_RemovedFunc9PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc9(
-	);
+	Self->RemovedFunc9();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc9 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc9PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc9 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc9PPC};
 
 static void stub_SeedPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->Seed(
-		(int)regarray[0]
-	);
+	Self->Seed((int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Seed = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SeedPPC };
+STATIC CONST struct EmuTrap stub_Seed = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SeedPPC};
 
 static void stub_RemovedFunc10PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc10(
-	);
+	Self->RemovedFunc10();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc10 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc10PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc10 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc10PPC};
 
 static void stub_RemovedFunc11PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc11(
-	);
+	Self->RemovedFunc11();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc11 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc11PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc11 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc11PPC};
 
 static void stub_RemovedFunc12PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemovedFunc12(
-	);
+	Self->RemovedFunc12();
 }
-STATIC CONST struct EmuTrap stub_RemovedFunc12 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemovedFunc12PPC };
+STATIC CONST struct EmuTrap stub_RemovedFunc12 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemovedFunc12PPC};
 
-static struct DiskObject * stub_CopyDiskObjectPPC(uint32 *regarray)
+static struct DiskObject *stub_CopyDiskObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyDiskObject(
-		(struct DiskObject *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->CopyDiskObject((struct DiskObject *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_CopyDiskObject = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyDiskObjectPPC };
+STATIC CONST struct EmuTrap stub_CopyDiskObject = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyDiskObjectPPC};
 
 static void stub_FreeDiskObjectCopyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeDiskObjectCopy(
-		(struct DiskObject *)regarray[8]
-	);
+	Self->FreeDiskObjectCopy((struct DiskObject *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeDiskObjectCopy = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeDiskObjectCopyPPC };
+STATIC CONST struct EmuTrap stub_FreeDiskObjectCopy = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_FreeDiskObjectCopyPPC};
 
 static void stub_IFFFailurePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->IFFFailure(
-		(APTR)regarray[8]
-	);
+	Self->IFFFailure((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IFFFailure = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_IFFFailurePPC };
+STATIC CONST struct EmuTrap stub_IFFFailure = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_IFFFailurePPC};
 
-static struct DiskObject * stub_GetCachedDefDiskObjectPPC(uint32 *regarray)
+static struct DiskObject *stub_GetCachedDefDiskObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetCachedDefDiskObject(
-		(long)regarray[0]
-	);
+	return Self->GetCachedDefDiskObject((long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetCachedDefDiskObject = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetCachedDefDiskObjectPPC };
+STATIC CONST struct EmuTrap stub_GetCachedDefDiskObject = {TRAPINST,
+														   TRAPTYPE,
+														   (uint32(*)(uint32 *))stub_GetCachedDefDiskObjectPPC};
 
 static void stub_FreeCachedDiskObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeCachedDiskObject(
-		(struct DiskObject *)regarray[8]
-	);
+	Self->FreeCachedDiskObject((struct DiskObject *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeCachedDiskObject = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeCachedDiskObjectPPC };
+STATIC CONST struct EmuTrap stub_FreeCachedDiskObject = {TRAPINST,
+														 TRAPTYPENR,
+														 (uint32(*)(uint32 *))stub_FreeCachedDiskObjectPPC};
 
-static struct DiskObject * stub_GetCachedDiskObjectPPC(uint32 *regarray)
+static struct DiskObject *stub_GetCachedDiskObjectPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetCachedDiskObject(
-		(char *)regarray[8],
-		(long)regarray[0]
-	);
+	return Self->GetCachedDiskObject((char *)regarray[8], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetCachedDiskObject = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetCachedDiskObjectPPC };
+STATIC CONST struct EmuTrap stub_GetCachedDiskObject = {TRAPINST,
+														TRAPTYPE,
+														(uint32(*)(uint32 *))stub_GetCachedDiskObjectPPC};
 
-static struct DiskObject * stub_GetCachedDiskObjectNewPPC(uint32 *regarray)
+static struct DiskObject *stub_GetCachedDiskObjectNewPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetCachedDiskObjectNew(
-		(char *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->GetCachedDiskObjectNew((char *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetCachedDiskObjectNew = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetCachedDiskObjectNewPPC };
+STATIC CONST struct EmuTrap stub_GetCachedDiskObjectNew = {TRAPINST,
+														   TRAPTYPE,
+														   (uint32(*)(uint32 *))stub_GetCachedDiskObjectNewPPC};
 
 static ULONG stub_IconCheckSumPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IconCheckSum(
-		(struct DiskObject *)regarray[8],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->IconCheckSum((struct DiskObject *)regarray[8], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_IconCheckSum = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IconCheckSumPPC };
+STATIC CONST struct EmuTrap stub_IconCheckSum = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IconCheckSumPPC};
 
 static APTR stub_OpenProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenProgressWindow(
-		(struct TagItem *)regarray[8] //,  // 8 = a0, 14 = a6
-//		(struct Library *)regarray[14]  // yeah ! a6 and works !
+	return Self->OpenProgressWindow((struct TagItem *)regarray[8]  //,  // 8 = a0, 14 = a6
+									//		(struct Library *)regarray[14]  // yeah ! a6 and works !
 	);
 }
-STATIC CONST struct EmuTrap stub_OpenProgressWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_OpenProgressWindow = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_OpenProgressWindowPPC};
 
 static void stub_CloseProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->CloseProgressWindow(
-		(APTR)regarray[8]
-	);
+	Self->CloseProgressWindow((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CloseProgressWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_CloseProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_CloseProgressWindow = {TRAPINST,
+														TRAPTYPENR,
+														(uint32(*)(uint32 *))stub_CloseProgressWindowPPC};
 
 static void stub_HideProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->HideProgressWindow(
-		(APTR)regarray[8]
-	);
+	Self->HideProgressWindow((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_HideProgressWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_HideProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_HideProgressWindow = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_HideProgressWindowPPC};
 
 static void stub_ShowProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ShowProgressWindow(
-		(APTR)regarray[8],
-		(struct Screen *)regarray[9],
-		(struct Window *)regarray[10]
-	);
+	Self->ShowProgressWindow((APTR)regarray[8], (struct Screen *)regarray[9], (struct Window *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_ShowProgressWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ShowProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_ShowProgressWindow = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_ShowProgressWindowPPC};
 
 static void stub_SetProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetProgressWindow(
-		(APTR)regarray[8],
-		(struct TagItem *)regarray[9]
-	);
+	Self->SetProgressWindow((APTR)regarray[8], (struct TagItem *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SetProgressWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_SetProgressWindow = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_SetProgressWindowPPC};
 
 static void stub_GetProgressWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetProgressWindow(
-		(APTR)regarray[8],
-		(struct TagItem *)regarray[9]
-	);
+	Self->GetProgressWindow((APTR)regarray[8], (struct TagItem *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_GetProgressWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetProgressWindowPPC };
+STATIC CONST struct EmuTrap stub_GetProgressWindow = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_GetProgressWindowPPC};
 
 static void stub_SetNotifyRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetNotifyRequest(
-		(APTR)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	Self->SetNotifyRequest((APTR)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SetNotifyRequest = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetNotifyRequestPPC };
+STATIC CONST struct EmuTrap stub_SetNotifyRequest = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_SetNotifyRequestPPC};
 
 static void stub_ChangeAppIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ChangeAppIcon(
-		(APTR)regarray[8],
-		(struct Image *)regarray[9],
-		(struct Image *)regarray[10],
-		(char *)regarray[11],
-		(ULONG)regarray[0]
-	);
+	Self->ChangeAppIcon((APTR)regarray[8],
+						(struct Image *)regarray[9],
+						(struct Image *)regarray[10],
+						(char *)regarray[11],
+						(ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ChangeAppIcon = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ChangeAppIconPPC };
+STATIC CONST struct EmuTrap stub_ChangeAppIcon = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ChangeAppIconPPC};
 
 static BOOL stub_CheckProgressAbortPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckProgressAbort(
-		(APTR)regarray[8]
-	);
+	return Self->CheckProgressAbort((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CheckProgressAbort = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckProgressAbortPPC };
+STATIC CONST struct EmuTrap stub_CheckProgressAbort = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_CheckProgressAbortPPC};
 
-static char * stub_GetSecureStringPPC(uint32 *regarray)
+static char *stub_GetSecureStringPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetSecureString(
-		(struct Gadget *)regarray[8]
-	);
+	return Self->GetSecureString((struct Gadget *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetSecureString = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetSecureStringPPC };
+STATIC CONST struct EmuTrap stub_GetSecureString = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetSecureStringPPC};
 
-static Cfg_Button * stub_NewButtonWithFuncPPC(uint32 *regarray)
+static Cfg_Button *stub_NewButtonWithFuncPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->NewButtonWithFunc(
-		(APTR)regarray[8],
-		(char *)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->NewButtonWithFunc((APTR)regarray[8], (char *)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_NewButtonWithFunc = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewButtonWithFuncPPC };
+STATIC CONST struct EmuTrap stub_NewButtonWithFunc = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_NewButtonWithFuncPPC};
 
 static void stub_FreeButtonFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeButtonFunction(
-		(Cfg_ButtonFunction *)regarray[8]
-	);
+	Self->FreeButtonFunction((Cfg_ButtonFunction *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeButtonFunction = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeButtonFunctionPPC };
+STATIC CONST struct EmuTrap stub_FreeButtonFunction = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_FreeButtonFunctionPPC};
 
-static Cfg_ButtonFunction * stub_CopyButtonFunctionPPC(uint32 *regarray)
+static Cfg_ButtonFunction *stub_CopyButtonFunctionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->CopyButtonFunction(
-		(Cfg_ButtonFunction *)regarray[8],
-		(APTR)regarray[9],
-		(Cfg_ButtonFunction *)regarray[10]
-	);
+		(Cfg_ButtonFunction *)regarray[8], (APTR)regarray[9], (Cfg_ButtonFunction *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_CopyButtonFunction = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyButtonFunctionPPC };
+STATIC CONST struct EmuTrap stub_CopyButtonFunction = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_CopyButtonFunctionPPC};
 
-static struct PubScreenNode * stub_FindPubScreenPPC(uint32 *regarray)
+static struct PubScreenNode *stub_FindPubScreenPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindPubScreen(
-		(struct Screen *)regarray[8],
-		(BOOL)convert_int16(regarray[0])
-	);
+	return Self->FindPubScreen((struct Screen *)regarray[8], (BOOL)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_FindPubScreen = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindPubScreenPPC };
+STATIC CONST struct EmuTrap stub_FindPubScreen = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindPubScreenPPC};
 
 static long stub_SetAppIconMenuStatePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SetAppIconMenuState(
-		(APTR)regarray[8],
-		(long)regarray[0],
-		(long)regarray[1]
-	);
+	return Self->SetAppIconMenuState((APTR)regarray[8], (long)regarray[0], (long)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SetAppIconMenuState = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SetAppIconMenuStatePPC };
+STATIC CONST struct EmuTrap stub_SetAppIconMenuState = {TRAPINST,
+														TRAPTYPE,
+														(uint32(*)(uint32 *))stub_SetAppIconMenuStatePPC};
 
 static long stub_SearchFilePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->SearchFile(
-		(APTR)regarray[8],
-		(UBYTE *)regarray[9],
-		(ULONG)regarray[0],
-		(UBYTE *)regarray[10],
-		(ULONG)regarray[1]
-	);
+		(APTR)regarray[8], (UBYTE *)regarray[9], (ULONG)regarray[0], (UBYTE *)regarray[10], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SearchFile = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SearchFilePPC };
+STATIC CONST struct EmuTrap stub_SearchFile = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SearchFilePPC};
 
-static char * stub_ParseDateStringsPPC(uint32 *regarray)
+static char *stub_ParseDateStringsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ParseDateStrings(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(char *)regarray[10],
-		(long *)regarray[11]
-	);
+	return Self->ParseDateStrings((char *)regarray[8], (char *)regarray[9], (char *)regarray[10], (long *)regarray[11]);
 }
-STATIC CONST struct EmuTrap stub_ParseDateStrings = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ParseDateStringsPPC };
+STATIC CONST struct EmuTrap stub_ParseDateStrings = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ParseDateStringsPPC};
 
 static BOOL stub_DateFromStringsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DateFromStrings(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(struct DateStamp *)regarray[10]
-	);
+	return Self->DateFromStrings((char *)regarray[8], (char *)regarray[9], (struct DateStamp *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_DateFromStrings = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DateFromStringsPPC };
+STATIC CONST struct EmuTrap stub_DateFromStrings = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DateFromStringsPPC};
 
 static APTR stub_GetMatchHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetMatchHandle(
-		(char *)regarray[8]
-	);
+	return Self->GetMatchHandle((char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetMatchHandle = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetMatchHandlePPC };
+STATIC CONST struct EmuTrap stub_GetMatchHandle = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetMatchHandlePPC};
 
 static void stub_FreeMatchHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeMatchHandle(
-		(APTR)regarray[8]
-	);
+	Self->FreeMatchHandle((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeMatchHandle = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeMatchHandlePPC };
+STATIC CONST struct EmuTrap stub_FreeMatchHandle = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeMatchHandlePPC};
 
 static BOOL stub_MatchFiletypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->MatchFiletype(
-		(APTR)regarray[8],
-		(APTR)regarray[9]
-	);
+	return Self->MatchFiletype((APTR)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_MatchFiletype = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_MatchFiletypePPC };
+STATIC CONST struct EmuTrap stub_MatchFiletype = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_MatchFiletypePPC};
 
 static void stub_LayoutResizePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->LayoutResize(
-		(struct Window *)regarray[8]
-	);
+	Self->LayoutResize((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_LayoutResize = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_LayoutResizePPC };
+STATIC CONST struct EmuTrap stub_LayoutResize = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_LayoutResizePPC};
 
 static BOOL stub_GetFileVersionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetFileVersion(
-		(char *)regarray[8],
-		(short *)regarray[0],
-		(short *)regarray[1],
-		(struct DateStamp *)regarray[9],
-		(APTR)regarray[10]
-	);
+	return Self->GetFileVersion((char *)regarray[8],
+								(short *)regarray[0],
+								(short *)regarray[1],
+								(struct DateStamp *)regarray[9],
+								(APTR)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_GetFileVersion = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetFileVersionPPC };
+STATIC CONST struct EmuTrap stub_GetFileVersion = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetFileVersionPPC};
 
 static long stub_AsyncRequestPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AsyncRequest(
-		(IPCData *)regarray[8],
-		(long)regarray[0],
-		(struct Window *)regarray[9],
-		(ULONG (*)(ULONG, APTR, APTR))regarray[10],
-		(APTR)regarray[11],
-		(struct TagItem *)regarray[1]
-	);
+	return Self->AsyncRequest((IPCData *)regarray[8],
+							  (long)regarray[0],
+							  (struct Window *)regarray[9],
+							  (ULONG(*)(ULONG, APTR, APTR))regarray[10],
+							  (APTR)regarray[11],
+							  (struct TagItem *)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_AsyncRequest = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AsyncRequestPPC };
+STATIC CONST struct EmuTrap stub_AsyncRequest = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AsyncRequestPPC};
 
-static struct IntuiMessage * stub_CheckRefreshMsgPPC(uint32 *regarray)
+static struct IntuiMessage *stub_CheckRefreshMsgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckRefreshMsg(
-		(struct Window *)regarray[8],
-		(ULONG)regarray[0]
-	);
+	return Self->CheckRefreshMsg((struct Window *)regarray[8], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_CheckRefreshMsg = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckRefreshMsgPPC };
+STATIC CONST struct EmuTrap stub_CheckRefreshMsg = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CheckRefreshMsgPPC};
 
 static BOOL stub_RemapImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->RemapImage(
-		(APTR)regarray[8],
-		(struct Screen *)regarray[9],
-		(ImageRemap *)regarray[10]
-	);
+	return Self->RemapImage((APTR)regarray[8], (struct Screen *)regarray[9], (ImageRemap *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_RemapImage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_RemapImagePPC };
+STATIC CONST struct EmuTrap stub_RemapImage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_RemapImagePPC};
 
 static void stub_FreeRemapImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeRemapImage(
-		(APTR)regarray[8],
-		(ImageRemap *)regarray[9]
-	);
+	Self->FreeRemapImage((APTR)regarray[8], (ImageRemap *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_FreeRemapImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeRemapImagePPC };
+STATIC CONST struct EmuTrap stub_FreeRemapImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeRemapImagePPC};
 
 static void stub_FreeAppMessagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeAppMessage(
-		(DOpusAppMessage *)regarray[8]
-	);
+	Self->FreeAppMessage((DOpusAppMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeAppMessage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeAppMessagePPC };
+STATIC CONST struct EmuTrap stub_FreeAppMessage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeAppMessagePPC};
 
 static void stub_ReplyAppMessagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ReplyAppMessage(
-		(DOpusAppMessage *)regarray[8]
-	);
+	Self->ReplyAppMessage((DOpusAppMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ReplyAppMessage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ReplyAppMessagePPC };
+STATIC CONST struct EmuTrap stub_ReplyAppMessage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ReplyAppMessagePPC};
 
 static ULONG stub_SetLibraryFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SetLibraryFlags(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->SetLibraryFlags((ULONG)regarray[0], (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SetLibraryFlags = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SetLibraryFlagsPPC };
+STATIC CONST struct EmuTrap stub_SetLibraryFlags = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SetLibraryFlagsPPC};
 
 static void stub_StartRefreshConfigWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StartRefreshConfigWindow(
-		(struct Window *)regarray[8],
-		(long)regarray[0]
-	);
+	Self->StartRefreshConfigWindow((struct Window *)regarray[8], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_StartRefreshConfigWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StartRefreshConfigWindowPPC };
+STATIC CONST struct EmuTrap stub_StartRefreshConfigWindow = {TRAPINST,
+															 TRAPTYPENR,
+															 (uint32(*)(uint32 *))stub_StartRefreshConfigWindowPPC};
 
 static void stub_EndRefreshConfigWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->EndRefreshConfigWindow(
-		(struct Window *)regarray[8]
-	);
+	Self->EndRefreshConfigWindow((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_EndRefreshConfigWindow = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_EndRefreshConfigWindowPPC };
+STATIC CONST struct EmuTrap stub_EndRefreshConfigWindow = {TRAPINST,
+														   TRAPTYPENR,
+														   (uint32(*)(uint32 *))stub_EndRefreshConfigWindowPPC};
 
 static ULONG stub_CompareListFormatPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CompareListFormat(
-		(ListFormat *)regarray[8],
-		(ListFormat *)regarray[9]
-	);
+	return Self->CompareListFormat((ListFormat *)regarray[8], (ListFormat *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_CompareListFormat = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CompareListFormatPPC };
+STATIC CONST struct EmuTrap stub_CompareListFormat = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_CompareListFormatPPC};
 
 static void stub_UpdateGadgetValuePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->UpdateGadgetValue(
-		(ObjectList *)regarray[8],
-		(struct IntuiMessage *)regarray[9],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+		(ObjectList *)regarray[8], (struct IntuiMessage *)regarray[9], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_UpdateGadgetValue = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdateGadgetValuePPC };
+STATIC CONST struct EmuTrap stub_UpdateGadgetValue = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_UpdateGadgetValuePPC};
 
 static void stub_UpdateGadgetListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UpdateGadgetList(
-		(ObjectList *)regarray[8]
-	);
+	Self->UpdateGadgetList((ObjectList *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_UpdateGadgetList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdateGadgetListPPC };
+STATIC CONST struct EmuTrap stub_UpdateGadgetList = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_UpdateGadgetListPPC};
 
-static struct BitMap * stub_NewBitMapPPC(uint32 *regarray)
+static struct BitMap *stub_NewBitMapPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->NewBitMap(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2],
-		(ULONG)regarray[3],
-		(struct BitMap *)regarray[8]
-	);
+		(ULONG)regarray[0], (ULONG)regarray[1], (ULONG)regarray[2], (ULONG)regarray[3], (struct BitMap *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_NewBitMap = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_NewBitMapPPC };
+STATIC CONST struct EmuTrap stub_NewBitMap = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_NewBitMapPPC};
 
 static void stub_DisposeBitMapPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DisposeBitMap(
-		(struct BitMap *)regarray[8]
-	);
+	Self->DisposeBitMap((struct BitMap *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DisposeBitMap = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DisposeBitMapPPC };
+STATIC CONST struct EmuTrap stub_DisposeBitMap = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DisposeBitMapPPC};
 
-static FuncArgs * stub_ParseArgsPPC(uint32 *regarray)
+static FuncArgs *stub_ParseArgsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ParseArgs(
-		(char *)regarray[8],
-		(char *)regarray[9]
-	);
+	return Self->ParseArgs((char *)regarray[8], (char *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_ParseArgs = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ParseArgsPPC };
+STATIC CONST struct EmuTrap stub_ParseArgs = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ParseArgsPPC};
 
 static void stub_DisposeArgsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DisposeArgs(
-		(FuncArgs *)regarray[8]
-	);
+	Self->DisposeArgs((FuncArgs *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DisposeArgs = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DisposeArgsPPC };
+STATIC CONST struct EmuTrap stub_DisposeArgs = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DisposeArgsPPC};
 
 static void stub_SetConfigWindowLimitsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->SetConfigWindowLimits(
-		(struct Window *)regarray[8],
-		(ConfigWindow *)regarray[9],
-		(ConfigWindow *)regarray[10]
-	);
+		(struct Window *)regarray[8], (ConfigWindow *)regarray[9], (ConfigWindow *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_SetConfigWindowLimits = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetConfigWindowLimitsPPC };
+STATIC CONST struct EmuTrap stub_SetConfigWindowLimits = {TRAPINST,
+														  TRAPTYPENR,
+														  (uint32(*)(uint32 *))stub_SetConfigWindowLimitsPPC};
 
 static void stub_SetEnvPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetEnv(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(BOOL)convert_int16(regarray[0])
-	);
+	Self->SetEnv((char *)regarray[8], (char *)regarray[9], (BOOL)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_SetEnv = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetEnvPPC };
+STATIC CONST struct EmuTrap stub_SetEnv = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetEnvPPC};
 
 static BOOL stub_IsListLockEmptyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IsListLockEmpty(
-		(struct ListLock *)regarray[8]
-	);
+	return Self->IsListLockEmpty((struct ListLock *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IsListLockEmpty = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IsListLockEmptyPPC };
+STATIC CONST struct EmuTrap stub_IsListLockEmpty = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IsListLockEmptyPPC};
 
-static DOpusAppMessage * stub_AllocAppMessagePPC(uint32 *regarray)
+static DOpusAppMessage *stub_AllocAppMessagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AllocAppMessage(
-		(APTR)regarray[8],
-		(struct MsgPort *)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->AllocAppMessage((APTR)regarray[8], (struct MsgPort *)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_AllocAppMessage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AllocAppMessagePPC };
+STATIC CONST struct EmuTrap stub_AllocAppMessage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_AllocAppMessagePPC};
 
 static BOOL stub_CheckAppMessagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CheckAppMessage(
-		(DOpusAppMessage *)regarray[8]
-	);
+	return Self->CheckAppMessage((DOpusAppMessage *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CheckAppMessage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CheckAppMessagePPC };
+STATIC CONST struct EmuTrap stub_CheckAppMessage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CheckAppMessagePPC};
 
-static DOpusAppMessage * stub_CopyAppMessagePPC(uint32 *regarray)
+static DOpusAppMessage *stub_CopyAppMessagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CopyAppMessage(
-		(DOpusAppMessage *)regarray[8],
-		(APTR)regarray[9]
-	);
+	return Self->CopyAppMessage((DOpusAppMessage *)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_CopyAppMessage = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CopyAppMessagePPC };
+STATIC CONST struct EmuTrap stub_CopyAppMessage = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CopyAppMessagePPC};
 
 static BOOL stub_SetWBArgPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SetWBArg(
-		(DOpusAppMessage *)regarray[8],
-		(short)convert_int16(regarray[0]),
-		(BPTR)regarray[1],
-		(char *)regarray[9],
-		(APTR)regarray[10]
-	);
+	return Self->SetWBArg((DOpusAppMessage *)regarray[8],
+						  (short)convert_int16(regarray[0]),
+						  (BPTR)regarray[1],
+						  (char *)regarray[9],
+						  (APTR)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_SetWBArg = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SetWBArgPPC };
+STATIC CONST struct EmuTrap stub_SetWBArg = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SetWBArgPPC};
 
 static BPTR stub_OriginalCreateDirPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalCreateDir(
-		(char *)regarray[1]
-	);
+	return Self->OriginalCreateDir((char *)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_OriginalCreateDir = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalCreateDirPPC };
+STATIC CONST struct EmuTrap stub_OriginalCreateDir = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_OriginalCreateDirPPC};
 
 static long stub_OriginalDeleteFilePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalDeleteFile(
-		(char *)regarray[1]
-	);
+	return Self->OriginalDeleteFile((char *)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_OriginalDeleteFile = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalDeleteFilePPC };
+STATIC CONST struct EmuTrap stub_OriginalDeleteFile = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_OriginalDeleteFilePPC};
 
 static BOOL stub_OriginalSetFileDatePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalSetFileDate(
-		(char *)regarray[1],
-		(struct DateStamp *)regarray[2]
-	);
+	return Self->OriginalSetFileDate((char *)regarray[1], (struct DateStamp *)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalSetFileDate = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalSetFileDatePPC };
+STATIC CONST struct EmuTrap stub_OriginalSetFileDate = {TRAPINST,
+														TRAPTYPE,
+														(uint32(*)(uint32 *))stub_OriginalSetFileDatePPC};
 
 static BOOL stub_OriginalSetCommentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalSetComment(
-		(char *)regarray[1],
-		(char *)regarray[2]
-	);
+	return Self->OriginalSetComment((char *)regarray[1], (char *)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalSetComment = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalSetCommentPPC };
+STATIC CONST struct EmuTrap stub_OriginalSetComment = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_OriginalSetCommentPPC};
 
 static BOOL stub_OriginalSetProtectionPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalSetProtection(
-		(char *)regarray[1],
-		(ULONG)regarray[2]
-	);
+	return Self->OriginalSetProtection((char *)regarray[1], (ULONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalSetProtection = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalSetProtectionPPC };
+STATIC CONST struct EmuTrap stub_OriginalSetProtection = {TRAPINST,
+														  TRAPTYPE,
+														  (uint32(*)(uint32 *))stub_OriginalSetProtectionPPC};
 
 static BOOL stub_OriginalRenamePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalRename(
-		(char *)regarray[1],
-		(char *)regarray[2]
-	);
+	return Self->OriginalRename((char *)regarray[1], (char *)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalRename = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalRenamePPC };
+STATIC CONST struct EmuTrap stub_OriginalRename = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OriginalRenamePPC};
 
 static BPTR stub_OriginalOpenPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalOpen(
-		(char *)regarray[1],
-		(LONG)regarray[2]
-	);
+	return Self->OriginalOpen((char *)regarray[1], (LONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalOpen = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalOpenPPC };
+STATIC CONST struct EmuTrap stub_OriginalOpen = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OriginalOpenPPC};
 
 static BOOL stub_OriginalClosePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalClose(
-		(BPTR)regarray[1]
-	);
+	return Self->OriginalClose((BPTR)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_OriginalClose = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalClosePPC };
+STATIC CONST struct EmuTrap stub_OriginalClose = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OriginalClosePPC};
 
 static LONG stub_OriginalWritePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalWrite(
-		(BPTR)regarray[1],
-		(void *)regarray[2],
-		(LONG)regarray[3]
-	);
+	return Self->OriginalWrite((BPTR)regarray[1], (void *)regarray[2], (LONG)regarray[3]);
 }
-STATIC CONST struct EmuTrap stub_OriginalWrite = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalWritePPC };
+STATIC CONST struct EmuTrap stub_OriginalWrite = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OriginalWritePPC};
 
-static struct Gadget * stub_CreateTitleGadgetPPC(uint32 *regarray)
+static struct Gadget *stub_CreateTitleGadgetPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CreateTitleGadget(
-		(struct Screen *)regarray[8],
-		(struct List *)regarray[9],
-		(BOOL)convert_int16(regarray[0]),
-		(short)convert_int16(regarray[1]),
-		(short)convert_int16(regarray[2]),
-		(UWORD)(regarray[3] & 0xffff)
-	);
+	return Self->CreateTitleGadget((struct Screen *)regarray[8],
+								   (struct List *)regarray[9],
+								   (BOOL)convert_int16(regarray[0]),
+								   (short)convert_int16(regarray[1]),
+								   (short)convert_int16(regarray[2]),
+								   (UWORD)(regarray[3] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_CreateTitleGadget = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CreateTitleGadgetPPC };
+STATIC CONST struct EmuTrap stub_CreateTitleGadget = {TRAPINST,
+													  TRAPTYPE,
+													  (uint32(*)(uint32 *))stub_CreateTitleGadgetPPC};
 
-static struct Gadget * stub_FindGadgetTypePPC(uint32 *regarray)
+static struct Gadget *stub_FindGadgetTypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FindGadgetType(
-		(struct Gadget *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff)
-	);
+	return Self->FindGadgetType((struct Gadget *)regarray[8], (UWORD)(regarray[0] & 0xffff));
 }
-STATIC CONST struct EmuTrap stub_FindGadgetType = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FindGadgetTypePPC };
+STATIC CONST struct EmuTrap stub_FindGadgetType = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FindGadgetTypePPC};
 
 static void stub_FixTitleGadgetsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FixTitleGadgets(
-		(struct Window *)regarray[8]
-	);
+	Self->FixTitleGadgets((struct Window *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FixTitleGadgets = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FixTitleGadgetsPPC };
+STATIC CONST struct EmuTrap stub_FixTitleGadgets = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FixTitleGadgetsPPC};
 
 static BOOL stub_OriginalRelabelPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OriginalRelabel(
-		(char *)regarray[1],
-		(char *)regarray[2]
-	);
+	return Self->OriginalRelabel((char *)regarray[1], (char *)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_OriginalRelabel = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OriginalRelabelPPC };
+STATIC CONST struct EmuTrap stub_OriginalRelabel = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OriginalRelabelPPC};
 
-static ILBMHandle * stub_FakeILBMPPC(uint32 *regarray)
+static ILBMHandle *stub_FakeILBMPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->FakeILBM(
-		(UWORD *)regarray[8],
-		(ULONG *)regarray[9],
-		(short)convert_int16(regarray[0]),
-		(short)convert_int16(regarray[1]),
-		(short)convert_int16(regarray[2]),
-		(ULONG)regarray[3]
-	);
+	return Self->FakeILBM((UWORD *)regarray[8],
+						  (ULONG *)regarray[9],
+						  (short)convert_int16(regarray[0]),
+						  (short)convert_int16(regarray[1]),
+						  (short)convert_int16(regarray[2]),
+						  (ULONG)regarray[3]);
 }
-STATIC CONST struct EmuTrap stub_FakeILBM = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_FakeILBMPPC };
+STATIC CONST struct EmuTrap stub_FakeILBM = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_FakeILBMPPC};
 
 static ULONG stub_IPC_SafeCommandPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IPC_SafeCommand(
-		(IPCData *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(APTR)regarray[9],
-		(APTR)regarray[10],
-		(struct MsgPort *)regarray[11],
-		(struct ListLock *)regarray[12]
-	);
+	return Self->IPC_SafeCommand((IPCData *)regarray[8],
+								 (ULONG)regarray[0],
+								 (ULONG)regarray[1],
+								 (APTR)regarray[9],
+								 (APTR)regarray[10],
+								 (struct MsgPort *)regarray[11],
+								 (struct ListLock *)regarray[12]);
 }
-STATIC CONST struct EmuTrap stub_IPC_SafeCommand = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IPC_SafeCommandPPC };
+STATIC CONST struct EmuTrap stub_IPC_SafeCommand = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IPC_SafeCommandPPC};
 
 static void stub_ClearFiletypeCachePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ClearFiletypeCache(
-	);
+	Self->ClearFiletypeCache();
 }
-STATIC CONST struct EmuTrap stub_ClearFiletypeCache = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ClearFiletypeCachePPC };
+STATIC CONST struct EmuTrap stub_ClearFiletypeCache = {TRAPINST,
+													   TRAPTYPENR,
+													   (uint32(*)(uint32 *))stub_ClearFiletypeCachePPC};
 
-static struct Library * stub_GetTimerBasePPC(uint32 *regarray)
+static struct Library *stub_GetTimerBasePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetTimerBase(
-	);
+	return Self->GetTimerBase();
 }
-STATIC CONST struct EmuTrap stub_GetTimerBase = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetTimerBasePPC };
+STATIC CONST struct EmuTrap stub_GetTimerBase = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetTimerBasePPC};
 
 static BOOL stub_InitDragDBufPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->InitDragDBuf(
-		(DragInfo *)regarray[8]
-	);
+	return Self->InitDragDBuf((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_InitDragDBuf = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_InitDragDBufPPC };
+STATIC CONST struct EmuTrap stub_InitDragDBuf = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_InitDragDBufPPC};
 
 static void stub_FreeRexxMsgExPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeRexxMsgEx(
-		(struct RexxMsg *)regarray[8]
-	);
+	Self->FreeRexxMsgEx((struct RexxMsg *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeRexxMsgEx = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeRexxMsgExPPC };
+STATIC CONST struct EmuTrap stub_FreeRexxMsgEx = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeRexxMsgExPPC};
 
-static struct RexxMsg * stub_CreateRexxMsgExPPC(uint32 *regarray)
+static struct RexxMsg *stub_CreateRexxMsgExPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CreateRexxMsgEx(
-		(struct MsgPort *)regarray[8],
-		(UBYTE *)regarray[9],
-		(UBYTE *)regarray[0]
-	);
+	return Self->CreateRexxMsgEx((struct MsgPort *)regarray[8], (UBYTE *)regarray[9], (UBYTE *)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_CreateRexxMsgEx = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CreateRexxMsgExPPC };
+STATIC CONST struct EmuTrap stub_CreateRexxMsgEx = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CreateRexxMsgExPPC};
 
 static long stub_SetRexxVarExPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->SetRexxVarEx(
-		(struct RexxMsg *)regarray[8],
-		(char *)regarray[9],
-		(char *)regarray[0],
-		(long)regarray[1]
-	);
+		(struct RexxMsg *)regarray[8], (char *)regarray[9], (char *)regarray[0], (long)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_SetRexxVarEx = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SetRexxVarExPPC };
+STATIC CONST struct EmuTrap stub_SetRexxVarEx = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SetRexxVarExPPC};
 
 static long stub_GetRexxVarExPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetRexxVarEx(
-		(struct RexxMsg *)regarray[8],
-		(char *)regarray[9],
-		(char **)regarray[10]
-	);
+	return Self->GetRexxVarEx((struct RexxMsg *)regarray[8], (char *)regarray[9], (char **)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_GetRexxVarEx = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetRexxVarExPPC };
+STATIC CONST struct EmuTrap stub_GetRexxVarEx = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetRexxVarExPPC};
 
-static struct RexxMsg * stub_BuildRexxMsgExPPC(uint32 *regarray)
+static struct RexxMsg *stub_BuildRexxMsgExPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->BuildRexxMsgEx(
-		(struct MsgPort *)regarray[8],
-		(UBYTE *)regarray[9],
-		(UBYTE *)regarray[0],
-		(struct TagItem *)regarray[10]
-	);
+		(struct MsgPort *)regarray[8], (UBYTE *)regarray[9], (UBYTE *)regarray[0], (struct TagItem *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_BuildRexxMsgEx = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_BuildRexxMsgExPPC };
+STATIC CONST struct EmuTrap stub_BuildRexxMsgEx = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_BuildRexxMsgExPPC};
 
 static void stub_NotifyDiskChangePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->NotifyDiskChange(
-	);
+	Self->NotifyDiskChange();
 }
-STATIC CONST struct EmuTrap stub_NotifyDiskChange = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_NotifyDiskChangePPC };
+STATIC CONST struct EmuTrap stub_NotifyDiskChange = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_NotifyDiskChangePPC};
 
 static void stub_GetDosListCopyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->GetDosListCopy(
-		(struct List *)regarray[8],
-		(APTR)regarray[9]
-	);
+	Self->GetDosListCopy((struct List *)regarray[8], (APTR)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_GetDosListCopy = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetDosListCopyPPC };
+STATIC CONST struct EmuTrap stub_GetDosListCopy = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_GetDosListCopyPPC};
 
 static void stub_FreeDosListCopyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->FreeDosListCopy(
-		(struct List *)regarray[8]
-	);
+	Self->FreeDosListCopy((struct List *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_FreeDosListCopy = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_FreeDosListCopyPPC };
+STATIC CONST struct EmuTrap stub_FreeDosListCopy = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_FreeDosListCopyPPC};
 
 static BOOL stub_DateFromStringsNewPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->DateFromStringsNew(
-		(char *)regarray[8],
-		(char *)regarray[9],
-		(struct DateStamp *)regarray[10],
-		(ULONG)regarray[0]
-	);
+		(char *)regarray[8], (char *)regarray[9], (struct DateStamp *)regarray[10], (ULONG)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_DateFromStringsNew = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DateFromStringsNewPPC };
+STATIC CONST struct EmuTrap stub_DateFromStringsNew = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_DateFromStringsNewPPC};
 
 static BOOL stub_RemapIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->RemapIcon(
-		(struct DiskObject *)regarray[8],
-		(struct Screen *)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+		(struct DiskObject *)regarray[8], (struct Screen *)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_RemapIcon = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_RemapIconPPC };
+STATIC CONST struct EmuTrap stub_RemapIcon = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_RemapIconPPC};
 
-static struct DiskObject * stub_GetOriginalIconPPC(uint32 *regarray)
+static struct DiskObject *stub_GetOriginalIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetOriginalIcon(
-		(struct DiskObject *)regarray[8]
-	);
+	return Self->GetOriginalIcon((struct DiskObject *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetOriginalIcon = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetOriginalIconPPC };
+STATIC CONST struct EmuTrap stub_GetOriginalIcon = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetOriginalIconPPC};
 
 static long stub_CalcPercentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->CalcPercent(
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(struct Library *)regarray[8]
-	);
+	return Self->CalcPercent((ULONG)regarray[0], (ULONG)regarray[1], (struct Library *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_CalcPercent = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_CalcPercentPPC };
+STATIC CONST struct EmuTrap stub_CalcPercent = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_CalcPercentPPC};
 
 static BOOL stub_IsDiskDevicePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->IsDiskDevice(
-		(struct MsgPort *)regarray[8]
-	);
+	return Self->IsDiskDevice((struct MsgPort *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_IsDiskDevice = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_IsDiskDevicePPC };
+STATIC CONST struct EmuTrap stub_IsDiskDevice = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_IsDiskDevicePPC};
 
 static void stub_DrawDragListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DrawDragList(
-		(struct RastPort *)regarray[8],
-		(struct ViewPort *)regarray[9],
-		(long)regarray[0]
-	);
+	Self->DrawDragList((struct RastPort *)regarray[8], (struct ViewPort *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_DrawDragList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DrawDragListPPC };
+STATIC CONST struct EmuTrap stub_DrawDragList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DrawDragListPPC};
 
 static void stub_RemoveDragImagePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemoveDragImage(
-		(DragInfo *)regarray[8]
-	);
+	Self->RemoveDragImage((DragInfo *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_RemoveDragImage = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemoveDragImagePPC };
+STATIC CONST struct EmuTrap stub_RemoveDragImage = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_RemoveDragImagePPC};
 
 static void stub_SetNewIconsFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetNewIconsFlags(
-		(ULONG)regarray[0],
-		(short)convert_int16(regarray[1])
-	);
+	Self->SetNewIconsFlags((ULONG)regarray[0], (short)convert_int16(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_SetNewIconsFlags = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetNewIconsFlagsPPC };
+STATIC CONST struct EmuTrap stub_SetNewIconsFlags = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_SetNewIconsFlagsPPC};
 
 static long stub_ReadBufLinePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ReadBufLine(
-		(APTR)regarray[8],
-		(char *)regarray[9],
-		(long)regarray[0]
-	);
+	return Self->ReadBufLine((APTR)regarray[8], (char *)regarray[9], (long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_ReadBufLine = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ReadBufLinePPC };
+STATIC CONST struct EmuTrap stub_ReadBufLine = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ReadBufLinePPC};
 
 static ULONG stub_GetLibraryFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetLibraryFlags(
-	);
+	return Self->GetLibraryFlags();
 }
-STATIC CONST struct EmuTrap stub_GetLibraryFlags = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetLibraryFlagsPPC };
+STATIC CONST struct EmuTrap stub_GetLibraryFlags = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetLibraryFlagsPPC};
 
 static short stub_GetIconTypePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetIconType(
-		(struct DiskObject *)regarray[8]
-	);
+	return Self->GetIconType((struct DiskObject *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_GetIconType = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetIconTypePPC };
+STATIC CONST struct EmuTrap stub_GetIconType = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetIconTypePPC};
 
 static void stub_SetReqBackFillPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetReqBackFill(
-		(struct Hook *)regarray[8],
-		(struct Screen **)regarray[9]
-	);
+	Self->SetReqBackFill((struct Hook *)regarray[8], (struct Screen **)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_SetReqBackFill = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetReqBackFillPPC };
+STATIC CONST struct EmuTrap stub_SetReqBackFill = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetReqBackFillPPC};
 
-static struct Hook * stub_LockReqBackFillPPC(uint32 *regarray)
+static struct Hook *stub_LockReqBackFillPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->LockReqBackFill(
-		(struct Screen *)regarray[8]
-	);
+	return Self->LockReqBackFill((struct Screen *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_LockReqBackFill = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_LockReqBackFillPPC };
+STATIC CONST struct EmuTrap stub_LockReqBackFill = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_LockReqBackFillPPC};
 
 static void stub_UnlockReqBackFillPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UnlockReqBackFill(
-	);
+	Self->UnlockReqBackFill();
 }
-STATIC CONST struct EmuTrap stub_UnlockReqBackFill = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UnlockReqBackFillPPC };
+STATIC CONST struct EmuTrap stub_UnlockReqBackFill = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_UnlockReqBackFillPPC};
 
 static BOOL stub_DragCustomOkPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DragCustomOk(
-		(struct BitMap *)regarray[8]
-	);
+	return Self->DragCustomOk((struct BitMap *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DragCustomOk = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DragCustomOkPPC };
+STATIC CONST struct EmuTrap stub_DragCustomOk = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DragCustomOkPPC};
 
 static BOOL stub_WB_LaunchNewPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_LaunchNew(
-		(char *)regarray[8],
-		(struct Screen *)regarray[9],
-		(short)convert_int16(regarray[0]),
-		(long)regarray[1],
-		(char *)regarray[10]
-	);
+	return Self->WB_LaunchNew((char *)regarray[8],
+							  (struct Screen *)regarray[9],
+							  (short)convert_int16(regarray[0]),
+							  (long)regarray[1],
+							  (char *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_WB_LaunchNew = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_LaunchNewPPC };
+STATIC CONST struct EmuTrap stub_WB_LaunchNew = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_LaunchNewPPC};
 
 static void stub_UpdatePathListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UpdatePathList(
-	);
+	Self->UpdatePathList();
 }
-STATIC CONST struct EmuTrap stub_UpdatePathList = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdatePathListPPC };
+STATIC CONST struct EmuTrap stub_UpdatePathList = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_UpdatePathListPPC};
 
 static void stub_UpdateMyPathsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UpdateMyPaths(
-	);
+	Self->UpdateMyPaths();
 }
-STATIC CONST struct EmuTrap stub_UpdateMyPaths = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdateMyPathsPPC };
+STATIC CONST struct EmuTrap stub_UpdateMyPaths = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_UpdateMyPathsPPC};
 
 static void stub_GetPopUpImageSizePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->GetPopUpImageSize(
-		(struct Window *)regarray[8],
-		(PopUpMenu *)regarray[9],
-		(short *)regarray[10],
-		(short *)regarray[11]
-	);
+		(struct Window *)regarray[8], (PopUpMenu *)regarray[9], (short *)regarray[10], (short *)regarray[11]);
 }
-STATIC CONST struct EmuTrap stub_GetPopUpImageSize = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_GetPopUpImageSizePPC };
+STATIC CONST struct EmuTrap stub_GetPopUpImageSize = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_GetPopUpImageSizePPC};
 
 static BOOL stub_GetDeviceUnitPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetDeviceUnit(
-		(BPTR)regarray[8],
-		(char *)regarray[9],
-		(short *)regarray[10]
-	);
+	return Self->GetDeviceUnit((BPTR)regarray[8], (char *)regarray[9], (short *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_GetDeviceUnit = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetDeviceUnitPPC };
+STATIC CONST struct EmuTrap stub_GetDeviceUnit = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetDeviceUnitPPC};
 
 static void stub_StripWindowMessagesPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->StripWindowMessages(
-		(struct MsgPort *)regarray[8],
-		(struct IntuiMessage *)regarray[9]
-	);
+	Self->StripWindowMessages((struct MsgPort *)regarray[8], (struct IntuiMessage *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_StripWindowMessages = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_StripWindowMessagesPPC };
+STATIC CONST struct EmuTrap stub_StripWindowMessages = {TRAPINST,
+														TRAPTYPENR,
+														(uint32(*)(uint32 *))stub_StripWindowMessagesPPC};
 
 static BOOL stub_DeleteIconPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->DeleteIcon(
-		(char *)regarray[8]
-	);
+	return Self->DeleteIcon((char *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_DeleteIcon = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_DeleteIconPPC };
+STATIC CONST struct EmuTrap stub_DeleteIcon = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_DeleteIconPPC};
 
 static void stub_MUFSLoginPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->MUFSLogin(
-		(struct Window *)regarray[8],
-		(char *)regarray[9],
-		(char *)regarray[10]
-	);
+	Self->MUFSLogin((struct Window *)regarray[8], (char *)regarray[9], (char *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_MUFSLogin = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_MUFSLoginPPC };
+STATIC CONST struct EmuTrap stub_MUFSLogin = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_MUFSLoginPPC};
 
 static void stub_UpdateEnvironmentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->UpdateEnvironment(
-		(CFG_ENVR *)regarray[8]
-	);
+	Self->UpdateEnvironment((CFG_ENVR *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_UpdateEnvironment = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_UpdateEnvironmentPPC };
+STATIC CONST struct EmuTrap stub_UpdateEnvironment = {TRAPINST,
+													  TRAPTYPENR,
+													  (uint32(*)(uint32 *))stub_UpdateEnvironmentPPC};
 
 static void stub_ConvertStartMenuPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ConvertStartMenu(
-		(Cfg_ButtonBank *)regarray[8]
-	);
+	Self->ConvertStartMenu((Cfg_ButtonBank *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ConvertStartMenu = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ConvertStartMenuPPC };
+STATIC CONST struct EmuTrap stub_ConvertStartMenu = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_ConvertStartMenuPPC};
 
 static BPTR stub_GetOpusPathListPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetOpusPathList(
-	);
+	return Self->GetOpusPathList();
 }
-STATIC CONST struct EmuTrap stub_GetOpusPathList = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetOpusPathListPPC };
+STATIC CONST struct EmuTrap stub_GetOpusPathList = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetOpusPathListPPC};
 
 static long stub_GetStatisticsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->GetStatistics(
-		(long)regarray[0]
-	);
+	return Self->GetStatistics((long)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_GetStatistics = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_GetStatisticsPPC };
+STATIC CONST struct EmuTrap stub_GetStatistics = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_GetStatisticsPPC};
 
 static void stub_SetPopUpDelayPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->SetPopUpDelay(
-		(short)convert_int16(regarray[0])
-	);
+	Self->SetPopUpDelay((short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_SetPopUpDelay = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_SetPopUpDelayPPC };
+STATIC CONST struct EmuTrap stub_SetPopUpDelay = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_SetPopUpDelayPPC};
 
 static BOOL stub_WB_LaunchNotifyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_LaunchNotify(
-		(char *)regarray[8],
-		(struct Screen *)regarray[9],
-		(short)convert_int16(regarray[0]),
-		(long)regarray[1],
-		(char *)regarray[10],
-		(struct Process **)regarray[11],
-		(IPCData *)regarray[12],
-		(ULONG)regarray[2]
-	);
+	return Self->WB_LaunchNotify((char *)regarray[8],
+								 (struct Screen *)regarray[9],
+								 (short)convert_int16(regarray[0]),
+								 (long)regarray[1],
+								 (char *)regarray[10],
+								 (struct Process **)regarray[11],
+								 (IPCData *)regarray[12],
+								 (ULONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_WB_LaunchNotify = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_LaunchNotifyPPC };
+STATIC CONST struct EmuTrap stub_WB_LaunchNotify = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_WB_LaunchNotifyPPC};
 
-static struct Window * stub_WB_AppWindowWindowPPC(uint32 *regarray)
+static struct Window *stub_WB_AppWindowWindowPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->WB_AppWindowWindow(
-		(struct AppWindow *)regarray[8]
-	);
+	return Self->WB_AppWindowWindow((struct AppWindow *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_WB_AppWindowWindow = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_WB_AppWindowWindowPPC };
+STATIC CONST struct EmuTrap stub_WB_AppWindowWindow = {TRAPINST,
+													   TRAPTYPE,
+													   (uint32(*)(uint32 *))stub_WB_AppWindowWindowPPC};
 
 static BOOL stub_OpenEnvironmentPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->OpenEnvironment(
-		(char *)regarray[8],
-		(struct OpenEnvironmentData *)regarray[9]
-	);
+	return Self->OpenEnvironment((char *)regarray[8], (struct OpenEnvironmentData *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_OpenEnvironment = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_OpenEnvironmentPPC };
+STATIC CONST struct EmuTrap stub_OpenEnvironment = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_OpenEnvironmentPPC};
 
-static PopUpHandle * stub_PopUpNewHandlePPC(uint32 *regarray)
+static PopUpHandle *stub_PopUpNewHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->PopUpNewHandle(
-		(ULONG)regarray[0],
-		(ULONG (*)(ULONG, APTR, APTR))regarray[8],
-		(struct DOpusLocale *)regarray[9]
-	);
+		(ULONG)regarray[0], (ULONG(*)(ULONG, APTR, APTR))regarray[8], (struct DOpusLocale *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_PopUpNewHandle = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_PopUpNewHandlePPC };
+STATIC CONST struct EmuTrap stub_PopUpNewHandle = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_PopUpNewHandlePPC};
 
 static void stub_PopUpFreeHandlePPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->PopUpFreeHandle(
-		(PopUpHandle *)regarray[8]
-	);
+	Self->PopUpFreeHandle((PopUpHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_PopUpFreeHandle = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_PopUpFreeHandlePPC };
+STATIC CONST struct EmuTrap stub_PopUpFreeHandle = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_PopUpFreeHandlePPC};
 
-static PopUpItem * stub_PopUpNewItemPPC(uint32 *regarray)
+static PopUpItem *stub_PopUpNewItemPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->PopUpNewItem(
-		(PopUpHandle *)regarray[8],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1],
-		(ULONG)regarray[2]
-	);
+	return Self->PopUpNewItem((PopUpHandle *)regarray[8], (ULONG)regarray[0], (ULONG)regarray[1], (ULONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_PopUpNewItem = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_PopUpNewItemPPC };
+STATIC CONST struct EmuTrap stub_PopUpNewItem = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_PopUpNewItemPPC};
 
 static void stub_PopUpSeparatorPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->PopUpSeparator(
-		(PopUpHandle *)regarray[8]
-	);
+	Self->PopUpSeparator((PopUpHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_PopUpSeparator = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_PopUpSeparatorPPC };
+STATIC CONST struct EmuTrap stub_PopUpSeparator = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_PopUpSeparatorPPC};
 
 static BOOL stub_PopUpItemSubPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->PopUpItemSub(
-		(PopUpHandle *)regarray[8],
-		(PopUpItem *)regarray[9]
-	);
+	return Self->PopUpItemSub((PopUpHandle *)regarray[8], (PopUpItem *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_PopUpItemSub = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_PopUpItemSubPPC };
+STATIC CONST struct EmuTrap stub_PopUpItemSub = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_PopUpItemSubPPC};
 
 static void stub_PopUpEndSubPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->PopUpEndSub(
-		(PopUpHandle *)regarray[8]
-	);
+	Self->PopUpEndSub((PopUpHandle *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_PopUpEndSub = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_PopUpEndSubPPC };
+STATIC CONST struct EmuTrap stub_PopUpEndSub = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_PopUpEndSubPPC};
 
 static ULONG stub_PopUpSetFlagsPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	return Self->PopUpSetFlags(
-		(PopUpMenu *)regarray[8],
-		(UWORD)(regarray[0] & 0xffff),
-		(ULONG)regarray[1],
-		(ULONG)regarray[2]
-	);
+		(PopUpMenu *)regarray[8], (UWORD)(regarray[0] & 0xffff), (ULONG)regarray[1], (ULONG)regarray[2]);
 }
-STATIC CONST struct EmuTrap stub_PopUpSetFlags = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_PopUpSetFlagsPPC };
+STATIC CONST struct EmuTrap stub_PopUpSetFlags = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_PopUpSetFlagsPPC};
 
 static APTR stub_AddAllocBitmapPatchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->AddAllocBitmapPatch(
-		(struct Task *)regarray[8],
-		(struct Screen *)regarray[9]
-	);
+	return Self->AddAllocBitmapPatch((struct Task *)regarray[8], (struct Screen *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_AddAllocBitmapPatch = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_AddAllocBitmapPatchPPC };
+STATIC CONST struct EmuTrap stub_AddAllocBitmapPatch = {TRAPINST,
+														TRAPTYPE,
+														(uint32(*)(uint32 *))stub_AddAllocBitmapPatchPPC};
 
 static void stub_RemAllocBitmapPatchPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->RemAllocBitmapPatch(
-		(APTR)regarray[8]
-	);
+	Self->RemAllocBitmapPatch((APTR)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_RemAllocBitmapPatch = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_RemAllocBitmapPatchPPC };
+STATIC CONST struct EmuTrap stub_RemAllocBitmapPatch = {TRAPINST,
+														TRAPTYPENR,
+														(uint32(*)(uint32 *))stub_RemAllocBitmapPatchPPC};
 
 static BOOL stub_LoadPosPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->LoadPos(
-		(char *)regarray[8],
-		(struct IBox *)regarray[9],
-		(short *)regarray[0]
-	);
+	return Self->LoadPos((char *)regarray[8], (struct IBox *)regarray[9], (short *)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_LoadPos = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_LoadPosPPC };
+STATIC CONST struct EmuTrap stub_LoadPos = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_LoadPosPPC};
 
 static BOOL stub_SavePosPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->SavePos(
-		(char *)regarray[8],
-		(struct IBox *)regarray[9],
-		(short)convert_int16(regarray[0])
-	);
+	return Self->SavePos((char *)regarray[8], (struct IBox *)regarray[9], (short)convert_int16(regarray[0]));
 }
-STATIC CONST struct EmuTrap stub_SavePos = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_SavePosPPC };
+STATIC CONST struct EmuTrap stub_SavePos = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_SavePosPPC};
 
 static void stub_DivideU64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DivideU64(
-		(UQUAD *)regarray[8],
-		(ULONG)regarray[0],
-		(UQUAD *)regarray[9],
-		(UQUAD *)regarray[10]
-	);
+	Self->DivideU64((UQUAD *)regarray[8], (ULONG)regarray[0], (UQUAD *)regarray[9], (UQUAD *)regarray[10]);
 }
-STATIC CONST struct EmuTrap stub_DivideU64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideU64PPC };
+STATIC CONST struct EmuTrap stub_DivideU64 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_DivideU64PPC};
 
 static void stub_ItoaU64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->ItoaU64(
-		(UQUAD *)regarray[8],
-		(char *)regarray[9],
-		(int)regarray[0],
-		(char)convert_int8(regarray[1])
-	);
+	Self->ItoaU64((UQUAD *)regarray[8], (char *)regarray[9], (int)regarray[0], (char)convert_int8(regarray[1]));
 }
-STATIC CONST struct EmuTrap stub_ItoaU64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_ItoaU64PPC };
+STATIC CONST struct EmuTrap stub_ItoaU64 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_ItoaU64PPC};
 
 static void stub_DivideToString64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	Self->DivideToString64(
-		(char *)regarray[8],
-		(int)regarray[0],
-		(UQUAD *)regarray[9],
-		(ULONG)regarray[1],
-		(int)regarray[2],
-		(char)convert_int8(regarray[3])
-	);
+	Self->DivideToString64((char *)regarray[8],
+						   (int)regarray[0],
+						   (UQUAD *)regarray[9],
+						   (ULONG)regarray[1],
+						   (int)regarray[2],
+						   (char)convert_int8(regarray[3]));
 }
-STATIC CONST struct EmuTrap stub_DivideToString64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_DivideToString64PPC };
+STATIC CONST struct EmuTrap stub_DivideToString64 = {TRAPINST,
+													 TRAPTYPENR,
+													 (uint32(*)(uint32 *))stub_DivideToString64PPC};
 
 static void stub_BytesToString64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
 	Self->BytesToString64(
-		(UQUAD *)regarray[8],
-		(char *)regarray[9],
-		(int)regarray[0],
-		(int)regarray[1],
-		(char)convert_int8(regarray[2])
-	);
+		(UQUAD *)regarray[8], (char *)regarray[9], (int)regarray[0], (int)regarray[1], (char)convert_int8(regarray[2]));
 }
-STATIC CONST struct EmuTrap stub_BytesToString64 = { TRAPINST, TRAPTYPENR, (uint32 (*)(uint32 *))stub_BytesToString64PPC }; 
+STATIC CONST struct EmuTrap stub_BytesToString64 = {TRAPINST, TRAPTYPENR, (uint32(*)(uint32 *))stub_BytesToString64PPC};
 
 static BOOL stub_ExamineLock64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ExamineLock64(
-		(BPTR)regarray[0],
-		(FileInfoBlock64 *)regarray[8]
-	);
+	return Self->ExamineLock64((BPTR)regarray[0], (FileInfoBlock64 *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ExamineLock64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineLock64PPC };
+STATIC CONST struct EmuTrap stub_ExamineLock64 = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ExamineLock64PPC};
 
 static BOOL stub_ExamineNext64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ExamineNext64(
-		(BPTR)regarray[0],
-		(FileInfoBlock64 *)regarray[8]
-	);
+	return Self->ExamineNext64((BPTR)regarray[0], (FileInfoBlock64 *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ExamineNext64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineNext64PPC };
+STATIC CONST struct EmuTrap stub_ExamineNext64 = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ExamineNext64PPC};
 
 static BOOL stub_ExamineHandle64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->ExamineHandle64(
-		(BPTR)regarray[0],
-		(FileInfoBlock64 *)regarray[8]
-	);
+	return Self->ExamineHandle64((BPTR)regarray[0], (FileInfoBlock64 *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_ExamineHandle64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_ExamineHandle64PPC };
+STATIC CONST struct EmuTrap stub_ExamineHandle64 = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_ExamineHandle64PPC};
 
 static LONG stub_MatchFirst64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->MatchFirst64(
-		(STRPTR)regarray[8],
-		(struct AnchorPath *)regarray[9]
-	);
+	return Self->MatchFirst64((STRPTR)regarray[8], (struct AnchorPath *)regarray[9]);
 }
-STATIC CONST struct EmuTrap stub_MatchFirst64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_MatchFirst64PPC };
+STATIC CONST struct EmuTrap stub_MatchFirst64 = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_MatchFirst64PPC};
 
 static LONG stub_MatchNext64PPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct DOpusIFace *Self = (struct DOpusIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct DOpusIFace *Self = (struct DOpusIFace *)ExtLib->MainIFace;
 
-	return Self->MatchNext64(
-		(struct AnchorPath *)regarray[8]
-	);
+	return Self->MatchNext64((struct AnchorPath *)regarray[8]);
 }
-STATIC CONST struct EmuTrap stub_MatchNext64 = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_MatchNext64PPC };
+STATIC CONST struct EmuTrap stub_MatchNext64 = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_MatchNext64PPC};
 
-
-
-CONST CONST_APTR VecTable68K[] =
-{
-	&stub_Open,
-	&stub_Close,
-	&stub_Expunge,
-	&stub_Reserved,
-	&stub_RemovedFunc0,
-	&stub_RandomDopus,
-	&stub_Atoh,
-	&stub_BtoCStr,
-	&stub_DivideU,
-	&stub_Itoa,
-	&stub_ItoaU,
-	&stub_Ito26,
-	&stub_BytesToString,
-	&stub_DivideToString,
-	&stub_SetBusyPointer,
-	&stub_BuildKeyString,
-	&stub_ActivateStrGad,
-	&stub_AllocTimer,
-	&stub_FreeTimer,
-	&stub_StartTimer,
-	&stub_CheckTimer,
-	&stub_StopTimer,
-	&stub_GetDosPathList,
-	&stub_FreeDosPathList,
-	&stub_DoSimpleRequest,
-	&stub_SimpleRequest,
-	&stub_SelectionList,
-	&stub_WriteIcon,
-	&stub_WriteFileIcon,
-	&stub_GetDragInfo,
-	&stub_FreeDragInfo,
-	&stub_GetDragImage,
-	&stub_ShowDragImage,
-	&stub_HideDragImage,
-	&stub_StampDragImage,
-	&stub_GetDragMask,
-	&stub_CheckDragDeadlock,
-	&stub_AddDragImage,
-	&stub_RemDragImage,
-	&stub_OpenConfigWindow,
-	&stub_CloseConfigWindow,
-	&stub_GetWindowMsg,
-	&stub_ReplyWindowMsg,
-	&stub_StripIntuiMessagesDopus,
-	&stub_CloseWindowSafely,
-	&stub_CalcObjectDims,
-	&stub_CalcWindowDims,
-	&stub_AddObjectList,
-	&stub_FreeObject,
-	&stub_FreeObjectList,
-	&stub_RefreshObjectList,
-	&stub_GetObject,
-	&stub_StoreGadgetValue,
-	&stub_SetGadgetValue,
-	&stub_GetGadgetValue,
-	&stub_SetObjectKind,
-	&stub_SetGadgetChoices,
-	&stub_CheckObjectArea,
-	&stub_GetObjectRect,
-	&stub_DisplayObject,
-	&stub_DisableObject,
-	&stub_BoundsCheckGadget,
-	&stub_AddWindowMenus,
-	&stub_FreeWindowMenus,
-	&stub_SetWindowBusy,
-	&stub_ClearWindowBusy,
-	&stub_GetString,
-	&stub_FindKeyEquivalent,
-	&stub_ShowProgressBar,
-	&stub_SetWindowID,
-	&stub_GetWindowID,
-	&stub_GetWindowAppPort,
-	&stub_Att_NewList,
-	&stub_Att_NewNode,
-	&stub_Att_RemNode,
-	&stub_Att_PosNode,
-	&stub_Att_RemList,
-	&stub_Att_FindNode,
-	&stub_Att_NodeNumber,
-	&stub_Att_FindNodeData,
-	&stub_Att_NodeDataNumber,
-	&stub_Att_NodeName,
-	&stub_Att_NodeCount,
-	&stub_Att_ChangeNodeName,
-	&stub_Att_FindNodeNumber,
-	&stub_AddSorted,
-	&stub_BuildMenuStrip,
-	&stub_FindMenuItem,
-	&stub_DoPopUpMenu,
-	&stub_GetPopUpItem,
-	&stub_IPC_Startup,
-	&stub_IPC_Command,
-	&stub_IPC_Reply,
-	&stub_IPC_Free,
-	&stub_IPC_FindProc,
-	&stub_IPC_Quit,
-	&stub_IPC_Hello,
-	&stub_IPC_Goodbye,
-	&stub_IPC_GetGoodbye,
-	&stub_IPC_ListQuit,
-	&stub_IPC_Flush,
-	&stub_IPC_ListCommand,
-	&stub_IPC_ProcStartup,
-	&stub_IPC_Launch,
-	&stub_OpenImage,
-	&stub_CloseImage,
-	&stub_CopyImage,
-	&stub_FlushImages,
-	&stub_RenderImage,
-	&stub_GetImageAttrs,
-	&stub_NewMemHandle,
-	&stub_FreeMemHandle,
-	&stub_ClearMemHandle,
-	&stub_AllocMemH,
-	&stub_FreeMemH,
-	&stub_DrawBox,
-	&stub_DrawFieldBox,
-	&stub_NewLister,
-	&stub_NewButtonBank,
-	&stub_NewButton,
-	&stub_NewFunction,
-	&stub_NewInstruction,
-	&stub_ReadSettings,
-	&stub_ReadListerDef,
-	&stub_OpenButtonBank,
-	&stub_DefaultSettings,
-	&stub_DefaultEnvironment,
-	&stub_DefaultButtonBank,
-	&stub_SaveSettings,
-	&stub_SaveListerDef,
-	&stub_SaveButtonBank,
-	&stub_CloseButtonBank,
-	&stub_FreeListerDef,
-	&stub_FreeButtonList,
-	&stub_FreeButtonImages,
-	&stub_FreeButton,
-	&stub_FreeFunction,
-	&stub_FreeInstruction,
-	&stub_FreeInstructionList,
-	&stub_CopyButtonBank,
-	&stub_CopyButton,
-	&stub_CopyFunction,
-	&stub_NewFiletype,
-	&stub_ReadFiletypes,
-	&stub_SaveFiletypeList,
-	&stub_FreeFiletypeList,
-	&stub_FreeFiletype,
-	&stub_CopyFiletype,
-	&stub_FindFunctionType,
-	&stub_SaveButton,
-	&stub_ReadButton,
-	&stub_ReadFunction,
-	&stub_OpenIFFFile,
-	&stub_CloseIFFFile,
-	&stub_OpenStatusWindow,
-	&stub_SetStatusText,
-	&stub_UpdateStatusGraph,
-	&stub_ReadILBM,
-	&stub_FreeILBM,
-	&stub_DecodeILBM,
-	&stub_DecodeRLE,
-	&stub_LoadPalette32,
-	&stub_GetPalette32,
-	&stub_OpenBuf,
-	&stub_CloseBuf,
-	&stub_ReadBuf,
-	&stub_WriteBuf,
-	&stub_FlushBuf,
-	&stub_SeekBuf,
-	&stub_ExamineBuf,
-	&stub_OpenDisk,
-	&stub_CloseDisk,
-	&stub_AddScrollBars,
-	&stub_FindBOOPSIGadget,
-	&stub_BOOPSIFree,
-	&stub_SerialValid,
-	&stub_WB_Install_Patch,
-	&stub_WB_Remove_Patch,
-	&stub_WB_AddAppWindow,
-	&stub_WB_RemoveAppWindow,
-	&stub_WB_FindAppWindow,
-	&stub_WB_AppWindowData,
-	&stub_WB_AppWindowLocal,
-	&stub_LockAppList,
-	&stub_NextAppEntry,
-	&stub_UnlockAppList,
-	&stub_AddNotifyRequest,
-	&stub_RemoveNotifyRequest,
-	&stub_SendNotifyMsg,
-	&stub_StrCombine,
-	&stub_StrConcat,
-	&stub_WB_Launch,
-	&stub_CopyLocalEnv,
-	&stub_CLI_Launch,
-	&stub_SerialCheck,
-	&stub_ChecksumFile,
-	&stub_ReplyFreeMsg,
-	&stub_TimerActive,
-	&stub_NewButtonFunction,
-	&stub_IFFOpen,
-	&stub_IFFClose,
-	&stub_IFFPushChunk,
-	&stub_IFFWriteChunkBytes,
-	&stub_IFFPopChunk,
-	&stub_IFFWriteChunk,
-	&stub_FindNameI,
-	&stub_AnimDecodeRIFFXor,
-	&stub_AnimDecodeRIFFSet,
-	&stub_ConvertRawKey,
-	&stub_OpenClipBoard,
-	&stub_CloseClipBoard,
-	&stub_WriteClipString,
-	&stub_ReadClipString,
-	&stub_LockAttList,
-	&stub_UnlockAttList,
-	&stub_RemovedFunc1,
-	&stub_RemovedFunc2,
-	&stub_RemovedFunc3,
-	&stub_RemovedFunc4,
-	&stub_RemovedFunc5,
-	&stub_RemovedFunc6,
-	&stub_RemovedFunc7,
-	&stub_GetSemaphore,
-	&stub_FreeSemaphore,
-	&stub_ShowSemaphore,
-	&stub_SaveFunction,
-	&stub_IFFNextChunk,
-	&stub_IFFChunkSize,
-	&stub_IFFReadChunkBytes,
-	&stub_IFFFileHandle,
-	&stub_IFFChunkRemain,
-	&stub_IFFChunkID,
-	&stub_IFFGetFORM,
-	&stub_ScreenInfo,
-	&stub_GetEditHook,
-	&stub_FreeEditHook,
-	&stub_InitWindowDims,
-	&stub_StoreWindowDims,
-	&stub_CheckWindowDims,
-	&stub_InitListLock,
-	&stub_IPC_QuitName,
-	&stub_QualValid,
-	&stub_FHFromBuf,
-	&stub_WB_AppIconFlags,
-	&stub_GetWBArgPath,
-	&stub_RemovedFunc8,
-	&stub_DeviceFromLock,
-	&stub_DeviceFromHandler,
-	&stub_DevNameFromLockDopus,
-	&stub_GetIconFlags,
-	&stub_SetIconFlags,
-	&stub_GetIconPosition,
-	&stub_SetIconPosition,
-	&stub_BuildTransDragMask,
-	&stub_GetImagePalette,
-	&stub_FreeImageRemap,
-	&stub_SwapListNodes,
-	&stub_RemovedFunc9,
-	&stub_Seed,
-	&stub_RemovedFunc10,
-	&stub_RemovedFunc11,
-	&stub_RemovedFunc12,
-	&stub_CopyDiskObject,
-	&stub_FreeDiskObjectCopy,
-	&stub_IFFFailure,
-	&stub_GetCachedDefDiskObject,
-	&stub_FreeCachedDiskObject,
-	&stub_GetCachedDiskObject,
-	&stub_GetCachedDiskObjectNew,
-	&stub_IconCheckSum,
-	&stub_OpenProgressWindow,
-	&stub_CloseProgressWindow,
-	&stub_HideProgressWindow,
-	&stub_ShowProgressWindow,
-	&stub_SetProgressWindow,
-	&stub_GetProgressWindow,
-	&stub_SetNotifyRequest,
-	&stub_ChangeAppIcon,
-	&stub_CheckProgressAbort,
-	&stub_GetSecureString,
-	&stub_NewButtonWithFunc,
-	&stub_FreeButtonFunction,
-	&stub_CopyButtonFunction,
-	&stub_FindPubScreen,
-	&stub_SetAppIconMenuState,
-	&stub_SearchFile,
-	&stub_ParseDateStrings,
-	&stub_DateFromStrings,
-	&stub_GetMatchHandle,
-	&stub_FreeMatchHandle,
-	&stub_MatchFiletype,
-	&stub_LayoutResize,
-	&stub_GetFileVersion,
-	&stub_AsyncRequest,
-	&stub_CheckRefreshMsg,
-	&stub_RemapImage,
-	&stub_FreeRemapImage,
-	&stub_FreeAppMessage,
-	&stub_ReplyAppMessage,
-	&stub_SetLibraryFlags,
-	&stub_StartRefreshConfigWindow,
-	&stub_EndRefreshConfigWindow,
-	&stub_CompareListFormat,
-	&stub_UpdateGadgetValue,
-	&stub_UpdateGadgetList,
-	&stub_NewBitMap,
-	&stub_DisposeBitMap,
-	&stub_ParseArgs,
-	&stub_DisposeArgs,
-	&stub_SetConfigWindowLimits,
-	&stub_SetEnv,
-	&stub_IsListLockEmpty,
-	&stub_AllocAppMessage,
-	&stub_CheckAppMessage,
-	&stub_CopyAppMessage,
-	&stub_SetWBArg,
-	&stub_OriginalCreateDir,
-	&stub_OriginalDeleteFile,
-	&stub_OriginalSetFileDate,
-	&stub_OriginalSetComment,
-	&stub_OriginalSetProtection,
-	&stub_OriginalRename,
-	&stub_OriginalOpen,
-	&stub_OriginalClose,
-	&stub_OriginalWrite,
-	&stub_CreateTitleGadget,
-	&stub_FindGadgetType,
-	&stub_FixTitleGadgets,
-	&stub_OriginalRelabel,
-	&stub_FakeILBM,
-	&stub_IPC_SafeCommand,
-	&stub_ClearFiletypeCache,
-	&stub_GetTimerBase,
-	&stub_InitDragDBuf,
-	&stub_FreeRexxMsgEx,
-	&stub_CreateRexxMsgEx,
-	&stub_SetRexxVarEx,
-	&stub_GetRexxVarEx,
-	&stub_BuildRexxMsgEx,
-	&stub_NotifyDiskChange,
-	&stub_GetDosListCopy,
-	&stub_FreeDosListCopy,
-	&stub_DateFromStringsNew,
-	&stub_RemapIcon,
-	&stub_GetOriginalIcon,
-	&stub_CalcPercent,
-	&stub_IsDiskDevice,
-	&stub_DrawDragList,
-	&stub_RemoveDragImage,
-	&stub_SetNewIconsFlags,
-	&stub_ReadBufLine,
-	&stub_GetLibraryFlags,
-	&stub_GetIconType,
-	&stub_SetReqBackFill,
-	&stub_LockReqBackFill,
-	&stub_UnlockReqBackFill,
-	&stub_DragCustomOk,
-	&stub_WB_LaunchNew,
-	&stub_UpdatePathList,
-	&stub_UpdateMyPaths,
-	&stub_GetPopUpImageSize,
-	&stub_GetDeviceUnit,
-	&stub_StripWindowMessages,
-	&stub_DeleteIcon,
-	&stub_MUFSLogin,
-	&stub_UpdateEnvironment,
-	&stub_ConvertStartMenu,
-	&stub_GetOpusPathList,
-	&stub_GetStatistics,
-	&stub_SetPopUpDelay,
-	&stub_WB_LaunchNotify,
-	&stub_WB_AppWindowWindow,
-	&stub_OpenEnvironment,
-	&stub_PopUpNewHandle,
-	&stub_PopUpFreeHandle,
-	&stub_PopUpNewItem,
-	&stub_PopUpSeparator,
-	&stub_PopUpItemSub,
-	&stub_PopUpEndSub,
-	&stub_PopUpSetFlags,
-	&stub_AddAllocBitmapPatch,
-	&stub_RemAllocBitmapPatch,
-	&stub_LoadPos,
-	&stub_SavePos,
-	&stub_DivideU64,
-	&stub_ItoaU64,
-	&stub_DivideToString64,
-	&stub_BytesToString64,	
-	&stub_ExamineLock64,
-	&stub_ExamineNext64,
-	&stub_ExamineHandle64,
-	&stub_MatchFirst64,
-	&stub_MatchNext64,
-	(CONST_APTR)-1
-};
-
+CONST CONST_APTR VecTable68K[] = {&stub_Open,
+								  &stub_Close,
+								  &stub_Expunge,
+								  &stub_Reserved,
+								  &stub_RemovedFunc0,
+								  &stub_RandomDopus,
+								  &stub_Atoh,
+								  &stub_BtoCStr,
+								  &stub_DivideU,
+								  &stub_Itoa,
+								  &stub_ItoaU,
+								  &stub_Ito26,
+								  &stub_BytesToString,
+								  &stub_DivideToString,
+								  &stub_SetBusyPointer,
+								  &stub_BuildKeyString,
+								  &stub_ActivateStrGad,
+								  &stub_AllocTimer,
+								  &stub_FreeTimer,
+								  &stub_StartTimer,
+								  &stub_CheckTimer,
+								  &stub_StopTimer,
+								  &stub_GetDosPathList,
+								  &stub_FreeDosPathList,
+								  &stub_DoSimpleRequest,
+								  &stub_SimpleRequest,
+								  &stub_SelectionList,
+								  &stub_WriteIcon,
+								  &stub_WriteFileIcon,
+								  &stub_GetDragInfo,
+								  &stub_FreeDragInfo,
+								  &stub_GetDragImage,
+								  &stub_ShowDragImage,
+								  &stub_HideDragImage,
+								  &stub_StampDragImage,
+								  &stub_GetDragMask,
+								  &stub_CheckDragDeadlock,
+								  &stub_AddDragImage,
+								  &stub_RemDragImage,
+								  &stub_OpenConfigWindow,
+								  &stub_CloseConfigWindow,
+								  &stub_GetWindowMsg,
+								  &stub_ReplyWindowMsg,
+								  &stub_StripIntuiMessagesDopus,
+								  &stub_CloseWindowSafely,
+								  &stub_CalcObjectDims,
+								  &stub_CalcWindowDims,
+								  &stub_AddObjectList,
+								  &stub_FreeObject,
+								  &stub_FreeObjectList,
+								  &stub_RefreshObjectList,
+								  &stub_GetObject,
+								  &stub_StoreGadgetValue,
+								  &stub_SetGadgetValue,
+								  &stub_GetGadgetValue,
+								  &stub_SetObjectKind,
+								  &stub_SetGadgetChoices,
+								  &stub_CheckObjectArea,
+								  &stub_GetObjectRect,
+								  &stub_DisplayObject,
+								  &stub_DisableObject,
+								  &stub_BoundsCheckGadget,
+								  &stub_AddWindowMenus,
+								  &stub_FreeWindowMenus,
+								  &stub_SetWindowBusy,
+								  &stub_ClearWindowBusy,
+								  &stub_GetString,
+								  &stub_FindKeyEquivalent,
+								  &stub_ShowProgressBar,
+								  &stub_SetWindowID,
+								  &stub_GetWindowID,
+								  &stub_GetWindowAppPort,
+								  &stub_Att_NewList,
+								  &stub_Att_NewNode,
+								  &stub_Att_RemNode,
+								  &stub_Att_PosNode,
+								  &stub_Att_RemList,
+								  &stub_Att_FindNode,
+								  &stub_Att_NodeNumber,
+								  &stub_Att_FindNodeData,
+								  &stub_Att_NodeDataNumber,
+								  &stub_Att_NodeName,
+								  &stub_Att_NodeCount,
+								  &stub_Att_ChangeNodeName,
+								  &stub_Att_FindNodeNumber,
+								  &stub_AddSorted,
+								  &stub_BuildMenuStrip,
+								  &stub_FindMenuItem,
+								  &stub_DoPopUpMenu,
+								  &stub_GetPopUpItem,
+								  &stub_IPC_Startup,
+								  &stub_IPC_Command,
+								  &stub_IPC_Reply,
+								  &stub_IPC_Free,
+								  &stub_IPC_FindProc,
+								  &stub_IPC_Quit,
+								  &stub_IPC_Hello,
+								  &stub_IPC_Goodbye,
+								  &stub_IPC_GetGoodbye,
+								  &stub_IPC_ListQuit,
+								  &stub_IPC_Flush,
+								  &stub_IPC_ListCommand,
+								  &stub_IPC_ProcStartup,
+								  &stub_IPC_Launch,
+								  &stub_OpenImage,
+								  &stub_CloseImage,
+								  &stub_CopyImage,
+								  &stub_FlushImages,
+								  &stub_RenderImage,
+								  &stub_GetImageAttrs,
+								  &stub_NewMemHandle,
+								  &stub_FreeMemHandle,
+								  &stub_ClearMemHandle,
+								  &stub_AllocMemH,
+								  &stub_FreeMemH,
+								  &stub_DrawBox,
+								  &stub_DrawFieldBox,
+								  &stub_NewLister,
+								  &stub_NewButtonBank,
+								  &stub_NewButton,
+								  &stub_NewFunction,
+								  &stub_NewInstruction,
+								  &stub_ReadSettings,
+								  &stub_ReadListerDef,
+								  &stub_OpenButtonBank,
+								  &stub_DefaultSettings,
+								  &stub_DefaultEnvironment,
+								  &stub_DefaultButtonBank,
+								  &stub_SaveSettings,
+								  &stub_SaveListerDef,
+								  &stub_SaveButtonBank,
+								  &stub_CloseButtonBank,
+								  &stub_FreeListerDef,
+								  &stub_FreeButtonList,
+								  &stub_FreeButtonImages,
+								  &stub_FreeButton,
+								  &stub_FreeFunction,
+								  &stub_FreeInstruction,
+								  &stub_FreeInstructionList,
+								  &stub_CopyButtonBank,
+								  &stub_CopyButton,
+								  &stub_CopyFunction,
+								  &stub_NewFiletype,
+								  &stub_ReadFiletypes,
+								  &stub_SaveFiletypeList,
+								  &stub_FreeFiletypeList,
+								  &stub_FreeFiletype,
+								  &stub_CopyFiletype,
+								  &stub_FindFunctionType,
+								  &stub_SaveButton,
+								  &stub_ReadButton,
+								  &stub_ReadFunction,
+								  &stub_OpenIFFFile,
+								  &stub_CloseIFFFile,
+								  &stub_OpenStatusWindow,
+								  &stub_SetStatusText,
+								  &stub_UpdateStatusGraph,
+								  &stub_ReadILBM,
+								  &stub_FreeILBM,
+								  &stub_DecodeILBM,
+								  &stub_DecodeRLE,
+								  &stub_LoadPalette32,
+								  &stub_GetPalette32,
+								  &stub_OpenBuf,
+								  &stub_CloseBuf,
+								  &stub_ReadBuf,
+								  &stub_WriteBuf,
+								  &stub_FlushBuf,
+								  &stub_SeekBuf,
+								  &stub_ExamineBuf,
+								  &stub_OpenDisk,
+								  &stub_CloseDisk,
+								  &stub_AddScrollBars,
+								  &stub_FindBOOPSIGadget,
+								  &stub_BOOPSIFree,
+								  &stub_SerialValid,
+								  &stub_WB_Install_Patch,
+								  &stub_WB_Remove_Patch,
+								  &stub_WB_AddAppWindow,
+								  &stub_WB_RemoveAppWindow,
+								  &stub_WB_FindAppWindow,
+								  &stub_WB_AppWindowData,
+								  &stub_WB_AppWindowLocal,
+								  &stub_LockAppList,
+								  &stub_NextAppEntry,
+								  &stub_UnlockAppList,
+								  &stub_AddNotifyRequest,
+								  &stub_RemoveNotifyRequest,
+								  &stub_SendNotifyMsg,
+								  &stub_StrCombine,
+								  &stub_StrConcat,
+								  &stub_WB_Launch,
+								  &stub_CopyLocalEnv,
+								  &stub_CLI_Launch,
+								  &stub_SerialCheck,
+								  &stub_ChecksumFile,
+								  &stub_ReplyFreeMsg,
+								  &stub_TimerActive,
+								  &stub_NewButtonFunction,
+								  &stub_IFFOpen,
+								  &stub_IFFClose,
+								  &stub_IFFPushChunk,
+								  &stub_IFFWriteChunkBytes,
+								  &stub_IFFPopChunk,
+								  &stub_IFFWriteChunk,
+								  &stub_FindNameI,
+								  &stub_AnimDecodeRIFFXor,
+								  &stub_AnimDecodeRIFFSet,
+								  &stub_ConvertRawKey,
+								  &stub_OpenClipBoard,
+								  &stub_CloseClipBoard,
+								  &stub_WriteClipString,
+								  &stub_ReadClipString,
+								  &stub_LockAttList,
+								  &stub_UnlockAttList,
+								  &stub_RemovedFunc1,
+								  &stub_RemovedFunc2,
+								  &stub_RemovedFunc3,
+								  &stub_RemovedFunc4,
+								  &stub_RemovedFunc5,
+								  &stub_RemovedFunc6,
+								  &stub_RemovedFunc7,
+								  &stub_GetSemaphore,
+								  &stub_FreeSemaphore,
+								  &stub_ShowSemaphore,
+								  &stub_SaveFunction,
+								  &stub_IFFNextChunk,
+								  &stub_IFFChunkSize,
+								  &stub_IFFReadChunkBytes,
+								  &stub_IFFFileHandle,
+								  &stub_IFFChunkRemain,
+								  &stub_IFFChunkID,
+								  &stub_IFFGetFORM,
+								  &stub_ScreenInfo,
+								  &stub_GetEditHook,
+								  &stub_FreeEditHook,
+								  &stub_InitWindowDims,
+								  &stub_StoreWindowDims,
+								  &stub_CheckWindowDims,
+								  &stub_InitListLock,
+								  &stub_IPC_QuitName,
+								  &stub_QualValid,
+								  &stub_FHFromBuf,
+								  &stub_WB_AppIconFlags,
+								  &stub_GetWBArgPath,
+								  &stub_RemovedFunc8,
+								  &stub_DeviceFromLock,
+								  &stub_DeviceFromHandler,
+								  &stub_DevNameFromLockDopus,
+								  &stub_GetIconFlags,
+								  &stub_SetIconFlags,
+								  &stub_GetIconPosition,
+								  &stub_SetIconPosition,
+								  &stub_BuildTransDragMask,
+								  &stub_GetImagePalette,
+								  &stub_FreeImageRemap,
+								  &stub_SwapListNodes,
+								  &stub_RemovedFunc9,
+								  &stub_Seed,
+								  &stub_RemovedFunc10,
+								  &stub_RemovedFunc11,
+								  &stub_RemovedFunc12,
+								  &stub_CopyDiskObject,
+								  &stub_FreeDiskObjectCopy,
+								  &stub_IFFFailure,
+								  &stub_GetCachedDefDiskObject,
+								  &stub_FreeCachedDiskObject,
+								  &stub_GetCachedDiskObject,
+								  &stub_GetCachedDiskObjectNew,
+								  &stub_IconCheckSum,
+								  &stub_OpenProgressWindow,
+								  &stub_CloseProgressWindow,
+								  &stub_HideProgressWindow,
+								  &stub_ShowProgressWindow,
+								  &stub_SetProgressWindow,
+								  &stub_GetProgressWindow,
+								  &stub_SetNotifyRequest,
+								  &stub_ChangeAppIcon,
+								  &stub_CheckProgressAbort,
+								  &stub_GetSecureString,
+								  &stub_NewButtonWithFunc,
+								  &stub_FreeButtonFunction,
+								  &stub_CopyButtonFunction,
+								  &stub_FindPubScreen,
+								  &stub_SetAppIconMenuState,
+								  &stub_SearchFile,
+								  &stub_ParseDateStrings,
+								  &stub_DateFromStrings,
+								  &stub_GetMatchHandle,
+								  &stub_FreeMatchHandle,
+								  &stub_MatchFiletype,
+								  &stub_LayoutResize,
+								  &stub_GetFileVersion,
+								  &stub_AsyncRequest,
+								  &stub_CheckRefreshMsg,
+								  &stub_RemapImage,
+								  &stub_FreeRemapImage,
+								  &stub_FreeAppMessage,
+								  &stub_ReplyAppMessage,
+								  &stub_SetLibraryFlags,
+								  &stub_StartRefreshConfigWindow,
+								  &stub_EndRefreshConfigWindow,
+								  &stub_CompareListFormat,
+								  &stub_UpdateGadgetValue,
+								  &stub_UpdateGadgetList,
+								  &stub_NewBitMap,
+								  &stub_DisposeBitMap,
+								  &stub_ParseArgs,
+								  &stub_DisposeArgs,
+								  &stub_SetConfigWindowLimits,
+								  &stub_SetEnv,
+								  &stub_IsListLockEmpty,
+								  &stub_AllocAppMessage,
+								  &stub_CheckAppMessage,
+								  &stub_CopyAppMessage,
+								  &stub_SetWBArg,
+								  &stub_OriginalCreateDir,
+								  &stub_OriginalDeleteFile,
+								  &stub_OriginalSetFileDate,
+								  &stub_OriginalSetComment,
+								  &stub_OriginalSetProtection,
+								  &stub_OriginalRename,
+								  &stub_OriginalOpen,
+								  &stub_OriginalClose,
+								  &stub_OriginalWrite,
+								  &stub_CreateTitleGadget,
+								  &stub_FindGadgetType,
+								  &stub_FixTitleGadgets,
+								  &stub_OriginalRelabel,
+								  &stub_FakeILBM,
+								  &stub_IPC_SafeCommand,
+								  &stub_ClearFiletypeCache,
+								  &stub_GetTimerBase,
+								  &stub_InitDragDBuf,
+								  &stub_FreeRexxMsgEx,
+								  &stub_CreateRexxMsgEx,
+								  &stub_SetRexxVarEx,
+								  &stub_GetRexxVarEx,
+								  &stub_BuildRexxMsgEx,
+								  &stub_NotifyDiskChange,
+								  &stub_GetDosListCopy,
+								  &stub_FreeDosListCopy,
+								  &stub_DateFromStringsNew,
+								  &stub_RemapIcon,
+								  &stub_GetOriginalIcon,
+								  &stub_CalcPercent,
+								  &stub_IsDiskDevice,
+								  &stub_DrawDragList,
+								  &stub_RemoveDragImage,
+								  &stub_SetNewIconsFlags,
+								  &stub_ReadBufLine,
+								  &stub_GetLibraryFlags,
+								  &stub_GetIconType,
+								  &stub_SetReqBackFill,
+								  &stub_LockReqBackFill,
+								  &stub_UnlockReqBackFill,
+								  &stub_DragCustomOk,
+								  &stub_WB_LaunchNew,
+								  &stub_UpdatePathList,
+								  &stub_UpdateMyPaths,
+								  &stub_GetPopUpImageSize,
+								  &stub_GetDeviceUnit,
+								  &stub_StripWindowMessages,
+								  &stub_DeleteIcon,
+								  &stub_MUFSLogin,
+								  &stub_UpdateEnvironment,
+								  &stub_ConvertStartMenu,
+								  &stub_GetOpusPathList,
+								  &stub_GetStatistics,
+								  &stub_SetPopUpDelay,
+								  &stub_WB_LaunchNotify,
+								  &stub_WB_AppWindowWindow,
+								  &stub_OpenEnvironment,
+								  &stub_PopUpNewHandle,
+								  &stub_PopUpFreeHandle,
+								  &stub_PopUpNewItem,
+								  &stub_PopUpSeparator,
+								  &stub_PopUpItemSub,
+								  &stub_PopUpEndSub,
+								  &stub_PopUpSetFlags,
+								  &stub_AddAllocBitmapPatch,
+								  &stub_RemAllocBitmapPatch,
+								  &stub_LoadPos,
+								  &stub_SavePos,
+								  &stub_DivideU64,
+								  &stub_ItoaU64,
+								  &stub_DivideToString64,
+								  &stub_BytesToString64,
+								  &stub_ExamineLock64,
+								  &stub_ExamineNext64,
+								  &stub_ExamineHandle64,
+								  &stub_MatchFirst64,
+								  &stub_MatchNext64,
+								  (CONST_APTR)-1};

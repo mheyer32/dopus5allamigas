@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _ASYNC_H
@@ -29,8 +29,7 @@ LONG REGARGS ReadAsync(APTR file, APTR buffer, LONG numBytes);
 LONG REGARGS WriteAsync(APTR file, APTR buffer, LONG numBytes);
 LONG REGARGS SeekAsync(APTR file, LONG position, BYTE mode);
 
-#define MODE_READ   0  /* read an existing file                             */
-#define MODE_WRITE  1  /* create a new file, delete existing file if needed */
+#define MODE_READ 0	 /* read an existing file                             */
+#define MODE_WRITE 1 /* create a new file, delete existing file if needed */
 
 #endif
-

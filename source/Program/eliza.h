@@ -17,20 +17,19 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
-
 
 #define MAX_BUFFER 512
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 struct eliza_data
 {
-	char input_string_buffer[MAX_BUFFER+4];
+	char input_string_buffer[MAX_BUFFER + 4];
 	char *input_string;
 	char last_input_string[MAX_BUFFER];
 
@@ -38,20 +37,18 @@ struct eliza_data
 	int *current_response;
 	int *last_response;
 
-
-	int n1,  /* Number of elements in keywords (minus 1) */
-    	n2,  /* Number of elements in wordin and wordout (minus 1) */
-	    key;
+	int n1, /* Number of elements in keywords (minus 1) */
+		n2, /* Number of elements in wordin and wordout (minus 1) */
+		key;
 
 	int keyword_size, wordin_size, wordout_size;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
-short eliza_line(struct eliza_data *data,char *line);
+short eliza_line(struct eliza_data *data, char *line);
 BOOL init_eliza(struct eliza_data *);
 void free_eliza(struct eliza_data *);
 void print_string(char *);

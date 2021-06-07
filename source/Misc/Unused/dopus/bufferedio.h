@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -31,21 +31,21 @@ For more information on Directory Opus for Windows please see:
  *****************************************************************************/
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 
 #ifndef DOS_DOS_H
-#include <dos/dos.h>
+	#include <dos/dos.h>
 #endif
 
 long CloseBuf(APTR file);
-long ExamineBuf(APTR file,struct FileInfoBlock *fib);
+long ExamineBuf(APTR file, struct FileInfoBlock *fib);
 BPTR FHFromBuf(APTR file);
 long FlushBuf(APTR file);
-APTR OpenBuf(char *name,long mode,long buffer_size);
-long ReadBuf(APTR file,char *data,long size);
-long ReadBufLine(APTR file,char *data,long size);
-long SeekBuf(APTR file,long offset,long mode);
-long WriteBuf(APTR file,char *data,long size);
+APTR OpenBuf(char *name, long mode, long buffer_size);
+long ReadBuf(APTR file, char *data, long size);
+long ReadBufLine(APTR file, char *data, long size);
+long SeekBuf(APTR file, long offset, long mode);
+long WriteBuf(APTR file, char *data, long size);
 
 #endif

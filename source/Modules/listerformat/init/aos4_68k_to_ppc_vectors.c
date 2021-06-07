@@ -5,10 +5,10 @@
 */
 
 #ifdef __USE_INLINE__
-#undef __USE_INLINE__
+	#undef __USE_INLINE__
 #endif
 #ifndef __NOGLOBALIFACE__
-#define __NOGLOBALIFACE__
+	#define __NOGLOBALIFACE__
 #endif
 
 #include <proto/dopus5.h>
@@ -19,79 +19,71 @@
 #include <interfaces/exec.h>
 #include <interfaces/module.h>
 
-
-static inline int8  convert_int8 (uint32 x) { return x; }
-static inline int16 convert_int16(uint32 x) { return x; }
-
-
-STATIC struct Library * stub_OpenPPC(ULONG *regarray)
+static inline int8 convert_int8(uint32 x)
 {
-    struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-    struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((ULONG)Base + Base->lib_PosSize);
-    struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *) ExtLib->ILibrary;
-
-    return Self->Open(0);
+	return x;
 }
-STATIC CONST struct EmuTrap stub_Open = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_OpenPPC };
+static inline int16 convert_int16(uint32 x)
+{
+	return x;
+}
+
+STATIC struct Library *stub_OpenPPC(ULONG *regarray)
+{
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((ULONG)Base + Base->lib_PosSize);
+	struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *)ExtLib->ILibrary;
+
+	return Self->Open(0);
+}
+STATIC CONST struct EmuTrap stub_Open = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_OpenPPC};
 
 STATIC APTR stub_ClosePPC(ULONG *regarray)
 {
-    struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-    struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((ULONG)Base + Base->lib_PosSize);
-    struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *) ExtLib->ILibrary;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((ULONG)Base + Base->lib_PosSize);
+	struct LibraryManagerInterface *Self = (struct LibraryManagerInterface *)ExtLib->ILibrary;
 
-    return Self->Close();
+	return Self->Close();
 }
-STATIC CONST struct EmuTrap stub_Close = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_ClosePPC };
+STATIC CONST struct EmuTrap stub_Close = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_ClosePPC};
 
 STATIC APTR stub_ExpungePPC(ULONG *regarray __attribute__((unused)))
 {
-    return NULL;
+	return NULL;
 }
-STATIC CONST struct EmuTrap stub_Expunge = { TRAPINST, TRAPTYPE, (ULONG (*)(ULONG *))stub_ExpungePPC };
+STATIC CONST struct EmuTrap stub_Expunge = {TRAPINST, TRAPTYPE, (ULONG(*)(ULONG *))stub_ExpungePPC};
 
 STATIC ULONG stub_ReservedPPC(ULONG *regarray __attribute__((unused)))
 {
-    return 0UL;
+	return 0UL;
 }
-STATIC CONST struct EmuTrap stub_Reserved = { TRAPINST, TRAPTYPE, stub_ReservedPPC };
+STATIC CONST struct EmuTrap stub_Reserved = {TRAPINST, TRAPTYPE, stub_ReservedPPC};
 
 static int stub_Module_EntryPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct ModuleIFace *Self = (struct ModuleIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct ModuleIFace *Self = (struct ModuleIFace *)ExtLib->MainIFace;
 
-	return Self->Module_Entry(
-		(struct List *)regarray[8],
-		(struct Screen *)regarray[9],
-		(IPCData *)regarray[10],
-		(IPCData *)regarray[11],
-		(ULONG)regarray[0],
-		(ULONG)regarray[1]
-	);
+	return Self->Module_Entry((struct List *)regarray[8],
+							  (struct Screen *)regarray[9],
+							  (IPCData *)regarray[10],
+							  (IPCData *)regarray[11],
+							  (ULONG)regarray[0],
+							  (ULONG)regarray[1]);
 }
-STATIC CONST struct EmuTrap stub_Module_Entry = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Module_EntryPPC };
+STATIC CONST struct EmuTrap stub_Module_Entry = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Module_EntryPPC};
 
-static ModuleInfo * stub_Module_IdentifyPPC(uint32 *regarray)
+static ModuleInfo *stub_Module_IdentifyPPC(uint32 *regarray)
 {
-	struct Library *Base = (struct Library *) regarray[REG68K_A6/4];
-	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *) ((uint32)Base + Base->lib_PosSize);
-	struct ModuleIFace *Self = (struct ModuleIFace *) ExtLib->MainIFace;
+	struct Library *Base = (struct Library *)regarray[REG68K_A6 / 4];
+	struct ExtendedLibrary *ExtLib = (struct ExtendedLibrary *)((uint32)Base + Base->lib_PosSize);
+	struct ModuleIFace *Self = (struct ModuleIFace *)ExtLib->MainIFace;
 
-	return Self->Module_Identify(
-		(int)regarray[0]
-	);
+	return Self->Module_Identify((int)regarray[0]);
 }
-STATIC CONST struct EmuTrap stub_Module_Identify = { TRAPINST, TRAPTYPE, (uint32 (*)(uint32 *))stub_Module_IdentifyPPC };
+STATIC CONST struct EmuTrap stub_Module_Identify = {TRAPINST, TRAPTYPE, (uint32(*)(uint32 *))stub_Module_IdentifyPPC};
 
 CONST CONST_APTR VecTable68K[] =
-{
-	&stub_Open,
-	&stub_Close,
-	&stub_Expunge,
-	&stub_Reserved,
-	&stub_Module_Entry,
-	&stub_Module_Identify,
-	(CONST_APTR)-1
-};
+	{&stub_Open, &stub_Close, &stub_Expunge, &stub_Reserved, &stub_Module_Entry, &stub_Module_Identify, (CONST_APTR)-1};

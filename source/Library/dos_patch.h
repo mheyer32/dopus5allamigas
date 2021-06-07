@@ -17,34 +17,32 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _DOS_PATCH_H
 #define _DOS_PATCH_H
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
-struct FileInfoBlock *dospatch_fib(BPTR,struct MyLibrary *,BOOL);
+struct FileInfoBlock *dospatch_fib(BPTR, struct MyLibrary *, BOOL);
 
 struct FileHandleWrapper
 {
-	struct MinNode		fhw_Node;
-	BPTR			fhw_FileHandle;
-	ULONG			fhw_Flags;
-	BPTR			fhw_Parent;
+	struct MinNode fhw_Node;
+	BPTR fhw_FileHandle;
+	ULONG fhw_Flags;
+	BPTR fhw_Parent;
 };
 
-#define FHWF_WRITTEN		(1<<0)		// File has been written to
+#define FHWF_WRITTEN (1 << 0)  // File has been written to
 
-struct FileHandleWrapper *find_filehandle(BPTR file,struct LibData *data);
+struct FileHandleWrapper *find_filehandle(BPTR file, struct LibData *data);
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
 #endif
-

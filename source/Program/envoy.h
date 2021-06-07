@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,47 +25,47 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_ENVOY
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 // Envoy stuff
 struct UserInfo
 {
-	UBYTE	ui_UserName[32];
-	UWORD	ui_UserID;
-	UWORD	ui_PrimaryGroupID;
-	ULONG   ui_Flags;
+	UBYTE ui_UserName[32];
+	UWORD ui_UserID;
+	UWORD ui_PrimaryGroupID;
+	ULONG ui_Flags;
 };
 struct GroupInfo
 {
-	UBYTE	gi_GroupName[32];
-	UWORD	gi_GroupID;
+	UBYTE gi_GroupName[32];
+	UWORD gi_GroupID;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-struct UserInfo *AllocUserInfo( void );
-struct GroupInfo *AllocGroupInfo( void );
-void FreeUserInfo( struct UserInfo * );
-void FreeGroupInfo( struct GroupInfo * );
+struct UserInfo *AllocUserInfo(void);
+struct GroupInfo *AllocGroupInfo(void);
+void FreeUserInfo(struct UserInfo *);
+void FreeGroupInfo(struct GroupInfo *);
 
-ULONG IDToUser( unsigned long userID, struct UserInfo *user );
-ULONG IDToGroup( unsigned long groupID, struct GroupInfo *group );
+ULONG IDToUser(unsigned long userID, struct UserInfo *user);
+ULONG IDToGroup(unsigned long groupID, struct GroupInfo *group);
 
-#define ACTION_Envoy            20000
+#define ACTION_Envoy 20000
 
-#define ACTION_NAME_TO_UID      (ACTION_Envoy+0) // arg1 cstring
-#define ACTION_NAME_TO_GID      (ACTION_Envoy+1) // arg1 cstring
+#define ACTION_NAME_TO_UID (ACTION_Envoy + 0)  // arg1 cstring
+#define ACTION_NAME_TO_GID (ACTION_Envoy + 1)  // arg1 cstring
 #ifndef ACTION_UID_TO_USERINFO
-#define ACTION_UID_TO_USERINFO  (ACTION_Envoy+2)
+	#define ACTION_UID_TO_USERINFO (ACTION_Envoy + 2)
 #endif
 #ifndef ACTION_GID_TO_GROUPINFO
-#define ACTION_GID_TO_GROUPINFO (ACTION_Envoy+3)
+	#define ACTION_GID_TO_GROUPINFO (ACTION_Envoy + 3)
 #endif
 
-#define NEW_ACTION_UID_TO_USERINFO      1037
-#define NEW_ACTION_GID_TO_GROUPINFO     1038
+#define NEW_ACTION_UID_TO_USERINFO 1037
+#define NEW_ACTION_GID_TO_GROUPINFO 1038
 
 #endif

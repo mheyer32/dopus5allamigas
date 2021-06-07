@@ -17,14 +17,14 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Get an entry
-DirEntry *get_entry(struct MinList *list,BOOL selected,short type)
+DirEntry *get_entry(struct MinList *list, BOOL selected, short type)
 {
 	DirEntry *entry;
 
@@ -32,18 +32,14 @@ DirEntry *get_entry(struct MinList *list,BOOL selected,short type)
 	if (list)
 	{
 		// Go through list
-		for (entry=(DirEntry *)list->mlh_Head;
-			entry->de_Node.dn_Succ;
-			entry=(DirEntry *)entry->de_Node.dn_Succ)
+		for (entry = (DirEntry *)list->mlh_Head; entry->de_Node.dn_Succ; entry = (DirEntry *)entry->de_Node.dn_Succ)
 		{
 			// See if entry matches selection requirements
-			if (!selected || (entry->de_Flags&ENTF_SELECTED))
+			if (!selected || (entry->de_Flags & ENTF_SELECTED))
 			{
 				// See if entry matches type requirements
-				if (type==ENTRY_ANYTHING ||
-					(type==0 && entry->de_Node.dn_Type==0) ||
-					(type<0 && entry->de_Node.dn_Type<0) ||
-					(type>0 && entry->de_Node.dn_Type>0))
+				if (type == ENTRY_ANYTHING || (type == 0 && entry->de_Node.dn_Type == 0) ||
+					(type < 0 && entry->de_Node.dn_Type < 0) || (type > 0 && entry->de_Node.dn_Type > 0))
 				{
 					// Return entry
 					return entry;
@@ -56,27 +52,23 @@ DirEntry *get_entry(struct MinList *list,BOOL selected,short type)
 	return 0;
 }
 
-
 // Return first selected file
 DirEntry *checktot(DirBuffer *list)
 {
-	return get_entry(&list->entry_list,1,ENTRY_FILE);
+	return get_entry(&list->entry_list, 1, ENTRY_FILE);
 }
-
 
 // Return first selected directory
 DirEntry *checkdirtot(DirBuffer *list)
 {
-	return get_entry(&list->entry_list,1,ENTRY_DIRECTORY);
+	return get_entry(&list->entry_list, 1, ENTRY_DIRECTORY);
 }
-
 
 // Return first selected device
 DirEntry *checkdevtot(DirBuffer *list)
 {
-	return get_entry(&list->entry_list,1,ENTRY_DEVICE);
+	return get_entry(&list->entry_list, 1, ENTRY_DEVICE);
 }
-
 
 // First selected file/directory
 DirEntry *checkalltot(DirBuffer *list)
@@ -84,125 +76,128 @@ DirEntry *checkalltot(DirBuffer *list)
 	DirEntry *entry;
 
 	// Valid list?
-	if (!list) return 0;
+	if (!list)
+		return 0;
 
 	// Go through list
-	for (entry=(DirEntry *)list->entry_list.mlh_Head;
-		entry->de_Node.dn_Succ;
-		entry=(DirEntry *)entry->de_Node.dn_Succ)
+	for (entry = (DirEntry *)list->entry_list.mlh_Head; entry->de_Node.dn_Succ;
+		 entry = (DirEntry *)entry->de_Node.dn_Succ)
 	{
 		// Selected file/directory?
-		if (entry->de_Flags&ENTF_SELECTED &&
-			entry->de_Node.dn_Type!=ENTRY_DEVICE) return entry;
+		if (entry->de_Flags & ENTF_SELECTED && entry->de_Node.dn_Type != ENTRY_DEVICE)
+			return entry;
 	}
 
 	return 0;
 }
 
-
 // Find an entry in a list
-DirEntry *find_entry(struct MinList *list,char *name,long *offset,short case_sens)
+DirEntry *find_entry(struct MinList *list, char *name, long *offset, short case_sens)
 {
-	DirEntry *entry=0;
+	DirEntry *entry = 0;
 
 	// Valid list?
 	if (list && !(IsListEmpty((struct List *)list)))
 	{
-		char *icon_name=0;
+		char *icon_name = 0;
 
 		// Look for icon?
-		if (case_sens&FINDENTRY_ICON)
+		if (case_sens & FINDENTRY_ICON)
 		{
 			// Don't already have .info?
 			if (!isicon(name))
 			{
 				// Allocate icon name
-				if ((icon_name=AllocVec(strlen(name)+6,0)))
+				if ((icon_name = AllocVec(strlen(name) + 6, 0)))
 				{
 					// Get name
-					strcpy(icon_name,name);
+					strcpy(icon_name, name);
 
 					// Add .info suffix
-					strcat(icon_name,".info");
+					strcat(icon_name, ".info");
 
 					// Use as new name pointer
-					name=icon_name;
+					name = icon_name;
 				}
 			}
 		}
 
 		// Zero offset
-		if (offset) *offset=0;
+		if (offset)
+			*offset = 0;
 
 		// Go through list
-		for (entry=(DirEntry *)list->mlh_Head;
-			entry->de_Node.dn_Succ;
-			entry=(DirEntry *)entry->de_Node.dn_Succ)
+		for (entry = (DirEntry *)list->mlh_Head; entry->de_Node.dn_Succ; entry = (DirEntry *)entry->de_Node.dn_Succ)
 		{
 			// See if name matches
-			if (case_sens&DWF_CASE)
+			if (case_sens & DWF_CASE)
 			{
-				if (strcmp(name,entry->de_Node.dn_Name)==0) break;
+				if (strcmp(name, entry->de_Node.dn_Name) == 0)
+					break;
 			}
-			else if (stricmp(name,entry->de_Node.dn_Name)==0) break;
+			else if (stricmp(name, entry->de_Node.dn_Name) == 0)
+				break;
 
 			// Increment offset
-			if (offset) ++(*offset);
+			if (offset)
+				++(*offset);
 		}
 
 		// Invalid?
-		if (!entry->de_Node.dn_Succ) entry=0;
+		if (!entry->de_Node.dn_Succ)
+			entry = 0;
 
 		// Free icon name
-		if (icon_name) FreeVec(icon_name);
+		if (icon_name)
+			FreeVec(icon_name);
 	}
 
 	// Return entry
 	return entry;
 }
 
-
 // Find an entry's offset in a list
-long find_entry_offset(struct MinList *list,DirEntry *find)
+long find_entry_offset(struct MinList *list, DirEntry *find)
 {
 	DirEntry *entry;
 	long offset;
 
 	// Valid list?
-	if (!list || IsListEmpty((struct List *)list)) return -1;
+	if (!list || IsListEmpty((struct List *)list))
+		return -1;
 
 	// Go through list
-	for (entry=(DirEntry *)list->mlh_Head,offset=0;
-		entry->de_Node.dn_Succ;
-		entry=(DirEntry *)entry->de_Node.dn_Succ,offset++)
+	for (entry = (DirEntry *)list->mlh_Head, offset = 0; entry->de_Node.dn_Succ;
+		 entry = (DirEntry *)entry->de_Node.dn_Succ, offset++)
 	{
 		// Is this the entry?
-		if (entry==find) return offset;
+		if (entry == find)
+			return offset;
 	}
 
 	// Not found
 	return -1;
 }
 
-
 // Get an ordinal number in a list
-DirEntry *get_entry_ord(struct MinList *list,long offset)
+DirEntry *get_entry_ord(struct MinList *list, long offset)
 {
 	DirEntry *entry;
 
 	// Valid list or offset?
-	if (offset<0) return 0;
+	if (offset < 0)
+		return 0;
 
 	// Get ordinal number in list
-	for (entry=(DirEntry *)list->mlh_Head;
-		offset>0 && entry->de_Node.dn_Succ;
-		offset--,entry=(DirEntry *)entry->de_Node.dn_Succ);
+	for (entry = (DirEntry *)list->mlh_Head; offset > 0 && entry->de_Node.dn_Succ;
+		 offset--, entry = (DirEntry *)entry->de_Node.dn_Succ)
+		;
 
 	// Return entry
-	if (entry->de_Node.dn_Succ) return entry;
+	if (entry->de_Node.dn_Succ)
+		return entry;
 	return 0;
 }
-
 
 // See if a list contains "user-custom" entries
 BOOL list_is_custom(DirBuffer *buffer)
@@ -212,7 +207,7 @@ BOOL list_is_custom(DirBuffer *buffer)
 		return 0;
 
 	// Device list entry?
-	if (((DirEntry *)buffer->entry_list.mlh_Head)->de_Node.dn_Type==ENTRY_DEVICE)
+	if (((DirEntry *)buffer->entry_list.mlh_Head)->de_Node.dn_Type == ENTRY_DEVICE)
 		return 1;
 
 	// Normal entry
@@ -221,8 +216,8 @@ BOOL list_is_custom(DirBuffer *buffer)
 
 // Read parent/root of a window
 // Called from the LISTER PROCESS
-void do_parent_root(Lister *lister,char *path)
+void do_parent_root(Lister *lister, char *path)
 {
 	// Read directory
-	read_directory(lister,path,GETDIRF_CANMOVEEMPTY|GETDIRF_CANCHECKBUFS);
+	read_directory(lister, path, GETDIRF_CANMOVEEMPTY | GETDIRF_CANCHECKBUFS);
 }

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,17 +25,16 @@ For more information on Directory Opus for Windows please see:
 
 struct TextFont *topaz_font;
 
-struct List				image_list;
-struct SignalSemaphore	image_lock;
-APTR					image_memory;
-//APTR					chip_memory;
+struct List image_list;
+struct SignalSemaphore image_lock;
+APTR image_memory;
+// APTR					chip_memory;
 
-Class
-	*listview_class,*image_class,*button_class,*palette_class,*string_class,
-	*check_class,*view_class,*frame_class,*gauge_class;
+Class *listview_class, *image_class, *button_class, *palette_class, *string_class, *check_class, *view_class,
+	*frame_class, *gauge_class;
 
 FAR WB_Data *wb_data;
 
-char	decimal_point='.';
+char decimal_point = '.';
 
-IPCData	*launcher_ipc;
+IPCData *launcher_ipc;

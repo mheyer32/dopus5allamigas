@@ -17,18 +17,18 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-#define ARGBUFFER	514
+#define ARGBUFFER 514
 
 // Allocate and parse arguments
-FuncArgs *function_parse_args(char *template,char *args)
+FuncArgs *function_parse_args(char *template, char *args)
 {
-	short count,len;
+	short count, len;
 	FuncArgs *funcargs;
 
 	// Valid arguments and template?
@@ -36,50 +36,50 @@ FuncArgs *function_parse_args(char *template,char *args)
 		return 0;
 
 	// Count the number of arguments in template
-	for (len=0,count=1;template[len];len++)
+	for (len = 0, count = 1; template[len]; len++)
 	{
 		// Add one for every comma
-		if (template[len]==',') ++count;
+		if (template[len] == ',')
+			++count;
 	}
 
 	// Allocate FuncArgs
-	if (!(funcargs=AllocVec(sizeof(FuncArgs)+ARGBUFFER+sizeof(LONG *)*count*2,MEMF_CLEAR)) ||
-		!(funcargs->rdargs=AllocDosObject(DOS_RDARGS,0)))
+	if (!(funcargs = AllocVec(sizeof(FuncArgs) + ARGBUFFER + sizeof(LONG *) * count * 2, MEMF_CLEAR)) ||
+		!(funcargs->rdargs = AllocDosObject(DOS_RDARGS, 0)))
 	{
 		function_free_args(funcargs);
 		return 0;
 	}
 
 	// Initialise pointers
-	funcargs->arg_string=((char *)funcargs)+sizeof(FuncArgs);
-	funcargs->arg_array=(LONG *)(funcargs->arg_string+ARGBUFFER);
-	funcargs->arguments=funcargs->arg_array+count;
+	funcargs->arg_string = ((char *)funcargs) + sizeof(FuncArgs);
+	funcargs->arg_array = (LONG *)(funcargs->arg_string + ARGBUFFER);
+	funcargs->arguments = funcargs->arg_array + count;
 
 	// Initialise RDArgs
-	funcargs->rdargs->RDA_Source.CS_Buffer=funcargs->arg_string;
-	funcargs->rdargs->RDA_Source.CS_Length=strlen(args)+1;
+	funcargs->rdargs->RDA_Source.CS_Buffer = funcargs->arg_string;
+	funcargs->rdargs->RDA_Source.CS_Length = strlen(args) + 1;
 
 	// Copy arg string and add a newline
-	strcpy(funcargs->arg_string,args);
-	strcat(funcargs->arg_string,"\n");
+	strcpy(funcargs->arg_string, args);
+	strcat(funcargs->arg_string, "\n");
 
 	// Call RDArgs
-	if (!(funcargs->rdargs_res=ReadArgs(template,funcargs->arg_array,funcargs->rdargs)))
+	if (!(funcargs->rdargs_res = ReadArgs(template, funcargs->arg_array, funcargs->rdargs)))
 	{
 		function_free_args(funcargs);
 		return 0;
 	}
 
 	// Store argument count
-	funcargs->count=count;
+	funcargs->count = count;
 
 	// Copy argument pointers
-	for (len=0;len<count;len++)
-		funcargs->arguments[len]=funcargs->arg_array[len];
+	for (len = 0; len < count; len++)
+		funcargs->arguments[len] = funcargs->arg_array[len];
 
 	return funcargs;
 }
-
 
 // Free FuncArgs
 void function_free_args(FuncArgs *args)
@@ -92,11 +92,10 @@ void function_free_args(FuncArgs *args)
 		if (args->arguments)
 		{
 			// Free any custom arguments
-			for (arg=0;arg<args->count;arg++)
+			for (arg = 0; arg < args->count; arg++)
 			{
 				// Got an argument that's different?
-				if (args->arguments[arg] &&
-					args->arguments[arg]!=args->arg_array[arg])
+				if (args->arguments[arg] && args->arguments[arg] != args->arg_array[arg])
 				{
 					// Free it
 					FreeVec((APTR)args->arguments[arg]);
@@ -108,7 +107,7 @@ void function_free_args(FuncArgs *args)
 		FreeArgs(args->rdargs_res);
 
 		// Free RDArgs structure
-		FreeDosObject(DOS_RDARGS,args->rdargs);
+		FreeDosObject(DOS_RDARGS, args->rdargs);
 
 		// Free FuncArgs
 		FreeVec(args);

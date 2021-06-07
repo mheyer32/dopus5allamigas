@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,22 +30,22 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 // Locale marker
 struct DOpusLocale
 {
-	APTR		li_LocaleBase;
-	APTR		li_Catalog;
-	char		*li_BuiltIn;
-	struct Locale	*li_Locale;
+	APTR li_LocaleBase;
+	APTR li_Catalog;
+	char *li_BuiltIn;
+	struct Locale *li_Locale;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
-STRPTR DOpusGetString(struct DOpusLocale *,LONG);
+STRPTR DOpusGetString(struct DOpusLocale *, LONG);
 
 #endif

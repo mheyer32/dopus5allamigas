@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,21 +29,21 @@ DOPUS_FUNC(function_stopsniffer)
 	Lister *lister;
 
 	// Get current lister
-	if ((lister=function_lister_current(&handle->source_paths)))
+	if ((lister = function_lister_current(&handle->source_paths)))
 	{
 		IPCData *ipc;
 
 		// Lock process list
-		lock_listlock(&GUI->process_list,FALSE);
+		lock_listlock(&GUI->process_list, FALSE);
 
 		// See if filetypes process is present
-		if ((ipc=IPC_FindProc(&GUI->process_list,"dopus_filetype_sniffer",FALSE,0)))
+		if ((ipc = IPC_FindProc(&GUI->process_list, "dopus_filetype_sniffer", FALSE, 0)))
 		{
 			// Send abort command
-			IPC_Command(ipc,IPC_ABORT,0,lister,0,0);
+			IPC_Command(ipc, IPC_ABORT, 0, lister, 0, 0);
 
 			// Send break
-			Signal((struct Task *)ipc->proc,SIGBREAKF_CTRL_C);
+			Signal((struct Task *)ipc->proc, SIGBREAKF_CTRL_C);
 		}
 
 		// Unlock process list

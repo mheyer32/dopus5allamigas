@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,34 +26,26 @@ For more information on Directory Opus for Windows please see:
 void lister_diskinfo(Lister *lister)
 {
 	// Do we have a device list?
-	if (lister->cur_buffer->more_flags&DWF_DEVICE_LIST)
+	if (lister->cur_buffer->more_flags & DWF_DEVICE_LIST)
 	{
 		// In icon mode?
-		if (lister->flags&LISTERF_VIEW_ICONS)
+		if (lister->flags & LISTERF_VIEW_ICONS)
 		{
 			BackdropObject *object;
 
 			// Lock icon list
-			lock_listlock(&lister->backdrop_info->objects,FALSE);
+			lock_listlock(&lister->backdrop_info->objects, FALSE);
 
 			// Go through, look for selected disks
-			for (object=(BackdropObject *)lister->backdrop_info->objects.list.lh_Head;
-				object->node.ln_Succ;
-				object=(BackdropObject *)object->node.ln_Succ)
+			for (object = (BackdropObject *)lister->backdrop_info->objects.list.lh_Head; object->node.ln_Succ;
+				 object = (BackdropObject *)object->node.ln_Succ)
 			{
 				// Selected disk? :)
-				if (object->type==BDO_DISK &&
-					object->state &&
-					!(object->flags&(BDOF_ASSIGN|BDOF_CACHE)))
+				if (object->type == BDO_DISK && object->state && !(object->flags & (BDOF_ASSIGN | BDOF_CACHE)))
 				{
 					// Launch info for this disk
 					function_launch(
-						FUNCTION_RUN_FUNCTION,
-						def_function_diskinfo,
-						0,0,
-						0,0,
-						object->device_name,0,
-						0,0,0);
+						FUNCTION_RUN_FUNCTION, def_function_diskinfo, 0, 0, 0, 0, object->device_name, 0, 0, 0, 0);
 				}
 			}
 
@@ -65,5 +57,5 @@ void lister_diskinfo(Lister *lister)
 	}
 
 	// Launch on current lister
-	function_launch_quick(FUNCTION_RUN_FUNCTION,def_function_diskinfo,lister);
+	function_launch_quick(FUNCTION_RUN_FUNCTION, def_function_diskinfo, lister);
 }

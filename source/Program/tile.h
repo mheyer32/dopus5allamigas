@@ -17,45 +17,39 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_TILE
 #define _DOPUS_TILE
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	struct MinNode		node;
-	struct IBox			dims;			// Box dimensions
-	APTR				ptr;			// User-pointer
+	struct MinNode node;
+	struct IBox dims;  // Box dimensions
+	APTR ptr;		   // User-pointer
 } TileNode;
 
 typedef struct
 {
-	struct IBox			base;			// Area to tile within
-	struct MinList		box_list;		// List of boxes to tile
-	short				count;			// Number of boxes
-	short				mode;			// Tile mode
-	short				x_offset;		// Cascade offsets
-	short				y_offset;
+	struct IBox base;		  // Area to tile within
+	struct MinList box_list;  // List of boxes to tile
+	short count;			  // Number of boxes
+	short mode;				  // Tile mode
+	short x_offset;			  // Cascade offsets
+	short y_offset;
 } TileInfo;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-enum
-{
-	TILE_TILE_H,
-	TILE_TILE_V,
-	TILE_CASCADE
-};
+enum { TILE_TILE_H, TILE_TILE_V, TILE_CASCADE };
 
 void tile_windows(TileInfo *);
 

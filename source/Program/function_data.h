@@ -17,24 +17,23 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_FUNCTION_DATA
 #define _DOPUS_FUNCTION_DATA
 
-#define FUNCKEY_FILE	'f'
-#define FUNCKEY_FILENO	'F'
-#define FUNCKEY_SOURCE	'S'
-#define FUNCKEY_DIR	'd'
-#define FUNCKEY_ARG	'a'
-#define FUNCKEY_NEW	'n'
+#define FUNCKEY_FILE 'f'
+#define FUNCKEY_FILENO 'F'
+#define FUNCKEY_SOURCE 'S'
+#define FUNCKEY_DIR 'd'
+#define FUNCKEY_ARG 'a'
+#define FUNCKEY_NEW 'n'
 
 // Internal command IDs
-enum
-{
-	FUNC_BASE=0x1000,
+enum {
+	FUNC_BASE = 0x1000,
 
 	FUNC_ADDICON,
 	FUNC_ALL,
@@ -124,9 +123,8 @@ enum
 	FUNC_STOPSNIFF,
 };
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 struct _InstructionParsed;
@@ -135,80 +133,77 @@ struct _FunctionHandle;
 // Command entry (looks like a (struct Node) as far as ln_Name goes)
 typedef struct _CommandList
 {
-	struct MinNode	node;
-	UWORD		function;	// Function ID
-	char		*name;		// Function name
-	ULONG		desc;		// Function description
-	ULONG		flags;		// Function flags
+	struct MinNode node;
+	UWORD function;	 // Function ID
+	char *name;		 // Function name
+	ULONG desc;		 // Function description
+	ULONG flags;	 // Function flags
 
 	// Function code
 	union
 	{
-		int	(*code)(struct _CommandList *,struct _FunctionHandle *,char *args,struct _InstructionParsed *);
-		char	*module_name;
+		int (*code)(struct _CommandList *, struct _FunctionHandle *, char *args, struct _InstructionParsed *);
+		char *module_name;
 	} stuff;
 
-	char		*template;
-	char		*template_key;
+	char *template;
+	char *template_key;
 
-	char		*help_name;
+	char *help_name;
 } CommandList;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-extern CommandList	commandlist_internal[];
-
+extern CommandList commandlist_internal[];
 
 // Internal function flags
-#define FUNCFLAGS_DIRS			(1<<0)		// Operates on directories
-#define FUNCFLAGS_DEVS			(1<<1)		// Operates on devices
-#define FUNCFLAGS_FILES			(1<<2)		// Operates on files
-#define FUNCFLAGS_ANYTHING		(1<<3)		// Operates on files or directories
-#define FUNCFLAGS_COPYISCLONE		(1<<8)		// COPY is actually a CLONE
-#define FUNCFLAGS_BYTEISCHECKFIT	(1<<8)		// BYTE is actually a CHECKFIT
-
+#define FUNCFLAGS_DIRS (1 << 0)			   // Operates on directories
+#define FUNCFLAGS_DEVS (1 << 1)			   // Operates on devices
+#define FUNCFLAGS_FILES (1 << 2)		   // Operates on files
+#define FUNCFLAGS_ANYTHING (1 << 3)		   // Operates on files or directories
+#define FUNCFLAGS_COPYISCLONE (1 << 8)	   // COPY is actually a CLONE
+#define FUNCFLAGS_BYTEISCHECKFIT (1 << 8)  // BYTE is actually a CHECKFIT
 
 // Curly-bracket sequences
-#define FUNC_END_ARG		1
-#define FUNC_VARIABLE		2
-#define FUNC_REQUESTER		3
-#define FUNC_QUERY_INFO		4
-#define FUNC_LAST_FILE		5
-#define FUNC_LAST_PATH		6
-#define FUNC_ONE_FILE		14
-#define FUNC_ALL_FILES		15
-#define FUNC_ONE_PATH		16
-#define FUNC_ALL_PATHS		17
-#define FUNC_SOURCE		18
-#define FUNC_DEST		19
-#define FUNC_STRIP_SUFFIX	20
-#define FUNC_QUOTES		21
-#define FUNC_NO_QUOTES		22
-#define FUNC_NORMAL		23
+#define FUNC_END_ARG 1
+#define FUNC_VARIABLE 2
+#define FUNC_REQUESTER 3
+#define FUNC_QUERY_INFO 4
+#define FUNC_LAST_FILE 5
+#define FUNC_LAST_PATH 6
+#define FUNC_ONE_FILE 14
+#define FUNC_ALL_FILES 15
+#define FUNC_ONE_PATH 16
+#define FUNC_ALL_PATHS 17
+#define FUNC_SOURCE 18
+#define FUNC_DEST 19
+#define FUNC_STRIP_SUFFIX 20
+#define FUNC_QUOTES 21
+#define FUNC_NO_QUOTES 22
+#define FUNC_NORMAL 23
 
 // Function types
 enum {
-	FT_INTERNAL,		// Internal
-	FT_EXECUTABLE,		// AmigaDOS
-	FT_WORKBENCH,		// Workbench
+	FT_INTERNAL,	// Internal
+	FT_EXECUTABLE,	// AmigaDOS
+	FT_WORKBENCH,	// Workbench
 	FT_BATCH,		// Batch
 	FT_AREXX,		// ARexx
-	FT_REQUESTER		// Requester
+	FT_REQUESTER	// Requester
 };
 
 // Function type characters
-#define FC_INTERNAL	'*'
-#define FC_WORKBENCH	'%'
-#define FC_BATCH	'$'
-#define FC_AREXX	'&'
-#define FC_REQUESTER	'@'
-
+#define FC_INTERNAL '*'
+#define FC_WORKBENCH '%'
+#define FC_BATCH '$'
+#define FC_AREXX '&'
+#define FC_REQUESTER '@'
 
 // ARexx Status values
 enum {
-	RXSTATUS_CURRENT_DIRECTORY=1,
+	RXSTATUS_CURRENT_DIRECTORY = 1,
 	RXSTATUS_VERSION,
 	RXSTATUS_ACTIVE_WINDOW,
 	RXSTATUS_NUMBER_OF_FILES,
@@ -241,29 +236,27 @@ enum {
 	RXSTATUS_CURRENT_BANK_NUMBER
 };
 
-
-
 // Copy return codes
-#define COPY_ABORTED		-1	// Aborted
-#define COPY_FAILED		0	// Failed
-#define COPY_OK			1	// Ok
+#define COPY_ABORTED -1	 // Aborted
+#define COPY_FAILED 0	 // Failed
+#define COPY_OK 1		 // Ok
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 // Keeps track of what's in the modules directory
 typedef struct _ModuleNode
 {
-	struct Node		node;
-	struct DateStamp	date;
-	short			flags;
+	struct Node node;
+	struct DateStamp date;
+	short flags;
 } ModuleNode;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-#define MNF_TEMP	(1<<0)
+#define MNF_TEMP (1 << 0)
 
 #endif

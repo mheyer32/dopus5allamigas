@@ -17,17 +17,17 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_WB
 #define _DOPUS_WB
 
-#define LAUNCH_DONOTWAIT	(1<<7)
-#define LAUNCH_GETWAIT(x)	(x&~LAUNCH_DONOTWAIT)
+#define LAUNCH_DONOTWAIT (1 << 7)
+#define LAUNCH_GETWAIT(x) (x & ~LAUNCH_DONOTWAIT)
 
 void wb_do_startup(void);
-void wb_launch_list(IPCData *ipc,Att_List *launch_list);
+void wb_launch_list(IPCData *ipc, Att_List *launch_list);
 
 #endif

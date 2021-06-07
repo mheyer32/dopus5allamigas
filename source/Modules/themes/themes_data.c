@@ -17,87 +17,79 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "themes.h"
 
-#define ARG_1	"AS=TO"
-#define ARG_2	"FILE=FROM,APPLYPALETTE=AP/S,APPLYFONTS=AF/S,APPLYBACKGROUNDS=AB/S,APPLYSOUNDS=AS/S"
-#define ARG_3	"FILE=FROM,AS=TO"
+#define ARG_1 "AS=TO"
+#define ARG_2 "FILE=FROM,APPLYPALETTE=AP/S,APPLYFONTS=AF/S,APPLYBACKGROUNDS=AB/S,APPLYSOUNDS=AS/S"
+#define ARG_3 "FILE=FROM,AS=TO"
 
-char *func_templates[]={ARG_1,ARG_2,ARG_1,ARG_3};
-
+char *func_templates[] = {ARG_1, ARG_2, ARG_1, ARG_3};
 
 #ifdef __AROS__
-ModuleInfo_4
-	module_info={
-		1,
-		"themes.module",
-		"themes.catalog",
-		0,
-		4,
-		{
-			{SAVETHEME,"SaveTheme",MSG_SAVE_THEME_DESC,0,ARG_1},
-			{LOADTHEME,"LoadTheme",MSG_LOAD_THEME_DESC,FUNCF_WANT_ENTRIES,ARG_2},
-			{BUILDTHEME,"BuildTheme",MSG_BUILD_THEME_DESC,0,ARG_1},
-			{CONVERTTHEME,"ConvertTheme",MSG_CONVERT_THEME_DESC,0,ARG_3}
-		}
-	};
+ModuleInfo_4 module_info = {1,
+							"themes.module",
+							"themes.catalog",
+							0,
+							4,
+							{{SAVETHEME, "SaveTheme", MSG_SAVE_THEME_DESC, 0, ARG_1},
+							 {LOADTHEME, "LoadTheme", MSG_LOAD_THEME_DESC, FUNCF_WANT_ENTRIES, ARG_2},
+							 {BUILDTHEME, "BuildTheme", MSG_BUILD_THEME_DESC, 0, ARG_1},
+							 {CONVERTTHEME, "ConvertTheme", MSG_CONVERT_THEME_DESC, 0, ARG_3}}};
 #else
-ModuleInfo
-	module_info={
-		1,
-		"themes.module",
-		"themes.catalog",
-		0,
-		4,
-		{{SAVETHEME,"SaveTheme",MSG_SAVE_THEME_DESC,0,ARG_1}}};
+ModuleInfo module_info =
+	{1, "themes.module", "themes.catalog", 0, 4, {{SAVETHEME, "SaveTheme", MSG_SAVE_THEME_DESC, 0, ARG_1}}};
 
-ModuleFunction
-	more_functions[]={
-		{LOADTHEME,"LoadTheme",MSG_LOAD_THEME_DESC,FUNCF_WANT_ENTRIES,ARG_2},
-		{BUILDTHEME,"BuildTheme",MSG_BUILD_THEME_DESC,0,ARG_1},
-		{CONVERTTHEME,"ConvertTheme",MSG_CONVERT_THEME_DESC,0,ARG_3}};
+ModuleFunction more_functions[] = {{LOADTHEME, "LoadTheme", MSG_LOAD_THEME_DESC, FUNCF_WANT_ENTRIES, ARG_2},
+								   {BUILDTHEME, "BuildTheme", MSG_BUILD_THEME_DESC, 0, ARG_1},
+								   {CONVERTTHEME, "ConvertTheme", MSG_CONVERT_THEME_DESC, 0, ARG_3}};
 #endif
 
-char
-	*pen_settings[]={
-		"icons",
-		"files",
-		"dirs",
-		"selfiles",
-		"seldirs",
-		"devices",
-		"assigns",
-		"source",
-		"dest",
-		"gauge",
-		"user",
-		0};
+char *pen_settings[] =
+	{"icons", "files", "dirs", "selfiles", "seldirs", "devices", "assigns", "source", "dest", "gauge", "user", 0};
 
-char apply_lookup[]={'p','f','b','s'};
+char apply_lookup[] = {'p', 'f', 'b', 's'};
 
-char
-	*sound_lookup[]={
-		"Bad disk inserted",	"EmptyRecycleBin",
-		"Startup",				"SystemStart",
-		"Shutdown",				"SystemExit",
-		"Hide",					"SystemExclamation",
-		"Reveal",				".Default",
-		"Disk inserted",		"SystemQuestion",
-		"Disk removed",			"SystemDefault",
-		"Open lister",			"Maximize",
-		"Open buttons",			"MenuPopup",
-		"Open group",			"MenuCommand",
-		"Close lister",			"Minimize",
-		"Close buttons",		"SystemAsterisk",
-		"Close group",			"SystemHand",
-		"FTP close connection",	"Close",
-		"FTP connect fail",		"RestoreDown",
-		"FTP connect success",	"RestoreUp",
-		"FTP copy fail",		"AppGPFault",
-		"FTP copy success",		".Default",
-		"FTP error",			"SystemAsterisk",
-		0,0};
+char *sound_lookup[] = {"Bad disk inserted",
+						"EmptyRecycleBin",
+						"Startup",
+						"SystemStart",
+						"Shutdown",
+						"SystemExit",
+						"Hide",
+						"SystemExclamation",
+						"Reveal",
+						".Default",
+						"Disk inserted",
+						"SystemQuestion",
+						"Disk removed",
+						"SystemDefault",
+						"Open lister",
+						"Maximize",
+						"Open buttons",
+						"MenuPopup",
+						"Open group",
+						"MenuCommand",
+						"Close lister",
+						"Minimize",
+						"Close buttons",
+						"SystemAsterisk",
+						"Close group",
+						"SystemHand",
+						"FTP close connection",
+						"Close",
+						"FTP connect fail",
+						"RestoreDown",
+						"FTP connect success",
+						"RestoreUp",
+						"FTP copy fail",
+						"AppGPFault",
+						"FTP copy success",
+						".Default",
+						"FTP error",
+						"SystemAsterisk",
+						0,
+						0};

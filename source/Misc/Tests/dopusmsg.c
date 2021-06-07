@@ -17,38 +17,38 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
-void main(int argc,char **argv)
+void main(int argc, char **argv)
 {
 	struct RexxMsg *msg;
-	struct MsgPort *port,*dopus;
+	struct MsgPort *port, *dopus;
 
 	// Allocate message
-	if (!(msg=AllocVec(sizeof(struct RexxMsg),MEMF_CLEAR)))
+	if (!(msg = AllocVec(sizeof(struct RexxMsg), MEMF_CLEAR)))
 		exit(0);
 
 	// Create port
-	if (!(port=CreateMsgPort()))
+	if (!(port = CreateMsgPort()))
 	{
 		FreeVec(msg);
 		exit(0);
 	}
 
 	// Set reply port
-	msg->rm_Node.mn_ReplyPort=port;
+	msg->rm_Node.mn_ReplyPort = port;
 
 	// Set pointer to arg string
-	msg->rm_Args[0]=argv[2];
+	msg->rm_Args[0] = argv[2];
 
 	// Find port
 	Forbid();
-	if (dopus=FindPort(argv[1]))
+	if (dopus = FindPort(argv[1]))
 	{
 		// Send message
-		PutMsg(dopus,(struct Message *)msg);
+		PutMsg(dopus, (struct Message *)msg);
 	}
 	Permit();
 

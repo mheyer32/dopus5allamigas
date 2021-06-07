@@ -17,15 +17,14 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_SEARCH
 #define _DOPUS_SEARCH
 
-enum
-{
+enum {
 	GAD_SEARCH_LAYOUT,
 	GAD_SEARCH_CANCEL,
 	GAD_SEARCH_OKAY,
@@ -36,12 +35,7 @@ enum
 	GAD_SEARCH_RESULT
 };
 
-enum
-{
-	RESULT_PROMPT,
-	RESULT_LEAVE,
-	RESULT_OUTPUT
-};
+enum { RESULT_PROMPT, RESULT_LEAVE, RESULT_OUTPUT };
 
 extern ConfigWindow search_window;
 extern ObjectDef search_objects[];
@@ -49,14 +43,14 @@ extern ObjectDef search_objects[];
 // Data to store search results
 typedef struct
 {
-	char	*v_search_found_position;	// Position of match in buffer
-	long	v_search_found_size;		// Number of bytes searched
-	long	v_search_found_lines;		// Number of lines searched
-	long	v_search_last_line_pos;		// Last line position searched
+	char *v_search_found_position;	// Position of match in buffer
+	long v_search_found_size;		// Number of bytes searched
+	long v_search_found_lines;		// Number of lines searched
+	long v_search_last_line_pos;	// Last line position searched
 } search_handle;
 
 // Prototypes
-int search_file(APTR,UBYTE *,ULONG,UBYTE *,ULONG);
-int search_buffer(search_handle *,UBYTE *,ULONG,UBYTE *,ULONG,ULONG);
+int search_file(APTR, UBYTE *, ULONG, UBYTE *, ULONG);
+int search_buffer(search_handle *, UBYTE *, ULONG, UBYTE *, ULONG, ULONG);
 
 #endif

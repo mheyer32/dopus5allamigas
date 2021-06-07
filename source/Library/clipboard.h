@@ -17,41 +17,37 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _CLIPBOARD_H
 #define _CLIPBOARD_H
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
-
-
 
 typedef struct ClipData
 {
-	char			*string;
-	long			length;
-	long			result;
+	char *string;
+	long length;
+	long result;
 } ClipData;
 
-#define CLIP_PUTSTRING	2000
-#define CLIP_GETSTRING	2001
+#define CLIP_PUTSTRING 2000
+#define CLIP_GETSTRING 2001
 
 typedef struct ClipHandle
 {
-	struct MsgPort		*clip_Port;
-	struct IOClipReq	*clip_Req;
-	ULONG			clip_Header[5];
-	char			clip_Buffer[128];
-	BOOL			clip_Write;
+	struct MsgPort *clip_Port;
+	struct IOClipReq *clip_Req;
+	ULONG clip_Header[5];
+	char clip_Buffer[128];
+	BOOL clip_Write;
 } ClipHandle;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
 #endif
-

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,42 +25,40 @@ For more information on Directory Opus for Windows please see:
 #include "config.h"
 #include <Program/dopus_config.h>
 
-long write_string(struct _IFFHandle *iff,char *string);
-long write_button_list(struct _IFFHandle *iff,struct List *list,long flags);
-short write_function_list(struct _IFFHandle *iff,struct List *list);
+long write_string(struct _IFFHandle *iff, char *string);
+long write_button_list(struct _IFFHandle *iff, struct List *list, long flags);
+short write_function_list(struct _IFFHandle *iff, struct List *list);
 extern void do_backup(char *name);
 
-int LIBFUNC L_SaveSettings(
-	REG(a0, CFG_SETS *settings),
-	REG(a1, char *name),
-	REG(a6, struct MyLibrary *libbase))
+int LIBFUNC L_SaveSettings(REG(a0, CFG_SETS *settings), REG(a1, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct _IFFHandle *iff;
-	int success=0;
+	int success = 0;
 #ifdef __AROS__
 	CFG_SETS *settings_be;
 #endif
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
+#endif
 
 	// Check valid config and name
-	if (!settings || !name || !name[0]) return -1;
+	if (!settings || !name || !name[0])
+		return -1;
 
 #ifdef __AROS__
-	if (!(settings_be=AllocVec(sizeof(CFG_SETS),MEMF_CLEAR)))
+	if (!(settings_be = AllocVec(sizeof(CFG_SETS), MEMF_CLEAR)))
 		return -1;
 #endif
 
 	// Try to open file to write
-	if ((iff=L_IFFOpen(name,MODE_NEWFILE,ID_OPUS)))
+	if ((iff = L_IFFOpen(name, MODE_NEWFILE, ID_OPUS)))
 	{
 		char buf[40];
 
 		// Write header chunk
 #ifdef __AROS__
-		CopyMem(settings,settings_be,sizeof(CFG_SETS));
+		CopyMem(settings, settings_be, sizeof(CFG_SETS));
 
 		settings_be->copy_flags = AROS_LONG2BE(settings_be->copy_flags);
 		settings_be->delete_flags = AROS_LONG2BE(settings_be->delete_flags);
@@ -85,26 +83,27 @@ int LIBFUNC L_SaveSettings(
 		settings_be->max_filename = AROS_WORD2BE(settings_be->max_filename);
 		settings_be->flags = AROS_LONG2BE(settings_be->flags);
 
-		if (L_IFFWriteChunk(iff,(char *)settings_be,ID_SETS,sizeof(CFG_SETS)))
+		if (L_IFFWriteChunk(iff, (char *)settings_be, ID_SETS, sizeof(CFG_SETS)))
 #else
-		if (L_IFFWriteChunk(iff,(char *)settings,ID_SETS,sizeof(CFG_SETS)))
+		if (L_IFFWriteChunk(iff, (char *)settings, ID_SETS, sizeof(CFG_SETS)))
 #endif
 		{
 			// Succeeded
-			success=1;
+			success = 1;
 
 			// Write icons?
-			if ((GetVar("dopus/dopus",buf,sizeof(buf),GVF_GLOBAL_ONLY)>0) &&
-				strstr(buf,"-icons-"))
+			if ((GetVar("dopus/dopus", buf, sizeof(buf), GVF_GLOBAL_ONLY) > 0) && strstr(buf, "-icons-"))
 			{
 				// Write icon file
-				L_WriteFileIcon("dopus5:icons/Settings",name,libbase);
+				L_WriteFileIcon("dopus5:icons/Settings", name, libbase);
 			}
 		}
 	}
 
-	if (!success) success=IoErr();
-	else success=0;
+	if (!success)
+		success = IoErr();
+	else
+		success = 0;
 
 	L_IFFClose(iff);
 
@@ -115,22 +114,20 @@ int LIBFUNC L_SaveSettings(
 	return success;
 }
 
-
-long LIBFUNC L_SaveListerDef(
-	REG(a0, struct _IFFHandle *iff),
-	REG(a1, Cfg_Lister *lister))
+long LIBFUNC L_SaveListerDef(REG(a0, struct _IFFHandle *iff), REG(a1, Cfg_Lister *lister))
 {
 #ifdef __AROS__
 	CFG_LSTR *lister_be;
 #endif
 
-	if (!iff || !lister) return 0;
+	if (!iff || !lister)
+		return 0;
 
 #ifdef __AROS__
-	if (!(lister_be=AllocVec(sizeof(CFG_LSTR),MEMF_CLEAR)))
+	if (!(lister_be = AllocVec(sizeof(CFG_LSTR), MEMF_CLEAR)))
 		return 0;
-		
-	CopyMem(&lister->lister,lister_be,sizeof(CFG_LSTR));
+
+	CopyMem(&lister->lister, lister_be, sizeof(CFG_LSTR));
 
 	lister_be->icon_x = AROS_LONG2BE(lister_be->icon_x);
 	lister_be->icon_y = AROS_LONG2BE(lister_be->icon_y);
@@ -145,55 +142,50 @@ long LIBFUNC L_SaveListerDef(
 	lister_be->flags = AROS_LONG2BE(lister_be->flags);
 
 	// Write lister information
-	if (!(L_IFFPushChunk(iff,ID_LSTR)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)lister_be,sizeof(CFG_LSTR))))
+	if (!(L_IFFPushChunk(iff, ID_LSTR)) || !(L_IFFWriteChunkBytes(iff, (char *)lister_be, sizeof(CFG_LSTR))))
 	{
 		FreeVec(lister_be);
 		return 0;
 	}
-	
+
 	FreeVec(lister_be);
 #else
 	// Write lister information
-	if (!(L_IFFPushChunk(iff,ID_LSTR)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)&lister->lister,sizeof(CFG_LSTR))))
+	if (!(L_IFFPushChunk(iff, ID_LSTR)) || !(L_IFFWriteChunkBytes(iff, (char *)&lister->lister, sizeof(CFG_LSTR))))
 		return 0;
 #endif
 
 	// Write lister path
-	if (lister->path && lister->path[0] &&
-		!(write_string(iff,lister->path))) return 0;
+	if (lister->path && lister->path[0] && !(write_string(iff, lister->path)))
+		return 0;
 
 	// Pop chunk
 	return L_IFFPopChunk(iff);
 }
 
-
-int LIBFUNC L_SaveButtonBank(
-	REG(a0, Cfg_ButtonBank *bank),
-	REG(a1, char *name),
-	REG(a6, struct MyLibrary *libbase))
+int LIBFUNC L_SaveButtonBank(REG(a0, Cfg_ButtonBank *bank), REG(a1, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct _IFFHandle *iff;
 	BPTR lock = 0;
-	short success=0;
+	short success = 0;
 #ifdef __AROS__
 	CFG_BTNW *window_be;
 	CFG_STRT *startmenu_be = NULL;
 #endif
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
-	// Check valid bank and name
-	if (!bank || !name || !name[0]) return -1;
+#endif
 
-#ifdef __AROS__
-	if (!(window_be=AllocVec(sizeof(CFG_BTNW),MEMF_CLEAR)))
+	// Check valid bank and name
+	if (!bank || !name || !name[0])
 		return -1;
 
-	if (bank->startmenu && !(startmenu_be=AllocVec(sizeof(CFG_STRT),MEMF_CLEAR)))
+#ifdef __AROS__
+	if (!(window_be = AllocVec(sizeof(CFG_BTNW), MEMF_CLEAR)))
+		return -1;
+
+	if (bank->startmenu && !(startmenu_be = AllocVec(sizeof(CFG_STRT), MEMF_CLEAR)))
 	{
 		FreeVec(window_be);
 		return -1;
@@ -207,26 +199,26 @@ int LIBFUNC L_SaveButtonBank(
 	}
 
 	// Try to open file to write
-	while ((iff=L_IFFOpen(name,MODE_NEWFILE,ID_EPUS)))
+	while ((iff = L_IFFOpen(name, MODE_NEWFILE, ID_EPUS)))
 	{
 		char buf[40];
 
 		// Clear change flag
-		bank->window.flags&=~BTNWF_CHANGED;
+		bank->window.flags &= ~BTNWF_CHANGED;
 
 		// Check columns/rows for zero
-		if (bank->window.columns==0)
-			bank->window.columns=1;
-		if (bank->window.rows==0)
-			bank->window.rows=1;
+		if (bank->window.columns == 0)
+			bank->window.columns = 1;
+		if (bank->window.rows == 0)
+			bank->window.rows = 1;
 
 		// Get bank path name
-		if (!(NameFromFH(L_FHFromBuf(L_IFFFileHandle(iff)),bank->path,256)))
-			strcpy(bank->path,name);
+		if (!(NameFromFH(L_FHFromBuf(L_IFFFileHandle(iff)), bank->path, 256)))
+			strcpy(bank->path, name);
 
-		// Write header chunk
+			// Write header chunk
 #ifdef __AROS__
-		CopyMem(&bank->window,window_be,sizeof(CFG_BTNW));
+		CopyMem(&bank->window, window_be, sizeof(CFG_BTNW));
 
 		window_be->pos.Left = AROS_WORD2BE(window_be->pos.Left);
 		window_be->pos.Top = AROS_WORD2BE(window_be->pos.Top);
@@ -236,57 +228,57 @@ int LIBFUNC L_SaveButtonBank(
 		window_be->rows = AROS_WORD2BE(window_be->rows);
 		window_be->flags = AROS_LONG2BE(window_be->flags);
 
-		if (!(L_IFFWriteChunk(iff,(char *)window_be,ID_BTNW,sizeof(CFG_BTNW))))
+		if (!(L_IFFWriteChunk(iff, (char *)window_be, ID_BTNW, sizeof(CFG_BTNW))))
 #else
-		if (!(L_IFFWriteChunk(iff,(char *)&bank->window,ID_BTNW,sizeof(CFG_BTNW))))
+		if (!(L_IFFWriteChunk(iff, (char *)&bank->window, ID_BTNW, sizeof(CFG_BTNW))))
 #endif
 			break;
 
 		// Write background picture
-		if (bank->backpic[0] &&
-			!(L_IFFWriteChunk(iff,bank->backpic,ID_BPIC,strlen(bank->backpic)+1)))
+		if (bank->backpic[0] && !(L_IFFWriteChunk(iff, bank->backpic, ID_BPIC, strlen(bank->backpic) + 1)))
 			break;
 
 		// Start menu?
 		if (bank->startmenu)
 		{
 			// Write STRT chunk
-			bank->startmenu->flags|=STRTF_VERSION2;
+			bank->startmenu->flags |= STRTF_VERSION2;
 #ifdef __AROS__
-			CopyMem(bank->startmenu,startmenu_be,sizeof(CFG_STRT));
+			CopyMem(bank->startmenu, startmenu_be, sizeof(CFG_STRT));
 
 			startmenu_be->flags = AROS_LONG2BE(startmenu_be->flags);
 			startmenu_be->fpen = AROS_WORD2BE(startmenu_be->fpen);
 			startmenu_be->label_fpen = AROS_WORD2BE(startmenu_be->label_fpen);
 			startmenu_be->sel_fpen = AROS_WORD2BE(startmenu_be->sel_fpen);
 			startmenu_be->label_fontsize = AROS_WORD2BE(startmenu_be->label_fontsize);
-	
-			if (!(L_IFFWriteChunk(iff,(char *)startmenu_be,ID_STRT,sizeof(CFG_STRT))))
+
+			if (!(L_IFFWriteChunk(iff, (char *)startmenu_be, ID_STRT, sizeof(CFG_STRT))))
 #else
-			if (!(L_IFFWriteChunk(iff,(char *)bank->startmenu,ID_STRT,sizeof(CFG_STRT))))
+			if (!(L_IFFWriteChunk(iff, (char *)bank->startmenu, ID_STRT, sizeof(CFG_STRT))))
 #endif
 				break;
 		}
 
 		// Write button list
-		if (!(write_button_list(iff,&bank->buttons,bank->window.flags)))
+		if (!(write_button_list(iff, &bank->buttons, bank->window.flags)))
 			break;
 
 		// Succeeded
-		success=1;
+		success = 1;
 
 		// Write icons?
-		if ((GetVar("dopus/dopus",buf,sizeof(buf),GVF_GLOBAL_ONLY)>0) &&
-			strstr(buf,"-icons-"))
+		if ((GetVar("dopus/dopus", buf, sizeof(buf), GVF_GLOBAL_ONLY) > 0) && strstr(buf, "-icons-"))
 		{
 			// Write icon file
-			L_WriteFileIcon("dopus5:icons/Buttons",name,libbase);
+			L_WriteFileIcon("dopus5:icons/Buttons", name, libbase);
 		}
 		break;
 	}
 
-	if (!success) success=IoErr();
-	else success=0;
+	if (!success)
+		success = IoErr();
+	else
+		success = 0;
 
 	L_IFFClose(iff);
 
@@ -298,97 +290,89 @@ int LIBFUNC L_SaveButtonBank(
 	return success;
 }
 
-
-int LIBFUNC L_SaveFiletypeList(
-	REG(a0, Cfg_FiletypeList *list),
-	REG(a1, char *name),
-	REG(a6, struct MyLibrary *libbase))
+int LIBFUNC L_SaveFiletypeList(REG(a0, Cfg_FiletypeList *list), REG(a1, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct _IFFHandle *iff;
 	Cfg_Filetype *type;
-	int success=0;
+	int success = 0;
 #ifdef __AROS__
 	CFG_TYPE type_be;
 #endif
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
+#endif
 
 	// Check valid list and name
-	if (!list || list->flags&FTLISTF_INTERNAL || !name || !name[0]) return -1;
+	if (!list || list->flags & FTLISTF_INTERNAL || !name || !name[0])
+		return -1;
 
 	// Try to open file to write
-	while ((iff=L_IFFOpen(name,MODE_NEWFILE,ID_OPUS)))
+	while ((iff = L_IFFOpen(name, MODE_NEWFILE, ID_OPUS)))
 	{
 		char buf[40];
 
 		// Go through filetypes in list
-		for (type=(Cfg_Filetype *)list->filetype_list.lh_Head;
-			type->node.ln_Succ;
-			type=(Cfg_Filetype *)type->node.ln_Succ)
+		for (type = (Cfg_Filetype *)list->filetype_list.lh_Head; type->node.ln_Succ;
+			 type = (Cfg_Filetype *)type->node.ln_Succ)
 		{
 			short a;
 
 			// Write filetype data
 #ifdef __AROS__
-			CopyMem(&type->type,&type_be,sizeof(CFG_TYPE));
+			CopyMem(&type->type, &type_be, sizeof(CFG_TYPE));
 
 			type_be.flags = AROS_WORD2BE(type_be.flags);
 			type_be.count = AROS_WORD2BE(type_be.count);
 
-			if (!(L_IFFPushChunk(iff,ID_TYPE)) ||
-				!(L_IFFWriteChunkBytes(iff,(char *)&type_be,sizeof(CFG_TYPE))))
+			if (!(L_IFFPushChunk(iff, ID_TYPE)) || !(L_IFFWriteChunkBytes(iff, (char *)&type_be, sizeof(CFG_TYPE))))
 #else
-			if (!(L_IFFPushChunk(iff,ID_TYPE)) ||
-				!(L_IFFWriteChunkBytes(iff,(char *)&type->type,sizeof(CFG_TYPE))))
+			if (!(L_IFFPushChunk(iff, ID_TYPE)) || !(L_IFFWriteChunkBytes(iff, (char *)&type->type, sizeof(CFG_TYPE))))
 #endif
 				break;
 
 			// Write recognition and icon path
-			if (!(write_string(iff,(char *)type->recognition)) ||
-				!(write_string(iff,type->icon_path)))
+			if (!(write_string(iff, (char *)type->recognition)) || !(write_string(iff, type->icon_path)))
 				break;
 
 			// Write actions
-			for (a=0;a<16;a++)
+			for (a = 0; a < 16; a++)
 			{
-				if (!(write_string(iff,(type->actions)?type->actions[a]:0)))
+				if (!(write_string(iff, (type->actions) ? type->actions[a] : 0)))
 					break;
 			}
-			if (a<type->type.count || !(L_IFFPopChunk(iff))) break;
+			if (a < type->type.count || !(L_IFFPopChunk(iff)))
+				break;
 
 			// Write function list
-			if (!(write_function_list(iff,&type->function_list)))
+			if (!(write_function_list(iff, &type->function_list)))
 				break;
 		}
 
 		// Failure?
-		if (type->node.ln_Succ) break;
+		if (type->node.ln_Succ)
+			break;
 
 		// Succeeded
-		success=1;
+		success = 1;
 
 		// Write icons?
-		if ((GetVar("dopus/dopus",buf,sizeof(buf),GVF_GLOBAL_ONLY)>0) &&
-			strstr(buf,"-icons-"))
+		if ((GetVar("dopus/dopus", buf, sizeof(buf), GVF_GLOBAL_ONLY) > 0) && strstr(buf, "-icons-"))
 		{
 			// Write icon file
-			L_WriteFileIcon("dopus5:icons/Filetype",name,libbase);
+			L_WriteFileIcon("dopus5:icons/Filetype", name, libbase);
 		}
 		break;
 	}
 
 	L_IFFClose(iff);
 
-	if (success) return 0;
+	if (success)
+		return 0;
 	return IoErr();
 }
 
-
-short LIBFUNC L_SaveButton(
-	REG(a0, struct _IFFHandle *iff),
-	REG(a1, Cfg_Button *button))
+short LIBFUNC L_SaveButton(REG(a0, struct _IFFHandle *iff), REG(a1, Cfg_Button *button))
 {
 	Cfg_ButtonFunction *func;
 #ifdef __AROS__
@@ -396,115 +380,112 @@ short LIBFUNC L_SaveButton(
 #endif
 
 	// Count number of functions
-	button->button.count=L_Att_NodeCount((Att_List *)&button->function_list);
+	button->button.count = L_Att_NodeCount((Att_List *)&button->function_list);
 
 	// Set "new style" flag
-	button->button.flags|=BUTNF_NEW_FORMAT;
+	button->button.flags |= BUTNF_NEW_FORMAT;
 
 	// Write button data
 #ifdef __AROS__
-	CopyMem(&button->button,&button_be,sizeof(CFG_BUTN));
+	CopyMem(&button->button, &button_be, sizeof(CFG_BUTN));
 
 	button_be.flags = AROS_LONG2BE(button_be.flags);
 	button_be.count = AROS_WORD2BE(button_be.count);
 
-	if (!(L_IFFPushChunk(iff,ID_BUTN)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)&button_be,sizeof(CFG_BUTN))))
+	if (!(L_IFFPushChunk(iff, ID_BUTN)) || !(L_IFFWriteChunkBytes(iff, (char *)&button_be, sizeof(CFG_BUTN))))
 #else
-	if (!(L_IFFPushChunk(iff,ID_BUTN)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)&button->button,sizeof(CFG_BUTN))))
+	if (!(L_IFFPushChunk(iff, ID_BUTN)) || !(L_IFFWriteChunkBytes(iff, (char *)&button->button, sizeof(CFG_BUTN))))
 #endif
 		return 0;
 
 	// Go through button functions
-	for (func=(Cfg_ButtonFunction *)button->function_list.mlh_Head;
-		func->node.ln_Succ;
-		func=(Cfg_ButtonFunction *)func->node.ln_Succ)
+	for (func = (Cfg_ButtonFunction *)button->function_list.mlh_Head; func->node.ln_Succ;
+		 func = (Cfg_ButtonFunction *)func->node.ln_Succ)
 	{
 		// Write label
-		if (!(write_string(iff,func->label))) break;
+		if (!(write_string(iff, func->label)))
+			break;
 
 		// Is the name the same as the label?
-		if (!func->node.ln_Name ||
-			(func->label && strcmp(func->label,func->node.ln_Name)==0 && *func->label))
+		if (!func->node.ln_Name || (func->label && strcmp(func->label, func->node.ln_Name) == 0 && *func->label))
 		{
 			char special[2];
 
 			// Special marker
-			special[0]=1;
-			special[1]=0;
-			if (!(write_string(iff,special))) break;
+			special[0] = 1;
+			special[1] = 0;
+			if (!(write_string(iff, special)))
+				break;
 		}
-		else if (!(write_string(iff,func->node.ln_Name))) break;
+		else if (!(write_string(iff, func->node.ln_Name)))
+			break;
 	}
 
 	// Failed?
-	if (func->node.ln_Succ || !(L_IFFPopChunk(iff))) return 0;
+	if (func->node.ln_Succ || !(L_IFFPopChunk(iff)))
+		return 0;
 
 	// Write functions
-	return write_function_list(iff,(struct List *)&button->function_list);
+	return write_function_list(iff, (struct List *)&button->function_list);
 }
 
-
-long write_string(struct _IFFHandle *iff,char *string)
+long write_string(struct _IFFHandle *iff, char *string)
 {
 	int len;
 
-	if (!string) string="";
-	len=strlen(string)+1;
-	return L_IFFWriteChunkBytes(iff,string,len);
+	if (!string)
+		string = "";
+	len = strlen(string) + 1;
+	return L_IFFWriteChunkBytes(iff, string, len);
 }
 
-long write_button_list(struct _IFFHandle *iff,struct List *list,long flags)
+long write_button_list(struct _IFFHandle *iff, struct List *list, long flags)
 {
 	Cfg_Button *button;
 
 	// Go through button list
-	for (button=(Cfg_Button *)list->lh_Head;
-		button->node.ln_Succ;
-		button=(Cfg_Button *)button->node.ln_Succ)
+	for (button = (Cfg_Button *)list->lh_Head; button->node.ln_Succ; button = (Cfg_Button *)button->node.ln_Succ)
 	{
 		// Write button
-		if (!(L_SaveButton(iff,button)))
+		if (!(L_SaveButton(iff, button)))
 			break;
 	}
 
 	// Fail?
-	if (button->node.ln_Succ) return 0;
+	if (button->node.ln_Succ)
+		return 0;
 	return 1;
 }
 
-short write_function_list(struct _IFFHandle *iff,struct List *list)
+short write_function_list(struct _IFFHandle *iff, struct List *list)
 {
 	Cfg_Function *function;
 
 	// Go through function list
-	for (function=(Cfg_Function *)list->lh_Head;
-		function->node.ln_Succ;
-		function=(Cfg_Function *)function->node.ln_Succ)
+	for (function = (Cfg_Function *)list->lh_Head; function->node.ln_Succ;
+		 function = (Cfg_Function *)function->node.ln_Succ)
 	{
 		// Write function data
-		if (!(L_SaveFunction(iff,function)))
+		if (!(L_SaveFunction(iff, function)))
 			break;
 	}
 
 	// Fail?
-	if (function->node.ln_Succ) return 0;
+	if (function->node.ln_Succ)
+		return 0;
 	return 1;
 }
 
-BOOL LIBFUNC L_SaveFunction(
-	REG(a0, struct _IFFHandle *iff),
-	REG(a1, Cfg_Function *function))
+BOOL LIBFUNC L_SaveFunction(REG(a0, struct _IFFHandle *iff), REG(a1, Cfg_Function *function))
 {
 	Cfg_Instruction *ins;
 #ifdef __AROS__
 	CFG_FUNC *function_be;
-	
-	if (!(function_be=AllocVec(sizeof(CFG_FUNC),MEMF_CLEAR)))
+
+	if (!(function_be = AllocVec(sizeof(CFG_FUNC), MEMF_CLEAR)))
 		return 0;
-	
-	CopyMem(&function->function,function_be,sizeof(CFG_FUNC));
+
+	CopyMem(&function->function, function_be, sizeof(CFG_FUNC));
 
 	function_be->flags = AROS_LONG2BE(function_be->flags);
 	function_be->flags2 = AROS_LONG2BE(function_be->flags2);
@@ -514,33 +495,28 @@ BOOL LIBFUNC L_SaveFunction(
 	function_be->qual_mask = AROS_WORD2BE(function_be->qual_mask);
 	function_be->qual_same = AROS_WORD2BE(function_be->qual_same);
 
-	if (!(L_IFFPushChunk(iff,ID_FUNC)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)function_be,sizeof(CFG_FUNC))))
+	if (!(L_IFFPushChunk(iff, ID_FUNC)) || !(L_IFFWriteChunkBytes(iff, (char *)function_be, sizeof(CFG_FUNC))))
 	{
 		FreeVec(function_be);
 		return 0;
 	}
 	FreeVec(function_be);
 #else
-	if (!(L_IFFPushChunk(iff,ID_FUNC)) ||
-		!(L_IFFWriteChunkBytes(iff,(char *)&function->function,sizeof(CFG_FUNC))))
+	if (!(L_IFFPushChunk(iff, ID_FUNC)) || !(L_IFFWriteChunkBytes(iff, (char *)&function->function, sizeof(CFG_FUNC))))
 		return 0;
 #endif
 
 	// Go through instruction list
-	for (ins=(Cfg_Instruction *)function->instructions.mlh_Head;
-		ins->node.mln_Succ;
-		ins=(Cfg_Instruction *)ins->node.mln_Succ)
+	for (ins = (Cfg_Instruction *)function->instructions.mlh_Head; ins->node.mln_Succ;
+		 ins = (Cfg_Instruction *)ins->node.mln_Succ)
 	{
 #ifdef __AROS__
 		short type_be = AROS_WORD2BE(ins->type);
 
-		if (!(write_string(iff,ins->string)) ||
-			!(L_IFFWriteChunkBytes(iff,(char *)&type_be,sizeof(short))))
+		if (!(write_string(iff, ins->string)) || !(L_IFFWriteChunkBytes(iff, (char *)&type_be, sizeof(short))))
 #else
 		// Write function string
-		if (!(write_string(iff,ins->string)) ||
-			!(L_IFFWriteChunkBytes(iff,(char *)&ins->type,sizeof(short))))
+		if (!(write_string(iff, ins->string)) || !(L_IFFWriteChunkBytes(iff, (char *)&ins->type, sizeof(short))))
 #endif
 			return 0;
 	}

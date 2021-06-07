@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,39 +26,37 @@ For more information on Directory Opus for Windows please see:
 #include <Program/dopus_config.h>
 
 // Load a 32 bit palette, even under <39
-void LIBFUNC L_LoadPalette32(
-	REG(a0, struct ViewPort *vp),
-	REG(a1, unsigned long *palette))
+void LIBFUNC L_LoadPalette32(REG(a0, struct ViewPort *vp), REG(a1, unsigned long *palette))
 {
 	// Under 39 pass to Gfx library
-	if( ((struct Library *)GfxBase)->lib_Version>=39) 
+	if (((struct Library *)GfxBase)->lib_Version >= 39)
 	{
-		LoadRGB32(vp,palette);
+		LoadRGB32(vp, palette);
 	}
 
 	// Otherwise, convert to 4 bit
 	else
 	{
 		unsigned short *backup_palette;
-		short pen,numcols;
+		short pen, numcols;
 
 		// Get count
-		numcols=*(unsigned short *)palette;
+		numcols = *(unsigned short *)palette;
 		++palette;
 
 		// Allocate backup palette
-		if ((backup_palette=AllocVec(numcols*sizeof(unsigned short),0)))
+		if ((backup_palette = AllocVec(numcols * sizeof(unsigned short), 0)))
 		{
 			// Convert to 4 bit colour
-			for (pen=0;pen<numcols;pen++)
+			for (pen = 0; pen < numcols; pen++)
 			{
-				backup_palette[pen]=((*palette++)&0xf0000000)>>20;
-				backup_palette[pen]|=((*palette++)&0xf0000000)>>24;
-				backup_palette[pen]|=((*palette++)&0xf0000000)>>28;
+				backup_palette[pen] = ((*palette++) & 0xf0000000) >> 20;
+				backup_palette[pen] |= ((*palette++) & 0xf0000000) >> 24;
+				backup_palette[pen] |= ((*palette++) & 0xf0000000) >> 28;
 			}
 
 			// Load palette
-			LoadRGB4(vp,backup_palette,numcols);
+			LoadRGB4(vp, backup_palette, numcols);
 
 			// Free backup
 			FreeVec(backup_palette);
@@ -66,17 +64,15 @@ void LIBFUNC L_LoadPalette32(
 	}
 }
 
-
 // Get a 32 bit palette, even under <39
-void LIBFUNC L_GetPalette32(
-	REG(a0, struct ViewPort *vp),
-	REG(a1, unsigned long *palette),
-	REG(d0, unsigned short count),
-	REG(d1, short first))
+void LIBFUNC L_GetPalette32(REG(a0, struct ViewPort *vp),
+							REG(a1, unsigned long *palette),
+							REG(d0, unsigned short count),
+							REG(d1, short first))
 {
 	// If under 39+ we get it directly
-	if( ((struct Library *)GfxBase)->lib_Version>=39)
-		GetRGB32(vp->ColorMap,first,count,palette);
+	if (((struct Library *)GfxBase)->lib_Version >= 39)
+		GetRGB32(vp->ColorMap, first, count, palette);
 
 	// Otherwise, we have to convert from 4 bit colour
 	else
@@ -85,15 +81,15 @@ void LIBFUNC L_GetPalette32(
 		unsigned long colour;
 
 		// Go through each pen
-		for (pen=0;pen<count;pen++)
+		for (pen = 0; pen < count; pen++)
 		{
 			// Get colour value of this pen
-			colour=GetRGB4(vp->ColorMap,pen+first);
+			colour = GetRGB4(vp->ColorMap, pen + first);
 
 			// Convert from 4 to 32 bit colour
-			*palette++=(((colour>>8)&0xf)<<28)|0x0fffffff;
-			*palette++=(((colour>>4)&0xf)<<28)|0x0fffffff;
-			*palette++=((colour&0xf)<<28)|0x0fffffff;
+			*palette++ = (((colour >> 8) & 0xf) << 28) | 0x0fffffff;
+			*palette++ = (((colour >> 4) & 0xf) << 28) | 0x0fffffff;
+			*palette++ = ((colour & 0xf) << 28) | 0x0fffffff;
 		}
 	}
 }

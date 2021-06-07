@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -31,7 +31,7 @@ For more information on Directory Opus for Windows please see:
  *	 1-02-96	Converting progress meters to 5.1165 style
  *	 7-02-96	Now shows name of file being transferred when iconified
  *	 4-06-96	lst_set_busy now uses 'lister set busy on wait'
- *	
+ *
  *	30-01-97	GJP various changes
  *			Changed mechanism of returning RC or RESULT
  *			added lst_title
@@ -57,7 +57,6 @@ For more information on Directory Opus for Windows please see:
 // Debugging info from this file can be annoying
 #undef DEBUG
 #define LOUD 0
-
 
 /*
 
@@ -95,63 +94,64 @@ return result;
 }
 */
 
-
 // Add an entry to a lister which is NOT under our control
 
-void rexx_lst_add( const char *opus, ULONG handle,
-	 char *name, unsigned int size, int type, ULONG seconds, LONG prot,
-	 char *comment )
+void rexx_lst_add(const char *opus,
+				  ULONG handle,
+				  char *name,
+				  unsigned int size,
+				  int type,
+				  ULONG seconds,
+				  LONG prot,
+				  char *comment)
 {
-char protbuf[9];
+	char protbuf[9];
 
-// Convert protection bits to ascii
-protbuf[0] = prot & FIBF_HIDDEN ? 'h' : '-';
-protbuf[1] = prot & FIBF_SCRIPT ? 's' : '-';
-protbuf[2] = prot & FIBF_PURE ? 'p' : '-';
-protbuf[3] = prot & FIBF_ARCHIVE ? 'a' : '-';
-protbuf[4] = prot & FIBF_READ ? '-' : 'r';
-protbuf[5] = prot & FIBF_WRITE ? '-' : 'w';
-protbuf[6] = prot & FIBF_EXECUTE ? '-' : 'e';
-protbuf[7] = prot & FIBF_DELETE ? '-' : 'd';
-protbuf[8] = 0;
+	// Convert protection bits to ascii
+	protbuf[0] = prot & FIBF_HIDDEN ? 'h' : '-';
+	protbuf[1] = prot & FIBF_SCRIPT ? 's' : '-';
+	protbuf[2] = prot & FIBF_PURE ? 'p' : '-';
+	protbuf[3] = prot & FIBF_ARCHIVE ? 'a' : '-';
+	protbuf[4] = prot & FIBF_READ ? '-' : 'r';
+	protbuf[5] = prot & FIBF_WRITE ? '-' : 'w';
+	protbuf[6] = prot & FIBF_EXECUTE ? '-' : 'e';
+	protbuf[7] = prot & FIBF_DELETE ? '-' : 'd';
+	protbuf[8] = 0;
 
-send_rexxa(
-	opus,
-	FALSE,
-	"lister add %lu \"%s\" %lu %ld %lu %s%s%s",
-	handle,
-	name,
-	size,
-	type,
-	seconds,
-	protbuf,
-	comment ? " " : "",
-	comment ? comment : "" );
+	send_rexxa(opus,
+			   FALSE,
+			   "lister add %lu \"%s\" %lu %ld %lu %s%s%s",
+			   handle,
+			   name,
+			   size,
+			   type,
+			   seconds,
+			   protbuf,
+			   comment ? " " : "",
+			   comment ? comment : "");
 }
 
 /********************************/
 
-void rexx_doubleclick( const char *opus, const char *path )
+void rexx_doubleclick(const char *opus, const char *path)
 {
-send_rexxa( opus, REXX_REPLY_NONE, "command doubleclick %s", path );
+	send_rexxa(opus, REXX_REPLY_NONE, "command doubleclick %s", path);
 }
-
 
 /********************************/
 
 //
 //	Refresh a lister
 //
-void rexx_lst_refresh( const char *opus, ULONG handle, int date )
+void rexx_lst_refresh(const char *opus, ULONG handle, int date)
 {
-D(bug("Refresh lister - start - "));
+	D(bug("Refresh lister - start - "));
 
-send_rexxa( opus, FALSE, "lister refresh %lu", handle );
-if	(date == REFRESH_DATE)
-	send_rexxa( opus, FALSE, "lister refresh %lu date", handle );
+	send_rexxa(opus, FALSE, "lister refresh %lu", handle);
+	if (date == REFRESH_DATE)
+		send_rexxa(opus, FALSE, "lister refresh %lu date", handle);
 
-D(bug("end\n"));
-
+	D(bug("end\n"));
 }
 
 /********************************/
@@ -160,48 +160,47 @@ D(bug("end\n"));
  *	Set or clear a lister's busy state
  */
 
-void rexx_lst_busy( const char *opus, ULONG handle, int val )
+void rexx_lst_busy(const char *opus, ULONG handle, int val)
 {
-/*
-if	(val)
-	D(bug( "rexx_lst_busy()\n" ));
-else
-	D(bug( "rexx_lst_unlock()\n" ));
-*/
+	/*
+	if	(val)
+		D(bug( "rexx_lst_busy()\n" ));
+	else
+		D(bug( "rexx_lst_unlock()\n" ));
+	*/
 
-send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu busy %d wait", handle, val );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu busy %d wait", handle, val);
 }
 
 /********************************/
 
-/*	
+/*
  *	Tell Opus to cache the current buffer and moves to a new one
  *	18.4.97 Added namelength and case on to et new buffer obtained
  *	from lister empty to support ftp parameters.
  *
  */
 
-void rexx_lst_empty( const char *opus, ULONG handle )
+void rexx_lst_empty(const char *opus, ULONG handle)
 {
-D(bug( "rexx_lst_empty(%ld)\n", handle ));
+	D(bug("rexx_lst_empty(%ld)\n", handle));
 
-send_rexxa( opus, REXX_REPLY_NONE, "lister empty %lu", handle );
-send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu namelength 256", handle );
-send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu case on", handle );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister empty %lu", handle);
+	send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu namelength 256", handle);
+	send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu case on", handle);
 }
-
 
 /********************************/
 
-/*	
+/*
  *	Opus clears the current buffer, does not move to a new one
  */
 
-void rexx_lst_clear( const char *opus, ULONG handle )
+void rexx_lst_clear(const char *opus, ULONG handle)
 {
-D(bug( "rexx_lst_clear(%ld)\n", handle ));
+	D(bug("rexx_lst_clear(%ld)\n", handle));
 
-send_rexxa( opus, REXX_REPLY_NONE, "lister clear %lu", handle );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister clear %lu", handle);
 }
 
 /********************************/
@@ -210,55 +209,54 @@ send_rexxa( opus, REXX_REPLY_NONE, "lister clear %lu", handle );
  *	Close a lister and clear cache buffers
  */
 
-void rexx_lst_close( const char *opus, ULONG handle )
+void rexx_lst_close(const char *opus, ULONG handle)
 {
-// new command : lister freecaches <handle> <handler>
-// eg, lister freecaches 129384849 _OPUS_FTP_
-send_rexxa( opus, REXX_REPLY_NONE, "lister freecaches %lu "PORTNAME"", handle );
+	// new command : lister freecaches <handle> <handler>
+	// eg, lister freecaches 129384849 _OPUS_FTP_
+	send_rexxa(opus, REXX_REPLY_NONE, "lister freecaches %lu " PORTNAME "", handle);
 
-// Remove handler so we don't get 'inactive' msg
-send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu handler ''", handle );
+	// Remove handler so we don't get 'inactive' msg
+	send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu handler ''", handle);
 
-// Close lister
-send_rexxa( opus, REXX_REPLY_NONE, "lister close %lu", handle );
+	// Close lister
+	send_rexxa(opus, REXX_REPLY_NONE, "lister close %lu", handle);
 }
-
 
 /*
  *	check if dir is in Opus cache. If so then Opus it will display it
- *	
+ *
  *	returns 1/0 for entry cached or not
  */
-int rexx_lst_findcache( const char *opus, ULONG handle, char *path )
+int rexx_lst_findcache(const char *opus, ULONG handle, char *path)
 {
-char *string;
-int   value = 0;
+	char *string;
+	int value = 0;
 
-if	((string = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister findcache %lu %s", handle, path )))
+	if ((string = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister findcache %lu %s", handle, path)))
 	{
-	value = atoi(string);
-	DeleteArgstring( string );
+		value = atoi(string);
+		DeleteArgstring(string);
 	}
 
-return value;
+	return value;
 }
 
 // Remember to do a refresh after this
-void rexx_lst_title( const char *opus, ULONG handle, char *title )
+void rexx_lst_title(const char *opus, ULONG handle, char *title)
 {
-if	(strncmp( title, "FTP:", 4 ))
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu title FTP:%s", handle, title );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu title %s", handle, title );
+	if (strncmp(title, "FTP:", 4))
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu title FTP:%s", handle, title);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu title %s", handle, title);
 }
 
 // Remember to do a refresh after this
-char *rexx_lst_title_swap( const char *opus, ULONG handle, char *title )
+char *rexx_lst_title_swap(const char *opus, ULONG handle, char *title)
 {
-if	(strncmp( title, "FTP:", 4 ))
-	return (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister set %lu title FTP:%s", handle, title );
-else
-	return (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister set %lu title %s", handle, title );
+	if (strncmp(title, "FTP:", 4))
+		return (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister set %lu title FTP:%s", handle, title);
+	else
+		return (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister set %lu title %s", handle, title);
 }
 
 /********************************/
@@ -266,18 +264,17 @@ else
 //
 //	Set the label that the lister will have while iconified
 //
-void rexx_lst_label ( const char *opus, ULONG handle, 
-	 char *pref, char *label, char *suff )
+void rexx_lst_label(const char *opus, ULONG handle, char *pref, char *label, char *suff)
 {
-if	(!pref)
-	pref = "";
-if	(!suff)
-	suff = "";
+	if (!pref)
+		pref = "";
+	if (!suff)
+		suff = "";
 
-if	(label)
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu label (%s%s%s)", handle, pref, label, suff );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu label", handle );
+	if (label)
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu label (%s%s%s)", handle, pref, label, suff);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu label", handle);
 }
 
 /********************************/
@@ -285,27 +282,27 @@ else
 //
 //	Ensure a lister becomes busy
 //
-void rexx_lst_lock( const char *opus, ULONG handle )
+void rexx_lst_lock(const char *opus, ULONG handle)
 {
-int		notdone = 1;
-char *		r;
+	int notdone = 1;
+	char *r;
 
-D(bug( "rexx_lst_lock()\n" ));
+	D(bug("rexx_lst_lock()\n"));
 
-while	(notdone)
+	while (notdone)
 	{
-	rexx_lst_busy( opus, handle, 1 );
+		rexx_lst_busy(opus, handle, 1);
 
-	if	((r = (char*)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu busy", handle )))
+		if ((r = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu busy", handle)))
 		{
-		if	(*r == '1')
-			notdone = 0;
+			if (*r == '1')
+				notdone = 0;
 
-		DeleteArgstring( r );
+			DeleteArgstring(r);
 		}
 
-	if	(notdone)
-		Delay( 5 );
+		if (notdone)
+			Delay(5);
 	}
 }
 
@@ -314,107 +311,104 @@ while	(notdone)
 //
 //	Create a new lister and set it's title and handler
 //
-ULONG rexx_lst_new( const char *opus, ULONG handle, char *host, const char *toolbar )
+ULONG rexx_lst_new(const char *opus, ULONG handle, char *host, const char *toolbar)
 {
-char  *asciihandle;
-ULONG  new_handle;
-BPTR   dir_lock = 0, cd = 0, toolbar_lock = 0;
+	char *asciihandle;
+	ULONG new_handle;
+	BPTR dir_lock = 0, cd = 0, toolbar_lock = 0;
 
-if	(toolbar && *toolbar && (dir_lock = Lock( "DOpus5:Buttons/", ACCESS_READ )))
+	if (toolbar && *toolbar && (dir_lock = Lock("DOpus5:Buttons/", ACCESS_READ)))
 	{
-	cd = CurrentDir( dir_lock );
-	toolbar_lock = Lock( (char *)toolbar, ACCESS_READ );
+		cd = CurrentDir(dir_lock);
+		toolbar_lock = Lock((char *)toolbar, ACCESS_READ);
 	}
 
-if	(handle)
+	if (handle)
 	{
-	new_handle = handle;
+		new_handle = handle;
 
-//	TODO DeviceList causes problems when the list is not cleared
-//	rexx_lst_clear( opus, new_handle )
+		//	TODO DeviceList causes problems when the list is not cleared
+		//	rexx_lst_clear( opus, new_handle )
 
-	// if there is special toolbar then set it.
-	if	(toolbar_lock)
-		send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu toolbar %s", new_handle, toolbar );
+		// if there is special toolbar then set it.
+		if (toolbar_lock)
+			send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu toolbar %s", new_handle, toolbar);
 	}
-else
-	{
-	if	(toolbar_lock)
-		asciihandle = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister new toolbar %s", toolbar );
 	else
-		asciihandle = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister new" );
-	new_handle = atoi(asciihandle);
-	DeleteArgstring( asciihandle );
-	}
-	
-if	(new_handle)
 	{
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu handler "PORTNAME" quotes editing subdrop synctraps", new_handle );
+		if (toolbar_lock)
+			asciihandle = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister new toolbar %s", toolbar);
+		else
+			asciihandle = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister new");
+		new_handle = atoi(asciihandle);
+		DeleteArgstring(asciihandle);
+	}
 
-	#if 0
+	if (new_handle)
+	{
+		send_rexxa(
+			opus, REXX_REPLY_NONE, "lister set %lu handler " PORTNAME " quotes editing subdrop synctraps", new_handle);
+
+#if 0
 	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu title FTP:%s", new_handle, host );
 	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu namelength 256", new_handle );
 	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu case on", new_handle );
 	send_rexxa( opus, REXX_REPLY_NONE, "lister refresh %lu full", new_handle );
 	rexx_lst_label( opus, new_handle, "FTP:", host, NULL );
-	#endif
+#endif
 
-	send_rexxa( opus, REXX_REPLY_NONE, "lister wait %lu quick", new_handle );
+		send_rexxa(opus, REXX_REPLY_NONE, "lister wait %lu quick", new_handle);
 	}
 
-if	(toolbar_lock)
-	UnLock( toolbar_lock );
+	if (toolbar_lock)
+		UnLock(toolbar_lock);
 
-if	(dir_lock)
+	if (dir_lock)
 	{
-	CurrentDir( cd );
-	UnLock( dir_lock );
+		CurrentDir(cd);
+		UnLock(dir_lock);
 	}
 
-return new_handle;
+	return new_handle;
 }
 
 /*********************************/
 
-BOOL rexx_lst_query_handler( const char *opus, ULONG handle )
+BOOL rexx_lst_query_handler(const char *opus, ULONG handle)
 {
-char *handler;
-BOOL  result = FALSE;
+	char *handler;
+	BOOL result = FALSE;
 
-if	((handler = (char *)send_rexxa(
-	opus,
-	REXX_REPLY_RESULT,
-	"lister query %lu handler",
-	handle )))
+	if ((handler = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu handler", handle)))
 	{
-	if	(*handler)
-		result = TRUE;
+		if (*handler)
+			result = TRUE;
 
-	DeleteArgstring( handler );
+		DeleteArgstring(handler);
 	}
 
-return result;
+	return result;
 }
 
 /*********************************/
 
 //
-//	Is lister visible? 
+//	Is lister visible?
 //	Still there after an inactive msg?
 //
-int rexx_lst_query_visible( const char *opus, ULONG handle)
+int rexx_lst_query_visible(const char *opus, ULONG handle)
 {
-char *string;
-int   value = 0;
+	char *string;
+	int value = 0;
 
-if	((string = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu visible", handle)))
+	if ((string = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu visible", handle)))
 	{
-	D(bug( "** query visible '%s'\n", string ));
-	value = atoi(string);
-	DeleteArgstring( string );
+		D(bug("** query visible '%s'\n", string));
+		value = atoi(string);
+		DeleteArgstring(string);
 	}
 
-return value;
+	return value;
 }
 
 /********************************/
@@ -423,18 +417,18 @@ return value;
  *	Returns 1st dest handle
  */
 
-ULONG rexx_lst_query_dest1( const char *opus )
+ULONG rexx_lst_query_dest1(const char *opus)
 {
-char *dst;
-ULONG result = 0;
+	char *dst;
+	ULONG result = 0;
 
-if	((dst = (char*)send_rexx( opus, REXX_REPLY_RESULT, "lister query dest" )))
+	if ((dst = (char *)send_rexx(opus, REXX_REPLY_RESULT, "lister query dest")))
 	{
-	result = atoi(dst);
-	DeleteArgstring( dst );
+		result = atoi(dst);
+		DeleteArgstring(dst);
 	}
 
-return result;
+	return result;
 }
 
 /********************************/
@@ -443,75 +437,75 @@ return result;
  *	Get the fileinfo string for a list entry
  */
 
-char *rexx_lst_query_entry( const char *opus, ULONG handle, char *entry )
+char *rexx_lst_query_entry(const char *opus, ULONG handle, char *entry)
 {
-return (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu entry \"%s\"", handle, entry );
+	return (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu entry \"%s\"", handle, entry);
 }
 
 /********************************/
 
-static int rexx_lst_query_numblah( const char *opus, ULONG handle, const char *blah )
+static int rexx_lst_query_numblah(const char *opus, ULONG handle, const char *blah)
 {
-char *s;
-int   n = 0;
+	char *s;
+	int n = 0;
 
-if	((s = (char *)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu num%s", handle, blah )))
+	if ((s = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu num%s", handle, blah)))
 	{
-	n = atoi(s);
-	DeleteArgstring( s );
+		n = atoi(s);
+		DeleteArgstring(s);
 	}
 
-return n;
+	return n;
 }
 
 /********************************/
 
-int rexx_lst_query_numentries( const char *opus, ULONG handle )
+int rexx_lst_query_numentries(const char *opus, ULONG handle)
 {
-return rexx_lst_query_numblah( opus, handle, "entries" );
+	return rexx_lst_query_numblah(opus, handle, "entries");
 }
 
 /********************************/
 
-int rexx_lst_query_numfiles( const char *opus, ULONG handle )
+int rexx_lst_query_numfiles(const char *opus, ULONG handle)
 {
-return rexx_lst_query_numblah( opus, handle, "files" );
+	return rexx_lst_query_numblah(opus, handle, "files");
 }
 
 /********************************/
 
-int rexx_lst_query_numseldirs( const char *opus, ULONG handle )
+int rexx_lst_query_numseldirs(const char *opus, ULONG handle)
 {
-return rexx_lst_query_numblah( opus, handle, "seldirs" );
+	return rexx_lst_query_numblah(opus, handle, "seldirs");
 }
 
 /********************************/
 
-int rexx_lst_query_numselentries( const char *opus, ULONG handle )
+int rexx_lst_query_numselentries(const char *opus, ULONG handle)
 {
-return rexx_lst_query_numblah( opus, handle, "selentries" );
+	return rexx_lst_query_numblah(opus, handle, "selentries");
 }
 
 /********************************/
 
-int rexx_lst_query_numselfiles( const char *opus, ULONG handle )
+int rexx_lst_query_numselfiles(const char *opus, ULONG handle)
 {
-return rexx_lst_query_numblah( opus, handle, "selfiles" );
+	return rexx_lst_query_numblah(opus, handle, "selfiles");
 }
 
 /********************************/
 
-char *rexx_lst_query_path( const char *opus, ULONG handle )
+char *rexx_lst_query_path(const char *opus, ULONG handle)
 {
-char *path;
+	char *path;
 
-D(bug( "rexx_lst_query_path(%ld)\n", handle ));
+	D(bug("rexx_lst_query_path(%ld)\n", handle));
 
-path = (char*)send_rexxa( opus, REXX_REPLY_RESULT, "lister query %lu path", handle );
+	path = (char *)send_rexxa(opus, REXX_REPLY_RESULT, "lister query %lu path", handle);
 
-D(bug( "-> '%s'\n", path ));
+	D(bug("-> '%s'\n", path));
 
-return path;
+	return path;
 }
 
 /********************************/
@@ -519,25 +513,25 @@ return path;
 //
 //	Returns 1st source handle
 //
-ULONG rexx_lst_query_src1( const char *opus )
+ULONG rexx_lst_query_src1(const char *opus)
 {
-char  *src;
-ULONG  result = 0;
+	char *src;
+	ULONG result = 0;
 
-if	((src = (char*)send_rexx( opus, REXX_REPLY_RESULT, "lister query source" )))
+	if ((src = (char *)send_rexx(opus, REXX_REPLY_RESULT, "lister query source")))
 	{
-	result = atoi(src);
-	DeleteArgstring( src );
+		result = atoi(src);
+		DeleteArgstring(src);
 	}
 
-return result;
+	return result;
 }
 
 /********************************/
 
-void rexx_lst_remove( const char *opus, ULONG handle, char *name )
+void rexx_lst_remove(const char *opus, ULONG handle, char *name)
 {
-send_rexxa( opus, REXX_REPLY_NONE, "lister remove %lu \"%s\"", handle, name );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister remove %lu \"%s\"", handle, name);
 }
 
 /********************************/
@@ -546,53 +540,117 @@ send_rexxa( opus, REXX_REPLY_NONE, "lister remove %lu \"%s\"", handle, name );
  *	Select or deselect an entry in a lister
  */
 
-void rexx_lst_select( const char *opus, ULONG handle, char *name, int state )
+void rexx_lst_select(const char *opus, ULONG handle, char *name, int state)
 {
-send_rexxa( opus, REXX_REPLY_NONE, "lister select %lu \"%s\" %d", handle, name, state );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister select %lu \"%s\" %d", handle, name, state);
 }
 
 /********************************/
 
-void rexx_lst_set_path( const char *opus, ULONG handle, char *path )
+void rexx_lst_set_path(const char *opus, ULONG handle, char *path)
 {
-D(bug( "rexx_lst_set_path(%ld)\n", handle ));
-D(bug( "-> '%s'\n", path ));
+	D(bug("rexx_lst_set_path(%ld)\n", handle));
+	D(bug("-> '%s'\n", path));
 
-send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu path %s", handle, path );
+	send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu path %s", handle, path);
 
-
-//DeleteArgstring( rexx_lst_query_path( opus, handle ) );
-
+	// DeleteArgstring( rexx_lst_query_path( opus, handle ) );
 }
 
 /********************************/
 
-void rexx_prog_bar( const char *opus, ULONG handle, int type, int total, int count )
+void rexx_prog_bar(const char *opus, ULONG handle, int type, int total, int count)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu bar %ld %ld", handle, total, count );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress bar %ld %ld", handle, total, count );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu bar %ld %ld", handle, total, count);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress bar %ld %ld", handle, total, count);
 }
 
 /********************************/
 
-void rexx_prog_bytes( const char *opus, ULONG handle, int type, int total, int count )
+void rexx_prog_bytes(const char *opus, ULONG handle, int type, int total, int count)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu file %ld %ld", handle, total, count );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress file %ld %ld", handle, total, count );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu file %ld %ld", handle, total, count);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress file %ld %ld", handle, total, count);
 }
 
 /********************************/
 
-void rexx_prog_clear( const char *opus, ULONG handle, int type )
+void rexx_prog_clear(const char *opus, ULONG handle, int type)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu off", handle );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister clear %lu progress", handle );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu off", handle);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister clear %lu progress", handle);
+}
+
+/********************************/
+
+//
+//	Initialize a progress bar.
+//	If no handle is passed in, a free-floating progress bar will be created.
+//	Returns the handle passed in or the handle of the free-floating bar.
+//
+ULONG rexx_prog_init(const char *opus, ULONG handle, int type, char *title, char *info, char *name, int file, int bar)
+{
+	char buf[80];
+	char *str;
+
+	if (type == PROGRESS_FREE)
+		sprintf(buf, "dopus progress abort", handle);
+	else
+		sprintf(buf, "lister set %lu newprogress abort", handle);
+
+	if (info)
+		strcat(buf, " info");
+
+	if (name)
+		strcat(buf, " name");
+	if (file)
+		strcat(buf, " file");
+	if (bar)
+		strcat(buf, " bar");
+
+	if (type == PROGRESS_FREE)
+	{
+		if ((str = (char *)send_rexx(opus, REXX_REPLY_RESULT, buf)))
+		{
+			handle = atoi(str);
+			DeleteArgstring(str);
+		}
+	}
+	else
+		send_rexx(opus, REXX_REPLY_NONE, buf);
+
+	if (handle)
+	{
+		if (title && *title)
+		{
+			if (type == PROGRESS_FREE)
+				send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu title %s", handle, title);
+			else
+				send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress title %s", handle, title);
+		}
+		if (info && *info)
+		{
+			if (type == PROGRESS_FREE)
+				send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info);
+			else
+				send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress info %s", handle, info);
+		}
+		if (name && *name)
+		{
+			if (type == PROGRESS_FREE)
+				send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name);
+			else
+				send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name);
+		}
+	}
+
+	return handle;
 }
 
 /********************************/
@@ -602,174 +660,120 @@ else
 //	If no handle is passed in, a free-floating progress bar will be created.
 //	Returns the handle passed in or the handle of the free-floating bar.
 //
-ULONG rexx_prog_init(
-	const char *opus,
-	ULONG       handle,
-	int         type,
-	char       *title,
-	char       *info,
-	char       *name,
-	int         file,
-	int         bar )
+ULONG rexx_prog_init3(const char *opus,
+					  ULONG handle,
+					  int type,
+					  char *title,
+					  char *info,
+
+					  char *info2,
+					  char *info3,
+
+					  char *name,
+					  int file,
+					  int bar)
 {
-char  buf[80];
-char *str;
+	char buf[80];
+	char *str;
 
-if	(type == PROGRESS_FREE)
-	sprintf( buf, "dopus progress abort", handle );
-else
-	sprintf( buf, "lister set %lu newprogress abort", handle );
+	if (type == PROGRESS_FREE)
+		sprintf(buf, "dopus progress abort", handle);
+	else
+		sprintf(buf, "lister set %lu newprogress abort", handle);
 
-if	(info)	strcat( buf, " info" );
+	if (info)
+		strcat(buf, " info");
+	if (info2)
+		strcat(buf, " info2");
+	if (info3)
+		strcat(buf, " info3");
+	if (name)
+		strcat(buf, " name");
+	if (file)
+		strcat(buf, " file");
+	if (bar)
+		strcat(buf, " bar");
 
-if	(name)	strcat( buf, " name" );
-if	(file)	strcat( buf, " file" );
-if	(bar)	strcat( buf, " bar" );
-
-if	(type == PROGRESS_FREE)
+	if (type == PROGRESS_FREE)
 	{
-	if	((str = (char *)send_rexx( opus, REXX_REPLY_RESULT, buf )))
+		if ((str = (char *)send_rexx(opus, REXX_REPLY_RESULT, buf)))
 		{
-		handle = atoi(str);
-		DeleteArgstring( str );
+			handle = atoi(str);
+			DeleteArgstring(str);
 		}
 	}
-else
-	send_rexx( opus, REXX_REPLY_NONE, buf );
+	else
+		send_rexx(opus, REXX_REPLY_NONE, buf);
 
-if	(handle)
+	if (handle)
 	{
-		if	(title && *title)  {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu title %s", handle, title );
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress title %s", handle, title );
-		}
-		if	(info && *info) {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info );
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress info %s", handle, info );
-		}
-		if	(name && *name) {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name );
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name );
-		}		
-	}
-
-return handle;
-}
-
-
-/********************************/
-
-//
-//	Initialize a progress bar.
-//	If no handle is passed in, a free-floating progress bar will be created.
-//	Returns the handle passed in or the handle of the free-floating bar.
-//
-ULONG rexx_prog_init3(
-	const char *opus,
-	ULONG       handle,
-	int         type,
-	char       *title,
-	char       *info,
-
-	char       *info2,
-	char       *info3,
-
-	char       *name,
-	int         file,
-	int         bar )
-{
-char  buf[80];
-char *str;
-
-if	(type == PROGRESS_FREE)
-	sprintf( buf, "dopus progress abort", handle );
-else
-	sprintf( buf, "lister set %lu newprogress abort", handle );
-
-if	(info)	strcat( buf, " info" );
-if	(info2)	strcat( buf, " info2" );
-if	(info3)	strcat( buf, " info3" );
-if	(name)	strcat( buf, " name" );
-if	(file)	strcat( buf, " file" );
-if	(bar)	strcat( buf, " bar" );
-
-if	(type == PROGRESS_FREE)
-	{
-	if	((str = (char *)send_rexx( opus, REXX_REPLY_RESULT, buf )))
+		if (title && *title)
 		{
-		handle = atoi(str);
-		DeleteArgstring( str );
+			if (type == PROGRESS_FREE)
+				send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu title %s", handle, title);
+			else
+				send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress title %s", handle, title);
+		}
+		if (info && *info)
+		{
+			if (type == PROGRESS_FREE)
+				send_rexxa(
+					opus, REXX_REPLY_NONE, "dopus progress %lu info %s info2 %s info3 %s ", handle, info, info2, info3);
+			else
+				send_rexxa(opus,
+						   REXX_REPLY_NONE,
+						   "lister set %lu newprogress info %s info2 %s info3 %s ",
+						   handle,
+						   info,
+						   info2,
+						   info3);
+		}
+		if (name && *name)
+		{
+			if (type == PROGRESS_FREE)
+				send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name);
+			else
+				send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name);
 		}
 	}
-else
-	send_rexx( opus, REXX_REPLY_NONE, buf );
 
-if	(handle)
-	{
-		if	(title && *title) {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu title %s", handle, title );
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress title %s", handle, title );
-		}
-		if	(info && *info) {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu info %s info2 %s info3 %s ", handle,info,info2,info3);
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress info %s info2 %s info3 %s ", handle,info,info2,info3);
-		}
-		if	(name && *name) {
-			if	(type == PROGRESS_FREE)
-				send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name );
-			else
-				send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name );
-		}		
-	}
-
-return handle;
+	return handle;
 }
 
 /********************************/
 
-void rexx_prog_name( const char *opus, ULONG handle, int type, char *name )
+void rexx_prog_name(const char *opus, ULONG handle, int type, char *name)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu name %s", handle, name);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress name %s", handle, name);
 }
 
 /********************************/
 
-void rexx_prog_info( const char *opus, ULONG handle, int type, char *info )
+void rexx_prog_info(const char *opus, ULONG handle, int type, char *info)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress info %s", handle, info );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress info %s", handle, info);
 }
 
-
-void rexx_prog_info2( const char *opus, ULONG handle, int type, char *info )
+void rexx_prog_info2(const char *opus, ULONG handle, int type, char *info)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu info2 %s", handle, info );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress info2 %s", handle, info );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu info2 %s", handle, info);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress info2 %s", handle, info);
 }
 
-void rexx_prog_info3( const char *opus, ULONG handle, int type, char *info )
+void rexx_prog_info3(const char *opus, ULONG handle, int type, char *info)
 {
-if	(type == PROGRESS_FREE)
-	send_rexxa( opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info );
-else
-	send_rexxa( opus, REXX_REPLY_NONE, "lister set %lu newprogress info3 %s", handle, info );
+	if (type == PROGRESS_FREE)
+		send_rexxa(opus, REXX_REPLY_NONE, "dopus progress %lu info %s", handle, info);
+	else
+		send_rexxa(opus, REXX_REPLY_NONE, "lister set %lu newprogress info3 %s", handle, info);
 }
 
 /********************************/
@@ -778,23 +782,23 @@ else
  *	Send an Arexx command, get an optional result back
  */
 
-LONG STDARGS send_rexxa( const char *dest_portname, int reply_type, const char *fmt, ... )
+LONG STDARGS send_rexxa(const char *dest_portname, int reply_type, const char *fmt, ...)
 {
-va_list	 ap;
-int	 retval = NULL;
-char    *buf;
+	va_list ap;
+	int retval = NULL;
+	char *buf;
 
-if	((buf = AllocVec( 1024, MEMF_ANY )))
+	if ((buf = AllocVec(1024, MEMF_ANY)))
 	{
-	va_start( ap, fmt );
-	vsprintf(buf, fmt, ap);
-	va_end( ap );
+		va_start(ap, fmt);
+		vsprintf(buf, fmt, ap);
+		va_end(ap);
 
-	retval = send_rexx( dest_portname, reply_type, buf );
-	FreeVec( buf );
+		retval = send_rexx(dest_portname, reply_type, buf);
+		FreeVec(buf);
 	}
 
-return retval;
+	return retval;
 }
 
 /********************************/
@@ -808,79 +812,80 @@ return retval;
 //	gjp changed to make return RC/RESULT easier by using
 //	reply_type is emum REXX_REPLY_NONE,REXX_REPLY_RESULT,REXX_REPLY_RC;
 //
-LONG send_rexx( const char *dest_portname, int reply_type, const char *cmd )
+LONG send_rexx(const char *dest_portname, int reply_type, const char *cmd)
 {
-LONG           *retptr, retval = -1;	// The result and a pointer to it
-struct MsgPort *destport, *rp;		// The destination and reply ports
-UBYTE          *argstr;			// The arexx argument string
-struct RexxMsg *rxmsg;			// The arexx message
+	LONG *retptr, retval = -1;		// The result and a pointer to it
+	struct MsgPort *destport, *rp;	// The destination and reply ports
+	UBYTE *argstr;					// The arexx argument string
+	struct RexxMsg *rxmsg;			// The arexx message
 
 #ifdef DEBUG
-BOOL quiet = FALSE;
-BOOL show_debug = FALSE;
+	BOOL quiet = FALSE;
+	BOOL show_debug = FALSE;
 #endif
 
-if	((rp = CreateMsgPort()))
+	if ((rp = CreateMsgPort()))
 	{
-	if	((rxmsg = CreateRexxMsg( rp, NULL, NULL )))
+		if ((rxmsg = CreateRexxMsg(rp, NULL, NULL)))
 		{
-		if	(reply_type == REXX_REPLY_RC)
-			retptr = &rxmsg->rm_Result1;
-		else
-			retptr = &rxmsg->rm_Result2;
+			if (reply_type == REXX_REPLY_RC)
+				retptr = &rxmsg->rm_Result1;
+			else
+				retptr = &rxmsg->rm_Result2;
 
 #ifdef DEBUG
-		quiet = !(strnicmp(cmd,"lister add",10) && strnicmp(cmd,"lister refresh",13)
-			&& (!strstr(cmd,"progress count")) && (!strstr(cmd,"newprogress file")) && (!strstr(cmd,"abort")) /*&& (!strstr(cmd,"busy"))*/
-			&& (!strstr(cmd,"addtrap")) );
+			quiet = !(strnicmp(cmd, "lister add", 10) && strnicmp(cmd, "lister refresh", 13) &&
+					  (!strstr(cmd, "progress count")) && (!strstr(cmd, "newprogress file")) &&
+					  (!strstr(cmd, "abort")) /*&& (!strstr(cmd,"busy"))*/
+					  && (!strstr(cmd, "addtrap")));
 
-		if	(LOUD || !quiet)
+			if (LOUD || !quiet)
 			{
-			show_debug = TRUE;
-			D(bug( "%s: '%s'\n", dest_portname, cmd ));
+				show_debug = TRUE;
+				D(bug("%s: '%s'\n", dest_portname, cmd));
 			}
 #endif
-		if	((argstr = CreateArgstring( (char *)cmd, strlen(cmd) )))
+			if ((argstr = CreateArgstring((char *)cmd, strlen(cmd))))
 			{
-			// We only send commands
-			rxmsg->rm_Action = RXCOMM;
+				// We only send commands
+				rxmsg->rm_Action = RXCOMM;
 
-			if	(reply_type != REXX_REPLY_NONE)
+				if (reply_type != REXX_REPLY_NONE)
 				{
-				// Do we need a reply?
-				rxmsg->rm_Action |= RXFF_RESULT;
+					// Do we need a reply?
+					rxmsg->rm_Action |= RXFF_RESULT;
 				}
 
-			rxmsg->rm_Args[0] = argstr;
+				rxmsg->rm_Args[0] = argstr;
 
-			Forbid();
-			if	((destport = FindPort( (char *)dest_portname )))
-				PutMsg( destport, (struct Message *)rxmsg );
-			Permit();
-			if	(destport)
+				Forbid();
+				if ((destport = FindPort((char *)dest_portname)))
+					PutMsg(destport, (struct Message *)rxmsg);
+				Permit();
+				if (destport)
 				{
-				WaitPort( rp );
-				GetMsg( rp );
-				retval = *retptr;
+					WaitPort(rp);
+					GetMsg(rp);
+					retval = *retptr;
 #ifdef DEBUG
-				if	(reply_type != REXX_REPLY_NONE && show_debug)
+					if (reply_type != REXX_REPLY_NONE && show_debug)
 					{
-					D(bug( "RC==> 1: %ld  ", rxmsg->rm_Result1 ));
-					if	(retptr == &rxmsg->rm_Result2)
-						D(bug( "RES==> 2: '%s'\n", retval ));
-					D(bug( "\n"));
+						D(bug("RC==> 1: %ld  ", rxmsg->rm_Result1));
+						if (retptr == &rxmsg->rm_Result2)
+							D(bug("RES==> 2: '%s'\n", retval));
+						D(bug("\n"));
 					}
 #endif
 				}
 
-			DeleteArgstring( argstr );
+				DeleteArgstring(argstr);
 			}
-		DeleteRexxMsg( rxmsg );
+			DeleteRexxMsg(rxmsg);
 		}
-	DeleteMsgPort( rp );
+		DeleteMsgPort(rp);
 	}
 
-return retval;
+	return retval;
 }
 
 /********************************/
@@ -888,16 +893,16 @@ return retval;
 //
 //	Reply to an arexx message
 //
-void reply_rexx( struct RexxMsg *msg, LONG r1, LONG r2 )
+void reply_rexx(struct RexxMsg *msg, LONG r1, LONG r2)
 {
-if	(msg)
+	if (msg)
 	{
-	msg->rm_Result1 = r1;
+		msg->rm_Result1 = r1;
 
-	if	(msg->rm_Action & RXFF_RESULT)
-		msg->rm_Result2 = r2;
+		if (msg->rm_Action & RXFF_RESULT)
+			msg->rm_Result2 = r2;
 
-	ReplyMsg( (struct Message *)msg );
+		ReplyMsg((struct Message *)msg);
 	}
 }
 
@@ -906,13 +911,13 @@ if	(msg)
 //
 //	Flush ARexx port
 //
-void flush_arexxport( struct MsgPort *port )
+void flush_arexxport(struct MsgPort *port)
 {
-struct RexxMsg *msg;
+	struct RexxMsg *msg;
 
-if	(port)
+	if (port)
 	{
-	while	((msg = (struct RexxMsg *)GetMsg( port )))
-		reply_rexx( msg, 10, 0 );
+		while ((msg = (struct RexxMsg *)GetMsg(port)))
+			reply_rexx(msg, 10, 0);
 	}
 }

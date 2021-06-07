@@ -17,54 +17,54 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopuslib.h"
 
-void LIBFUNC L_AnimDecodeRIFFXor(
-	REG(a0, unsigned char *delta),
-	REG(a1, char *plane),
-	REG(d0, unsigned short rowbytes),
-	REG(d1, unsigned short sourcebytes))
+void LIBFUNC L_AnimDecodeRIFFXor(REG(a0, unsigned char *delta),
+								 REG(a1, char *plane),
+								 REG(d0, unsigned short rowbytes),
+								 REG(d1, unsigned short sourcebytes))
 {
-	register unsigned char ch,*data;
+	register unsigned char ch, *data;
 	register unsigned short opcount;
 	unsigned short column;
 
 	// Go through image columns
-	for (column=0;column<sourcebytes;column++)
+	for (column = 0; column < sourcebytes; column++)
 	{
 		// Get pointer to delta column
-		data=(unsigned char *)plane+column;
+		data = (unsigned char *)plane + column;
 
 		// Number of operations in this column
-		opcount=*delta++;
+		opcount = *delta++;
 
 		// Perform operations
 		while (opcount--)
 		{
 			// Get delta code
-			ch=*delta++;
+			ch = *delta++;
 
 			// !=0 means a run
 			if (ch)
 			{
 				// High bit not set means skip
-				if (!(ch&128)) data+=rowbytes*(unsigned short)ch;
+				if (!(ch & 128))
+					data += rowbytes * (unsigned short)ch;
 
 				// High bit set
 				else
 				{
 					// Mask out high bit
-					ch&=127;
+					ch &= 127;
 
 					// Run of data
 					while (ch--)
 					{
-						*data^=*delta++;
-						data+=rowbytes;
+						*data ^= *delta++;
+						data += rowbytes;
 					}
 				}
 			}
@@ -73,13 +73,13 @@ void LIBFUNC L_AnimDecodeRIFFXor(
 			else
 			{
 				// Get count
-				ch=*delta++;
+				ch = *delta++;
 
 				// Do count
 				while (ch--)
 				{
-					*data^=*delta;
-					data+=rowbytes;
+					*data ^= *delta;
+					data += rowbytes;
 				}
 				++delta;
 			}
@@ -87,48 +87,48 @@ void LIBFUNC L_AnimDecodeRIFFXor(
 	}
 }
 
-void LIBFUNC L_AnimDecodeRIFFSet(
-	REG(a0, unsigned char *delta),
-	REG(a1, char *plane),
-	REG(d0, unsigned short rowbytes),
-	REG(d1, unsigned short sourcebytes))
+void LIBFUNC L_AnimDecodeRIFFSet(REG(a0, unsigned char *delta),
+								 REG(a1, char *plane),
+								 REG(d0, unsigned short rowbytes),
+								 REG(d1, unsigned short sourcebytes))
 {
-	register unsigned char ch,*data;
+	register unsigned char ch, *data;
 	register unsigned short opcount;
 	unsigned short column;
 
 	// Go through image columns
-	for (column=0;column<sourcebytes;column++)
+	for (column = 0; column < sourcebytes; column++)
 	{
 		// Get pointer to delta column
-		data=(unsigned char *)plane+column;
+		data = (unsigned char *)plane + column;
 
 		// Number of operations in this column
-		opcount=*delta++;
+		opcount = *delta++;
 
 		// Perform operations
 		while (opcount--)
 		{
 			// Get delta code
-			ch=*delta++;
+			ch = *delta++;
 
 			// !=0 means a run
 			if (ch)
 			{
 				// High bit not set means skip
-				if (!(ch&128)) data+=rowbytes*(unsigned short)ch;
+				if (!(ch & 128))
+					data += rowbytes * (unsigned short)ch;
 
 				// High bit set
 				else
 				{
 					// Mask out high bit
-					ch&=127;
+					ch &= 127;
 
 					// Run of data
 					while (ch--)
 					{
-						*data=*delta++;
-						data+=rowbytes;
+						*data = *delta++;
+						data += rowbytes;
 					}
 				}
 			}
@@ -137,13 +137,13 @@ void LIBFUNC L_AnimDecodeRIFFSet(
 			else
 			{
 				// Get count
-				ch=*delta++;
+				ch = *delta++;
 
 				// Do count
 				while (ch--)
 				{
-					*data=*delta;
-					data+=rowbytes;
+					*data = *delta;
+					data += rowbytes;
 				}
 				++delta;
 			}

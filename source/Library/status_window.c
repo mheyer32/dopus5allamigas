@@ -17,71 +17,65 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopuslib.h"
 
 // Status window
-static ConfigWindow
-	_status_window={
-		{POS_CENTER,POS_CENTER,36,3},
-		{0,0,8,6}};
-
+static ConfigWindow _status_window = {{POS_CENTER, POS_CENTER, 36, 3}, {0, 0, 8, 6}};
 
 // Status objects
-static ObjectDef
-	_status_objects[]={
+static ObjectDef _status_objects[] = {
 
-		// Display area
-		{OD_AREA,
-			TEXTPEN,
-			{0,0,SIZE_MAXIMUM,SIZE_MAXIMUM},
-			{2,2,-2,-2},
-			0,
-			AREAFLAG_RECESSED|TEXTFLAG_CENTER|AREAFLAG_OPTIM|AREAFLAG_THIN,
-			1,
-			0},
+	// Display area
+	{OD_AREA,
+	 TEXTPEN,
+	 {0, 0, SIZE_MAXIMUM, SIZE_MAXIMUM},
+	 {2, 2, -2, -2},
+	 0,
+	 AREAFLAG_RECESSED | TEXTFLAG_CENTER | AREAFLAG_OPTIM | AREAFLAG_THIN,
+	 1,
+	 0},
 
-		{OD_END}};
-		
+	{OD_END}};
 
 // Open status window
-struct Window *LIBFUNC L_OpenStatusWindow(
-	REG(a0, char *title),
-	REG(a1, char *text),
-	REG(a2, struct Screen *screen),
-	REG(d1, LONG graph),
-	REG(d0, ULONG flags),
-	REG(a6, struct MyLibrary *libbase))
+struct Window *LIBFUNC L_OpenStatusWindow(REG(a0, char *title),
+										  REG(a1, char *text),
+										  REG(a2, struct Screen *screen),
+										  REG(d1, LONG graph),
+										  REG(d0, ULONG flags),
+										  REG(a6, struct MyLibrary *libbase))
 {
 	struct Window *window;
 	NewConfigWindow newwin;
 	ObjectList *list;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Initialise new window
-	newwin.parent=screen;
-	newwin.dims=&_status_window;
-	newwin.title=(title)?title:"Directory Opus";
-	newwin.locale=0;
-	newwin.port=0;
-	newwin.flags=WINDOW_SCREEN_PARENT|WINDOW_REQ_FILL|flags;
-	newwin.font=0;
+	newwin.parent = screen;
+	newwin.dims = &_status_window;
+	newwin.title = (title) ? title : "Directory Opus";
+	newwin.locale = 0;
+	newwin.port = 0;
+	newwin.flags = WINDOW_SCREEN_PARENT | WINDOW_REQ_FILL | flags;
+	newwin.font = 0;
 
 	// Open new window
-	if (!(window=L_OpenConfigWindow(&newwin,libbase)))
+	if (!(window = L_OpenConfigWindow(&newwin, libbase)))
 		return 0;
 
 	// Add objects
-	if ((list=L_AddObjectList(window,_status_objects,libbase)))
+	if ((list = L_AddObjectList(window, _status_objects, libbase)))
 	{
 		// Display text
-		if (text) L_SetGadgetValue(list,1,(ULONG)text);
+		if (text)
+			L_SetGadgetValue(list, 1, (ULONG)text);
 	}
 
 	// Make window busy
@@ -90,25 +84,20 @@ struct Window *LIBFUNC L_OpenStatusWindow(
 	return window;
 }
 
-
 // Change status text
-void LIBFUNC L_SetStatusText(
-	REG(a0, struct Window *window),
-	REG(a1, char *text))
+void LIBFUNC L_SetStatusText(REG(a0, struct Window *window), REG(a1, char *text))
 {
 	if (window)
 	{
 		// Update text
-		L_SetGadgetValue(OBJLIST(window),1,(ULONG)text);
+		L_SetGadgetValue(OBJLIST(window), 1, (ULONG)text);
 	}
 }
 
-
 // Update bar graph
-void LIBFUNC L_UpdateStatusGraph(
-	REG(a0, struct Window *window),
-	REG(a1, char *text),
-	REG(d0, ULONG total),
-	REG(d1, ULONG count))
+void LIBFUNC L_UpdateStatusGraph(REG(a0, struct Window *window),
+								 REG(a1, char *text),
+								 REG(d0, ULONG total),
+								 REG(d1, ULONG count))
 {
 }

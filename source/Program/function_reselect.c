@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,16 +29,10 @@ DOPUS_FUNC(function_reselect)
 	Lister *lister;
 
 	// Get current lister
-	if ((lister=function_lister_current(&handle->source_paths)))
+	if ((lister = function_lister_current(&handle->source_paths)))
 	{
 		// Call reselect
-		IPC_Command(
-			lister->ipc,
-			LISTER_DO_RESELECT,
-			1,
-			(APTR)&lister->reselect,
-			0,
-			(struct MsgPort *)-1);
+		IPC_Command(lister->ipc, LISTER_DO_RESELECT, 1, (APTR)&lister->reselect, 0, (struct MsgPort *)-1);
 	}
 
 	return 1;

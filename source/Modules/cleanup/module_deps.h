@@ -8,17 +8,13 @@
 extern struct DOpusLocale *locale;
 extern ModuleInfo module_info;
 
-
-#define VALID_QUALIFIERS (IEQUALIFIER_LCOMMAND|IEQUALIFIER_RCOMMAND|\
-                         IEQUALIFIER_CONTROL|IEQUALIFIER_LSHIFT|\
-                         IEQUALIFIER_RSHIFT|IEQUALIFIER_LALT|IEQUALIFIER_RALT)
-
+#define VALID_QUALIFIERS                                                                                           \
+	(IEQUALIFIER_LCOMMAND | IEQUALIFIER_RCOMMAND | IEQUALIFIER_CONTROL | IEQUALIFIER_LSHIFT | IEQUALIFIER_RSHIFT | \
+	 IEQUALIFIER_LALT | IEQUALIFIER_RALT)
 
 void init_locale_data(struct DOpusLocale *);
 
-
 #define userlibname "cleanup.module"
-#define textsegmentname "\0$VER: cleanup.module "LIB_STRING
-
+#define textsegmentname "\0$VER: cleanup.module " LIB_STRING
 
 #endif

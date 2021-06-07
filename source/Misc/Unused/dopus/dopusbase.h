@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,7 +30,6 @@ For more information on Directory Opus for Windows please see:
  * (c) Copyright 1998 Jonathan Potter
  *
  */
-
 
 // Include this file to conveniently include all the standard Opus headers
 
@@ -64,22 +63,23 @@ For more information on Directory Opus for Windows please see:
 #include <dopus/hooks.h>
 
 #ifndef DOPUS_PRAG
-#include <pragmas/dopus_pragmas.h>
+	#include <pragmas/dopus_pragmas.h>
 #endif
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 // DOpus Public Semaphore
-struct DOpusPublicSemaphore {
-	struct SignalSemaphore	ds_Sem;
-	APTR			ds_MainIPC;
-	struct ListLock		ds_Modules;
+struct DOpusPublicSemaphore
+{
+	struct SignalSemaphore ds_Sem;
+	APTR ds_MainIPC;
+	struct ListLock ds_Modules;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
 #endif

@@ -8,35 +8,35 @@
 ** calls by substituting functions.
 **
 ** Do not edit manually.
-*/ 
+*/
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 #ifndef EXEC_EXEC_H
-#include <exec/exec.h>
+	#include <exec/exec.h>
 #endif
 #ifndef EXEC_INTERFACES_H
-#include <exec/interfaces.h>
+	#include <exec/interfaces.h>
 #endif
 
 #ifndef LIBRARIES_SYSINFO_H
-#include <libraries/SysInfo.h>
+	#include <libraries/SysInfo.h>
 #endif
 #include <interfaces/SysInfo.h>
 
 /* Inline macros for Interface "main" */
-#define InitSysInfo() ISysInfo->InitSysInfo() 
-#define FreeSysInfo(si) ISysInfo->FreeSysInfo((si)) 
-#define GetLoadAverage(si, la) ISysInfo->GetLoadAverage((si), (la)) 
-#define GetPid(si) ISysInfo->GetPid((si)) 
-#define GetPpid(si) ISysInfo->GetPpid((si)) 
-#define GetPgrp(si) ISysInfo->GetPgrp((si)) 
-#define GetNice(si, which, who) ISysInfo->GetNice((si), (which), (who)) 
-#define SetNice(si, which, who, nice) ISysInfo->SetNice((si), (which), (who), (nice)) 
-#define AddNotify(si, flags, safety_limit) ISysInfo->AddNotify((si), (flags), (safety_limit)) 
-#define RemoveNotify(si, notify) ISysInfo->RemoveNotify((si), (notify)) 
-#define GetCpuUsage(si, usage) ISysInfo->GetCpuUsage((si), (usage)) 
-#define GetTaskCpuUsage(si, usage, task) ISysInfo->GetTaskCpuUsage((si), (usage), (task)) 
+#define InitSysInfo() ISysInfo->InitSysInfo()
+#define FreeSysInfo(si) ISysInfo->FreeSysInfo((si))
+#define GetLoadAverage(si, la) ISysInfo->GetLoadAverage((si), (la))
+#define GetPid(si) ISysInfo->GetPid((si))
+#define GetPpid(si) ISysInfo->GetPpid((si))
+#define GetPgrp(si) ISysInfo->GetPgrp((si))
+#define GetNice(si, which, who) ISysInfo->GetNice((si), (which), (who))
+#define SetNice(si, which, who, nice) ISysInfo->SetNice((si), (which), (who), (nice))
+#define AddNotify(si, flags, safety_limit) ISysInfo->AddNotify((si), (flags), (safety_limit))
+#define RemoveNotify(si, notify) ISysInfo->RemoveNotify((si), (notify))
+#define GetCpuUsage(si, usage) ISysInfo->GetCpuUsage((si), (usage))
+#define GetTaskCpuUsage(si, usage, task) ISysInfo->GetTaskCpuUsage((si), (usage), (task))
 
 #endif /* INLINE4_SYSINFO_H */

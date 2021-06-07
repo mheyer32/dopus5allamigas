@@ -3,18 +3,18 @@
 
 /* Includeheader
 
-        Name:           SDI_misc.h
-        Versionstring:  $VER: SDI_misc.h 1.0 (17.05.2005)
-        Author:         Guido Mersmann
-        Distribution:   PD
-        Project page:   http://www.sf.net/projects/sditools/
-        Description:    defines to hide compiler specific function stuff.
-                        This header is ment to keep all minor functions
-                        like PutChProc() used by RawDoFMT().
+		Name:           SDI_misc.h
+		Versionstring:  $VER: SDI_misc.h 1.0 (17.05.2005)
+		Author:         Guido Mersmann
+		Distribution:   PD
+		Project page:   http://www.sf.net/projects/sditools/
+		Description:    defines to hide compiler specific function stuff.
+						This header is ment to keep all minor functions
+						like PutChProc() used by RawDoFMT().
 
  1.0   17.05.05 : inspired by the SDI_#?.h files made by Jens Langner
-                  and Dirk Stöcker I created this file to handle rawdofmt()
-                  functions.
+				  and Dirk Stöcker I created this file to handle rawdofmt()
+				  functions.
 */
 
 /*
@@ -81,40 +81,36 @@
 
 #ifdef __MORPHOS__
 
-#ifndef SDI_TRAP_LIB /* avoid defining this twice */
+	#ifndef SDI_TRAP_LIB /* avoid defining this twice */
 
-  #include <proto/alib.h>
-  #include <emul/emulregs.h>
+		#include <proto/alib.h>
+		#include <emul/emulregs.h>
 
-  #define SDI_TRAP_LIB 0xFF00 /* SDI prefix to reduce conflicts */
+		#define SDI_TRAP_LIB 0xFF00 /* SDI prefix to reduce conflicts */
 
-  struct SDI_EmulLibEntry
-  {
-    UWORD Trap;
-    UWORD pad;
-    APTR  Func;
-  };
+struct SDI_EmulLibEntry
+{
+	UWORD Trap;
+	UWORD pad;
+	APTR Func;
+};
 
-#endif
+	#endif
 
-  #define PUTCHARPROTO(name, chr, buffer)                                   \
-    SAVEDS ASM void name( chr, buffer);                                     \
-    static void Trampoline_##name(void) { name(( chr) REG_D0,               \
-    (buffer) REG_A3);}                                                      \
-    static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0,    \
-    (APTR) Trampoline_##name};                                              \
-    SAVEDS ASM void name( chr, buffer)
+	#define PUTCHARPROTO(name, chr, buffer)                                                            \
+		SAVEDS ASM void name(chr, buffer);                                                             \
+		static void Trampoline_##name(void) { name((chr)REG_D0, (buffer)REG_A3); }                     \
+		static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0, (APTR)Trampoline_##name}; \
+		SAVEDS ASM void name(chr, buffer)
 
-  #define ENTRY(func) (APTR)&Gate_##func
+	#define ENTRY(func) (APTR) & Gate_##func
 
 #else
 
-  #define PUTCHARPROTO(name, chr, buffer)                                   \
-    SAVEDS ASM void name(REG(d0, chr), REG(a3, buffer))
+	#define PUTCHARPROTO(name, chr, buffer) SAVEDS ASM void name(REG(d0, chr), REG(a3, buffer))
 
-  #define ENTRY(func) (APTR)func
+	#define ENTRY(func) (APTR) func
 
 #endif /* __MORPHOS__ */
 
 #endif /* SDI_MISC_H */
-

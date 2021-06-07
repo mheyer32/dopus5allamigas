@@ -17,61 +17,34 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include <SDI/SDI_lib.h>
 
-void LIBFUNC L_RemovedFunc0(void)
-{
-}
+void LIBFUNC L_RemovedFunc0(void) {}
 
-void LIBFUNC L_RemovedFunc1(void)
-{
-}
+void LIBFUNC L_RemovedFunc1(void) {}
 
-void LIBFUNC L_RemovedFunc2(void)
-{
-}
+void LIBFUNC L_RemovedFunc2(void) {}
 
-void LIBFUNC L_RemovedFunc3(void)
-{
-}
+void LIBFUNC L_RemovedFunc3(void) {}
 
-void LIBFUNC L_RemovedFunc4(void)
-{
-}
+void LIBFUNC L_RemovedFunc4(void) {}
 
-void LIBFUNC L_RemovedFunc5(void)
-{
-}
+void LIBFUNC L_RemovedFunc5(void) {}
 
-void LIBFUNC L_RemovedFunc6(void)
-{
-}
+void LIBFUNC L_RemovedFunc6(void) {}
 
-void LIBFUNC L_RemovedFunc7(void)
-{
-}
+void LIBFUNC L_RemovedFunc7(void) {}
 
-void LIBFUNC L_RemovedFunc8(void)
-{
-}
+void LIBFUNC L_RemovedFunc8(void) {}
 
-void LIBFUNC L_RemovedFunc9(void)
-{
-}
+void LIBFUNC L_RemovedFunc9(void) {}
 
-void LIBFUNC L_RemovedFunc10(void)
-{
-}
+void LIBFUNC L_RemovedFunc10(void) {}
 
-void LIBFUNC L_RemovedFunc11(void)
-{
-}
+void LIBFUNC L_RemovedFunc11(void) {}
 
-void LIBFUNC L_RemovedFunc12(void)
-{
-}
-
+void LIBFUNC L_RemovedFunc12(void) {}

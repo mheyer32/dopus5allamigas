@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,24 +30,24 @@ For more information on Directory Opus for Windows please see:
 void init_locale_data(struct DOpusLocale *locale)
 {
 	// Initialise, get pointer to built-in strings
-	locale->li_Catalog=0;
-	locale->li_BuiltIn=(char *)CatCompBlock;
+	locale->li_Catalog = 0;
+	locale->li_BuiltIn = (char *)CatCompBlock;
 
 	// Try to open locale library
-	if ((locale->li_LocaleBase=OpenLibrary("locale.library",38)))
+	if ((locale->li_LocaleBase = OpenLibrary("locale.library", 38)))
 	{
-		#ifdef __amigaos4__
+#ifdef __amigaos4__
 		if (!(ILocale = (struct LocaleIFace *)GetInterface(LocaleBase, "main", 1, NULL)))
 		{
 			CloseLibrary(LocaleBase);
 			return;
 		}
-		#endif	
+#endif
 		// Try for a catalog
-		locale->li_Catalog=OpenCatalogA(0,"dopus.catalog",0);
+		locale->li_Catalog = OpenCatalogA(0, "dopus.catalog", 0);
 
 		// Get default locale
-		locale->li_Locale=OpenLocale(0);
+		locale->li_Locale = OpenLocale(0);
 	}
 }
 
@@ -59,9 +59,9 @@ void free_locale_data(struct DOpusLocale *locale)
 		{
 			CloseLocale(locale->li_Locale);
 			CloseCatalog(locale->li_Catalog);
-			#ifdef __amigaos4__
+#ifdef __amigaos4__
 			DropInterface((struct Interface *)ILocale);
-			#endif
+#endif
 			CloseLibrary(locale->li_LocaleBase);
 		}
 	}

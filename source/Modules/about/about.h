@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _ABOUT_H
@@ -25,30 +25,29 @@ For more information on Directory Opus for Windows please see:
 
 #include "module_deps.h"
 
-
-#define logo_width	63
-#define logo_height	59
-#define logo_mod	8
-#define logo_frames	10
+#define logo_width 63
+#define logo_height 59
+#define logo_mod 8
+#define logo_frames 10
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	short	width;
-	short	height;
-	short	depth;
-	short	planesize;
-	const UWORD	*imagedata;
-	ULONG	*palette;
+	short width;
+	short height;
+	short depth;
+	short planesize;
+	const UWORD *imagedata;
+	ULONG *palette;
 } image_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-#define image_count	17
-#define image_special	14
+#define image_count 17
+#define image_special 14
 
 extern const ConfigWindow about_window;
 extern const ObjectDef about_objects[];
@@ -58,11 +57,14 @@ extern APTR logo_obj[logo_frames];
 extern const image_data images[image_count];
 extern ImageRemap remap;
 
-extern FAR const UWORD jon_data[],greg_data[],leo_data[],andrew_data[],ben_data[],juggler_data[],tick_data[],coopers_data[],bill_data[],thomas_data[],frederic_data[],john_data[],trevor_data[],ash_data[],harv_data[],martin_data[],dave_data[];
-extern const ULONG jon_palette[],greg_palette[],leo_palette[],andrew_palette[],ben_palette[],juggler_palette[],tick_palette[],coopers_palette[],bill_palette[],thomas_palette[],frederic_palette[],john_palette[],trevor_palette[],ash_palette[],harv_palette[],martin_palette[],dave_palette[];
+extern FAR const UWORD jon_data[], greg_data[], leo_data[], andrew_data[], ben_data[], juggler_data[], tick_data[],
+	coopers_data[], bill_data[], thomas_data[], frederic_data[], john_data[], trevor_data[], ash_data[], harv_data[],
+	martin_data[], dave_data[];
+extern const ULONG jon_palette[], greg_palette[], leo_palette[], andrew_palette[], ben_palette[], juggler_palette[],
+	tick_palette[], coopers_palette[], bill_palette[], thomas_palette[], frederic_palette[], john_palette[],
+	trevor_palette[], ash_palette[], harv_palette[], martin_palette[], dave_palette[];
 
-enum
-{
+enum {
 	GAD_ABOUT_LOGO,
 	GAD_ABOUT_COPYRIGHT,
 	GAD_ABOUT_REGISTRATION,
@@ -82,32 +84,31 @@ enum
 };
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	struct Window	*window;
+	struct Window *window;
 
-	GL_Object	*text_area;
-	unsigned short	text_off;
-	short		text_pos;
-	short		text_disp;
-	struct IBox	text_dims;
-	struct RastPort	text_rp;
-	struct Region	*text_reg;
+	GL_Object *text_area;
+	unsigned short text_off;
+	short text_pos;
+	short text_disp;
+	struct IBox text_dims;
+	struct RastPort text_rp;
+	struct Region *text_reg;
 
-	char		*text_line;
-	short		text_len;
-	short		text_size;
+	char *text_line;
+	short text_len;
+	short text_size;
 
-	char		*trans_info;
-	char		*message;
+	char *trans_info;
+	char *message;
 } about_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
 extern const unsigned char about_message[];
 
 #endif
-

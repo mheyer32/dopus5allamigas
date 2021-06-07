@@ -17,15 +17,13 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-void ASM SAVEDS HookShowHelp(
-	REG(a0, char *file_name),
-	REG(a1, char *node_name))
+void ASM SAVEDS HookShowHelp(REG(a0, char *file_name), REG(a1, char *node_name))
 {
 	char filename[256];
 
@@ -33,13 +31,13 @@ void ASM SAVEDS HookShowHelp(
 	if (file_name && *file_name)
 	{
 		// Make string into "dopus5:help/" followed by filename
-		stccpy(filename,"dopus5:help",256);
-		AddPart(filename,FilePart(file_name),256);
+		stccpy(filename, "dopus5:help", 256);
+		AddPart(filename, FilePart(file_name), 256);
 
 		// Get new pointer
-		file_name=filename;
+		file_name = filename;
 	}
 
 	// Show help
-	help_show_help(node_name,file_name);
+	help_show_help(node_name, file_name);
 }

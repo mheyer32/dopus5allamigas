@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,10 +30,10 @@ For more information on Directory Opus for Windows please see:
 
  *****************************************************************************/
 
-void *AllocMemH(void *handle,ULONG size);
+void *AllocMemH(void *handle, ULONG size);
 void ClearMemHandle(void *handle);
 void FreeMemH(void *memory);
 void FreeMemHandle(void *handle);
-void *NewMemHandle(ULONG puddle_size,ULONG thresh_size,ULONG type);
+void *NewMemHandle(ULONG puddle_size, ULONG thresh_size, ULONG type);
 
 #endif

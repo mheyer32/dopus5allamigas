@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,15 +25,11 @@ For more information on Directory Opus for Windows please see:
 #include "listerformat.strings"
 #include "module_deps.h"
 
-extern ConfigWindow
-	listformat_window,listformat_window_big,
-	listformat_window_ftp,listformat_window_ftp_big;
-extern ObjectDef
-	listformat_objects[],listformat_ftp_objects[],listformat_nosave_objects[],
-	listformat_save_objects[],listformat_ftp_use_objects[],listformat_ftp_use_objects_big[];
+extern ConfigWindow listformat_window, listformat_window_big, listformat_window_ftp, listformat_window_ftp_big;
+extern ObjectDef listformat_objects[], listformat_ftp_objects[], listformat_nosave_objects[], listformat_save_objects[],
+	listformat_ftp_use_objects[], listformat_ftp_use_objects_big[];
 
-enum
-{
+enum {
 	GAD_LISTER_LAYOUT,
 	GAD_LISTER_USE,
 	GAD_LISTER_CANCEL,
@@ -54,35 +50,36 @@ enum
 };
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
-typedef struct {
-	NewConfigWindow		newwin;
-	struct Window		*window;
-	ObjectList		*objlist;
-	ListFormat		format;
-	Att_List		*item_list;
-	Att_List		*item_sel_list;
-	DragInfo		*drag;
-	short			drag_x,drag_y;
-	short			drag_from;
-	Att_Node		*drag_node;
-	GL_Object		*sel_lister;
-	ListFormat		*def_format;
-	ListFormatStorage	*def_ftp_format;
-	ULONG			mod_id;
-	ListFormat		def_format_copy;
+typedef struct
+{
+	NewConfigWindow newwin;
+	struct Window *window;
+	ObjectList *objlist;
+	ListFormat format;
+	Att_List *item_list;
+	Att_List *item_sel_list;
+	DragInfo *drag;
+	short drag_x, drag_y;
+	short drag_from;
+	Att_Node *drag_node;
+	GL_Object *sel_lister;
+	ListFormat *def_format;
+	ListFormatStorage *def_ftp_format;
+	ULONG mod_id;
+	ListFormat def_format_copy;
 } config_lister_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
 void _config_lister_init_format(config_lister_data *data);
 void _config_lister_cleanup(config_lister_data *data);
 void _config_lister_get_values(config_lister_data *data);
-void listformat_get_values(config_lister_data *data,ListFormat *format);
-void listerformat_end_drag(config_lister_data *data,BOOL ok);
-void listerformat_position(config_lister_data *data,Att_Node *node);
+void listformat_get_values(config_lister_data *data, ListFormat *format);
+void listerformat_end_drag(config_lister_data *data, BOOL ok);
+void listerformat_position(config_lister_data *data, Att_Node *node);
 void listerformat_defaults(config_lister_data *data);
 void listerformat_setas_defaults(config_lister_data *data);
 void listerformat_ftp_defaults(config_lister_data *data);

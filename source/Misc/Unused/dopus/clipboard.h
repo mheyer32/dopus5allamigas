@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -32,7 +32,7 @@ For more information on Directory Opus for Windows please see:
 
 void CloseClipBoard(APTR);
 APTR OpenClipBoard(ULONG);
-long ReadClipString(APTR,char *,long);
-BOOL WriteClipString(APTR,char *,long);
+long ReadClipString(APTR, char *, long);
+BOOL WriteClipString(APTR, char *, long);
 
 #endif

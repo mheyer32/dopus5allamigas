@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,32 +25,30 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_CX
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct _CxData
 {
-	struct NewBroker	nb;
+	struct NewBroker nb;
 
-	CxObj			*broker;
+	CxObj *broker;
 
-	CxObj			*popup_filter;
-	CxObj			*rmb_hook;
+	CxObj *popup_filter;
+	CxObj *rmb_hook;
 
-	unsigned short		right_down;
-	unsigned short		qual_down;
-	struct Window		*button_window;
-	struct Window		*popup_window;
-	short			start_popped;
+	unsigned short right_down;
+	unsigned short qual_down;
+	struct Window *button_window;
+	struct Window *popup_window;
+	short start_popped;
 } CxData;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
-enum
-{
+enum {
 	CXCODE_POPUP,
 	CXCODE_NEW_LISTER,
 
@@ -62,6 +60,6 @@ void cx_remove(CxData *);
 void cx_hotkey(long);
 void cx_install_popup(CxData *);
 
-BOOL cx_mouse_outside(struct Window *window,short,short);
+BOOL cx_mouse_outside(struct Window *window, short, short);
 
 #endif

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,92 +25,99 @@ For more information on Directory Opus for Windows please see:
 #define DOPUS_STRUCTURES
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
-
 
 #define OLD_CONFIG_VERSION 9999
 #define CONFIG_VERSION 10000
 #define CONFIG_MAGIC 0xFACE
 
-#define MENU_NUM			5					// Number of custom menus
-#define ITEM_NUM			20					// Number of items per menu
-#define MENUCOUNT			MENU_NUM*ITEM_NUM	// Total number of custom menus
-#define GADCOUNT			84					// Number of buttons per bank
-#define DRIVECOUNT			32					// Number of custom drives
-#define NUMFONTS			16					// Number of fonts
-#define FILETYPE_FUNCNUM	16					// Number of filetype functions
+#define MENU_NUM 5					  // Number of custom menus
+#define ITEM_NUM 20					  // Number of items per menu
+#define MENUCOUNT MENU_NUM *ITEM_NUM  // Total number of custom menus
+#define GADCOUNT 84					  // Number of buttons per bank
+#define DRIVECOUNT 32				  // Number of custom drives
+#define NUMFONTS 16					  // Number of fonts
+#define FILETYPE_FUNCNUM 16			  // Number of filetype functions
 
-struct Help {
+struct Help
+{
 	struct Help *next;
-	char *lookup,*message;
+	char *lookup, *message;
 };
 
-typedef struct dopusfuncpar {
-	ULONG	flags;	// Flags
-	ULONG	stack;	// Stack size
-	UBYTE	key;	// Key
-	UBYTE	qual;	// Qualifier
-	BYTE	type;	// Function type
-	BYTE	pri;	// Priority
-	BYTE	delay;	// Close delay
+typedef struct dopusfuncpar
+{
+	ULONG flags;  // Flags
+	ULONG stack;  // Stack size
+	UBYTE key;	  // Key
+	UBYTE qual;	  // Qualifier
+	BYTE type;	  // Function type
+	BYTE pri;	  // Priority
+	BYTE delay;	  // Close delay
 } FuncPars;
 
-struct dopusfunction {
+struct dopusfunction
+{
 	char name[16];
-	int which,stack;
-	unsigned char key,qual;
-	char type,pri,delay;
-	char fpen,bpen;
+	int which, stack;
+	unsigned char key, qual;
+	char type, pri, delay;
+	char fpen, bpen;
 	char pad;
 	char *function;
 };
 
-typedef struct newdopusfunction {
-	BYTE	*name;
-	ULONG	pad2[3];
-	ULONG	flags;
-	ULONG	stack;
-	UBYTE	key,qual;
-	UBYTE	type;
-	BYTE	pri;
-	BYTE	delay;
-	UBYTE	fpen,bpen;
-	BYTE	pad;
-	BYTE	*function;
+typedef struct newdopusfunction
+{
+	BYTE *name;
+	ULONG pad2[3];
+	ULONG flags;
+	ULONG stack;
+	UBYTE key, qual;
+	UBYTE type;
+	BYTE pri;
+	BYTE delay;
+	UBYTE fpen, bpen;
+	BYTE pad;
+	BYTE *function;
 } old_NewFunction;
 
-typedef struct dopusfiletype {
+typedef struct dopusfiletype
+{
 	struct dopusfiletype *next;
 	char type[32];
 	char typeid[8];
 	char actionstring[FILETYPE_FUNCNUM][40];
-	ULONG flags[FILETYPE_FUNCNUM],stack[FILETYPE_FUNCNUM];
-	char pri[FILETYPE_FUNCNUM],delay[FILETYPE_FUNCNUM];
+	ULONG flags[FILETYPE_FUNCNUM], stack[FILETYPE_FUNCNUM];
+	char pri[FILETYPE_FUNCNUM], delay[FILETYPE_FUNCNUM];
 	unsigned char *recognition;
 	char *function[FILETYPE_FUNCNUM];
 	char *iconpath;
 } Filetype;
 
-typedef struct dopusgadgetbanks {
+typedef struct dopusgadgetbanks
+{
 	old_NewFunction gadgets[GADCOUNT];
 	struct dopusgadgetbanks *next;
 	struct dopusgadgetbanks *prev;
 } GadgetBank;
 
-typedef struct dopushotkey {
+typedef struct dopushotkey
+{
 	struct dopushotkey *next;
-	UWORD code,qualifier;
+	UWORD code, qualifier;
 	char name[40];
 	old_NewFunction func;
 } Hotkey;
 
-struct Config {
+struct Config
+{
 	UWORD version;
 	UWORD magic;
 
-	char copyflags,deleteflags,errorflags,generalflags,iconflags;
-	char existflags,_invalid_sepflags,_invalid_sortflags,dynamicflags;
+	char copyflags, deleteflags, errorflags, generalflags, iconflags;
+	char existflags, _invalid_sepflags, _invalid_sortflags, dynamicflags;
 	char _invalid_sortmethod[2];
 
 	char hotkeyflags;
@@ -120,7 +127,7 @@ struct Config {
 
 	struct dopusfunction drive[DRIVECOUNT];
 
-	char outputcmd[80],output[80];
+	char outputcmd[80], output[80];
 	int gadgetrows;
 
 	char separatemethod[2];
@@ -133,21 +140,21 @@ struct Config {
 	char pubscreen_name[80];
 
 	UWORD Palette[16];
-	char gadgettopcol,gadgetbotcol;
-	char statusfg,statusbg;
-	char _invalid_filesfg,_invalid_filesbg,_invalid_filesselfg,_invalid_filesselbg;
-	char _invalid_dirsfg,_invalid_dirsbg,_invalid_dirsselfg,_invalid_dirsselbg;
-	char clockfg,clockbg;
-	char requestfg,requestbg;
-	char disknamefg,disknamebg,disknameselfg,disknameselbg;
-	char slidercol,arrowfg,arrowbg,littlegadfg,littlegadbg;
+	char gadgettopcol, gadgetbotcol;
+	char statusfg, statusbg;
+	char _invalid_filesfg, _invalid_filesbg, _invalid_filesselfg, _invalid_filesselbg;
+	char _invalid_dirsfg, _invalid_dirsbg, _invalid_dirsselfg, _invalid_dirsselbg;
+	char clockfg, clockbg;
+	char requestfg, requestbg;
+	char disknamefg, disknamebg, disknameselfg, disknameselbg;
+	char slidercol, arrowfg, arrowbg, littlegadfg, littlegadbg;
 
 	char drive_position;
 
 	char scrdepth;
 	char screenflags;
 	int screenmode;
-	int scrw,scrh;
+	int scrw, scrh;
 	char fontbuf[40];
 	char arrowpos[3];
 
@@ -161,23 +168,23 @@ struct Config {
 
 	char autodirs[2][30];
 	char pad5a[80];
-	UWORD hotkeycode,hotkeyqual;
+	UWORD hotkeycode, hotkeyqual;
 
-	char toolicon[80],projecticon[80],drawericon[80],defaulttool[80];
+	char toolicon[80], projecticon[80], drawericon[80], defaulttool[80];
 	char priority;
-	char showdelay,viewbits,fadetime,tabsize;
+	char showdelay, viewbits, fadetime, tabsize;
 
 	char pad7[2];
 
 	char hiddenbit;
-	char _invalid_showpat[40],_invalid_hidepat[40];
-	char _invalid_showpatparsed[40],_invalid_hidepatparsed[40];
-	char icontype,scrclktype,_invalid_showfree;
+	char _invalid_showpat[40], _invalid_hidepat[40];
+	char _invalid_showpatparsed[40], _invalid_hidepatparsed[40];
+	char icontype, scrclktype, _invalid_showfree;
 
 	char pad8;
 
-	short iconx,icony;
-	short wbwinx,wbwiny;
+	short iconx, icony;
+	short wbwinx, wbwiny;
 
 	char configreturnscript[80];
 
@@ -189,20 +196,20 @@ struct Config {
 
 	char pad_foo;
 
-	short scr_winx,scr_winy;
-	short scr_winw,scr_winh;
+	short scr_winx, scr_winy;
+	short scr_winw, scr_winh;
 
 	char morepadding[231];
 
 	char old_displaypos[2][8];
-	char dateformat,addiconflags;
-	char stringfgcol,stringbgcol;
+	char dateformat, addiconflags;
+	char stringfgcol, stringbgcol;
 	char namelength[2];
-	char sliderwidth,sliderheight;
+	char sliderwidth, sliderheight;
 	char formatflags;
-	short iconbutx,iconbuty;
+	short iconbutx, iconbuty;
 	char stringheight;
-	char stringselfgcol,stringselbgcol;
+	char stringselfgcol, stringselbgcol;
 	char generalscreenflags;
 
 	struct Rectangle scrollborders[2];
@@ -229,27 +236,28 @@ struct Config {
 	char pad10[1414];
 };
 
-struct dopustaskmsg {
+struct dopustaskmsg
+{
 	struct Message msg;
 	int command;
-	int total,value;
+	int total, value;
 	int flag;
 	char *data;
 };
 
-struct RLEinfo {
+struct RLEinfo
+{
 	unsigned char *sourceptr;
 	UBYTE **destplanes;
-	UWORD imagebpr,imageheight,imagedepth;
-	UWORD destbpr,destheight,destdepth;
-	char masking,compression;
+	UWORD imagebpr, imageheight, imagedepth;
+	UWORD destbpr, destheight, destdepth;
+	char masking, compression;
 	int offset;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
-
 
 #include "dopusmessage.h"
 

@@ -17,35 +17,33 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _DISKCHANGE_H
 #define _DISKCHANGE_H
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	struct Interrupt	interrupt;
-	struct MsgPort		*port;
-	struct IOExtTD		*req[4];
-	unsigned long		count[4];
-	unsigned long		flags;
+	struct Interrupt interrupt;
+	struct MsgPort *port;
+	struct IOExtTD *req[4];
+	unsigned long count[4];
+	unsigned long flags;
 } DiskChangeData;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
-
-#define DCF_DISK0	(1<<0)
-#define DCF_DISK1	(1<<1)
-#define DCF_DISK2	(1<<2)
-#define DCF_DISK3	(1<<3)
+#define DCF_DISK0 (1 << 0)
+#define DCF_DISK1 (1 << 1)
+#define DCF_DISK2 (1 << 2)
+#define DCF_DISK3 (1 << 3)
 
 void init_diskchange(DiskChangeData *);
 void free_diskchange(DiskChangeData *);

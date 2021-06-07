@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -27,9 +27,9 @@ void main(void)
 {
 	struct DiskObject *icon;
 
-	if (icon=GetDefDiskObject(WBDISK))
+	if (icon = GetDefDiskObject(WBDISK))
 	{
-		PutDiskObject("diskicon-def",icon);
+		PutDiskObject("diskicon-def", icon);
 		FreeDiskObject(icon);
 	}
 }

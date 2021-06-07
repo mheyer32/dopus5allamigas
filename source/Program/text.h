@@ -17,20 +17,19 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
-#define TMLF_CENTER		(1<<0)
-#define TMLF_EXTENT		(1<<1)
+#define TMLF_CENTER (1 << 0)
+#define TMLF_EXTENT (1 << 1)
 
-void TextMultiLine(
-	struct RastPort *rp,
-	char *text,
-	short text_len,
-	short max_width,
-	short flags,
-	struct TextExtent *extent);
+void TextMultiLine(struct RastPort *rp,
+				   char *text,
+				   short text_len,
+				   short max_width,
+				   short flags,
+				   struct TextExtent *extent);
 
-void TabbedTextOut(struct RastPort *rp,char *string,short len,short tabsize);
-short TabbedTextExtent(struct RastPort *rp,char *string,short len,short tabsize,struct TextExtent *extent);
+void TabbedTextOut(struct RastPort *rp, char *string, short len, short tabsize);
+short TabbedTextExtent(struct RastPort *rp, char *string, short len, short tabsize, struct TextExtent *extent);

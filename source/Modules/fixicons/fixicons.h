@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -27,29 +27,19 @@ For more information on Directory Opus for Windows please see:
 
 extern char *arg_template;
 
-enum
-{
-	FI_FILE,
-	FI_ANB,
-	FI_ANL,
-	FI_NFO,
-	FI_SWO,
-	FI_SOW,
-	FI_REPORT
-};
+enum { FI_FILE, FI_ANB, FI_ANL, FI_NFO, FI_SWO, FI_SOW, FI_REPORT };
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct _FunctionEntry
 {
-	struct MinNode		node;
-	char			*name;
-	struct DirEntry		*entry;
-	short			type;
-	short			flags;
+	struct MinNode node;
+	char *name;
+	struct DirEntry *entry;
+	short type;
+	short flags;
 } FunctionEntry;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
-

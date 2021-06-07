@@ -17,53 +17,49 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Launches read directory function for a lister
-void read_directory(Lister *lister,char *path,int flags)
+void read_directory(Lister *lister, char *path, int flags)
 {
 	// Check path for FTP
-	if (!(lister_check_ftp(lister,path)))
+	if (!(lister_check_ftp(lister, path)))
 	{
 		// Launch read function
-		function_launch(FUNCTION_READ_DIRECTORY,0,0,flags,lister,0,path,0,0,0,0);
+		function_launch(FUNCTION_READ_DIRECTORY, 0, 0, flags, lister, 0, path, 0, 0, 0, 0);
 	}
 }
 
-
 // Create a new lister and read a directory into it
-Lister *read_new_lister(char *path,Lister *parent,UWORD qual)
+Lister *read_new_lister(char *path, Lister *parent, UWORD qual)
 {
 	Cfg_Lister *cfg;
-	Lister *new_lister=0;
+	Lister *new_lister = 0;
 
 	// If shift is not down, look for open lister first
-	if (!(qual&IEQUAL_ANYSHIFT))
+	if (!(qual & IEQUAL_ANYSHIFT))
 	{
 		IPCData *ipc;
-		Lister *lister=0;
+		Lister *lister = 0;
 
 		// Lock lister list
-		lock_listlock(&GUI->lister_list,FALSE);
+		lock_listlock(&GUI->lister_list, FALSE);
 
 		// Go through listers
-		for (ipc=(IPCData *)GUI->lister_list.list.lh_Head;
-			ipc->node.mln_Succ;
-			ipc=(IPCData *)ipc->node.mln_Succ)
+		for (ipc = (IPCData *)GUI->lister_list.list.lh_Head; ipc->node.mln_Succ; ipc = (IPCData *)ipc->node.mln_Succ)
 		{
 			// Get lister
-			lister=IPCDATA(ipc);
+			lister = IPCDATA(ipc);
 
 			// Is this lister what we're after?
-			if (stricmp(lister->cur_buffer->buf_Path,path)==0 &&
-				!(lister->flags&LISTERF_BUSY))
+			if (stricmp(lister->cur_buffer->buf_Path, path) == 0 && !(lister->flags & LISTERF_BUSY))
 			{
 				// Activate this window
-				IPC_Command(ipc,IPC_ACTIVATE,0,(APTR)1,0,0);
+				IPC_Command(ipc, IPC_ACTIVATE, 0, (APTR)1, 0, 0);
 				break;
 			}
 		}
@@ -72,11 +68,12 @@ Lister *read_new_lister(char *path,Lister *parent,UWORD qual)
 		unlock_listlock(&GUI->lister_list);
 
 		// Get one?
-		if (ipc->node.mln_Succ) return lister;
+		if (ipc->node.mln_Succ)
+			return lister;
 	}
 
 	// Get a new lister definition
-	if ((cfg=NewLister(path)))
+	if ((cfg = NewLister(path)))
 	{
 		char fullpath[512];
 		BPTR lock;
@@ -84,72 +81,53 @@ Lister *read_new_lister(char *path,Lister *parent,UWORD qual)
 		position_rec *pos;
 
 		// Expand path just in case
-		if ((lock=Lock(path,ACCESS_READ)))
+		if ((lock = Lock(path, ACCESS_READ)))
 		{
-			NameFromLock(lock,fullpath,512);
-			AddPart(fullpath,"",512);
+			NameFromLock(lock, fullpath, 512);
+			AddPart(fullpath, "", 512);
 			UnLock(lock);
 		}
-		else strcpy(fullpath,path);
-		
+		else
+			strcpy(fullpath, path);
+
 		// Get position
-		pos=GetListerPosition(
-			fullpath,
-			0,
-			0,
-			&cfg->lister.pos[0],
-			&mode,
-			&cfg->lister.format,
-			(parent)?parent->window:0,
-			parent,
-			0);
+		pos = GetListerPosition(
+			fullpath, 0, 0, &cfg->lister.pos[0], &mode, &cfg->lister.format, (parent) ? parent->window : 0, parent, 0);
 
 		// Split display?
-		if (qual&(IEQUALIFIER_LALT|IEQUALIFIER_RALT))
+		if (qual & (IEQUALIFIER_LALT | IEQUALIFIER_RALT))
 		{
 			// Fill out lister
-			lister_init_new(cfg,parent);
+			lister_init_new(cfg, parent);
 		}
 
 		// Create a new lister
-		if ((new_lister=lister_new(cfg)))
+		if ((new_lister = lister_new(cfg)))
 		{
 			// Store position record
-			new_lister->pos_rec=pos;
+			new_lister->pos_rec = pos;
 
 			// Split display?
-			if (qual&(IEQUALIFIER_LALT|IEQUALIFIER_RALT))
+			if (qual & (IEQUALIFIER_LALT | IEQUALIFIER_RALT))
 			{
-				IPC_Command(
-					new_lister->ipc,
-					LISTER_SPLIT,
-					0,
-					parent,
-					0,
-					0);
+				IPC_Command(new_lister->ipc, LISTER_SPLIT, 0, parent, 0, 0);
 			}
 
 			// Open in icon mode?
-			if (mode&LISTERMODE_ICON)
+			if (mode & LISTERMODE_ICON)
 			{
 				// Force new lister into icon view mode
-				cfg->lister.flags|=DLSTF_ICON;
-				if (mode&LISTERMODE_ICON_ACTION)
-					cfg->lister.flags|=DLSTF_ICON_ACTION;
+				cfg->lister.flags |= DLSTF_ICON;
+				if (mode & LISTERMODE_ICON_ACTION)
+					cfg->lister.flags |= DLSTF_ICON_ACTION;
 
 				// Show all?
-				if (mode&LISTERMODE_SHOW_ALL)
-					cfg->lister.flags|=DLSTF_SHOW_ALL;
+				if (mode & LISTERMODE_SHOW_ALL)
+					cfg->lister.flags |= DLSTF_SHOW_ALL;
 			}
 
 			// Initialise lister
-			IPC_Command(
-				new_lister->ipc,
-				LISTER_INIT,
-				LISTERF_MAKE_SOURCE,
-				GUI->screen_pointer,
-				0,
-				0);
+			IPC_Command(new_lister->ipc, LISTER_INIT, LISTERF_MAKE_SOURCE, GUI->screen_pointer, 0, 0);
 		}
 	}
 

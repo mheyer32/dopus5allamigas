@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -28,188 +28,191 @@ For more information on Directory Opus for Windows please see:
 void lister_configure(Lister *lister)
 {
 	// Format locked?
-	if (lister->cur_buffer->more_flags&DWF_LOCK_FORMAT)
+	if (lister->cur_buffer->more_flags & DWF_LOCK_FORMAT)
 		return;
 
 	// Already configuring?
-	if (lister->more_flags&LISTERF_CONFIGURE)
+	if (lister->more_flags & LISTERF_CONFIGURE)
 		return;
 
 	// Run configure function
-	function_launch_quick(FUNCTION_RUN_FUNCTION,def_function_configure,lister);
+	function_launch_quick(FUNCTION_RUN_FUNCTION, def_function_configure, lister);
 }
 
 // Change a lister's format
-void lister_change_format(Lister *lister,ListFormat *format)
+void lister_change_format(Lister *lister, ListFormat *format)
 {
 	ListFormat oldformat;
-	short flags=SNIFFF_NO_FILETYPES;
+	short flags = SNIFFF_NO_FILETYPES;
 
 	// Get current format
-	oldformat=lister->cur_buffer->buf_ListFormat;
+	oldformat = lister->cur_buffer->buf_ListFormat;
 
 	// Clear special sort flag in buffer
-	lister->cur_buffer->flags&=~DWF_SPECIAL_SORT;
+	lister->cur_buffer->flags &= ~DWF_SPECIAL_SORT;
 
 	// Need to show filetypes now?
-	if (buffer_show_filetypes(format) &&
-		!(buffer_show_filetypes(&oldformat))) flags&=~SNIFFF_NO_FILETYPES;
+	if (buffer_show_filetypes(format) && !(buffer_show_filetypes(&oldformat)))
+		flags &= ~SNIFFF_NO_FILETYPES;
 
 	// Need to show version now?
-	if (buffer_show_versions(format) &&
-		!(buffer_show_versions(&oldformat))) flags|=SNIFFF_VERSION;
+	if (buffer_show_versions(format) && !(buffer_show_versions(&oldformat)))
+		flags |= SNIFFF_VERSION;
 
 	// Store format in lister
-	lister->format=*format;
-	lister->user_format=*format;
+	lister->format = *format;
+	lister->user_format = *format;
 
 	// Resort and refresh the display
-	lister_refresh_display(lister,REFRESHF_RESORT|REFRESHF_SLIDERS);
+	lister_refresh_display(lister, REFRESHF_RESORT | REFRESHF_SLIDERS);
 
 	// Show selection information
-	select_show_info(lister,1);
+	select_show_info(lister, 1);
 
 	// Update filetypes or versions?
-	if (flags!=SNIFFF_NO_FILETYPES)
+	if (flags != SNIFFF_NO_FILETYPES)
 	{
 		// Lock buffer
-		buffer_lock(lister->cur_buffer,FALSE);
+		buffer_lock(lister->cur_buffer, FALSE);
 
 		// Get filetypes
-		filetype_find_typelist(lister,flags);
+		filetype_find_typelist(lister, flags);
 
 		// Unlock buffer
 		buffer_unlock(lister->cur_buffer);
 	}
 
 	// Fuel gauge
-	if ((format->flags&LFORMATF_GAUGE)!=(oldformat.flags&LFORMATF_GAUGE))
+	if ((format->flags & LFORMATF_GAUGE) != (oldformat.flags & LFORMATF_GAUGE))
 	{
 		// Update fuel gauge
-		lister_set_gauge(lister,TRUE);
+		lister_set_gauge(lister, TRUE);
 	}
 }
 
-
 // Change a lister's sort method
-void lister_set_sort(Lister *lister,short item,UWORD qual)
+void lister_set_sort(Lister *lister, short item, UWORD qual)
 {
 	ListFormat format;
-	BOOL busy=0;
+	BOOL busy = 0;
 
 	// Is lister already busy?
-	if (lister->flags&LISTERF_BUSY) busy=1;
+	if (lister->flags & LISTERF_BUSY)
+		busy = 1;
 
 	// Lock this lister
-	else lister_busy(lister,1);
+	else
+		lister_busy(lister, 1);
 
 	// Get existing format
-	format=lister->cur_buffer->buf_ListFormat;
+	format = lister->cur_buffer->buf_ListFormat;
 
 	// If method is already selected, we change order
-	if (format.sort.sort==item) format.sort.sort_flags^=SORT_REVERSE;
+	if (format.sort.sort == item)
+		format.sort.sort_flags ^= SORT_REVERSE;
 
 	// Set sort type, clear reverse flag
 	else
 	{
-		format.sort.sort=item;
-		format.sort.sort_flags&=~SORT_REVERSE;
+		format.sort.sort = item;
+		format.sort.sort_flags &= ~SORT_REVERSE;
 	}
 
 	// Clear special sort flag
-	lister->cur_buffer->flags&=~DWF_SPECIAL_SORT;
+	lister->cur_buffer->flags &= ~DWF_SPECIAL_SORT;
 
 	// Store format in lister
-	lister->format=format;
-	lister->user_format=format;
+	lister->format = format;
+	lister->user_format = format;
 
 	// Resort and refresh the display
-	lister_refresh_display(lister,REFRESHF_RESORT|((qual&IEQUALIFIER_CONTROL)?REFRESHF_SORTSEL:0));
+	lister_refresh_display(lister, REFRESHF_RESORT | ((qual & IEQUALIFIER_CONTROL) ? REFRESHF_SORTSEL : 0));
 
 	// Unlock lister
-	if (!busy) lister_unbusy(lister,1);
+	if (!busy)
+		lister_unbusy(lister, 1);
 }
 
-
 // Resort a lister
-BOOL lister_resort(Lister *lister,short type)
+BOOL lister_resort(Lister *lister, short type)
 {
 	DirBuffer *buffer;
 
 	// Valid lister and buffer?
-	if (!lister || !(buffer=lister->cur_buffer)) return 0;
+	if (!lister || !(buffer = lister->cur_buffer))
+		return 0;
 
 	// Does buffer have a special sort format?
-	if (buffer->flags&DWF_SPECIAL_SORT) return 0;
+	if (buffer->flags & DWF_SPECIAL_SORT)
+		return 0;
 
 	// See if we need to resort
-	if (!type && !(type=resort_test(&buffer->buf_ListFormat,&lister->format)))
+	if (!type && !(type = resort_test(&buffer->buf_ListFormat, &lister->format)))
 	{
-		buffer->buf_ListFormat=lister->format;
+		buffer->buf_ListFormat = lister->format;
 		return 0;
 	}
 
 	// Store new sort method in buffer
-	buffer->buf_ListFormat=lister->format;
+	buffer->buf_ListFormat = lister->format;
 
 	// Lock buffer
-	buffer_lock(lister->cur_buffer,TRUE);
+	buffer_lock(lister->cur_buffer, TRUE);
 
 	// Has sort method changed?
-	if (type&RESORT_SORT)
+	if (type & RESORT_SORT)
 	{
 		struct MinList temp;
-		long file_count,dir_count;
+		long file_count, dir_count;
 
 		// Replace rejects if necessary
-		if (type&RESORT_REJECTS) buffer_replace_rejects(buffer,0);
+		if (type & RESORT_REJECTS)
+			buffer_replace_rejects(buffer, 0);
 
 		// Copy list pointers
-		temp=buffer->entry_list;
-		temp.mlh_TailPred->mln_Succ=(struct MinNode *)&temp.mlh_Tail;
-		temp.mlh_Head->mln_Pred=(struct MinNode *)&temp.mlh_Head;
+		temp = buffer->entry_list;
+		temp.mlh_TailPred->mln_Succ = (struct MinNode *)&temp.mlh_Tail;
+		temp.mlh_Head->mln_Pred = (struct MinNode *)&temp.mlh_Head;
 
 		// Store file and directory counts
-		file_count=buffer->buf_TotalFiles[0];
-		dir_count=buffer->buf_TotalDirs[0];
+		file_count = buffer->buf_TotalFiles[0];
+		dir_count = buffer->buf_TotalDirs[0];
 
 		// Clear buffer entry pointers
 		NewList((struct List *)&buffer->entry_list);
-		buffer->first_file=0;
-		buffer->first_dir=0;
+		buffer->first_file = 0;
+		buffer->first_dir = 0;
 
 		// Clear counts
-		buffer->buf_TotalEntries[0]=0;
-		buffer->buf_TotalFiles[0]=0;
-		buffer->buf_TotalDirs[0]=0;
-		buffer->buf_TotalBytes[0]=0;
-		buffer->buf_SelectedFiles[0]=0;
-		buffer->buf_SelectedDirs[0]=0;
-		buffer->buf_SelectedBytes[0]=0;
+		buffer->buf_TotalEntries[0] = 0;
+		buffer->buf_TotalFiles[0] = 0;
+		buffer->buf_TotalDirs[0] = 0;
+		buffer->buf_TotalBytes[0] = 0;
+		buffer->buf_SelectedFiles[0] = 0;
+		buffer->buf_SelectedDirs[0] = 0;
+		buffer->buf_SelectedBytes[0] = 0;
 
 		// Sort the list
-		buffer_sort_list(buffer,&temp,file_count,dir_count);
-		type=0;
+		buffer_sort_list(buffer, &temp, file_count, dir_count);
+		type = 0;
 	}
 
 	// Change reverse sort
-	else
-	if (type&RESORT_REVERSE)
+	else if (type & RESORT_REVERSE)
 	{
-		buffer_sort_reversesep(buffer,1);
+		buffer_sort_reversesep(buffer, 1);
 	}
 
 	// Separation state changed
-	else
-	if (type&RESORT_SEPARATE)
+	else if (type & RESORT_SEPARATE)
 	{
-		buffer_sort_reversesep(buffer,0);
+		buffer_sort_reversesep(buffer, 0);
 	}
 
 	// Do rejects for this lister
-	if (type&RESORT_REJECTS)
+	if (type & RESORT_REJECTS)
 	{
-		buffer_replace_rejects(buffer,1);
+		buffer_replace_rejects(buffer, 1);
 		buffer_do_rejects(buffer);
 	}
 
@@ -218,56 +221,53 @@ BOOL lister_resort(Lister *lister,short type)
 	return 1;
 }
 
-
-int resort_test(ListFormat *old,ListFormat *new)
+int resort_test(ListFormat *old, ListFormat *new)
 {
-	int type=0;
+	int type = 0;
 
 	// See if sort method has changed
-	if (old->sort.sort!=new->sort.sort)
-		type|=RESORT_SORT;
+	if (old->sort.sort != new->sort.sort)
+		type |= RESORT_SORT;
 
 	// Separation state changed?
-	else if (old->sort.separation!=new->sort.separation)
+	else if (old->sort.separation != new->sort.separation)
 	{
 		// If we've gone from separated to mixed, we have to resort
-		if (new->sort.separation==SEPARATE_MIX)
-			type|=RESORT_SORT;
+		if (new->sort.separation == SEPARATE_MIX)
+			type |= RESORT_SORT;
 
 		// Otherwise, we can just rearrange
-		else type|=RESORT_SEPARATE;
+		else
+			type |= RESORT_SEPARATE;
 	}
 
 	// Reverse state changed?
-	if (old->sort.sort_flags!=new->sort.sort_flags)
-		type|=RESORT_REVERSE;
+	if (old->sort.sort_flags != new->sort.sort_flags)
+		type |= RESORT_REVERSE;
 
 	// See if rejects have changed
-	if ((old->flags&(LFORMATF_REJECT_ICONS|LFORMATF_HIDDEN_BIT))!=
-		(new->flags&(LFORMATF_REJECT_ICONS|LFORMATF_HIDDEN_BIT)))
-		type|=RESORT_REJECTS;
+	if ((old->flags & (LFORMATF_REJECT_ICONS | LFORMATF_HIDDEN_BIT)) !=
+		(new->flags &(LFORMATF_REJECT_ICONS | LFORMATF_HIDDEN_BIT)))
+		type |= RESORT_REJECTS;
 
 	// See if patterns have changed
-	if (stricmp(old->show_pattern,new->show_pattern)!=0 ||
-		stricmp(old->hide_pattern,new->hide_pattern)!=0)
-		type|=RESORT_REJECTS;
+	if (stricmp(old->show_pattern, new->show_pattern) != 0 || stricmp(old->hide_pattern, new->hide_pattern) != 0)
+		type |= RESORT_REJECTS;
 
 	return type;
 }
 
 // Default lister parent popup
-static PopUpItem
-	parent_popup[]={
-		{{0},(char *)MSG_PARENT,PP_PARENT,POPUPF_LOCALE,0},
-		{{0},(char *)MSG_ROOT,PP_ROOT,POPUPF_LOCALE,0},
-		{{0},POPUP_BARLABEL,0,0,0},
-		{{0},(char *)MSG_DEVICE_LIST,PP_DEVICE_LIST,POPUPF_LOCALE,0},
-		{{0},(char *)MSG_BUFFER_LIST,PP_BUFFER_LIST,POPUPF_LOCALE,0},
-		{{0},POPUP_BARLABEL,0,0,0},
-		{{0},(char *)MSG_REREAD_DIR,PP_REREAD_DIR,POPUPF_LOCALE,0}};
+static PopUpItem parent_popup[] = {{{0}, (char *)MSG_PARENT, PP_PARENT, POPUPF_LOCALE, 0},
+								   {{0}, (char *)MSG_ROOT, PP_ROOT, POPUPF_LOCALE, 0},
+								   {{0}, POPUP_BARLABEL, 0, 0, 0},
+								   {{0}, (char *)MSG_DEVICE_LIST, PP_DEVICE_LIST, POPUPF_LOCALE, 0},
+								   {{0}, (char *)MSG_BUFFER_LIST, PP_BUFFER_LIST, POPUPF_LOCALE, 0},
+								   {{0}, POPUP_BARLABEL, 0, 0, 0},
+								   {{0}, (char *)MSG_REREAD_DIR, PP_REREAD_DIR, POPUPF_LOCALE, 0}};
 
 // Do lister parent popup
-void lister_parent_popup(Lister *lister,unsigned short code)
+void lister_parent_popup(Lister *lister, unsigned short code)
 {
 	PopUpMenu *parent_menu;
 	PopUpItem *item;
@@ -275,76 +275,76 @@ void lister_parent_popup(Lister *lister,unsigned short code)
 	struct Node *node;
 	short a;
 	unsigned short res;
-	BOOL help=0;
+	BOOL help = 0;
 
 	// Create a memory handle
-	if (!(memory=NewMemHandle(1024,768,MEMF_CLEAR)))
+	if (!(memory = NewMemHandle(1024, 768, MEMF_CLEAR)))
 		return;
 
 	// Initialise parent menu
-	if (!(parent_menu=AllocMemH(memory,sizeof(PopUpMenu))))
+	if (!(parent_menu = AllocMemH(memory, sizeof(PopUpMenu))))
 	{
 		FreeMemHandle(memory);
 		return;
 	}
 	NewList((struct List *)parent_menu);
-	parent_menu->locale=&locale;
-	parent_menu->flags=POPUPMF_HELP;
+	parent_menu->locale = &locale;
+	parent_menu->flags = POPUPMF_HELP;
 
 	// Create default items
-	for (a=0;a<7;a++)
+	for (a = 0; a < 7; a++)
 	{
 		// Allocate item
-		if ((item=AllocMemH(memory,sizeof(PopUpItem))))
+		if ((item = AllocMemH(memory, sizeof(PopUpItem))))
 		{
 			// Copy template item
-			*item=parent_popup[a];
+			*item = parent_popup[a];
 
 			// Add to list
-			AddTail((struct List *)parent_menu,(struct Node *)item);
+			AddTail((struct List *)parent_menu, (struct Node *)item);
 		}
 	}
 
 	// Zero count
-	a=0;
+	a = 0;
 
 	// Valid history?
 	if (lister->path_history)
 	{
 		// Lock lister history
-		LockAttList(lister->path_history,FALSE);
+		LockAttList(lister->path_history, FALSE);
 
 		// Go through lister history
-		for (node=lister->path_history->list.lh_Head;node->ln_Succ;node=node->ln_Succ)
+		for (node = lister->path_history->list.lh_Head; node->ln_Succ; node = node->ln_Succ)
 		{
 			// Should not display current directory
-			if (stricmp(node->ln_Name,lister->cur_buffer->buf_Path)==0)
+			if (stricmp(node->ln_Name, lister->cur_buffer->buf_Path) == 0)
 				continue;
 
 			// First item?
-			if (a==0)
+			if (a == 0)
 			{
 				// Allocate item to be a bar
-				if ((item=AllocMemH(memory,sizeof(PopUpItem))))
+				if ((item = AllocMemH(memory, sizeof(PopUpItem))))
 				{
 					// Initialise item
-					item->item_name=POPUP_BARLABEL;
+					item->item_name = POPUP_BARLABEL;
 
 					// Add to list
-					AddTail((struct List *)parent_menu,(struct Node *)item);
+					AddTail((struct List *)parent_menu, (struct Node *)item);
 				}
 			}
 
 			// Create item
-			if ((item=AllocMemH(memory,sizeof(PopUpItem))))
+			if ((item = AllocMemH(memory, sizeof(PopUpItem))))
 			{
 				// Initialise item
-				item->item_name=node->ln_Name;
-				item->id=PP_BASE+a;
-				item->data=(APTR)item->item_name;
+				item->item_name = node->ln_Name;
+				item->id = PP_BASE + a;
+				item->data = (APTR)item->item_name;
 
 				// Add to list
-				AddTail((struct List *)parent_menu,(struct Node *)item);
+				AddTail((struct List *)parent_menu, (struct Node *)item);
 			}
 
 			// Increment count
@@ -356,97 +356,106 @@ void lister_parent_popup(Lister *lister,unsigned short code)
 	}
 
 	// Do pop-up menu
-	if ((res=DoPopUpMenu(lister->window,parent_menu,&item,code))!=(UWORD)-1)
+	if ((res = DoPopUpMenu(lister->window, parent_menu, &item, code)) != (UWORD)-1)
 	{
 		// Help?
-		if (res&POPUP_HELPFLAG)
+		if (res & POPUP_HELPFLAG)
 		{
-			help=1;
-			res&=~POPUP_HELPFLAG;
+			help = 1;
+			res &= ~POPUP_HELPFLAG;
 		}
 
 		// Get result
 		switch (res)
 		{
-			// Parent
-			case PP_PARENT:
-				if (help) help_show_help("Parent",0);
-				else lister_do_function(lister,MENU_LISTER_PARENT);
-				break;
+		// Parent
+		case PP_PARENT:
+			if (help)
+				help_show_help("Parent", 0);
+			else
+				lister_do_function(lister, MENU_LISTER_PARENT);
+			break;
 
-			// Root
-			case PP_ROOT:
-				if (help) help_show_help("Root",0);
-				else lister_do_function(lister,MENU_LISTER_ROOT);
-				break;
+		// Root
+		case PP_ROOT:
+			if (help)
+				help_show_help("Root", 0);
+			else
+				lister_do_function(lister, MENU_LISTER_ROOT);
+			break;
 
-			// Device list
-			case PP_DEVICE_LIST:
-				if (help) help_show_help("DeviceList",0);
-				else function_launch_quick(FUNCTION_RUN_FUNCTION,def_function_devicelist,lister);
-				break;
+		// Device list
+		case PP_DEVICE_LIST:
+			if (help)
+				help_show_help("DeviceList", 0);
+			else
+				function_launch_quick(FUNCTION_RUN_FUNCTION, def_function_devicelist, lister);
+			break;
 
-			// Buffer list
-			case PP_BUFFER_LIST:
-				if (help) help_show_help("CacheList",0);
-				else function_launch_quick(FUNCTION_RUN_FUNCTION,def_function_cachelist,lister);
-				break;
+		// Buffer list
+		case PP_BUFFER_LIST:
+			if (help)
+				help_show_help("CacheList", 0);
+			else
+				function_launch_quick(FUNCTION_RUN_FUNCTION, def_function_cachelist, lister);
+			break;
 
-			// Re-read
-			case PP_REREAD_DIR:
+		// Re-read
+		case PP_REREAD_DIR:
 
-				// Help?
-				if (help) help_show_help("ReReadDir",0);
+			// Help?
+			if (help)
+				help_show_help("ReReadDir", 0);
 
-				// Custom handler?
-				else
-				if (lister->cur_buffer->buf_CustomHandler[0])
-				{
-					// Send message
-					rexx_handler_msg(
-						0,
-						lister->cur_buffer,
-						RXMF_WARN,
-						HA_String,0,"reread",
-						HA_Value,1,lister,
-						HA_String,2,lister->cur_buffer->buf_Path,
-						TAG_END);
-				}
+			// Custom handler?
+			else if (lister->cur_buffer->buf_CustomHandler[0])
+			{
+				// Send message
+				rexx_handler_msg(0,
+								 lister->cur_buffer,
+								 RXMF_WARN,
+								 HA_String,
+								 0,
+								 "reread",
+								 HA_Value,
+								 1,
+								 lister,
+								 HA_String,
+								 2,
+								 lister->cur_buffer->buf_Path,
+								 TAG_END);
+			}
 
-				// Otherwise, check for special buffer first
-				else
-				if (!(check_special_buffer(lister,1)))
-				{
-					// Re-read current dir
-					read_directory(lister,lister->cur_buffer->buf_Path,GETDIRF_RESELECT);
-				}
+			// Otherwise, check for special buffer first
+			else if (!(check_special_buffer(lister, 1)))
+			{
+				// Re-read current dir
+				read_directory(lister, lister->cur_buffer->buf_Path, GETDIRF_RESELECT);
+			}
 
-				// Switched from special buffer, need to refresh
-				else lister_show_buffer(lister,lister->cur_buffer,1,1);
-				break;
+			// Switched from special buffer, need to refresh
+			else
+				lister_show_buffer(lister, lister->cur_buffer, 1, 1);
+			break;
 
-			// Other dir
-			default:
+		// Other dir
+		default:
 
-				// Help?
-				if (help) help_show_help("PathHistory",0);
-				else
-				if (item)
-				{
-					// Read directory
-					read_directory(
-						lister,
-						(char *)item->data,
-						GETDIRF_CANCHECKBUFS|GETDIRF_CANMOVEEMPTY);
-				}
-				break;
+			// Help?
+			if (help)
+				help_show_help("PathHistory", 0);
+			else if (item)
+			{
+				// Read directory
+				read_directory(lister, (char *)item->data, GETDIRF_CANCHECKBUFS | GETDIRF_CANMOVEEMPTY);
+			}
+			break;
 		}
 	}
-		
+
 	// Free data
 	FreeMemHandle(memory);
 }
-
 
 // Add an entry to the history list
 void lister_add_history(Lister *lister)
@@ -454,31 +463,31 @@ void lister_add_history(Lister *lister)
 	Att_Node *node;
 
 	// Is current buffer valid?
-	if (!lister->path_history ||
-		!(lister->cur_buffer->flags&DWF_VALID) ||
-		!lister->cur_buffer->buf_Path[0]) return;
+	if (!lister->path_history || !(lister->cur_buffer->flags & DWF_VALID) || !lister->cur_buffer->buf_Path[0])
+		return;
 
 	// Lock list
-	LockAttList(lister->path_history,TRUE);
+	LockAttList(lister->path_history, TRUE);
 
 	// See if buffer is already in history list
-	if (!(node=(Att_Node *)FindNameI(&lister->path_history->list,lister->cur_buffer->buf_Path)))
+	if (!(node = (Att_Node *)FindNameI(&lister->path_history->list, lister->cur_buffer->buf_Path)))
 	{
 		// Allocate a history node
-		if ((node=Att_NewNode(lister->path_history,lister->cur_buffer->buf_Path,0,0)))
+		if ((node = Att_NewNode(lister->path_history, lister->cur_buffer->buf_Path, 0, 0)))
 		{
 			// If count is over 20, remove first entry
-			if (lister->history_count==20)
+			if (lister->history_count == 20)
 			{
 				// Get first entry
-				node=(Att_Node *)lister->path_history->list.lh_Head;
+				node = (Att_Node *)lister->path_history->list.lh_Head;
 
 				// Remove and free it
 				Att_RemNode(node);
 			}
 
 			// Otherwise, increment count
-			else ++lister->history_count;
+			else
+				++lister->history_count;
 		}
 	}
 
@@ -487,7 +496,7 @@ void lister_add_history(Lister *lister)
 	{
 		// Remove and add to head of list
 		Remove((struct Node *)node);
-		AddHead(&lister->path_history->list,(struct Node *)node);
+		AddHead(&lister->path_history->list, (struct Node *)node);
 	}
 
 	// Unlock list

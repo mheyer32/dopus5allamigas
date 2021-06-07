@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,18 +26,13 @@ For more information on Directory Opus for Windows please see:
 // VERIFY function
 DOPUS_FUNC(function_verify)
 {
-	short ret=1;
+	short ret = 1;
 
 	// First source?
-	if (handle->func_source_num==0)
+	if (handle->func_source_num == 0)
 	{
 		// Display requester
-		ret=function_request(
-			handle,
-			args,
-			0,
-			GetString(&locale,MSG_OKAY),
-			GetString(&locale,MSG_CANCEL),0);
+		ret = function_request(handle, args, 0, GetString(&locale, MSG_OKAY), GetString(&locale, MSG_CANCEL), 0);
 	}
 
 	return ret;

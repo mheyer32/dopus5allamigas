@@ -17,52 +17,55 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Format disks
-void backdrop_format(BackdropInfo *info,BackdropObject *icon)
+void backdrop_format(BackdropInfo *info, BackdropObject *icon)
 {
 	BackdropObject *object;
-	short count=0;
+	short count = 0;
 
 	// Lock backdrop list
-	lock_listlock(&info->objects,0);
+	lock_listlock(&info->objects, 0);
 
 	// Go through backdrop list
-	for (object=(BackdropObject *)info->objects.list.lh_Head;
-		object->node.ln_Succ;
-		object=(BackdropObject *)object->node.ln_Succ)
+	for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+		 object = (BackdropObject *)object->node.ln_Succ)
 	{
 		// Disk?
-		if (object->type!=BDO_DISK && object->type!=BDO_BAD_DISK)
+		if (object->type != BDO_DISK && object->type != BDO_BAD_DISK)
 			continue;
 
 		// Selected or supplied?
-		if ((!icon && object->state) || icon==object)
+		if ((!icon && object->state) || icon == object)
 		{
 			// Got a device name?
 			if (object->device_name)
 			{
 				// Launch format
-				function_launch(
-					FUNCTION_RUN_FUNCTION,
-					def_function_format,
-					0,
-					0,
-					0,0,
-					0,0,
-					BuildArgArray((IPTR)object->device_name,0),0,0);
+				function_launch(FUNCTION_RUN_FUNCTION,
+								def_function_format,
+								0,
+								0,
+								0,
+								0,
+								0,
+								0,
+								BuildArgArray((IPTR)object->device_name, 0),
+								0,
+								0);
 
 				// Increment count
 				++count;
 			}
 
 			// Icon supplied?
-			if (icon) break;
+			if (icon)
+				break;
 		}
 	}
 
@@ -70,9 +73,9 @@ void backdrop_format(BackdropInfo *info,BackdropObject *icon)
 	unlock_listlock(&info->objects);
 
 	// If we didn't launch any formats, run the format program
-	if (count==0)
+	if (count == 0)
 	{
 		// Launch format
-		function_launch_quick(FUNCTION_RUN_FUNCTION,def_function_format,0);
+		function_launch_quick(FUNCTION_RUN_FUNCTION, def_function_format, 0);
 	}
 }

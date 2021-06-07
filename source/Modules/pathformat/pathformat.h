@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,15 +25,14 @@ For more information on Directory Opus for Windows please see:
 #include "pathformat.strings"
 #include "module_deps.h"
 
-//struct Library *CxBase;
+// struct Library *CxBase;
 
 extern ConfigWindow pathformat_window;
 extern ObjectDef pathformat_objects[];
 
 //#define CxBase (data->cxbase)
 
-enum
-{
+enum {
 	GAD_PATHFORMAT_LAYOUT,
 	GAD_PATHFORMAT_SAVE,
 	GAD_PATHFORMAT_CANCEL,
@@ -47,53 +46,47 @@ enum
 	GAD_PATHFORMAT_NEW_LISTER,
 };
 
-enum
-{
-	MODE_NONE,
-	MODE_NAME,
-	MODE_ICON,
-	MODE_ACTION
-};
+enum { MODE_NONE, MODE_NAME, MODE_ICON, MODE_ACTION };
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	NewConfigWindow		newwin;
-	struct Window		*window;
-	ObjectList		*objlist;
+	NewConfigWindow newwin;
+	struct Window *window;
+	ObjectList *objlist;
 
-	struct List		*paths;
-	Att_List		*path_list;
-	Att_Node		*path_sel;
+	struct List *paths;
+	Att_List *path_list;
+	Att_Node *path_sel;
 
-	//struct Library		*cxbase;
-	ULONG 			pad1;
+	// struct Library		*cxbase;
+	ULONG pad1;
 
-	IPCData			*ipc;
-	IPCData			*main_ipc;
-	ListFormat		*def_format;
+	IPCData *ipc;
+	IPCData *main_ipc;
+	ListFormat *def_format;
 
-	struct AppWindow	*appwindow;
-	struct MsgPort		*appport;
+	struct AppWindow *appwindow;
+	struct MsgPort *appport;
 
-	APTR			memory;
+	APTR memory;
 
-	ULONG			seconds;
-	ULONG			micros;
+	ULONG seconds;
+	ULONG micros;
 } config_path_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-BOOL config_paths_open(config_path_data *data,struct Screen *screen);
+BOOL config_paths_open(config_path_data *data, struct Screen *screen);
 void config_paths_cleanup(config_path_data *data);
 void config_paths_build_list(config_path_data *data);
-void config_paths_disable(config_path_data *data,BOOL state);
-void config_paths_add(config_path_data *data,BOOL activate);
+void config_paths_disable(config_path_data *data, BOOL state);
+void config_paths_add(config_path_data *data, BOOL activate);
 void config_paths_change(config_path_data *data);
-void config_paths_select(config_path_data *data,Att_Node *node,BOOL);
+void config_paths_select(config_path_data *data, Att_Node *node, BOOL);
 void config_paths_get_key(config_path_data *data);
-void config_paths_remove(config_path_data *data,BOOL);
+void config_paths_remove(config_path_data *data, BOOL);
 void config_paths_edit(config_path_data *data);

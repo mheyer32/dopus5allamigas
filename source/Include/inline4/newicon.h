@@ -8,29 +8,29 @@
 ** calls by substituting functions.
 **
 ** Do not edit manually.
-*/ 
+*/
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 #ifndef EXEC_EXEC_H
-#include <exec/exec.h>
+	#include <exec/exec.h>
 #endif
 #ifndef EXEC_INTERFACES_H
-#include <exec/interfaces.h>
+	#include <exec/interfaces.h>
 #endif
 
 #ifndef LIBRARIES_NEWICON_H
-#include <libraries/newicon.h>
+	#include <libraries/newicon.h>
 #endif
 #include <interfaces/newicon.h>
 
 /* Inline macros for Interface "main" */
-#define GetNewDiskObject(name) INewIcon->GetNewDiskObject((name)) 
-#define PutNewDiskObject(name, newdiskobj) INewIcon->PutNewDiskObject((name), (newdiskobj)) 
-#define FreeNewDiskObject(newdiskobj) INewIcon->FreeNewDiskObject((newdiskobj)) 
-#define RemapChunkyImage(chunkyimage, screen) INewIcon->RemapChunkyImage((chunkyimage), (screen)) 
-#define FreeRemappedImage(image, screen) INewIcon->FreeRemappedImage((image), (screen)) 
-#define GetDefNewDiskObject(def_type) INewIcon->GetDefNewDiskObject((def_type)) 
+#define GetNewDiskObject(name) INewIcon->GetNewDiskObject((name))
+#define PutNewDiskObject(name, newdiskobj) INewIcon->PutNewDiskObject((name), (newdiskobj))
+#define FreeNewDiskObject(newdiskobj) INewIcon->FreeNewDiskObject((newdiskobj))
+#define RemapChunkyImage(chunkyimage, screen) INewIcon->RemapChunkyImage((chunkyimage), (screen))
+#define FreeRemappedImage(image, screen) INewIcon->FreeRemappedImage((image), (screen))
+#define GetDefNewDiskObject(def_type) INewIcon->GetDefNewDiskObject((def_type))
 
 #endif /* INLINE4_NEWICON_H */

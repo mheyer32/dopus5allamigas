@@ -15,11 +15,11 @@
 */
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 
 #ifndef LIBRARIES_SYSINFO_H
-#include <libraries/SysInfo.h>
+	#include <libraries/SysInfo.h>
 #endif
 
 /* init */

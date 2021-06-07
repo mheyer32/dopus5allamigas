@@ -17,26 +17,25 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _SIMPLEREQUEST_H
 #define _SIMPLEREQUEST_H
 
-
 #include "dopuslib.h"
 #include "layout_routines.h"
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
-#define GAD_POPUP_ID	(UWORD)-7
-#define GAD_CHECK_ID	(UWORD)-6
-#define GAD_SIGNAL	(UWORD)-5
-#define GAD_STRING2_ID	(UWORD)-4
-#define GAD_TEXT_ID	(UWORD)-3
-#define GAD_STRING_ID	(UWORD)-1
+#define GAD_POPUP_ID (UWORD) - 7
+#define GAD_CHECK_ID (UWORD) - 6
+#define GAD_SIGNAL (UWORD) - 5
+#define GAD_STRING2_ID (UWORD) - 4
+#define GAD_TEXT_ID (UWORD) - 3
+#define GAD_STRING_ID (UWORD) - 1
 
 typedef struct
 {
@@ -46,13 +45,13 @@ typedef struct
 	short max_gadget_width;
 	short max_text_width;
 	short text_lines;
-	short fine_pos,start_pos,width,gad_space,gad_fine_space;
+	short fine_pos, start_pos, width, gad_space, gad_fine_space;
 	short object_count;
 	struct Window *window;
 	ObjectDef *objects;
 	ObjectList *objlist;
 	unsigned char *keys;
-	struct TagItem tags[9],tags2[7],rel_tags[2];
+	struct TagItem tags[9], tags2[7], rel_tags[2];
 	BOOL strings_2;
 	short string_len;
 	IPCData *ipc;
@@ -72,13 +71,11 @@ typedef struct
 } simplereq_data;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
-BOOL _simplereq_open(simplereq_data *data,void *parent);
+BOOL _simplereq_open(simplereq_data *data, void *parent);
 void _simplereq_close(simplereq_data *data);
 BOOL simple_build(simplereq_data *data);
 
-
 #endif
-

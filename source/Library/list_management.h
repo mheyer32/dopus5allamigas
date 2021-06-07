@@ -17,50 +17,49 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _LIST_MANAGMENT_H
 #define _LIST_MANAGMENT_H
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
-typedef struct _Att_List {
+typedef struct _Att_List
+{
 	struct List list;
 } Att_List;
 
-typedef struct _Att_Node {
+typedef struct _Att_Node
+{
 	struct Node node;
 	Att_List *list;
 	ULONG data;
 } Att_Node;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
+#define ADDNODE_SORT 1		 // Sort names
+#define ADDNODE_EXCLUSIVE 2	 // Exclusive entry
+#define ADDNODE_NUMSORT 4	 // Numerical name sort
 
-#define ADDNODE_SORT		1		// Sort names
-#define ADDNODE_EXCLUSIVE	2		// Exclusive entry
-#define ADDNODE_NUMSORT		4		// Numerical name sort
-
-#define REMLIST_FREEDATA	1		// FreeVec data when freeing list
+#define REMLIST_FREEDATA 1	// FreeVec data when freeing list
 
 // prototypes
 Att_List *Att_NewList(void);
-Att_Node *Att_NewNode(Att_List *list,char *name,ULONG data,ULONG flags);
+Att_Node *Att_NewNode(Att_List *list, char *name, ULONG data, ULONG flags);
 void Att_RemNode(Att_Node *node);
-void Att_PosNode(Att_List *,Att_Node *,Att_Node *);
-void Att_RemList(Att_List *list,int);
-Att_Node *Att_FindNode(Att_List *list,int number);
-Att_NodeNumber(Att_List *list,char *name);
-Att_Node *Att_FindNodeData(Att_List *list,ULONG data);
-Att_NodeDataNumber(Att_List *list,ULONG data);
+void Att_PosNode(Att_List *, Att_Node *, Att_Node *);
+void Att_RemList(Att_List *list, int);
+Att_Node *Att_FindNode(Att_List *list, int number);
+Att_NodeNumber(Att_List *list, char *name);
+Att_Node *Att_FindNodeData(Att_List *list, ULONG data);
+Att_NodeDataNumber(Att_List *list, ULONG data);
 
 #define VALIDLIST(l) ((l) && (l)->list.lh_Head->ln_Succ)
-
 
 #endif

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 /*
@@ -29,18 +29,17 @@ For more information on Directory Opus for Windows please see:
 #ifndef PROTO_DOPUS5_H
 #define PROTO_DOPUS5_H
 
-
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 #ifndef PROTO_DOS_H
-#include <proto/dos.h>
+	#include <proto/dos.h>
 #endif
 #ifndef PROTO_INTUITION_H
-#include <proto/intuition.h>
+	#include <proto/intuition.h>
 #endif
 #ifndef PROTO_GRAPHICS_H
-#include <proto/graphics.h>
+	#include <proto/graphics.h>
 #endif
 //#ifndef PROTO_LAYOUT_H
 //# ifndef __MORPHOS__
@@ -48,62 +47,62 @@ For more information on Directory Opus for Windows please see:
 //# endif
 //#endif
 #ifndef PROTO_WB_H
-#include <proto/wb.h>
+	#include <proto/wb.h>
 #endif
 #ifndef PROTO_WB_H
-#include <proto/wb.h>
+	#include <proto/wb.h>
 #endif
 #ifndef PROTO_REXXSYSLIB_H
-#include <proto/rexxsyslib.h>
+	#include <proto/rexxsyslib.h>
 #endif
 #ifndef LIBRARIES_DOPUS5_H
-#include <libraries/dopus5.h>
+	#include <libraries/dopus5.h>
 #endif
 /****************************************************************************/
 
 #ifndef __NOLIBBASE__
- #ifndef __USE_BASETYPE__
-  extern struct Library * DOpusBase;
- #else
-  extern struct Library * DOpusBase;
- #endif /* __USE_BASETYPE__ */
-#endif /* __NOLIBBASE__ */
+	#ifndef __USE_BASETYPE__
+extern struct Library *DOpusBase;
+	#else
+extern struct Library* DOpusBase;
+	#endif /* __USE_BASETYPE__ */
+#endif	   /* __NOLIBBASE__ */
 
 /****************************************************************************/
 
 #ifdef __amigaos4__
- #include <interfaces/dopus5.h>
- #ifdef __USE_INLINE__
-  #include <inline4/dopus5.h>
- #endif /* __USE_INLINE__ */
- #ifndef CLIB_DOPUS5_PROTOS_H
-  #define CLIB_DOPUS5_PROTOS_H 1
- #endif /* CLIB_DOPUS5_PROTOS_H */
- #ifndef __NOGLOBALIFACE__
-  extern struct DOpusIFace *IDOpus;
- #endif /* __NOGLOBALIFACE__ */
-#else /* __amigaos4__ */
- #ifndef CLIB_DOPUS5_PROTOS_H
-  #include <clib/dopus5_protos.h>
- #endif /* CLIB_DOPUS5_PROTOS_H */
- #if defined(__GNUC__)
-  #ifdef __AROS__
-   #include <defines/dopus5.h>
-  #else /* __AROS__ */
-   #ifndef __PPC__
-    #include <inline/dopus5.h>
-   #else /* __PPC__ */
-    #include <ppcinline/dopus5.h>
-   #endif /* __PPC__ */
-  #endif /* __AROS__ */
- #elif defined(__VBCC__)
-  #ifndef __PPC__
-   #include <inline/dopus5_protos.h>
-  #endif /* __PPC__ */
- #else /* __GNUC__ */
-  #include <pragmas/dopus5_pragmas.h>
- #endif /* __GNUC__ */
-#endif /* __amigaos4__ */
+	#include <interfaces/dopus5.h>
+	#ifdef __USE_INLINE__
+		#include <inline4/dopus5.h>
+	#endif /* __USE_INLINE__ */
+	#ifndef CLIB_DOPUS5_PROTOS_H
+		#define CLIB_DOPUS5_PROTOS_H 1
+	#endif /* CLIB_DOPUS5_PROTOS_H */
+	#ifndef __NOGLOBALIFACE__
+extern struct DOpusIFace *IDOpus;
+	#endif /* __NOGLOBALIFACE__ */
+#else	   /* __amigaos4__ */
+	#ifndef CLIB_DOPUS5_PROTOS_H
+		#include <clib/dopus5_protos.h>
+	#endif /* CLIB_DOPUS5_PROTOS_H */
+	#if defined(__GNUC__)
+		#ifdef __AROS__
+			#include <defines/dopus5.h>
+		#else /* __AROS__ */
+			#ifndef __PPC__
+				#include <inline/dopus5.h>
+			#else /* __PPC__ */
+				#include <ppcinline/dopus5.h>
+			#endif /* __PPC__ */
+		#endif	   /* __AROS__ */
+	#elif defined(__VBCC__)
+		#ifndef __PPC__
+			#include <inline/dopus5_protos.h>
+		#endif /* __PPC__ */
+	#else	   /* __GNUC__ */
+		#include <pragmas/dopus5_pragmas.h>
+	#endif /* __GNUC__ */
+#endif	   /* __amigaos4__ */
 
 /****************************************************************************/
 

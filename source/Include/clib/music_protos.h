@@ -2,10 +2,10 @@
 #define CLIB_MUSIC_PROTOS_H
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 
-WORD PlayModule(char *,BOOL);
+WORD PlayModule(char *, BOOL);
 VOID StopModule(void);
 WORD IsModule(char *);
 VOID FlushModule(void);

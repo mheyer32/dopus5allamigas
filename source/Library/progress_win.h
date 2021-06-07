@@ -17,14 +17,13 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _PROGRESS_H
 #define _PROGRESS_H
 
-enum
-{
+enum {
 	PROG_NAME,
 	PROG_SIZE,
 	PROG_INFO,
@@ -34,69 +33,66 @@ enum
 	PROG_LAST,
 };
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct _ProgressWindow
 {
-	struct Window		*pw_Window;		// Window pointer
-	IPCData			*pw_IPC;		// IPC pointer
+	struct Window *pw_Window;  // Window pointer
+	IPCData *pw_IPC;		   // IPC pointer
 
-	struct Window		*pw_OwnerWindow;	// Owner window
-	struct Screen		*pw_Screen;		// Screen we're on
+	struct Window *pw_OwnerWindow;	// Owner window
+	struct Screen *pw_Screen;		// Screen we're on
 
-	char			pw_Title[40];		// Window title
+	char pw_Title[40];	// Window title
 
-	unsigned long		pw_Flags;		// Flags
+	unsigned long pw_Flags;	 // Flags
 
-	char			pw_FileName[80];	// Current filename
-	long			pw_FileSize;		// Current filesize
-	long			pw_FileDone;		// Amount of file done
+	char pw_FileName[80];  // Current filename
+	long pw_FileSize;	   // Current filesize
+	long pw_FileDone;	   // Amount of file done
 
-	long			pw_FileCount;		// Total number of files
-	long			pw_FileNum;		// Current file number
+	long pw_FileCount;	// Total number of files
+	long pw_FileNum;	// Current file number
 
-	char			pw_Information[80];	// Current information line
+	char pw_Information[80];  // Current information line
 
-	struct Task		*pw_SigTask;		// Task to signal for abort
-	long			pw_SigBit;		// Signal bit to use
+	struct Task *pw_SigTask;  // Task to signal for abort
+	long pw_SigBit;			  // Signal bit to use
 
-	struct MyLibrary	*pw_Lib;		// Library pointer
+	struct MyLibrary *pw_Lib;  // Library pointer
 
-	Point			pw_Offset;		// Coordinate offset
-	struct Gadget		*pw_Abort;		// Abort gadget
-	struct DrawInfo		*pw_DrawInfo;		// DrawInfo
-	char			*pw_SizeString;		// Cache for size string
+	Point pw_Offset;			   // Coordinate offset
+	struct Gadget *pw_Abort;	   // Abort gadget
+	struct DrawInfo *pw_DrawInfo;  // DrawInfo
+	char *pw_SizeString;		   // Cache for size string
 
-	Point			pw_WindowPos;		// Window position
-	BOOL			pw_PosValid;		// Position is valid?
+	Point pw_WindowPos;	 // Window position
+	BOOL pw_PosValid;	 // Position is valid?
 
-	short			pw_ProgWidth;		// Width of progress bar filled
+	short pw_ProgWidth;	 // Width of progress bar filled
 
-	WindowID		pw_ID;			// Window ID
-	struct Hook		*pw_Backfill;		// Backfill hook
+	WindowID pw_ID;			   // Window ID
+	struct Hook *pw_Backfill;  // Backfill hook
 
-	char			pw_TaskName[40];	// Task name
+	char pw_TaskName[40];  // Task name
 
-	char			pw_Information2[80];	// Current information line
-	char			pw_Information3[80];	// Current information line
+	char pw_Information2[80];  // Current information line
+	char pw_Information3[80];  // Current information line
 
-	struct IBox		pw_Coords[PROG_LAST+1];	// Coordinates
-	BOOL			pw_Scale;		// Scale 64bit size?
+	struct IBox pw_Coords[PROG_LAST + 1];  // Coordinates
+	BOOL pw_Scale;						   // Scale 64bit size?
 } ProgressWindow;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-#define PWF_ALL			(PWF_FILENAME|PWF_FILESIZE|PWF_INFO|PWF_GRAPH)
+#define PWF_ALL (PWF_FILENAME | PWF_FILESIZE | PWF_INFO | PWF_GRAPH)
 
-#define PWF_ABORTED		(1<<16)
+#define PWF_ABORTED (1 << 16)
 
-#define PROGRESS_SET		1000
-#define PROGRESS_GET		1001
-
+#define PROGRESS_SET 1000
+#define PROGRESS_GET 1001
 
 #endif
-

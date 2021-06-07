@@ -17,20 +17,20 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include <proto/dopus5.h>
 #include "dopus.h"
 
-void main(int,char **);
+void main(int, char **);
 
 struct Library *DOpusBase;
 
-void main(int argc,char **argv)
+void main(int argc, char **argv)
 {
-	if (DOpusBase=OpenLibrary("dopus5.library",0))
+	if (DOpusBase = OpenLibrary("dopus5.library", 0))
 	{
 		if (argv[1] && *argv[1])
 			ShowDebug(argv[1]);

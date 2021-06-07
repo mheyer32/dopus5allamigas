@@ -3,13 +3,13 @@
 
 /* Includeheader
 
-        Name:           SDI_stdarg.h
-        Versionstring:  $VER: SDI_stdarg.h 1.0 (05.07.2004)
-        Author:         Jens Langner
-        Distribution:   PD
-        Project page:   http://www.sf.net/projects/sditools/
-        Description:    defines to hide OS specific variable arguments
-                        function definitions
+		Name:           SDI_stdarg.h
+		Versionstring:  $VER: SDI_stdarg.h 1.0 (05.07.2004)
+		Author:         Jens Langner
+		Distribution:   PD
+		Project page:   http://www.sf.net/projects/sditools/
+		Description:    defines to hide OS specific variable arguments
+						function definitions
 
  1.0   05.07.04 : initial version
 
@@ -73,33 +73,33 @@
 #include <stdarg.h>
 
 #ifdef VA_LIST
-#undef VA_LIST
+	#undef VA_LIST
 #endif
 #ifdef VA_START
-#undef VA_START
+	#undef VA_START
 #endif
 #ifdef VA_ARG
-#undef VA_ARG
+	#undef VA_ARG
 #endif
 #ifdef VA_END
-#undef VA_END
+	#undef VA_END
 #endif
 
 #if defined(__amigaos4__)
-  #define VA_LIST             va_list
-  #define VA_START(va, start) va_startlinear((va), (start))
-  #define VA_ARG(va, type)    va_getlinearva((va), type)
-  #define VA_END(va)          va_end((va))
+	#define VA_LIST va_list
+	#define VA_START(va, start) va_startlinear((va), (start))
+	#define VA_ARG(va, type) va_getlinearva((va), type)
+	#define VA_END(va) va_end((va))
 #elif defined(__MORPHOS__)
-  #define VA_LIST             va_list
-  #define VA_START(va, start) va_start((va), (start))
-  #define VA_ARG(va, type)    (va)->overflow_arg_area
-  #define VA_END(va)          va_end((va))
+	#define VA_LIST va_list
+	#define VA_START(va, start) va_start((va), (start))
+	#define VA_ARG(va, type) (va)->overflow_arg_area
+	#define VA_END(va) va_end((va))
 #else
-  #define VA_LIST             va_list
-  #define VA_START(va, start) va_start((va), (start))
-  #define VA_ARG(va, type)    (va)
-  #define VA_END(va)          va_end((va))
+	#define VA_LIST va_list
+	#define VA_START(va, start) va_start((va), (start))
+	#define VA_ARG(va, type) (va)
+	#define VA_END(va) va_end((va))
 #endif
 
 #endif /* SDI_STDARG_H */

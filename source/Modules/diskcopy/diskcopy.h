@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,60 +29,58 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	struct Screen		*screen;
-	struct Window		*window;
-	IPCData			*ipc;
+	struct Screen *screen;
+	struct Window *window;
+	IPCData *ipc;
 
-	ConfigWindow		win_dims;
-	NewConfigWindow		new_win;
-	ObjectList		*list;
+	ConfigWindow win_dims;
+	NewConfigWindow new_win;
+	ObjectList *list;
 
-	Att_List		*source_list;
-	Att_List		*dest_list;
+	Att_List *source_list;
+	Att_List *dest_list;
 
-	struct InfoData		info;
+	struct InfoData info;
 
-	char			default_verify;
-	char			default_bump;
+	char default_verify;
+	char default_bump;
 
-	Point			window_pos;
-	char			pos_valid;
+	Point window_pos;
+	char pos_valid;
 
-	char			status_title[120];
+	char status_title[120];
 
-	DiskHandle		*source;
+	DiskHandle *source;
 
-	struct MsgPort		*dest_port;
-	char			disk_name[32];
+	struct MsgPort *dest_port;
+	char disk_name[32];
 
-	short			abort_bit;
+	short abort_bit;
 } diskcopy_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
-BOOL diskcopy_open(diskcopy_data *data,BOOL);
+BOOL diskcopy_open(diskcopy_data *data, BOOL);
 void diskcopy_close(diskcopy_data *data);
 void diskcopy_free(diskcopy_data *data);
-Att_List *get_device_list(char *,char *);
-void show_device_info(diskcopy_data *data,short);
-	BOOL start_diskcopy(diskcopy_data *data);
+Att_List *get_device_list(char *, char *);
+void show_device_info(diskcopy_data *data, short);
+BOOL start_diskcopy(diskcopy_data *data);
 void cleanup_diskcopy(diskcopy_data *data);
-//BOOL do_diskcopy(diskcopy_data *data,struct Window *status);
-BOOL do_diskcopy(diskcopy_data *data,APTR status);
+// BOOL do_diskcopy(diskcopy_data *data,struct Window *status);
+BOOL do_diskcopy(diskcopy_data *data, APTR status);
 
-short diskcopy_error(struct Window *,long,long,char *,long,long);
+short diskcopy_error(struct Window *, long, long, char *, long, long);
 
 extern ConfigWindow diskcopy_window;
 extern ObjectDef diskcopy_objects[];
 
-enum
-{
+enum {
 	GAD_BASE,
 
 	GAD_DISKCOPY_LAYOUT,
@@ -97,10 +95,8 @@ enum
 	GAD_DISKCOPY_CANCEL,
 };
 
-void diskcopy_motor(DiskHandle *handle,short on);
+void diskcopy_motor(DiskHandle *handle, short on);
 
-void serialise_disk(ULONG *data,unsigned long offset,struct DateStamp *);
-
+void serialise_disk(ULONG *data, unsigned long offset, struct DateStamp *);
 
 #endif
-

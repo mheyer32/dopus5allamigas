@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,48 +30,47 @@ For more information on Directory Opus for Windows please see:
 #include <proto/amigaguide.h>
 //#endif
 
-#define GENERIC_BUTTON			"Button"
-#define GENERIC_TOOLBAR_BUTTON		"ToolbarButton"
-#define GENERIC_LISTER_MENU		"ListerMenu"
-#define GENERIC_USER_MENU		"UserMenu"
-#define HELP_ARROW_BUTTON		"Toolbar Arrow"
-#define HELP_LISTER_MENU_POPUP		"Lister Menu PopUp"
-#define HELP_LISTER_PATH_POPUP		"Lister Path PopUp"
-#define HELP_LISTER_STATUS_POPUP	"Lister Status PopUp"
-#define HELP_LISTER_FILE_COUNT		"Lister File Count"
-#define HELP_LISTER_HELP		"Lister"
-#define HELP_PROGRAM_GROUP		"Program Group"
-#define HELP_MAIN			"Main"
-#define HELP_APPMENUITEM		"AppMenuItem"
+#define GENERIC_BUTTON "Button"
+#define GENERIC_TOOLBAR_BUTTON "ToolbarButton"
+#define GENERIC_LISTER_MENU "ListerMenu"
+#define GENERIC_USER_MENU "UserMenu"
+#define HELP_ARROW_BUTTON "Toolbar Arrow"
+#define HELP_LISTER_MENU_POPUP "Lister Menu PopUp"
+#define HELP_LISTER_PATH_POPUP "Lister Path PopUp"
+#define HELP_LISTER_STATUS_POPUP "Lister Status PopUp"
+#define HELP_LISTER_FILE_COUNT "Lister File Count"
+#define HELP_LISTER_HELP "Lister"
+#define HELP_PROGRAM_GROUP "Program Group"
+#define HELP_MAIN "Main"
+#define HELP_APPMENUITEM "AppMenuItem"
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	UWORD		id;
-	char		*name;
+	UWORD id;
+	char *name;
 } MenuHelp;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-void help_get_help(short,short,unsigned short);
-void help_button_help(Cfg_Button *,Cfg_Function *,unsigned short,short,char *);
-void help_menu_help(long,char *);
-void help_show_help(char *,char *);
-AMIGAGUIDECONTEXT help_open_database(struct NewAmigaGuide *,char *,struct Screen *,char *);
+void help_get_help(short, short, unsigned short);
+void help_button_help(Cfg_Button *, Cfg_Function *, unsigned short, short, char *);
+void help_menu_help(long, char *);
+void help_show_help(char *, char *);
+AMIGAGUIDECONTEXT help_open_database(struct NewAmigaGuide *, char *, struct Screen *, char *);
 
-enum
-{
+enum {
 	HELPCMD_base,
 
 	HELPCMD_LINK,
 };
 
-#define HELP_REAL	(1<<31)
-#define HELP_NEWFILE	(1<<30)
+#define HELP_REAL (1 << 31)
+#define HELP_NEWFILE (1 << 30)
 
 #endif

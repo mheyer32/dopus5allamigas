@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,28 +29,29 @@ DOPUS_FUNC(function_test)
 #ifndef __amigaos3__
 	struct Library *ConfigOpusBase;
 #endif
-	Cfg_Filetype *type,*new;
+	Cfg_Filetype *type, *new;
 
 	// No args?
 	if (!instruction->funcargs || !instruction->funcargs->FA_Arguments[0])
 		return 0;
 
 	// Find filetype
-	if (!(type=filetype_find((char *)instruction->funcargs->FA_Arguments[0])))
+	if (!(type = filetype_find((char *)instruction->funcargs->FA_Arguments[0])))
 		return 0;
 
 	// Open config module
-	if (!(ConfigOpusBase=OpenLibrary(config_name,0))) {
+	if (!(ConfigOpusBase = OpenLibrary(config_name, 0)))
+	{
 		return 0;
-    }
-	
-	// Edit it
-	new=EditFiletype(type,0,handle->ipc,&main_ipc,1);
+	}
 
-	// Close config module
-	#ifdef __amigaos4__
+	// Edit it
+	new = EditFiletype(type, 0, handle->ipc, &main_ipc, 1);
+
+// Close config module
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IConfigOpus);
-	#endif
+#endif
 	CloseLibrary(ConfigOpusBase);
 
 	// Got one?

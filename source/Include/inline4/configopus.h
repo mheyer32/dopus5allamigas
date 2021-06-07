@@ -8,33 +8,43 @@
 ** calls by substituting functions.
 **
 ** Do not edit manually.
-*/ 
+*/
 
 #ifndef EXEC_TYPES_H
-#include <exec/types.h>
+	#include <exec/types.h>
 #endif
 #ifndef EXEC_EXEC_H
-#include <exec/exec.h>
+	#include <exec/exec.h>
 #endif
 #ifndef EXEC_INTERFACES_H
-#include <exec/interfaces.h>
+	#include <exec/interfaces.h>
 #endif
 
 #include <interfaces/configopus.h>
 
 /* Inline macros for Interface "main" */
-#define Config_Settings(env, screen, ipc, mainipc, name) IConfigOpus->Config_Settings((env), (screen), (ipc), (mainipc), (name)) 
-#define Config_Environment(env, screen, table, ipc, mainipc, alloc, change, name, scripts) IConfigOpus->Config_Environment((env), (screen), (table), (ipc), (mainipc), (alloc), (change), (name), (scripts)) 
-#define Config_removed() IConfigOpus->Config_removed() 
-#define Config_Buttons(bank, ipc, owner, screen, cmdlist) IConfigOpus->Config_Buttons((bank), (ipc), (owner), (screen), (cmdlist)) 
-#define ConvertConfig(name, screen, owner) IConfigOpus->ConvertConfig((name), (screen), (owner)) 
-#define Config_Filetypes(screen, ipc, owner, cmdlist, name) IConfigOpus->Config_Filetypes((screen), (ipc), (owner), (cmdlist), (name)) 
-#define Config_ListerButtons(name, ipc, owner, screen, bank, cmdlist, init) IConfigOpus->Config_ListerButtons((name), (ipc), (owner), (screen), (bank), (cmdlist), (init)) 
-#define Config_Menu(name, ipc, owner, screen, bank, title, cmdlist, def, hotkeys, scripts) IConfigOpus->Config_Menu((name), (ipc), (owner), (screen), (bank), (title), (cmdlist), (def), (hotkeys), (scripts)) 
-#define Config_Menus(ipc, owner, screen, menu, cmdlist, type, name) IConfigOpus->Config_Menus((ipc), (owner), (screen), (menu), (cmdlist), (type), (name)) 
-#define EditFiletype(type, window, ipc, dopus, flags) IConfigOpus->EditFiletype((type), (window), (ipc), (dopus), (flags)) 
-#define Config_EditFunction(ipc, opus, window, func, memory, cmdlist) IConfigOpus->Config_EditFunction((ipc), (opus), (window), (func), (memory), (cmdlist)) 
-#define ShowPaletteBox(window, data, fgpen, bgpen, font, spec, pen) IConfigOpus->ShowPaletteBox((window), (data), (fgpen), (bgpen), (font), (spec), (pen)) 
-#define FunctionExportASCII(name, button, func, type) IConfigOpus->FunctionExportASCII((name), (button), (func), (type)) 
+#define Config_Settings(env, screen, ipc, mainipc, name) \
+	IConfigOpus->Config_Settings((env), (screen), (ipc), (mainipc), (name))
+#define Config_Environment(env, screen, table, ipc, mainipc, alloc, change, name, scripts) \
+	IConfigOpus->Config_Environment((env), (screen), (table), (ipc), (mainipc), (alloc), (change), (name), (scripts))
+#define Config_removed() IConfigOpus->Config_removed()
+#define Config_Buttons(bank, ipc, owner, screen, cmdlist) \
+	IConfigOpus->Config_Buttons((bank), (ipc), (owner), (screen), (cmdlist))
+#define ConvertConfig(name, screen, owner) IConfigOpus->ConvertConfig((name), (screen), (owner))
+#define Config_Filetypes(screen, ipc, owner, cmdlist, name) \
+	IConfigOpus->Config_Filetypes((screen), (ipc), (owner), (cmdlist), (name))
+#define Config_ListerButtons(name, ipc, owner, screen, bank, cmdlist, init) \
+	IConfigOpus->Config_ListerButtons((name), (ipc), (owner), (screen), (bank), (cmdlist), (init))
+#define Config_Menu(name, ipc, owner, screen, bank, title, cmdlist, def, hotkeys, scripts) \
+	IConfigOpus->Config_Menu((name), (ipc), (owner), (screen), (bank), (title), (cmdlist), (def), (hotkeys), (scripts))
+#define Config_Menus(ipc, owner, screen, menu, cmdlist, type, name) \
+	IConfigOpus->Config_Menus((ipc), (owner), (screen), (menu), (cmdlist), (type), (name))
+#define EditFiletype(type, window, ipc, dopus, flags) \
+	IConfigOpus->EditFiletype((type), (window), (ipc), (dopus), (flags))
+#define Config_EditFunction(ipc, opus, window, func, memory, cmdlist) \
+	IConfigOpus->Config_EditFunction((ipc), (opus), (window), (func), (memory), (cmdlist))
+#define ShowPaletteBox(window, data, fgpen, bgpen, font, spec, pen) \
+	IConfigOpus->ShowPaletteBox((window), (data), (fgpen), (bgpen), (font), (spec), (pen))
+#define FunctionExportASCII(name, button, func, type) IConfigOpus->FunctionExportASCII((name), (button), (func), (type))
 
 #endif /* INLINE4_CONFIGOPUS_H */

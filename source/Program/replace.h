@@ -17,21 +17,15 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #undef FULL_REPLACE
 
-enum
-{
-	REPLACE_ABORT=-1,
-	REPLACE_LEAVE,
-	REPLACE_REPLACE
-};
+enum { REPLACE_ABORT = -1, REPLACE_LEAVE, REPLACE_REPLACE };
 
-enum
-{
+enum {
 	REPLACE_GAD_ABORT,
 	REPLACE_GAD_REPLACE,
 	REPLACE_GAD_REPLACE_ALL,
@@ -40,8 +34,15 @@ enum
 	REPLACE_GAD_VERSION,
 };
 
-#define REPLACE_ALL	2
+#define REPLACE_ALL 2
 
-#define REPREQF_NOVERSION	(1<<16)		// No 'version' button
+#define REPREQF_NOVERSION (1 << 16)	 // No 'version' button
 
-long SmartAskReplace(struct Window *,struct Screen *,IPCData *,BPTR,struct FileInfoBlock *,BPTR,struct FileInfoBlock *,long);
+long SmartAskReplace(struct Window *,
+					 struct Screen *,
+					 IPCData *,
+					 BPTR,
+					 struct FileInfoBlock *,
+					 BPTR,
+					 struct FileInfoBlock *,
+					 long);

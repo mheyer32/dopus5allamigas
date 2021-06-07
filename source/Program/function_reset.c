@@ -17,14 +17,13 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-enum
-{
+enum {
 	ARG_MODULES,
 	ARG_SYSTEM,
 };
@@ -44,8 +43,7 @@ DOPUS_FUNC(function_reset)
 	}
 
 	// Reset system
-	else
-	if (instruction->funcargs->FA_Arguments[ARG_SYSTEM])
+	else if (instruction->funcargs->FA_Arguments[ARG_SYSTEM])
 	{
 		// Reboot
 		ColdReboot();

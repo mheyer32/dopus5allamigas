@@ -17,45 +17,44 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct ToolBarInfo
 {
-	Cfg_ButtonBank		*buttons;
+	Cfg_ButtonBank *buttons;
 
-	short			count;
-	short			button_height;
-	struct Rectangle	*button_array;
+	short count;
+	short button_height;
+	struct Rectangle *button_array;
 
-	BOOL			cache;
-	struct BitMap		*bitmap;
-	struct RastPort		rp;
-	short			width;
-	short			height;
+	BOOL cache;
+	struct BitMap *bitmap;
+	struct RastPort rp;
+	short width;
+	short height;
 
-	short			rows;
-	short			cols;
+	short rows;
+	short cols;
 
-	ImageRemap		remap;
-	BOOL			done_remap;
+	ImageRemap remap;
+	BOOL done_remap;
 
-	short			max_width;
+	short max_width;
 } ToolBarInfo;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-ToolBarInfo *OpenToolBar(Cfg_ButtonBank *,char *);
+ToolBarInfo *OpenToolBar(Cfg_ButtonBank *, char *);
 void FreeToolBar(ToolBarInfo *);
-BOOL GetToolBarCache(ToolBarInfo *,BOOL);
+BOOL GetToolBarCache(ToolBarInfo *, BOOL);
 void FreeToolBarCache(ToolBarInfo *);
 void RemapToolBar(ToolBarInfo *);
 void FreeToolBarRemap(ToolBarInfo *);

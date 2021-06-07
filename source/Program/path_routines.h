@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -27,6 +27,6 @@ For more information on Directory Opus for Windows please see:
 // Prototypes
 int path_parent(char *);
 int path_root(char *);
-int get_path_root(char *,char *,struct DateStamp *);
+int get_path_root(char *, char *, struct DateStamp *);
 
 #endif

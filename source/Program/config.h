@@ -17,15 +17,14 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_CONFIG
 #define _DOPUS_CONFIG
 
-enum
-{
+enum {
 	CONFIG_FLAGS,
 	CONFIG_DISPLAY,
 	CONFIG_FILETYPES,

@@ -17,14 +17,13 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-enum
-{
+enum {
 	ARG_NAME,
 	ARG_ALL,
 	ARG_ICONIFY,
@@ -35,9 +34,9 @@ enum
 // CLOSEBUTTONS function
 DOPUS_FUNC(function_closebuttons)
 {
-	char *close_bank=0;
-	BOOL close_all=0,iconify=0,start=0,hide=0;
-	Buttons *bank=0;
+	char *close_bank = 0;
+	BOOL close_all = 0, iconify = 0, start = 0, hide = 0;
+	Buttons *bank = 0;
 	IPCData *ipc;
 
 	// Arguments?
@@ -45,57 +44,52 @@ DOPUS_FUNC(function_closebuttons)
 	{
 		// Close all?
 		if (instruction->funcargs->FA_Arguments[ARG_ALL])
-			close_all=1;
+			close_all = 1;
 
 		// Specific bank
-		else
-		if (instruction->funcargs->FA_Arguments[ARG_NAME])
-			close_bank=(char *)instruction->funcargs->FA_Arguments[ARG_NAME];
+		else if (instruction->funcargs->FA_Arguments[ARG_NAME])
+			close_bank = (char *)instruction->funcargs->FA_Arguments[ARG_NAME];
 
 		// Iconify?
 		if (instruction->funcargs->FA_Arguments[ARG_ICONIFY])
-			iconify=1;
+			iconify = 1;
 
 		// Hide
-		else
-		if (instruction->funcargs->FA_Arguments[ARG_HIDE])
-			hide=1;
+		else if (instruction->funcargs->FA_Arguments[ARG_HIDE])
+			hide = 1;
 
 		// Start menu?
 		if (instruction->funcargs->FA_Arguments[ARG_START])
-			start=1;
+			start = 1;
 	}
 
 	// Start Menu?
 	if (start)
 	{
 		// Lock startmenu list
-		lock_listlock(&GUI->startmenu_list,FALSE);
+		lock_listlock(&GUI->startmenu_list, FALSE);
 
 		// Go through start menus
-		for (ipc=(IPCData *)GUI->startmenu_list.list.lh_Head;
-			ipc->node.mln_Succ;
-			ipc=(IPCData *)ipc->node.mln_Succ)
+		for (ipc = (IPCData *)GUI->startmenu_list.list.lh_Head; ipc->node.mln_Succ; ipc = (IPCData *)ipc->node.mln_Succ)
 		{
-			BOOL match=0;
+			BOOL match = 0;
 
 			// Closing all?
-			if (close_all) match=1;
+			if (close_all)
+				match = 1;
 
 			// Or does it match the name?
-			else
-			if (close_bank)
+			else if (close_bank)
 			{
 				Cfg_Button *button;
-				StartMenu *menu=(StartMenu *)IPCDATA(ipc);
+				StartMenu *menu = (StartMenu *)IPCDATA(ipc);
 
 				// Go through buttons in menu
-				for (button=(Cfg_Button *)menu->bank->buttons.lh_Head;
-					button->node.ln_Succ;
-					button=(Cfg_Button *)button->node.ln_Succ)
+				for (button = (Cfg_Button *)menu->bank->buttons.lh_Head; button->node.ln_Succ;
+					 button = (Cfg_Button *)button->node.ln_Succ)
 				{
 					// Button title?
-					if (button->button.flags&BUTNF_TITLE)
+					if (button->button.flags & BUTNF_TITLE)
 					{
 						Cfg_ButtonFunction *func;
 
@@ -103,10 +97,11 @@ DOPUS_FUNC(function_closebuttons)
 						if (!(IsListEmpty((struct List *)&button->function_list)))
 						{
 							// Get first function
-							func=(Cfg_ButtonFunction *)button->function_list.mlh_Head;
+							func = (Cfg_ButtonFunction *)button->function_list.mlh_Head;
 
 							// Compare name
-							if (func->label && stricmp(close_bank,func->label)==0) match=1;
+							if (func->label && stricmp(close_bank, func->label) == 0)
+								match = 1;
 						}
 
 						break;
@@ -114,15 +109,15 @@ DOPUS_FUNC(function_closebuttons)
 				}
 
 				// Or the filename?
-				if (!match &&
-					stricmp(close_bank,FilePart(menu->bank->path))==0) match=1;
+				if (!match && stricmp(close_bank, FilePart(menu->bank->path)) == 0)
+					match = 1;
 			}
 
 			// Match menu to close?
 			if (match)
 			{
 				// Send quit message
-				IPC_Quit(ipc,0,FALSE);
+				IPC_Quit(ipc, 0, FALSE);
 			}
 		}
 
@@ -130,57 +125,58 @@ DOPUS_FUNC(function_closebuttons)
 		unlock_listlock(&GUI->startmenu_list);
 		return 1;
 	}
-			
+
 	// Close current bank?
 	if (!close_all && !close_bank)
 	{
 		// If we don't have one, return
-		if (!(bank=handle->buttons)) return 1;
+		if (!(bank = handle->buttons))
+			return 1;
 	}
 
 	// Lock buttons list
-	lock_listlock(&GUI->buttons_list,FALSE);
+	lock_listlock(&GUI->buttons_list, FALSE);
 
 	// Look for bank in list
-	for (ipc=(IPCData *)GUI->buttons_list.list.lh_Head;
-		ipc->node.mln_Succ;
-		ipc=(IPCData *)ipc->node.mln_Succ)
+	for (ipc = (IPCData *)GUI->buttons_list.list.lh_Head; ipc->node.mln_Succ; ipc = (IPCData *)ipc->node.mln_Succ)
 	{
-		BOOL match=0;
-		Buttons *buttons=(Buttons *)IPCDATA(ipc);
+		BOOL match = 0;
+		Buttons *buttons = (Buttons *)IPCDATA(ipc);
 
 		// Closing all?
-		if (close_all) match=1;
+		if (close_all)
+			match = 1;
 
 		// Does this match our bank pointer?
-		else
-		if (bank && bank==buttons) match=1;
+		else if (bank && bank == buttons)
+			match = 1;
 
 		// Or does it match the name?
-		else
-		if (close_bank &&
-			stricmp(close_bank,buttons->bank->window.name)==0) match=1;
+		else if (close_bank && stricmp(close_bank, buttons->bank->window.name) == 0)
+			match = 1;
 
 		// Or the filename?
-		else
-		if (close_bank &&
-			stricmp(close_bank,FilePart(buttons->buttons_file))==0) match=1;
+		else if (close_bank && stricmp(close_bank, FilePart(buttons->buttons_file)) == 0)
+			match = 1;
 
 		// Match bank to close?
 		if (match)
 		{
 			// Iconify?
-			if (iconify) IPC_Command(ipc,BUTTONS_ICONIFY,0,0,0,0);
+			if (iconify)
+				IPC_Command(ipc, BUTTONS_ICONIFY, 0, 0, 0, 0);
 
 			// Hide?
-			else
-			if (hide) IPC_Command(ipc,IPC_HIDE,0,0,0,0);
+			else if (hide)
+				IPC_Command(ipc, IPC_HIDE, 0, 0, 0, 0);
 
 			// Send quit message
-			else IPC_Quit(ipc,0,FALSE);
+			else
+				IPC_Quit(ipc, 0, FALSE);
 
 			// If we were given a specific bank, break out
-			if (bank) break;
+			if (bank)
+				break;
 		}
 	}
 

@@ -17,30 +17,30 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _DOPUS_ICONS
 #define _DOPUS_ICONS
 
-#define ICONWRITE_ABORTED	-1
-#define ICONWRITE_FAILED	0
-#define ICONWRITE_OK		1
+#define ICONWRITE_ABORTED -1
+#define ICONWRITE_FAILED 0
+#define ICONWRITE_OK 1
 
-#define ICONTYPE_DRAWER		0
-#define ICONTYPE_TOOL		1
-#define ICONTYPE_PROJECT	2
-#define ICONTYPE_GROUP		3
+#define ICONTYPE_DRAWER 0
+#define ICONTYPE_TOOL 1
+#define ICONTYPE_PROJECT 2
+#define ICONTYPE_GROUP 3
 
 // Prototypes
-int icon_write(short,char *,BOOL,ULONG,ULONG,short *);
+int icon_write(short, char *, BOOL, ULONG, ULONG, short *);
 char *isicon(char *);
 
-void icon_function(BackdropInfo *,BackdropObject *,char *,Cfg_Function *,ULONG);
+void icon_function(BackdropInfo *, BackdropObject *, char *, Cfg_Function *, ULONG);
 
-void icon_rename(IPCData *,BackdropInfo *,BackdropObject *);
+void icon_rename(IPCData *, BackdropInfo *, BackdropObject *);
 
-struct DiskObject *GetProperIcon(char *,short *,ULONG);
+struct DiskObject *GetProperIcon(char *, short *, ULONG);
 
 #endif

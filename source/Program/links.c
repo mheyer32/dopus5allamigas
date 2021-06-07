@@ -17,20 +17,16 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-BOOL ReadSoftLinkDopus(
-	BPTR parent,
-	char *path,
-	char *name,
-	SoftLinkInfo *info)
+BOOL ReadSoftLinkDopus(BPTR parent, char *path, char *name, SoftLinkInfo *info)
 {
-	BPTR lock=0;
-	BOOL ok=FALSE;
+	BPTR lock = 0;
+	BOOL ok = FALSE;
 
 #ifdef __amigaos4__
 	strlcpy(info->sli_Path, path, 256);
@@ -40,24 +36,21 @@ BOOL ReadSoftLinkDopus(
 	if (!parent)
 	{
 		// Try to lock path
-		if (!(lock=Lock(path,ACCESS_READ))) return 0;
-		parent=lock;
+		if (!(lock = Lock(path, ACCESS_READ)))
+			return 0;
+		parent = lock;
 	}
 
 	// Read soft link
-	if (ReadLink(
-		((struct FileLock *)BADDR(parent))->fl_Task,
-		parent,
-		name,
-		info->sli_Path,
-		256)>0)
+	if (ReadLink(((struct FileLock *)BADDR(parent))->fl_Task, parent, name, info->sli_Path, 256) > 0)
 #endif
 	{
 		// Unlock path lock if we have one
-		if (lock) UnLock(lock);
+		if (lock)
+			UnLock(lock);
 
 		// Try to lock soft-linked path
-		if ((lock=Lock(info->sli_Path,ACCESS_READ)))
+		if ((lock = Lock(info->sli_Path, ACCESS_READ)))
 		{
 			char *ptr;
 
@@ -69,10 +62,11 @@ BOOL ReadSoftLinkDopus(
 #endif
 
 			// Cut filename out of path string
-			if ((ptr=PathPart(info->sli_Path))) *ptr=0;
+			if ((ptr = PathPart(info->sli_Path)))
+				*ptr = 0;
 
 			// Flag success
-			ok=TRUE;
+			ok = TRUE;
 		}
 	}
 
@@ -85,7 +79,8 @@ BOOL ReadSoftLinkDopus(
 	}
 
 	// Unlock lock if we have one
-	if (lock) UnLock(lock);
+	if (lock)
+		UnLock(lock);
 
 	return ok;
 }

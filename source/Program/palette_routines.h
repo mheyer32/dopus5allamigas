@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,8 +29,8 @@ void load_screen_palette(void);
 void get_colour_table(void);
 void free_colour_table(void);
 
-short GetCustomPen(short,short,ColourSpec32 *);
-void FreeCustomPen(short,short);
+short GetCustomPen(short, short, ColourSpec32 *);
+void FreeCustomPen(short, short);
 void InitCustomPens(void);
 
 #endif

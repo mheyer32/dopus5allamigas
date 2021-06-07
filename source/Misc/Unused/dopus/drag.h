@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -31,57 +31,55 @@ For more information on Directory Opus for Windows please see:
  *****************************************************************************/
 
 #ifndef GRAPHICS_GELS_H
-#include <graphics/gels.h>
+	#include <graphics/gels.h>
 #endif
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 typedef struct _DragInfo
 {
-	struct RastPort	*rastport;	// Stores RastPort this bob belongs to
-	struct ViewPort	*viewport;	// Stores ViewPort
+	struct RastPort *rastport;	// Stores RastPort this bob belongs to
+	struct ViewPort *viewport;	// Stores ViewPort
 
-	WORD		width;		// Bob width
-	WORD		height;		// Bob height
+	WORD width;	  // Bob width
+	WORD height;  // Bob height
 
-	struct VSprite	sprite;		// VSprite structure
-	struct Bob	bob;		// BOB structure
+	struct VSprite sprite;	// VSprite structure
+	struct Bob bob;			// BOB structure
 
-	unsigned long	flags;		// Flags
+	unsigned long flags;  // Flags
 
-	struct RastPort	drag_rp;	// RastPort we can draw into
-	struct BitMap	drag_bm;	// BitMap we can draw into
+	struct RastPort drag_rp;  // RastPort we can draw into
+	struct BitMap drag_bm;	  // BitMap we can draw into
 
-	struct Window	*window;	// Window pointer
+	struct Window *window;	// Window pointer
 } DragInfo;
 
 typedef struct
 {
-	struct VSprite	head;		// GEL list head sprite
-	struct VSprite	tail;		// GEL list tail sprite
-	struct GelsInfo	info;		// GEL info
+	struct VSprite head;   // GEL list head sprite
+	struct VSprite tail;   // GEL list tail sprite
+	struct GelsInfo info;  // GEL info
 } DragInfoExtra;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
-#define DRAGF_VALID		(1<<0)	// Bob is valid
-#define DRAGF_OPAQUE		(1<<1)	// Bob should be opaque
-#define DRAGF_DONE_GELS		(1<<2)	// Installed GelsInfo
-#define DRAGF_NO_LOCK		(1<<3)	// Don't lock layers
-#define DRAGF_TRANSPARENT	(1<<4)	// Bob should be transparent (use with opaque)
+#define DRAGF_VALID (1 << 0)		// Bob is valid
+#define DRAGF_OPAQUE (1 << 1)		// Bob should be opaque
+#define DRAGF_DONE_GELS (1 << 2)	// Installed GelsInfo
+#define DRAGF_NO_LOCK (1 << 3)		// Don't lock layers
+#define DRAGF_TRANSPARENT (1 << 4)	// Bob should be transparent (use with opaque)
 
 void FreeDragInfo(DragInfo *);
-void GetDragImage(DragInfo *,long,long);
-DragInfo *GetDragInfo(struct Window *,struct RastPort *,long,long,long);
+void GetDragImage(DragInfo *, long, long);
+DragInfo *GetDragInfo(struct Window *, struct RastPort *, long, long, long);
 void GetDragMask(DragInfo *);
 void HideDragImage(DragInfo *);
-void ShowDragImage(DragInfo *,long,long);
-void StampDragImage(DragInfo *,long,long);
-
+void ShowDragImage(DragInfo *, long, long);
+void StampDragImage(DragInfo *, long, long);
 
 #endif

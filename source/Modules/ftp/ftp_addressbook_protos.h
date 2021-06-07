@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,5 +25,5 @@ For more information on Directory Opus for Windows please see:
 ftp/ftp_addressbook.c
  */
 
-void test(int );
+void test(int);
 void addressbook(void);

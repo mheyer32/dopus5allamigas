@@ -17,55 +17,56 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Start dragging
-BOOL backdrop_start_drag(BackdropInfo *info,short x,short y)
+BOOL backdrop_start_drag(BackdropInfo *info, short x, short y)
 {
 	BackdropObject *object;
 
 	// Set drag flag
-	info->flags|=BDIF_DRAGGING;
+	info->flags |= BDIF_DRAGGING;
 
 	// Copy RastPort and initialise GELs
-	GUI->drag_screen_rp=GUI->screen_pointer->RastPort;
-	GUI->drag_screen_rp.GelsInfo=&GUI->drag_info;
-	InitGels(&GUI->drag_head,&GUI->drag_tail,&GUI->drag_info);
+	GUI->drag_screen_rp = GUI->screen_pointer->RastPort;
+	GUI->drag_screen_rp.GelsInfo = &GUI->drag_info;
+	InitGels(&GUI->drag_head, &GUI->drag_tail, &GUI->drag_info);
 
 	// Custom dragging?
 	if (DragCustomOk(GUI->drag_screen_rp.BitMap))
 	{
 		// Set custom flag
-		info->flags|=BDIF_CUSTOM_DRAG;
+		info->flags |= BDIF_CUSTOM_DRAG;
 	}
 
 	// Normal dragging
-	else info->flags&=~BDIF_CUSTOM_DRAG;
+	else
+		info->flags &= ~BDIF_CUSTOM_DRAG;
 
 	// Reset saved coords
-	info->last_x=x;
-	info->last_y=y;
+	info->last_x = x;
+	info->last_y = y;
 
 	// Stop menu actions, start mouse reporting
-	info->window->Flags|=WFLG_RMBTRAP|WFLG_REPORTMOUSE;
+	info->window->Flags |= WFLG_RMBTRAP | WFLG_REPORTMOUSE;
 
 	// Turn ticks on
-	ModifyIDCMP(info->window,info->window->IDCMPFlags|IDCMP_INTUITICKS);
-	info->tick_count=1;
-	info->last_tick=0;
+	ModifyIDCMP(info->window, info->window->IDCMPFlags | IDCMP_INTUITICKS);
+	info->tick_count = 1;
+	info->last_tick = 0;
 
 	// Get start time
-	CurrentTime(&info->drag_sec,&info->drag_mic);
+	CurrentTime(&info->drag_sec, &info->drag_mic);
 
 	// Last selected icon?
-	if ((object=info->last_sel_object) && object->state)
+	if ((object = info->last_sel_object) && object->state)
 	{
 		// Check icon isn't locked
-		if (object->flags&BDOF_LOCKED)
+		if (object->flags & BDOF_LOCKED)
 		{
 			// Can't drag at all
 			backdrop_stop_drag(info);
@@ -74,18 +75,18 @@ BOOL backdrop_start_drag(BackdropInfo *info,short x,short y)
 	}
 
 	// Go through backdrop list
-	for (object=(BackdropObject *)info->objects.list.lh_Head;
-		object->node.ln_Succ;
-		object=(BackdropObject *)object->node.ln_Succ)
+	for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+		 object = (BackdropObject *)object->node.ln_Succ)
 	{
 		// Is object selected?
 		if (object->state)
 		{
 			// Check icon isn't locked
-			if (object->flags&BDOF_LOCKED) continue;
+			if (object->flags & BDOF_LOCKED)
+				continue;
 
 			// Start dragging
-			if (!(backdrop_drag_object(info,object)))
+			if (!(backdrop_drag_object(info, object)))
 			{
 				// Failed
 				backdrop_stop_drag(info);
@@ -97,114 +98,107 @@ BOOL backdrop_start_drag(BackdropInfo *info,short x,short y)
 	return 1;
 }
 
-
 // Start dragging an object
-BOOL backdrop_drag_object(
-	BackdropInfo *info,
-	BackdropObject *object)
+BOOL backdrop_drag_object(BackdropInfo *info, BackdropObject *object)
 {
 	struct Image *image;
-	ULONG flags=0;
+	ULONG flags = 0;
 
 	// Is object already being dragged?
-	if (object->drag_info) return 1;
+	if (object->drag_info)
+		return 1;
 
 	// Is there a select image?
-	if (object->icon->do_Gadget.SelectRender &&
-		(object->icon->do_Gadget.Flags&GFLG_GADGHIMAGE))
+	if (object->icon->do_Gadget.SelectRender && (object->icon->do_Gadget.Flags & GFLG_GADGHIMAGE))
 	{
-		image=(struct Image *)object->icon->do_Gadget.SelectRender;
+		image = (struct Image *)object->icon->do_Gadget.SelectRender;
 	}
 
 	// No
-	else image=(struct Image *)object->icon->do_Gadget.GadgetRender;
+	else
+		image = (struct Image *)object->icon->do_Gadget.GadgetRender;
 
 	// Get flags
-	if (info->flags&BDIF_CUSTOM_DRAG)
+	if (info->flags & BDIF_CUSTOM_DRAG)
 	{
 		// Custom drag
-		flags=DRAGF_CUSTOM;
+		flags = DRAGF_CUSTOM;
 
 		// Opaque?
-		if (environment->env->desktop_flags&DESKTOPF_QUICK_DRAG) flags|=DRAGF_NO_MASK;
+		if (environment->env->desktop_flags & DESKTOPF_QUICK_DRAG)
+			flags |= DRAGF_NO_MASK;
 	}
 
 	// Get drag info
-	if (!(object->drag_info=
-		GetDragInfo(
-			info->window,
-			&GUI->drag_screen_rp,
-			(image->Width<object->pos.Width)?object->pos.Width:image->Width,
-			(image->Height<object->pos.Height)?object->pos.Height:image->Height,
-			flags)))
-			return 0;
+	if (!(object->drag_info = GetDragInfo(info->window,
+										  &GUI->drag_screen_rp,
+										  (image->Width < object->pos.Width) ? object->pos.Width : image->Width,
+										  (image->Height < object->pos.Height) ? object->pos.Height : image->Height,
+										  flags)))
+		return 0;
 
 	// Get image to drag
-	backdrop_draw_object(info,object,0,&object->drag_info->drag_rp,0,0);
+	backdrop_draw_object(info, object, 0, &object->drag_info->drag_rp, 0, 0);
 
 	// Get mask
-	if (environment->env->desktop_flags&DESKTOPF_QUICK_DRAG)
-		object->drag_info->flags|=DRAGF_OPAQUE;
+	if (environment->env->desktop_flags & DESKTOPF_QUICK_DRAG)
+		object->drag_info->flags |= DRAGF_OPAQUE;
+	else if (environment->env->desktop_flags & DESKTOPF_TRANSPARENCY)
+		object->drag_info->flags |= DRAGF_TRANSPARENT;
 	else
-	if (environment->env->desktop_flags&DESKTOPF_TRANSPARENCY)
-		object->drag_info->flags|=DRAGF_TRANSPARENT;
-	else
-		object->drag_info->flags|=DRAGF_TRANSPARENT|DRAGF_OPAQUE;
+		object->drag_info->flags |= DRAGF_TRANSPARENT | DRAGF_OPAQUE;
 	GetDragMask(object->drag_info);
 
 	return 1;
 }
 
-
 // Stop dragging
 BOOL backdrop_stop_drag(BackdropInfo *info)
 {
 	BackdropObject *object;
-	BOOL ret=0;
+	BOOL ret = 0;
 
 	// Rubber-banding?
-	if (info->flags&BDIF_RUBBERBAND)
+	if (info->flags & BDIF_RUBBERBAND)
 	{
 		// Erase box
-		backdrop_rubber_band(info,0);
+		backdrop_rubber_band(info, 0);
 
 		// Clear flag and mouse reporting
-		info->flags&=~BDIF_RUBBERBAND;
-		info->window->Flags&=~(WFLG_REPORTMOUSE|WFLG_RMBTRAP);
+		info->flags &= ~BDIF_RUBBERBAND;
+		info->window->Flags &= ~(WFLG_REPORTMOUSE | WFLG_RMBTRAP);
 
 		// Turn ticks off
-		ModifyIDCMP(info->window,info->window->IDCMPFlags&~IDCMP_INTUITICKS);
+		ModifyIDCMP(info->window, info->window->IDCMPFlags & ~IDCMP_INTUITICKS);
 
 		// If icon positioning, unlock layers
-		if (GUI->flags&GUIF_DRAGGING)
+		if (GUI->flags & GUIF_DRAGGING)
 		{
 			UnlockLayers(&info->window->WScreen->LayerInfo);
-			GUI->flags&=~GUIF_DRAGGING;
+			GUI->flags &= ~GUIF_DRAGGING;
 		}
 	}
 
 	// Dragging?
-	else
-	if (info->flags&BDIF_DRAGGING)
+	else if (info->flags & BDIF_DRAGGING)
 	{
 		// Clear drag flag
-		info->flags&=~BDIF_DRAGGING;
+		info->flags &= ~BDIF_DRAGGING;
 
 		// Are we dragging?
-		if (GUI->flags&GUIF_DRAGGING)
+		if (GUI->flags & GUIF_DRAGGING)
 		{
-			ULONG sec,mic,mic1,mic2;
+			ULONG sec, mic, mic1, mic2;
 
 			// Get stop time
-			CurrentTime(&sec,&mic);
+			CurrentTime(&sec, &mic);
 
 			// Normal dragging?
-			if (!(info->flags&BDIF_CUSTOM_DRAG))
+			if (!(info->flags & BDIF_CUSTOM_DRAG))
 			{
 				// Go through backdrop list
-				for (object=(BackdropObject *)info->objects.list.lh_Head;
-					object->node.ln_Succ;
-					object=(BackdropObject *)object->node.ln_Succ)
+				for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+					 object = (BackdropObject *)object->node.ln_Succ)
 				{
 					// Is object being dragged?
 					if (object->drag_info)
@@ -217,29 +211,31 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 
 			// Draw GELs list
 			SortGList(&GUI->drag_screen_rp);
-			DrawDragList(&GUI->drag_screen_rp,&info->window->WScreen->ViewPort,(info->flags&BDIF_CUSTOM_DRAG)?DRAGF_CUSTOM|DRAGF_REMOVE:0);
+			DrawDragList(&GUI->drag_screen_rp,
+						 &info->window->WScreen->ViewPort,
+						 (info->flags & BDIF_CUSTOM_DRAG) ? DRAGF_CUSTOM | DRAGF_REMOVE : 0);
 
 			// Unlock layer
 			UnlockLayers(&info->window->WScreen->LayerInfo);
 
 			// Get drag time deltas
-			mic1=(sec*1000000)+mic;
-			mic2=(info->drag_sec*1000000)+info->drag_mic;
+			mic1 = (sec * 1000000) + mic;
+			mic2 = (info->drag_sec * 1000000) + info->drag_mic;
 
 			// If drag was less than a fifth of a second, nothing moves
-			if (mic1<mic2+200000) ret=1;
+			if (mic1 < mic2 + 200000)
+				ret = 1;
 		}
 
 		// Go through backdrop list
-		for (object=(BackdropObject *)info->objects.list.lh_Head;
-			object->node.ln_Succ;
-			object=(BackdropObject *)object->node.ln_Succ)
+		for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+			 object = (BackdropObject *)object->node.ln_Succ)
 		{
 			// Was object being dragged?
 			if (object->drag_info)
 			{
-				if ((info->flags & BDIF_CUSTOM_DRAG) && // is custom drag?
-					(GUI->flags & GUIF_DRAGGING)) // actually did drag? i.e. AddVSprite called
+				if ((info->flags & BDIF_CUSTOM_DRAG) &&	 // is custom drag?
+					(GUI->flags & GUIF_DRAGGING))		 // actually did drag? i.e. AddVSprite called
 				{
 					// Now is the right time to remove the object from the GELs list. This is
 					// done in a different place than RemBob for regular dragging. RemBob
@@ -251,7 +247,7 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 				}
 				// Free drag
 				FreeDragInfo(object->drag_info);
-				object->drag_info=0;
+				object->drag_info = 0;
 			}
 		}
 
@@ -259,10 +255,10 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 		GUI->flags &= ~GUIF_DRAGGING;
 
 		// Start menu actions, stop mouse reporting
-		info->window->Flags&=~(WFLG_RMBTRAP|WFLG_REPORTMOUSE);
+		info->window->Flags &= ~(WFLG_RMBTRAP | WFLG_REPORTMOUSE);
 
 		// Turn ticks off
-		ModifyIDCMP(info->window,info->window->IDCMPFlags&~IDCMP_INTUITICKS);
+		ModifyIDCMP(info->window, info->window->IDCMPFlags & ~IDCMP_INTUITICKS);
 
 		// Unlock backdrop list
 		unlock_listlock(&info->objects);
@@ -271,53 +267,48 @@ BOOL backdrop_stop_drag(BackdropInfo *info)
 	return ret;
 }
 
-
 // Show drag objects
-void backdrop_show_drag(
-	BackdropInfo *info,
-	BackdropObject *first,
-	short x,
-	short y)
+void backdrop_show_drag(BackdropInfo *info, BackdropObject *first, short x, short y)
 {
 	BackdropObject *object;
-	BOOL ok=0;
+	BOOL ok = 0;
 
 	// We also won't move if the mouse position hasn't changed
-	if (info->last_x==x && info->last_y==y) return;
+	if (info->last_x == x && info->last_y == y)
+		return;
 
 	// Save coords
-	info->last_x=x;
-	info->last_y=y;
-	
+	info->last_x = x;
+	info->last_y = y;
+
 	// Go through backdrop list
-	for (object=(BackdropObject *)info->objects.list.lh_Head;
-		object->node.ln_Succ;
-		object=(BackdropObject *)object->node.ln_Succ)
+	for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+		 object = (BackdropObject *)object->node.ln_Succ)
 	{
 		// Is object being dragged?
 		if (object->drag_info)
 		{
-			short ox,oy;
+			short ox, oy;
 
 			// Get object position relative to first object
-			ox=object->pos.Left-first->pos.Left;
-			oy=object->pos.Top-first->pos.Top;
+			ox = object->pos.Left - first->pos.Left;
+			oy = object->pos.Top - first->pos.Top;
 
 			// Offset by mouse coordinates
-			ox+=x;
-			oy+=y;
+			ox += x;
+			oy += y;
 
 			// Offset by drag offset and window offset
-			ox+=first->drag_x_offset+info->size.MinX-info->offset_x;
-			oy+=first->drag_y_offset+info->size.MinY-info->offset_y;
+			ox += first->drag_x_offset + info->size.MinX - info->offset_x;
+			oy += first->drag_y_offset + info->size.MinY - info->offset_y;
 
 			// Position image
-			object->drag_info->sprite.X=ox;
-			object->drag_info->sprite.Y=oy;
-			ok=1;
+			object->drag_info->sprite.X = ox;
+			object->drag_info->sprite.Y = oy;
+			ok = 1;
 
 			// Not dragging yet?
-			if (!(GUI->flags&GUIF_DRAGGING))
+			if (!(GUI->flags & GUIF_DRAGGING))
 			{
 				// Add bob to list
 				if (!(info->flags & BDIF_CUSTOM_DRAG))
@@ -338,10 +329,10 @@ void backdrop_show_drag(
 	if (ok)
 	{
 		// Just started dragging?
-		if (!(GUI->flags&GUIF_DRAGGING))
+		if (!(GUI->flags & GUIF_DRAGGING))
 		{
 			// Set drag flag
-			GUI->flags|=GUIF_DRAGGING;
+			GUI->flags |= GUIF_DRAGGING;
 
 			// Lock layer
 			LockLayers(&info->window->WScreen->LayerInfo);
@@ -349,32 +340,33 @@ void backdrop_show_drag(
 
 		// Sort GELs list
 		SortGList(&GUI->drag_screen_rp);
-		DrawDragList(&GUI->drag_screen_rp,&info->window->WScreen->ViewPort,(info->flags&BDIF_CUSTOM_DRAG)?DRAGF_CUSTOM:0);
+		DrawDragList(&GUI->drag_screen_rp,
+					 &info->window->WScreen->ViewPort,
+					 (info->flags & BDIF_CUSTOM_DRAG) ? DRAGF_CUSTOM : 0);
 		WaitTOF();
 	}
 }
 
-
 // Drop some objects on another one
-void backdrop_drop_object(BackdropInfo *info,BackdropObject *on_object)
+void backdrop_drop_object(BackdropInfo *info, BackdropObject *on_object)
 {
 	BackdropObject *object;
-	char *buf,*dbuf;
+	char *buf, *dbuf;
 	D_S(struct InfoData, data)
 	BPTR lock;
 
-	if (!(buf=AllocVec(512,0)))
+	if (!(buf = AllocVec(512, 0)))
 		return;
-	dbuf=buf+256;
+	dbuf = buf + 256;
 
 	// Drop on an AppIcon
-	if (on_object->type==BDO_APP_ICON)
+	if (on_object->type == BDO_APP_ICON)
 	{
 		DOpusAppMessage *msg;
 		struct MsgPort *port;
 
 		// Is the icon busy?
-		if (on_object->flags&BDOF_BUSY)
+		if (on_object->flags & BDOF_BUSY)
 		{
 			DisplayBeep(info->window->WScreen);
 			FreeVec(buf);
@@ -382,30 +374,27 @@ void backdrop_drop_object(BackdropInfo *info,BackdropObject *on_object)
 		}
 
 		// Build AppMessage
-		if (!(msg=backdrop_appmessage(info,1)))
+		if (!(msg = backdrop_appmessage(info, 1)))
 		{
 			FreeVec(buf);
 			return;
 		}
 
 		// Set message type
-		msg->da_Msg.am_Type=MTYPE_APPICON;
+		msg->da_Msg.am_Type = MTYPE_APPICON;
 
 		// Get AppInfo
-		port=WB_AppWindowData(
-			(struct AppWindow *)on_object->misc_data,
-			&msg->da_Msg.am_ID,
-			&msg->da_Msg.am_UserData);
+		port = WB_AppWindowData((struct AppWindow *)on_object->misc_data, &msg->da_Msg.am_ID, &msg->da_Msg.am_UserData);
 
 		// Send the message
-		PutMsg(port,(struct Message *)msg);
+		PutMsg(port, (struct Message *)msg);
 		FreeVec(buf);
 		return;
 	}
 
 	// Only support dropping on disks at the moment
-	if ((on_object->type!=BDO_DISK && on_object->type!=BDO_BAD_DISK) ||
-		on_object->flags&(BDOF_ASSIGN|BDOF_CACHE))
+	if ((on_object->type != BDO_DISK && on_object->type != BDO_BAD_DISK) ||
+		on_object->flags & (BDOF_ASSIGN | BDOF_CACHE))
 	{
 		DisplayBeep(info->window->WScreen);
 		FreeVec(buf);
@@ -413,23 +402,22 @@ void backdrop_drop_object(BackdropInfo *info,BackdropObject *on_object)
 	}
 
 	// Go through backdrop list
-	for (object=(BackdropObject *)info->objects.list.lh_Head;
-		object->node.ln_Succ;
-		object=(BackdropObject *)object->node.ln_Succ)
+	for (object = (BackdropObject *)info->objects.list.lh_Head; object->node.ln_Succ;
+		 object = (BackdropObject *)object->node.ln_Succ)
 	{
 		// Selected disk?
-		if (object->type==BDO_DISK && !(object->flags&(BDOF_ASSIGN|BDOF_CACHE)) && object->state)
+		if (object->type == BDO_DISK && !(object->flags & (BDOF_ASSIGN | BDOF_CACHE)) && object->state)
 		{
 			BPTR lock;
 
 			// Get disk lock
-			if ((lock=backdrop_icon_lock(object)))
+			if ((lock = backdrop_icon_lock(object)))
 			{
 				// This is the source
-				Info(lock,data);
+				Info(lock, data);
 
 				// Get device name
-				DeviceFromLock(lock,buf);
+				DeviceFromLock(lock, buf);
 
 				// Unlock lock
 				UnLock(lock);
@@ -447,40 +435,32 @@ void backdrop_drop_object(BackdropInfo *info,BackdropObject *on_object)
 	}
 
 	// Drop on a bad disk?
-	if (on_object->type==BDO_BAD_DISK)
+	if (on_object->type == BDO_BAD_DISK)
 	{
 		// Get device name
-		strcpy(dbuf,on_object->name);
+		strcpy(dbuf, on_object->name);
 	}
 
 	// Real disk
 	else
 	{
 		// Get destination disk lock
-		if (!(lock=backdrop_icon_lock(on_object)))
+		if (!(lock = backdrop_icon_lock(on_object)))
 		{
 			FreeVec(buf);
 			return;
 		}
 
 		// Destination is the one we dropped it on
-		Info(lock,data);
+		Info(lock, data);
 
 		// Get device name
-		DeviceFromLock(lock,dbuf);
+		DeviceFromLock(lock, dbuf);
 		UnLock(lock);
 	}
 
 	// Launch diskcopy
-	function_launch(
-		FUNCTION_RUN_FUNCTION,
-		def_function_diskcopy,
-		0,
-		0,
-		0,0,
-		0,0,
-		BuildArgArray(buf,dbuf,0),
-		0,0);
+	function_launch(FUNCTION_RUN_FUNCTION, def_function_diskcopy, 0, 0, 0, 0, 0, 0, BuildArgArray(buf, dbuf, 0), 0, 0);
 
 	FreeVec(buf);
 }

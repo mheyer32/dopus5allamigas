@@ -17,39 +17,40 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _IPC_H
 #define _IPC_H
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
-typedef struct {
-	struct Message	msg;
-	ULONG			command;
-	ULONG			flags;
-	APTR			data;
-	APTR			data_free;
+typedef struct
+{
+	struct Message msg;
+	ULONG command;
+	ULONG flags;
+	APTR data;
+	APTR data_free;
 } IPCMessage;
 
-typedef struct {
-	struct MinNode			node;
-	struct Process			*proc;			// Process pointer
-	IPCMessage				startup_msg;	// Startup message
-	struct MsgPort			*command_port;	// Port to send commands to
-	struct ListLock			*list;			// List we're a member of
+typedef struct
+{
+	struct MinNode node;
+	struct Process *proc;		   // Process pointer
+	IPCMessage startup_msg;		   // Startup message
+	struct MsgPort *command_port;  // Port to send commands to
+	struct ListLock *list;		   // List we're a member of
 } IPCData;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
 enum {
-	IPC_COMMAND_BASE=0x8000000,
+	IPC_COMMAND_BASE = 0x8000000,
 	IPC_STARTUP,
 	IPC_ABORT,
 	IPC_QUIT,
@@ -57,15 +58,14 @@ enum {
 	IPC_NEW,
 };
 
-
 // protos
-ipc_launch(struct ListLock *,IPCData **,char *,ULONG,ULONG,ULONG);
-ipc_startup(IPCData *ipc,APTR data,struct MsgPort *reply);
-ULONG ipc_command(IPCData *ipc,ULONG command,ULONG flags,APTR data,APTR data_free,struct MsgPort *reply);
+ipc_launch(struct ListLock *, IPCData **, char *, ULONG, ULONG, ULONG);
+ipc_startup(IPCData *ipc, APTR data, struct MsgPort *reply);
+ULONG ipc_command(IPCData *ipc, ULONG command, ULONG flags, APTR data, APTR data_free, struct MsgPort *reply);
 void ipc_reply(IPCMessage *msg);
 void ipc_free(IPCData *);
 void ipc_free_port(IPCData *ipc);
-IPCData *ipc_find_proc(struct ListLock *,char *);
-IPCData *ipc_proc_startup(ULONG *,ULONG (*)(IPCData *,APTR));
+IPCData *ipc_find_proc(struct ListLock *, char *);
+IPCData *ipc_proc_startup(ULONG *, ULONG (*)(IPCData *, APTR));
 
 #endif

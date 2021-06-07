@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,10 +25,7 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_FUNCTION_PROTOS
 
 #define DOPUS_FUNC(name) \
-	int name(struct _CommandList *command,\
-				FunctionHandle *handle,\
-				char *args,\
-				struct _InstructionParsed *instruction)
+	int name(struct _CommandList *command, FunctionHandle *handle, char *args, struct _InstructionParsed *instruction)
 
 DOPUS_FUNC(function_all);
 DOPUS_FUNC(function_none);
@@ -75,13 +72,13 @@ DOPUS_FUNC(function_reset);
 DOPUS_FUNC(function_loadfonts);
 DOPUS_FUNC(function_stopsniffer);
 
-BOOL rename_get_wild(char *,char *,char *,char *);
-ExternalEntry *new_external_entry(FunctionHandle *handle,char *path);
+BOOL rename_get_wild(char *, char *, char *, char *);
+ExternalEntry *new_external_entry(FunctionHandle *handle, char *path);
 
-void network_get_info(NetworkInfo *,DirBuffer *,struct DevProc *,UWORD,UWORD,ULONG);
+void network_get_info(NetworkInfo *, DirBuffer *, struct DevProc *, UWORD, UWORD, ULONG);
 
-void function_user_run(FunctionHandle *handle,Cfg_Function *function);
+void function_user_run(FunctionHandle *handle, Cfg_Function *function);
 
-long DOpusDeleteFile(char *name,FunctionHandle *,struct _CommandList *,BOOL);
+long DOpusDeleteFile(char *name, FunctionHandle *, struct _CommandList *, BOOL);
 
 #endif

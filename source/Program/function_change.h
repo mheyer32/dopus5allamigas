@@ -17,22 +17,21 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 extern ConfigWindow _protect_window;
-extern ObjectDef _protect_button_template,_protect_objects[];
+extern ObjectDef _protect_button_template, _protect_objects[];
 
-enum
-{
+enum {
 	GAD_PROTECT_LAYOUT,
 	GAD_PROTECT_FILENAME,
 	GAD_PROTECT_OK,
 	GAD_PROTECT_ALL,
 	GAD_PROTECT_SKIP,
 	GAD_PROTECT_ABORT,
-	GAD_PROTECT_OLD=10,
-	GAD_PROTECT_SET=20,
-	GAD_PROTECT_CLEAR=30,
+	GAD_PROTECT_OLD = 10,
+	GAD_PROTECT_SET = 20,
+	GAD_PROTECT_CLEAR = 30,
 };

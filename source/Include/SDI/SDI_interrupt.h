@@ -3,17 +3,17 @@
 
 /* Includeheader
 
-        Name:           SDI_interrupt.h
-        Versionstring:  $VER: SDI_interrupt.h 1.1 (25.04.2006)
-        Author:         Guido Mersmann
-        Distribution:   PD
-        Project page:   http://www.sf.net/projects/sditools/
-        Description:    defines to hide compiler specific interrupt and
-                        handler stuff
+		Name:           SDI_interrupt.h
+		Versionstring:  $VER: SDI_interrupt.h 1.1 (25.04.2006)
+		Author:         Guido Mersmann
+		Distribution:   PD
+		Project page:   http://www.sf.net/projects/sditools/
+		Description:    defines to hide compiler specific interrupt and
+						handler stuff
 
  1.0   17.05.05 : inspired by the SDI_#?.h files made by Jens Langner
-                  and Dirk Stöcker I created files to handle interrupt
-                  and handler functions in an API compatible way.
+				  and Dirk Stöcker I created files to handle interrupt
+				  and handler functions in an API compatible way.
  1.1   25.04.06 : fixed MakeInterrupt() and MakeHandler() macro. (geit)
 
 */
@@ -79,76 +79,70 @@
 
 #ifdef __MORPHOS__
 
-#ifndef SDI_TRAP_LIB /* avoid defining this twice */
+	#ifndef SDI_TRAP_LIB /* avoid defining this twice */
 
-  #include <proto/alib.h>
-  #include <emul/emulregs.h>
+		#include <proto/alib.h>
+		#include <emul/emulregs.h>
 
-  #define SDI_TRAP_LIB 0xFF00 /* SDI prefix to reduce conflicts */
+		#define SDI_TRAP_LIB 0xFF00 /* SDI prefix to reduce conflicts */
 
-  struct SDI_EmulLibEntry
-  {
-    UWORD Trap;
-    UWORD pad;
-    APTR  Func;
-  };
-#endif
+struct SDI_EmulLibEntry
+{
+	UWORD Trap;
+	UWORD pad;
+	APTR Func;
+};
+	#endif
 
-  #define INTERRUPTPROTO(name, ret, obj, data)                               \
-    SAVEDS ASM ret name( obj, data);                                         \
-    static ret Trampoline_##name(void) {return name(( obj) REG_A0,           \
-    (data) REG_A1);}                                                         \
-    static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0,     \
-    (APTR) Trampoline_##name};                                               \
-    SAVEDS ASM ret name( obj, data)
+	#define INTERRUPTPROTO(name, ret, obj, data)                                                       \
+		SAVEDS ASM ret name(obj, data);                                                                \
+		static ret Trampoline_##name(void) { return name((obj)REG_A0, (data)REG_A1); }                 \
+		static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0, (APTR)Trampoline_##name}; \
+		SAVEDS ASM ret name(obj, data)
 
-  #define HANDLERPROTO(name, ret, obj, data)                                 \
-    SAVEDS ASM ret name( obj, data);                                         \
-    static ret Trampoline_##name(void) {return name(( obj) REG_A0,           \
-    (data) REG_A1);}                                                         \
-    static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0,     \
-    (APTR) Trampoline_##name};                                               \
-    SAVEDS ASM ret name( obj, data)
+	#define HANDLERPROTO(name, ret, obj, data)                                                         \
+		SAVEDS ASM ret name(obj, data);                                                                \
+		static ret Trampoline_##name(void) { return name((obj)REG_A0, (data)REG_A1); }                 \
+		static const struct SDI_EmulLibEntry Gate_##name = {SDI_TRAP_LIB, 0, (APTR)Trampoline_##name}; \
+		SAVEDS ASM ret name(obj, data)
 
-  #define ENTRY(func) (APTR)&Gate_##func
+	#define ENTRY(func) (APTR) & Gate_##func
 
 #else
 
-  #define INTERRUPTPROTO(name, ret, obj, data)                               \
-    SAVEDS ASM ret name(REG(a0, obj), REG(a1, data))
-  #define HANDLERPROTO(name, ret, obj, data)                                 \
-    SAVEDS ASM ret name(REG(a0, obj), REG(a1, data))
+	#define INTERRUPTPROTO(name, ret, obj, data) SAVEDS ASM ret name(REG(a0, obj), REG(a1, data))
+	#define HANDLERPROTO(name, ret, obj, data) SAVEDS ASM ret name(REG(a0, obj), REG(a1, data))
 
-  #define ENTRY(func) (APTR)func
+	#define ENTRY(func) (APTR) func
 
 #endif /* __MORPHOS__ */
 
 /* some structure creating macros for easy and more specific usage */
 
-#define MakeInterrupt( name, func, title, isdata ) \
-  static struct Interrupt name = {{ NULL, NULL, NT_INTERRUPT, 0, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeInterrupt(name, func, title, isdata) \
+	static struct Interrupt name = {{NULL, NULL, NT_INTERRUPT, 0, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeInterruptPri( name, func, title, isdata, pri ) \
-  static struct Interrupt name = {{ NULL, NULL, NT_INTERRUPT, pri, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeInterruptPri(name, func, title, isdata, pri) \
+	static struct Interrupt name = {                     \
+		{NULL, NULL, NT_INTERRUPT, pri, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeInterruptType( name, func, title, isdata, type ) \
-  static struct Interrupt name = {{ NULL, NULL, type, 0, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeInterruptType(name, func, title, isdata, type) \
+	static struct Interrupt name = {{NULL, NULL, type, 0, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeInterruptTypePri( name, func, title, isdata, type, pri ) \
-  static struct Interrupt name = {{ NULL, NULL, type, pri, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeInterruptTypePri(name, func, title, isdata, type, pri) \
+	static struct Interrupt name = {{NULL, NULL, type, pri, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeHandler( name, func, title, isdata ) \
-  static struct Interrupt name = {{ NULL, NULL, NT_INTERRUPT, 0, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeHandler(name, func, title, isdata) \
+	static struct Interrupt name = {{NULL, NULL, NT_INTERRUPT, 0, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeHandlerPri( name, func, title, isdata, pri ) \
-  static struct Interrupt name = {{ NULL, NULL, NT_INTERRUPT, pri, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeHandlerPri(name, func, title, isdata, pri) \
+	static struct Interrupt name = {                   \
+		{NULL, NULL, NT_INTERRUPT, pri, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeHandlerType( name, func, title, isdata, type ) \
-  static struct Interrupt name = {{ NULL, NULL, type, 0, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
+#define MakeHandlerType(name, func, title, isdata, type) \
+	static struct Interrupt name = {{NULL, NULL, type, 0, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
-#define MakeHandlerTypePri( name, func, title, isdata, type, pri ) \
-  static struct Interrupt name = {{ NULL, NULL, type, pri, (STRPTR) title}, (APTR) isdata, (void (*)()) ENTRY(func) }
-
+#define MakeHandlerTypePri(name, func, title, isdata, type, pri) \
+	static struct Interrupt name = {{NULL, NULL, type, pri, (STRPTR)title}, (APTR)isdata, (void (*)())ENTRY(func)}
 
 #endif /* SDI_INTERRUPT_H */
-

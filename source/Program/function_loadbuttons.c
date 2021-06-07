@@ -17,14 +17,13 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-enum
-{
+enum {
 	ARG_NAME,
 	ARG_START,
 	ARG_LABEL,
@@ -39,13 +38,13 @@ enum
 DOPUS_FUNC(function_loadbuttons)
 {
 	FunctionEntry *entry;
-	BOOL start=0,hidden=0;
-	ULONG buttonflags=BUTTONF_FAIL;
-	char label[40],image[256];
+	BOOL start = 0, hidden = 0;
+	ULONG buttonflags = BUTTONF_FAIL;
+	char label[40], image[256];
 
 	// Clear buffers
-	label[0]=0;
-	image[0]=0;
+	label[0] = 0;
+	image[0] = 0;
 
 	// Args?
 	if (instruction->funcargs)
@@ -54,63 +53,62 @@ DOPUS_FUNC(function_loadbuttons)
 		if (instruction->funcargs->FA_Arguments[ARG_START])
 		{
 			// Set flag
-			start=1;
+			start = 1;
 
 			// Get label
 			if (instruction->funcargs->FA_Arguments[ARG_LABEL])
-				stccpy(label,(char *)instruction->funcargs->FA_Arguments[ARG_LABEL],39);
+				stccpy(label, (char *)instruction->funcargs->FA_Arguments[ARG_LABEL], 39);
 
 			// Get image
 			if (instruction->funcargs->FA_Arguments[ARG_IMAGE])
-				stccpy(image,(char *)instruction->funcargs->FA_Arguments[ARG_IMAGE],255);
+				stccpy(image, (char *)instruction->funcargs->FA_Arguments[ARG_IMAGE], 255);
 		}
 
 		// Open under mouse?
 		if (instruction->funcargs->FA_Arguments[ARG_UNDERMOUSE])
-			buttonflags|=BUTTONF_UNDERMOUSE;
+			buttonflags |= BUTTONF_UNDERMOUSE;
 
 		// Open hidden
 		if (instruction->funcargs->FA_Arguments[ARG_HIDDEN])
-			hidden=1;
+			hidden = 1;
 
 		// Toggle/Show?
 		if (!start &&
-			(instruction->funcargs->FA_Arguments[ARG_TOGGLE] ||
-			 instruction->funcargs->FA_Arguments[ARG_SHOW]))
+			(instruction->funcargs->FA_Arguments[ARG_TOGGLE] || instruction->funcargs->FA_Arguments[ARG_SHOW]))
 		{
 			IPCData *ipc;
-			BOOL matched=0;
+			BOOL matched = 0;
 
 			// Get first entry
-			if ((entry=function_get_entry(handle)))
+			if ((entry = function_get_entry(handle)))
 			{
 				// Lock buttons list
-				lock_listlock(&GUI->buttons_list,FALSE);
+				lock_listlock(&GUI->buttons_list, FALSE);
 
 				// Look for bank in list
-				for (ipc=(IPCData *)GUI->buttons_list.list.lh_Head;
-					ipc->node.mln_Succ;
-					ipc=(IPCData *)ipc->node.mln_Succ)
+				for (ipc = (IPCData *)GUI->buttons_list.list.lh_Head; ipc->node.mln_Succ;
+					 ipc = (IPCData *)ipc->node.mln_Succ)
 				{
-					Buttons *buttons=(Buttons *)IPCDATA(ipc);
-					BOOL match=0;
+					Buttons *buttons = (Buttons *)IPCDATA(ipc);
+					BOOL match = 0;
 
 					// Or does it match the name?
-					if (stricmp(entry->name,buttons->bank->window.name)==0) match=1;
+					if (stricmp(entry->name, buttons->bank->window.name) == 0)
+						match = 1;
 
 					// Or the filename?
-					else
-					if (stricmp(entry->name,FilePart(buttons->buttons_file))==0) match=1;
+					else if (stricmp(entry->name, FilePart(buttons->buttons_file)) == 0)
+						match = 1;
 
 					// Match bank to close?
 					if (match)
 					{
 						// Send message
-			 			if (instruction->funcargs->FA_Arguments[ARG_SHOW])
-			 				IPC_Command(ipc,IPC_SHOW,0,GUI->screen_pointer,0,0);
-			 			else
-							IPC_Quit(ipc,0,FALSE);
-						matched=1;
+						if (instruction->funcargs->FA_Arguments[ARG_SHOW])
+							IPC_Command(ipc, IPC_SHOW, 0, GUI->screen_pointer, 0, 0);
+						else
+							IPC_Quit(ipc, 0, FALSE);
+						matched = 1;
 					}
 				}
 
@@ -119,17 +117,18 @@ DOPUS_FUNC(function_loadbuttons)
 			}
 
 			// If we closed a bank, return
-			if (matched) return 1;
+			if (matched)
+				return 1;
 		}
 	}
 
 	// Go through entries
-	while ((entry=function_get_entry(handle)))
+	while ((entry = function_get_entry(handle)))
 	{
 		Buttons *buttons;
 
 		// Build full name
-		function_build_source(handle,entry,handle->work_buffer);
+		function_build_source(handle, entry, handle->work_buffer);
 
 		// Start menu?
 		if (start)
@@ -137,25 +136,24 @@ DOPUS_FUNC(function_loadbuttons)
 			IPCData *ipc;
 
 			// Open as a start menu
-			if ((ipc=start_new(handle->work_buffer,label,image,-1,-1)))
+			if ((ipc = start_new(handle->work_buffer, label, image, -1, -1)))
 			{
 				// Not iconified?
 				if (GUI->window && !hidden)
-					IPC_Command(ipc,IPC_SHOW,0,GUI->screen_pointer,0,0);
+					IPC_Command(ipc, IPC_SHOW, 0, GUI->screen_pointer, 0, 0);
 			}
 		}
 
 		// Open button bank
-		else
-		if ((buttons=buttons_new(handle->work_buffer,0,0,0,buttonflags)))
+		else if ((buttons = buttons_new(handle->work_buffer, 0, 0, 0, buttonflags)))
 		{
 			// Not iconified?
 			if (GUI->window && !hidden)
-				IPC_Command(buttons->ipc,BUTTONS_OPEN,0,GUI->screen_pointer,0,0);
+				IPC_Command(buttons->ipc, BUTTONS_OPEN, 0, GUI->screen_pointer, 0, 0);
 		}
 
 		// Get next entry
-		function_end_entry(handle,entry,1);
+		function_end_entry(handle, entry, 1);
 	}
 
 	return 1;

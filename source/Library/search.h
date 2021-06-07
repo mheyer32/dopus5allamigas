@@ -17,41 +17,36 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _SEARCH_H
 #define _SEARCH_H
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 // Data to store search results
 typedef struct
 {
-	char	*v_search_found_position;	// Position of match in buffer
-	long	v_search_found_size;		// Number of bytes searched
-	long	v_search_found_lines;		// Number of lines searched
-	long	v_search_last_line_pos;		// Last line position searched
+	char *v_search_found_position;	// Position of match in buffer
+	long v_search_found_size;		// Number of bytes searched
+	long v_search_found_lines;		// Number of lines searched
+	long v_search_last_line_pos;	// Last line position searched
 } search_handle;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
-
-
-long search_buffer(
-	search_handle *handle,
-	UBYTE *buffer,
-	ULONG buffer_size,
-	UBYTE *match_buf,
-	ULONG match_size,
-	ULONG flags);
-
-#define isonlyword(c) (!c || c==10 || c==13 || isspace(c) || ispunct(c))
-
-
+	#pragma pack()
 #endif
 
+long search_buffer(search_handle *handle,
+				   UBYTE *buffer,
+				   ULONG buffer_size,
+				   UBYTE *match_buf,
+				   ULONG match_size,
+				   ULONG flags);
+
+#define isonlyword(c) (!c || c == 10 || c == 13 || isspace(c) || ispunct(c))
+
+#endif

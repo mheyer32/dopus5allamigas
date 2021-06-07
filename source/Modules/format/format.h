@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,64 +26,62 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	struct Screen		*screen;
-	struct Window		*window;
-	IPCData			*ipc;
+	struct Screen *screen;
+	struct Window *window;
+	IPCData *ipc;
 
-	ConfigWindow		win_dims;
-	NewConfigWindow		new_win;
-	ObjectList		*list;
+	ConfigWindow win_dims;
+	NewConfigWindow new_win;
+	ObjectList *list;
 
-	Att_List		*device_list;
+	Att_List *device_list;
 
-	struct InfoData		info;
-	struct FileInfoBlock	fib;
-	char			disk_name[32];
+	struct InfoData info;
+	struct FileInfoBlock fib;
+	char disk_name[32];
 
-	char			default_name[32];
-	char			default_ffs;
-	char			default_int;
-	char			default_cache;
-	char			default_trash;
-	char			default_boot;
-	char			default_verify;
+	char default_name[32];
+	char default_ffs;
+	char default_int;
+	char default_cache;
+	char default_trash;
+	char default_boot;
+	char default_verify;
 
-	Point			window_pos;
-	char			pos_valid;
+	Point window_pos;
+	char pos_valid;
 
-	char			status_title[80];
-	unsigned long		dos_type;
+	char status_title[80];
+	unsigned long dos_type;
 
-	char			selection[80];
+	char selection[80];
 
-	short			abort_bit;
+	short abort_bit;
 } format_data;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-BOOL format_open(format_data *data,BOOL);
+BOOL format_open(format_data *data, BOOL);
 void format_close(format_data *data);
 void format_free(format_data *data);
 Att_List *get_device_list(char *);
 void show_device_info(format_data *data);
-BOOL start_format(format_data *data,unsigned short type,BOOL);
-BOOL do_format(format_data *data,DiskHandle *disk,unsigned short type,short *);
-//BOOL do_raw_format(format_data *data,DiskHandle *disk,struct Window *status);
-//void do_install(format_data *data,DiskHandle *disk,struct Window *status);
+BOOL start_format(format_data *data, unsigned short type, BOOL);
+BOOL do_format(format_data *data, DiskHandle *disk, unsigned short type, short *);
+// BOOL do_raw_format(format_data *data,DiskHandle *disk,struct Window *status);
+// void do_install(format_data *data,DiskHandle *disk,struct Window *status);
 BOOL do_raw_format(format_data *data, DiskHandle *disk, APTR status);
-void do_install(format_data *data,DiskHandle *disk,APTR status);
-
+void do_install(format_data *data, DiskHandle *disk, APTR status);
 
 extern ConfigWindow format_window;
 extern ObjectDef format_objects[];
 
-enum
-{
+enum {
 	GAD_BASE,
 
 	GAD_FORMAT_LAYOUT,

@@ -17,30 +17,27 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Start notify on a file
-struct NotifyRequest *start_file_notify(
-	char *filename,
-	ULONG userdata,
-	struct MsgPort *port)
+struct NotifyRequest *start_file_notify(char *filename, ULONG userdata, struct MsgPort *port)
 {
 	struct NotifyRequest *notify;
 
 	// Create request
-	if (!(notify=AllocMemH(global_memory_pool,sizeof(struct NotifyRequest)+strlen(filename)+1)))
+	if (!(notify = AllocMemH(global_memory_pool, sizeof(struct NotifyRequest) + strlen(filename) + 1)))
 		return 0;
 
 	// Fill out request structure
-	notify->nr_Name=(char *)(notify+1);
-	strcpy(notify->nr_Name,filename);
-	notify->nr_UserData=userdata;
-	notify->nr_Flags=NRF_SEND_MESSAGE;
-	notify->nr_stuff.nr_Msg.nr_Port=port;
+	notify->nr_Name = (char *)(notify + 1);
+	strcpy(notify->nr_Name, filename);
+	notify->nr_UserData = userdata;
+	notify->nr_Flags = NRF_SEND_MESSAGE;
+	notify->nr_stuff.nr_Msg.nr_Port = port;
 
 	// Start notify
 	if (!(StartNotify(notify)))
@@ -53,7 +50,6 @@ struct NotifyRequest *start_file_notify(
 	// No worries
 	return notify;
 }
-
 
 // Stop notify on a file
 void stop_file_notify(struct NotifyRequest *notify)

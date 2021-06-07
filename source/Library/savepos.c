@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,45 +26,40 @@ For more information on Directory Opus for Windows please see:
 
 #include "dopuslib.h"
 
-void parse_number(char **ptr,short *val);
+void parse_number(char **ptr, short *val);
 
-BOOL LIBFUNC L_SavePos(
-	REG(a0, char *name),
-	REG(a1, struct IBox *box),
-	REG(d0, short fontsize))
+BOOL LIBFUNC L_SavePos(REG(a0, char *name), REG(a1, struct IBox *box), REG(d0, short fontsize))
 {
 	char buf[100];
-	lsprintf(buf,"%ld/%ld/%ld/%ld/%ld",box->Left,box->Top,box->Width,box->Height,fontsize);
-	L_SetEnv(name,buf,TRUE);
+	lsprintf(buf, "%ld/%ld/%ld/%ld/%ld", box->Left, box->Top, box->Width, box->Height, fontsize);
+	L_SetEnv(name, buf, TRUE);
 	return TRUE;
 }
 
-BOOL LIBFUNC L_LoadPos(
-	REG(a0, char *name),
-	REG(a1, struct IBox *box),
-	REG(d0, short *fontsize))
+BOOL LIBFUNC L_LoadPos(REG(a0, char *name), REG(a1, struct IBox *box), REG(d0, short *fontsize))
 {
 	char buf[100];
-	if (GetVar(name,buf,sizeof(buf),GVF_GLOBAL_ONLY)>0)
+	if (GetVar(name, buf, sizeof(buf), GVF_GLOBAL_ONLY) > 0)
 	{
-		char *ptr=buf;
-		parse_number(&ptr,&box->Left);
-		parse_number(&ptr,&box->Top);
-		parse_number(&ptr,&box->Width);
-		parse_number(&ptr,&box->Height);
-		parse_number(&ptr,fontsize);
+		char *ptr = buf;
+		parse_number(&ptr, &box->Left);
+		parse_number(&ptr, &box->Top);
+		parse_number(&ptr, &box->Width);
+		parse_number(&ptr, &box->Height);
+		parse_number(&ptr, fontsize);
 		return TRUE;
 	}
 	return FALSE;
 }
 
-void parse_number(char **ptr,short *val)
+void parse_number(char **ptr, short *val)
 {
 	// Digit?
 	if (isdigit(*(*ptr)))
 	{
-		*val=atoi(*ptr);
-		while (*(*ptr) && isdigit(*(*ptr))) ++*ptr;
+		*val = atoi(*ptr);
+		while (*(*ptr) && isdigit(*(*ptr)))
+			++*ptr;
 		++*ptr;
 	}
 }

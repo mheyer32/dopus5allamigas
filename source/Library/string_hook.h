@@ -17,35 +17,30 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _STRING_HOOK_H
 #define _STRING_HOOK_H
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 typedef struct
 {
-	struct Hook	hook;
-	Att_List	*history;
-	ULONG		type;
-	ULONG		flags;
-	struct Task	*change_task;
-	short		change_bit;
+	struct Hook hook;
+	Att_List *history;
+	ULONG type;
+	ULONG flags;
+	struct Task *change_task;
+	short change_bit;
 } HookData;
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
-
-ULONG ASM string_edit_hook(
-	REG(a0, HookData *hook),
-	REG(a2, struct SGWork *work),
-	REG(a1, ULONG *msg));
-
-
+	#pragma pack()
 #endif
 
+ULONG ASM string_edit_hook(REG(a0, HookData *hook), REG(a2, struct SGWork *work), REG(a1, ULONG *msg));
+
+#endif

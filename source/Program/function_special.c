@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,39 +29,36 @@ DOPUS_FUNC(function_special)
 	// Look at command
 	switch (command->function)
 	{
-		// Quit
-		case FUNC_QUIT:
+	// Quit
+	case FUNC_QUIT:
 
-			// Force quit?
-			if (instruction->funcargs &&
-				instruction->funcargs->FA_Arguments[0])
-			{
-				// Send quit message directory
-				IPC_Quit(&main_ipc,0,FALSE);
-			}
+		// Force quit?
+		if (instruction->funcargs && instruction->funcargs->FA_Arguments[0])
+		{
+			// Send quit message directory
+			IPC_Quit(&main_ipc, 0, FALSE);
+		}
 
-			// Otherwise, start quit process
-			else
-			{
-				misc_startup("dopus_quit",MENU_QUIT,GUI->window,0,1);
-			}
-			return 0;
+		// Otherwise, start quit process
+		else
+		{
+			misc_startup("dopus_quit", MENU_QUIT, GUI->window, 0, 1);
+		}
+		return 0;
 
+	// Hide
+	case FUNC_HIDE:
 
-		// Hide
-		case FUNC_HIDE:
+		// Send hide command
+		IPC_Command(&main_ipc, IPC_HIDE, 0, 0, 0, 0);
+		break;
 
-			// Send hide command
-			IPC_Command(&main_ipc,IPC_HIDE,0,0,0,0);
-			break;
+	// Reveal
+	case FUNC_REVEAL:
 
-
-		// Reveal
-		case FUNC_REVEAL:
-
-			// Send show command
-			IPC_Command(&main_ipc,IPC_SHOW,0,0,0,0);
-			break;
+		// Send show command
+		IPC_Command(&main_ipc, IPC_SHOW, 0, 0, 0, 0);
+		break;
 	}
 
 	return 1;

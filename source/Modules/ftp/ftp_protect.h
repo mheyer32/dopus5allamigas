@@ -17,33 +17,30 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef _FTP_PROTECT_H
 #define _FTP_PROTECT_H
 
-
 // Protect GUI message
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 struct protectgui_msg
 {
-struct Window *pm_window;
-char          *pm_name;
-ULONG          pm_current;
-ULONG          pm_set_mask;
-ULONG          pm_clear_mask;
+	struct Window *pm_window;
+	char *pm_name;
+	ULONG pm_current;
+	ULONG pm_set_mask;
+	ULONG pm_clear_mask;
 };
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-
 // Get protection
-int function_change_get_protect(struct opusftp_globals *og,struct protectgui_msg *pm);
-
+int function_change_get_protect(struct opusftp_globals *og, struct protectgui_msg *pm);
 
 #endif

@@ -17,38 +17,38 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
 // Open a backdrop object
-void backdrop_object_open(
-	BackdropInfo *info,
-	BackdropObject *object,
-	UWORD qual,
-	BOOL activate,
-	long numargs,
-	struct WBArg *arglist)
+void backdrop_object_open(BackdropInfo *info,
+						  BackdropObject *object,
+						  UWORD qual,
+						  BOOL activate,
+						  long numargs,
+						  struct WBArg *arglist)
 {
 	Lister *lister;
-	IPCData *ipc=0;
-	BPTR old,lock;
+	IPCData *ipc = 0;
+	BPTR old, lock;
 
 	// Valid object?
-	if (!object || !object->icon) return;
+	if (!object || !object->icon)
+		return;
 
 	// Is object a group?
-	if (object->type==BDO_GROUP)
+	if (object->type == BDO_GROUP)
 	{
 		// Open group
-		backdrop_open_group(info,object,1);
+		backdrop_open_group(info, object, 1);
 		return;
 	}
 
 	// Bad disk?
-	if (object->type==BDO_BAD_DISK)
+	if (object->type == BDO_BAD_DISK)
 	{
 		// Error
 		DisplayBeep(info->window->WScreen);
@@ -56,91 +56,85 @@ void backdrop_object_open(
 	}
 
 	// Is object an appicon?
-	if (object->type==BDO_APP_ICON)
+	if (object->type == BDO_APP_ICON)
 	{
 		DOpusAppMessage *msg;
 		struct MsgPort *port;
 
 		// Is icon busy?
-		if (object->flags&BDOF_BUSY)
+		if (object->flags & BDOF_BUSY)
 		{
 			DisplayBeep(info->window->WScreen);
 			return;
 		}
 
 		// Allocate AppMessage
-		if (!(msg=AllocAppMessage(global_memory_pool,GUI->appmsg_port,0))) return;
+		if (!(msg = AllocAppMessage(global_memory_pool, GUI->appmsg_port, 0)))
+			return;
 
 		// Message type
-		msg->da_Msg.am_Type=MTYPE_APPICON;
+		msg->da_Msg.am_Type = MTYPE_APPICON;
 
 		// Get AppInfo
-		port=WB_AppWindowData(
-			(struct AppWindow *)object->misc_data,
-			&msg->da_Msg.am_ID,
-			&msg->da_Msg.am_UserData);
+		port = WB_AppWindowData((struct AppWindow *)object->misc_data, &msg->da_Msg.am_ID, &msg->da_Msg.am_UserData);
 
 		// Send the message
-		PutMsg(port,(struct Message *)msg);
+		PutMsg(port, (struct Message *)msg);
 		return;
 	}
 
 	// If we're not trying to start a tool, see if there is one selected
-	if (object->icon->do_Type!=WBTOOL && info->first_sel_tool && info->first_sel_tool!=object)
+	if (object->icon->do_Type != WBTOOL && info->first_sel_tool && info->first_sel_tool != object)
 	{
 		// Check that it's valid
-		if (find_backdrop_object(info,info->first_sel_tool))
+		if (find_backdrop_object(info, info->first_sel_tool))
 		{
 			// Use this tool to open the projects
-			object=info->first_sel_tool;
+			object = info->first_sel_tool;
 		}
 	}
 
 	// Get icon lock
-	if (!(lock=backdrop_icon_lock(object)))
+	if (!(lock = backdrop_icon_lock(object)))
 		return;
 
 	// Change current directory
-	old=CurrentDir(lock);
+	old = CurrentDir(lock);
 
 	// Directory to read?
-	if (object->icon->do_Type==WBDISK ||
-		object->icon->do_Type==WBDRAWER ||
-		object->icon->do_Type==WBGARBAGE)
+	if (object->icon->do_Type == WBDISK || object->icon->do_Type == WBDRAWER || object->icon->do_Type == WBGARBAGE)
 	{
 		char path[256];
 
 		// Get path
-		DevNameFromLockDopus(lock,path,256);
+		DevNameFromLockDopus(lock, path, 256);
 
 		// Drawer to read?
-		if (object->icon->do_Type==WBDRAWER || object->icon->do_Type==WBGARBAGE)
+		if (object->icon->do_Type == WBDRAWER || object->icon->do_Type == WBGARBAGE)
 		{
 			// Add to path
-			AddPart(path,object->name,256);
-			AddPart(path,"",256);
+			AddPart(path, object->name, 256);
+			AddPart(path, "", 256);
 		}
 
 		// If shift isn't down, look for already open
-		if (!(qual&IEQUAL_ANYSHIFT))
+		if (!(qual & IEQUAL_ANYSHIFT))
 		{
 			// Lock lister list
-			lock_listlock(&GUI->lister_list,FALSE);
+			lock_listlock(&GUI->lister_list, FALSE);
 
 			// Go through listers
-			for (ipc=(IPCData *)GUI->lister_list.list.lh_Head;
-				ipc->node.mln_Succ;
-				ipc=(IPCData *)ipc->node.mln_Succ)
+			for (ipc = (IPCData *)GUI->lister_list.list.lh_Head; ipc->node.mln_Succ;
+				 ipc = (IPCData *)ipc->node.mln_Succ)
 			{
 				// Get lister
-				lister=IPCDATA(ipc);
+				lister = IPCDATA(ipc);
 
 				// Is this lister what we're after?
-				if (stricmp(lister->cur_buffer->buf_Path,path)==0 &&
-					!(lister->flags&LISTERF_BUSY))
+				if (stricmp(lister->cur_buffer->buf_Path, path) == 0 && !(lister->flags & LISTERF_BUSY))
 				{
 					// Activate this window
-					IPC_Command(ipc,IPC_ACTIVATE,0,(APTR)1,0,0);
+					IPC_Command(ipc, IPC_ACTIVATE, 0, (APTR)1, 0, 0);
 					break;
 				}
 			}
@@ -149,7 +143,8 @@ void backdrop_object_open(
 			unlock_listlock(&GUI->lister_list);
 
 			// Get one?
-			if (!ipc->node.mln_Succ) ipc=0;
+			if (!ipc->node.mln_Succ)
+				ipc = 0;
 		}
 
 		// Open new lister?
@@ -158,7 +153,7 @@ void backdrop_object_open(
 			BPTR lock;
 
 			// Lock path
-			if (!(lock=Lock(path,ACCESS_READ)))
+			if (!(lock = Lock(path, ACCESS_READ)))
 			{
 				// Can't open
 				DisplayBeep(info->window->WScreen);
@@ -171,30 +166,24 @@ void backdrop_object_open(
 				UnLock(lock);
 
 				// Read into existing lister in icon action mode if control is down
-				if (info->lister && info->lister->flags&LISTERF_ICON_ACTION && qual&IEQUALIFIER_CONTROL)
+				if (info->lister && info->lister->flags & LISTERF_ICON_ACTION && qual & IEQUALIFIER_CONTROL)
 				{
 					// Read into existing lister
-					read_directory(info->lister,path,GETDIRF_CANMOVEEMPTY|GETDIRF_CANCHECKBUFS);
+					read_directory(info->lister, path, GETDIRF_CANMOVEEMPTY | GETDIRF_CANCHECKBUFS);
 				}
 
 				// Open lister for this path
-				else
-				if ((lister=lister_open_new(path,object,info->window,info->lister)))
+				else if ((lister = lister_open_new(path, object, info->window, info->lister)))
 				{
 					// Initialise lister
-					IPC_Command(
-						lister->ipc,
-						LISTER_INIT,
-						(activate)?LISTERF_ACTIVATE:0,
-						GUI->screen_pointer,
-						0,0);
+					IPC_Command(lister->ipc, LISTER_INIT, (activate) ? LISTERF_ACTIVATE : 0, GUI->screen_pointer, 0, 0);
 
 					// Close parent?
-					if (qual&IEQUALIFIER_LALT)
+					if (qual & IEQUALIFIER_LALT)
 					{
 						// Got a lister?
 						if (info->lister)
-							IPC_Command(info->lister->ipc,IPC_QUIT,0,0,0,0);
+							IPC_Command(info->lister->ipc, IPC_QUIT, 0, 0, 0, 0);
 					}
 				}
 			}
@@ -202,36 +191,35 @@ void backdrop_object_open(
 	}
 
 	// Something to run?
-	else
-	if (object->icon->do_Type==WBTOOL ||
-		object->icon->do_Type==WBPROJECT)
+	else if (object->icon->do_Type == WBTOOL || object->icon->do_Type == WBPROJECT)
 	{
-		char *default_tool=0;
+		char *default_tool = 0;
 		char path[256];
-		BOOL execute=0,ok=1;
-		struct DiskObject *got_icon=0,*icon;
+		BOOL execute = 0, ok = 1;
+		struct DiskObject *got_icon = 0, *icon;
 
 		// Get icon
-		if (object->icon->do_Type==WBPROJECT &&
-			(got_icon=GetDiskObject(object->name))) icon=got_icon;
-		else icon=object->icon;
+		if (object->icon->do_Type == WBPROJECT && (got_icon = GetDiskObject(object->name)))
+			icon = got_icon;
+		else
+			icon = object->icon;
 
 		// Is object a project?
-		if (icon->do_Type==WBPROJECT)
+		if (icon->do_Type == WBPROJECT)
 		{
 			// Valid tool?
 			if (icon->do_DefaultTool && *icon->do_DefaultTool)
 			{
 				// Get default tool
-				default_tool=icon->do_DefaultTool;
+				default_tool = icon->do_DefaultTool;
 
 				// Trap more?
-				if (file_trap_more(object->name,default_tool)) ok=0;
+				if (file_trap_more(object->name, default_tool))
+					ok = 0;
 
 				// And ignore execute for fake icons
-				else
-				if (!got_icon &&
-					stricmp(FilePart(default_tool),"execute")==0) default_tool=0;
+				else if (!got_icon && stricmp(FilePart(default_tool), "execute") == 0)
+					default_tool = 0;
 			}
 
 			// No default tool?
@@ -241,18 +229,18 @@ void backdrop_object_open(
 				BPTR test;
 
 				// Lock and examine file
-				if ((test=Lock(object->name,ACCESS_READ)))
+				if ((test = Lock(object->name, ACCESS_READ)))
 				{
 					// Examine object
-					Examine(test,fib);
+					Examine(test, fib);
 					UnLock(test);
 
 					// Is S bit set?
-					if (fib->fib_Protection&FIBF_SCRIPT)
+					if (fib->fib_Protection & FIBF_SCRIPT)
 					{
 						// Execute it
-						default_tool=object->name;
-						execute=1;
+						default_tool = object->name;
+						execute = 1;
 					}
 				}
 
@@ -262,42 +250,43 @@ void backdrop_object_open(
 					short action;
 
 					// Get source path
-					DevNameFromLockDopus(lock,path,256);
+					DevNameFromLockDopus(lock, path, 256);
 
 					// Get filetype action
-					if (qual&IEQUALIFIER_CONTROL) action=FTTYPE_CTRL_DOUBLECLICK;
+					if (qual & IEQUALIFIER_CONTROL)
+						action = FTTYPE_CTRL_DOUBLECLICK;
+					else if (qual & (IEQUALIFIER_LALT | IEQUALIFIER_RALT))
+						action = FTTYPE_ALT_DOUBLECLICK;
 					else
-					if (qual&(IEQUALIFIER_LALT|IEQUALIFIER_RALT)) action=FTTYPE_ALT_DOUBLECLICK;
-					else
-					action=FTTYPE_DOUBLE_CLICK;
+						action = FTTYPE_DOUBLE_CLICK;
 
 					// Do filetype action on file
-					function_launch(
-						FUNCTION_FILETYPE,
-						0,
-						action,
-						0,
-						0,0,
-						path,0,
-						BuildArgArray(object->name,0),
-						0,
-						(Buttons *)WBArgArray(arglist,numargs,AAF_ALLOW_DIRS));
+					function_launch(FUNCTION_FILETYPE,
+									0,
+									action,
+									0,
+									0,
+									0,
+									path,
+									0,
+									BuildArgArray(object->name, 0),
+									0,
+									(Buttons *)WBArgArray(arglist, numargs, AAF_ALLOW_DIRS));
 				}
 			}
 		}
-							
+
 		// If it's a tool, see if icon exists at all
-		else
-		if (icon->do_Type==WBTOOL)
+		else if (icon->do_Type == WBTOOL)
 		{
 			char buf[256];
 			BPTR test;
 
 			// Build icon name
-			StrCombine(buf,object->name,".info",sizeof(buf));
+			StrCombine(buf, object->name, ".info", sizeof(buf));
 
 			// Does icon exist?
-			if ((test=Lock(buf,ACCESS_READ)))
+			if ((test = Lock(buf, ACCESS_READ)))
 			{
 				// Yep, it's ok
 				UnLock(test);
@@ -307,18 +296,18 @@ void backdrop_object_open(
 			else
 			{
 				// Launch proc to run as AmigaDOS
-				misc_startup("dopus_run",MENU_EXECUTE,info->window,(APTR)object->name,0);
-				ok=0;
+				misc_startup("dopus_run", MENU_EXECUTE, info->window, (APTR)object->name, 0);
+				ok = 0;
 			}
 		}
 
 		// Ok to run?
-		if (ok && (icon->do_Type==WBTOOL || default_tool))
+		if (ok && (icon->do_Type == WBTOOL || default_tool))
 		{
 			Att_List *command_list;
 
 			// Allocate command list
-			if ((command_list=Att_NewList(LISTF_POOL)))
+			if ((command_list = Att_NewList(LISTF_POOL)))
 			{
 				short len;
 				char *launchprog;
@@ -326,71 +315,73 @@ void backdrop_object_open(
 				struct Node *node;
 
 				// Program to actually launch
-				launchprog=(icon->do_Type==WBTOOL)?object->name:(char *)FilePart(default_tool);
+				launchprog = (icon->do_Type == WBTOOL) ? object->name : (char *)FilePart(default_tool);
 
 				// Set screen title
-				lsprintf(info->buffer,GetString(&locale,MSG_LAUNCHING_PROGRAM),launchprog);
-				title_error(info->buffer,0);
+				lsprintf(info->buffer, GetString(&locale, MSG_LAUNCHING_PROGRAM), launchprog);
+				title_error(info->buffer, 0);
 
 				// Arguments supplied?
-				if (numargs>0)
+				if (numargs > 0)
 				{
 					short arg;
 
 					// Go through arguments
-					for (arg=0;arg<numargs;arg++)
+					for (arg = 0; arg < numargs; arg++)
 					{
 						// Get full name
-						DevNameFromLockDopus(arglist[arg].wa_Lock,info->buffer,256);
-						AddPart(info->buffer,arglist[arg].wa_Name,256);
+						DevNameFromLockDopus(arglist[arg].wa_Lock, info->buffer, 256);
+						AddPart(info->buffer, arglist[arg].wa_Name, 256);
 
 						// Add to command list
-						Att_NewNode(command_list,info->buffer,0,0);
+						Att_NewNode(command_list, info->buffer, 0, 0);
 					}
 				}
 
 				// Selected objects as arguments?
-				else
-				if (numargs==0)
+				else if (numargs == 0)
 				{
 					// Get arguments
-					backdrop_run_build_args(command_list,info,object);
+					backdrop_run_build_args(command_list, info, object);
 				}
 
 				// Get total length of arguments
-				for (node=command_list->list.lh_Head,len=0;node->ln_Succ;node=node->ln_Succ)
-					len+=strlen(node->ln_Name)+3;
+				for (node = command_list->list.lh_Head, len = 0; node->ln_Succ; node = node->ln_Succ)
+					len += strlen(node->ln_Name) + 3;
 
 				// Add length of name
-				len+=strlen(object->name)+3;
+				len += strlen(object->name) + 3;
 
 				// Execute?
-				if (execute) len+=8;
+				if (execute)
+					len += 8;
 
 				// Allocate buffer
-				if ((command=AllocVec(len,MEMF_ANY)))
+				if ((command = AllocVec(len, MEMF_ANY)))
 				{
 					char *ptr;
 
 					// Build command
-					if (execute) lsprintf(command,"execute \"%s\"",object->name);
-					else lsprintf(command,"\"%s\"",object->name);
+					if (execute)
+						lsprintf(command, "execute \"%s\"", object->name);
+					else
+						lsprintf(command, "\"%s\"", object->name);
 
 					// Get pointer to end of string
-					ptr=command+strlen(command);
+					ptr = command + strlen(command);
 
 					// Add arguments
-					for (node=command_list->list.lh_Head;node->ln_Succ;node=node->ln_Succ)
+					for (node = command_list->list.lh_Head; node->ln_Succ; node = node->ln_Succ)
 					{
 						// Add space and name in quotes
-						*ptr++=' ';
-						*ptr++='\"';
-						strcpy(ptr,node->ln_Name);
+						*ptr++ = ' ';
+						*ptr++ = '\"';
+						strcpy(ptr, node->ln_Name);
 
 						// Bump pointer
-						ptr+=strlen(ptr);
-						*ptr++='\"';
-						*ptr=0;
+						ptr += strlen(ptr);
+						*ptr++ = '\"';
+						*ptr = 0;
 					}
 
 					// Execute?
@@ -400,21 +391,28 @@ void backdrop_object_open(
 						BPTR out;
 
 						// Open output
-						lsprintf(output,"%s%s/AUTO/CLOSE/WAIT/SCREEN %s",
-							environment->env->output_device,
-							environment->env->output_window,
-							get_our_pubscreen());
-						if (!(out=Open(output,MODE_OLDFILE)))
-							out=Open("nil:",MODE_OLDFILE);
+						lsprintf(output,
+								 "%s%s/AUTO/CLOSE/WAIT/SCREEN %s",
+								 environment->env->output_device,
+								 environment->env->output_window,
+								 get_our_pubscreen());
+						if (!(out = Open(output, MODE_OLDFILE)))
+							out = Open("nil:", MODE_OLDFILE);
 
 						// Run command
-						CLI_Launch(command,(struct Screen *)-1,0,out,0,LAUNCHF_USE_STACK,environment->env->default_stack);
+						CLI_Launch(command,
+								   (struct Screen *)-1,
+								   0,
+								   out,
+								   0,
+								   LAUNCHF_USE_STACK,
+								   environment->env->default_stack);
 					}
 
 					// Workbench launch
 					else
 					{
-						WB_LaunchNew(command,GUI->screen_pointer,0,environment->env->default_stack,default_tool);
+						WB_LaunchNew(command, GUI->screen_pointer, 0, environment->env->default_stack, default_tool);
 					}
 
 					// Free command buffer
@@ -422,12 +420,13 @@ void backdrop_object_open(
 				}
 
 				// Free arg list
-				Att_RemList(command_list,0);
+				Att_RemList(command_list, 0);
 			}
 		}
 
 		// Free icon
-		if (got_icon) FreeDiskObject(got_icon);
+		if (got_icon)
+			FreeDiskObject(got_icon);
 	}
 
 	// Restore directory
@@ -435,53 +434,52 @@ void backdrop_object_open(
 	UnLock(lock);
 }
 
-
 // Build arguments from icons
-void backdrop_run_build_args(Att_List *list,BackdropInfo *info,BackdropObject *exclude)
+void backdrop_run_build_args(Att_List *list, BackdropInfo *info, BackdropObject *exclude)
 {
 	BackdropObject *object;
 
 	// Lock backdrop list
-	lock_listlock(&info->objects,0);
+	lock_listlock(&info->objects, 0);
 
 	// Go through backdrop list backwards (to maintain compatibility with Workbench icon ordering)
-	for (object=(BackdropObject *)info->objects.list.lh_TailPred;
-		object->node.ln_Pred;
-		object=(BackdropObject *)object->node.ln_Pred)
+	for (object = (BackdropObject *)info->objects.list.lh_TailPred; object->node.ln_Pred;
+		 object = (BackdropObject *)object->node.ln_Pred)
 	{
 		// Is object selected (and not the one we're running) with a valid path?
-		if (object->state && object!=exclude && (object->path || object->type==BDO_DISK))
+		if (object->state && object != exclude && (object->path || object->type == BDO_DISK))
 		{
-			BOOL ok=0;
+			BOOL ok = 0;
 			char name[256];
 
 			// Is icon for a disk?
-			if (object->type==BDO_DISK) ok=1;
+			if (object->type == BDO_DISK)
+				ok = 1;
 
 			// Is object a real one?
-			else
-			if (object->type==BDO_LEFT_OUT)
+			else if (object->type == BDO_LEFT_OUT)
 			{
 				// In a lister, it's ok
-				if (info->lister || object->flags&BDOF_DESKTOP_FOLDER) ok=1;
+				if (info->lister || object->flags & BDOF_DESKTOP_FOLDER)
+					ok = 1;
 			}
 
 			// Ok to use?
 			if (ok)
 			{
 				// Disk?
-				if (object->type==BDO_DISK)
-					stccpy(name,object->device_name,sizeof(name));
+				if (object->type == BDO_DISK)
+					stccpy(name, object->device_name, sizeof(name));
 
 				// Build name
 				else
 				{
-					stccpy(name,object->path,sizeof(name));
-					AddPart(name,object->name,256);
+					stccpy(name, object->path, sizeof(name));
+					AddPart(name, object->name, 256);
 				}
 
 				// Add to list
-				Att_NewNode(list,name,0,0);
+				Att_NewNode(list, name, 0, 0);
 			}
 		}
 	}

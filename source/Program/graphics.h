@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,14 +25,14 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_GRAPHICS
 
 // Prototypes
-void do3dbox(struct RastPort *,struct Rectangle *,BOOL);
-void do3dstringbox(struct RastPort *,struct Rectangle *);
-void fill_out_cover_gadget(struct Gadget *,struct Gadget *);
-void show_list_selector(Lister *,short,BOOL);
+void do3dbox(struct RastPort *, struct Rectangle *, BOOL);
+void do3dstringbox(struct RastPort *, struct Rectangle *);
+void fill_out_cover_gadget(struct Gadget *, struct Gadget *);
+void show_list_selector(Lister *, short, BOOL);
 void erase_window(struct Window *);
-struct Gadget *create_iconify_gadget(struct Screen *,struct List *,BOOL);
+struct Gadget *create_iconify_gadget(struct Screen *, struct List *, BOOL);
 void LockScreenLayer(struct Screen *screen);
 void UnlockScreenLayer(struct Screen *screen);
-void setwindowtitle_fix(struct Window *window,char *title);
+void setwindowtitle_fix(struct Window *window, char *title);
 
 #endif

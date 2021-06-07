@@ -17,22 +17,22 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	char			sli_Path[256];
-	struct FileInfoBlock	sli_Fib;
+	char sli_Path[256];
+	struct FileInfoBlock sli_Fib;
 } SoftLinkInfo;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-BOOL ReadSoftLinkDopus(BPTR,char *,char *,SoftLinkInfo *);
+BOOL ReadSoftLinkDopus(BPTR, char *, char *, SoftLinkInfo *);

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -37,50 +37,49 @@ DOPUS_FUNC(function_printdir)
 #endif
 
 	// Get source path
-	if (!(path=function_path_current(&handle->source_paths)))
+	if (!(path = function_path_current(&handle->source_paths)))
 		return 0;
 
 	// Open temporary output file
-	lsprintf(handle->work_buffer+800,"t:dopus-tmp.%lx",handle);
-	if (!(outfile=OpenBuf(handle->work_buffer+800,MODE_NEWFILE,1024)))
+	lsprintf(handle->work_buffer + 800, "t:dopus-tmp.%lx", handle);
+	if (!(outfile = OpenBuf(handle->work_buffer + 800, MODE_NEWFILE, 1024)))
 		return 0;
 
 	// Output path
-	WriteBuf(outfile,path->path,-1);
-	WriteBuf(outfile,"\n\n",2);
+	WriteBuf(outfile, path->path, -1);
+	WriteBuf(outfile, "\n\n", 2);
 
 	// Valid lister?
-	if ((lister=path->lister))
+	if ((lister = path->lister))
 	{
 		DirBuffer *buffer;
 		DirEntry *entry;
 
 		// Lock lister buffer
-		buffer_lock((buffer=lister->cur_buffer),FALSE);
+		buffer_lock((buffer = lister->cur_buffer), FALSE);
 
 		// Go through buffer
-		for (entry=(DirEntry *)buffer->entry_list.mlh_Head;
-			entry->de_Node.dn_Succ;
-			entry=(DirEntry *)entry->de_Node.dn_Succ)
+		for (entry = (DirEntry *)buffer->entry_list.mlh_Head; entry->de_Node.dn_Succ;
+			 entry = (DirEntry *)entry->de_Node.dn_Succ)
 		{
 			short len;
 
 			// Build display string for this entry
-			builddisplaystring(entry,handle->work_buffer,lister);
+			builddisplaystring(entry, handle->work_buffer, lister);
 
 			// Find last character in string
-			for (len=strlen(handle->work_buffer)-1;len>=0;len--)
+			for (len = strlen(handle->work_buffer) - 1; len >= 0; len--)
 			{
-				if (handle->work_buffer[len]!=' ')
+				if (handle->work_buffer[len] != ' ')
 				{
-					handle->work_buffer[len+1]=0;
+					handle->work_buffer[len + 1] = 0;
 					break;
 				}
 			}
 
 			// Output to temporary file
-			WriteBuf(outfile,handle->work_buffer,-1);
-			WriteBuf(outfile,"\n",1);
+			WriteBuf(outfile, handle->work_buffer, -1);
+			WriteBuf(outfile, "\n", 1);
 		}
 
 		// Unlock buffer
@@ -88,44 +87,46 @@ DOPUS_FUNC(function_printdir)
 	}
 
 	// Otherwise, lock directory
-	else if ((lock=Lock(path->path,ACCESS_READ)))
+	else if ((lock = Lock(path->path, ACCESS_READ)))
 	{
 		// Examine directory
-		Examine(lock,handle->s_info);
+		Examine(lock, handle->s_info);
 
 		// Go through directory
-		while (ExNext(lock,handle->s_info))
+		while (ExNext(lock, handle->s_info))
 		{
 			// Get size
-			if (handle->s_info->fib_DirEntryType<0)
+			if (handle->s_info->fib_DirEntryType < 0)
 			{
-				if (handle->s_info->fib_Size>0)
-					lsprintf(handle->temp_buffer,"%ld",handle->s_info->fib_Size);
-				else strcpy(handle->temp_buffer,GetString(&locale,MSG_EMPTY));
+				if (handle->s_info->fib_Size > 0)
+					lsprintf(handle->temp_buffer, "%ld", handle->s_info->fib_Size);
+				else
+					strcpy(handle->temp_buffer, GetString(&locale, MSG_EMPTY));
 			}
-			else strcpy(handle->temp_buffer,"<dir>");
+			else
+				strcpy(handle->temp_buffer, "<dir>");
 
 			// Get protection and date strings
-			protect_get_string(handle->s_info->fib_Protection,handle->temp_buffer+20);
-			date_build_string(&handle->s_info->fib_Date,handle->temp_buffer+40,1);
+			protect_get_string(handle->s_info->fib_Protection, handle->temp_buffer + 20);
+			date_build_string(&handle->s_info->fib_Date, handle->temp_buffer + 40, 1);
 
 			// Build output string for this file
 			lsprintf(handle->work_buffer,
-				"%-24s%8s %8s %s\n",
-				handle->s_info->fib_FileName,
-				handle->temp_buffer,
-				handle->temp_buffer+20,
-				handle->temp_buffer+40);
+					 "%-24s%8s %8s %s\n",
+					 handle->s_info->fib_FileName,
+					 handle->temp_buffer,
+					 handle->temp_buffer + 20,
+					 handle->temp_buffer + 40);
 
 			// Write output
-			WriteBuf(outfile,handle->work_buffer,-1);
+			WriteBuf(outfile, handle->work_buffer, -1);
 
 			// Comment?
 			if (handle->s_info->fib_Comment[0])
 			{
-				WriteBuf(outfile,": ",2);
-				WriteBuf(outfile,handle->s_info->fib_Comment,-1);
-				WriteBuf(outfile,"\n",1);
+				WriteBuf(outfile, ": ", 2);
+				WriteBuf(outfile, handle->s_info->fib_Comment, -1);
+				WriteBuf(outfile, "\n", 1);
 			}
 		}
 
@@ -137,10 +138,10 @@ DOPUS_FUNC(function_printdir)
 	CloseBuf(outfile);
 
 	// Open print module
-	if ((ModuleBase=OpenModule("print.module"))
-	#ifdef __amigaos4__	
-	&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
-	#endif
+	if ((ModuleBase = OpenModule("print.module"))
+#ifdef __amigaos4__
+		&& (IModule = (struct ModuleIFace *)GetInterface(ModuleBase, "main", 1, NULL))
+#endif
 	)
 	{
 		struct List list;
@@ -148,22 +149,22 @@ DOPUS_FUNC(function_printdir)
 
 		// Initialise fake list
 		NewList(&list);
-		node.ln_Name=handle->work_buffer+800;
-		AddTail(&list,&node);
+		node.ln_Name = handle->work_buffer + 800;
+		AddTail(&list, &node);
 
 		// Print file
-		Module_Entry(&list,GUI->screen_pointer,handle->ipc,&main_ipc,0,0);
+		Module_Entry(&list, GUI->screen_pointer, handle->ipc, &main_ipc, 0, 0);
 
-		// Close print module
-		#ifdef __amigaos4__
+// Close print module
+#ifdef __amigaos4__
 		DropInterface((struct Interface *)IModule);
-		#endif
+#endif
 		CloseLibrary(ModuleBase);
 	}
 	else
-		CloseLibrary(ModuleBase); // In case libray opens and interface doesn't
+		CloseLibrary(ModuleBase);  // In case libray opens and interface doesn't
 
 	// Delete temporary file
-	DeleteFile(handle->work_buffer+800);
+	DeleteFile(handle->work_buffer + 800);
 	return 1;
 }

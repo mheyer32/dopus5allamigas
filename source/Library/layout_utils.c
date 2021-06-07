@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,81 +25,77 @@ For more information on Directory Opus for Windows please see:
 #include "layout_routines.h"
 
 // Initialise window dimensions
-void LIBFUNC L_InitWindowDims(
-	REG(a0, struct Window *window),
-	REG(a1, WindowDimensions *dims))
+void LIBFUNC L_InitWindowDims(REG(a0, struct Window *window), REG(a1, WindowDimensions *dims))
 {
 	// Not valid?
-	if (!(dims->wd_Flags&WDF_VALID))
+	if (!(dims->wd_Flags & WDF_VALID))
 	{
 		// Store normal dimensions
-		dims->wd_Normal=*((struct IBox *)&window->LeftEdge);
+		dims->wd_Normal = *((struct IBox *)&window->LeftEdge);
 
 		// Use minimum as zoomed dimensions
-		dims->wd_Zoomed.Left=window->LeftEdge;
-		dims->wd_Zoomed.Top=window->TopEdge;
-		dims->wd_Zoomed.Width=window->MinWidth;
-		dims->wd_Zoomed.Height=window->MinHeight;
+		dims->wd_Zoomed.Left = window->LeftEdge;
+		dims->wd_Zoomed.Top = window->TopEdge;
+		dims->wd_Zoomed.Width = window->MinWidth;
+		dims->wd_Zoomed.Height = window->MinHeight;
 
 		// Set valid flag
-		dims->wd_Flags|=WDF_VALID;
+		dims->wd_Flags |= WDF_VALID;
 	}
 }
 
-
 // Store window dimensions
-void LIBFUNC L_StoreWindowDims(
-	REG(a0, struct Window *window),
-	REG(a1, WindowDimensions *dims))
+void LIBFUNC L_StoreWindowDims(REG(a0, struct Window *window), REG(a1, WindowDimensions *dims))
 {
 	// Is window zoomed?
-	if (window->Flags&WFLG_ZOOMED)
+	if (window->Flags & WFLG_ZOOMED)
 	{
 		// Store zoom dimensions
-		dims->wd_Zoomed=*((struct IBox *)&window->LeftEdge);
+		dims->wd_Zoomed = *((struct IBox *)&window->LeftEdge);
 
 		// Set zoomed flag
-		dims->wd_Flags|=WDF_ZOOMED;
+		dims->wd_Flags |= WDF_ZOOMED;
 	}
 
 	// Not zoomed
 	else
 	{
 		// Store normal dimensions
-		dims->wd_Normal=*((struct IBox *)&window->LeftEdge);
+		dims->wd_Normal = *((struct IBox *)&window->LeftEdge);
 
 		// Clear zoomed flag
-		dims->wd_Flags&=~WDF_ZOOMED;
+		dims->wd_Flags &= ~WDF_ZOOMED;
 	}
 }
 
-
 // See if size has changed
-BOOL LIBFUNC L_CheckWindowDims(
-	REG(a0, struct Window *window),
-	REG(a1, WindowDimensions *dims))
+BOOL LIBFUNC L_CheckWindowDims(REG(a0, struct Window *window), REG(a1, WindowDimensions *dims))
 {
 	struct IBox *box;
 
 	// If zoom state has changed, sense changes
-	if ((window->Flags&WFLG_ZOOMED && !(dims->wd_Flags&WDF_ZOOMED)) ||
-		(!(window->Flags&WFLG_ZOOMED) && dims->wd_Flags&WDF_ZOOMED))
+	if ((window->Flags & WFLG_ZOOMED && !(dims->wd_Flags & WDF_ZOOMED)) ||
+		(!(window->Flags & WFLG_ZOOMED) && dims->wd_Flags & WDF_ZOOMED))
 	{
 		// Is window zoomed?
-		if (window->Flags&WFLG_ZOOMED) box=&dims->wd_Normal;
-		else box=&dims->wd_Zoomed;
+		if (window->Flags & WFLG_ZOOMED)
+			box = &dims->wd_Normal;
+		else
+			box = &dims->wd_Zoomed;
 	}
 
 	// Otherwise, normal sense
 	else
 	{
 		// Is window zoomed?
-		if (window->Flags&WFLG_ZOOMED) box=&dims->wd_Zoomed;
-		else box=&dims->wd_Normal;
+		if (window->Flags & WFLG_ZOOMED)
+			box = &dims->wd_Zoomed;
+		else
+			box = &dims->wd_Normal;
 	}
 
 	// See if size is different
-	if (window->Width!=box->Width || window->Height!=box->Height)
+	if (window->Width != box->Width || window->Height != box->Height)
 		return 1;
 
 	return 0;

@@ -7,5 +7,5 @@
 
 void init_locale_data(struct DOpusLocale *locale)
 {
-	locale->li_BuiltIn=(char *)CatCompBlock;
+	locale->li_BuiltIn = (char *)CatCompBlock;
 }

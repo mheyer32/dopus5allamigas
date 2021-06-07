@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,34 +25,34 @@ For more information on Directory Opus for Windows please see:
 #define DOPUS_POPUP_STUFF
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct _PopUpExt
 {
-	struct Node		pe_Node;
-	ULONG			pe_Type;		// WBDISK, etc
-	char			pe_FileType[40];	// Filetype name
-	char			pe_Command[40];		// Command to run
-	char			pe_Menu[40];		// Menu text
-	ULONG			pe_Flags;		// Flags
+	struct Node pe_Node;
+	ULONG pe_Type;		   // WBDISK, etc
+	char pe_FileType[40];  // Filetype name
+	char pe_Command[40];   // Command to run
+	char pe_Menu[40];	   // Menu text
+	ULONG pe_Flags;		   // Flags
 } PopUpExt;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-#define POPUP_ALL	((ULONG)-1)
-#define POPUP_LEFTOUT	7
-#define POPUP_LISTER	8
-#define POPUP_LISTER2	9
+#define POPUP_ALL ((ULONG)-1)
+#define POPUP_LEFTOUT 7
+#define POPUP_LISTER 8
+#define POPUP_LISTER2 9
 
-#define POPUPEXTF_HANDLER	(1<<0)
+#define POPUPEXTF_HANDLER (1 << 0)
 
-void add_popup_ext(char *,Att_List *,char *,ULONG);
+void add_popup_ext(char *, Att_List *, char *, ULONG);
 void remove_popup_ext(char *);
 BOOL popup_ext_check(char *);
-void popup_run_func(PopUpExt *,BackdropObject *,char *,Lister *);
-PopUpHandle *popup_from_bank(Cfg_ButtonBank *bank,short *);
+void popup_run_func(PopUpExt *, BackdropObject *, char *, Lister *);
+PopUpHandle *popup_from_bank(Cfg_ButtonBank *bank, short *);
 
 #endif

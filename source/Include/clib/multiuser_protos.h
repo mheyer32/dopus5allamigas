@@ -8,7 +8,7 @@
 */
 
 #ifndef LIBRARIES_MULTIUSER_H
-# include <libraries/multiuser.h>
+	#include <libraries/multiuser.h>
 #endif
 
 #ifdef __cplusplus
@@ -17,11 +17,11 @@ extern "C" {
 
 ULONG muLogoutA(struct TagItem *taglist);
 #if !defined(USE_INLINE_STDARG)
-ULONG muLogout(ULONG tag1type,...);
+ULONG muLogout(ULONG tag1type, ...);
 #endif
 ULONG muLoginA(struct TagItem *taglist);
 #if !defined(USE_INLINE_STDARG)
-ULONG muLogin(ULONG tag1type,...);
+ULONG muLogin(ULONG tag1type, ...);
 #endif
 ULONG muGetTaskOwner(struct Task *task);
 BOOL muPasswd(STRPTR oldpwd, STRPTR newpwd);
@@ -30,7 +30,7 @@ void muFreeUserInfo(struct muUserInfo *info);
 struct muUserInfo *muGetUserInfo(struct muUserInfo *info, ULONG keytype);
 BOOL muSetDefProtectionA(struct TagItem *taglist);
 #if !defined(USE_INLINE_STDARG)
-BOOL muSetDefProtection(ULONG tag1type,...);
+BOOL muSetDefProtection(ULONG tag1type, ...);
 #endif
 ULONG muGetDefProtection(struct Task *task);
 BOOL muSetProtection(STRPTR name, LONG mask);
@@ -38,17 +38,15 @@ BOOL muLimitDOSSetProtection(BOOL flag);
 BOOL muCheckPasswd(struct TagItem *taglist);
 BOOL muCheckPasswdTagList(struct TagItem *taglist);
 #if !defined(USE_INLINE_STDARG)
-BOOL muCheckPasswdTags(ULONG tag1type,...);
+BOOL muCheckPasswdTags(ULONG tag1type, ...);
 #endif
 BPTR muGetPasswdDirLock(void);
 BPTR muGetConfigDirLock(void);
 struct muExtOwner *muGetTaskExtOwner(struct Task *task);
 void muFreeExtOwner(struct muExtOwner *owner);
-ULONG muGetRelationshipA(struct muExtOwner *user, ULONG owner,
-                         struct TagItem *taglist);
+ULONG muGetRelationshipA(struct muExtOwner *user, ULONG owner, struct TagItem *taglist);
 #if !defined(USE_INLINE_STDARG)
-ULONG muGetRelationship(struct muExtOwner *user, ULONG owner,
-                        ULONG tag1type,...);
+ULONG muGetRelationship(struct muExtOwner *user, ULONG owner, ULONG tag1type, ...);
 #endif
 struct muExtOwner *muUserInfo2ExtOwner(struct muUserInfo *info);
 struct muGroupInfo *muAllocGroupInfo(void);
@@ -64,6 +62,5 @@ BOOL muFSRendezVous(void);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
-
 
 #endif /* CLIB_MULTIUSER_PROTOS_H */

@@ -4,32 +4,31 @@
 
 // Edit a filetype (library function)
 
-Cfg_Filetype *LIBFUNC L_EditFiletype(
-	REG(a0, Cfg_Filetype *type),
-	REG(a1, struct Window *window),
-	REG(a2, IPCData *ipc),
-	REG(a3, IPCData *dopus_ipc),
-	REG(d0, ULONG flags))
+Cfg_Filetype *LIBFUNC L_EditFiletype(REG(a0, Cfg_Filetype *type),
+									 REG(a1, struct Window *window),
+									 REG(a2, IPCData *ipc),
+									 REG(a3, IPCData *dopus_ipc),
+									 REG(d0, ULONG flags))
 {
 	filetype_ed_data *data;
 	IPCData *editor;
 	IPCMessage *imsg;
-	Cfg_Filetype *ret_type=0;
+	Cfg_Filetype *ret_type = 0;
 
 	// Valid filetype?
-	if (!type) return 0;
+	if (!type)
+		return 0;
 
 	// Allocate data for the editor, copy filetype
-	if (!(data=AllocVec(sizeof(filetype_ed_data),MEMF_CLEAR)) ||
-		!(data->type=CopyFiletype(type,0)))
+	if (!(data = AllocVec(sizeof(filetype_ed_data), MEMF_CLEAR)) || !(data->type = CopyFiletype(type, 0)))
 	{
 		FreeVec(data);
 		return 0;
 	}
 
 	// Fill out data
-	data->owner_ipc=ipc;
-	data->action_lookup=filetype_action_lookup;
+	data->owner_ipc = ipc;
+	data->action_lookup = filetype_action_lookup;
 
 	// Supply libraries
 	/*data->func_startup.dopus_base=DOpusBase;
@@ -43,41 +42,42 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 	data->func_startup.layers_base=LayersBase;*/
 
 	// Supply locale
-	data->func_startup.locale=locale;
+	data->func_startup.locale = locale;
 
 	// Supply gui data pointers
-	data->new_win.parent=window;
-	data->new_win.dims=&_filetype_editor_window;
-	data->new_win.locale=locale;
-	data->obj_def=_filetype_editor_objects;
+	data->new_win.parent = window;
+	data->new_win.dims = &_filetype_editor_window;
+	data->new_win.locale = locale;
+	data->obj_def = _filetype_editor_objects;
 
 	// Supply data pointers for function editor
-	data->func_startup.win_def=&_function_editor_window;
-	data->func_startup.obj_def=_function_editor_objects;
-	data->func_startup.func_labels=_function_type_labels;
-	data->func_startup.flag_list=_funced_flaglist;
-	data->func_startup.func_list=IPC_Command(dopus_ipc,MAINCMD_GET_LIST,0,0,0,REPLY_NO_PORT);
-	data->func_startup.flags=FUNCEDF_NO_KEY;
-	data->func_startup.main_owner=ipc;
+	data->func_startup.win_def = &_function_editor_window;
+	data->func_startup.obj_def = _function_editor_objects;
+	data->func_startup.func_labels = _function_type_labels;
+	data->func_startup.flag_list = _funced_flaglist;
+	data->func_startup.func_list = IPC_Command(dopus_ipc, MAINCMD_GET_LIST, 0, 0, 0, REPLY_NO_PORT);
+	data->func_startup.flags = FUNCEDF_NO_KEY;
+	data->func_startup.main_owner = ipc;
 
 	// Supply data pointers for the fileclass editor
-	data->class_win=&_fileclass_editor_window;
-	data->class_obj=_fileclass_editor_objects;
-	data->class_lookup=fileclass_match_lookup;
-	data->class_strings=matchtype_labels;
+	data->class_win = &_fileclass_editor_window;
+	data->class_obj = _fileclass_editor_objects;
+	data->class_lookup = fileclass_match_lookup;
+	data->class_strings = matchtype_labels;
 
 	// Open class editor automatically?
-	if (flags&EFTF_EDIT_CLASS) data->edit_flag=1;
+	if (flags & EFTF_EDIT_CLASS)
+		data->edit_flag = 1;
 
 	// Launch editor
-	if (!(IPC_Launch(
-		0,
-		&editor,
-		"dopus_filetype_editor",
-		(ULONG)IPC_NATIVE(FiletypeEditor),
-		STACK_DEFAULT,
-		(ULONG)data,
-		(struct Library *)DOSBase)) || !editor)
+	if (!(IPC_Launch(0,
+					 &editor,
+					 "dopus_filetype_editor",
+					 (ULONG)IPC_NATIVE(FiletypeEditor),
+					 STACK_DEFAULT,
+					 (ULONG)data,
+					 (struct Library *)DOSBase)) ||
+		!editor)
 	{
 		// Failed; free data
 		FreeFiletype(data->type);
@@ -88,45 +88,41 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 	// Event loop
 	FOREVER
 	{
-		BOOL quit=0;
+		BOOL quit = 0;
 
 		// IPC messages
-		while ((imsg=(IPCMessage *)GetMsg(ipc->command_port)))
+		while ((imsg = (IPCMessage *)GetMsg(ipc->command_port)))
 		{
 			// Filetype returned?
-			if (imsg->command==FILETYPEEDIT_RETURN)
+			if (imsg->command == FILETYPEEDIT_RETURN)
 			{
 				// Copy the filetype
-				ret_type=CopyFiletype((Cfg_Filetype *)imsg->flags,0);
+				ret_type = CopyFiletype((Cfg_Filetype *)imsg->flags, 0);
 			}
 
 			// Said goodbye?
-			else
-			if (imsg->command==IPC_GOODBYE && imsg->data==editor)
-				quit=1;
+			else if (imsg->command == IPC_GOODBYE && imsg->data == editor)
+				quit = 1;
 
 			// Abort?
-			else
-			if (imsg->command==IPC_QUIT)
+			else if (imsg->command == IPC_QUIT)
 			{
 				// Send abort message
-				IPC_Quit(editor,imsg->flags,TRUE);
+				IPC_Quit(editor, imsg->flags, TRUE);
 			}
 
 			// Activate?
-			else
-			if (imsg->command==IPC_ACTIVATE)
+			else if (imsg->command == IPC_ACTIVATE)
 			{
 				// Send message
-				IPC_Command(editor,IPC_ACTIVATE,imsg->flags,imsg->data,0,0);
+				IPC_Command(editor, IPC_ACTIVATE, imsg->flags, imsg->data, 0, 0);
 			}
 
 			// Identify?
-			else
-			if (imsg->command==IPC_IDENTIFY)
+			else if (imsg->command == IPC_IDENTIFY)
 			{
 				// Pass to DOpus
-				IPC_Command(dopus_ipc,IPC_IDENTIFY,imsg->flags,imsg->data,0,REPLY_NO_PORT);
+				IPC_Command(dopus_ipc, IPC_IDENTIFY, imsg->flags, imsg->data, 0, REPLY_NO_PORT);
 			}
 
 			// Reply to message
@@ -134,7 +130,8 @@ Cfg_Filetype *LIBFUNC L_EditFiletype(
 		}
 
 		// Check quit flag
-		if (quit) break;
+		if (quit)
+			break;
 
 		// Wait for message
 		WaitPort(ipc->command_port);

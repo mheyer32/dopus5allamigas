@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,96 +26,85 @@ For more information on Directory Opus for Windows please see:
 
 struct Library *DOpusBase;
 
-#define SetFlag(v,f)		((v)|=(f))
-#define ClearFlag(v,f)		((v)&=~(f))
-#define ToggleFlag(v,f) 	((v)^=(f))
-#define FlagIsSet(v,f)		(((v)&(f))!=0)
-#define FlagIsClear(v,f)	(((v)&(f))==0)
+#define SetFlag(v, f) ((v) |= (f))
+#define ClearFlag(v, f) ((v) &= ~(f))
+#define ToggleFlag(v, f) ((v) ^= (f))
+#define FlagIsSet(v, f) (((v) & (f)) != 0)
+#define FlagIsClear(v, f) (((v) & (f)) == 0)
 
-
-void main(int argc,char **argv)
+void main(int argc, char **argv)
 {
-char *name;
-struct DiskObject *icon;
-LONG flags;
+	char *name;
+	struct DiskObject *icon;
+	LONG flags;
 
-	if (DOpusBase=OpenLibrary("dopus5.library",0))
+	if (DOpusBase = OpenLibrary("dopus5.library", 0))
 	{
-	if (argc>1)
+		if (argc > 1)
 		{
-		name = argv[1];
-		printf("icon %s\n",name);
+			name = argv[1];
+			printf("icon %s\n", name);
 
-		if	(IconBase->lib_Version>=44)
-			icon=GetIconTags(name,
-				ICONGETA_FailIfUnavailable,TRUE,
-				TAG_DONE);
-		else
-			icon=GetDiskObject(name);
+			if (IconBase->lib_Version >= 44)
+				icon = GetIconTags(name, ICONGETA_FailIfUnavailable, TRUE, TAG_DONE);
+			else
+				icon = GetDiskObject(name);
 
-		if	(icon)
+			if (icon)
 			{
-			ULONG mx,ud;
+				ULONG mx, ud;
 
-			ud=(ULONG)icon->do_Gadget.UserData;
-			mx=icon->do_Gadget.MutualExclude; 
+				ud = (ULONG)icon->do_Gadget.UserData;
+				mx = icon->do_Gadget.MutualExclude;
 
-			printf("UserData %lx MutualExclude %lx\n",ud,mx);
+				printf("UserData %lx MutualExclude %lx\n", ud, mx);
 
-			flags=GetIconFlags(icon);
-			printf("%lx\n",flags);
+				flags = GetIconFlags(icon);
+				printf("%lx\n", flags);
 
-			printf("ICONF_POSITION_OK %lx\n",flags&ICONF_POSITION_OK);
-			printf("ICONF_ICON_VIEW %lx\n",flags&ICONF_ICON_VIEW);
-			printf("ICONF_BORDER_OFF %lx\n",flags&ICONF_BORDER_OFF);
-			printf("ICONF_NO_LABEL %lx\n",flags&ICONF_NO_LABEL);
-			printf("ICONF_BORDER_ON %lx\n",flags&ICONF_BORDER_ON);
+				printf("ICONF_POSITION_OK %lx\n", flags & ICONF_POSITION_OK);
+				printf("ICONF_ICON_VIEW %lx\n", flags & ICONF_ICON_VIEW);
+				printf("ICONF_BORDER_OFF %lx\n", flags & ICONF_BORDER_OFF);
+				printf("ICONF_NO_LABEL %lx\n", flags & ICONF_NO_LABEL);
+				printf("ICONF_BORDER_ON %lx\n", flags & ICONF_BORDER_ON);
 
-
-			if	(argc==3)
+				if (argc == 3)
 				{
-				if	(!strcmp(argv[2],"on"))
+					if (!strcmp(argv[2], "on"))
 					{
-					printf("ON\n");
+						printf("ON\n");
 
-					ClearFlag(flags,ICONF_BORDER_OFF);
-					SetFlag(flags,ICONF_BORDER_ON);
-
+						ClearFlag(flags, ICONF_BORDER_OFF);
+						SetFlag(flags, ICONF_BORDER_ON);
 					}
 
-				else
+					else
 					{
-					printf("OFF\n");
+						printf("OFF\n");
 
-					SetFlag(flags,ICONF_BORDER_OFF);
-					ClearFlag(flags,ICONF_BORDER_ON);
+						SetFlag(flags, ICONF_BORDER_OFF);
+						ClearFlag(flags, ICONF_BORDER_ON);
 					}
 
+					ud = (ULONG)icon->do_Gadget.UserData;
+					mx = icon->do_Gadget.MutualExclude;
 
-			ud=(ULONG)icon->do_Gadget.UserData;
-			mx=icon->do_Gadget.MutualExclude; 
+					printf("UserData %lx MutualExclude %lx\n", ud, mx);
 
-			printf("UserData %lx MutualExclude %lx\n",ud,mx);
+					printf("%lx\n", flags);
 
-			printf("%lx\n",flags);
+					printf("ICONF_BORDER_OFF %lx\n", flags & ICONF_BORDER_OFF);
+					printf("ICONF_NO_LABEL %lx\n", flags & ICONF_NO_LABEL);
+					printf("ICONF_BORDER_ON %lx\n", flags & ICONF_BORDER_ON);
 
-			printf("ICONF_BORDER_OFF %lx\n",flags&ICONF_BORDER_OFF);
-			printf("ICONF_NO_LABEL %lx\n",flags&ICONF_NO_LABEL);
-			printf("ICONF_BORDER_ON %lx\n",flags&ICONF_BORDER_ON);
-
-		
-				SetIconFlags(icon,flags);
-				PutDiskObject(name,icon);
-
-
-
+					SetIconFlags(icon, flags);
+					PutDiskObject(name, icon);
 				}
 
-			FreeDiskObject(icon);
+				FreeDiskObject(icon);
 			}
 		}
-	
 
-	CloseLibrary(DOpusBase);
+		CloseLibrary(DOpusBase);
 	}
 }

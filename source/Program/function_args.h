@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,27 +25,27 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_FUNCTION_ARGS
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct _FuncArgs
 {
-	struct RDArgs	*rdargs;	// RDArgs structure
-	struct RDArgs	*rdargs_res;	// Return from ReadArgs()
-	char		*arg_string;	// Copy of argument string (with newline)
-	LONG		*arg_array;	// Argument array pointer
-	LONG		*arguments;	// Arguments we use
-	short		count;
-	short		done_args;
+	struct RDArgs *rdargs;		// RDArgs structure
+	struct RDArgs *rdargs_res;	// Return from ReadArgs()
+	char *arg_string;			// Copy of argument string (with newline)
+	LONG *arg_array;			// Argument array pointer
+	LONG *arguments;			// Arguments we use
+	short count;
+	short done_args;
 } FuncArgs;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-FuncArgs *function_parse_args(char *template,char *args);
+FuncArgs *function_parse_args(char *template, char *args);
 void function_free_args(FuncArgs *args);
-BOOL function_file_args(FunctionHandle *handle,InstructionParsed *instruction,char *args);
+BOOL function_file_args(FunctionHandle *handle, InstructionParsed *instruction, char *args);
 void function_file_args_free(FunctionHandle *handle);
 
 #endif

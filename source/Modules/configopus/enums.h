@@ -1,5 +1,4 @@
-enum
-{
+enum {
 	GAD_BASE,
 
 	GAD_SETTINGS_LAYOUT,

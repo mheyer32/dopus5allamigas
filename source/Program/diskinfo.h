@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,8 +30,7 @@ extern struct TagItem diskinfo_info_tags[];
 
 #define DISKINFO_ITEM_WIDTH 60
 
-enum
-{
+enum {
 	GAD_DISKINFO_DEVICE,
 	GAD_DISKINFO_NAME,
 	GAD_DISKINFO_SIZE,
@@ -51,6 +50,6 @@ enum
 };
 
 // Prototypes
-void show_disk_info(FunctionHandle *,PathNode *,char *);
+void show_disk_info(FunctionHandle *, PathNode *, char *);
 
 #endif

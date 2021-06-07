@@ -8,7 +8,8 @@ int stccpy(char *p, const char *q, int n)
 	char *t = p;
 
 	while ((*p++ = *q++) && --n > 0)
-	{};
+	{
+	};
 
 	p[-1] = '\0';
 
@@ -32,11 +33,11 @@ char *stptok(const char *s, char *tok, size_t toklen, char *brk)
 		return NULL;
 
 	lim = tok + toklen - 1;
-	while ( *s && tok < lim )
+	while (*s && tok < lim)
 	{
-		for ( b = brk; *b; b++ )
+		for (b = brk; *b; b++)
 		{
-			if ( *s == *b )
+			if (*s == *b)
 			{
 				*tok = 0;
 				return (char *)s;
@@ -47,4 +48,3 @@ char *stptok(const char *s, char *tok, size_t toklen, char *brk)
 	*tok = 0;
 	return (char *)s;
 }
-

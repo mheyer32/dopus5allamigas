@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -29,22 +29,26 @@ int path_parent(char *path)
 	short len;
 
 	// Get length of path
-	if ((len=strlen(path)-1)<0) return 0;
+	if ((len = strlen(path) - 1) < 0)
+		return 0;
 
 	// If last character is a :, can't go any further
-	if (path[len]==':') return 0;
+	if (path[len] == ':')
+		return 0;
 
 	// If last character is a /, start at one before
-	if (path[len]=='/') --len;
+	if (path[len] == '/')
+		--len;
 
 	// Go back to previous / or :
-	while (len>0 && path[len]!='/' && path[len]!=':') --len;
+	while (len > 0 && path[len] != '/' && path[len] != ':')
+		--len;
 
 	// Got a separator?
-	if (path[len]=='/' || path[len]==':')
+	if (path[len] == '/' || path[len] == ':')
 	{
 		// Clear after this
-		path[len+1]=0;
+		path[len + 1] = 0;
 		return 1;
 	}
 
@@ -52,51 +56,49 @@ int path_parent(char *path)
 	return 0;
 }
 
-
 // Get the root of a path
 int path_root(char *path)
 {
 	short count;
 
 	// Keep doing parent until we reach the root
-	for (count=0;path_parent(path);count++);
+	for (count = 0; path_parent(path); count++)
+		;
 
 	return count;
 }
 
-
-
 // Get the root of a pathname
-int get_path_root(char *path,char *root_name,struct DateStamp *date)
+int get_path_root(char *path, char *root_name, struct DateStamp *date)
 {
 	struct DevProc *proc;
 	D_S(struct InfoData, info)
 	struct DosList *dos;
 
 	// Get device process
-	if (!(proc=GetDeviceProc(path,0)))
+	if (!(proc = GetDeviceProc(path, 0)))
 		return 0;
 
-	// Send info packet
+		// Send info packet
 #ifdef __AROS__
-	if (((struct Library *)DOSBase)->lib_Version<50)
+	if (((struct Library *)DOSBase)->lib_Version < 50)
 	{
-		//Info(proc->dvp_Lock,info);
+		// Info(proc->dvp_Lock,info);
 		BPTR lock;
-		if (!(lock=Lock(path,SHARED_LOCK)))
+		if (!(lock = Lock(path, SHARED_LOCK)))
 		{
 			FreeDeviceProc(proc);
 			return 0;
 		}
-		Info(lock,info);
+		Info(lock, info);
 		UnLock(lock);
 	}
 	else
 #endif
-	DoPkt(proc->dvp_Port,ACTION_DISK_INFO,MKBADDR(info),0,0,0,0);
+		DoPkt(proc->dvp_Port, ACTION_DISK_INFO, MKBADDR(info), 0, 0, 0, 0);
 
 	// Get DOS list pointer
-	if (!(dos=(struct DosList *)BADDR(info->id_VolumeNode)))
+	if (!(dos = (struct DosList *)BADDR(info->id_VolumeNode)))
 	{
 		FreeDeviceProc(proc);
 		return 0;
@@ -105,12 +107,15 @@ int get_path_root(char *path,char *root_name,struct DateStamp *date)
 	// Get root device name
 	if (root_name)
 	{
-		if (dos->dol_Name) BtoCStr(dos->dol_Name,root_name,32);
-		else *root_name=0;
+		if (dos->dol_Name)
+			BtoCStr(dos->dol_Name, root_name, 32);
+		else
+			*root_name = 0;
 	}
 
 	// Copy datestamp if buffer supplied
-	if (date) *date=dos->dol_misc.dol_volume.dol_VolumeDate;
+	if (date)
+		*date = dos->dol_misc.dol_volume.dol_VolumeDate;
 
 	// Free device process
 	FreeDeviceProc(proc);

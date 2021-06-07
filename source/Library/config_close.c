@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -28,8 +28,7 @@ For more information on Directory Opus for Windows please see:
 void config_free_functions(struct List *);
 void config_free_hotkeys(struct List *list);
 
-void LIBFUNC L_CloseButtonBank(
-	REG(a0, Cfg_ButtonBank *bank))
+void LIBFUNC L_CloseButtonBank(REG(a0, Cfg_ButtonBank *bank))
 {
 	if (bank)
 	{
@@ -40,8 +39,7 @@ void LIBFUNC L_CloseButtonBank(
 	}
 }
 
-void LIBFUNC L_FreeListerDef(
-	REG(a0, Cfg_Lister *lister))
+void LIBFUNC L_FreeListerDef(REG(a0, Cfg_Lister *lister))
 {
 	if (lister)
 	{
@@ -50,24 +48,22 @@ void LIBFUNC L_FreeListerDef(
 	}
 }
 
-void LIBFUNC L_FreeButton(
-	REG(a0, Cfg_Button *button))
+void LIBFUNC L_FreeButton(REG(a0, Cfg_Button *button))
 {
 	if (button)
 	{
 		Cfg_ButtonFunction *func;
 
 		// Go through functions attached to button
-		for (func=(Cfg_ButtonFunction *)button->function_list.mlh_Head;
-			func->node.ln_Succ;)
+		for (func = (Cfg_ButtonFunction *)button->function_list.mlh_Head; func->node.ln_Succ;)
 		{
-			Cfg_ButtonFunction *next=(Cfg_ButtonFunction *)func->node.ln_Succ;
+			Cfg_ButtonFunction *next = (Cfg_ButtonFunction *)func->node.ln_Succ;
 
 			// Free function
 			L_FreeButtonFunction(func);
 
 			// Get next
-			func=next;
+			func = next;
 		}
 
 		// Free button
@@ -75,8 +71,7 @@ void LIBFUNC L_FreeButton(
 	}
 }
 
-void LIBFUNC L_FreeFunction(
-	REG(a0, Cfg_Function *function))
+void LIBFUNC L_FreeFunction(REG(a0, Cfg_Function *function))
 {
 	if (function)
 	{
@@ -85,8 +80,7 @@ void LIBFUNC L_FreeFunction(
 	}
 }
 
-void LIBFUNC L_FreeButtonFunction(
-	REG(a0, Cfg_ButtonFunction *func))
+void LIBFUNC L_FreeButtonFunction(REG(a0, Cfg_ButtonFunction *func))
 {
 	if (func)
 	{
@@ -100,23 +94,20 @@ void LIBFUNC L_FreeButtonFunction(
 	}
 }
 
-
-void LIBFUNC L_FreeButtonList(
-	REG(a0, struct List *list))
+void LIBFUNC L_FreeButtonList(REG(a0, struct List *list))
 {
-	struct Node *node,*next;
+	struct Node *node, *next;
 
 	// Free buttons
-	for (node=list->lh_Head;node->ln_Succ;)
+	for (node = list->lh_Head; node->ln_Succ;)
 	{
-		next=node->ln_Succ;
+		next = node->ln_Succ;
 		L_FreeButton((Cfg_Button *)node);
-		node=next;
+		node = next;
 	}
 }
 
-void LIBFUNC L_FreeInstruction(
-	REG(a0, Cfg_Instruction *ins))
+void LIBFUNC L_FreeInstruction(REG(a0, Cfg_Instruction *ins))
 {
 	if (ins)
 	{
@@ -125,72 +116,66 @@ void LIBFUNC L_FreeInstruction(
 	}
 }
 
-void LIBFUNC L_FreeButtonImages(
-	REG(a0, struct List *list))
+void LIBFUNC L_FreeButtonImages(REG(a0, struct List *list))
 {
 	Cfg_Button *button;
 
 	// Go through button list
-	for (button=(Cfg_Button *)list->lh_Head;
-		button->node.ln_Succ;
-		button=(Cfg_Button *)button->node.ln_Succ)
+	for (button = (Cfg_Button *)list->lh_Head; button->node.ln_Succ; button = (Cfg_Button *)button->node.ln_Succ)
 	{
 		Cfg_ButtonFunction *func;
 
-		// Go through button functions	
-		for (func=(Cfg_ButtonFunction *)button->function_list.mlh_Head;
-			func->node.ln_Succ;
-			func=(Cfg_ButtonFunction *)func->node.ln_Succ)
+		// Go through button functions
+		for (func = (Cfg_ButtonFunction *)button->function_list.mlh_Head; func->node.ln_Succ;
+			 func = (Cfg_ButtonFunction *)func->node.ln_Succ)
 		{
 			// Free image
 			L_CloseImage(func->image);
-			func->image=0;
+			func->image = 0;
 		}
 	}
 }
 
-
 void config_free_functions(struct List *list)
 {
-	Cfg_Function *node,*next;
+	Cfg_Function *node, *next;
 
 	// Free functions
-	for (node=(Cfg_Function *)list->lh_Head;node->node.ln_Succ;)
+	for (node = (Cfg_Function *)list->lh_Head; node->node.ln_Succ;)
 	{
-		next=(Cfg_Function *)node->node.ln_Succ;
+		next = (Cfg_Function *)node->node.ln_Succ;
 		L_FreeFunction((Cfg_Function *)node);
-		node=next;
+		node = next;
 	}
 }
 
 void LIBFUNC L_FreeInstructionList(REG(a0, Cfg_Function *func))
 {
-	Cfg_Instruction *node,*next;
+	Cfg_Instruction *node, *next;
 
 	// Free instructions
-	for (node=(Cfg_Instruction *)func->instructions.mlh_Head;
-		node->node.mln_Succ;)
+	for (node = (Cfg_Instruction *)func->instructions.mlh_Head; node->node.mln_Succ;)
 	{
-		next=(Cfg_Instruction *)node->node.mln_Succ;
+		next = (Cfg_Instruction *)node->node.mln_Succ;
 		L_FreeInstruction((Cfg_Instruction *)node);
-		node=next;
+		node = next;
 	}
 	NewList((struct List *)&func->instructions);
 }
 
 void LIBFUNC L_FreeFiletypeList(REG(a0, Cfg_FiletypeList *list))
 {
-	struct Node *node,*next;
+	struct Node *node, *next;
 
-	if (!list || (list->flags&FTLISTF_INTERNAL))
+	if (!list || (list->flags & FTLISTF_INTERNAL))
 		return;
 
 	// Free filetypes in list
-	for (node=list->filetype_list.lh_Head;node->ln_Succ;)
+	for (node = list->filetype_list.lh_Head; node->ln_Succ;)
 	{
-		next=node->ln_Succ;
+		next = node->ln_Succ;
 		L_FreeFiletype((Cfg_Filetype *)node);
-		node=next;
+		node = next;
 	}
 
 	// Free list
@@ -201,7 +186,8 @@ void LIBFUNC L_FreeFiletype(REG(a0, Cfg_Filetype *type))
 {
 	short a;
 
-	if (!type) return;
+	if (!type)
+		return;
 
 	// Remove filetype from list
 	if (type->node.ln_Succ && type->node.ln_Pred)
@@ -212,7 +198,7 @@ void LIBFUNC L_FreeFiletype(REG(a0, Cfg_Filetype *type))
 	L_FreeMemH(type->icon_path);
 	if (type->actions)
 	{
-		for (a=0;a<16;a++)
+		for (a = 0; a < 16; a++)
 			L_FreeMemH(type->actions[a]);
 		L_FreeMemH(type->actions);
 	}
@@ -220,18 +206,17 @@ void LIBFUNC L_FreeFiletype(REG(a0, Cfg_Filetype *type))
 	L_FreeMemH(type);
 }
 
-
 void config_free_hotkeys(struct List *list)
 {
-	struct Node *node,*next;
+	struct Node *node, *next;
 
 	// Free hotkeys
-	for (node=list->lh_Head;node->ln_Succ;) {
-
-		next=node->ln_Succ;
+	for (node = list->lh_Head; node->ln_Succ;)
+	{
+		next = node->ln_Succ;
 		L_FreeMemH(((Cfg_Hotkey *)node)->name);
 		config_free_functions(&((Cfg_Hotkey *)node)->function_list);
 		L_FreeMemH(node);
-		node=next;
+		node = next;
 	}
 }

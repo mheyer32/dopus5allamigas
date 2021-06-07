@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,49 +26,48 @@ For more information on Directory Opus for Windows please see:
 #include "module_deps.h"
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 typedef struct _FunctionEntry
 {
-	struct MinNode		node;
-	char			*name;
-	struct DirEntry		*entry;
-	short			type;
-	short			flags;
+	struct MinNode node;
+	char *name;
+	struct DirEntry *entry;
+	short type;
+	short flags;
 } FunctionEntry;
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
-#define SAVETHEME	0
-#define LOADTHEME	1
-#define BUILDTHEME	2
-#define CONVERTTHEME	3
+#define SAVETHEME 0
+#define LOADTHEME 1
+#define BUILDTHEME 2
+#define CONVERTTHEME 3
 
-#define is_digit(c) ((c)>='0' && (c)<='9')
-#define is_space(c) ((c)==' ' || (c)=='\t')
+#define is_digit(c) ((c) >= '0' && (c) <= '9')
+#define is_space(c) ((c) == ' ' || (c) == '\t')
 
 extern char *func_templates[];
 
-long save_theme(struct Screen *,DOpusCallbackInfo *,char *,BOOL);
+long save_theme(struct Screen *, DOpusCallbackInfo *, char *, BOOL);
 void rexx_skip_space(char **);
-short rexx_parse_word(char **,char *,short);
-BOOL save_theme_background(APTR,DOpusCallbackInfo *,char *,struct MsgPort *,char *,APTR);
-BOOL save_theme_sound(APTR,DOpusCallbackInfo *,char *,struct MsgPort *,char *,APTR);
-BOOL save_theme_font(APTR,DOpusCallbackInfo *,char *,struct MsgPort *);
-BOOL save_theme_pens(APTR,DOpusCallbackInfo *,char *,struct MsgPort *);
-BOOL save_theme_palette(APTR,DOpusCallbackInfo *,struct MsgPort *);
-BOOL theme_copy_file(char *,char *);
+short rexx_parse_word(char **, char *, short);
+BOOL save_theme_background(APTR, DOpusCallbackInfo *, char *, struct MsgPort *, char *, APTR);
+BOOL save_theme_sound(APTR, DOpusCallbackInfo *, char *, struct MsgPort *, char *, APTR);
+BOOL save_theme_font(APTR, DOpusCallbackInfo *, char *, struct MsgPort *);
+BOOL save_theme_pens(APTR, DOpusCallbackInfo *, char *, struct MsgPort *);
+BOOL save_theme_palette(APTR, DOpusCallbackInfo *, struct MsgPort *);
+BOOL theme_copy_file(char *, char *);
 Att_List *theme_build_list(char *path);
-void write_theme_intro(APTR,char *);
+void write_theme_intro(APTR, char *);
 void write_theme_outro(APTR);
-short convert_theme(DOpusCallbackInfo *,char *,char *);
+short convert_theme(DOpusCallbackInfo *, char *, char *);
 void convert_theme_file(char *);
 
 extern char *pen_settings[];
 
-enum
-{
+enum {
 	APPLY_PALETTE,
 	APPLY_FONTS,
 	APPLY_PICTURES,
@@ -77,4 +76,4 @@ enum
 	APPLY_LAST,
 };
 
-extern char apply_lookup[],*sound_lookup[];
+extern char apply_lookup[], *sound_lookup[];

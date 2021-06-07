@@ -17,18 +17,17 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 extern ConfigWindow keyfinder_window;
 extern ObjectDef keyfinder_objects[];
 
-enum
-{
-	GAD_KEYFINDER_KEY=1,
+enum {
+	GAD_KEYFINDER_KEY = 1,
 	GAD_KEYFINDER_FOUND,
 	GAD_KEYFINDER_FUNCTION,
 };
 
-#define KFIPC_KEYCODE	100
+#define KFIPC_KEYCODE 100

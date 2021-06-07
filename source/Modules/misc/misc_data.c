@@ -17,47 +17,29 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "misc.h"
 
 #ifdef __AROS__
-ModuleInfo_3
-	module_info={
-		1,
-		"misc.module",
-		"misc.catalog",
-		0,
-		3,
-		{
-			{BEEP,"Beep",MSG_BEEP_DESC,0,0},
-			{FLASH,"Flash",MSG_FLASH_DESC,0,0},
-			{ALARM,"Alarm",MSG_ALARM_DESC,0,0}
-		}};
+ModuleInfo_3 module_info = {1,
+							"misc.module",
+							"misc.catalog",
+							0,
+							3,
+							{{BEEP, "Beep", MSG_BEEP_DESC, 0, 0},
+							 {FLASH, "Flash", MSG_FLASH_DESC, 0, 0},
+							 {ALARM, "Alarm", MSG_ALARM_DESC, 0, 0}}};
 #else
-ModuleInfo
-	module_info={
-		1,
-		"misc.module",
-		"misc.catalog",
-		0,
-		3,
-		{{BEEP,"Beep",MSG_BEEP_DESC,0,0}}};
+ModuleInfo module_info = {1, "misc.module", "misc.catalog", 0, 3, {{BEEP, "Beep", MSG_BEEP_DESC, 0, 0}}};
 
-ModuleFunction
-	more_functions[]={
-		{FLASH,"Flash",MSG_FLASH_DESC,0,0},
-		{ALARM,"Alarm",MSG_ALARM_DESC,0,0}};
+ModuleFunction more_functions[] = {{FLASH, "Flash", MSG_FLASH_DESC, 0, 0}, {ALARM, "Alarm", MSG_ALARM_DESC, 0, 0}};
 #endif
 
-
 // Beep wave-form
-__chip char
-	beepwave[16]={
-		0,30,60,95,127,95,60,30,0,-30,-60,-95,-127,-95,-60,-30};
+__chip char beepwave[16] = {0, 30, 60, 95, 127, 95, 60, 30, 0, -30, -60, -95, -127, -95, -60, -30};
 
 // Audio channels to allocate
-UBYTE achannels[8]={3,5,10,12,1,2,4,8};
-
+UBYTE achannels[8] = {3, 5, 10, 12, 1, 2, 4, 8};

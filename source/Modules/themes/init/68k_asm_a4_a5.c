@@ -23,4 +23,3 @@ _SelectionList:                  \n\
       moveml sp@+,d2-d4/a2-a6    \n\
       rts                        \n\
       ");
-	  

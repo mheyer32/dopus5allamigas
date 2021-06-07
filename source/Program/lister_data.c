@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,16 +25,27 @@ For more information on Directory Opus for Windows please see:
 
 // Lister menu data
 UWORD
-	lister_popup_data[]={
-		MSG_LISTER_SOURCE,MENU_LISTER_SOURCE,
-		MSG_LISTER_DEST,MENU_LISTER_DEST,
-		MSG_LISTER_OFF,MENU_LISTER_OFF,
-		(UWORD)-1,0,
-		MSG_LISTER_LOCK_SOURCE,MENU_LISTER_LOCK_SOURCE,
-		MSG_LISTER_LOCK_DEST,MENU_LISTER_LOCK_DEST,
-		MSG_LISTER_UNLOCK,MENU_LISTER_UNLOCK,
-		(UWORD)-1,0,
-		MSG_EDIT_MENU,MENU_EDIT_LISTER,
-		(UWORD)-1,0,
-		MSG_LISTER_LOCK_POS,MENU_LISTER_LOCK_POS,
-		0,0};
+lister_popup_data[] = {MSG_LISTER_SOURCE,
+					   MENU_LISTER_SOURCE,
+					   MSG_LISTER_DEST,
+					   MENU_LISTER_DEST,
+					   MSG_LISTER_OFF,
+					   MENU_LISTER_OFF,
+					   (UWORD)-1,
+					   0,
+					   MSG_LISTER_LOCK_SOURCE,
+					   MENU_LISTER_LOCK_SOURCE,
+					   MSG_LISTER_LOCK_DEST,
+					   MENU_LISTER_LOCK_DEST,
+					   MSG_LISTER_UNLOCK,
+					   MENU_LISTER_UNLOCK,
+					   (UWORD)-1,
+					   0,
+					   MSG_EDIT_MENU,
+					   MENU_EDIT_LISTER,
+					   (UWORD)-1,
+					   0,
+					   MSG_LISTER_LOCK_POS,
+					   MENU_LISTER_LOCK_POS,
+					   0,
+					   0};

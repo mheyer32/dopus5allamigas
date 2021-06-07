@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -26,6 +26,6 @@ For more information on Directory Opus for Windows please see:
 // logout internal function
 DOPUS_FUNC(function_logout)
 {
-	MUFSLogin(GUI->window,0,0);
+	MUFSLogin(GUI->window, 0, 0);
 	return 1;
 }

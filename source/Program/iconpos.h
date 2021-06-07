@@ -17,46 +17,43 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
-
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	struct Node		ip_Node;
-	unsigned long		ip_Flags;
-	struct IBox		ip_Area;
-	struct Window		*ip_Window;
-	PopUpHandle		*ip_Menu;
-	PopUpItem		*ip_Item[10];
-	char			ip_Buf[5][4];
+	struct Node ip_Node;
+	unsigned long ip_Flags;
+	struct IBox ip_Area;
+	struct Window *ip_Window;
+	PopUpHandle *ip_Menu;
+	PopUpItem *ip_Item[10];
+	char ip_Buf[5][4];
 } iconpos_data;
 
 typedef struct
 {
-	WindowID		ip_ID;
-	iconpos_data		ip_Data;
+	WindowID ip_ID;
+	iconpos_data ip_Data;
 } iconpos_info;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-void iconpos_openwindow(iconpos_info *,struct MsgPort *);
+void iconpos_openwindow(iconpos_info *, struct MsgPort *);
 void iconpos_closewindow(iconpos_info *);
 
 enum
 
-{
-	IPITEM_APPICON,
-	IPITEM_DISKS,
-	IPITEM_LISTERS,
-	IPITEM_GROUPS,
-	IPITEM_LEFTOUT,
-	IPITEM_PRIORITY
-};
+{ IPITEM_APPICON,
+  IPITEM_DISKS,
+  IPITEM_LISTERS,
+  IPITEM_GROUPS,
+  IPITEM_LEFTOUT,
+  IPITEM_PRIORITY };

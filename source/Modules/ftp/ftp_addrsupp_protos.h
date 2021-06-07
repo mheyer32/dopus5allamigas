@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,21 +25,21 @@ For more information on Directory Opus for Windows please see:
 ftp/ftp_addrsupp.c
  */
 
-extern char const * logfile;
+extern char const *logfile;
 
-void Save_Config(struct display_globals * , BOOL );
+void Save_Config(struct display_globals *, BOOL);
 
-BOOL save_sites(struct display_globals *dg,struct Window *win,short gadgetid);
+BOOL save_sites(struct display_globals *dg, struct Window *win, short gadgetid);
 
-BOOL save_options(struct window_params * , int, short );
+BOOL save_options(struct window_params *, int, short);
 
-Att_List *read_sites(struct window_params *, short );
+Att_List *read_sites(struct window_params *, short);
 
-Att_List *import_sites(struct window_params *, short );
+Att_List *import_sites(struct window_params *, short);
 
-struct ftp_config *read_options(struct window_params * , int );
+struct ftp_config *read_options(struct window_params *, int);
 
-void read_build_addressbook(struct opusftp_globals *,IPCData *);
+void read_build_addressbook(struct opusftp_globals *, IPCData *);
 
 struct connect_msg *get_blank_connectmsg(struct opusftp_globals *);
 
@@ -47,17 +47,16 @@ struct site_entry *get_blank_site_entry(struct opusftp_globals *og);
 
 void sort_list(Att_List *);
 
-int get_site_entry(struct opusftp_globals *og,struct site_entry *e,IPCData *ipc);
+int get_site_entry(struct opusftp_globals *og, struct site_entry *e, IPCData *ipc);
 
-BOOL  get_global_options(struct opusftp_globals *og);
+BOOL get_global_options(struct opusftp_globals *og);
 
 void set_config_to_default(struct ftp_config *oc);
 
-void copy_site_entry(struct opusftp_globals *og,struct site_entry *e,struct site_entry *old);
+void copy_site_entry(struct opusftp_globals *og, struct site_entry *e, struct site_entry *old);
 
-BPTR setup_config( struct opusftp_globals * );
+BPTR setup_config(struct opusftp_globals *);
 
-void cleanup_config( BPTR );
+void cleanup_config(BPTR);
 
-BOOL export_sites(struct display_globals *dg,struct Window *win);
-
+BOOL export_sites(struct display_globals *dg, struct Window *win);

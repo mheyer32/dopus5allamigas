@@ -17,80 +17,77 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 #include "dopus.h"
 
-#define PEN_MAX		8
+#define PEN_MAX 8
 
 // Load screen palette
 void load_screen_palette(void)
 {
-	short num,pen;
+	short num, pen;
 
 	// Get number of colours in screen
-	num=1<<GUI->screen->RastPort.BitMap->Depth;
+	num = 1 << GUI->screen->RastPort.BitMap->Depth;
 
 	// Load base 4 colours
-	for (pen=0;pen<4;pen++)
+	for (pen = 0; pen < 4; pen++)
 	{
-    	if (((struct Library *)GfxBase)->lib_Version>=39)
+		if (((struct Library *)GfxBase)->lib_Version >= 39)
 		{
-			SetRGB32(
-				&GUI->screen->ViewPort,
-				pen,
-				environment->env->palette[pen*3+1],
-				environment->env->palette[pen*3+2],
-				environment->env->palette[pen*3+3]);
+			SetRGB32(&GUI->screen->ViewPort,
+					 pen,
+					 environment->env->palette[pen * 3 + 1],
+					 environment->env->palette[pen * 3 + 2],
+					 environment->env->palette[pen * 3 + 3]);
 		}
 		else
 		{
-			SetRGB4(
-				&GUI->screen->ViewPort,
-				pen,
-				(environment->env->palette[pen*3+1]>>28)&0xf,
-				(environment->env->palette[pen*3+2]>>28)&0xf,
-				(environment->env->palette[pen*3+3]>>28)&0xf);
+			SetRGB4(&GUI->screen->ViewPort,
+					pen,
+					(environment->env->palette[pen * 3 + 1] >> 28) & 0xf,
+					(environment->env->palette[pen * 3 + 2] >> 28) & 0xf,
+					(environment->env->palette[pen * 3 + 3] >> 28) & 0xf);
 		}
 	}
 
 	// Load top 4 colours (under 39)
-	if (((struct Library *)GfxBase)->lib_Version>=39 && num>4)
+	if (((struct Library *)GfxBase)->lib_Version >= 39 && num > 4)
 	{
-		for (pen=0;pen<4;pen++)
+		for (pen = 0; pen < 4; pen++)
 		{
-			SetRGB32(
-				&GUI->screen->ViewPort,
-				num-pen-1,
-				environment->env->palette[(pen+4)*3+1],
-				environment->env->palette[(pen+4)*3+2],
-				environment->env->palette[(pen+4)*3+3]);
+			SetRGB32(&GUI->screen->ViewPort,
+					 num - pen - 1,
+					 environment->env->palette[(pen + 4) * 3 + 1],
+					 environment->env->palette[(pen + 4) * 3 + 2],
+					 environment->env->palette[(pen + 4) * 3 + 3]);
 		}
 	}
 
 	// Under 37, load custom colours
-	if (((struct Library *)GfxBase)->lib_Version<39 && num>4)
+	if (((struct Library *)GfxBase)->lib_Version < 39 && num > 4)
 	{
 		// Only maximum of configured colours
-		num-=4;
-		if (num>environment->env->palette_count) num=environment->env->palette_count;
-		if (num>PEN_MAX) num=PEN_MAX;
+		num -= 4;
+		if (num > environment->env->palette_count)
+			num = environment->env->palette_count;
+		if (num > PEN_MAX)
+			num = PEN_MAX;
 
 		// Load colours
-		for (pen=0;pen<num;pen++)
+		for (pen = 0; pen < num; pen++)
 		{
-			SetRGB4(
-				&GUI->screen->ViewPort,
-				pen+4,
-				(environment->env->palette[(pen+8)*3+1]>>28)&0xf,
-				(environment->env->palette[(pen+8)*3+2]>>28)&0xf,
-				(environment->env->palette[(pen+8)*3+3]>>28)&0xf);
+			SetRGB4(&GUI->screen->ViewPort,
+					pen + 4,
+					(environment->env->palette[(pen + 8) * 3 + 1] >> 28) & 0xf,
+					(environment->env->palette[(pen + 8) * 3 + 2] >> 28) & 0xf,
+					(environment->env->palette[(pen + 8) * 3 + 3] >> 28) & 0xf);
 		}
 	}
 }
-
 
 // Allocate palette
 void get_colour_table()
@@ -99,23 +96,25 @@ void get_colour_table()
 	int newpen = 0;
 
 	// Already got palette?
-	if (GUI->flags&GUIF_GOT_PALETTE)
+	if (GUI->flags & GUIF_GOT_PALETTE)
 		return;
-	GUI->flags|=GUIF_GOT_PALETTE;
+	GUI->flags |= GUIF_GOT_PALETTE;
 
 	// Initialise pens
-	for (pen=0;pen<16;pen++) GUI->pens[pen]=pen;
-	GUI->pen_alloc=0;
+	for (pen = 0; pen < 16; pen++)
+		GUI->pens[pen] = pen;
+	GUI->pen_alloc = 0;
 
 	// Using 37?
-	if (((struct Library *)GfxBase)->lib_Version<39)
+	if (((struct Library *)GfxBase)->lib_Version < 39)
 	{
 		// On our own screen, pens go from 4 onwards
 		if (GUI->screen)
 		{
 			// Pens go from 4 onwards
-			for (pen=0;pen<16;pen++) GUI->pens[pen]=pen+4;
-			GUI->pen_alloc=0xff;
+			for (pen = 0; pen < 16; pen++)
+				GUI->pens[pen] = pen + 4;
+			GUI->pen_alloc = 0xff;
 		}
 		return;
 	}
@@ -126,170 +125,159 @@ void get_colour_table()
 		short top;
 
 		// Get number of colours in display
-		top=(1<<GUI->screen->RastPort.BitMap->Depth)-1;
+		top = (1 << GUI->screen->RastPort.BitMap->Depth) - 1;
 
 		// More than 4 colours?
-		if (top>4)
+		if (top > 4)
 		{
 			// Allocate OS colours
-			for (pen=0;pen<4;pen++)
+			for (pen = 0; pen < 4; pen++)
 			{
 				// Get top four palette colours so they won't be used below
-				GUI->pens[12+pen] = newpen =
-					ObtainPen(
-						GUI->screen_pointer->ViewPort.ColorMap,
-						top-pen,
-						environment->env->palette[(pen+4)*3+1],
-						environment->env->palette[(pen+4)*3+2],
-						environment->env->palette[(pen+4)*3+3],
-						0);
+				GUI->pens[12 + pen] = newpen = ObtainPen(GUI->screen_pointer->ViewPort.ColorMap,
+														 top - pen,
+														 environment->env->palette[(pen + 4) * 3 + 1],
+														 environment->env->palette[(pen + 4) * 3 + 2],
+														 environment->env->palette[(pen + 4) * 3 + 3],
+														 0);
 				if (newpen != -1)
 				{
-					GUI->pen_alloc|=1<<(12+pen);
+					GUI->pen_alloc |= 1 << (12 + pen);
 				}
 			}
 		}
 	}
 
 	// Go through user pens
-	for (pen=0;pen<environment->env->palette_count;pen++)
+	for (pen = 0; pen < environment->env->palette_count; pen++)
 	{
 		// Not already allocated?
-		if (!(GUI->pen_alloc&(1<<pen)))
+		if (!(GUI->pen_alloc & (1 << pen)))
 		{
 			// Try to allocate a pen
-			GUI->pens[pen] = newpen =
-				ObtainBestPen(
-					GUI->screen_pointer->ViewPort.ColorMap,
-					environment->env->palette[(pen+8)*3+1],
-					environment->env->palette[(pen+8)*3+2],
-					environment->env->palette[(pen+8)*3+3],
-					OBP_Precision,PRECISION_EXACT,
-					OBP_FailIfBad,TRUE,
-					TAG_END);
+			GUI->pens[pen] = newpen = ObtainBestPen(GUI->screen_pointer->ViewPort.ColorMap,
+													environment->env->palette[(pen + 8) * 3 + 1],
+													environment->env->palette[(pen + 8) * 3 + 2],
+													environment->env->palette[(pen + 8) * 3 + 3],
+													OBP_Precision,
+													PRECISION_EXACT,
+													OBP_FailIfBad,
+													TRUE,
+													TAG_END);
 			if (newpen == -1)
 			{
 				// Failed to allocate, find closest match
-				GUI->pens[pen]=
-					FindColor(GUI->screen_pointer->ViewPort.ColorMap,
-						environment->env->palette[(pen+8)*3+1],
-						environment->env->palette[(pen+8)*3+2],
-						environment->env->palette[(pen+8)*3+3],
-						-1);
+				GUI->pens[pen] = FindColor(GUI->screen_pointer->ViewPort.ColorMap,
+										   environment->env->palette[(pen + 8) * 3 + 1],
+										   environment->env->palette[(pen + 8) * 3 + 2],
+										   environment->env->palette[(pen + 8) * 3 + 3],
+										   -1);
 			}
 
 			// Otherwise, we have an exclusive pen
 			else
 			{
 				// Set flag to say we allocated it
-				GUI->pen_alloc|=1<<pen;
+				GUI->pen_alloc |= 1 << pen;
 			}
 		}
 	}
 }
-
 
 // Free allocated colours
 void free_colour_table()
 {
 	// Haven't got palette?
-	if (!(GUI->flags&GUIF_GOT_PALETTE))
+	if (!(GUI->flags & GUIF_GOT_PALETTE))
 		return;
-	GUI->flags&=~GUIF_GOT_PALETTE;
+	GUI->flags &= ~GUIF_GOT_PALETTE;
 
 	// Only 39+
-	if (((struct Library *)GfxBase)->lib_Version>=39)
+	if (((struct Library *)GfxBase)->lib_Version >= 39)
 	{
 		short pen;
 
 		// Go through pens
-		for (pen=0;pen<16;pen++)
+		for (pen = 0; pen < 16; pen++)
 		{
 			// Was this pen allocated?
-			if (GUI->pen_alloc&(1<<pen))
+			if (GUI->pen_alloc & (1 << pen))
 			{
 				// Free it
-				ReleasePen(
-					GUI->screen_pointer->ViewPort.ColorMap,
-					GUI->pens[pen]);
+				ReleasePen(GUI->screen_pointer->ViewPort.ColorMap, GUI->pens[pen]);
 			}
 		}
 	}
 
 	// Clear allocation flag
-	GUI->pen_alloc=0;
+	GUI->pen_alloc = 0;
 }
 
-
 // Retrieve custom pen
-short GetCustomPen(short pen,short num,ColourSpec32 *spec)
+short GetCustomPen(short pen, short num, ColourSpec32 *spec)
 {
-	short flag,bestpen;
+	short flag, bestpen;
 
 	// Doesn't work under 37
-	if (((struct Library *)GfxBase)->lib_Version<39)
+	if (((struct Library *)GfxBase)->lib_Version < 39)
 		return -1;
 
 	// Get the flag
-	flag=pen+(num*CUST_PENS);
+	flag = pen + (num * CUST_PENS);
 
 	// See if pen is defined, unless forcing the issue
-	if (!spec && !(environment->env->env_ColourFlag&(1<<flag)))
+	if (!spec && !(environment->env->env_ColourFlag & (1 << flag)))
 		return -1;
 
 	// Lock the custom pens
-	GetSemaphore(&GUI->custom_pen_lock,SEMF_EXCLUSIVE,0);
+	GetSemaphore(&GUI->custom_pen_lock, SEMF_EXCLUSIVE, 0);
 
 	// See if pen is already allocated
-	if (GUI->custom_pen_alloc&(1<<flag))
+	if (GUI->custom_pen_alloc & (1 << flag))
 	{
 		// Increment count
 		++GUI->custom_pen_count[pen][num];
 
 		// Get pen
-		bestpen=GUI->custom_pens[pen][num];
+		bestpen = GUI->custom_pens[pen][num];
 	}
 
 	// Not allocated yet
 	else
 	{
 		// Try to allocate pen, in exclusive mode
-		if ((bestpen=
-			ObtainPen(
-				GUI->screen_pointer->ViewPort.ColorMap,
-				-1,
-				(spec)?spec->cs_Red:environment->env->env_Colours[pen][num][0],
-				(spec)?spec->cs_Green:environment->env->env_Colours[pen][num][1],
-				(spec)?spec->cs_Blue:environment->env->env_Colours[pen][num][2],
-				PEN_EXCLUSIVE))==-1)
+		if ((bestpen = ObtainPen(GUI->screen_pointer->ViewPort.ColorMap,
+								 -1,
+								 (spec) ? spec->cs_Red : environment->env->env_Colours[pen][num][0],
+								 (spec) ? spec->cs_Green : environment->env->env_Colours[pen][num][1],
+								 (spec) ? spec->cs_Blue : environment->env->env_Colours[pen][num][2],
+								 PEN_EXCLUSIVE)) == -1)
 		{
 			// If we wanted an editable pen, we have to fail, otherwise just find closest colour
 			if (!spec)
 			{
 				// Look for best pen
-				bestpen=
-					ObtainBestPen(
-						GUI->screen_pointer->ViewPort.ColorMap,
-						(spec)?spec->cs_Red:environment->env->env_Colours[pen][num][0],
-						(spec)?spec->cs_Green:environment->env->env_Colours[pen][num][1],
-						(spec)?spec->cs_Blue:environment->env->env_Colours[pen][num][2],
-						OBP_Precision,PRECISION_EXACT,
-						TAG_END);
+				bestpen = ObtainBestPen(GUI->screen_pointer->ViewPort.ColorMap,
+										(spec) ? spec->cs_Red : environment->env->env_Colours[pen][num][0],
+										(spec) ? spec->cs_Green : environment->env->env_Colours[pen][num][1],
+										(spec) ? spec->cs_Blue : environment->env->env_Colours[pen][num][2],
+										OBP_Precision,
+										PRECISION_EXACT,
+										TAG_END);
 			}
 		}
 
 		// Got pen
-		else
-		if (bestpen>-1)
+		else if (bestpen > -1)
 		{
 			// Mark pen as allocated
-			GUI->custom_pen_alloc|=(1<<flag);
+			GUI->custom_pen_alloc |= (1 << flag);
 
 			// Set count to one
-			GUI->custom_pen_count[pen][num]=1;
+			GUI->custom_pen_count[pen][num] = 1;
 
 			// Store pen
-			GUI->custom_pens[pen][num]=bestpen;
+			GUI->custom_pens[pen][num] = bestpen;
 		}
 	}
 
@@ -300,37 +288,36 @@ short GetCustomPen(short pen,short num,ColourSpec32 *spec)
 	return bestpen;
 }
 
-
 // Free a custom pen
-void FreeCustomPen(short pen,short num)
+void FreeCustomPen(short pen, short num)
 {
 	short flag;
 
 	// Doesn't work under 37
-	if (((struct Library *)GfxBase)->lib_Version<39)
+	if (((struct Library *)GfxBase)->lib_Version < 39)
 		return;
 
 	// Get the flag
-	flag=pen+(num*CUST_PENS);
+	flag = pen + (num * CUST_PENS);
 
 	// Lock the custom pens
-	GetSemaphore(&GUI->custom_pen_lock,SEMF_EXCLUSIVE,0);
+	GetSemaphore(&GUI->custom_pen_lock, SEMF_EXCLUSIVE, 0);
 
 	// See if pen is allocated
-	if (GUI->custom_pen_alloc&(1<<flag))
+	if (GUI->custom_pen_alloc & (1 << flag))
 	{
 		// Decrement count
-		if ((--GUI->custom_pen_count[pen][num])==0)
+		if ((--GUI->custom_pen_count[pen][num]) == 0)
 		{
 			// Count has reached zero, we can free the pen
 			if (GUI->screen_pointer)
 			{
 				// Free the pen
-				ReleasePen(GUI->screen_pointer->ViewPort.ColorMap,GUI->custom_pens[pen][num]);
+				ReleasePen(GUI->screen_pointer->ViewPort.ColorMap, GUI->custom_pens[pen][num]);
 			}
 
 			// Clear allocation bit
-			GUI->custom_pen_alloc&=~(1<<flag);
+			GUI->custom_pen_alloc &= ~(1 << flag);
 		}
 	}
 
@@ -338,44 +325,43 @@ void FreeCustomPen(short pen,short num)
 	FreeSemaphore(&GUI->custom_pen_lock);
 }
 
-
 // Initialise custom pens
 void InitCustomPens(void)
 {
-	short pen,num;
+	short pen, num;
 	short flag;
 
 	// Doesn't work under 37
-	if (((struct Library *)GfxBase)->lib_Version<39)
+	if (((struct Library *)GfxBase)->lib_Version < 39)
 		return;
 
 	// Lock the custom pens
-	GetSemaphore(&GUI->custom_pen_lock,SEMF_EXCLUSIVE,0);
+	GetSemaphore(&GUI->custom_pen_lock, SEMF_EXCLUSIVE, 0);
 
 	// Go through pens, 2 for each
-	for (pen=0;pen<CUST_PENS;pen++)
-		for (num=0;num<2;num++)
+	for (pen = 0; pen < CUST_PENS; pen++)
+		for (num = 0; num < 2; num++)
 		{
 			// Get the flag
-			flag=pen+(num*CUST_PENS);
+			flag = pen + (num * CUST_PENS);
 
 			// Is this pen allocated?
-			if (GUI->custom_pen_alloc&(1<<flag))
+			if (GUI->custom_pen_alloc & (1 << flag))
 			{
 				// Set count to zero
-				GUI->custom_pen_count[pen][num]=0;
+				GUI->custom_pen_count[pen][num] = 0;
 
 				// Is screen still open?
 				if (GUI->screen_pointer)
 				{
 					// Free the pen
-					ReleasePen(GUI->screen_pointer->ViewPort.ColorMap,GUI->custom_pens[pen][num]);
+					ReleasePen(GUI->screen_pointer->ViewPort.ColorMap, GUI->custom_pens[pen][num]);
 				}
 			}
 		}
 
 	// Clear allocation flags
-	GUI->custom_pen_alloc=0;
+	GUI->custom_pen_alloc = 0;
 
 	// Unlock the custom pens
 	FreeSemaphore(&GUI->custom_pen_lock);

@@ -17,25 +17,25 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
-BOOL desktop_find_hidden(char *,BOOL);
-Cfg_Desktop *desktop_snapshot_icon(BackdropObject *icon,short x,short y);
-Cfg_Desktop *desktop_find_icon(char *name,ULONG *pos);
-BOOL desktop_icon_path(BackdropObject *icon,char *path,short len,BPTR our_lock);
-void desktop_refresh_icons(BackdropInfo *info,BOOL);
+BOOL desktop_find_hidden(char *, BOOL);
+Cfg_Desktop *desktop_snapshot_icon(BackdropObject *icon, short x, short y);
+Cfg_Desktop *desktop_find_icon(char *name, ULONG *pos);
+BOOL desktop_icon_path(BackdropObject *icon, char *path, short len, BPTR our_lock);
+void desktop_refresh_icons(BackdropInfo *info, BOOL);
 
-void desktop_delete(IPCData *,BackdropInfo *,BackdropObject *);
+void desktop_delete(IPCData *, BackdropInfo *, BackdropObject *);
 
-void desktop_drop(BackdropInfo *,struct _DOpusAppMessage *,UWORD);
+void desktop_drop(BackdropInfo *, struct _DOpusAppMessage *, UWORD);
 
-void notify_disk_name_change(BackdropInfo *,char *,char *);
-void backdrop_update_disk(BackdropInfo *info,devname_change *change,BOOL show);
+void notify_disk_name_change(BackdropInfo *, char *, char *);
+void backdrop_update_disk(BackdropInfo *info, devname_change *change, BOOL show);
 
 BOOL desktop_add_hidden(char *name);
 
-BOOL desktop_drop_on_object(BackdropInfo *,DOpusAppMessage **,BackdropObject *,UWORD);
+BOOL desktop_drop_on_object(BackdropInfo *, DOpusAppMessage **, BackdropObject *, UWORD);
 
-short read_desktop_folder(BackdropInfo *,BOOL);
+short read_desktop_folder(BackdropInfo *, BOOL);

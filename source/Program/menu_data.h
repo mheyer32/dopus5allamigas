@@ -17,15 +17,14 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
 extern MenuData dopus_menus[];
 extern MenuHelp menu_help_data[];
 
-enum
-{
+enum {
 	MENU_BASE,
 
 	MENU_BACKDROP,
@@ -258,10 +257,10 @@ enum
 	MENU_THEMES_SAVE,
 	MENU_THEMES_BUILD,
 
-	MENU_OPEN_WITH_BASE=7900,
-	MENU_OPEN_WITH_MAX=7999,
+	MENU_OPEN_WITH_BASE = 7900,
+	MENU_OPEN_WITH_MAX = 7999,
 
-	MENU_CUSTOM=8000,
+	MENU_CUSTOM = 8000,
 
-	MENU_EXTENSION=10000,
+	MENU_EXTENSION = 10000,
 };

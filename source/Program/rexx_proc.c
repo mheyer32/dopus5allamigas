@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,36 +25,36 @@ For more information on Directory Opus for Windows please see:
 
 //#define RX_DEBUG
 
-#define REFRESH_TIME	5
+#define REFRESH_TIME 5
 
 // Initialise rexx port
 IPC_StartupCode(rexx_init, ULONG *, foo, static)
 {
 	short a;
-	struct MsgPort *port=0;
+	struct MsgPort *port = 0;
 
 	// Create a unique port name
 	Forbid();
 
 	// Start at 1; only try 100 times (why would you want 100 copies of DOpus? :)
-	for (a=1;a<100;a++)
+	for (a = 1; a < 100; a++)
 	{
 		// Build port name
-		lsprintf(GUI->rexx_port_name,"DOPUS.%ld",a);
+		lsprintf(GUI->rexx_port_name, "DOPUS.%ld", a);
 
 		// See if port already exists
 		if (!(FindPort(GUI->rexx_port_name)))
 		{
 			// It doesn't; try to create it
-			if ((port=CreateMsgPort()))
+			if ((port = CreateMsgPort()))
 			{
 				// Make port public
-				port->mp_Node.ln_Pri=50;
-				port->mp_Node.ln_Name=GUI->rexx_port_name;
+				port->mp_Node.ln_Pri = 50;
+				port->mp_Node.ln_Name = GUI->rexx_port_name;
 				AddPort(port);
 
 				// Store copy number
-				GUI->dopus_copy=a;
+				GUI->dopus_copy = a;
 			}
 			break;
 		}
@@ -65,7 +65,7 @@ IPC_StartupCode(rexx_init, ULONG *, foo, static)
 	if (port)
 	{
 		// Return pointer
-		ipc->userdata=port;
+		ipc->userdata = port;
 		return 1;
 	}
 
@@ -73,31 +73,27 @@ IPC_StartupCode(rexx_init, ULONG *, foo, static)
 	return 0;
 }
 
-
 // REXX process
 IPC_EntryCode(rexx_proc)
 {
 	IPCData *ipc;
-	struct MsgPort *rexx_port,*reply_port=0,*notify_port=0;
+	struct MsgPort *rexx_port, *reply_port = 0, *notify_port = 0;
 	IPCMessage *imsg;
 	struct RexxMsg *rmsg;
 	RexxSyncMessage *smsg;
 	struct AppMessage *amsg;
 	DOpusNotify *nmsg;
-	long message_count=0;		// Count of outstanding messages
+	long message_count = 0;	 // Count of outstanding messages
 	struct MinList msg_list;
-	BOOL pending_quit=0;
-	APTR notify_req=0;
+	BOOL pending_quit = 0;
+	APTR notify_req = 0;
 	FunctionHandle *handle;
-	TimerHandle *timer=0;
+	TimerHandle *timer = 0;
 
 	// Do startup
-	if (!(ipc=IPC_ProcStartup(0,&rexx_init)) ||
-		!(reply_port=CreateMsgPort()) ||
-		!(GUI->rexx_app_port=CreateMsgPort()) ||
-		!(notify_port=CreateMsgPort()) ||
-		!(timer=AllocTimer(UNIT_VBLANK,0)) ||
-		!(rexx_port=(struct MsgPort *)IPCDATA(ipc)))
+	if (!(ipc = IPC_ProcStartup(0, &rexx_init)) || !(reply_port = CreateMsgPort()) ||
+		!(GUI->rexx_app_port = CreateMsgPort()) || !(notify_port = CreateMsgPort()) ||
+		!(timer = AllocTimer(UNIT_VBLANK, 0)) || !(rexx_port = (struct MsgPort *)IPCDATA(ipc)))
 	{
 		FreeTimer(timer);
 		DeleteMsgPort(notify_port);
@@ -115,13 +111,13 @@ IPC_EntryCode(rexx_proc)
 	NewList((struct List *)&msg_list);
 
 	// Try to create function handle
-	if ((handle=function_new_handle(0,1)))
+	if ((handle = function_new_handle(0, 1)))
 	{
 		// Add notification for dos events
-		notify_req=AddNotifyRequest(DN_DOS_ACTION,0,notify_port);
+		notify_req = AddNotifyRequest(DN_DOS_ACTION, 0, notify_port);
 
 		// Start timer for five second intervals
-		StartTimer(timer,REFRESH_TIME,0);
+		StartTimer(timer, REFRESH_TIME, 0);
 	}
 
 	// Event loop
@@ -137,49 +133,48 @@ IPC_EntryCode(rexx_proc)
 				if (!(IsListEmpty(&handle->filechange)))
 				{
 					// Do changes
-					function_filechange_do(handle,1);
+					function_filechange_do(handle, 1);
 				}
 
 				// Restart timer
-				StartTimer(timer,REFRESH_TIME,0);
+				StartTimer(timer, REFRESH_TIME, 0);
 			}
 		}
 
 		// IPC messages
-		while ((imsg=(IPCMessage *)GetMsg(ipc->command_port)))
+		while ((imsg = (IPCMessage *)GetMsg(ipc->command_port)))
 		{
 			// Look at message
 			switch (imsg->command)
 			{
-				// Quit
-				case IPC_QUIT:
-					pending_quit=1;
-					break;
+			// Quit
+			case IPC_QUIT:
+				pending_quit = 1;
+				break;
 
-				// Increment message count
-				case REXXCMD_INCREMENT_MSG:
+			// Increment message count
+			case REXXCMD_INCREMENT_MSG:
+				++message_count;
+				break;
+
+			// Goodbye from something
+			case IPC_GOODBYE:
+
+				// Check readers
+				rexx_goodbye_reader((IPCData *)imsg->data);
+				break;
+
+			// Send a rexx command
+			case REXXCMD_SEND_MSG:
+				if (rexx_send_msg(&msg_list, &imsg, rexx_port))
 					++message_count;
-					break;
+				break;
 
-				// Goodbye from something
-				case IPC_GOODBYE:
-
-					// Check readers
-					rexx_goodbye_reader((IPCData *)imsg->data);
-					break;
-
-				// Send a rexx command
-				case REXXCMD_SEND_MSG:
-					if (rexx_send_msg(&msg_list,&imsg,rexx_port))
-						++message_count;
-					break;
-
-
-				// Send a REXX message
-				case REXXCMD_SEND_RXMSG:
-					if (rexx_send_rxmsg(imsg,rexx_port))
-						++message_count;
-					break;
+			// Send a REXX message
+			case REXXCMD_SEND_RXMSG:
+				if (rexx_send_rxmsg(imsg, rexx_port))
+					++message_count;
+				break;
 			}
 
 			// Reply to message
@@ -187,11 +182,11 @@ IPC_EntryCode(rexx_proc)
 		}
 
 		// App messages?
-		while ((amsg=(struct AppMessage *)GetMsg(GUI->rexx_app_port)))
+		while ((amsg = (struct AppMessage *)GetMsg(GUI->rexx_app_port)))
 		{
 			// Intuimessage reply?
-			if (amsg->am_Message.mn_Node.ln_Type==NT_REPLYMSG &&
-				amsg->am_Message.mn_Length==sizeof(struct IntuiMessage))
+			if (amsg->am_Message.mn_Node.ln_Type == NT_REPLYMSG &&
+				amsg->am_Message.mn_Length == sizeof(struct IntuiMessage))
 			{
 				// Just free the reply
 				FreeVec(amsg);
@@ -209,18 +204,18 @@ IPC_EntryCode(rexx_proc)
 		}
 
 		// Notification messages
-		while ((nmsg=(DOpusNotify *)GetMsg(notify_port)))
+		while ((nmsg = (DOpusNotify *)GetMsg(notify_port)))
 		{
 			// Handle notify
-			handle_dos_notify(nmsg,handle);
+			handle_dos_notify(nmsg, handle);
 			ReplyFreeMsg(nmsg);
 		}
 
 		// REXX messages
-		while ((rmsg=(struct RexxMsg *)GetMsg(rexx_port)))
+		while ((rmsg = (struct RexxMsg *)GetMsg(rexx_port)))
 		{
 			// Reply message?
-			if (rmsg->rm_Node.mn_Node.ln_Type==NT_REPLYMSG)
+			if (rmsg->rm_Node.mn_Node.ln_Type == NT_REPLYMSG)
 			{
 				RexxMsgTracker *track;
 
@@ -228,12 +223,11 @@ IPC_EntryCode(rexx_proc)
 				--message_count;
 
 				// Look for message in 'track' list
-				for (track=(RexxMsgTracker *)msg_list.mlh_Head;
-					track->node.mln_Succ;
-					track=(RexxMsgTracker *)track->node.mln_Succ)
+				for (track = (RexxMsgTracker *)msg_list.mlh_Head; track->node.mln_Succ;
+					 track = (RexxMsgTracker *)track->node.mln_Succ)
 				{
 					// See if message matches
-					if (track->rx_msg==rmsg)
+					if (track->rx_msg == rmsg)
 					{
 						// Reply to IPC message
 						IPC_Reply(track->ipc_msg);
@@ -253,30 +247,31 @@ IPC_EntryCode(rexx_proc)
 			else
 			{
 				// Is there a quit pending?
-				if (pending_quit) rmsg->rm_Result1=RXERRORIMGONE;
+				if (pending_quit)
+					rmsg->rm_Result1 = RXERRORIMGONE;
 
-				// Otherwise				
+				// Otherwise
 				else
 				{
 					// Initialise result fields
-					rmsg->rm_Result1=0;
-					rmsg->rm_Result2=0;
+					rmsg->rm_Result1 = 0;
+					rmsg->rm_Result2 = 0;
 
 #ifdef RX_DEBUG
 					{
 						short a;
 
 						D(bug("Got REXX message!\n"));
-						for (a=0;a<(rmsg->rm_Action&RXARGMASK);a++)
-							D(bug("Arg %ld : %s\n",a,rmsg->rm_Args[a]));
+						for (a = 0; a < (rmsg->rm_Action & RXARGMASK); a++)
+							D(bug("Arg %ld : %s\n", a, rmsg->rm_Args[a]));
 					}
 #endif
 
 					// Process message
-					if (rexx_process_msg(rmsg,reply_port,&message_count))
+					if (rexx_process_msg(rmsg, reply_port, &message_count))
 					{
 						// Clear message pointer
-						rmsg=0;
+						rmsg = 0;
 #ifdef RX_DEBUG
 						D(bug("Message swallowed\n"));
 #endif
@@ -287,7 +282,7 @@ IPC_EntryCode(rexx_proc)
 				if (rmsg)
 				{
 #ifdef RX_DEBUG
-					D(bug("Replying to message (port %lx)\n",rmsg->rm_Node.mn_ReplyPort));
+					D(bug("Replying to message (port %lx)\n", rmsg->rm_Node.mn_ReplyPort));
 #endif
 					rexx_reply_msg(rmsg);
 				}
@@ -295,7 +290,7 @@ IPC_EntryCode(rexx_proc)
 		}
 
 		// Sync-replies
-		while ((smsg=(RexxSyncMessage *)GetMsg(reply_port)))
+		while ((smsg = (RexxSyncMessage *)GetMsg(reply_port)))
 		{
 			// Reply to rexx message
 			if (smsg->rmsg)
@@ -303,8 +298,8 @@ IPC_EntryCode(rexx_proc)
 				char buf[10];
 
 				// Build result string
-				lsprintf(buf,"%ld",smsg->msg.mn_Node.ln_Pri);
-				rexx_set_return(smsg->rmsg,0,buf);
+				lsprintf(buf, "%ld", smsg->msg.mn_Node.ln_Pri);
+				rexx_set_return(smsg->rmsg, 0, buf);
 
 				// Reply to message
 				rexx_reply_msg(smsg->rmsg);
@@ -321,34 +316,32 @@ IPC_EntryCode(rexx_proc)
 		if (pending_quit)
 		{
 			// Remove all AppThings
-			rexx_rem_appthing(0,REXXAPP_ALL);
+			rexx_rem_appthing(0, REXXAPP_ALL);
 
 			// If there's no outstanding messages, quit immediately
-			if (message_count<1)
+			if (message_count < 1)
 			{
-				BOOL ok=0;
+				BOOL ok = 0;
 
 				// Check reader list is empty
-				lock_listlock(&GUI->rexx_readers,FALSE);
+				lock_listlock(&GUI->rexx_readers, FALSE);
 
 				// If it is, we can go
-				if (IsListEmpty(&GUI->rexx_readers.list)) ok=1;
+				if (IsListEmpty(&GUI->rexx_readers.list))
+					ok = 1;
 
 				// Unlock list
 				unlock_listlock(&GUI->rexx_readers);
 
 				// Ok to go?
-				if (ok) break;
+				if (ok)
+					break;
 			}
 		}
 
 		// Wait for a message
-		Wait(	1<<ipc->command_port->mp_SigBit|
-				1<<rexx_port->mp_SigBit|
-				1<<reply_port->mp_SigBit|
-				1<<notify_port->mp_SigBit|
-				1<<GUI->rexx_app_port->mp_SigBit|
-				1<<timer->port->mp_SigBit);
+		Wait(1 << ipc->command_port->mp_SigBit | 1 << rexx_port->mp_SigBit | 1 << reply_port->mp_SigBit |
+			 1 << notify_port->mp_SigBit | 1 << GUI->rexx_app_port->mp_SigBit | 1 << timer->port->mp_SigBit);
 	}
 
 	// Stop notification
@@ -372,73 +365,74 @@ IPC_EntryCode(rexx_proc)
 	DeleteMsgPort(GUI->rexx_app_port);
 
 	// Send goodbye message
-	IPC_Goodbye(ipc,&main_ipc,0);
+	IPC_Goodbye(ipc, &main_ipc, 0);
 
 	// Exit
 	IPC_Free(ipc);
 }
 
-
 // Process a REXX message
-BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
+BOOL rexx_process_msg(struct RexxMsg *msg, struct MsgPort *reply, long *count)
 {
-	short command,subcommand;
+	short command, subcommand;
 	char *commandptr;
-	BOOL ret=0;
+	BOOL ret = 0;
 
 #ifdef RX_DEBUG
-	D(bug("Command : %s\n",msg->rm_Args[0]));
+	D(bug("Command : %s\n", msg->rm_Args[0]));
 #endif
 
 	// Get initial command
-	commandptr=(char *)msg->rm_Args[0];
-	if (!(command=rexx_get_command(&commandptr)))
+	commandptr = (char *)msg->rm_Args[0];
+	if (!(command = rexx_get_command(&commandptr)))
 		return 0;
 
 #ifdef RX_DEBUG
-	D(bug("      # : %ld\n",command));
+	D(bug("      # : %ld\n", command));
 #endif
 
 	// Internal command?
-	if (command==RXCMD_COMMAND)
+	if (command == RXCMD_COMMAND)
 	{
 		Cfg_Function *function;
-		Lister *source=0,*dest=0;
-		BOOL sync=0,orig=0;
+		Lister *source = 0, *dest = 0;
+		BOOL sync = 0, orig = 0;
 		short opt;
-	
+
 		// Skip spaces
 		rexx_skip_space(&commandptr);
 
 		// Options
-		while ((opt=rexx_match_keyword(&commandptr,command_keys,0))!=-1)
+		while ((opt = rexx_match_keyword(&commandptr, command_keys, 0)) != -1)
 		{
 			// Run synchronously?
-			if (opt==RXCOM_WAIT) sync=1;
+			if (opt == RXCOM_WAIT)
+				sync = 1;
 
 			// Source/dest?
-			else
-			if (opt==RXCOM_SOURCE || opt==RXCOM_DEST)
+			else if (opt == RXCOM_SOURCE || opt == RXCOM_DEST)
 			{
 				Lister *lister;
 
 				// Get lister
-				if ((lister=(Lister *)rexx_parse_number(&commandptr,0,0)))
+				if ((lister = (Lister *)rexx_parse_number(&commandptr, 0, 0)))
 				{
 					// Is lister valid?
 					if (rexx_lister_valid(lister))
 					{
 						// Source?
-						if (opt==RXCOM_SOURCE) source=lister;
+						if (opt == RXCOM_SOURCE)
+							source = lister;
 
 						// Dest
-						else dest=lister;
+						else
+							dest = lister;
 					}
 
 					// Fail with an error
 					else
 					{
-						rexx_set_return(msg,RXERR_INVALID_HANDLE,0);
+						rexx_set_return(msg, RXERR_INVALID_HANDLE, 0);
 						return 0;
 					}
 				}
@@ -448,18 +442,18 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 			}
 
 			// Original?
-			else
-			if (opt==RXCOM_ORIGINAL) orig=1;
+			else if (opt == RXCOM_ORIGINAL)
+				orig = 1;
 		}
 
 #ifdef RX_DEBUG
-		D(bug("Command : %s\n",commandptr));
+		D(bug("Command : %s\n", commandptr));
 #else
 
 		// Create dummy function
-		if ((function=new_default_function(commandptr,0)))
+		if ((function = new_default_function(commandptr, 0)))
 		{
-			struct Message *reply_msg=0;
+			struct Message *reply_msg = 0;
 
 			// Want a reply?
 			if (sync)
@@ -467,189 +461,176 @@ BOOL rexx_process_msg(struct RexxMsg *msg,struct MsgPort *reply,long *count)
 				RexxSyncMessage *rep;
 
 				// Create reply message
-				if ((rep=AllocVec(sizeof(RexxSyncMessage),MEMF_CLEAR)))
+				if ((rep = AllocVec(sizeof(RexxSyncMessage), MEMF_CLEAR)))
 				{
 					// Set reply port
-					rep->msg.mn_ReplyPort=reply;
+					rep->msg.mn_ReplyPort = reply;
 
 					// Store rexx message pointer
-					rep->rmsg=msg;
+					rep->rmsg = msg;
 
 					// Use as reply message
-					reply_msg=(struct Message *)rep;
+					reply_msg = (struct Message *)rep;
 
 					// Increment reply count
 					++*count;
-					ret=1;
+					ret = 1;
 				}
 			}
 
 			// Set flag to free function
-			function->function.flags2|=FUNCF2_FREE_FUNCTION;
+			function->function.flags2 |= FUNCF2_FREE_FUNCTION;
 
 			// Use original function?
-			if (orig) function->function.flags2|=FUNCF2_ORIGINAL;
+			if (orig)
+				function->function.flags2 |= FUNCF2_ORIGINAL;
 
 			// Launch function
 			function_launch(
-				FUNCTION_RUN_FUNCTION,
-				function,
-				0,
-				(reply_msg)?FUNCF_SYNC:0,
-				source,dest,
-				0,0,
-				0,reply_msg,0);
+				FUNCTION_RUN_FUNCTION, function, 0, (reply_msg) ? FUNCF_SYNC : 0, source, dest, 0, 0, 0, reply_msg, 0);
 		}
 #endif
 		return ret;
 	}
 
 	// Get sub-command
-	if (!(subcommand=rexx_get_command(&commandptr)))
+	if (!(subcommand = rexx_get_command(&commandptr)))
 		return 0;
 
 #ifdef RX_DEBUG
-	D(bug("Sub-Command : %ld\n",subcommand));
+	D(bug("Sub-Command : %ld\n", subcommand));
 #endif
 
 	// Look at initial command
 	switch (command)
 	{
-		// Lister stuff
-		case RXCMD_LISTER:
+	// Lister stuff
+	case RXCMD_LISTER:
 
-			// New lister?
-			if (subcommand==RXCMD_NEW)
-			{
-				rexx_lister_new(msg,commandptr);
-			}
+		// New lister?
+		if (subcommand == RXCMD_NEW)
+		{
+			rexx_lister_new(msg, commandptr);
+		}
 
-			// Other lister command
-			else ret=rexx_lister_cmd(msg,subcommand,commandptr);
-			break;
+		// Other lister command
+		else
+			ret = rexx_lister_cmd(msg, subcommand, commandptr);
+		break;
 
+	// DOpus stuff
+	case RXCMD_DOPUS:
 
-		// DOpus stuff
-		case RXCMD_DOPUS:
-
-			// Handle command
-			ret=rexx_dopus_cmd(msg,subcommand,commandptr);
-			break;
+		// Handle command
+		ret = rexx_dopus_cmd(msg, subcommand, commandptr);
+		break;
 	}
 
 	return ret;
 }
 
-
 // Set REXX return codes
-void rexx_set_return(struct RexxMsg *msg,long rc,char *result)
+void rexx_set_return(struct RexxMsg *msg, long rc, char *result)
 {
 	// Can only set result string if valid, asked for, and not asynchronous
-	if (result && (!rc || result[0]) &&
-		msg->rm_Action&RXFF_RESULT &&
-		msg->rm_Node.mn_ReplyPort)
+	if (result && (!rc || result[0]) && msg->rm_Action & RXFF_RESULT && msg->rm_Node.mn_ReplyPort)
 	{
-		long len=strlen(result);
-		while (len>0 && result[len-1]==' ') --len;
-		if (!(msg->rm_Result2=(long)CreateArgstring(result,len)))
-			msg->rm_Result1=RXERR_NO_MEMORY;
+		long len = strlen(result);
+		while (len > 0 && result[len - 1] == ' ')
+			--len;
+		if (!(msg->rm_Result2 = (long)CreateArgstring(result, len)))
+			msg->rm_Result1 = RXERR_NO_MEMORY;
 		else
-			msg->rm_Result1=0;
+			msg->rm_Result1 = 0;
 	}
 
 	// Otherwise, set RC instead
 	else
 	{
-		msg->rm_Result1=rc;
-		msg->rm_Result2=0;
+		msg->rm_Result1 = rc;
+		msg->rm_Result2 = 0;
 	}
 }
 
-
 // Read a text file through ARexx
-RexxReader *rexx_read_file(short command,char *args,struct RexxMsg *msg)
+RexxReader *rexx_read_file(short command, char *args, struct RexxMsg *msg)
 {
 	RexxReader *reader;
-	BOOL quit=0,delete=0,got_pos=0;
-	struct IBox dims={0,0,0,0};
+	BOOL quit = 0, delete = 0, got_pos = 0;
+	struct IBox dims = {0, 0, 0, 0};
 	short key;
 
 	// Get command
-	if (command==RXCMD_SMARTREAD)
-		command=FUNC_SMARTREAD;
+	if (command == RXCMD_SMARTREAD)
+		command = FUNC_SMARTREAD;
+	else if (command == RXCMD_ANSIREAD)
+		command = FUNC_ANSIREAD;
+	else if (command == RXCMD_HEXREAD)
+		command = FUNC_HEXREAD;
 	else
-	if (command==RXCMD_ANSIREAD)
-		command=FUNC_ANSIREAD;
-	else
-	if (command==RXCMD_HEXREAD)
-		command=FUNC_HEXREAD;
-	else
-		command=FUNC_READ;
+		command = FUNC_READ;
 
 	// Skip spaces
 	rexx_skip_space(&args);
 
 	// Lock reader list
-	lock_listlock(&GUI->rexx_readers,TRUE);
+	lock_listlock(&GUI->rexx_readers, TRUE);
 
 	// Given a reader?
-	if ((reader=(RexxReader *)rexx_parse_number(&args,FALSE,0)))
+	if ((reader = (RexxReader *)rexx_parse_number(&args, FALSE, 0)))
 	{
 		RexxReader *test;
 
 		// See if reader is in the list
-		for (test=(RexxReader *)GUI->rexx_readers.list.lh_Head;
-			test->node.mln_Succ;
-			test=(RexxReader *)test->node.mln_Succ)
+		for (test = (RexxReader *)GUI->rexx_readers.list.lh_Head; test->node.mln_Succ;
+			 test = (RexxReader *)test->node.mln_Succ)
 		{
 			// Match our reader?
-			if (test==reader) break;
+			if (test == reader)
+				break;
 		}
 
 		// Not in the list?
-		if (test!=reader) reader=0;
+		if (test != reader)
+			reader = 0;
 	}
 
 	// Skip spaces
 	rexx_skip_space(&args);
 
 	// Check flags
-	while ((key=rexx_match_keyword(&args,reader_keys,0))!=-1)
+	while ((key = rexx_match_keyword(&args, reader_keys, 0)) != -1)
 	{
 		// Quit?
-		if (key==0) quit=1;
+		if (key == 0)
+			quit = 1;
 
 		// Delete?
-		else
-		if (key==1) delete=1;
+		else if (key == 1)
+			delete = 1;
 
 		// Position
-		else
-		if (key==2)
+		else if (key == 2)
 		{
 			// Get dimensions
 			rexx_skip_space(&args);
-			dims.Left=rexx_parse_number(&args,1,0);
-			dims.Top=rexx_parse_number(&args,1,0);
-			dims.Width=rexx_parse_number(&args,1,0);
-			dims.Height=rexx_parse_number(&args,0,0);
-			got_pos=1;
+			dims.Left = rexx_parse_number(&args, 1, 0);
+			dims.Top = rexx_parse_number(&args, 1, 0);
+			dims.Width = rexx_parse_number(&args, 1, 0);
+			dims.Height = rexx_parse_number(&args, 0, 0);
+			got_pos = 1;
 		}
 
 		// Mode
-		else
-		if (key==3)
-			command=FUNC_HEXREAD;
-		else
-		if (key==4)
-			command=FUNC_ANSIREAD;
-		else
-		if (key==5)
-			command=FUNC_SMARTREAD;
-		
+		else if (key == 3)
+			command = FUNC_HEXREAD;
+		else if (key == 4)
+			command = FUNC_ANSIREAD;
+		else if (key == 5)
+			command = FUNC_SMARTREAD;
+
 		// File name
-		else
-		if (key==6)
+		else if (key == 6)
 			break;
 	}
 
@@ -659,36 +640,38 @@ RexxReader *rexx_read_file(short command,char *args,struct RexxMsg *msg)
 	// Need to create a new reader?
 	if (!reader && !quit)
 	{
-		struct read_startup *startup=0;
+		struct read_startup *startup = 0;
 		Att_Node *node;
-		BOOL fail=1;
+		BOOL fail = 1;
 
 		// Allocate reader structure and startup packet
-		if ((reader=AllocVec(sizeof(RexxReader),MEMF_CLEAR)) &&
-			(startup=AllocVec(sizeof(struct read_startup),MEMF_CLEAR)) &&
-			(startup->files=(struct List *)Att_NewList(0)) &&
-			(node=Att_NewNode((Att_List *)startup->files,args,0,0)))
+		if ((reader = AllocVec(sizeof(RexxReader), MEMF_CLEAR)) &&
+			(startup = AllocVec(sizeof(struct read_startup), MEMF_CLEAR)) &&
+			(startup->files = (struct List *)Att_NewList(0)) &&
+			(node = Att_NewNode((Att_List *)startup->files, args, 0, 0)))
 		{
 			// Set delete flag
-			if (delete) node->node.ln_Pri=1;
+			if (delete)
+				node->node.ln_Pri = 1;
 
 			// Save position
-			startup->dims=dims;
-			startup->got_pos=got_pos;
+			startup->dims = dims;
+			startup->got_pos = got_pos;
 
 			// Set owner for goodbye packet
-			startup->owner=GUI->rexx_proc;
+			startup->owner = GUI->rexx_proc;
 
 			// Add to list
-			AddTail(&GUI->rexx_readers.list,(struct Node *)reader);
+			AddTail(&GUI->rexx_readers.list, (struct Node *)reader);
 
 			// Launch reader
-			if (!(reader->ipc=misc_startup("dopus_rexx_reader",command,0,startup,FALSE)))
+			if (!(reader->ipc = misc_startup("dopus_rexx_reader", command, 0, startup, FALSE)))
 			{
 				// Remove from reader list
 				Remove((struct Node *)reader);
 			}
-			else fail=0;
+			else
+				fail = 0;
 		}
 
 		// Free if we failed
@@ -697,20 +680,20 @@ RexxReader *rexx_read_file(short command,char *args,struct RexxMsg *msg)
 			// Free stuff
 			if (startup)
 			{
-				Att_RemList((Att_List *)startup->files,0);
+				Att_RemList((Att_List *)startup->files, 0);
 				FreeVec(startup);
 			}
 			FreeVec(reader);
-			reader=0;
+			reader = 0;
 		}
 	}
 
 	// Otherwise, send command to reader
-	else
-	if (reader)
+	else if (reader)
 	{
-		IPC_Command(reader->ipc,(quit)?IPC_QUIT:READCOM_READ,delete,args,0,(quit)?0:REPLY_NO_PORT);
-		if (quit) reader=0;
+		IPC_Command(reader->ipc, (quit) ? IPC_QUIT : READCOM_READ, delete, args, 0, (quit) ? 0 : REPLY_NO_PORT);
+		if (quit)
+			reader = 0;
 	}
 
 	// Unlock reader list
@@ -720,22 +703,20 @@ RexxReader *rexx_read_file(short command,char *args,struct RexxMsg *msg)
 	return reader;
 }
 
-
 // Got goodbye from a reader
 void rexx_goodbye_reader(IPCData *ipc)
 {
 	RexxReader *reader;
 
 	// Lock reader list
-	lock_listlock(&GUI->rexx_readers,TRUE);
+	lock_listlock(&GUI->rexx_readers, TRUE);
 
 	// See if reader is in the list
-	for (reader=(RexxReader *)GUI->rexx_readers.list.lh_Head;
-		reader->node.mln_Succ;
-		reader=(RexxReader *)reader->node.mln_Succ)
+	for (reader = (RexxReader *)GUI->rexx_readers.list.lh_Head; reader->node.mln_Succ;
+		 reader = (RexxReader *)reader->node.mln_Succ)
 	{
 		// Match our reader?
-		if (reader->ipc==ipc)
+		if (reader->ipc == ipc)
 		{
 			// Remove from list
 			Remove((struct Node *)reader);
@@ -748,112 +729,112 @@ void rexx_goodbye_reader(IPCData *ipc)
 	unlock_listlock(&GUI->rexx_readers);
 }
 
-
 void rexx_reply_msg(struct RexxMsg *rmsg)
 {
 	if (rmsg->rm_Node.mn_ReplyPort)
 		ReplyMsg((struct Message *)rmsg);
 
 	// No reply port; free instead
-	else FreeRexxMsgEx(rmsg);
+	else
+		FreeRexxMsgEx(rmsg);
 }
 
-
 // Send a message to rexx
-void rexx_send_command(char *command,BOOL wait)
+void rexx_send_command(char *command, BOOL wait)
 {
 	char *copy;
 
 	// Copy command
-	if ((copy=AllocVec(strlen(command)+1,0)))
+	if ((copy = AllocVec(strlen(command) + 1, 0)))
 	{
 		// Copy and send it
-		strcpy(copy,command);
-		IPC_Command(GUI->rexx_proc,REXXCMD_SEND_MSG,wait,0,copy,(wait)?REPLY_NO_PORT:0);
+		strcpy(copy, command);
+		IPC_Command(GUI->rexx_proc, REXXCMD_SEND_MSG, wait, 0, copy, (wait) ? REPLY_NO_PORT : 0);
 	}
 }
 
-
 // Send a REXX message
-BOOL rexx_send_msg(struct MinList *list,IPCMessage **imsg,struct MsgPort *port)
+BOOL rexx_send_msg(struct MinList *list, IPCMessage **imsg, struct MsgPort *port)
 {
 	RexxMsgTracker *track;
 	struct RexxMsg *msg;
 	struct MsgPort *rexx;
 
 	// Create message
-	if (!(msg=CreateRexxMsg(port,".dopus5",port->mp_Node.ln_Name)))
+	if (!(msg = CreateRexxMsg(port, ".dopus5", port->mp_Node.ln_Name)))
 		return 0;
 
 	// Build message
-	msg->rm_Args[0]=(char *)(*imsg)->data_free;
-	FillRexxMsg(msg,1,0);
+	msg->rm_Args[0] = (char *)(*imsg)->data_free;
+	FillRexxMsg(msg, 1, 0);
 
 	// Set flags
-	msg->rm_Action|=1|RXCOMM;
-	if (!(*imsg)->flags) msg->rm_Action|=RXFF_NONRET;
+	msg->rm_Action |= 1 | RXCOMM;
+	if (!(*imsg)->flags)
+		msg->rm_Action |= RXFF_NONRET;
 
 	// Find rexx port
 	Forbid();
-	if ((rexx=FindPort("REXX")))
+	if ((rexx = FindPort("REXX")))
 	{
 		// Send message
-		PutMsg(rexx,(struct Message *)msg);
+		PutMsg(rexx, (struct Message *)msg);
 	}
 	Permit();
 
 	// Need to free message if not sent
-	if (!rexx) FreeRexxMsgEx(msg);
+	if (!rexx)
+		FreeRexxMsgEx(msg);
 
 	// Wait for reply?
 	if ((*imsg)->flags)
 	{
 		// Allocate tracker
-		if ((track=AllocVec(sizeof(RexxMsgTracker),MEMF_CLEAR)))
+		if ((track = AllocVec(sizeof(RexxMsgTracker), MEMF_CLEAR)))
 		{
 			// Fill out tracker, add to list
-			track->rx_msg=msg;
-			track->ipc_msg=*imsg;
-			AddTail((struct List *)list,(struct Node *)track);
+			track->rx_msg = msg;
+			track->ipc_msg = *imsg;
+			AddTail((struct List *)list, (struct Node *)track);
 
 			// Clear message pointer
-			*imsg=0;
+			*imsg = 0;
 		}
 	}
 
 	return 1;
 }
 
-
 // Send a RxMsg supplied by another task
-BOOL rexx_send_rxmsg(IPCMessage *imsg,struct MsgPort *rxport)
+BOOL rexx_send_rxmsg(IPCMessage *imsg, struct MsgPort *rxport)
 {
-	return rexx_send_rxmsg_args((RexxDespatch *)imsg->data_free,imsg->flags,rxport);
+	return rexx_send_rxmsg_args((RexxDespatch *)imsg->data_free, imsg->flags, rxport);
 }
 
 // Send a RxMsg supplied by another task
-BOOL rexx_send_rxmsg_args(RexxDespatch *desp,ULONG flags,struct MsgPort *rxport)
+BOOL rexx_send_rxmsg_args(RexxDespatch *desp, ULONG flags, struct MsgPort *rxport)
 {
 	struct MsgPort *port;
-	BOOL ok=0;
+	BOOL ok = 0;
 
 	// No despatch?
-	if (!desp) return 0;
+	if (!desp)
+		return 0;
 
 	// Find port to send to
 	Forbid();
-	if (!(port=FindPort(desp->handler)))
+	if (!(port = FindPort(desp->handler)))
 	{
 		// Port not found
 		Permit();
 
 		// Display error?
-		if (flags&RXMF_WARN)
+		if (flags & RXMF_WARN)
 		{
 			char buf[128];
 
 			// Build error message
-			lsprintf(buf,GetString(&locale,MSG_CUSTPORT_NOT_FOUND),desp->handler);
+			lsprintf(buf, GetString(&locale, MSG_CUSTPORT_NOT_FOUND), desp->handler);
 
 			// Show error
 			global_requester(buf);
@@ -867,16 +848,16 @@ BOOL rexx_send_rxmsg_args(RexxDespatch *desp,ULONG flags,struct MsgPort *rxport)
 	else
 	{
 		// Fix reply port
-		desp->rx_msg->rm_Node.mn_ReplyPort=rxport;
+		desp->rx_msg->rm_Node.mn_ReplyPort = rxport;
 
 		// Send the message
-		PutMsg(port,(struct Message *)desp->rx_msg);
+		PutMsg(port, (struct Message *)desp->rx_msg);
 
 		// Permit now its sent
 		Permit();
 
 		// Increment message count
-		ok=1;
+		ok = 1;
 	}
 
 	return ok;

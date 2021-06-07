@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 #ifndef _LAYOUT_ROUTINES_H
@@ -26,38 +26,38 @@ For more information on Directory Opus for Windows please see:
 //#define BACKFILL
 
 #ifndef __amigaos3__
-#pragma pack(2)
-#endif 
+	#pragma pack(2)
+#endif
 
 struct backfill_hook
 {
-	struct Hook		hook;
-	//struct Library		*GfxBase;
-	ULONG			pad1;
-	UWORD			dither[2];
-	struct RastPort		rp;
-	short			shinepen;
-	short			shadowpen;
+	struct Hook hook;
+	// struct Library		*GfxBase;
+	ULONG pad1;
+	UWORD dither[2];
+	struct RastPort rp;
+	short shinepen;
+	short shadowpen;
 };
 
 #ifndef __amigaos3__
-#pragma pack()
-#endif 
+	#pragma pack()
+#endif
 
 #ifdef BACKFILL
-void ASM _req_backfill(REG(a0, struct backfill_hook *hook),REG(a1, struct BackFillInfo *info),REG(a2, struct RastPort *rp));
+void ASM _req_backfill(REG(a0, struct backfill_hook *hook),
+					   REG(a1, struct BackFillInfo *info),
+					   REG(a2, struct RastPort *rp));
 #else
 void _req_backfill(struct Window *window);
 #endif
 
-void _layout_add_gad_image(APTR *memory,struct Gadget *,struct Image *);
+void _layout_add_gad_image(APTR *memory, struct Gadget *, struct Image *);
 
-APTR alloc_object_memory(APTR *memory,long size);
+APTR alloc_object_memory(APTR *memory, long size);
 
 void layout_resize(struct Window *window);
 
 #include "boopsi.h"
 
-
 #endif
-

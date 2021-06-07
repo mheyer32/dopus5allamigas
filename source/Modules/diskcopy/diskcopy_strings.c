@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -30,5 +30,5 @@ For more information on Directory Opus for Windows please see:
 
 void init_locale_data(struct DOpusLocale *locale)
 {
-	locale->li_BuiltIn=(char *)CatCompBlock;
+	locale->li_BuiltIn = (char *)CatCompBlock;
 }

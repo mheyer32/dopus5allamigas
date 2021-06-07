@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 	getusage.c - Conversion of Assem functions to C functions.
 */
@@ -26,10 +26,10 @@ For more information on Directory Opus for Windows please see:
 
 static ULONG oldIdle, oldDispatch;
 
-long GetCPUUsage(void) //Doesn't work on OS4
+long GetCPUUsage(void)	// Doesn't work on OS4
 {
 	ULONG newIdle = ((struct ExecBase *)SysBase)->IdleCount;
-	ULONG newDispatch = ((struct ExecBase*)SysBase)->DispCount;
+	ULONG newDispatch = ((struct ExecBase *)SysBase)->DispCount;
 	ULONG temp = 0;
 	ULONG idleDifference = 0;
 	ULONG dispatchDifference = 0;
@@ -42,9 +42,11 @@ long GetCPUUsage(void) //Doesn't work on OS4
 	oldDispatch = newDispatch;
 	dispatchDifference = newDispatch - temp;
 
-	if (idleDifference <= 0) return 100;
-	if (dispatchDifference <= 0) return 0;
+	if (idleDifference <= 0)
+		return 100;
+	if (dispatchDifference <= 0)
+		return 0;
 
 	temp = idleDifference + dispatchDifference;
-	return ((dispatchDifference * 100)/ temp);
+	return ((dispatchDifference * 100) / temp);
 }

@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -27,8 +27,8 @@ For more information on Directory Opus for Windows please see:
 struct subproc_data;
 
 BOOL get_listformat(struct window_params *wp);
-BOOL configure_format(struct display_globals *dg,struct subproc_data *data,IPCMessage *imsg);
-void get_formats(struct opusftp_globals *og,struct ftp_environment *env,ListFormat **def_format);
+BOOL configure_format(struct display_globals *dg, struct subproc_data *data, IPCMessage *imsg);
+void get_formats(struct opusftp_globals *og, struct ftp_environment *env, ListFormat **def_format);
 ListFormat *get_opus_format(struct opusftp_globals *og);
 
 #endif

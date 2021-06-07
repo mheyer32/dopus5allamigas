@@ -1,66 +1,66 @@
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 typedef struct
 {
-	struct MinNode		node;
-	Cfg_ButtonFunction	*func;
-	IPCData			*editor;
+	struct MinNode node;
+	Cfg_ButtonFunction *func;
+	IPCData *editor;
 } ButtonEditorNode;
 
 typedef struct
 {
-	struct _bank_node	*bank;
-	Cfg_Button		*button;
-	Cfg_Button		*orig_button;
+	struct _bank_node *bank;
+	Cfg_Button *button;
+	Cfg_Button *orig_button;
 } ButtonReturn;
 
 typedef struct
 {
-	struct Window		*window;
-	Cfg_Button		*button;
-	IPCData			*owner_ipc;
-	struct _ButtonEdData	*data;
-	FunctionStartup		func_startup;
-	ButtonReturn		retdata;
+	struct Window *window;
+	Cfg_Button *button;
+	IPCData *owner_ipc;
+	struct _ButtonEdData *data;
+	FunctionStartup func_startup;
+	ButtonReturn retdata;
 
-	ConfigWindow		*win_text_def;
-	ConfigWindow		*win_image_def;
-	ObjectDef		*obj_def;
+	ConfigWindow *win_text_def;
+	ConfigWindow *win_image_def;
+	ObjectDef *obj_def;
 
-	PaletteBoxData		palette_data;
+	PaletteBoxData palette_data;
 
-	ObjectDef		*obj_name;
-	ObjectDef		*obj_image;
+	ObjectDef *obj_name;
+	ObjectDef *obj_image;
 
-	ULONG			command_list;
+	ULONG command_list;
 
-	IPCData			*main_owner;
+	IPCData *main_owner;
 
-	ULONG			flags;
+	ULONG flags;
 } ButtonEdStartup;
 
-#define BUTTONEDF_NO_ADD	(1<<0)
+#define BUTTONEDF_NO_ADD (1 << 0)
 
 typedef struct _ButtonEdData
 {
-	NewConfigWindow		newwin;
+	NewConfigWindow newwin;
 
-	IPCData			*ipc;
-	struct Window		*window;	// Window
-	ObjectList		*objlist;	// List of objects
+	IPCData *ipc;
+	struct Window *window;	// Window
+	ObjectList *objlist;	// List of objects
 
-	Cfg_Button		*button;	// Button being edited
-	short			which;		// Function being editor (left/right/etc)
-	GL_Object		*display;	// Button display area
-	struct Rectangle	button_rect;	// Button display rectangle
+	Cfg_Button *button;			   // Button being edited
+	short which;				   // Function being editor (left/right/etc)
+	GL_Object *display;			   // Button display area
+	struct Rectangle button_rect;  // Button display rectangle
 
-	struct DOpusLocale	*locale;
-	ButtonEdStartup		*startup;
+	struct DOpusLocale *locale;
+	ButtonEdStartup *startup;
 
-	Att_List		*func_list;
+	Att_List *func_list;
 
-	struct ListLock		proc_list;
+	struct ListLock proc_list;
 
 	/*struct Library		*DOpusBase;
 	struct Library		*DOSBase;
@@ -70,37 +70,32 @@ typedef struct _ButtonEdData
 	struct Library		*WorkbenchBase;
 	struct Library		*GfxBase;
 	struct Library		*LayersBase;*/
-	ULONG			pad1[8];
+	ULONG pad1[8];
 
-	struct AppWindow	*appwindow;
-	struct MsgPort		*app_port;
+	struct AppWindow *appwindow;
+	struct MsgPort *app_port;
 
-	CfgDragInfo		drag;
+	CfgDragInfo drag;
 
-	GL_Object		*lister;
-	ULONG			last_sec,last_mic;
-	short			change;
-	struct MinList		editors;
+	GL_Object *lister;
+	ULONG last_sec, last_mic;
+	short change;
+	struct MinList editors;
 
-	short			change_bit;
+	short change_bit;
 
-	struct IBox		display_box;
+	struct IBox display_box;
 
-	ImageRemap		remap;
+	ImageRemap remap;
 } ButtonEdData;
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-extern const ConfigWindow
-	_button_editor_window;
-extern const ObjectDef
-	_button_editor_objects[],
-	_button_editor_image_objects[],
-	_button_editor_label_objects[];
+extern const ConfigWindow _button_editor_window;
+extern const ObjectDef _button_editor_objects[], _button_editor_image_objects[], _button_editor_label_objects[];
 
-enum
-{
+enum {
 	FUNCTION_LEFT,
 	FUNCTION_RIGHT,
 	FUNCTION_MIDDLE,
@@ -110,28 +105,32 @@ enum
 void ButtonEditor(void);
 void _buttoned_show_button(ButtonEdData *);
 void _button_editor_edit_function(ButtonEdData *);
-BOOL _button_editor_receive_edit(ButtonEdData *,FunctionReturn *);
+BOOL _button_editor_receive_edit(ButtonEdData *, FunctionReturn *);
 void button_editor_init(ButtonEdStartup *);
 void palette_editor_init(PaletteBoxData *);
-void function_editor_init(FunctionStartup *,ULONG);
-void buttoned_copy_string(ButtonEdData *,char *,char **);
-Cfg_ButtonFunction *buttoned_get_function(ButtonEdData *,short);
-void buttoned_start_drag(ButtonEdData *,struct IntuiMessage *);
-void buttoned_end_drag(ButtonEdData *,BOOL);
-short buttoned_get_drop(ButtonEdData *,short,short);
-void buttoned_get_button(ButtonEdData *,Cfg_Button *,Point *);
-void buttoned_free_function(ButtonEdData *,Cfg_ButtonFunction *,BOOL);
-Cfg_ButtonFunction *buttoned_copy_function(ButtonEdData *,Cfg_Button *,Cfg_ButtonFunction *,Cfg_ButtonFunction *,short);
-Cfg_ButtonFunction *buttoned_find_function(ButtonEdData *,short);
+void function_editor_init(FunctionStartup *, ULONG);
+void buttoned_copy_string(ButtonEdData *, char *, char **);
+Cfg_ButtonFunction *buttoned_get_function(ButtonEdData *, short);
+void buttoned_start_drag(ButtonEdData *, struct IntuiMessage *);
+void buttoned_end_drag(ButtonEdData *, BOOL);
+short buttoned_get_drop(ButtonEdData *, short, short);
+void buttoned_get_button(ButtonEdData *, Cfg_Button *, Point *);
+void buttoned_free_function(ButtonEdData *, Cfg_ButtonFunction *, BOOL);
+Cfg_ButtonFunction *buttoned_copy_function(ButtonEdData *,
+										   Cfg_Button *,
+										   Cfg_ButtonFunction *,
+										   Cfg_ButtonFunction *,
+										   short);
+Cfg_ButtonFunction *buttoned_find_function(ButtonEdData *, short);
 BOOL buttoned_function_empty(Cfg_ButtonFunction *);
 void buttoned_fix_functionlist(ButtonEdData *);
-ButtonEditorNode *buttoned_find_editor(ButtonEdData *,Cfg_ButtonFunction *);
+ButtonEditorNode *buttoned_find_editor(ButtonEdData *, Cfg_ButtonFunction *);
 void buttoned_add_function(ButtonEdData *);
 void buttoned_del_function(ButtonEdData *);
 void buttoned_build_function_list(ButtonEdData *data);
-BOOL buttoned_swap_functions(ButtonEdData *,short,short);
+BOOL buttoned_swap_functions(ButtonEdData *, short, short);
 void buttoned_refresh_functionlist(ButtonEdData *data);
-void _button_editor_change_label(ButtonEdData *data,UWORD id,BOOL);
+void _button_editor_change_label(ButtonEdData *data, UWORD id, BOOL);
 void _buttoned_close_window(ButtonEdData *data);
-void buttoned_delete_function(ButtonEdData *data,Cfg_ButtonFunction *func,BOOL);
+void buttoned_delete_function(ButtonEdData *data, Cfg_ButtonFunction *func, BOOL);
 BOOL buttoned_check_empty(Cfg_ButtonFunction *func);

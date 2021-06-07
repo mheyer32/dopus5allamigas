@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -25,47 +25,47 @@ For more information on Directory Opus for Windows please see:
 #define _DOPUS_RESELECT
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	struct DirectoryBuffer	*buffer;	// Buffer these came from
-	APTR			memory;		// Memory pool
-	struct MinList		files;		// List of files
-	char			*top_name;	// Top file displayed
-	long			v_offset;	// Vertical offset
-	long			h_offset;	// Horizontal offset
-	unsigned long		flags;		// Flags
+	struct DirectoryBuffer *buffer;	 // Buffer these came from
+	APTR memory;					 // Memory pool
+	struct MinList files;			 // List of files
+	char *top_name;					 // Top file displayed
+	long v_offset;					 // Vertical offset
+	long h_offset;					 // Horizontal offset
+	unsigned long flags;			 // Flags
 } ReselectionData;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
-#define RESELF_SAVE_FILETYPES	(1<<0)
+#define RESELF_SAVE_FILETYPES (1 << 0)
 
 #ifndef __amigaos3__
-#pragma pack(2)
+	#pragma pack(2)
 #endif
 
 typedef struct
 {
-	struct MinNode		node;
-	unsigned short		flags;		// Selection state
-	char			*filetype;	// Saved filetype pointer
-	struct DateStamp	date;		// File date
-	char			name[1];	// Filename
+	struct MinNode node;
+	unsigned short flags;	// Selection state
+	char *filetype;			// Saved filetype pointer
+	struct DateStamp date;	// File date
+	char name[1];			// Filename
 } ReselectionFile;
 
 #ifndef __amigaos3__
-#pragma pack()
+	#pragma pack()
 #endif
 
 void InitReselect(ReselectionData *);
-void MakeReselect(ReselectionData *,struct DirectoryBuffer *,ULONG);
-void DoReselect(ReselectionData *,struct ListerWindow *,BOOL);
-void GetReselectFiletypes(ReselectionData *,struct MinList *);
+void MakeReselect(ReselectionData *, struct DirectoryBuffer *, ULONG);
+void DoReselect(ReselectionData *, struct ListerWindow *, BOOL);
+void GetReselectFiletypes(ReselectionData *, struct MinList *);
 void FreeReselect(ReselectionData *);
 
 #endif

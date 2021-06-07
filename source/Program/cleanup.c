@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -34,13 +34,13 @@ void quit(BOOL script)
 	if (main_status)
 	{
 		CloseProgressWindow(main_status);
-		main_status=0;
+		main_status = 0;
 	}
 
 	if (GUI)
 	{
 		// Clear 'startup' flag for scripts
-		GUI->flags&=~GUIF_DONE_STARTUP;
+		GUI->flags &= ~GUIF_DONE_STARTUP;
 
 		// Close commodities
 		cx_remove(GUI->cx);
@@ -50,7 +50,7 @@ void quit(BOOL script)
 
 		// Stop notify request
 		RemoveNotifyRequest(GUI->notify_req);
-		GUI->notify_req=0;
+		GUI->notify_req = 0;
 
 		// Is there a hide appicon?
 		if (GUI->hide_appicon)
@@ -60,17 +60,18 @@ void quit(BOOL script)
 		}
 
 		// Or an appmenuitem?
-		if (GUI->hide_appitem) RemoveAppMenuItem(GUI->hide_appitem);
+		if (GUI->hide_appitem)
+			RemoveAppMenuItem(GUI->hide_appitem);
 
 		// Launch shutdown script
 		if (script)
-			RunScript(SCRIPT_SHUTDOWN,0);
+			RunScript(SCRIPT_SHUTDOWN, 0);
 
 		// Set quit flag
-		GUI->flags|=GUIF_PENDING_QUIT;
+		GUI->flags |= GUIF_PENDING_QUIT;
 
 		// Shut the display down
-		close_display(CLOSE_ALL,TRUE);
+		close_display(CLOSE_ALL, TRUE);
 
 		// Send quit notifications
 		quit_notify();
@@ -89,10 +90,10 @@ void quit(BOOL script)
 		{
 			DOpusAppMessage *amsg;
 			RemPort(GUI->appmsg_port);
-			while ((amsg=(DOpusAppMessage *)GetMsg(GUI->appmsg_port)))
+			while ((amsg = (DOpusAppMessage *)GetMsg(GUI->appmsg_port)))
 				ReplyAppMessage(amsg);
 			DeleteMsgPort(GUI->appmsg_port);
-			GUI->appmsg_port=0;
+			GUI->appmsg_port = 0;
 
 			// Remove public semaphore
 			RemSemaphore((struct SignalSemaphore *)&pub_semaphore);
@@ -102,18 +103,18 @@ void quit(BOOL script)
 		IPC_Flush(&main_ipc);
 
 		// Close all processes
-		IPC_ListQuit(&GUI->lister_list,&main_ipc,0,TRUE);
-		IPC_ListQuit(&GUI->group_list,&main_ipc,0,TRUE);
-		IPC_ListQuit(&GUI->buttons_list,&main_ipc,0,TRUE);
-		IPC_ListQuit(&GUI->startmenu_list,&main_ipc,0,TRUE);
-		IPC_ListQuit(&GUI->process_list,&main_ipc,0,TRUE);
-		IPC_ListQuit(&GUI->function_list,&main_ipc,0,TRUE);
+		IPC_ListQuit(&GUI->lister_list, &main_ipc, 0, TRUE);
+		IPC_ListQuit(&GUI->group_list, &main_ipc, 0, TRUE);
+		IPC_ListQuit(&GUI->buttons_list, &main_ipc, 0, TRUE);
+		IPC_ListQuit(&GUI->startmenu_list, &main_ipc, 0, TRUE);
+		IPC_ListQuit(&GUI->process_list, &main_ipc, 0, TRUE);
+		IPC_ListQuit(&GUI->function_list, &main_ipc, 0, TRUE);
 
 		// Free buffers
 		buffers_clear(0);
 
 		// Remove all handlers
-		RemFunctionTrap("*","#?");
+		RemFunctionTrap("*", "#?");
 
 		// Free filetypes
 		FreeMemHandle(GUI->filetype_memory);
@@ -136,8 +137,10 @@ void quit(BOOL script)
 		backdrop_free(GUI->backdrop);
 
 		// Free icons
-		if (GUI->lister_icon) FreeCachedDiskObject(GUI->lister_icon);
-		if (GUI->button_icon) FreeCachedDiskObject(GUI->button_icon);
+		if (GUI->lister_icon)
+			FreeCachedDiskObject(GUI->lister_icon);
+		if (GUI->button_icon)
+			FreeCachedDiskObject(GUI->button_icon);
 
 		// Free arrow image
 		CloseImage(GUI->toolbar_arrow_image);
@@ -147,25 +150,27 @@ void quit(BOOL script)
 		FreeVec(arrow_lo_data_chip);
 		FreeVec(small_arrow_chip);
 		FreeVec(big_arrow_chip);
-#ifndef USE_SCREENTITLE
+	#ifndef USE_SCREENTITLE
 		FreeVec(moon_big_data_chip);
 		FreeVec(moon_small_data_chip);
-#endif
+	#endif
 		FreeVec(command_arrow_chip);
 		FreeVec(parent_arrow_chip);
 #endif
 
 		// Free screen signal
-		if (GUI->screen_signal!=-1) FreeSignal(GUI->screen_signal);
+		if (GUI->screen_signal != -1)
+			FreeSignal(GUI->screen_signal);
 
 		// Delete notify port
-		if (GUI->notify_port) DeleteMsgPort(GUI->notify_port);
+		if (GUI->notify_port)
+			DeleteMsgPort(GUI->notify_port);
 
 		// Free position memory
 		FreeMemHandle(GUI->position_memory);
 
 		// Free command history
-		Att_RemList(GUI->command_history,0);
+		Att_RemList(GUI->command_history, 0);
 
 		// Delete icon positioning port
 		DeleteMsgPort(GUI->iconpos_port);
@@ -174,8 +179,8 @@ void quit(BOOL script)
 		PopUpFreeHandle(GUI->desktop_menu);
 
 		// Clear requester pattern hook in library
-		if (GUI->flags2&GUIF2_BACKFILL_SET)
-			SetReqBackFill(0,0);
+		if (GUI->flags2 & GUIF2_BACKFILL_SET)
+			SetReqBackFill(0, 0);
 	}
 
 	// Free scripts
@@ -183,14 +188,14 @@ void quit(BOOL script)
 
 	// Free environment
 	environment_free(environment);
-	
+
 	// Delete main message ports
 	IPC_Flush(&main_ipc);
 	DeleteMsgPort(main_ipc.command_port);
 	DeleteMsgPort(main_ipc.reply_port);
 
 	// Pause here for a couple of seconds to let everything clean up
-	Delay(3*50);
+	Delay(3 * 50);
 
 	// Free global data
 	FreeMemHandle(global_memory_pool);
@@ -202,160 +207,161 @@ void quit(BOOL script)
 	free_locale_data(&locale);
 
 	// Close input device
-	if (InputBase) {
-	#ifdef __amigaos4__
-	DropInterface((struct Interface *)IInput);
-	#endif
-	CloseDevice((struct IORequest *)&input_req);
+	if (InputBase)
+	{
+#ifdef __amigaos4__
+		DropInterface((struct Interface *)IInput);
+#endif
+		CloseDevice((struct IORequest *)&input_req);
 	}
 
 	// Close timer device
-	if (TimerBase) {
-	#ifdef __amigaos4__
-	DropInterface((struct Interface *)ITimer);
-	#endif
-	CloseDevice((struct IORequest *)&timer_req);
+	if (TimerBase)
+	{
+#ifdef __amigaos4__
+		DropInterface((struct Interface *)ITimer);
+#endif
+		CloseDevice((struct IORequest *)&timer_req);
 	}
 
 	// Close console device
-	if (ConsoleDevice) {
-	#ifdef __amigaos4__
-	DropInterface((struct Interface *)IConsole);
-	#endif
-	CloseDevice((struct IORequest *)&console_req);
+	if (ConsoleDevice)
+	{
+#ifdef __amigaos4__
+		DropInterface((struct Interface *)IConsole);
+#endif
+		CloseDevice((struct IORequest *)&console_req);
 	}
 
-	// Close libraries
-	#ifdef __amigaos4__
+// Close libraries
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)Imu);
-	#endif
+#endif
 	CloseLibrary(muBase);
-	
-#ifndef __amigaos3__	
+
+#ifndef __amigaos3__
 	#ifdef __amigaos4__
 	DropInterface((struct Interface *)INewIcon);
 	#endif
 	CloseLibrary((struct Library *)NewIconBase);
 #endif
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)ICyberGfx);
-	#endif
+#endif
 	CloseLibrary(CyberGfxBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IAmigaGuide);
-	#endif
+#endif
 	CloseLibrary(AmigaGuideBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDataTypes);
-	#endif
+#endif
 	CloseLibrary(DataTypesBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IAsl);
-	#endif
+#endif
 	CloseLibrary(AslBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IIcon);
-	#endif
+#endif
 	CloseLibrary(IconBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDiskfont);
-	#endif
+#endif
 	CloseLibrary(DiskfontBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IWorkbench);
-	#endif
+#endif
 	CloseLibrary(WorkbenchBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)ICommodities);
-	#endif
+#endif
 	CloseLibrary(CxBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IRexxSys);
-	#endif
-	CloseLibrary((struct Library *)RexxSysBase); 
-	
-	#ifdef __amigaos4__
+#endif
+	CloseLibrary((struct Library *)RexxSysBase);
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IUtility);
-	#endif
+#endif
 	CloseLibrary(UtilityBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IGadTools);
-	#endif
+#endif
 	CloseLibrary(GadToolsBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)ILayers);
-	#endif
+#endif
 	CloseLibrary((struct Library *)LayersBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IGraphics);
-	#endif
+#endif
 	CloseLibrary((struct Library *)GfxBase);
-	
-	#ifdef __amigaos4__
+
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IIntuition);
-	#endif
+#endif
 	CloseLibrary((struct Library *)IntuitionBase);
-	
+
 	// Restore old current directory?
 	if (old_current_dir)
 	{
 		UnLock(CurrentDir(old_current_dir));
 	}
 
-	// Close the dopus5.library
-	#ifdef __amigaos4__
+// Close the dopus5.library
+#ifdef __amigaos4__
 	DropInterface((struct Interface *)IDOpus);
-	#endif
+#endif
 	CloseLibrary(DOpusBase);
 
 	// Outahere!
 	exit(0);
 }
 
-
 // Delete any temporary files
 void delete_temp_files(struct DateStamp *last)
 {
 	struct AnchorPath *anchor;
-	BPTR old,lock;
+	BPTR old, lock;
 
 	// Lock T: and cd
-	if ((lock=Lock("t:",ACCESS_READ)))
+	if ((lock = Lock("t:", ACCESS_READ)))
 	{
 		// CD to t:
-		old=CurrentDir(lock);
+		old = CurrentDir(lock);
 
 		// Allocate an anchor
-		if ((anchor=AllocVec(sizeof(struct AnchorPath),MEMF_CLEAR)))
+		if ((anchor = AllocVec(sizeof(struct AnchorPath), MEMF_CLEAR)))
 		{
 			short error;
 			struct FileInfoBlock fibcopy;
 
 			// See if any script files already exist
-			error=MatchFirst("T:dopus#?tmp#?",anchor);
+			error = MatchFirst("T:dopus#?tmp#?", anchor);
 			while (!error)
 			{
 				// Copy fib
-				fibcopy=anchor->ap_Info;
+				fibcopy = anchor->ap_Info;
 
 				// Get next
-				error=MatchNext(anchor);
+				error = MatchNext(anchor);
 
 				// Check datestamp
-				if (!last ||
-					CompareDates(&fibcopy.fib_Date,last)>=0)
+				if (!last || CompareDates(&fibcopy.fib_Date, last) >= 0)
 				{
 					// Try to delete file
 					DeleteFile(fibcopy.fib_FileName);
@@ -371,7 +377,6 @@ void delete_temp_files(struct DateStamp *last)
 	}
 }
 
-
 // Notify people we're quitting
 BOOL quit_notify(void)
 {
@@ -379,20 +384,20 @@ BOOL quit_notify(void)
 	char port[40];
 
 	// Lock trap list
-	trap=LockTrapList();
+	trap = LockTrapList();
 
 	// Look for quit traps
-	while ((trap=FindTrapEntry(trap,"quit",port)))
+	while ((trap = FindTrapEntry(trap, "quit", port)))
 	{
 		// Send abort message
-		rexx_handler_msg(port,0,0,HA_String,0,"quit",TAG_END);
+		rexx_handler_msg(port, 0, 0, HA_String, 0, "quit", TAG_END);
 	}
 
 	// Unlock trap list
 	UnlockTrapList();
 
 	// Broadcast notify message
-	SendNotifyMsg(DN_OPUS_QUIT,GUI->dopus_copy,0,0,GUI->rexx_port_name,0);
+	SendNotifyMsg(DN_OPUS_QUIT, GUI->dopus_copy, 0, 0, GUI->rexx_port_name, 0);
 
 	return 1;
 }

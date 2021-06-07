@@ -17,7 +17,7 @@ the existing commercial status of Directory Opus for Windows.
 
 For more information on Directory Opus for Windows please see:
 
-                 http://www.gpsoft.com.au
+				 http://www.gpsoft.com.au
 
 */
 
@@ -28,15 +28,15 @@ For more information on Directory Opus for Windows please see:
 #ifdef __amigaos3__
 static inline void atomic_inc(ULONG *counter)
 {
-	asm volatile ("addql #1,%0" : "+m" (*counter));
+	asm volatile("addql #1,%0" : "+m"(*counter));
 }
 
 static inline void atomic_dec(ULONG *counter)
 {
-	asm volatile ("subql #1,%0" : "+m" (*counter));
+	asm volatile("subql #1,%0" : "+m"(*counter));
 }
 #elif defined(__AROS__) && defined(__arm__)
-#include <aros/atomic.h>
+	#include <aros/atomic.h>
 static inline void atomic_inc(ULONG *counter)
 {
 	__AROS_ATOMIC_INC_L(*counter);
@@ -47,7 +47,7 @@ static inline void atomic_dec(ULONG *counter)
 	__AROS_ATOMIC_DEC_L(*counter);
 }
 #elif defined(__MORPHOS__)
-#include <hardware/atomic.h>
+	#include <hardware/atomic.h>
 static inline void atomic_inc(ULONG *counter)
 {
 	ATOMIC_ADD(counter, 1);
@@ -78,64 +78,61 @@ PATCHED_1(BPTR, LIBFUNC L_PatchedCreateDir, d1, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_CREATEDIR]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	struct FileInfoBlock *fib;
-	BPTR lock;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		struct FileInfoBlock *fib;
+		BPTR lock;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
+		{
+			atomic_dec(&usecount[WB_PATCH_CREATEDIR]);
+			return 0;
+		}
+
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
+
+		// Call original function
+		lock = LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], DOSBase, IDOS, d1, name);
+
+		// Failed?
+		if (!lock)
+		{
+			atomic_dec(&usecount[WB_PATCH_CREATEDIR]);
+			return 0;
+		}
+
+		// Get directory information
+		if ((fib = dospatch_fib(lock, libbase, 1)))
+		{
+			// Send notification
+			L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_CREATEDIR, 0, (char *)(fib + 1), fib, libbase);
+
+			// Free info block
+			FreeVec(fib);
+		}
+
 		atomic_dec(&usecount[WB_PATCH_CREATEDIR]);
-		return 0;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Call original function
-	lock=LIBCALL_1(BPTR, data->wb_data.old_function[WB_PATCH_CREATEDIR], DOSBase, IDOS, d1, name);
-
-	// Failed?
-	if (!lock)
-	{
-		atomic_dec(&usecount[WB_PATCH_CREATEDIR]);
-		return 0;
-	}
-
-	// Get directory information
-	if ((fib=dospatch_fib(lock,libbase,1)))
-	{
-		// Send notification
-		L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_CREATEDIR,0,(char *)(fib+1),fib,libbase);
-
-		// Free info block
-		FreeVec(fib);
-	}
-
-	atomic_dec(&usecount[WB_PATCH_CREATEDIR]);
-	return lock;
+		return lock;
 	}
 }
 PATCH_END
 
-
 // Calls original CreateDir directly
-BPTR LIBFUNC L_OriginalCreateDir(
-	REG(d1, char *name),
-	REG(a6, struct MyLibrary *libbase))
+BPTR LIBFUNC L_OriginalCreateDir(REG(d1, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
+	if (!(data->flags & LIBDF_DOS_PATCH))
 		return CreateDir(name);
 
 	// Create directory
@@ -149,103 +146,101 @@ PATCHED_1(long, LIBFUNC L_PatchedDeleteFile, d1, char *, name)
 {
 	atomic_inc(&usecount[WB_PATCH_DELETEFILE]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	char *buf=NULL;
-	BPTR lock;
-	long res;
-	APTR wsave=(APTR)-1;
-	struct Process *task;
-	
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_DELETEFILE]);
-		return 0;
-	}
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		char *buf = NULL;
+		BPTR lock;
+		long res;
+		APTR wsave = (APTR)-1;
+		struct Process *task;
 
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
-		}
-		else task=NULL;
-	}
-
-	// Try to lock file to delete
-	if ((lock=Lock(name,ACCESS_READ)))
-	{
-		// Allocate buffer
-		if ((buf=AllocVec(512,MEMF_CLEAR)))
-		{
-			// Get full path
-			L_DevNameFromLockDopus(lock,buf,512,libbase);
+			atomic_dec(&usecount[WB_PATCH_DELETEFILE]);
+			return 0;
 		}
 
-		// Unlock file
-		UnLock(lock);
-	}
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
+		{
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
+		}
 
-	// Call original function
-	res=LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], DOSBase, IDOS, d1, name);
+		// Try to lock file to delete
+		if ((lock = Lock(name, ACCESS_READ)))
+		{
+			// Allocate buffer
+			if ((buf = AllocVec(512, MEMF_CLEAR)))
+			{
+				// Get full path
+				L_DevNameFromLockDopus(lock, buf, 512, libbase);
+			}
 
-	// Failed?
-	if (!res)
-	{
+			// Unlock file
+			UnLock(lock);
+		}
+
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		// Call original function
+		res = LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], DOSBase, IDOS, d1, name);
+
+		// Failed?
+		if (!res)
+		{
+			atomic_dec(&usecount[WB_PATCH_DELETEFILE]);
+			return 0;
+		}
+
+		// Got name?
+		if (buf && *buf)
+		{
+			// Send notification
+			L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_DELETEFILE, 0, buf, 0, libbase);
+		}
+
+		// Free buffer
+		FreeVec(buf);
+
 		atomic_dec(&usecount[WB_PATCH_DELETEFILE]);
-		return 0;
-	}
-
-	// Got name?
-	if (buf && *buf)
-	{
-		// Send notification
-		L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_DELETEFILE,0,buf,0,libbase);
-	}
-
-	// Free buffer
-	FreeVec(buf);
-
-	atomic_dec(&usecount[WB_PATCH_DELETEFILE]);
-	return res;
+		return res;
 	}
 }
 PATCH_END
 
-
 // Original DeleteFile
-long LIBFUNC L_OriginalDeleteFile(
-	REG(d1, char *name),
-	REG(a6, struct MyLibrary *libbase))
+long LIBFUNC L_OriginalDeleteFile(REG(d1, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
+	if (!(data->flags & LIBDF_DOS_PATCH))
 		return DeleteFile(name);
 
 	// Delete file
 	return LIBCALL_1(long, data->wb_data.old_function[WB_PATCH_DELETEFILE], DOSBase, IDOS, d1, name);
 }
-
 
 /********************************** SetFileDate **********************************/
 
@@ -254,98 +249,97 @@ PATCHED_2(BOOL, LIBFUNC L_PatchedSetFileDate, d1, char *, name, d2, struct DateS
 {
 	atomic_inc(&usecount[WB_PATCH_SETFILEDATE]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	BOOL res;
-	BPTR lock;
-	APTR wsave=(APTR)-1;
-	struct Process *task;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		BOOL res;
+		BPTR lock;
+		APTR wsave = (APTR)-1;
+		struct Process *task;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
-		return FALSE;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], DOSBase, IDOS, d1, name, d2, date);
-
-	// Failed?
-	if (!res)
-	{
-		atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
-		return FALSE;
-	}
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
-		}
-		else task=NULL;
-	}
-
-	// Try to lock file
-	if ((lock=Lock(name,ACCESS_READ)))
-	{
-		struct FileInfoBlock *fib;
-
-		// Get directory information
-		if ((fib=dospatch_fib(lock,libbase,0)))
-		{
-			// Send notification
-			L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_SETFILEDATE,0,(char *)(fib+1),fib,libbase);
-
-			// Free info block
-			FreeVec(fib);
+			atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
+			return FALSE;
 		}
 
-		// Unlock file
-		UnLock(lock);
-	}
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Call original function
+		res = LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], DOSBase, IDOS, d1, name, d2, date);
 
-	atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
-	return res;
+		// Failed?
+		if (!res)
+		{
+			atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
+			return FALSE;
+		}
+
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
+		{
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
+		}
+
+		// Try to lock file
+		if ((lock = Lock(name, ACCESS_READ)))
+		{
+			struct FileInfoBlock *fib;
+
+			// Get directory information
+			if ((fib = dospatch_fib(lock, libbase, 0)))
+			{
+				// Send notification
+				L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_SETFILEDATE, 0, (char *)(fib + 1), fib, libbase);
+
+				// Free info block
+				FreeVec(fib);
+			}
+
+			// Unlock file
+			UnLock(lock);
+		}
+
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		atomic_dec(&usecount[WB_PATCH_SETFILEDATE]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original SetFileDate directly
-BOOL LIBFUNC L_OriginalSetFileDate(
-	REG(d1, char *name),
-	REG(d2, struct DateStamp *date),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalSetFileDate(REG(d1, char *name),
+								   REG(d2, struct DateStamp *date),
+								   REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return (BOOL)SetFileDate(name,date);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return (BOOL)SetFileDate(name, date);
 
 	// Set date
 	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETFILEDATE], DOSBase, IDOS, d1, name, d2, date);
 }
-
 
 /********************************** SetComment **********************************/
 
@@ -354,98 +348,95 @@ PATCHED_2(BOOL, LIBFUNC L_PatchedSetComment, d1, char *, name, d2, char *, comme
 {
 	atomic_inc(&usecount[WB_PATCH_SETCOMMENT]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	BOOL res;
-	BPTR lock;
-	APTR wsave=(APTR)-1;
-	struct Process *task;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		BOOL res;
+		BPTR lock;
+		APTR wsave = (APTR)-1;
+		struct Process *task;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
-		return FALSE;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], DOSBase, IDOS, d1, name, d2, comment);
-
-	// Failed?
-	if (!res)
-	{
-		atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
-		return FALSE;
-	}
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
-		}
-		else task=NULL;
-	}
-
-	// Lock file
-	if ((lock=Lock(name,ACCESS_READ)))
-	{
-		struct FileInfoBlock *fib;
-
-		// Get directory information
-		if ((fib=dospatch_fib(lock,libbase,0)))
-		{
-			// Send notification
-			L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_SETCOMMENT,0,(char *)(fib+1),fib,libbase);
-
-			// Free info block
-			FreeVec(fib);
+			atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
+			return FALSE;
 		}
 
-		// Unlock file
-		UnLock(lock);
-	}
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Call original function
+		res = LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], DOSBase, IDOS, d1, name, d2, comment);
 
-	atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
-	return res;
+		// Failed?
+		if (!res)
+		{
+			atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
+			return FALSE;
+		}
+
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
+		{
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
+		}
+
+		// Lock file
+		if ((lock = Lock(name, ACCESS_READ)))
+		{
+			struct FileInfoBlock *fib;
+
+			// Get directory information
+			if ((fib = dospatch_fib(lock, libbase, 0)))
+			{
+				// Send notification
+				L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_SETCOMMENT, 0, (char *)(fib + 1), fib, libbase);
+
+				// Free info block
+				FreeVec(fib);
+			}
+
+			// Unlock file
+			UnLock(lock);
+		}
+
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		atomic_dec(&usecount[WB_PATCH_SETCOMMENT]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original SetComment directly
-BOOL LIBFUNC L_OriginalSetComment(
-	REG(d1, char *name),
-	REG(d2, char *comment),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalSetComment(REG(d1, char *name), REG(d2, char *comment), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return (BOOL)SetComment(name,comment);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return (BOOL)SetComment(name, comment);
 
 	// Set comment
 	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETCOMMENT], DOSBase, IDOS, d1, name, d2, comment);
 }
-
 
 /********************************** SetProtection **********************************/
 
@@ -454,98 +445,95 @@ PATCHED_2(BOOL, LIBFUNC L_PatchedSetProtection, d1, char *, name, d2, ULONG, mas
 {
 	atomic_inc(&usecount[WB_PATCH_SETPROTECTION]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	BOOL res;
-	BPTR lock;
-	APTR wsave=(APTR)-1;
-	struct Process *task;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		BOOL res;
+		BPTR lock;
+		APTR wsave = (APTR)-1;
+		struct Process *task;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
-		return FALSE;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], DOSBase, IDOS, d1, name, d2, mask);
-
-	// Failed?
-	if (!res)
-	{
-		atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
-		return FALSE;
-	}
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
-		}
-		else task=NULL;
-	}
-
-	// Lock file
-	if ((lock=Lock(name,ACCESS_READ)))
-	{
-		struct FileInfoBlock *fib;
-
-		// Get directory information
-		if ((fib=dospatch_fib(lock,libbase,0)))
-		{
-			// Send notification
-			L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_SETPROTECTION,0,(char *)(fib+1),fib,libbase);
-
-			// Free info block
-			FreeVec(fib);
+			atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
+			return FALSE;
 		}
 
-		// Unlock file
-		UnLock(lock);
-	}
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Call original function
+		res = LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], DOSBase, IDOS, d1, name, d2, mask);
 
-	atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
-	return res;
+		// Failed?
+		if (!res)
+		{
+			atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
+			return FALSE;
+		}
+
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
+		{
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
+		}
+
+		// Lock file
+		if ((lock = Lock(name, ACCESS_READ)))
+		{
+			struct FileInfoBlock *fib;
+
+			// Get directory information
+			if ((fib = dospatch_fib(lock, libbase, 0)))
+			{
+				// Send notification
+				L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_SETPROTECTION, 0, (char *)(fib + 1), fib, libbase);
+
+				// Free info block
+				FreeVec(fib);
+			}
+
+			// Unlock file
+			UnLock(lock);
+		}
+
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		atomic_dec(&usecount[WB_PATCH_SETPROTECTION]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original SetProtection directly
-BOOL LIBFUNC L_OriginalSetProtection(
-	REG(d1, char *name),
-	REG(d2, ULONG mask),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalSetProtection(REG(d1, char *name), REG(d2, ULONG mask), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return (BOOL)SetProtection(name,mask);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return (BOOL)SetProtection(name, mask);
 
 	// Set protection
 	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_SETPROTECTION], DOSBase, IDOS, d1, name, d2, mask);
 }
-
 
 /********************************** Rename **********************************/
 
@@ -554,133 +542,134 @@ PATCHED_2(BOOL, LIBFUNC L_PatchedRename, d1, char *, oldname, d2, char *, newnam
 {
 	atomic_inc(&usecount[WB_PATCH_RENAME]);
 	{
-	struct FileInfoBlock *fib=NULL;
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	BOOL res;
-	BPTR lock;
-	char old_name[108];
-	APTR wsave=(APTR)-1;
-	struct Process *task;
+		struct FileInfoBlock *fib = NULL;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		BOOL res;
+		BPTR lock;
+		char old_name[108];
+		APTR wsave = (APTR)-1;
+		struct Process *task;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_RENAME]);
-		return FALSE;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
+			atomic_dec(&usecount[WB_PATCH_RENAME]);
+			return FALSE;
 		}
-		else task=NULL;
-	}
 
-	// Get lock on old file?
-	if ((lock=Lock(oldname,ACCESS_READ)))
-	{
-		// Get file information
-		if (!(fib=dospatch_fib(lock,libbase,0)))
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
+
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
 		{
-			// Failed to get info
-			UnLock(lock);
-			lock=0;
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
 		}
-	}
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Get lock on old file?
+		if ((lock = Lock(oldname, ACCESS_READ)))
+		{
+			// Get file information
+			if (!(fib = dospatch_fib(lock, libbase, 0)))
+			{
+				// Failed to get info
+				UnLock(lock);
+				lock = 0;
+			}
+		}
 
-	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], DOSBase, IDOS, d1, oldname, d2, newname);
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
 
-	// Failure?
-	if (!res)
-	{
-		// Unlock and free fib
-		if (fib) FreeVec(fib);
-		if (lock) UnLock(lock);
-		atomic_dec(&usecount[WB_PATCH_RENAME]);
-		return res;
-	}
+		// Call original function
+		res = LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], DOSBase, IDOS, d1, oldname, d2, newname);
 
-	// Got no Fib?
-	if (!fib)
-	{
-		atomic_dec(&usecount[WB_PATCH_RENAME]);
-		return res;
-	}
+		// Failure?
+		if (!res)
+		{
+			// Unlock and free fib
+			if (fib)
+				FreeVec(fib);
+			if (lock)
+				UnLock(lock);
+			atomic_dec(&usecount[WB_PATCH_RENAME]);
+			return res;
+		}
 
-	// Store old name
-	strcpy(old_name,fib->fib_FileName);
+		// Got no Fib?
+		if (!fib)
+		{
+			atomic_dec(&usecount[WB_PATCH_RENAME]);
+			return res;
+		}
 
-	// Turn requesters off
-	if (task) task->pr_WindowPtr=(APTR)-1;
+		// Store old name
+		strcpy(old_name, fib->fib_FileName);
 
-	// Get new information
+		// Turn requesters off
+		if (task)
+			task->pr_WindowPtr = (APTR)-1;
+
+			// Get new information
 #ifdef USE_64BIT
-	if (L_ExamineLock64(lock,(FileInfoBlock64 *)fib))
+		if (L_ExamineLock64(lock, (FileInfoBlock64 *)fib))
 #else
-	if (Examine(lock,fib))
+		if (Examine(lock, fib))
 #endif
-	{
-		// Copy new name to comment
-		stccpy(fib->fib_Comment,fib->fib_FileName,79);
+		{
+			// Copy new name to comment
+			stccpy(fib->fib_Comment, fib->fib_FileName, 79);
 
-		// Restore old name
-		strcpy(fib->fib_FileName,old_name);
+			// Restore old name
+			strcpy(fib->fib_FileName, old_name);
 
-		// Send notification
-		L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_RENAME,0,(char *)(fib+1),fib,libbase);
-	}
+			// Send notification
+			L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_RENAME, 0, (char *)(fib + 1), fib, libbase);
+		}
 
-	// Free info block and lock
-	FreeVec(fib);
-	UnLock(lock);
-	
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+		// Free info block and lock
+		FreeVec(fib);
+		UnLock(lock);
 
-	atomic_dec(&usecount[WB_PATCH_RENAME]);
-	return res;
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		atomic_dec(&usecount[WB_PATCH_RENAME]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original Rename directly
-BOOL LIBFUNC L_OriginalRename(
-	REG(d1, char *oldname),
-	REG(d2, char *newname),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalRename(REG(d1, char *oldname), REG(d2, char *newname), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return (BOOL)Rename(oldname,newname);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return (BOOL)Rename(oldname, newname);
 
 	// Rename file
 	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RENAME], DOSBase, IDOS, d1, oldname, d2, newname);
 }
-
 
 /********************************** Relabel **********************************/
 
@@ -689,63 +678,58 @@ PATCHED_2(BOOL, LIBFUNC L_PatchedRelabel, d1, char *, volumename, d2, char *, na
 {
 	atomic_inc(&usecount[WB_PATCH_RELABEL]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	struct FileInfoBlock fib;
-	BOOL res;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		struct FileInfoBlock fib;
+		BOOL res;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_RELABEL]);
-		return FALSE;
-	}
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
+		{
+			atomic_dec(&usecount[WB_PATCH_RELABEL]);
+			return FALSE;
+		}
 
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Call original function
-	res=LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], DOSBase, IDOS, d1, volumename, d2, name);
+		// Call original function
+		res = LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], DOSBase, IDOS, d1, volumename, d2, name);
 
-	// Failure?
-	if (!res)
-	{
+		// Failure?
+		if (!res)
+		{
+			atomic_dec(&usecount[WB_PATCH_RELABEL]);
+			return res;
+		}
+
+		// Fake fib with new name
+		strcpy(fib.fib_FileName, name);
+
+		// Send notification
+		L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_RELABEL, 0, volumename, &fib, libbase);
+
 		atomic_dec(&usecount[WB_PATCH_RELABEL]);
 		return res;
-	}
-
-	// Fake fib with new name
-	strcpy(fib.fib_FileName,name);
-
-	// Send notification
-	L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_RELABEL,0,volumename,&fib,libbase);
-
-	atomic_dec(&usecount[WB_PATCH_RELABEL]);
-	return res;
 	}
 }
 PATCH_END
 
-
 // Calls original Relabel directly
-BOOL LIBFUNC L_OriginalRelabel(
-	REG(d1, char *volumename),
-	REG(d2, char *name),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalRelabel(REG(d1, char *volumename), REG(d2, char *name), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// Relabel disk
 	return LIBCALL_2(BOOL, data->wb_data.old_function[WB_PATCH_RELABEL], DOSBase, IDOS, d1, volumename, d2, name);
 }
-
 
 /********************************** Open **********************************/
 
@@ -754,172 +738,174 @@ PATCHED_2(BPTR, LIBFUNC L_PatchedOpen, d1, char *, name, d2, LONG, accessMode)
 {
 	atomic_inc(&usecount[WB_PATCH_OPEN]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	struct FileInfoBlock *fib;
-	BPTR file,lock;
-	BOOL create=FALSE;
-	APTR wsave=(APTR)-1;
-	struct Process *task;
-	struct FileHandleWrapper *handle;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		struct FileInfoBlock *fib;
+		BPTR file, lock;
+		BOOL create = FALSE;
+		APTR wsave = (APTR)-1;
+		struct Process *task;
+		struct FileHandleWrapper *handle;
 
-	// Get library
-	if (!(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_OPEN]);
-		return 0;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Find process
-	if ((task=(struct Process *)FindTask(NULL)))
-	{
-		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		// Get library
+		if (!(libbase = GET_DOPUSLIB))
 		{
-			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
+			atomic_dec(&usecount[WB_PATCH_OPEN]);
+			return 0;
 		}
-		else task=NULL;
-	}
 
-	// Check mode
-	switch (accessMode)
-	{
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
+
+		// Find process
+		if ((task = (struct Process *)FindTask(NULL)))
+		{
+			// Is it a process?
+			if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+			{
+				// Save pointer and turn requesters off
+				wsave = task->pr_WindowPtr;
+				task->pr_WindowPtr = (APTR)-1;
+			}
+			else
+				task = NULL;
+		}
+
+		// Check mode
+		switch (accessMode)
+		{
 		// Create?
 		case MODE_NEWFILE:
-			create=TRUE;
+			create = TRUE;
 			break;
 
 		// Read/write
 		case MODE_READWRITE:
 
 			// If file is going to be created, we use it
-			if (!(lock=Lock(name,ACCESS_READ))) create=TRUE;
-			else UnLock(lock);
+			if (!(lock = Lock(name, ACCESS_READ)))
+				create = TRUE;
+			else
+				UnLock(lock);
 			break;
-	}
-
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
-
-	// Call original function
-	file=LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], DOSBase, IDOS, d1, name, d2, accessMode);
-
-	// Failure?
-	if (!file)
-	{
-		atomic_dec(&usecount[WB_PATCH_OPEN]);
-		return file;
-	}
-
-	// If file is Interactive, assume it's not a filesystem
-	if (IsInteractive(file))
-	{
-		atomic_dec(&usecount[WB_PATCH_OPEN]);
-		return file;
-	}
-
-	// Allocate FileInfoBlock and buffer
-	if (!(fib=AllocVec(sizeof(struct FileInfoBlock)+512,MEMF_CLEAR)))
-	{
-		atomic_dec(&usecount[WB_PATCH_OPEN]);
-		return file;
-	}
-
-	// Disable requesters
-	if (task) task->pr_WindowPtr=(APTR)-1;
-
-	// Get lock on parent directory
-	if ((lock=ParentOfFH(file)))
-	{
-		// Allocate wrapper handle
-		if ((handle=AllocVec(sizeof(struct FileHandleWrapper),0)))
-		{
-			// Fill out handle
-			handle->fhw_FileHandle=file;
-			handle->fhw_Flags=0;
-			handle->fhw_Parent=lock;
-
-			// Lock file list
-			ObtainSemaphore(&data->file_list.lock);
-
-			// Add to head of list
-			AddHead(&data->file_list.list,(struct Node *)handle);
-
-			// Unlock file list
-			ReleaseSemaphore(&data->file_list.lock);
 		}
 
-		// If this was a create operation, we need to send a message now
-		if (create)
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
+
+		// Call original function
+		file = LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], DOSBase, IDOS, d1, name, d2, accessMode);
+
+		// Failure?
+		if (!file)
 		{
-			// Get buffer pointer
-			char *path=(char *)(fib+1);
+			atomic_dec(&usecount[WB_PATCH_OPEN]);
+			return file;
+		}
 
-			// Get full path of parent, and terminate it
-			L_DevNameFromLockDopus(lock,path,512,libbase);
-			AddPart(path,"",512);
+		// If file is Interactive, assume it's not a filesystem
+		if (IsInteractive(file))
+		{
+			atomic_dec(&usecount[WB_PATCH_OPEN]);
+			return file;
+		}
 
-			// Got path?
-			if (*path)
+		// Allocate FileInfoBlock and buffer
+		if (!(fib = AllocVec(sizeof(struct FileInfoBlock) + 512, MEMF_CLEAR)))
+		{
+			atomic_dec(&usecount[WB_PATCH_OPEN]);
+			return file;
+		}
+
+		// Disable requesters
+		if (task)
+			task->pr_WindowPtr = (APTR)-1;
+
+		// Get lock on parent directory
+		if ((lock = ParentOfFH(file)))
+		{
+			// Allocate wrapper handle
+			if ((handle = AllocVec(sizeof(struct FileHandleWrapper), 0)))
 			{
-				// Examine the new file
-#ifdef USE_64BIT
-				if (L_ExamineHandle64(file,(FileInfoBlock64 *)fib))
-#else
-				if (ExamineFH(file,fib))
-#endif
+				// Fill out handle
+				handle->fhw_FileHandle = file;
+				handle->fhw_Flags = 0;
+				handle->fhw_Parent = lock;
+
+				// Lock file list
+				ObtainSemaphore(&data->file_list.lock);
+
+				// Add to head of list
+				AddHead(&data->file_list.list, (struct Node *)handle);
+
+				// Unlock file list
+				ReleaseSemaphore(&data->file_list.lock);
+			}
+
+			// If this was a create operation, we need to send a message now
+			if (create)
+			{
+				// Get buffer pointer
+				char *path = (char *)(fib + 1);
+
+				// Get full path of parent, and terminate it
+				L_DevNameFromLockDopus(lock, path, 512, libbase);
+				AddPart(path, "", 512);
+
+				// Got path?
+				if (*path)
 				{
-					// Send notification
-					L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_CREATE,0,path,fib,libbase);
+					// Examine the new file
+#ifdef USE_64BIT
+					if (L_ExamineHandle64(file, (FileInfoBlock64 *)fib))
+#else
+					if (ExamineFH(file, fib))
+#endif
+					{
+						// Send notification
+						L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_CREATE, 0, path, fib, libbase);
+					}
 				}
 			}
+
+			// Unlock parent, unless handle has grabbed it
+			if (!handle)
+				UnLock(lock);
 		}
 
-		// Unlock parent, unless handle has grabbed it
-		if (!handle) UnLock(lock);
-	}
+		// Free fib
+		FreeVec(fib);
 
-	// Free fib
-	FreeVec(fib);
+		// Fix requesters
+		if (task)
+			task->pr_WindowPtr = wsave;
 
-	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
-
-	atomic_dec(&usecount[WB_PATCH_OPEN]);
-	return file;
+		atomic_dec(&usecount[WB_PATCH_OPEN]);
+		return file;
 	}
 }
 PATCH_END
 
-
 // Calls original Open directly
-BPTR LIBFUNC L_OriginalOpen(
-	REG(d1, char *name),
-	REG(d2, LONG accessMode),
-	REG(a6, struct MyLibrary *libbase))
+BPTR LIBFUNC L_OriginalOpen(REG(d1, char *name), REG(d2, LONG accessMode), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return Open(name,accessMode);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return Open(name, accessMode);
 
 	// Open file
 	return LIBCALL_2(BPTR, data->wb_data.old_function[WB_PATCH_OPEN], DOSBase, IDOS, d1, name, d2, accessMode);
 }
-
 
 /********************************** Close **********************************/
 
@@ -928,130 +914,128 @@ PATCHED_1(BOOL, LIBFUNC L_PatchedClose, d1, BPTR, file)
 {
 	atomic_inc(&usecount[WB_PATCH_CLOSE]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	BOOL res;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		BOOL res;
 
-	// Get library
-	if (!file || !(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_CLOSE]);
-		return FALSE;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// If this is the 'last' file, clear pointer
-	if (data->last_file==file)
-		data->last_file=0;
-
-	// Is file not interactive (ie a filesystem)?
-	if (!IsInteractive(file))
-	{
-		struct FileHandleWrapper *handle;
-
-		// See if we have a wrapper
-		if ((handle=find_filehandle(file,data)))
+		// Get library
+		if (!file || !(libbase = GET_DOPUSLIB))
 		{
-			// Remove it from the list
-			Remove((struct Node *)handle);
-
-			// Unlock the list
-			ReleaseSemaphore(&data->file_list.lock);
-
-			// Did the file get written to?
-			if (handle->fhw_Flags&FHWF_WRITTEN)
-			{
-				struct FileInfoBlock *fib;
-				APTR wsave=(APTR)-1;
-				struct Process *task;
-
-				// Find process
-				if ((task=(struct Process *)FindTask(NULL)))
-				{
-					// Is it a process?
-					if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
-					{
-						// Save pointer and turn requesters off
-						wsave=task->pr_WindowPtr;
-						task->pr_WindowPtr=(APTR)-1;
-					}
-					else task=NULL;
-				}
-
-				// Allocate FileInfoBlock and buffer
-				if ((fib=AllocVec(sizeof(struct FileInfoBlock)+512,MEMF_CLEAR)))
-				{
-					char *path=(char *)(fib+1);
-
-					// Get full path of parent and terminate it
-					L_DevNameFromLockDopus(handle->fhw_Parent,path,512,libbase);
-					AddPart(path,"",512);
-
-					// Got path?
-					if (*path)
-					{
-						// Examine the file
-#ifdef USE_64BIT
-						if (L_ExamineHandle64(file,(FileInfoBlock64 *)fib))
-#else
-						if (ExamineFH(file,fib))
-#endif
-						{
-							// Send notification
-							L_SendNotifyMsg(DN_DOS_ACTION,0,DNF_DOS_CLOSE,0,path,fib,libbase);
-						}
-					}
-
-					// Free fib
-					FreeVec(fib);
-				}
-
-				// Fix requesters
-				if (task) task->pr_WindowPtr=wsave;
-			}
-
-			// Unlock parent lock
-			UnLock(handle->fhw_Parent);
-
-			// Free wrapper handle
-			FreeVec(handle);
+			atomic_dec(&usecount[WB_PATCH_CLOSE]);
+			return FALSE;
 		}
-	}
 
-	// Close file
-	res=LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], DOSBase, IDOS, d1, file);
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	atomic_dec(&usecount[WB_PATCH_CLOSE]);
-	return res;
+		// If this is the 'last' file, clear pointer
+		if (data->last_file == file)
+			data->last_file = 0;
+
+		// Is file not interactive (ie a filesystem)?
+		if (!IsInteractive(file))
+		{
+			struct FileHandleWrapper *handle;
+
+			// See if we have a wrapper
+			if ((handle = find_filehandle(file, data)))
+			{
+				// Remove it from the list
+				Remove((struct Node *)handle);
+
+				// Unlock the list
+				ReleaseSemaphore(&data->file_list.lock);
+
+				// Did the file get written to?
+				if (handle->fhw_Flags & FHWF_WRITTEN)
+				{
+					struct FileInfoBlock *fib;
+					APTR wsave = (APTR)-1;
+					struct Process *task;
+
+					// Find process
+					if ((task = (struct Process *)FindTask(NULL)))
+					{
+						// Is it a process?
+						if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
+						{
+							// Save pointer and turn requesters off
+							wsave = task->pr_WindowPtr;
+							task->pr_WindowPtr = (APTR)-1;
+						}
+						else
+							task = NULL;
+					}
+
+					// Allocate FileInfoBlock and buffer
+					if ((fib = AllocVec(sizeof(struct FileInfoBlock) + 512, MEMF_CLEAR)))
+					{
+						char *path = (char *)(fib + 1);
+
+						// Get full path of parent and terminate it
+						L_DevNameFromLockDopus(handle->fhw_Parent, path, 512, libbase);
+						AddPart(path, "", 512);
+
+						// Got path?
+						if (*path)
+						{
+							// Examine the file
+#ifdef USE_64BIT
+							if (L_ExamineHandle64(file, (FileInfoBlock64 *)fib))
+#else
+							if (ExamineFH(file, fib))
+#endif
+							{
+								// Send notification
+								L_SendNotifyMsg(DN_DOS_ACTION, 0, DNF_DOS_CLOSE, 0, path, fib, libbase);
+							}
+						}
+
+						// Free fib
+						FreeVec(fib);
+					}
+
+					// Fix requesters
+					if (task)
+						task->pr_WindowPtr = wsave;
+				}
+
+				// Unlock parent lock
+				UnLock(handle->fhw_Parent);
+
+				// Free wrapper handle
+				FreeVec(handle);
+			}
+		}
+
+		// Close file
+		res = LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], DOSBase, IDOS, d1, file);
+
+		atomic_dec(&usecount[WB_PATCH_CLOSE]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original Close directly
-BOOL LIBFUNC L_OriginalClose(
-	REG(d1, BPTR file),
-	REG(a6, struct MyLibrary *libbase))
+BOOL LIBFUNC L_OriginalClose(REG(d1, BPTR file), REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
+	if (!(data->flags & LIBDF_DOS_PATCH))
 		return (BOOL)Close(file);
 
 	// Close file
 	return LIBCALL_1(BOOL, data->wb_data.old_function[WB_PATCH_CLOSE], DOSBase, IDOS, d1, file);
 }
-
 
 /********************************** Write **********************************/
 
@@ -1060,126 +1044,125 @@ PATCHED_3(LONG, LIBFUNC L_PatchedWrite, d1, BPTR, file, d2, void *, wdata, d3, L
 {
 	atomic_inc(&usecount[WB_PATCH_WRITE]);
 	{
-	struct LibData *data;
-	struct MyLibrary *libbase;
-	struct FileHandleWrapper *handle;
-	LONG res;
+		struct LibData *data;
+		struct MyLibrary *libbase;
+		struct FileHandleWrapper *handle;
+		LONG res;
 
-	// Get library
-	if (!file || !(libbase=GET_DOPUSLIB))
-	{
-		atomic_dec(&usecount[WB_PATCH_WRITE]);
-		return 0;
-	}
-
-	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
-
-	// Different to the last file we saw?
-	if (data->last_file!=file)
-	{
-		// See if we have a wrapper
-		if ((handle=find_filehandle(file,data)))
+		// Get library
+		if (!file || !(libbase = GET_DOPUSLIB))
 		{
-			// Set 'written' flag
-			handle->fhw_Flags|=FHWF_WRITTEN;
-
-			// Unlock the list
-			ReleaseSemaphore(&data->file_list.lock);
+			atomic_dec(&usecount[WB_PATCH_WRITE]);
+			return 0;
 		}
 
-		// Remember this file
-		data->last_file=file;
-	}
+		// Get data pointer
+		data = (struct LibData *)libbase->ml_UserData;
 
-	// Write data
-	res=LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], DOSBase, IDOS, d1, file, d2, wdata, d3, length);
+		// Different to the last file we saw?
+		if (data->last_file != file)
+		{
+			// See if we have a wrapper
+			if ((handle = find_filehandle(file, data)))
+			{
+				// Set 'written' flag
+				handle->fhw_Flags |= FHWF_WRITTEN;
 
-	atomic_dec(&usecount[WB_PATCH_WRITE]);
-	return res;
+				// Unlock the list
+				ReleaseSemaphore(&data->file_list.lock);
+			}
+
+			// Remember this file
+			data->last_file = file;
+		}
+
+		// Write data
+		res =
+			LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], DOSBase, IDOS, d1, file, d2, wdata, d3, length);
+
+		atomic_dec(&usecount[WB_PATCH_WRITE]);
+		return res;
 	}
 }
 PATCH_END
 
-
 // Calls original Write directly
-LONG LIBFUNC L_OriginalWrite(
-	REG(d1, BPTR file),
-	REG(d2, void *wdata),
-	REG(d3, LONG length),
-	REG(a6, struct MyLibrary *libbase))
+LONG LIBFUNC L_OriginalWrite(REG(d1, BPTR file),
+							 REG(d2, void *wdata),
+							 REG(d3, LONG length),
+							 REG(a6, struct MyLibrary *libbase))
 {
 	struct LibData *data;
 
-	#ifdef __amigaos4__
+#ifdef __amigaos4__
 	libbase = dopuslibbase_global;
-	#endif
-	
+#endif
+
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// If patch wasn't installed, call DOS directly
-	if (!(data->flags&LIBDF_DOS_PATCH))
-		return Write(file,wdata,length);
+	if (!(data->flags & LIBDF_DOS_PATCH))
+		return Write(file, wdata, length);
 
 	// Write data
 	return LIBCALL_3(LONG, data->wb_data.old_function[WB_PATCH_WRITE], DOSBase, IDOS, d1, file, d2, wdata, d3, length);
 }
 
-
 /******************************************************************************/
 
 // Get information on a filelock
-struct FileInfoBlock *dospatch_fib(BPTR lock,struct MyLibrary *libbase,BOOL req)
+struct FileInfoBlock *dospatch_fib(BPTR lock, struct MyLibrary *libbase, BOOL req)
 {
-	struct FileInfoBlock *fib=NULL;
+	struct FileInfoBlock *fib = NULL;
 	struct LibData *data;
 	BPTR parent;
-	BOOL ok=FALSE;
-	APTR wsave=(APTR)-1;
-	struct Process *task=NULL;
+	BOOL ok = FALSE;
+	APTR wsave = (APTR)-1;
+	struct Process *task = NULL;
 
 	// Get data pointer
-	data=(struct LibData *)libbase->ml_UserData;
+	data = (struct LibData *)libbase->ml_UserData;
 
 	// Find process
-	if (req && (task=(struct Process *)FindTask(NULL)))
+	if (req && (task = (struct Process *)FindTask(NULL)))
 	{
 		// Is it a process?
-		if (task->pr_Task.tc_Node.ln_Type==NT_PROCESS)
+		if (task->pr_Task.tc_Node.ln_Type == NT_PROCESS)
 		{
 			// Save pointer and turn requesters off
-			wsave=task->pr_WindowPtr;
-			task->pr_WindowPtr=(APTR)-1;
+			wsave = task->pr_WindowPtr;
+			task->pr_WindowPtr = (APTR)-1;
 		}
-		else task=NULL;
+		else
+			task = NULL;
 	}
 
 	// Get parent directory
-	if ((parent=ParentDir(lock)))
+	if ((parent = ParentDir(lock)))
 	{
 		// Get FileInfoBlock and a buffer
-		if ((fib=AllocVec(sizeof(struct FileInfoBlock)+512,MEMF_CLEAR)))
+		if ((fib = AllocVec(sizeof(struct FileInfoBlock) + 512, MEMF_CLEAR)))
 		{
 			char *buf;
 
 			// Get buffer pointer
-			buf=(char *)(fib+1);
+			buf = (char *)(fib + 1);
 
 			// Get full path of parent, and terminate it
-			L_DevNameFromLockDopus(parent,buf,512,libbase);
-			AddPart(buf,"",512);
+			L_DevNameFromLockDopus(parent, buf, 512, libbase);
+			AddPart(buf, "", 512);
 
 			// Got path?
 			if (*buf)
 			{
 				// Examine the lock
 #ifdef USE_64BIT
-				if (L_ExamineLock64(lock,(FileInfoBlock64 *)fib))
+				if (L_ExamineLock64(lock, (FileInfoBlock64 *)fib))
 #else
-				if (Examine(lock,fib))
+				if (Examine(lock, fib))
 #endif
-					ok=TRUE;
+					ok = TRUE;
 			}
 		}
 
@@ -1187,7 +1170,7 @@ struct FileInfoBlock *dospatch_fib(BPTR lock,struct MyLibrary *libbase,BOOL req)
 		if (!ok)
 		{
 			FreeVec(fib);
-			fib=NULL;
+			fib = NULL;
 		}
 
 		// Unlock parent
@@ -1195,12 +1178,13 @@ struct FileInfoBlock *dospatch_fib(BPTR lock,struct MyLibrary *libbase,BOOL req)
 	}
 
 	// Fix requesters
-	if (task) task->pr_WindowPtr=wsave;
+	if (task)
+		task->pr_WindowPtr = wsave;
 	return fib;
 }
 
 // Find FileHandle in tracking list
-struct FileHandleWrapper *find_filehandle(BPTR file,struct LibData *data)
+struct FileHandleWrapper *find_filehandle(BPTR file, struct LibData *data)
 {
 	struct FileHandleWrapper *handle;
 
@@ -1208,19 +1192,18 @@ struct FileHandleWrapper *find_filehandle(BPTR file,struct LibData *data)
 	ObtainSemaphore(&data->file_list.lock);
 
 	// Go through list
-	for (handle=(struct FileHandleWrapper *)data->file_list.list.lh_Head;
-		handle->fhw_Node.mln_Succ;
-		handle=(struct FileHandleWrapper *)handle->fhw_Node.mln_Succ)
+	for (handle = (struct FileHandleWrapper *)data->file_list.list.lh_Head; handle->fhw_Node.mln_Succ;
+		 handle = (struct FileHandleWrapper *)handle->fhw_Node.mln_Succ)
 	{
 		// Match handle
-		if (handle->fhw_FileHandle==file)
+		if (handle->fhw_FileHandle == file)
 		{
 			// Not the top one?
-			if (handle!=(struct FileHandleWrapper *)data->file_list.list.lh_Head)
+			if (handle != (struct FileHandleWrapper *)data->file_list.list.lh_Head)
 			{
 				// Shift it to the top as the most recently accessed
 				Remove((struct Node *)handle);
-				AddHead(&data->file_list.list,(struct Node *)handle);
+				AddHead(&data->file_list.list, (struct Node *)handle);
 			}
 
 			// Return the handle (leave the list locked)
