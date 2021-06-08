@@ -145,11 +145,12 @@ struct GfxBase *GfxBase = NULL;
 struct DosLibrary *DOSBase = NULL;
 struct LocaleBase *LocaleBase = NULL;
 struct RxsLib *RexxSysBase = NULL;
-	#ifdef __amigaos3__
-extern struct Library *MathIeeeSingBasBase = NULL;
-extern struct Library *MathIeeeSingTransBase = NULL;
-extern struct Library *MathIeeeDoubBasBase = NULL;
-extern struct Library *MathIeeeDoubTransBase = NULL;
+    #if defined(__amigaos3__) && defined(__libnix__)
+// libnix will automatically open the math libs; use libnix' library base pointers instead
+extern struct Library *MathIeeeSingBasBase;
+extern struct Library *MathIeeeSingTransBase;
+extern struct Library *MathIeeeDoubBasBase;
+extern struct Library *MathIeeeDoubTransBase;
 	#endif
 #endif
 
@@ -820,7 +821,8 @@ ULONG freeBase(struct LibraryHeader *lib)
 {
 	UserLibCleanup();
 
-#ifdef __amigaos3__
+#if defined(__amigaos3__) && !defined(__libnix__)
+    // libnix will automatically open the math libs; use libnix' library base pointers instead
 	if (MathIeeeSingBasBase != NULL)
 	{
 		CloseLibrary(MathIeeeSingBasBase);
@@ -999,7 +1001,8 @@ ULONG initBase(struct LibraryHeader *lib)
 													if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) !=
 															NULL &&
 														GETINTERFACE(ILocale, LocaleBase))
-#ifdef __amigaos3__
+// libnix will automatically open the math libs; use libnix' library base pointers instead
+#if defined(__amigaos3__) && !defined(__libnix__)
 														if ((MathIeeeSingBasBase =
 																 OpenLibrary("mathieeesingbas.library", 37)))
 															if ((MathIeeeSingTransBase =
