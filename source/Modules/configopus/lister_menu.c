@@ -4,57 +4,24 @@
 
 BOOL buttoned_function_empty(Cfg_ButtonFunction *);
 
-#warning Rewrite Config_Menu() function to use Tags or structure for A4/A5 arguments
-#ifdef __amigaos3__
-Cfg_ButtonBank *global_bank = NULL;
-char *global_title = NULL;
-asm(".text                    \n\
-     .even                    \n\
-.globl _L_Config_Menu         \n\
-_L_Config_Menu:               \n\
-      jsr _Forbid             \n\
-      movel a4,_global_bank   \n\
-      movel a5,_global_title  \n\
-      jsr _ConfigMen          \n\
-      rts                     \n\
-      ");
-
-ULONG ConfigMen(REG(a0, char *menu_name),
-				REG(a1, IPCData *ipc),
-				REG(a2, IPCData *owner_ipc),
-				REG(a3, struct Screen *screen),
-				REG(d0, ULONG command_list),
-				REG(d1, char *default_name),
-				REG(d2, short type),
-				REG(d3, Att_List *script_list))
-{
-	Cfg_ButtonBank *def_bank = global_bank;
-	char *title = global_title;
-	lister_menu_data *data;
-	IPCMessage *quit_msg = 0;
-	short undo_flag = 0, pending_quit = 0;
-	Cfg_Button *button;
-	Cfg_ButtonBank *ret_code = 0;
-	Permit();
-#else
 ULONG LIBFUNC L_Config_Menu(REG(a0, char *menu_name),
 							REG(a1, IPCData *ipc),
 							REG(a2, IPCData *owner_ipc),
 							REG(a3, struct Screen *screen),
-							REG(a4, Cfg_ButtonBank *def_bank),
-							REG(a5, char *title),
-							REG(d0, ULONG command_list),
-							REG(d1, char *default_name),
-							REG(d2, short type),
-							REG(d3, Att_List *script_list))
+                            REG(d0, Cfg_ButtonBank *def_bank),
+                            REG(d1, char *title),
+                            REG(d2, ULONG command_list),
+                            REG(d3, char *default_name),
+                            REG(d4, short type),
+                            REG(d5, Att_List *script_list))
 {
 	lister_menu_data *data;
 	IPCMessage *quit_msg = 0;
 	short undo_flag = 0, pending_quit = 0;
 	Cfg_Button *button;
 	Cfg_ButtonBank *ret_code = 0;
-#endif
-	// Allocate data
+
+    // Allocate data
 	if (!(data = AllocVec(sizeof(lister_menu_data), MEMF_CLEAR)) || !(data->drag.timer = AllocTimer(UNIT_VBLANK, 0)))
 	{
 		FreeVec(data);

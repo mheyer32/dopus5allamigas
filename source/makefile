@@ -244,3 +244,17 @@ aros: mos
 mos:
 	-@sh -c "echo -n"
 
+.PHONY: Include/inline/dopus5.h
+
+Include/inline/dopus5.h: Include/fd/dopus_lib.fd Include/clib/dopus5_protos.h
+	fd2sfd Include/fd/dopus_lib.fd Include/clib/dopus5_protos.h Include/fd/dopus_lib.sfd
+	sfdc --output=Include/inline/dopus5.h --target=m68k-amigaos --mode=macros Include/fd/dopus_lib.sfd
+
+.PHONY: Include/inline/configopus.h
+
+Include/inline/configopus.h: Include/fd/configopus.fd Include/clib/configopus_protos.h
+		fd2sfd Include/fd/configopus.fd Include/clib/configopus_protos.h Include/fd/configopus.sfd
+		sfdc --output=Include/inline/configopus.h --target=m68k-amigaos --mode=macros Include/fd/configopus.sfd
+
+headers: Include/inline/dopus5.h Include/inline/configopus.h
+

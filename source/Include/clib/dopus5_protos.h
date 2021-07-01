@@ -61,6 +61,16 @@ void FreeDosPathList(BPTR);
 //-----
 short DoSimpleRequest(struct Window *, struct DOpusSimpleRequest *);
 short SimpleRequest(struct Window *, char *, char *, char *, char *, APTR, long, ULONG);
+
+// We need a special definition of SimpleRequestTags because fd2pragma can't generate
+// the proper call into SimpleRequest (with tags in the middle of the parameters)
+#ifdef __GNUC__
+#define SimpleRequestTags(window, title, buttons, message, tags...)                 \
+        ({                                                                          \
+            ULONG _tags[] = {tags};                                                \
+            SimpleRequest(window, title, buttons, message, 0, (APTR)&_tags, 0, 0);  \
+        })
+#endif //__GNUC__
 short SelectionList(Att_List *,
 					struct Window *,
 					struct Screen *,

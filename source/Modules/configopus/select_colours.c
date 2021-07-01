@@ -217,9 +217,9 @@ long LIBFUNC L_ShowPaletteBox(REG(a0, struct Window *parent),
 							  REG(a1, DOpusScreenData *screen_data),
 							  REG(a2, short *fgpen),
 							  REG(a3, short *bgpen),
-							  REG(a4, struct TextAttr *font),
-							  REG(a5, ColourSpec32 *spec),
-							  REG(d0, short *spec_pen))
+                              REG(d0, struct TextAttr *font),
+                              REG(d1, ColourSpec32 *spec),
+                              REG(d2, short *spec_pen))
 #ifdef __amigaos3__
 {
 	return 0;

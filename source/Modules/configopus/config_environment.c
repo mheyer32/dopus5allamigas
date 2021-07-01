@@ -12,52 +12,21 @@ void config_env_load(config_env_data *, UWORD);
 BOOL config_env_save(config_env_data *, short);
 char *strstri(char *string, char *substring);
 
-#warning Rewrite Config_Environment() function to use Tags or structure for A4/A5 arguments
-#ifdef __amigaos3__
-IPCData *global_main_ipc = NULL;	// A4
-ULONG *global_change_flags = NULL;	// A5
-asm(".text                          \n\
-     .even                          \n\
-.globl _L_Config_Environment        \n\
-_L_Config_Environment:              \n\
-      jsr _Forbid                   \n\
-      movel a4,_global_main_ipc     \n\
-      movel a5,_global_change_flags \n\
-      jsr _ConfigEnv                \n\
-      rts                           \n\
-      ");
-
-unsigned long ConfigEnv(REG(a0, Cfg_Environment *env),
-						REG(a1, struct Screen *screen),
-						REG(a2, UWORD *pen_table),
-						REG(a3, IPCData *ipc),
-						REG(d0, UWORD pen_alloc),
-						REG(d1, char *settings_name),
-						REG(d2, Att_List *script_list))
-{
-	IPCData *main_ipc = global_main_ipc;
-	ULONG *change_flags = global_change_flags;
-	config_env_data *data;
-	IPCMessage *quit_msg = 0;
-	unsigned long success = CONFIG_OK;
-	short a;
-	Permit();
-#else
 unsigned long LIBFUNC L_Config_Environment(REG(a0, Cfg_Environment *env),
 										   REG(a1, struct Screen *screen),
 										   REG(a2, UWORD *pen_table),
 										   REG(a3, IPCData *ipc),
-										   REG(a4, IPCData *main_ipc),
-										   REG(d0, UWORD pen_alloc),
-										   REG(a5, ULONG *change_flags),
-										   REG(d1, char *settings_name),
-										   REG(d2, Att_List *script_list))
+                                           REG(d0, IPCData *main_ipc),
+                                           REG(d1, UWORD pen_alloc),
+                                           REG(d2, ULONG *change_flags),
+                                           REG(d3, char *settings_name),
+                                           REG(d4, Att_List *script_list))
 {
 	config_env_data *data;
 	IPCMessage *quit_msg = 0;
 	unsigned long success = CONFIG_OK;
 	short a;
-#endif
+
 	// Clear change flags
 	change_flags[0] = 0;
 	change_flags[1] = 0;

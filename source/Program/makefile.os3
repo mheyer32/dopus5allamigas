@@ -13,7 +13,7 @@ LDFLAGS  += -specs _gcc.spec -stackswap
 REMOVE = rm -f
 MAKEDIR := mkdir -p
 
-OBJS = $(COMMON_OBJS) amiga.o 68k_asm_a4_a5.o
+OBJS = $(COMMON_OBJS) amiga.o
 
 all : $(TARGET)
 

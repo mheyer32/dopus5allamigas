@@ -4,8 +4,8 @@ Cfg_Function *LIBFUNC L_Config_EditFunction(REG(a0, IPCData *ipc),
 											REG(a1, IPCData *opus_ipc),
 											REG(a2, struct Window *window),
 											REG(a3, Cfg_Function *function),
-											REG(a4, APTR memory),
-											REG(d0, ULONG command_list))
+                                            REG(d0, APTR memory),
+                                            REG(d1, ULONG command_list))
 {
 	FunctionStartup *startup;
 	Cfg_Function *edit_func;

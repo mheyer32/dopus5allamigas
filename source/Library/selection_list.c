@@ -136,8 +136,8 @@ short LIBFUNC L_SelectionList(REG(a0, Att_List *list),
 							  REG(d2, char *buffer),
 							  REG(d3, char *okay_txt),
 							  REG(d4, char *cancel_txt),
-							  REG(a4, char **switch_txt),
-							  REG(a5, ULONG *switch_flags),
+                              REG(d5, char **switch_txt),
+                              REG(d6, ULONG *switch_flags),
 							  REG(a6, struct MyLibrary *lib))
 {
 	ConfigWindow dims, mindims;

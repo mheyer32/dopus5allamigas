@@ -440,10 +440,10 @@ short LIBFUNC L_SimpleRequest(REG(a0, struct Window *parent),
 							  REG(a1, char *title),
 							  REG(a2, char *buttons),
 							  REG(a3, char *message),
-							  REG(a4, char *buffer),
-							  REG(a5, APTR params),
-							  REG(d0, long buffersize),
-							  REG(d1, ULONG flags),
+                              REG(d0, char *buffer),
+                              REG(d1, APTR params),
+                              REG(d2, long buffersize),
+                              REG(d3, ULONG flags),
 							  REG(a6, struct Library *libbase))
 {
 	char *data, *ptr;

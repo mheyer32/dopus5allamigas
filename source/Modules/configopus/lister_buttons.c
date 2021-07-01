@@ -5,9 +5,9 @@ long LIBFUNC L_Config_ListerButtons(
 	REG(a1, IPCData *ipc),
 	REG(a2, IPCData *owner_ipc),
 	REG(a3, struct Screen *screen),
-	REG(a4, Cfg_ButtonBank *def_bank0,
-	REG(d0, ULONG command_list0,
-	REG(d1, LONG initial))
+    REG(d0, Cfg_ButtonBank *def_bank0,
+    REG(d1, ULONG command_list0,
+    REG(d2, LONG initial))
 {
 	return 0;
 }
