@@ -16,11 +16,11 @@ unsigned long LIBFUNC L_Config_Environment(REG(a0, Cfg_Environment *env),
 										   REG(a1, struct Screen *screen),
 										   REG(a2, UWORD *pen_table),
 										   REG(a3, IPCData *ipc),
-                                           REG(d0, IPCData *main_ipc),
-                                           REG(d1, UWORD pen_alloc),
-                                           REG(d2, ULONG *change_flags),
-                                           REG(d3, char *settings_name),
-                                           REG(d4, Att_List *script_list))
+                                           REG(a4, IPCData *main_ipc),
+                                           REG(d0, UWORD pen_alloc),
+                                           REG(d1, ULONG *change_flags),
+                                           REG(d2, char *settings_name),
+                                           REG(d3, Att_List *script_list))
 {
 	config_env_data *data;
 	IPCMessage *quit_msg = 0;
@@ -617,12 +617,8 @@ unsigned long LIBFUNC L_Config_Environment(REG(a0, Cfg_Environment *env),
 						if (data->config->env_ColourFlag & (1 << (data->colour_number + CUST_PENS)))
 							bgpen = data->palette_count - 4;
 
-							// Bring up palette box
-	#ifdef __amigaos3__
-						if ((flags = ShowPalBox(
-	#else
+                        // Bring up palette box
 						if ((flags = L_ShowPaletteBox(
-	#endif
 								 data->window,
 								 &scrdata,
 								 &fgpen,

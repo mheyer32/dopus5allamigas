@@ -212,7 +212,6 @@ struct Window *palette_box_open(PaletteBoxData *data, ObjectDef *objects, short 
 #undef IntuitionBase*/
 
 // Show palette box
-#warning Rewrite Config_Environment() function to use Tags or structure for A4/A5 arguments
 long LIBFUNC L_ShowPaletteBox(REG(a0, struct Window *parent),
 							  REG(a1, DOpusScreenData *screen_data),
 							  REG(a2, short *fgpen),
@@ -220,19 +219,6 @@ long LIBFUNC L_ShowPaletteBox(REG(a0, struct Window *parent),
                               REG(d0, struct TextAttr *font),
                               REG(d1, ColourSpec32 *spec),
                               REG(d2, short *spec_pen))
-#ifdef __amigaos3__
-{
-	return 0;
-}
-
-long ShowPalBox(struct Window *parent,
-				DOpusScreenData *screen_data,
-				short *fgpen,
-				short *bgpen,
-				struct TextAttr *font,
-				ColourSpec32 *spec,
-				short *spec_pen)
-#endif
 {
 	PaletteBoxData *data;
 	short a, extra = 0;
