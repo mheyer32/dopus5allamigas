@@ -821,8 +821,6 @@ ULONG freeBase(struct LibraryHeader *lib)
 {
 	UserLibCleanup();
 
-#if defined(__amigaos3__) && !defined(__libnix__)
-    // libnix will automatically open the math libs; use libnix' library base pointers instead
 	if (MathIeeeSingBasBase != NULL)
 	{
 		CloseLibrary(MathIeeeSingBasBase);
@@ -846,7 +844,6 @@ ULONG freeBase(struct LibraryHeader *lib)
 		CloseLibrary(MathIeeeDoubTransBase);
 		MathIeeeDoubTransBase = NULL;
 	}
-#endif
 
 	// close cybergarphics.library
 	if (CyberGfxBase != NULL)
@@ -1001,8 +998,6 @@ ULONG initBase(struct LibraryHeader *lib)
 													if ((LocaleBase = (APTR)OpenLibrary("locale.library", 37)) !=
 															NULL &&
 														GETINTERFACE(ILocale, LocaleBase))
-// libnix will automatically open the math libs; use libnix' library base pointers instead
-#if defined(__amigaos3__) && !defined(__libnix__)
 														if ((MathIeeeSingBasBase =
 																 OpenLibrary("mathieeesingbas.library", 37)))
 															if ((MathIeeeSingTransBase =
@@ -1011,7 +1006,6 @@ ULONG initBase(struct LibraryHeader *lib)
 																		 OpenLibrary("mathieeedoubbas.library", 37)))
 																	if ((MathIeeeDoubTransBase = OpenLibrary(
 																			 "mathieeedoubtrans.library", 37)))
-#endif
 																	{
 // we have to please the internal utilitybase
 // pointers of libnix and clib2

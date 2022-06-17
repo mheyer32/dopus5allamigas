@@ -13,6 +13,8 @@ MAKEDIR := mkdir -p
 
 OBJS = $(COMMON_OBJS) $(OS3_OBJS)
 
+LIBS += -lm
+
 all : $(TARGET)
 
 $(TARGET): $(OBJS)

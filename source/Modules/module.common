@@ -6,6 +6,6 @@ INCLUDES += -Iinit $(OS3_INCLUDE)
 
 LDFLAGS  += -nostartfiles
 
-LIBS += -lm
+
 
 
