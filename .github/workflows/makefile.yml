@@ -1,0 +1,29 @@
+name: Makefile CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-os3:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run the build process with Docker
+      uses: addnab/docker-run-action@v3
+      with:
+        image: amigadev/crosstools:m68k-amigaos
+        options: -v ${{ github.workspace }}:/work
+        run: |
+          cd source
+          make os3 release
+          
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Dopus5_92_dev_os3_debug
+        path: releases/Dopus5_92_dev_os3_debug.zip
