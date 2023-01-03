@@ -73,7 +73,7 @@ struct AmigaGuideIFace *IAmigaGuide = NULL;
 #if defined(__amigaos4__) || defined(__AROS__)
 struct UtilityBase *UtilityBase = NULL;
 #else
-struct UtilityBase *UtilityBase = NULL;
+struct Library *UtilityBase = NULL;
 #endif
 struct IntuitionBase *IntuitionBase = NULL;
 struct GfxBase *GfxBase = NULL;
