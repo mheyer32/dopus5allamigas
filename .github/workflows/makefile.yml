@@ -44,5 +44,5 @@ jobs:
           
     - uses: actions/upload-artifact@v3
       with:
-        name: Dopus5_92_dev_os3
-        path: releases/Dopus5_92_dev_os3.zip
+        name: Dopus5_92_os3
+        path: releases/Dopus5_92_os3.zip
