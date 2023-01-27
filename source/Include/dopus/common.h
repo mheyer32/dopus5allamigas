@@ -53,7 +53,7 @@
 #if defined(__MORPHOS__) || defined(__AROS__)
 	#include <cybergraphx/cybergraphics.h>
 #else
-	#include <proto/cybergraphics.h>
+	#include <cybergraphics/cybergraphics.h>
 #endif
 #include <proto/cybergraphics.h>
 

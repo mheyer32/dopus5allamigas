@@ -1083,7 +1083,7 @@ void progress_bar(ProgressWindow *prog, unsigned long flags, long count, long nu
 }
 
 // Calculate a percentage
-long LIBFUNC L_CalcPercent(REG(d0, ULONG amount), REG(d1, ULONG total), REG(a0, struct Library *UtilityBase))
+long LIBFUNC L_CalcPercent(REG(d0, ULONG amount), REG(d1, ULONG total), REG(a0, struct UtilityBase *UtilityBase))
 {
 	long pcent;
 
