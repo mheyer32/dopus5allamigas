@@ -169,7 +169,7 @@ struct Device  			*ConsoleDevice = NULL;
 #ifdef __AROS__
 struct UtilityBase *UtilityBase = NULL;
 #elif defined(__libnix__)
-extern struct Library *UtilityBase;
+extern struct UtilityBase *UtilityBase;
 #else
 struct UtilityBase *UtilityBase = NULL;
 extern struct Library __UtilityBase = NULL;	 // required by clib2
