@@ -217,7 +217,7 @@ struct DiskObject *LIBFUNC L_GetCachedDiskObject(REG(a0, char *name),
 
 		if (data->backfill_screen)
 			icon = GetIconTags(
-				name, ICONGETA_FailIfUnavailable, TRUE, ICONGETA_Screen, (Tag)*data->backfill_screen, TAG_DONE);
+				name, ICONGETA_FailIfUnavailable, FALSE, ICONGETA_Screen, (Tag)*data->backfill_screen, TAG_DONE);
 
 		return icon;
 	}
