@@ -43,54 +43,66 @@ DOPUS_FUNC(function_runprog)
 		BPTR file;
 
 		// Does file have an icon? (don't check if not allowed to)
-		if (!(handle->flags & FUNCF_RUN_NO_ICONS) && (icon = GetDiskObject(entry->name)))
-		{
-			Lister *lister;
-			char *tool = 0;
-			BOOL done = 0;
+		if (!(handle->flags & FUNCF_RUN_NO_ICONS))
+    	{
+      		icon = GetDiskObject(entry->name);
+      		if (!icon)
+      		{
+          		if (IconBase->lib_Version >= 44)
+          		{
+             		//attempt to get deficons default tool
+             		icon = GetIconTags(entry->name, ICONGETA_FailIfUnavailable, FALSE, TAG_DONE);
+          		}
+      		}
+      		if (icon)
+      		{
+        		Lister *lister;
+        		char *tool = 0;
+        		BOOL done = 0;
 
-			// Does icon have a tool?
-			if (icon->do_Type == WBPROJECT && icon->do_DefaultTool && icon->do_DefaultTool[0])
-			{
-				// Test 'more' trap
-				if (file_trap_more(entry->name, icon->do_DefaultTool))
-					done = 1;
+        		// Does icon have a tool?
+        		if (icon->do_Type == WBPROJECT && icon->do_DefaultTool && icon->do_DefaultTool[0])
+        		{
+          			// Test 'more' trap
+          			if (file_trap_more(entry->name, icon->do_DefaultTool))
+            			done = 1;
 
-				// Get pointer to tool name
-				else
-					tool = FilePart(icon->do_DefaultTool);
-			}
+          			// Get pointer to tool name
+          			else
+	            		tool = FilePart(icon->do_DefaultTool);
+        		}
 
-			// Get pointer to file name
-			else
-				tool = FilePart(entry->name);
+    		    // Get pointer to file name
+        		else
+          			tool = FilePart(entry->name);
 
-			// Not run trapped more?
-			if (!done)
-			{
-				// Try to get current lister
-				if ((lister = function_lister_current(&handle->source_paths)))
-				{
-					// Set screen title
-					if (lister->window)
-					{
-						char buf[80];
+        		// Not run trapped more?
+        		if (!done)
+        		{
+          			// Try to get current lister
+          			if ((lister = function_lister_current(&handle->source_paths)))
+          			{
+            			// Set screen title
+            			if (lister->window)
+            			{
+            				char buf[80];
 
-						if (tool)
-							lsprintf(buf, GetString(&locale, MSG_LAUNCHING_PROGRAM), tool);
-						title_error(buf, 0);
-					}
-				}
+              				if (tool)
+                				lsprintf(buf, GetString(&locale, MSG_LAUNCHING_PROGRAM), tool);
+              				title_error(buf, 0);
+            			}
+          			}
 
-				// Build name with quotes
-				lsprintf(handle->work_buffer, "\"%s\"", entry->name);
+          			// Build name with quotes
+          			lsprintf(handle->work_buffer, "\"%s\"", entry->name);
 
-				// Launch program
-				WB_LaunchNew(handle->work_buffer, GUI->screen_pointer, 0, environment->env->default_stack, 0);
-			}
+          			// Launch program
+          			WB_LaunchNew(handle->work_buffer, GUI->screen_pointer, 0, environment->env->default_stack, tool);
+        		}
 
-			// Free icon
-			FreeDiskObject(icon);
+        		// Free icon
+        		FreeDiskObject(icon);
+      		}
 		}
 
 		// No; try to open file

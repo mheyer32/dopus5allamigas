@@ -527,17 +527,29 @@ Cfg_Filetype *filetype_identify(char *file, short match_type, char *name, unsign
 		if (qual & IEQUAL_ANYSHIFT)
 		{
 			// If file isn't an icon, try and get icon for it
-			if (!(isicon(file)) && (icon = GetDiskObject(file)))
+			if (!(isicon(file)))
 			{
-				// Is icon a project, with a default tool?
-				if (icon->do_Type == WBPROJECT && icon->do_DefaultTool && icon->do_DefaultTool[0])
-				{
-					// Use 'run' filetype
-					type = run_filetype;
-				}
+        		icon = GetDiskObject(file);
+        		if (!icon)
+        		{
+        			//if file has no icon attempt to get the deficons default icon
+          			if (IconBase->lib_Version >= 44)
+            		{
+               			icon = GetIconTags(file, ICONGETA_FailIfUnavailable, FALSE, TAG_DONE);
+            		}
+        		}
+        		if (icon)
+        		{
+          			// Is icon a project, with a default tool?
+          			if (icon->do_Type == WBPROJECT && icon->do_DefaultTool && icon->do_DefaultTool[0])
+          			{
+	            		// Use 'run' filetype
+            			type = run_filetype;
+          			}
 
-				// Free icon
-				FreeDiskObject(icon);
+	          		// Free icon
+        		  	FreeDiskObject(icon);
+		        }
 			}
 		}
 	}
