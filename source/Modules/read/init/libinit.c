@@ -57,10 +57,13 @@ __stdargs void exit(int status)
 }
 #endif
 
+#ifdef FBASEREL
 void __restore_a4(void)
 {
 	__asm volatile("\tlea ___a4_init, a4");
 }
+#endif
+
 
 /****************************************************************************/
 

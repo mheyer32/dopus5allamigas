@@ -51,10 +51,13 @@ int _start(void)  // must be first for 68k library
 }
 #endif
 
+#ifdef FBASEREL
 void __restore_a4(void)
 {
 	__asm volatile("\tlea ___a4_init, a4");
 }
+#endif
+
 
 /****************************************************************************/
 
