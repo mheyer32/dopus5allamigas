@@ -585,7 +585,14 @@ void LIBFUNC L_AddDragImage(REG(a0, DragInfo *drag))
 	// If bob not visible, add to list
 	if (!(drag->flags & DRAGF_VALID))
 	{
-		AddBob(&drag->bob, drag->rastport);
+		if (!(drag->flags&DRAGF_CUSTOM))
+        	{
+        		AddBob(&drag->bob,drag->rastport);
+        	}
+        	else
+		{
+			AddVSprite(&drag->sprite, drag->rastport);
+		}  
 		drag->flags |= DRAGF_VALID;
 	}
 }
