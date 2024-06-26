@@ -8,7 +8,7 @@ NAME := DirectoryOpus
 DESTDIR := ../bin.os3
 TARGET   := $(DESTDIR)/$(NAME)
 
-LDFLAGS  += -specs _gcc.spec -stackswap
+LDFLAGS  += -Wl,-u___stkswap
 
 REMOVE = rm -f
 MAKEDIR := mkdir -p
