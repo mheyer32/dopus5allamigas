@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Run the build process with Docker
       uses: addnab/docker-run-action@v3
@@ -22,7 +22,7 @@ jobs:
           cd source
           make os3 release
           
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: Dopus5_92_dev_os3_debug
         path: releases/Dopus5_92_dev_os3_debug.zip
@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Run the build process with Docker
       uses: addnab/docker-run-action@v3
@@ -42,7 +42,7 @@ jobs:
           cd source
           make os3 release debug=no
           
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: Dopus5_92_os3
         path: releases/Dopus5_92_os3.zip
