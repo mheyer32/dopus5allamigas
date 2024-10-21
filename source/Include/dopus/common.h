@@ -43,7 +43,6 @@
 #include <proto/asl.h>
 #include <proto/gadtools.h>
 #include <proto/console.h>
-#include <proto/utility.h>
 #include <proto/timer.h>
 #include <proto/diskfont.h>
 #include <proto/input.h>
@@ -83,6 +82,17 @@
 #ifdef __amigaos3__
 	#include <clib/alib_protos.h>
 	#include <intuition/intuitionbase.h>
+	// Declare Utilitybase ourselves as NDK3.9 and NDK 3.2 can't agree on the type.
+	#define __NOLIBBASE__
+	#include <proto/utility.h>
+	extern struct Library *
+	# ifdef __CONSTLIBBASEDECL__
+	__CONSTLIBBASEDECL__
+	# endif /* __CONSTLIBBASEDECL__ */
+		UtilityBase;
+	#undef __NOLIBBASE__
+#else
+	#include <proto/utility.h>
 #endif
 
 #ifdef __MORPHOS__
